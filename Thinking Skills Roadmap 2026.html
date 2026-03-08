@@ -1,0 +1,734 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="A single-page learning roadmap for Critical Thinking, Analytical Thinking, and Design Thinking — 3 skills, 19 frameworks, 6-phase journey.">
+<title>Thinking Skills — Learning Roadmap</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=DM+Sans:wght@300;400;500;600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --ink:    #0f1624;
+    --ink2:   #1e2d45;
+    --blue:   #1b3f8b;
+    --teal:   #0d6b6b;
+    --amber:  #c4570a;
+    --blue-l: #dce8ff;
+    --teal-l: #d4f0f0;
+    --amb-l:  #fde8d8;
+    --rule:   #dde4ee;
+    --white:  #fafbfd;
+    --gold:   #e8a820;
+  }
+
+  html { font-size: 11px; }
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--white);
+    color: var(--ink);
+    line-height: 1.5;
+  }
+
+  /* ── PAGE SHELL ── */
+  .page {
+    width: 1200px;
+    margin: 0 auto;
+    padding: 28px 36px 36px;
+  }
+
+  /* ── MASTHEAD ── */
+  .masthead {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    border-bottom: 3px solid var(--ink);
+    padding-bottom: 12px;
+    margin-bottom: 6px;
+  }
+  .masthead-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 3.6rem;
+    font-weight: 900;
+    line-height: 1;
+    letter-spacing: -1px;
+    color: var(--ink);
+  }
+  .masthead-title span { color: var(--blue); }
+  .masthead-right {
+    text-align: right;
+    font-size: 1rem;
+    color: #5a6a7e;
+    font-weight: 500;
+    letter-spacing: .05em;
+    text-transform: uppercase;
+  }
+  .sub-rule {
+    display: flex;
+    gap: 20px;
+    margin-bottom: 18px;
+    font-size: 1rem;
+    font-weight: 600;
+    letter-spacing: .12em;
+    text-transform: uppercase;
+    color: #8898aa;
+    align-items: center;
+  }
+  .sub-rule span { color: var(--rule); }
+
+  /* ── GRID ── */
+  .grid-main {
+    display: grid;
+    grid-template-columns: 220px 1fr 1fr 1fr;
+    grid-template-rows: auto auto auto auto;
+    gap: 10px;
+  }
+
+  /* ── SHARED CARD ── */
+  .card {
+    border-radius: 8px;
+    padding: 14px 16px;
+    position: relative;
+    overflow: hidden;
+  }
+  .card-label {
+    font-size: .85rem;
+    font-weight: 700;
+    letter-spacing: .14em;
+    text-transform: uppercase;
+    margin-bottom: 7px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+  .card-label .dot {
+    width: 8px; height: 8px;
+    border-radius: 50%;
+    display: inline-block;
+    flex-shrink: 0;
+  }
+  h3 { font-family: 'Playfair Display', serif; font-size: 1.55rem; font-weight: 700; line-height: 1.15; margin-bottom: 6px; }
+  h4 { font-size: 1rem; font-weight: 700; margin-bottom: 4px; }
+  p, li { font-size: 1rem; line-height: 1.5; }
+  ul { padding-left: 14px; }
+  li { margin-bottom: 2px; }
+
+  /* ── SKILL COLUMNS (col 2-4, row 1) ── */
+  .skill-ct  { background: var(--blue-l); border-top: 4px solid var(--blue); }
+  .skill-at  { background: var(--teal-l); border-top: 4px solid var(--teal); }
+  .skill-dt  { background: var(--amb-l);  border-top: 4px solid var(--amber);}
+
+  .skill-ct h3 { color: var(--blue); }
+  .skill-at h3 { color: var(--teal); }
+  .skill-dt h3 { color: var(--amber); }
+
+  .skill-ct .card-label .dot { background: var(--blue); }
+  .skill-at .card-label .dot { background: var(--teal); }
+  .skill-dt .card-label .dot { background: var(--amber); }
+
+  .skill-ct .card-label { color: var(--blue); }
+  .skill-at .card-label { color: var(--teal); }
+  .skill-dt .card-label { color: var(--amber); }
+
+  .definition { font-size: 1rem; line-height: 1.55; color: #2c3e50; margin-bottom: 8px; }
+
+  .tag-row { display: flex; flex-wrap: wrap; gap: 4px; margin-top: 6px; }
+  .tag {
+    font-size: .82rem; font-weight: 600;
+    padding: 2px 8px; border-radius: 20px;
+    font-family: 'DM Mono', monospace;
+  }
+  .tag-blue  { background: #c2d5f8; color: var(--blue); }
+  .tag-teal  { background: #b2e2e2; color: var(--teal); }
+  .tag-amber { background: #f8d5b8; color: var(--amber); }
+
+  /* ── LEFT COLUMN ── */
+  .left-col {
+    grid-column: 1;
+    grid-row: 1 / 5;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .card-meta { background: var(--ink2); color: #fff; }
+  .card-meta .card-label { color: #8fb3d4; }
+  .card-meta h4 { color: #fff; font-size: 1.05rem; }
+  .card-meta p  { color: #b0c4d8; font-size: .95rem; }
+  .card-meta li { color: #b0c4d8; font-size: .95rem; }
+
+  .why-card { background: var(--ink); color: #fff; }
+  .why-card .card-label { color: var(--gold); }
+  .why-card h3 { color: var(--gold); font-size: 1.3rem; }
+  .why-card li { color: #d0dde8; font-size: .95rem; margin-bottom: 4px; }
+  .why-card li strong { color: #fff; }
+
+  .mindset-card {
+    background: linear-gradient(135deg, #0f1624 60%, #1b3f8b);
+    color: #fff;
+    flex-grow: 1;
+  }
+  .mindset-card .card-label { color: #7fc0c0; }
+  .mindset-card .quote {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.2rem;
+    line-height: 1.55;
+    color: #e8f4f4;
+    font-style: italic;
+    margin-bottom: 8px;
+  }
+  .mindset-card .attribution {
+    font-size: .88rem;
+    color: #7fc0c0;
+    font-weight: 600;
+    letter-spacing: .06em;
+  }
+
+  /* ── ROW 2: FRAMEWORKS ── */
+  .fw-card { background: #fff; border: 1.5px solid var(--rule); }
+  .fw-card h4 { font-size: .95rem; }
+
+  .fw-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 5px; }
+  .fw-item {
+    background: #f4f7fb;
+    border-radius: 5px;
+    padding: 5px 8px;
+  }
+  .fw-name { font-size: .9rem; font-weight: 700; color: var(--ink); }
+  .fw-sub  { font-size: .82rem; color: #667; line-height: 1.3; }
+
+  .fw-card.ct-fw .fw-item { border-left: 3px solid var(--blue); }
+  .fw-card.at-fw .fw-item { border-left: 3px solid var(--teal); }
+  .fw-card.dt-fw .fw-item { border-left: 3px solid var(--amber); }
+
+  /* ── ROW 3: TRAINING + SELF-EVAL ── */
+  .train-card { background: #fff; border: 1.5px solid var(--rule); }
+  .train-steps { counter-reset: step; display: flex; flex-direction: column; gap: 5px; }
+  .train-step {
+    counter-increment: step;
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+  }
+  .train-step::before {
+    content: counter(step);
+    width: 20px; height: 20px;
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-size: .78rem; font-weight: 800;
+    flex-shrink: 0;
+    margin-top: 1px;
+  }
+  .ct-train .train-step::before { background: var(--blue); color: #fff; }
+  .at-train .train-step::before { background: var(--teal); color: #fff; }
+  .dt-train .train-step::before { background: var(--amber); color: #fff; }
+
+  .train-step-text { font-size: .92rem; }
+  .train-step-text strong { font-weight: 700; }
+
+  /* ── ROW 4: ROADMAP TIMELINE ── */
+  .roadmap-row {
+    grid-column: 1 / 5;
+    background: var(--ink);
+    border-radius: 10px;
+    padding: 16px 20px;
+    color: #fff;
+  }
+  .roadmap-header {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 14px;
+  }
+  .roadmap-header h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.35rem;
+    color: var(--gold);
+    margin: 0;
+  }
+  .roadmap-header .rh-sub { font-size: .9rem; color: #8898aa; font-weight: 500; }
+
+  .timeline {
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    gap: 8px;
+    position: relative;
+  }
+  .timeline::before {
+    content: '';
+    position: absolute;
+    top: 22px;
+    left: 20px; right: 20px;
+    height: 2px;
+    background: linear-gradient(90deg, var(--blue), var(--teal), var(--amber), var(--gold));
+    z-index: 0;
+  }
+  .tl-phase {
+    position: relative;
+    z-index: 1;
+  }
+  .tl-dot {
+    width: 12px; height: 12px;
+    border-radius: 50%;
+    margin: 10px auto 8px;
+    border: 2px solid var(--ink);
+  }
+  .tl-phase:nth-child(1) .tl-dot { background: var(--blue); }
+  .tl-phase:nth-child(2) .tl-dot { background: #3a7bc8; }
+  .tl-phase:nth-child(3) .tl-dot { background: var(--teal); }
+  .tl-phase:nth-child(4) .tl-dot { background: #0d9e80; }
+  .tl-phase:nth-child(5) .tl-dot { background: var(--amber); }
+  .tl-phase:nth-child(6) .tl-dot { background: var(--gold); }
+
+  .tl-period {
+    font-size: .78rem; font-weight: 800;
+    letter-spacing: .1em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 4px;
+  }
+  .tl-title { font-size: .95rem; font-weight: 700; color: #fff; margin-bottom: 4px; }
+  .tl-body  { font-size: .85rem; color: #95a8bb; line-height: 1.45; }
+  .tl-body li { list-style: none; padding-left: 0; }
+  .tl-body li::before { content: '→ '; color: var(--gold); font-weight: 700; }
+
+  /* ── RESOURCES STRIP ── */
+  .resources-row {
+    grid-column: 1 / 5;
+    background: #f0f4ff;
+    border-radius: 8px;
+    padding: 12px 16px;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    gap: 10px;
+  }
+  .res-col h4 { font-size: .9rem; font-weight: 800; margin-bottom: 6px; letter-spacing: .04em; text-transform: uppercase; }
+  .res-col li { font-size: .86rem; color: #334; list-style: none; padding-left: 0; margin-bottom: 2px; }
+  .res-col li::before { content: ''; }
+  .res-col li span { font-weight: 700; color: var(--ink); }
+
+  /* ── eval card: removed (unused) ── */
+
+  /* ── PRINT ── */
+  @media print {
+    body { background: #fff; }
+    .page { width: 100%; padding: 14px; }
+    html { font-size: 9.5px; }
+    * { print-color-adjust: exact; -webkit-print-color-adjust: exact; }
+  }
+
+  /* ── ANIMATIONS ── */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(14px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+  .card, .roadmap-row, .resources-row {
+    animation: fadeUp .5s ease both;
+  }
+  .card:nth-child(1)  { animation-delay: .05s; }
+  .card:nth-child(2)  { animation-delay: .1s;  }
+  .card:nth-child(3)  { animation-delay: .15s; }
+  .card:nth-child(4)  { animation-delay: .2s;  }
+  .card:nth-child(5)  { animation-delay: .25s; }
+  .card:nth-child(6)  { animation-delay: .3s;  }
+  .roadmap-row { animation-delay: .4s; }
+  /* ── RESPONSIVE ── */
+  @media screen and (max-width: 1220px) {
+    .page { width: 100%; padding: 16px; }
+    .grid-main { grid-template-columns: 1fr; }
+    .left-col { grid-column: 1; grid-row: auto; flex-direction: row; flex-wrap: wrap; }
+    .left-col .card { flex: 1 1 260px; }
+    .roadmap-row { grid-column: 1; }
+    .resources-row { grid-column: 1; grid-template-columns: 1fr 1fr; }
+    .timeline { grid-template-columns: repeat(3, 1fr); }
+    .masthead-title { font-size: 2.4rem; }
+    .train-card { grid-column: 1 !important; }
+  }
+  @media screen and (max-width: 640px) {
+    .resources-row { grid-template-columns: 1fr; }
+    .timeline { grid-template-columns: repeat(2, 1fr); }
+    .fw-grid { grid-template-columns: 1fr; }
+    .masthead { flex-direction: column; align-items: flex-start; gap: 6px; }
+    .train-card { grid-column: 1 !important; }
+  }
+</style>
+</head>
+<body>
+<div class="page">
+
+  <!-- MASTHEAD -->
+  <div class="masthead">
+    <div class="masthead-title">THINKING SKILLS<br><span>Learning Roadmap</span></div>
+    <div class="masthead-right">
+      Critical · Analytical · Design<br>
+      A Complete Self-Study Plan
+    </div>
+  </div>
+  <div class="sub-rule">
+    <span style="color:var(--blue);font-size:1.1rem">●</span> 3 Core Skills
+    <span>|</span>
+    <span style="color:var(--teal);font-size:1.1rem">●</span> 19 Proven Frameworks
+    <span>|</span>
+    <span style="color:var(--amber);font-size:1.1rem">●</span> 6-Phase Learning Journey
+    <span>|</span>
+    Build · Measure · Learn
+  </div>
+
+  <!-- MAIN GRID -->
+  <div class="grid-main">
+
+    <!-- ══ LEFT COLUMN ══ -->
+    <div class="left-col">
+
+      <div class="card card-meta">
+        <div class="card-label"><span class="dot" style="background:#8fb3d4"></span>The Master Sequence</div>
+        <h4>Use all three together</h4>
+        <ul style="margin-top:5px">
+          <li style="margin-bottom:6px"><strong style="color:#fff">Design</strong> <span style="color:#7fa8c0">discovers the right problem</span></li>
+          <li style="margin-bottom:6px"><strong style="color:#fff">Analytical</strong> <span style="color:#7fa8c0">structures the solution</span></li>
+          <li><strong style="color:#fff">Critical</strong> <span style="color:#7fa8c0">validates every step</span></li>
+        </ul>
+        <div style="margin-top:10px;padding-top:8px;border-top:1px solid #2e4a6a;">
+          <div style="font-size:.85rem;color:#8fb3d4;font-weight:700;letter-spacing:.07em;text-transform:uppercase;margin-bottom:4px">Metacognition</div>
+          <p style="font-size:.88rem;color:#9ab;line-height:1.45">The invisible layer beneath all three: thinking about your thinking. Improves all skills simultaneously.</p>
+        </div>
+      </div>
+
+      <div class="card why-card">
+        <div class="card-label"><span class="dot" style="background:var(--gold)"></span>Why It Matters</div>
+        <h3>Your Competitive Edge</h3>
+        <ul style="padding-left:0;list-style:none;margin-top:6px">
+          <li><strong>#1</strong> most in-demand skill globally (WEF 2025): Analytical Thinking — cited by 7 in 10 employers</li>
+          <li style="margin-top:4px"><strong>AI won't replace</strong> people who think well — it amplifies them</li>
+          <li style="margin-top:4px"><strong>Better grades, better decisions,</strong> better career trajectory</li>
+          <li style="margin-top:4px">Skills that <strong>compound</strong> — each year of practice multiplies impact</li>
+        </ul>
+      </div>
+
+      <div class="card mindset-card">
+        <div class="card-label"><span class="dot" style="background:#7fc0c0"></span>Growth Mindset</div>
+        <div class="quote">"The mind is not a vessel to be filled, but a fire to be kindled."</div>
+        <div class="attribution">— Plutarch</div>
+        <div style="margin-top:12px;border-top:1px solid #1e3a55;padding-top:10px">
+          <div style="font-size:.85rem;color:#7fc0c0;font-weight:700;letter-spacing:.07em;text-transform:uppercase;margin-bottom:10px">The Growth Loop</div>
+          <!-- Vertical 5-step loop diagram -->
+          <div style="display:flex;flex-direction:column;gap:3px;align-items:stretch;">
+
+            <div style="display:flex;align-items:center;gap:6px;">
+              <div style="background:rgba(27,63,139,0.55);border:1.5px solid #3a6fc4;border-radius:6px;padding:4px 8px;flex:1">
+                <span style="font-size:.7rem;font-weight:800;color:#7fc0ff;letter-spacing:.08em;text-transform:uppercase">① Learn</span>
+                <span style="font-size:.68rem;color:#8ab;margin-left:6px">— consume &amp; absorb</span>
+              </div>
+            </div>
+
+            <div style="text-align:center;color:#3a6fc4;font-size:.85rem;line-height:1;">↓</div>
+
+            <div style="display:flex;align-items:center;gap:6px;">
+              <div style="background:rgba(13,107,107,0.45);border:1.5px solid #1a9090;border-radius:6px;padding:4px 8px;flex:1">
+                <span style="font-size:.7rem;font-weight:800;color:#7fe0e0;letter-spacing:.08em;text-transform:uppercase">② Apply</span>
+                <span style="font-size:.68rem;color:#8ab;margin-left:6px">— use it on real problems</span>
+              </div>
+            </div>
+
+            <div style="text-align:center;color:#3a6fc4;font-size:.85rem;line-height:1;">↓</div>
+
+            <div style="display:flex;align-items:center;gap:6px;">
+              <div style="background:rgba(100,80,20,0.4);border:1.5px solid #c8921a;border-radius:6px;padding:4px 8px;flex:1">
+                <span style="font-size:.7rem;font-weight:800;color:#e8c060;letter-spacing:.08em;text-transform:uppercase">③ Reflect</span>
+                <span style="font-size:.68rem;color:#8ab;margin-left:6px">— what worked? what didn't?</span>
+              </div>
+            </div>
+
+            <div style="text-align:center;color:#3a6fc4;font-size:.85rem;line-height:1;">↓</div>
+
+            <div style="display:flex;align-items:center;gap:6px;">
+              <div style="background:rgba(80,60,120,0.45);border:1.5px solid #7060b0;border-radius:6px;padding:4px 8px;flex:1">
+                <span style="font-size:.7rem;font-weight:800;color:#b0a0e0;letter-spacing:.08em;text-transform:uppercase">④ Spot the Gap</span>
+                <span style="font-size:.68rem;color:#8ab;margin-left:6px">— target next practice</span>
+              </div>
+            </div>
+
+            <div style="text-align:center;color:#3a6fc4;font-size:.85rem;line-height:1;">↓</div>
+
+            <div style="display:flex;align-items:center;gap:6px;">
+              <div style="background:rgba(196,87,10,0.35);border:1.5px solid #c4570a;border-radius:6px;padding:4px 8px;flex:1">
+                <span style="font-size:.7rem;font-weight:800;color:#f0a070;letter-spacing:.08em;text-transform:uppercase">⑤ Repeat</span>
+                <span style="font-size:.68rem;color:#8ab;margin-left:6px">— rising standard</span>
+              </div>
+              <div style="font-size:.65rem;color:#3a6fc4;font-weight:700;white-space:nowrap;">↺ back to ①</div>
+            </div>
+
+          </div>
+          <div style="margin-top:9px;font-size:.82rem;color:#7fc0c0;font-style:italic;text-align:center">No destination. Only a rising standard of thought.</div>
+        </div>
+      </div>
+
+    </div><!-- /left-col -->
+
+
+    <!-- ══ ROW 1: THREE SKILLS ══ -->
+    <div class="card skill-ct">
+      <div class="card-label"><span class="dot"></span>Critical Thinking</div>
+      <h3>Evaluate &amp;<br>Question</h3>
+      <p class="definition">The disciplined ability to analyse, evaluate, and synthesise information — applying standards of clarity, accuracy, and fairness to every judgment.</p>
+      <div class="tag-row">
+        <span class="tag tag-blue">Analysis</span>
+        <span class="tag tag-blue">Evaluation</span>
+        <span class="tag tag-blue">Inference</span>
+        <span class="tag tag-blue">Interpretation</span>
+        <span class="tag tag-blue">Self-Regulation</span>
+      </div>
+    </div>
+
+    <div class="card skill-at">
+      <div class="card-label"><span class="dot"></span>Analytical Thinking</div>
+      <h3>Decompose &amp;<br>Structure</h3>
+      <p class="definition">The systematic ability to break complex problems into components, identify patterns and relationships, and reason step-by-step to sound conclusions.</p>
+      <div class="tag-row">
+        <span class="tag tag-teal">Decomposition</span>
+        <span class="tag tag-teal">Pattern Recognition</span>
+        <span class="tag tag-teal">Causal Reasoning</span>
+        <span class="tag tag-teal">Data Interpretation</span>
+        <span class="tag tag-teal">Logical Reasoning</span>
+        <span class="tag tag-teal">Systematic Process</span>
+      </div>
+    </div>
+
+    <div class="card skill-dt">
+      <div class="card-label"><span class="dot"></span>Design Thinking</div>
+      <h3>Empathise &amp;<br>Create</h3>
+      <p class="definition">A human-centred, iterative problem-solving methodology that thrives on ambiguity — prioritising deep empathy, radical collaboration, and fast experimentation.</p>
+      <div class="tag-row">
+        <span class="tag tag-amber">Empathise</span>
+        <span class="tag tag-amber">Define</span>
+        <span class="tag tag-amber">Ideate</span>
+        <span class="tag tag-amber">Prototype</span>
+        <span class="tag tag-amber">Test</span>
+      </div>
+    </div>
+
+
+    <!-- ══ ROW 2: FRAMEWORKS ══ -->
+    <div class="card fw-card ct-fw">
+      <div class="card-label" style="color:var(--blue)"><span class="dot" style="background:var(--blue)"></span>Key Frameworks — Critical Thinking</div>
+      <div class="fw-grid">
+        <div class="fw-item"><div class="fw-name">Paul-Elder Framework</div><div class="fw-sub">8 Elements + 9 Intellectual Standards</div></div>
+        <div class="fw-item"><div class="fw-name">Bloom's Taxonomy</div><div class="fw-sub">6-level cognitive hierarchy</div></div>
+        <div class="fw-item"><div class="fw-name">Socratic Method</div><div class="fw-sub">6 categories of probing questions</div></div>
+        <div class="fw-item"><div class="fw-name">RED Model</div><div class="fw-sub">Recognise → Evaluate → Draw</div></div>
+        <div class="fw-item"><div class="fw-name">Six Thinking Hats</div><div class="fw-sub">6 parallel cognitive modes (de Bono)</div></div>
+        <div class="fw-item"><div class="fw-name">OODA Loop</div><div class="fw-sub">Observe → Orient → Decide → Act</div></div>
+      </div>
+    </div>
+
+    <div class="card fw-card at-fw">
+      <div class="card-label" style="color:var(--teal)"><span class="dot" style="background:var(--teal)"></span>Key Frameworks — Analytical Thinking</div>
+      <div class="fw-grid">
+        <div class="fw-item"><div class="fw-name">MECE + Issue Trees</div><div class="fw-sub">McKinsey/Minto — structured decomposition</div></div>
+        <div class="fw-item"><div class="fw-name">Pyramid Principle</div><div class="fw-sub">SCR: Situation-Complication-Resolution</div></div>
+        <div class="fw-item"><div class="fw-name">First Principles</div><div class="fw-sub">Reduce to fundamentals; reason upward</div></div>
+        <div class="fw-item"><div class="fw-name">5 Whys + Fishbone</div><div class="fw-sub">Toyota/Ishikawa root cause analysis</div></div>
+        <div class="fw-item"><div class="fw-name">SWOT + PESTEL</div><div class="fw-sub">Internal/external strategic analysis</div></div>
+        <div class="fw-item"><div class="fw-name">Systems Thinking</div><div class="fw-sub">MIT Sloan: feedback loops &amp; stocks</div></div>
+        <div class="fw-item"><div class="fw-name">Cynefin</div><div class="fw-sub">Match thinking type to problem type</div></div>
+      </div>
+    </div>
+
+    <div class="card fw-card dt-fw">
+      <div class="card-label" style="color:var(--amber)"><span class="dot" style="background:var(--amber)"></span>Key Frameworks — Design Thinking</div>
+      <div class="fw-grid">
+        <div class="fw-item"><div class="fw-name">Stanford d.school HCD</div><div class="fw-sub">POV statements + HMW questions</div></div>
+        <div class="fw-item"><div class="fw-name">Double Diamond</div><div class="fw-sub">UK Design Council — 4D model</div></div>
+        <div class="fw-item"><div class="fw-name">IBM Enterprise DT</div><div class="fw-sub">Hills + Playbacks + Sponsor Users</div></div>
+        <div class="fw-item"><div class="fw-name">GV Design Sprint</div><div class="fw-sub">Jake Knapp — 5-day / 5-hour sprint</div></div>
+        <div class="fw-item"><div class="fw-name">SCAMPER</div><div class="fw-sub">Substitute/Combine/Adapt/Modify…</div></div>
+        <div class="fw-item"><div class="fw-name">Jobs-To-Be-Done</div><div class="fw-sub">Ulwick/Christensen/Moesta</div></div>
+      </div>
+    </div>
+
+
+    <!-- ══ ROW 3: DAILY TRAINING ══ -->
+    <div class="card train-card ct-train" style="grid-column:2">
+      <div class="card-label" style="color:var(--blue)"><span class="dot" style="background:var(--blue)"></span>Daily Practice — Critical</div>
+      <div class="train-steps">
+        <div class="train-step"><div class="train-step-text"><strong>Socratic Questioning</strong> — challenge every claim: what's the evidence? assumptions?</div></div>
+        <div class="train-step"><div class="train-step-text"><strong>Steelman First</strong> — build the strongest opposing argument before dismissing it</div></div>
+        <div class="train-step"><div class="train-step-text"><strong>Fallacy Hunting</strong> — spot logical errors in one article or video daily</div></div>
+        <div class="train-step"><div class="train-step-text"><strong>Source Triangulation</strong> — 3 independent primary sources before forming opinions</div></div>
+        <div class="train-step"><div class="train-step-text"><strong>10-min Reflection</strong> — "How could I have thought about this better?"</div></div>
+      </div>
+    </div>
+
+    <div class="card train-card at-train" style="grid-column:3">
+      <div class="card-label" style="color:var(--teal)"><span class="dot" style="background:var(--teal)"></span>Daily Practice — Analytical</div>
+      <div class="train-steps">
+        <div class="train-step"><div class="train-step-text"><strong>MECE Drills</strong> — break any daily problem into non-overlapping, exhaustive branches</div></div>
+        <div class="train-step"><div class="train-step-text"><strong>Fermi Questions</strong> — estimate anything quantitatively to build number fluency</div></div>
+        <div class="train-step"><div class="train-step-text"><strong>5 Whys</strong> — for any setback, ask why 5 times until you find the root cause</div></div>
+        <div class="train-step"><div class="train-step-text"><strong>Case Decomposition</strong> — map causes &amp; consequences for any news story</div></div>
+        <div class="train-step"><div class="train-step-text"><strong>Data Literacy</strong> — question every graph, chart, or statistic you encounter</div></div>
+      </div>
+    </div>
+
+    <div class="card train-card dt-train" style="grid-column:4">
+      <div class="card-label" style="color:var(--amber)"><span class="dot" style="background:var(--amber)"></span>Daily Practice — Design</div>
+      <div class="train-steps">
+        <div class="train-step"><div class="train-step-text"><strong>1 Empathy Interview/week</strong> — listen to a user's challenge; don't solve, just understand</div></div>
+        <div class="train-step"><div class="train-step-text"><strong>Observation Journal</strong> — spot one poorly-designed thing daily; sketch a fix</div></div>
+        <div class="train-step"><div class="train-step-text"><strong>HMW Reframing</strong> — turn any problem into 5+ "How Might We…" questions</div></div>
+        <div class="train-step"><div class="train-step-text"><strong>20-min Prototype Sprint</strong> — sketch or build any idea under a tight time constraint</div></div>
+        <div class="train-step"><div class="train-step-text"><strong>SCAMPER Drill</strong> — apply all 7 lenses to any product or process in 7 minutes</div></div>
+      </div>
+    </div>
+
+    <!-- ══ ROW 4: TIMELINE ══ -->
+    <div class="roadmap-row">
+      <div class="roadmap-header">
+        <h3>6-Phase Learning Journey</h3>
+        <div class="rh-sub">Approximate timeframes · Adjust to your pace · Revisit phases as you deepen</div>
+      </div>
+      <div class="timeline">
+        <div class="tl-phase">
+          <div class="tl-dot"></div>
+          <div class="tl-period">Week 1–2</div>
+          <div class="tl-title">Foundation</div>
+          <ul class="tl-body">
+            <li>Read definitions (Parts 1–3)</li>
+            <li>Understand the master sequence</li>
+            <li>Start a Thinking Journal</li>
+            <li>Read: Thinking F&amp;S (Kahneman)</li>
+          </ul>
+        </div>
+        <div class="tl-phase">
+          <div class="tl-dot"></div>
+          <div class="tl-period">Week 3–6</div>
+          <div class="tl-title">Critical Core</div>
+          <ul class="tl-body">
+            <li>Study Paul-Elder Framework</li>
+            <li>Practise Bloom's levels 1–4</li>
+            <li>Daily fallacy &amp; bias hunting</li>
+            <li>Apply RED Model to 5 articles</li>
+          </ul>
+        </div>
+        <div class="tl-phase">
+          <div class="tl-dot"></div>
+          <div class="tl-period">Week 7–12</div>
+          <div class="tl-title">Analytical Engine</div>
+          <ul class="tl-body">
+            <li>Master MECE &amp; Issue Trees</li>
+            <li>Practise Pyramid Principle in writing</li>
+            <li>Apply 5 Whys to real problems</li>
+            <li>Read: McKinsey Way (Rasiel)</li>
+          </ul>
+        </div>
+        <div class="tl-phase">
+          <div class="tl-dot"></div>
+          <div class="tl-period">Month 4–5</div>
+          <div class="tl-title">Design Mindset</div>
+          <ul class="tl-body">
+            <li>Run a personal mini Design Sprint</li>
+            <li>Conduct 4 empathy interviews</li>
+            <li>Build &amp; test one prototype</li>
+            <li>Read: Creative Confidence (Kelley)</li>
+          </ul>
+        </div>
+        <div class="tl-phase">
+          <div class="tl-dot"></div>
+          <div class="tl-period">Month 6–9</div>
+          <div class="tl-title">Integration</div>
+          <ul class="tl-body">
+            <li>Apply all 3 skills to one real project</li>
+            <li>Study Cynefin + Systems Thinking</li>
+            <li>Join a hackathon or case competition</li>
+            <li>Monthly self-evaluation audit</li>
+          </ul>
+        </div>
+        <div class="tl-phase">
+          <div class="tl-dot"></div>
+          <div class="tl-period">Month 10+</div>
+          <div class="tl-title">Mastery Loop</div>
+          <ul class="tl-body">
+            <li>Teach a framework to someone else</li>
+            <li>Quarterly skills audit (score 1–10)</li>
+            <li>Combine frameworks deliberately</li>
+            <li>Never stop: only a rising standard</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- ══ RESOURCES STRIP ══ -->
+    <div class="resources-row">
+      <div class="res-col">
+        <h4 style="color:var(--blue)">📚 Start Here — Books</h4>
+        <ul>
+          <li><span>Thinking, Fast and Slow</span> — Kahneman</li>
+          <li><span>Great Mental Models Vol.1</span> — Parrish</li>
+          <li><span>The McKinsey Way</span> — Rasiel</li>
+          <li><span>Creative Confidence</span> — Kelley</li>
+          <li><span>Sprint</span> — Jake Knapp</li>
+          <li><span>The Fifth Discipline</span> — Senge</li>
+        </ul>
+      </div>
+      <div class="res-col">
+        <h4 style="color:var(--teal)">🎓 Online Learning</h4>
+        <ul>
+          <li><span>Coursera</span> — U. Michigan CT course</li>
+          <li><span>IDEO U</span> — Design Thinking platform</li>
+          <li><span>Brilliant.org</span> — Analytical thinking</li>
+          <li><span>Complexity Explorer</span> — Systems (Santa Fe Inst.)</li>
+          <li><span>Khan Academy</span> — Logic &amp; statistics</li>
+          <li><span>fs.blog</span> — Mental models (free)</li>
+        </ul>
+      </div>
+      <div class="res-col">
+        <h4 style="color:var(--amber)">🛠 Practice Tools</h4>
+        <ul>
+          <li><span>Miro / FigJam</span> — Visual sprints</li>
+          <li><span>XMind</span> — Issue trees &amp; mind maps</li>
+          <li><span>Obsidian</span> — Mental model library</li>
+          <li><span>Anki</span> — Frameworks via spaced rep.</li>
+          <li><span>Kaggle</span> — Real analytical datasets</li>
+          <li><span>AI (Claude/GPT)</span> — Sparring partner</li>
+        </ul>
+      </div>
+      <div class="res-col">
+        <h4 style="color:var(--ink2)">🔄 Self-Evaluation</h4>
+        <ul>
+          <li>After every project: <span>10-min reflection</span></li>
+          <li>Weekly: <span>Thinking Journal</span> entry</li>
+          <li>Monthly: <span>Bias &amp; fallacy log</span> review</li>
+          <li>Quarterly: <span>Score yourself</span> 1–10 per skill</li>
+          <li>Annually: <span>Full skills audit</span> vs. goals</li>
+          <li>Always: <span>Teach what you learn</span></li>
+        </ul>
+      </div>
+    </div>
+
+  </div><!-- /grid-main -->
+
+  <!-- FOOTER -->
+  <div style="margin-top:14px;border-top:2px solid var(--ink);padding-top:10px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:6px;">
+    <div style="font-size:.82rem;color:#8898aa;font-weight:500">
+      <strong style="color:var(--blue)">Critical Thinking</strong> = Evaluate quality of reasoning &nbsp;·&nbsp;
+      <strong style="color:var(--teal)">Analytical Thinking</strong> = Decompose complexity into structure &nbsp;·&nbsp;
+      <strong style="color:var(--amber)">Design Thinking</strong> = Human-centred iterative problem solving
+    </div>
+    <div style="font-size:.82rem;color:#aab;font-style:italic">
+      Compounded over years, deliberate thinking practice separates exceptional thinkers from average ones.
+    </div>
+  </div>
+
+  <!-- BRANDED FOOTER -->
+  <div style="margin-top:10px;background:var(--ink);border-radius:8px;padding:10px 20px;display:flex;align-items:center;justify-content:center;gap:0;">
+    <span style="font-family:'Playfair Display',serif;font-size:1rem;font-weight:700;color:#7fc0c0;letter-spacing:.04em;">Architecting U'r Career</span>
+    <span style="color:#ffffff;font-size:1.1rem;margin:0 12px;font-weight:300;">|</span>
+    <span style="font-family:'DM Sans',sans-serif;font-size:.95rem;font-weight:600;color:#fff;letter-spacing:.06em;">Krishna Mohan Parsha</span>
+    <span style="color:#ffffff;font-size:1.1rem;margin:0 12px;font-weight:300;">|</span>
+    <span style="font-family:'DM Mono',monospace;font-size:.85rem;font-weight:500;color:#e8a820;letter-spacing:.08em;text-transform:uppercase;">Thinking Skills Roadmap</span>
+  </div>
+
+</div><!-- /page -->
+</body>
+</html>
