@@ -1,456 +1,428 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>AI Security Stack — Architect U'r Career</title>
-
-<!-- FIX #10: Open Graph meta tags for social sharing -->
-<meta property="og:title" content="AI Security Stack — Layered Defense for AI Systems">
-<meta property="og:description" content="Interactive visual guide to the 6 critical layers of AI security: Infrastructure, Data, Model, Pipeline, Prompt, and API security. By Krishna Mohan Parsha.">
-<meta property="og:type" content="website">
-<meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="AI Security Stack — Layered Defense for AI Systems">
-<meta name="twitter:description" content="Interactive visual guide to the 6 critical layers of AI security. Architect U'r Career | Krishna Mohan Parsha">
-<meta name="description" content="Interactive visual guide to the 6 critical layers of AI security: Infrastructure, Data, Model, Pipeline, Prompt, and API security.">
-<meta name="author" content="Krishna Mohan Parsha">
-
-<style>
-  @import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&family=JetBrains+Mono:wght@500&display=swap');
-
-  *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
-
-  :root {
-    --bg-dark: #080a1c;
-    --bg-mid: #0e1230;
-    --cyan: #00e6ff;
-    --cyan-dim: rgba(0, 230, 255, 0.25);
-  }
-
-  body {
-    min-height: 100vh;
-    background: linear-gradient(180deg, var(--bg-dark) 0%, var(--bg-mid) 40%, #121838 100%);
-    color: #fff;
-    font-family: 'Outfit', system-ui, sans-serif;
-    overflow-x: hidden;
-    position: relative;
-  }
-
-  #particles { position: fixed; inset: 0; z-index: 0; pointer-events: none; }
-
-  .scanlines {
-    position: fixed; inset: 0; z-index: 1; pointer-events: none;
-    background: repeating-linear-gradient(0deg, transparent 0px, transparent 3px, rgba(0,230,255,0.007) 3px, rgba(0,230,255,0.007) 4px);
-  }
-
-  .corner { position: fixed; width: 22px; height: 22px; z-index: 2; }
-  .corner.tl { top: 10px; left: 10px; border-top: 2px solid var(--cyan-dim); border-left: 2px solid var(--cyan-dim); }
-  .corner.tr { top: 10px; right: 10px; border-top: 2px solid var(--cyan-dim); border-right: 2px solid var(--cyan-dim); }
-  .corner.bl { bottom: 10px; left: 10px; border-bottom: 2px solid var(--cyan-dim); border-left: 2px solid var(--cyan-dim); }
-  .corner.br { bottom: 10px; right: 10px; border-bottom: 2px solid var(--cyan-dim); border-right: 2px solid var(--cyan-dim); }
-
-  .container {
-    position: relative; z-index: 3;
-    max-width: 740px; margin: 0 auto;
-    padding: 44px 20px 28px;
-  }
-
-  /* ── Title ── */
-  .header {
-    text-align: center; margin-bottom: 40px;
-    opacity: 0; transform: translateY(-22px);
-    animation: fadeUp 0.9s cubic-bezier(.16,1,.3,1) 0.2s forwards;
-  }
-  .header .title-row {
-    display: inline-flex; align-items: center; gap: 14px; justify-content: center;
-  }
-  /* FIX #13: Shield icon beside title */
-  .header .shield-icon {
-    width: 36px; height: 36px; flex-shrink: 0;
-    color: var(--cyan); opacity: 0.7;
-  }
-  .header h1 {
-    font-size: clamp(28px, 5vw, 40px); font-weight: 800;
-    letter-spacing: 3px;
-    /* FIX #3: standard background-clip + webkit prefix */
-    background: linear-gradient(135deg, #fff 30%, var(--cyan) 100%);
-    -webkit-background-clip: text; -webkit-text-fill-color: transparent;
-    background-clip: text; color: transparent;
-  }
-  .header .subtitle {
-    margin-top: 8px; font-size: 14px; font-weight: 300;
-    color: rgba(0,210,240,0.55); letter-spacing: 4px;
-  }
-  .header .divider {
-    width: 200px; height: 1px; margin: 18px auto 0;
-    background: linear-gradient(90deg, transparent, rgba(0,230,255,0.4), transparent);
-  }
-
-  .stack { display: flex; flex-direction: column; gap: 8px; }
-
-  /* ── Layer Card ── */
-  .layer-card {
-    margin: 0 auto; border-radius: 12px; overflow: hidden; cursor: pointer;
-    border: 1px solid rgba(255,255,255,0.06);
-    background: rgba(255,255,255,0.02);
-    transition: all 0.35s ease;
-    position: relative;
-    opacity: 0; transform: translateY(40px);
-  }
-  .layer-card.visible { opacity: 1; transform: translateY(0); }
-  /* FIX #5: rgba() fallback instead of color-mix() */
-  .layer-card:hover {
-    border-color: var(--layer-color);
-    box-shadow: 0 0 30px rgba(var(--lr), var(--lg), var(--lb), 0.12);
-  }
-  .layer-card.expanded {
-    border-color: var(--layer-color);
-    background: linear-gradient(135deg, rgba(var(--lr), var(--lg), var(--lb), 0.08), transparent);
-    box-shadow: 0 0 35px rgba(var(--lr), var(--lg), var(--lb), 0.15);
-  }
-
-  .layer-card .accent-bar {
-    position: absolute; left: 0; top: 0; bottom: 0; width: 4px;
-    background: var(--layer-gradient);
-    box-shadow: 0 0 14px rgba(var(--lr), var(--lg), var(--lb), 0.5);
-  }
-
-  .layer-row {
-    display: flex; align-items: center; padding: 16px 20px 16px 24px; gap: 16px;
-  }
-  .layer-icon {
-    width: 44px; height: 44px; border-radius: 10px; flex-shrink: 0;
-    display: flex; align-items: center; justify-content: center;
-    background: rgba(var(--lr), var(--lg), var(--lb), 0.1);
-    border: 1px solid rgba(var(--lr), var(--lg), var(--lb), 0.28);
-    color: var(--layer-color);
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-  }
-  .layer-card:hover .layer-icon {
-    transform: scale(1.1);
-    box-shadow: 0 0 20px rgba(var(--lr), var(--lg), var(--lb), 0.25);
-  }
-  .layer-icon svg { width: 22px; height: 22px; }
-
-  .layer-info { flex: 1; min-width: 0; }
-  .layer-num {
-    font-family: 'JetBrains Mono', monospace; font-size: 11px; font-weight: 500;
-    color: var(--layer-color); opacity: 0.65; letter-spacing: 1.5px;
-  }
-  .layer-name { font-size: 17px; font-weight: 700; letter-spacing: 0.5px; margin-top: 1px; }
-  .layer-tagline { font-size: 13px; color: rgba(180,195,220,0.65); margin-top: 2px; }
-
-  .chevron {
-    width: 28px; height: 28px; border-radius: 50%; flex-shrink: 0;
-    display: flex; align-items: center; justify-content: center;
-    background: rgba(255,255,255,0.04);
-    transition: all 0.35s ease;
-  }
-  .layer-card.expanded .chevron {
-    transform: rotate(180deg);
-    background: rgba(var(--lr), var(--lg), var(--lb), 0.15);
-  }
-  .chevron svg { stroke: rgba(255,255,255,0.35); }
-  .layer-card.expanded .chevron svg { stroke: var(--layer-color); }
-
-  .layer-details {
-    max-height: 0; overflow: hidden;
-    transition: max-height 0.5s cubic-bezier(.16,1,.3,1);
-  }
-  /* FIX #8: larger max-height for accessibility zoom */
-  .layer-card.expanded .layer-details { max-height: 600px; }
-
-  .details-inner {
-    padding: 0 24px 20px;
-    border-top: 1px solid rgba(var(--lr), var(--lg), var(--lb), 0.08);
-  }
-  .details-inner > div { padding-top: 16px; }
-
-  .section-label {
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 10px; font-weight: 500;
-    letter-spacing: 1.8px; margin-bottom: 10px;
-  }
-  .section-label.controls { color: var(--layer-color); }
-  .section-label.threat { color: #ff6b6b; }
-  .section-label.frameworks { color: #00c8ff; }
-
-  .point-list { display: flex; flex-direction: column; gap: 7px; margin-bottom: 16px; }
-  .point {
-    display: flex; align-items: flex-start; gap: 10px;
-    font-size: 13px; color: rgba(200,210,225,0.85); line-height: 1.55;
-  }
-  .point-dot {
-    width: 5px; height: 5px; border-radius: 50%; margin-top: 7px; flex-shrink: 0;
-    background: var(--layer-color);
-    box-shadow: 0 0 6px rgba(var(--lr), var(--lg), var(--lb), 0.5);
-  }
-
-  .info-box { border-radius: 8px; padding: 12px 14px; margin-bottom: 12px; }
-  .info-box.threat-box {
-    background: rgba(255,50,50,0.06);
-    border: 1px solid rgba(255,80,80,0.14);
-  }
-  .info-box.threat-box p { font-size: 12px; color: rgba(255,180,180,0.75); line-height: 1.55; }
-  .info-box.fw-box {
-    background: rgba(0,200,255,0.04);
-    border: 1px solid rgba(0,200,255,0.1);
-  }
-  .info-box.fw-box p { font-size: 12px; color: rgba(150,220,255,0.7); }
-
-  .hint {
-    text-align: center; margin-top: 22px;
-    font-size: 12px; color: rgba(0,200,230,0.4); letter-spacing: 1px;
-    opacity: 0; animation: fadeIn 1s ease 1.4s forwards;
-  }
-
-  .footer {
-    margin-top: 34px; padding-top: 16px;
-    border-top: 1px solid rgba(255,255,255,0.06);
-    text-align: center;
-  }
-  .footer .brand {
-    font-size: 14px; font-weight: 600; letter-spacing: 1px;
-    /* FIX #3: standard background-clip */
-    background: linear-gradient(90deg, #00d2f0, #00e6ff, #40a0ff);
-    -webkit-background-clip: text; -webkit-text-fill-color: transparent;
-    background-clip: text; color: transparent;
-  }
-  /* FIX #14: Source attribution */
-  .footer .attribution {
-    margin-top: 8px; font-size: 10px;
-    color: rgba(120, 150, 180, 0.35);
-    letter-spacing: 0.5px;
-  }
-
-  @keyframes fadeUp { to { opacity: 1; transform: translateY(0); } }
-  @keyframes fadeIn { to { opacity: 1; } }
-
-  /* FIX #11: prefers-reduced-motion */
-  @media (prefers-reduced-motion: reduce) {
-    *, *::before, *::after {
-      animation-duration: 0.01ms !important;
-      animation-iteration-count: 1 !important;
-      transition-duration: 0.01ms !important;
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>LLM Deep Dive — Interactive Technical Reference | Architect U'r Career</title>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/react/18.2.0/umd/react.production.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/react-dom/18.2.0/umd/react-dom.production.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-standalone/7.23.9/babel.min.js"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html, body, #root { height: 100%; }
+    @keyframes fadeSlideUp { from { opacity: 0; transform: translateY(12px); } to { opacity: 1; transform: translateY(0); } }
+    ::-webkit-scrollbar { width: 6px; }
+    ::-webkit-scrollbar-track { background: #0a0e17; }
+    ::-webkit-scrollbar-thumb { background: #1e2d4a; border-radius: 3px; }
+    @media (max-width: 768px) {
+      .desktop-nav { display: none !important; }
+      .mobile-nav-toggle { display: flex !important; }
+      .mobile-nav-open { display: flex !important; }
+      .main-content { padding: 24px 16px 64px !important; }
     }
-    #particles { display: none; }
-    .scanlines { display: none; }
-    .layer-card { opacity: 1 !important; transform: none !important; }
-    .header { opacity: 1 !important; transform: none !important; }
-    .hint { opacity: 0.4 !important; }
-  }
-</style>
+    @media (min-width: 769px) {
+      .desktop-nav { display: flex !important; }
+      .mobile-nav-toggle { display: none !important; }
+    }
+  </style>
 </head>
 <body>
+  <div id="root"></div>
+  <script type="text/babel">
+    const { useState, useEffect, useRef, useCallback } = React;
 
-<canvas id="particles"></canvas>
-<div class="scanlines"></div>
-<div class="corner tl"></div>
-<div class="corner tr"></div>
-<div class="corner bl"></div>
-<div class="corner br"></div>
+    const SECTIONS = [
+      { id: "overview", label: "Overview", key: "1" },
+      { id: "tokenization", label: "Tokenization", key: "2" },
+      { id: "embedding", label: "Embeddings", key: "3" },
+      { id: "transformer", label: "Transformer", key: "4" },
+      { id: "attention", label: "Attention", key: "5" },
+      { id: "training", label: "Training", key: "6" },
+      { id: "inference", label: "Inference", key: "7" },
+    ];
 
-<div class="container">
-  <div class="header">
-    <!-- FIX #13: Shield icon beside title -->
-    <div class="title-row">
-      <svg class="shield-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
-        <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
-        <polyline points="9 12 11 14 15 10"/>
-      </svg>
-      <h1>AI SECURITY STACK</h1>
-    </div>
-    <div class="subtitle">LAYERED DEFENSE FOR AI SYSTEMS</div>
-    <div class="divider"></div>
-  </div>
+    const C = {
+      bg: "#0a0e17", surface: "#111827", surfaceAlt: "#1a2235", border: "#1e2d4a",
+      accent: "#00e5a0", accentAlt: "#6366f1", warn: "#f59e0b",
+      text: "#e2e8f0", textDim: "#64748b", code: "#c084fc",
+    };
 
-  <div class="stack" id="stack"></div>
-
-  <div class="hint">Click any layer to explore details</div>
-
-  <div class="footer">
-    <p class="brand">Architect U'r Career &nbsp;|&nbsp; Krishna Mohan Parsha</p>
-    <!-- FIX #14: Source attribution for credibility -->
-    <p class="attribution">Based on NIST AI RMF &middot; MITRE ATLAS &middot; OWASP LLM Top 10 &middot; ISO 27001</p>
-  </div>
-</div>
-
-<script>
-const LAYERS = [
-  {
-    id:6, name:"API Security", tagline:"Control the Gateway",
-    color:"#E6783C", rgb:"230,120,60",
-    gradient:"linear-gradient(135deg,#c45e28,#E6783C,#ff9a5c)",
-    icon:`<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="6" cy="6" r="3"/><circle cx="18" cy="6" r="3"/><circle cx="12" cy="18" r="3"/><line x1="6" y1="9" x2="12" y2="15"/><line x1="18" y1="9" x2="12" y2="15"/><line x1="6" y1="6" x2="18" y2="6"/></svg>`,
-    points:["OAuth 2.0 / API key authentication & rotation","Rate limiting & token-based throttling","Endpoint monitoring & anomaly detection","Input/output filtering & content moderation","API versioning & deprecation governance"],
-    threat:"Credential stuffing, DDoS on inference endpoints, data scraping, unauthorized model access",
-    frameworks:"OWASP API Security Top 10, PCI DSS"
-  },
-  {
-    id:5, name:"Prompt Security", tagline:"Defend the Input",
-    color:"#C850A0", rgb:"200,80,160",
-    gradient:"linear-gradient(135deg,#a33d82,#C850A0,#e870c0)",
-    icon:`<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/><path d="M8 10h8M8 14h4"/></svg>`,
-    points:["Prompt injection detection & prevention","Jailbreak attempt classification & blocking","Input sanitization & validation layers","Context boundary enforcement for RAG","System prompt protection & instruction hierarchy"],
-    threat:"Direct/indirect prompt injection, data exfiltration via prompt, jailbreaking, context manipulation",
-    frameworks:"OWASP LLM Top 10, NIST AI 600-1"
-  },
-  {
-    id:4, name:"Pipeline Security", tagline:"Secure the Workflow",
-    color:"#8C5ADC", rgb:"140,90,220",
-    gradient:"linear-gradient(135deg,#6b3fb5,#8C5ADC,#a87aff)",
-    icon:`<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M12 1v4m0 14v4M4.22 4.22l2.83 2.83m9.9 9.9l2.83 2.83M1 12h4m14 0h4M4.22 19.78l2.83-2.83m9.9-9.9l2.83-2.83"/></svg>`,
-    points:["CI/CD pipeline integrity & signed artifacts","ML supply chain verification (SBOM for models)","Training environment sandboxing","Experiment tracking with tamper-proof audit trails","Automated security scanning in MLOps"],
-    threat:"Dependency confusion, malicious packages in model registries, compromised training jobs",
-    frameworks:"SLSA, SSDF, NIST SP 800-218"
-  },
-  {
-    id:3, name:"Model Security", tagline:"Guard the Brain",
-    color:"#5078E6", rgb:"80,120,230",
-    gradient:"linear-gradient(135deg,#3a5abf,#5078E6,#6b95ff)",
-    icon:`<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 3v18"/><path d="M3 12h18"/><circle cx="12" cy="12" r="3"/></svg>`,
-    points:["Adversarial robustness testing & red teaming","Model theft & extraction prevention","Weight poisoning & backdoor detection","Model watermarking & fingerprinting","Secure model serialization & integrity verification"],
-    threat:"Adversarial examples, model inversion, trojaned weights, intellectual property theft",
-    frameworks:"MITRE ATLAS, OWASP ML Top 10, NIST AI 100-2"
-  },
-  {
-    id:2, name:"Data Security", tagline:"Protect What Fuels AI",
-    color:"#1EAA9E", rgb:"30,170,158",
-    gradient:"linear-gradient(135deg,#147a72,#1EAA9E,#28d4c6)",
-    icon:`<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/><circle cx="12" cy="16" r="1"/></svg>`,
-    points:["Training data encryption at rest & in transit","Differential privacy & data anonymization","Data lineage tracking & access governance","PII detection & automated redaction","Vector database access control & audit logs"],
-    threat:"Data poisoning, membership inference attacks, PII leakage from embeddings",
-    frameworks:"GDPR, CCPA, ISO 27001, NIST AI RMF"
-  },
-  {
-    id:1, name:"Infrastructure Security", tagline:"The Foundation Layer",
-    color:"#1482C8", rgb:"20,130,200",
-    gradient:"linear-gradient(135deg,#0d5a8f,#1482C8,#18a0e8)",
-    icon:`<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="17" width="20" height="5" rx="1"/><rect x="4" y="10" width="16" height="5" rx="1"/><rect x="6" y="3" width="12" height="5" rx="1"/></svg>`,
-    points:["Cloud environment hardening & network segmentation","GPU & compute node isolation and telemetry","Hardware root-of-trust & secure enclaves","Zero-trust architecture for AI workloads","Container security & Kubernetes RBAC"],
-    threat:"Lateral movement through shared GPU clusters, supply chain attacks on hardware",
-    frameworks:"NIST CSF, CIS Benchmarks, SOC 2"
-  }
-];
-
-// ── Render Stack ──  (FIX #6: removed dead expandedId variable)
-const stack = document.getElementById('stack');
-
-LAYERS.forEach((layer, idx) => {
-  const widthPct = 100 - idx * 3;
-  // FIX #5: pass rgb components as CSS custom properties
-  const [lr, lg, lb] = layer.rgb.split(',');
-  const card = document.createElement('div');
-  card.className = 'layer-card';
-  card.style.cssText = `width:${widthPct}%;--layer-color:${layer.color};--layer-gradient:${layer.gradient};--lr:${lr};--lg:${lg};--lb:${lb};transition-delay:${idx * 0.12}s;`;
-  card.dataset.id = layer.id;
-
-  card.innerHTML = `
-    <div class="accent-bar"></div>
-    <div class="layer-row">
-      <div class="layer-icon">${layer.icon}</div>
-      <div class="layer-info">
-        <div style="display:flex;align-items:center;gap:10px">
-          <span class="layer-num">0${layer.id}</span>
-          <span class="layer-name">${layer.name}</span>
-        </div>
-        <div class="layer-tagline">${layer.tagline}</div>
-      </div>
-      <div class="chevron">
-        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg>
-      </div>
-    </div>
-    <div class="layer-details">
-      <div class="details-inner"><div>
-        <div class="section-label controls">KEY SECURITY CONTROLS</div>
-        <div class="point-list">
-          ${layer.points.map(p => `<div class="point"><div class="point-dot"></div><span>${p}</span></div>`).join('')}
-        </div>
-        <div class="info-box threat-box">
-          <div class="section-label threat">THREAT LANDSCAPE</div>
-          <p>${layer.threat}</p>
-        </div>
-        <div class="info-box fw-box">
-          <div class="section-label frameworks">REFERENCE FRAMEWORKS</div>
-          <p>${layer.frameworks}</p>
-        </div>
-      </div></div>
-    </div>
-  `;
-
-  card.addEventListener('click', () => {
-    const wasExpanded = card.classList.contains('expanded');
-    document.querySelectorAll('.layer-card.expanded').forEach(c => c.classList.remove('expanded'));
-    if (!wasExpanded) card.classList.add('expanded');
-  });
-
-  stack.appendChild(card);
-  setTimeout(() => card.classList.add('visible'), 300 + idx * 120);
-});
-
-// ── Particle System ──
-(function () {
-  // FIX #11: skip particles entirely if reduced motion preferred
-  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
-
-  const canvas = document.getElementById('particles');
-  const ctx = canvas.getContext('2d');
-  let w, h, animId;
-  const particles = [];
-  const N = 45;
-  let isVisible = true;
-
-  // FIX #12: pause when tab is hidden
-  document.addEventListener('visibilitychange', () => {
-    isVisible = !document.hidden;
-    if (isVisible && !animId) draw();
-  });
-
-  function resize() {
-    w = canvas.width = window.innerWidth;
-    h = canvas.height = window.innerHeight;
-  }
-  resize();
-  window.addEventListener('resize', resize);
-
-  for (let i = 0; i < N; i++) {
-    particles.push({
-      x: Math.random() * (w || 1000), y: Math.random() * (h || 800),
-      vx: (Math.random() - 0.5) * 0.35, vy: (Math.random() - 0.5) * 0.35,
-      r: Math.random() * 1.5 + 0.5, a: Math.random() * 0.3 + 0.08
-    });
-  }
-
-  function draw() {
-    if (!isVisible) { animId = null; return; } // FIX #12
-    ctx.clearRect(0, 0, w, h);
-    for (const p of particles) {
-      p.x += p.vx; p.y += p.vy;
-      if (p.x < 0) p.x = w; if (p.x > w) p.x = 0;
-      if (p.y < 0) p.y = h; if (p.y > h) p.y = 0;
-      ctx.beginPath();
-      ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
-      ctx.fillStyle = `rgba(0,230,255,${p.a})`;
-      ctx.fill();
+    function AnimatedCounter({ end, duration = 1200, suffix = "" }) {
+      const [val, setVal] = useState(0);
+      const ref = useRef(null);
+      useEffect(() => {
+        const obs = new IntersectionObserver(([e]) => {
+          if (e.isIntersecting) {
+            let s = 0; const step = end / (duration / 16);
+            const iv = setInterval(() => { s += step; if (s >= end) { setVal(end); clearInterval(iv); } else setVal(Math.floor(s)); }, 16);
+            obs.disconnect();
+          }
+        }, { threshold: 0.3 });
+        if (ref.current) obs.observe(ref.current);
+        return () => obs.disconnect();
+      }, [end, duration]);
+      return <span ref={ref}>{val.toLocaleString()}{suffix}</span>;
     }
-    for (let i = 0; i < N; i++) {
-      for (let j = i + 1; j < N; j++) {
-        const dx = particles[i].x - particles[j].x;
-        const dy = particles[i].y - particles[j].y;
-        const d = Math.sqrt(dx * dx + dy * dy);
-        if (d < 110) {
-          ctx.beginPath();
-          ctx.moveTo(particles[i].x, particles[i].y);
-          ctx.lineTo(particles[j].x, particles[j].y);
-          ctx.strokeStyle = `rgba(0,200,255,${0.05 * (1 - d / 110)})`;
-          ctx.stroke();
+
+    function TokenDemo() {
+      const [input, setInput] = useState("Large Language Models are transforming AI.");
+      const tokenize = (text) => {
+        const patterns = []; let remaining = text;
+        while (remaining.length > 0) {
+          let matched = false;
+          const prefixes = ["transform","Large","Language","Model","are","ing","AI","the","is","of","to","in","for","and"];
+          for (const p of prefixes) { if (remaining.startsWith(p)) { patterns.push({ text: p, type: "word" }); remaining = remaining.slice(p.length); matched = true; break; } }
+          if (!matched) { if (remaining[0]===" ") patterns.push({text:"\u2423",type:"space"}); else if (remaining[0]===".") patterns.push({text:".",type:"punct"}); else patterns.push({text:remaining[0],type:"char"}); remaining = remaining.slice(1); }
         }
-      }
+        return patterns;
+      };
+      const tokens = tokenize(input);
+      const pal = ["#00e5a0","#6366f1","#f59e0b","#ec4899","#06b6d4","#a78bfa","#34d399","#f472b6"];
+      return (
+        <div>
+          <div style={{marginBottom:16}}>
+            <label style={{color:C.textDim,fontSize:12,fontFamily:"'JetBrains Mono', monospace",textTransform:"uppercase",letterSpacing:2}}>Input Text</label>
+            <input value={input} onChange={(e)=>setInput(e.target.value)} style={{width:"100%",padding:"12px 16px",marginTop:8,background:C.bg,border:"1px solid "+C.border,borderRadius:8,color:C.text,fontSize:15,fontFamily:"'JetBrains Mono', monospace",outline:"none"}} />
+          </div>
+          <div style={{display:"flex",alignItems:"center",gap:8,marginBottom:16}}>
+            <span style={{color:C.textDim,fontSize:13}}>Simplified Tokenization →</span>
+            <span style={{color:C.accent,fontSize:13,fontWeight:600}}>{tokens.length} tokens</span>
+          </div>
+          <div style={{display:"flex",flexWrap:"wrap",gap:6}}>
+            {tokens.map((t,i) => (
+              <div key={i} style={{padding:"6px 12px",borderRadius:6,background:pal[i%pal.length]+"18",border:"1px solid "+pal[i%pal.length]+"44",fontFamily:"'JetBrains Mono', monospace",fontSize:14,color:pal[i%pal.length],animation:"fadeSlideUp 0.3s ease "+(i*0.04)+"s both"}}>
+                <span>{t.text}</span><span style={{fontSize:10,opacity:0.5,marginLeft:6}}>{i}</span>
+              </div>
+            ))}
+          </div>
+          <div style={{marginTop:16,padding:"10px 14px",borderRadius:8,background:C.warn+"0a",border:"1px solid "+C.warn+"22"}}>
+            <span style={{fontSize:11,color:C.warn,fontFamily:"'JetBrains Mono', monospace"}}>⚠ Simplified demo — real BPE iteratively merges frequent byte pairs from a trained vocabulary of ~50K–100K tokens (e.g., GPT: cl100k_base, LLaMA: SentencePiece).</span>
+          </div>
+        </div>
+      );
     }
-    animId = requestAnimationFrame(draw);
-  }
-  draw();
-})();
-</script>
+
+    function EmbeddingViz() {
+      const dims = [
+        {label:"king",values:[0.82,-0.21,0.65,0.91,-0.34,0.12,0.55,-0.78]},
+        {label:"queen",values:[0.79,-0.18,0.68,0.44,-0.31,0.15,0.88,-0.72]},
+        {label:"man",values:[0.45,-0.62,0.22,0.87,-0.55,0.33,0.11,-0.41]},
+        {label:"woman",values:[0.42,-0.58,0.25,0.39,-0.51,0.36,0.44,-0.35]},
+      ];
+      return (
+        <div>
+          <div style={{fontSize:13,color:C.textDim,marginBottom:16,fontFamily:"'JetBrains Mono', monospace"}}>king − man + woman ≈ queen</div>
+          <div style={{display:"flex",flexDirection:"column",gap:12}}>
+            {dims.map((d,di) => (
+              <div key={di} style={{display:"flex",alignItems:"center",gap:12}}>
+                <span style={{width:60,textAlign:"right",color:C.code,fontSize:13,fontFamily:"'JetBrains Mono', monospace",fontWeight:600}}>{d.label}</span>
+                <div style={{display:"flex",gap:3,flex:1}}>
+                  {d.values.map((v,vi) => {
+                    const absV = Math.abs(v); const col = v > 0 ? C.accent : C.accentAlt;
+                    return (<div key={vi} style={{flex:1,height:32,borderRadius:4,background:col+Math.round(absV*200).toString(16).padStart(2,"0"),border:"1px solid "+col+"33",display:"flex",alignItems:"center",justifyContent:"center",fontSize:10,color:absV>0.5?"#fff":C.textDim,fontFamily:"'JetBrains Mono', monospace",animation:"fadeSlideUp 0.3s ease "+((di*8+vi)*0.02)+"s both"}}>{v.toFixed(2)}</div>);
+                  })}
+                </div>
+              </div>
+            ))}
+          </div>
+          <div style={{marginTop:12,fontSize:11,color:C.textDim,fontFamily:"'JetBrains Mono', monospace"}}>↑ 8 of d_model=4096 dimensions shown · Actual: ℝ^4096 dense vector per token</div>
+        </div>
+      );
+    }
+
+    function TransformerBlock() {
+      const [activeLayer, setActiveLayer] = useState(null);
+      const layers = [
+        {id:"input",label:"Token Embeddings + RoPE",desc:"Token IDs → dense vectors ∈ ℝ^d_model. Rotary Position Embeddings (RoPE) encode relative positions by rotating Q and K vectors, enabling length extrapolation. Replaces sinusoidal/learned encodings from the original Transformer.",color:C.accent,detail:"q_rot = q · cos(mθ) + rotate(q) · sin(mθ)  // applied to Q, K only"},
+        {id:"ln1",label:"RMSNorm (Pre-Norm)",desc:"Root Mean Square Normalization — simpler and faster than LayerNorm. Omits mean-centering; normalizes by RMS of activations. Used by LLaMA, Mistral, Gemma, and most modern LLMs.",color:C.textDim,detail:"RMSNorm(x) = x / √(mean(x²) + ε) · γ"},
+        {id:"mha",label:"Multi-Head Self-Attention",desc:"h parallel attention heads with Q, K, V projections. Scaled dot-product with causal mask (lower-triangular). Modern variant: GQA (Grouped-Query Attention) shares K/V heads to reduce KV cache size.",color:C.accentAlt,detail:"Attn(Q,K,V) = softmax(QKᵀ/√d_k + causal_mask) · V"},
+        {id:"res1",label:"Residual Connection",desc:"Skip connection adds original input back. Critical for gradient flow in deep networks (96+ layers).",color:C.warn,detail:"output = x + MultiHeadAttn(RMSNorm(x))"},
+        {id:"ln2",label:"RMSNorm (Pre-Norm)",desc:"Second normalization before the feed-forward network. Same RMSNorm applied independently.",color:C.textDim,detail:"RMSNorm(x_residual)"},
+        {id:"ffn",label:"SwiGLU Feed-Forward Network",desc:"Gated FFN with three weight matrices. SwiGLU uses SiLU (Swish) as a gate, element-wise multiplied with the up-projection. Expansion ratio ~8/3× (to match 4× standard FFN FLOPs). No bias terms.",color:"#ec4899",detail:"FFN(x) = (SiLU(xW_gate) ⊙ xW_up) · W_down"},
+        {id:"res2",label:"Residual Connection",desc:"Second skip connection for FFN output.",color:C.warn,detail:"output = x_residual + FFN(RMSNorm(x_residual))"},
+      ];
+      return (
+        <div>
+          <div style={{display:"flex",gap:24,flexWrap:"wrap"}}>
+            <div style={{flex:"0 0 280px",minWidth:240,display:"flex",flexDirection:"column",gap:4}}>
+              {layers.map((l,i) => (
+                <div key={l.id} onMouseEnter={()=>setActiveLayer(l.id)} onMouseLeave={()=>setActiveLayer(null)} onClick={()=>setActiveLayer(activeLayer===l.id?null:l.id)}
+                  style={{padding:"10px 14px",borderRadius:8,cursor:"pointer",background:activeLayer===l.id?l.color+"18":"transparent",border:"1px solid "+(activeLayer===l.id?l.color+"55":C.border),transition:"all 0.2s ease"}}>
+                  <div style={{display:"flex",alignItems:"center",gap:8}}>
+                    <div style={{width:8,height:8,borderRadius:"50%",background:l.color,flexShrink:0}} />
+                    <span style={{fontSize:12,color:C.text,fontFamily:"'JetBrains Mono', monospace",fontWeight:500}}>{l.label}</span>
+                  </div>
+                  {i < layers.length - 1 && <div style={{width:1,height:8,background:C.border,marginLeft:3.5,marginTop:4}} />}
+                </div>
+              ))}
+              <div style={{marginTop:8,padding:"8px 14px",borderRadius:8,border:"1px dashed "+C.border,textAlign:"center"}}>
+                <span style={{fontSize:11,color:C.textDim,fontFamily:"'JetBrains Mono', monospace"}}>× N layers (e.g., 80–96 for frontier models)</span>
+              </div>
+            </div>
+            <div style={{flex:1,minWidth:280,padding:20,background:C.bg,borderRadius:12,border:"1px solid "+C.border,minHeight:200,display:"flex",flexDirection:"column",justifyContent:"center"}}>
+              {activeLayer ? (()=>{const l=layers.find(x=>x.id===activeLayer); return (
+                <div style={{animation:"fadeSlideUp 0.2s ease"}}>
+                  <div style={{fontSize:16,fontWeight:700,color:l.color,marginBottom:8,fontFamily:"'Space Grotesk', sans-serif"}}>{l.label}</div>
+                  <p style={{fontSize:14,color:C.text,lineHeight:1.7,marginBottom:16}}>{l.desc}</p>
+                  <div style={{padding:"12px 16px",background:l.color+"0a",borderRadius:8,border:"1px solid "+l.color+"22",fontFamily:"'JetBrains Mono', monospace",fontSize:13,color:l.color,overflowX:"auto"}}>{l.detail}</div>
+                </div>);})() : (
+                <div style={{textAlign:"center",color:C.textDim,fontSize:14}}><div style={{fontSize:32,marginBottom:8}}>⬅</div>Hover or click a layer to inspect it</div>
+              )}
+            </div>
+          </div>
+          <div style={{marginTop:20,padding:"14px 18px",borderRadius:10,background:C.accentAlt+"08",border:"1px solid "+C.accentAlt+"22"}}>
+            <div style={{fontSize:12,fontWeight:700,color:C.accentAlt,fontFamily:"'JetBrains Mono', monospace",marginBottom:6}}>🧩 VARIANT: MIXTURE OF EXPERTS (MoE)</div>
+            <p style={{fontSize:13,color:C.textDim,lineHeight:1.7}}>In MoE architectures (Mixtral, DeepSeek-V2/V3, DBRX), the FFN is replaced by N expert FFNs + a router. Only top-k experts (typically 2 of 8–16) activate per token, enabling larger total params with constant per-token FLOPs. E.g., Mixtral 8×7B has 47B total params but ~13B active per token.</p>
+          </div>
+        </div>
+      );
+    }
+
+    function AttentionViz() {
+      const [hoveredToken, setHoveredToken] = useState(null);
+      const tokens = ["The","cat","sat","on","the","mat"];
+      const rawWeights = [
+        [1.0,0,0,0,0,0],[0.3,0.7,0,0,0,0],[0.15,0.55,0.3,0,0,0],
+        [0.1,0.15,0.25,0.5,0,0],[0.35,0.1,0.05,0.1,0.4,0],[0.05,0.2,0.15,0.25,0.05,0.3],
+      ];
+      return (
+        <div>
+          <div style={{fontSize:13,color:C.textDim,marginBottom:8,fontFamily:"'JetBrains Mono', monospace"}}>Causal Self-Attention: softmax((QKᵀ + M)/√d_k) · V — M is −∞ for future positions</div>
+          <div style={{fontSize:12,color:C.warn,marginBottom:16,fontFamily:"'JetBrains Mono', monospace"}}>⚠ Decoder-only: each token can only attend to itself and prior tokens (causal mask)</div>
+          <div style={{display:"flex",justifyContent:"center",gap:8,marginBottom:24,flexWrap:"wrap"}}>
+            {tokens.map((t,i) => (
+              <div key={i} onMouseEnter={()=>setHoveredToken(i)} onMouseLeave={()=>setHoveredToken(null)} role="button" tabIndex={0} aria-label={"Query token: "+t+", position "+i}
+                style={{padding:"10px 18px",borderRadius:8,cursor:"pointer",background:hoveredToken===i?C.accentAlt:C.surfaceAlt,border:"1px solid "+(hoveredToken===i?C.accentAlt:C.border),color:hoveredToken===i?"#fff":C.text,fontFamily:"'JetBrains Mono', monospace",fontSize:14,fontWeight:600,transition:"all 0.2s ease",transform:hoveredToken===i?"scale(1.08)":"scale(1)"}}>
+                {t}<span style={{fontSize:9,opacity:0.4,marginLeft:4}}>t{i}</span>
+              </div>
+            ))}
+          </div>
+          {hoveredToken !== null && (
+            <div style={{animation:"fadeSlideUp 0.2s ease"}}>
+              <div style={{display:"flex",justifyContent:"center",gap:8,marginBottom:12,flexWrap:"wrap"}}>
+                {tokens.map((t,i) => {
+                  const w = rawWeights[hoveredToken][i]; const isMasked = i > hoveredToken;
+                  return (
+                    <div key={i} style={{textAlign:"center",width:70}}>
+                      <div style={{height:100,display:"flex",alignItems:"flex-end",justifyContent:"center",marginBottom:6}}>
+                        {isMasked ? <div style={{width:40,height:4,borderRadius:2,background:"#ef4444",opacity:0.5}} /> :
+                          <div style={{width:40,height:(w*250)+"px",borderRadius:"6px 6px 0 0",background:"linear-gradient(to top, "+C.accentAlt+", "+C.accent+")",opacity:0.3+w*2,transition:"height 0.3s ease"}} />}
+                      </div>
+                      <div style={{fontSize:12,color:isMasked?"#ef444488":C.text,fontFamily:"'JetBrains Mono', monospace",textDecoration:isMasked?"line-through":"none"}}>{t}</div>
+                      <div style={{fontSize:11,color:isMasked?"#ef4444":C.accent,fontFamily:"'JetBrains Mono', monospace"}}>{isMasked?"−∞":(w*100).toFixed(0)+"%"}</div>
+                    </div>);
+                })}
+              </div>
+              <div style={{textAlign:"center",fontSize:12,color:C.textDim,fontFamily:"'JetBrains Mono', monospace"}}>
+                Query: "{tokens[hoveredToken]}" (t{hoveredToken}) — attends to t0..t{hoveredToken} only | {hoveredToken+1} visible position{hoveredToken>0?"s":""}
+              </div>
+            </div>
+          )}
+        </div>
+      );
+    }
+
+    function TrainingPipeline() {
+      const [activePhase, setActivePhase] = useState(0);
+      const phases = [
+        {title:"Pre-training",icon:"📚",color:C.accent,stats:[{label:"Tokens",value:"~15T"},{label:"Compute",value:"~10²⁵ FLOPs"},{label:"Duration",value:"~90 days"}],details:"Next-token prediction on massive corpora (web, books, code). Causal language modeling: minimize cross-entropy loss. Trained on clusters of thousands of GPUs/TPUs with 3D parallelism (data + tensor + pipeline). Chinchilla-optimal or over-trained depending on inference budget.",formula:"L_pretrain = −Σ log P(xₜ | x<ₜ ; θ)"},
+        {title:"Supervised Fine-Tuning",icon:"🎯",color:C.accentAlt,stats:[{label:"Examples",value:"~100K"},{label:"Epochs",value:"2–5"},{label:"LR",value:"1e-5"}],details:"Instruction-response pairs curated by human annotators. Model learns to follow instructions, produce structured outputs, and align with desired behavior. Methods: full fine-tune or parameter-efficient (LoRA, QLoRA).",formula:"L_SFT = −Σ log P(response | instruction ; θ)"},
+        {title:"RLHF / DPO",icon:"🏆",color:C.warn,stats:[{label:"Pref. Pairs",value:"~500K"},{label:"Method",value:"DPO/PPO"},{label:"β (KL)",value:"0.1–0.5"}],details:"Alignment via human preferences. PPO: trains a separate reward model, optimizes policy with clipped surrogate + KL penalty. DPO (Direct Preference Optimization): eliminates the reward model — directly optimizes from preference pairs. DPO is now the dominant method (2024+).",formula:"L_DPO = −𝔼 log σ(β · [log π(y_w|x)/π_ref(y_w|x) − log π(y_l|x)/π_ref(y_l|x)])"},
+      ];
+      const p = phases[activePhase];
+      return (
+        <div>
+          <div style={{display:"flex",gap:8,marginBottom:24,flexWrap:"wrap"}}>
+            {phases.map((ph,i) => (
+              <button key={i} onClick={()=>setActivePhase(i)} aria-label={"Training phase: "+ph.title}
+                style={{flex:1,minWidth:140,padding:"14px 16px",borderRadius:10,cursor:"pointer",background:activePhase===i?ph.color+"18":C.bg,border:"2px solid "+(activePhase===i?ph.color:C.border),color:activePhase===i?ph.color:C.textDim,fontFamily:"'Space Grotesk', sans-serif",fontSize:14,fontWeight:600,transition:"all 0.2s ease",display:"flex",alignItems:"center",justifyContent:"center",gap:8}}>
+                <span style={{fontSize:20}}>{ph.icon}</span>{ph.title}
+              </button>
+            ))}
+          </div>
+          <div style={{animation:"fadeSlideUp 0.25s ease",padding:24,background:C.bg,borderRadius:12,border:"1px solid "+p.color+"33"}}>
+            <div style={{display:"flex",gap:16,marginBottom:20,flexWrap:"wrap"}}>
+              {p.stats.map((s,i) => (
+                <div key={i} style={{flex:1,minWidth:100,padding:"12px 16px",borderRadius:8,background:p.color+"0a",border:"1px solid "+p.color+"22",textAlign:"center"}}>
+                  <div style={{fontSize:22,fontWeight:800,color:p.color,fontFamily:"'Space Grotesk', sans-serif"}}>{s.value}</div>
+                  <div style={{fontSize:11,color:C.textDim,fontFamily:"'JetBrains Mono', monospace",marginTop:4,textTransform:"uppercase",letterSpacing:1}}>{s.label}</div>
+                </div>
+              ))}
+            </div>
+            <p style={{fontSize:14,color:C.text,lineHeight:1.8,marginBottom:16}}>{p.details}</p>
+            <div style={{padding:"12px 16px",background:C.surfaceAlt,borderRadius:8,fontFamily:"'JetBrains Mono', monospace",fontSize:13,color:p.color,borderLeft:"3px solid "+p.color,overflowX:"auto"}}>{p.formula}</div>
+          </div>
+          <div style={{display:"flex",alignItems:"center",justifyContent:"center",gap:6,marginTop:16}}>
+            {phases.map((_,i) => (
+              <React.Fragment key={i}>
+                <div style={{width:10,height:10,borderRadius:"50%",background:i<=activePhase?phases[i].color:C.border,transition:"background 0.3s"}} />
+                {i<phases.length-1 && <div style={{width:40,height:2,background:i<activePhase?phases[i].color:C.border,transition:"background 0.3s"}} />}
+              </React.Fragment>
+            ))}
+          </div>
+        </div>
+      );
+    }
+
+    function InferenceFlow() {
+      const steps = [
+        {label:"Prompt",icon:"⌨️",desc:"User input tokenized via BPE into token IDs",tech:"encode(text) → [token_ids]"},
+        {label:"Prefill",icon:"⚡",desc:"Full prompt processed in parallel. KV cache populated for all positions. Uses Flash Attention for O(N) memory.",tech:"KV_cache = FlashAttn(Q, K, V) for all t"},
+        {label:"Decode",icon:"🔄",desc:"Autoregressive generation: one token per forward pass. KV cache avoids recomputation. PagedAttention (vLLM) manages memory in blocks.",tech:"for t in range(max_len): logits = model(x_t, KV_cache)"},
+        {label:"Sample",icon:"🎲",desc:"Logits → probability distribution. Top-p (nucleus), top-k, temperature scaling, repetition penalty.",tech:"token = sample(softmax(logits / T), top_p, top_k)"},
+        {label:"Detokenize",icon:"📝",desc:"Token IDs decoded back to text. Streaming: chunks sent as generated via SSE or WebSocket.",tech:"decode([token_ids]) → text"},
+      ];
+      const opts = [
+        {label:"Quantization",desc:"INT8/INT4 (GPTQ, AWQ, GGUF) — 2–4× memory savings"},
+        {label:"Flash Attention",desc:"Fused CUDA kernel — O(N) memory, 2–4× faster"},
+        {label:"Speculative Decoding",desc:"Small draft model proposes, large model verifies in parallel"},
+        {label:"Continuous Batching",desc:"Dynamic batching (vLLM, TGI) — maximizes GPU utilization"},
+      ];
+      return (
+        <div>
+          <div style={{display:"flex",flexDirection:"column",gap:12}}>
+            {steps.map((s,i) => (
+              <div key={i} style={{display:"flex",gap:16,padding:"16px 20px",borderRadius:10,background:C.bg,border:"1px solid "+C.border,animation:"fadeSlideUp 0.3s ease "+(i*0.08)+"s both",alignItems:"flex-start"}}>
+                <div style={{width:44,height:44,borderRadius:10,display:"flex",alignItems:"center",justifyContent:"center",background:C.accent+"15",border:"1px solid "+C.accent+"33",fontSize:20,flexShrink:0}}>{s.icon}</div>
+                <div style={{flex:1}}>
+                  <div style={{display:"flex",alignItems:"center",gap:8,marginBottom:4}}>
+                    <span style={{fontSize:11,color:C.accent,fontFamily:"'JetBrains Mono', monospace",fontWeight:700}}>STEP {i+1}</span>
+                    <span style={{fontSize:15,fontWeight:700,color:C.text,fontFamily:"'Space Grotesk', sans-serif"}}>{s.label}</span>
+                  </div>
+                  <p style={{fontSize:13,color:C.textDim,lineHeight:1.6,margin:"4px 0 8px"}}>{s.desc}</p>
+                  <code style={{fontSize:12,color:C.code,fontFamily:"'JetBrains Mono', monospace",background:C.code+"0a",padding:"4px 8px",borderRadius:4}}>{s.tech}</code>
+                </div>
+              </div>
+            ))}
+          </div>
+          <div style={{marginTop:20,padding:"16px 18px",borderRadius:10,background:C.accent+"08",border:"1px solid "+C.accent+"22"}}>
+            <div style={{fontSize:12,fontWeight:700,color:C.accent,fontFamily:"'JetBrains Mono', monospace",marginBottom:8}}>⚙ PRODUCTION OPTIMIZATIONS</div>
+            <div style={{display:"grid",gridTemplateColumns:"repeat(auto-fit, minmax(200px, 1fr))",gap:10}}>
+              {opts.map((o,i) => (
+                <div key={i} style={{padding:"10px 12px",borderRadius:8,background:C.surfaceAlt,border:"1px solid "+C.border}}>
+                  <div style={{fontSize:12,fontWeight:700,color:C.accent,fontFamily:"'JetBrains Mono', monospace",marginBottom:3}}>{o.label}</div>
+                  <div style={{fontSize:11,color:C.textDim,lineHeight:1.5}}>{o.desc}</div>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+      );
+    }
+
+    function SectionHeader({title,sub}) {
+      return (<div style={{marginBottom:28}}><h2 style={{fontSize:28,fontWeight:800,color:C.text,fontFamily:"'Space Grotesk', sans-serif",marginBottom:6}}>{title}</h2><p style={{fontSize:14,color:C.textDim,fontFamily:"'JetBrains Mono', monospace"}}>{sub}</p></div>);
+    }
+
+    function LLMExplainer() {
+      const [activeSection, setActiveSection] = useState("overview");
+      const [mobileNavOpen, setMobileNavOpen] = useState(false);
+
+      const handleKeyNav = useCallback((e) => {
+        if (e.target.tagName==="INPUT"||e.target.tagName==="TEXTAREA") return;
+        const idx = SECTIONS.findIndex(s=>s.id===activeSection);
+        if (e.key==="ArrowRight"||e.key==="ArrowDown") { e.preventDefault(); if(idx<SECTIONS.length-1) setActiveSection(SECTIONS[idx+1].id); }
+        else if (e.key==="ArrowLeft"||e.key==="ArrowUp") { e.preventDefault(); if(idx>0) setActiveSection(SECTIONS[idx-1].id); }
+        else { const n=parseInt(e.key); if(n>=1&&n<=SECTIONS.length){e.preventDefault();setActiveSection(SECTIONS[n-1].id);} }
+      }, [activeSection]);
+
+      useEffect(() => { window.addEventListener("keydown",handleKeyNav); return ()=>window.removeEventListener("keydown",handleKeyNav); }, [handleKeyNav]);
+
+      const renderSection = () => {
+        switch(activeSection) {
+          case "overview": return (
+            <div>
+              <h2 style={{fontSize:28,fontWeight:800,color:C.text,marginBottom:8,fontFamily:"'Space Grotesk', sans-serif"}}>What is a Large Language Model?</h2>
+              <p style={{fontSize:15,color:C.textDim,lineHeight:1.8,marginBottom:28,maxWidth:680}}>A decoder-only Transformer neural network trained on massive text corpora via next-token prediction. The model learns a compressed representation of language structure, facts, and reasoning patterns as parameter weights.</p>
+              <div style={{display:"grid",gridTemplateColumns:"repeat(auto-fit, minmax(160px, 1fr))",gap:16,marginBottom:28}}>
+                {[
+                  {label:"Parameters",value:React.createElement(AnimatedCounter,{end:1800,suffix:"B"}),sub:"frontier class (est.)",color:C.accent},
+                  {label:"Context Window",value:React.createElement(AnimatedCounter,{end:128,suffix:"K"}),sub:"tokens (RoPE scaled)",color:C.accentAlt},
+                  {label:"Training Data",value:React.createElement(AnimatedCounter,{end:15,suffix:"T"}),sub:"tokens",color:C.warn},
+                ].map((s,i) => (
+                  <div key={i} style={{padding:24,borderRadius:12,background:C.bg,border:"1px solid "+s.color+"33",textAlign:"center",animation:"fadeSlideUp 0.4s ease "+(i*0.1)+"s both"}}>
+                    <div style={{fontSize:36,fontWeight:900,color:s.color,fontFamily:"'Space Grotesk', sans-serif"}}>{s.value}</div>
+                    <div style={{fontSize:13,color:C.text,fontWeight:600,marginTop:4}}>{s.label}</div>
+                    <div style={{fontSize:11,color:C.textDim,fontFamily:"'JetBrains Mono', monospace",marginTop:2}}>{s.sub}</div>
+                  </div>
+                ))}
+              </div>
+              <div style={{padding:20,borderRadius:12,background:C.bg,border:"1px solid "+C.border,overflowX:"auto"}}>
+                <div style={{fontSize:12,color:C.accent,fontFamily:"'JetBrains Mono', monospace",textTransform:"uppercase",letterSpacing:2,marginBottom:12}}>Architecture Stack</div>
+                <div style={{display:"flex",gap:8,minWidth:600}}>
+                  {["Tokenizer (BPE)","Embedding + RoPE","N × Transformer Blocks","LM Head (Unembedding)","Softmax → Logits"].map((l,i) => (
+                    <div key={i} style={{flex:1,padding:"12px 8px",borderRadius:8,textAlign:"center",background:C.accentAlt+(10+i*5).toString(16),border:"1px solid "+C.accentAlt+"33",fontSize:11,color:C.text,fontFamily:"'JetBrains Mono', monospace",animation:"fadeSlideUp 0.3s ease "+(i*0.08)+"s both"}}>
+                      {l}{i<4 && <span style={{position:"relative",right:-4,color:C.textDim}}> →</span>}
+                    </div>
+                  ))}
+                </div>
+              </div>
+              <div style={{marginTop:12,fontSize:11,color:C.textDim,fontFamily:"'JetBrains Mono', monospace",fontStyle:"italic"}}>Note: Parameter counts for frontier models are estimated — exact figures have not been officially disclosed.</div>
+            </div>
+          );
+          case "tokenization": return <div><SectionHeader title="Tokenization" sub="Text → Token IDs via Byte-Pair Encoding (BPE)" /><TokenDemo /></div>;
+          case "embedding": return <div><SectionHeader title="Embeddings" sub="Token IDs → Dense Vectors in ℝ^d_model" /><EmbeddingViz /></div>;
+          case "transformer": return <div><SectionHeader title="Transformer Block" sub="The core repeating unit — stacked N times" /><TransformerBlock /></div>;
+          case "attention": return <div><SectionHeader title="Causal Self-Attention" sub="How tokens attend to past context — the heart of the decoder-only Transformer" /><AttentionViz /></div>;
+          case "training": return <div><SectionHeader title="Training Pipeline" sub="From raw compute to aligned assistant" /><TrainingPipeline /></div>;
+          case "inference": return <div><SectionHeader title="Inference Flow" sub="Prompt → Response: what happens at runtime" /><InferenceFlow /></div>;
+          default: return null;
+        }
+      };
+
+      return (
+        <div style={{minHeight:"100vh",background:C.bg,color:C.text,fontFamily:"'Inter', system-ui, sans-serif"}}>
+          <div style={{display:"flex",minHeight:"100vh",flexDirection:"column"}}>
+            <div className="mobile-nav-toggle" style={{display:"none",padding:"12px 16px",background:C.surface,borderBottom:"1px solid "+C.border,alignItems:"center",justifyContent:"space-between"}}>
+              <div style={{display:"flex",alignItems:"center",gap:8}}>
+                <span style={{fontSize:16,fontWeight:800,color:C.accent,fontFamily:"'Space Grotesk', sans-serif"}}>LLM</span>
+                <span style={{fontSize:11,color:C.textDim,fontFamily:"'JetBrains Mono', monospace"}}>Deep Dive</span>
+              </div>
+              <button onClick={()=>setMobileNavOpen(!mobileNavOpen)} style={{background:"none",border:"1px solid "+C.border,borderRadius:6,padding:"6px 12px",color:C.text,cursor:"pointer",fontFamily:"'JetBrains Mono', monospace",fontSize:12}}>{mobileNavOpen?"✕ Close":"☰ Sections"}</button>
+            </div>
+            {mobileNavOpen && (
+              <div className="mobile-nav-open" style={{display:"none",flexWrap:"wrap",gap:6,padding:"12px 16px",background:C.surface,borderBottom:"1px solid "+C.border}}>
+                {SECTIONS.map(s => (
+                  <button key={s.id} onClick={()=>{setActiveSection(s.id);setMobileNavOpen(false);}} style={{padding:"8px 14px",borderRadius:6,cursor:"pointer",border:"none",background:activeSection===s.id?C.accent+"15":C.surfaceAlt,color:activeSection===s.id?C.accent:C.textDim,fontFamily:"'Space Grotesk', sans-serif",fontSize:12,fontWeight:600}}>{s.label}</button>
+                ))}
+              </div>
+            )}
+            <div style={{display:"flex",flex:1}}>
+              <nav className="desktop-nav" style={{width:220,padding:"24px 12px",borderRight:"1px solid "+C.border,background:C.surface,flexDirection:"column",gap:4,position:"sticky",top:0,height:"100vh",flexShrink:0}}>
+                <div style={{padding:"8px 12px",marginBottom:16}}>
+                  <div style={{fontSize:18,fontWeight:800,color:C.accent,fontFamily:"'Space Grotesk', sans-serif",letterSpacing:-0.5}}>LLM</div>
+                  <div style={{fontSize:11,color:C.textDim,fontFamily:"'JetBrains Mono', monospace",marginTop:2}}>Deep Dive</div>
+                </div>
+                {SECTIONS.map(s => (
+                  <button key={s.id} onClick={()=>setActiveSection(s.id)} aria-label={"Navigate to "+s.label+" section"} aria-current={activeSection===s.id?"page":undefined}
+                    style={{padding:"10px 14px",borderRadius:8,cursor:"pointer",border:"none",textAlign:"left",background:activeSection===s.id?C.accent+"15":"transparent",color:activeSection===s.id?C.accent:C.textDim,fontFamily:"'Space Grotesk', sans-serif",fontSize:13,fontWeight:activeSection===s.id?700:500,transition:"all 0.15s ease",borderLeft:activeSection===s.id?"2px solid "+C.accent:"2px solid transparent"}}>
+                    <span style={{fontSize:10,opacity:0.4,marginRight:6}}>{s.key}</span>{s.label}
+                  </button>
+                ))}
+                <div style={{marginTop:"auto",padding:"12px",borderTop:"1px solid "+C.border}}>
+                  <div style={{fontSize:10,color:C.textDim,fontFamily:"'JetBrains Mono', monospace",lineHeight:1.6}}>← → navigate sections<br/>1–7 jump to section</div>
+                </div>
+              </nav>
+              <div style={{position:"fixed",bottom:0,left:0,right:0,zIndex:100,background:"linear-gradient(135deg, #0a0e17ee 0%, #111827ee 100%)",backdropFilter:"blur(12px)",WebkitBackdropFilter:"blur(12px)",borderTop:"1px solid "+C.accent+"33",padding:"12px 32px",display:"flex",alignItems:"center",justifyContent:"center",gap:12}}>
+                <span style={{fontSize:13,fontWeight:700,color:C.accent,fontFamily:"'Space Grotesk', sans-serif",letterSpacing:0.5}}>Architect U'r Career</span>
+                <span style={{color:"#ffffff",fontSize:16}}>|</span>
+                <span style={{fontSize:13,fontWeight:500,color:C.text,fontFamily:"'Space Grotesk', sans-serif"}}>Krishna Mohan Parsha</span>
+                <span style={{color:"#ffffff",fontSize:16}}>|</span>
+                <span style={{fontSize:13,fontWeight:600,color:C.accentAlt,fontFamily:"'JetBrains Mono', monospace"}}>How LLM Works</span>
+              </div>
+              <main className="main-content" style={{flex:1,padding:"40px 48px 64px",maxWidth:860,animation:"fadeSlideUp 0.3s ease"}}>
+                {renderSection()}
+              </main>
+            </div>
+          </div>
+        </div>
+      );
+    }
+
+    ReactDOM.createRoot(document.getElementById("root")).render(<LLMExplainer />);
+  </script>
 </body>
 </html>
