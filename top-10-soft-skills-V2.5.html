@@ -1,0 +1,500 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Beyond the Degree: 10 Soft Skills That Define Career Success</title>
+<meta name="description" content="Beyond the Degree — an evidence-based ranking of the 10 essential soft skills every undergraduate needs for employability, productivity, and career success, with curated books, courses, and free resources for each skill.">
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=Manrope:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+  :root {
+    --navy: #0B1D3A;
+    --slate: #1E3150;
+    --gold: #C8963E;
+    --gold-light: #E8C778;
+    --cream: #F7F4EF;
+    --warm-gray: #A8A09A;
+    --text-dark: #1A1A1A;
+    --text-mid: #4A4A4A;
+    --text-light: #7A7A7A;
+    --accent-teal: #2A8B8B;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'Manrope', sans-serif;
+    background: var(--cream);
+    color: var(--text-dark);
+    line-height: 1.7;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* ── HERO ── */
+  .hero {
+    background: linear-gradient(160deg, #0B1D3A 0%, #1E3150 40%, #2A4A6B 100%);
+    color: white;
+    padding: 80px 40px 70px;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero::before {
+    content: '';
+    position: absolute;
+    top: -120px; right: -120px;
+    width: 500px; height: 500px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(200,150,62,0.12) 0%, transparent 70%);
+  }
+  .hero::after {
+    content: '';
+    position: absolute;
+    bottom: 0; left: 0; right: 0;
+    height: 4px;
+    background: linear-gradient(90deg, var(--gold), var(--accent-teal), var(--gold));
+  }
+  .hero-inner { max-width: 960px; margin: 0 auto; position: relative; z-index: 1; }
+  .hero-badge {
+    display: inline-block;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--gold);
+    border: 1.5px solid var(--gold);
+    padding: 6px 18px;
+    border-radius: 2px;
+    margin-bottom: 28px;
+    animation: fadeDown 0.8s ease-out;
+  }
+  .hero h1 {
+    font-family: 'DM Serif Display', serif;
+    font-size: clamp(2.2rem, 5vw, 3.4rem);
+    font-weight: 400;
+    line-height: 1.15;
+    margin-bottom: 20px;
+    animation: fadeDown 0.8s ease-out 0.15s both;
+  }
+  .hero h1 span { color: var(--gold); }
+  .hero-sub {
+    font-size: 1.05rem;
+    font-weight: 300;
+    color: rgba(255,255,255,0.7);
+    max-width: 640px;
+    animation: fadeDown 0.8s ease-out 0.3s both;
+  }
+
+  /* ── INTRO ── */
+  .intro {
+    max-width: 960px;
+    margin: 0 auto;
+    padding: 60px 40px 10px;
+  }
+  .intro p {
+    font-size: 1.05rem;
+    color: var(--text-mid);
+    max-width: 780px;
+    line-height: 1.85;
+  }
+  .intro p strong { color: var(--navy); font-weight: 700; }
+
+  /* ── SKILLS GRID ── */
+  .skills-section {
+    max-width: 960px;
+    margin: 0 auto;
+    padding: 30px 40px 60px;
+  }
+
+  .skill-card {
+    display: grid;
+    grid-template-columns: 72px 1fr;
+    gap: 0 28px;
+    padding: 32px 0;
+    border-bottom: 1px solid rgba(0,0,0,0.07);
+    animation: fadeUp 0.6s ease-out both;
+  }
+  .skill-card:last-child { border-bottom: none; }
+
+  .skill-rank {
+    font-family: 'DM Serif Display', serif;
+    font-size: 2.6rem;
+    color: var(--gold);
+    line-height: 1;
+    text-align: center;
+    padding-top: 4px;
+    opacity: 0.85;
+  }
+
+  .skill-body h3 {
+    font-family: 'DM Serif Display', serif;
+    font-size: 1.35rem;
+    color: var(--navy);
+    margin-bottom: 6px;
+    font-weight: 400;
+  }
+  .skill-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    margin-bottom: 10px;
+  }
+  .skill-tag {
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    color: var(--accent-teal);
+    background: rgba(42,139,139,0.08);
+    padding: 3px 10px;
+    border-radius: 2px;
+  }
+  .skill-body p {
+    font-size: 0.935rem;
+    color: var(--text-mid);
+    line-height: 1.8;
+  }
+
+  /* ── RESOURCES ── */
+  .resources {
+    margin-top: 14px;
+    padding: 16px 20px;
+    background: rgba(11,29,58,0.03);
+    border-left: 3px solid var(--gold);
+    border-radius: 0 6px 6px 0;
+  }
+  .resources-title {
+    font-size: 10px;
+    font-weight: 800;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 10px;
+  }
+  .resource-row {
+    display: flex;
+    gap: 8px;
+    align-items: baseline;
+    margin-bottom: 7px;
+  }
+  .resource-row:last-child { margin-bottom: 0; }
+  .resource-icon {
+    flex-shrink: 0;
+    width: 18px;
+    height: 18px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 10px;
+    font-weight: 800;
+    color: white;
+    border-radius: 3px;
+    position: relative;
+    top: 2px;
+  }
+  .resource-icon.book { background: var(--navy); }
+  .resource-icon.course { background: var(--accent-teal); }
+  .resource-icon.free { background: #7B6B3A; }
+  .resource-text {
+    font-size: 0.84rem;
+    color: var(--text-mid);
+    line-height: 1.55;
+  }
+  .resource-text strong {
+    color: var(--navy);
+    font-weight: 600;
+  }
+  .resource-text em {
+    font-style: normal;
+    color: var(--text-light);
+    font-size: 0.8rem;
+  }
+
+  .resource-legend {
+    max-width: 960px;
+    margin: 0 auto;
+    padding: 0 40px 10px;
+    display: flex;
+    gap: 20px;
+    flex-wrap: wrap;
+  }
+  .legend-item {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 0.75rem;
+    color: var(--text-light);
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+  }
+  .legend-dot {
+    width: 12px; height: 12px;
+    border-radius: 2px;
+    display: inline-block;
+  }
+
+  /* ── FOOTER ── */
+  .footer {
+    background: var(--navy);
+    color: rgba(255,255,255,0.5);
+    text-align: center;
+    padding: 40px 40px 36px;
+    font-size: 0.8rem;
+    letter-spacing: 0.5px;
+  }
+  .footer-brand {
+    font-family: 'DM Serif Display', serif;
+    font-size: 0.95rem;
+    color: var(--gold);
+    margin-bottom: 4px;
+    letter-spacing: 1px;
+  }
+
+
+  /* ── ANIMATIONS ── */
+  @keyframes fadeDown {
+    from { opacity: 0; transform: translateY(-18px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(22px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  .skill-card:nth-child(1)  { animation-delay: 0.05s; }
+  .skill-card:nth-child(2)  { animation-delay: 0.10s; }
+  .skill-card:nth-child(3)  { animation-delay: 0.15s; }
+  .skill-card:nth-child(4)  { animation-delay: 0.20s; }
+  .skill-card:nth-child(5)  { animation-delay: 0.25s; }
+  .skill-card:nth-child(6)  { animation-delay: 0.30s; }
+  .skill-card:nth-child(7)  { animation-delay: 0.35s; }
+  .skill-card:nth-child(8)  { animation-delay: 0.40s; }
+  .skill-card:nth-child(9)  { animation-delay: 0.45s; }
+  .skill-card:nth-child(10) { animation-delay: 0.50s; }
+
+  @media (max-width: 640px) {
+    .hero { padding: 50px 24px 45px; }
+    .intro, .skills-section, .resource-legend { padding-left: 24px; padding-right: 24px; }
+    .skill-card { grid-template-columns: 50px 1fr; gap: 0 16px; padding: 24px 0; }
+    .skill-rank { font-size: 2rem; }
+    .resources { padding: 12px 14px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ═══ HERO ═══ -->
+<section class="hero">
+  <div class="hero-inner">
+    <div class="hero-badge">Career Readiness Brief</div>
+    <h1>Beyond the Degree: <span>10 Soft Skills</span> That Define Career Success</h1>
+    <p class="hero-sub">An evidence-based ranking of the interpersonal and cognitive competencies that consistently separate high-performing graduates from the rest — with the best resources to build each skill.</p>
+  </div>
+</section>
+
+<!-- ═══ INTRO ═══ -->
+<section class="intro">
+  <p>Technical qualifications open doors, but <strong>soft skills determine how far you walk through them.</strong> Employer surveys by the NACE, LinkedIn, and the World Economic Forum consistently rank human-centred competencies above hard skills when predicting long-term career success. Below are the ten capabilities — ranked by their impact on employability, productivity, and upward mobility — paired with the best available training resources to accelerate your development.</p>
+  <p style="margin-top:14px; font-size:0.92rem; color:#7A7A7A; font-style:italic;">Tip: Don't try to master all ten at once. Identify 2–3 skills where you have the most room to grow and begin there — depth beats breadth every time.</p>
+</section>
+
+<!-- ═══ LEGEND ═══ -->
+<div class="resource-legend">
+  <div class="legend-item"><span class="legend-dot" style="background:var(--navy)"></span> Book</div>
+  <div class="legend-item"><span class="legend-dot" style="background:var(--accent-teal)"></span> Online Course</div>
+  <div class="legend-item"><span class="legend-dot" style="background:#7B6B3A"></span> Free Resource</div>
+</div>
+
+<!-- ═══ SKILLS ═══ -->
+<section class="skills-section">
+
+  <!-- 01 -->
+  <article class="skill-card">
+    <div class="skill-rank">01</div>
+    <div class="skill-body">
+      <h3>Communication</h3>
+      <div class="skill-tags"><span class="skill-tag">Verbal</span><span class="skill-tag">Written</span><span class="skill-tag">Presentations</span></div>
+      <p>The ability to articulate ideas clearly — in emails, reports, meetings, and presentations — is the single most cited requirement in job postings worldwide. Strong communicators reduce misunderstandings, accelerate decision-making, and build trust instantly. This includes active listening: understanding intent before crafting a response. Graduates who can distil complex ideas into simple, persuasive narratives will out-perform peers in every function, from engineering to finance.</p>
+      <div class="resources">
+        <div class="resources-title">Recommended Resources</div>
+        <div class="resource-row"><span class="resource-icon book">B</span><span class="resource-text"><strong>How to Win Friends and Influence People</strong> — Dale Carnegie <em>· Timeless classic on persuasion &amp; rapport</em></span></div>
+        <div class="resource-row"><span class="resource-icon book">B</span><span class="resource-text"><strong>Crucial Conversations</strong> — Patterson, Grenny, McMillan &amp; Switzler <em>· High-stakes dialogue mastery</em></span></div>
+        <div class="resource-row"><span class="resource-icon book">B</span><span class="resource-text"><strong>Talk Like TED</strong> — Carmine Gallo <em>· Secrets of world-class presenters</em></span></div>
+        <div class="resource-row"><span class="resource-icon course">C</span><span class="resource-text"><strong>Improving Communication Skills</strong> — Coursera · University of Pennsylvania <em>· 4 weeks</em></span></div>
+        <div class="resource-row"><span class="resource-icon free">F</span><span class="resource-text"><strong>Introduction to Public Speaking</strong> — Coursera · University of Washington <em>· Free audit · 10 weeks</em></span></div>
+      </div>
+    </div>
+  </article>
+
+  <!-- 02 -->
+  <article class="skill-card">
+    <div class="skill-rank">02</div>
+    <div class="skill-body">
+      <h3>Critical Thinking &amp; Problem Solving</h3>
+      <div class="skill-tags"><span class="skill-tag">Analysis</span><span class="skill-tag">Decision-Making</span><span class="skill-tag">Logic</span></div>
+      <p>Employers need people who can evaluate evidence, question assumptions, and arrive at sound conclusions under ambiguity. Critical thinkers don't just identify problems — they decompose them, weigh trade-offs, and design actionable solutions. In a world overflowing with data and noise, the graduate who can separate signal from distraction and propose a clear path forward becomes indispensable from day one.</p>
+      <div class="resources">
+        <div class="resources-title">Recommended Resources</div>
+        <div class="resource-row"><span class="resource-icon book">B</span><span class="resource-text"><strong>Thinking, Fast and Slow</strong> — Daniel Kahneman <em>· Nobel laureate on cognitive biases &amp; decision-making</em></span></div>
+        <div class="resource-row"><span class="resource-icon book">B</span><span class="resource-text"><strong>Super Thinking</strong> — Gabriel Weinberg &amp; Lauren McCann <em>· Mental models for smarter decisions</em></span></div>
+        <div class="resource-row"><span class="resource-icon book">B</span><span class="resource-text"><strong>The 5 Elements of Effective Thinking</strong> — Burger &amp; Starbird <em>· Practical thinking frameworks</em></span></div>
+        <div class="resource-row"><span class="resource-icon course">C</span><span class="resource-text"><strong>Critical Thinking &amp; Problem Solving</strong> — edX · Rochester Institute of Technology <em>· 5 weeks</em></span></div>
+        <div class="resource-row"><span class="resource-icon free">F</span><span class="resource-text"><strong>Mindware: Critical Thinking for the Information Age</strong> — Coursera · University of Michigan <em>· Free audit</em></span></div>
+      </div>
+    </div>
+  </article>
+
+  <!-- 03 -->
+  <article class="skill-card">
+    <div class="skill-rank">03</div>
+    <div class="skill-body">
+      <h3>Adaptability &amp; Resilience</h3>
+      <div class="skill-tags"><span class="skill-tag">Change Management</span><span class="skill-tag">Growth Mindset</span></div>
+      <p>Industries are being reshaped by AI, shifting regulations, and global disruptions at an unprecedented pace. Adaptable graduates absorb new tools, pivot strategies, and stay productive when plans collapse. Resilience — the capacity to recover from setbacks without losing momentum — is what transforms a temporary failure into a learning milestone rather than a career stall. Employers value this trait because it predicts sustained performance over years, not just months.</p>
+      <div class="resources">
+        <div class="resources-title">Recommended Resources</div>
+        <div class="resource-row"><span class="resource-icon book">B</span><span class="resource-text"><strong>Mindset: The New Psychology of Success</strong> — Carol Dweck <em>· The growth mindset framework</em></span></div>
+        <div class="resource-row"><span class="resource-icon book">B</span><span class="resource-text"><strong>Grit: The Power of Passion and Perseverance</strong> — Angela Duckworth <em>· Resilience through sustained effort</em></span></div>
+        <div class="resource-row"><span class="resource-icon book">B</span><span class="resource-text"><strong>Who Moved My Cheese?</strong> — Spencer Johnson <em>· Timeless parable on embracing change</em></span></div>
+        <div class="resource-row"><span class="resource-icon course">C</span><span class="resource-text"><strong>Building Resilience</strong> — LinkedIn Learning <em>· Strategies for bouncing back stronger</em></span></div>
+        <div class="resource-row"><span class="resource-icon free">F</span><span class="resource-text"><strong>The Science of Well-Being</strong> — Coursera · Yale University <em>· Free audit · Most popular Coursera course</em></span></div>
+      </div>
+    </div>
+  </article>
+
+  <!-- 04 -->
+  <article class="skill-card">
+    <div class="skill-rank">04</div>
+    <div class="skill-body">
+      <h3>Teamwork &amp; Collaboration</h3>
+      <div class="skill-tags"><span class="skill-tag">Cross-Functional</span><span class="skill-tag">Conflict Resolution</span></div>
+      <p>Nearly every meaningful outcome in the modern workplace is a team product. Effective collaborators contribute their strengths, defer when others have more expertise, manage interpersonal friction constructively, and hold themselves accountable to shared goals. The ability to work productively with people of diverse backgrounds, disciplines, and working styles is no longer optional — it is a baseline expectation across every sector.</p>
+      <div class="resources">
+        <div class="resources-title">Recommended Resources</div>
+        <div class="resource-row"><span class="resource-icon book">B</span><span class="resource-text"><strong>The Culture Code</strong> — Daniel Coyle <em>· Secrets of highly successful teams</em></span></div>
+        <div class="resource-row"><span class="resource-icon book">B</span><span class="resource-text"><strong>The Five Dysfunctions of a Team</strong> — Patrick Lencioni <em>· Leadership fable on team dynamics</em></span></div>
+        <div class="resource-row"><span class="resource-icon book">B</span><span class="resource-text"><strong>Radical Candor</strong> — Kim Scott <em>· Caring personally while challenging directly</em></span></div>
+        <div class="resource-row"><span class="resource-icon course">C</span><span class="resource-text"><strong>Teamwork Skills: Communicating Effectively in Groups</strong> — Coursera · University of Colorado <em>· 4 courses</em></span></div>
+        <div class="resource-row"><span class="resource-icon free">F</span><span class="resource-text"><strong>Teamwork Skills: Effective Communication</strong> — FutureLearn · University of Colorado <em>· Free short course</em></span></div>
+      </div>
+    </div>
+  </article>
+
+  <!-- 05 -->
+  <article class="skill-card">
+    <div class="skill-rank">05</div>
+    <div class="skill-body">
+      <h3>Emotional Intelligence</h3>
+      <div class="skill-tags"><span class="skill-tag">Self-Awareness</span><span class="skill-tag">Empathy</span><span class="skill-tag">Social Skills</span></div>
+      <p>Emotional intelligence (EQ) — the ability to recognise, understand, and manage your own emotions while reading those of others — is a powerful predictor of leadership potential. High-EQ graduates navigate office politics gracefully, give and receive feedback without defensiveness, and build the kind of psychological safety that makes teams perform at their peak. Research consistently shows that EQ outweighs IQ in determining who gets promoted.</p>
+      <div class="resources">
+        <div class="resources-title">Recommended Resources</div>
+        <div class="resource-row"><span class="resource-icon book">B</span><span class="resource-text"><strong>Emotional Intelligence</strong> — Daniel Goleman <em>· The seminal work that defined EQ</em></span></div>
+        <div class="resource-row"><span class="resource-icon book">B</span><span class="resource-text"><strong>Emotional Intelligence 2.0</strong> — Travis Bradberry &amp; Jean Greaves <em>· Practical EQ strategies with self-assessment</em></span></div>
+        <div class="resource-row"><span class="resource-icon book">B</span><span class="resource-text"><strong>Dare to Lead</strong> — Brené Brown <em>· Vulnerability, empathy &amp; courageous leadership</em></span></div>
+        <div class="resource-row"><span class="resource-icon course">C</span><span class="resource-text"><strong>Empathy &amp; Emotional Intelligence at Work</strong> — edX · UC Berkeley <em>· 4 weeks</em></span></div>
+        <div class="resource-row"><span class="resource-icon free">F</span><span class="resource-text"><strong>Emotional &amp; Social Intelligence</strong> — Coursera · University of Michigan <em>· Free audit</em></span></div>
+      </div>
+    </div>
+  </article>
+
+  <!-- 06 -->
+  <article class="skill-card">
+    <div class="skill-rank">06</div>
+    <div class="skill-body">
+      <h3>Time Management &amp; Self-Discipline</h3>
+      <div class="skill-tags"><span class="skill-tag">Prioritisation</span><span class="skill-tag">Productivity</span><span class="skill-tag">Focus</span></div>
+      <p>The transition from academic deadlines to professional workloads can overwhelm graduates who lack structure. Time management is about ruthless prioritisation — knowing what matters most, protecting deep-work hours, and saying no to low-impact tasks. Self-disciplined individuals deliver consistent quality without requiring constant oversight, making them the first candidates managers trust with ownership of critical projects.</p>
+      <div class="resources">
+        <div class="resources-title">Recommended Resources</div>
+        <div class="resource-row"><span class="resource-icon book">B</span><span class="resource-text"><strong>Deep Work</strong> — Cal Newport <em>· Rules for focused success in a distracted world</em></span></div>
+        <div class="resource-row"><span class="resource-icon book">B</span><span class="resource-text"><strong>Atomic Habits</strong> — James Clear <em>· Tiny changes, remarkable results</em></span></div>
+        <div class="resource-row"><span class="resource-icon book">B</span><span class="resource-text"><strong>Getting Things Done</strong> — David Allen <em>· The definitive productivity system</em></span></div>
+        <div class="resource-row"><span class="resource-icon course">C</span><span class="resource-text"><strong>Time Management Fundamentals</strong> — LinkedIn Learning <em>· Efficiency, to-do lists &amp; focus strategies</em></span></div>
+        <div class="resource-row"><span class="resource-icon free">F</span><span class="resource-text"><strong>Work Smarter, Not Harder</strong> — Coursera · University of California, Irvine <em>· Free audit</em></span></div>
+      </div>
+    </div>
+  </article>
+
+  <!-- 07 -->
+  <article class="skill-card">
+    <div class="skill-rank">07</div>
+    <div class="skill-body">
+      <h3>Leadership &amp; Initiative</h3>
+      <div class="skill-tags"><span class="skill-tag">Ownership</span><span class="skill-tag">Influence</span><span class="skill-tag">Vision</span></div>
+      <p>Leadership is not a title — it is the willingness to step forward when no one else will, to take ownership of outcomes, and to inspire action in others. Even in entry-level roles, graduates who identify gaps, propose improvements, and volunteer to drive solutions signal executive potential. Initiative — acting without being asked — is the single behaviour that most reliably fast-tracks a career in its earliest years.</p>
+      <div class="resources">
+        <div class="resources-title">Recommended Resources</div>
+        <div class="resource-row"><span class="resource-icon book">B</span><span class="resource-text"><strong>Leaders Eat Last</strong> — Simon Sinek <em>· Why great leaders put their teams first</em></span></div>
+        <div class="resource-row"><span class="resource-icon book">B</span><span class="resource-text"><strong>The 7 Habits of Highly Effective People</strong> — Stephen Covey <em>· Principle-centred leadership</em></span></div>
+        <div class="resource-row"><span class="resource-icon book">B</span><span class="resource-text"><strong>Extreme Ownership</strong> — Jocko Willink &amp; Leif Babin <em>· Accountability from the battlefield to business</em></span></div>
+        <div class="resource-row"><span class="resource-icon course">C</span><span class="resource-text"><strong>Foundations of Everyday Leadership</strong> — Coursera · University of Illinois <em>· Specialisation</em></span></div>
+        <div class="resource-row"><span class="resource-icon free">F</span><span class="resource-text"><strong>Becoming a Successful Leader</strong> — edX · HEC Paris <em>· Free audit</em></span></div>
+      </div>
+    </div>
+  </article>
+
+  <!-- 08 -->
+  <article class="skill-card">
+    <div class="skill-rank">08</div>
+    <div class="skill-body">
+      <h3>Creativity &amp; Innovation</h3>
+      <div class="skill-tags"><span class="skill-tag">Ideation</span><span class="skill-tag">Design Thinking</span></div>
+      <p>As automation handles routine tasks, human value increasingly lies in the ability to generate novel ideas, re-frame problems, and connect dots across disciplines. Creative graduates don't wait for a "creative role" — they bring fresh perspectives to operations, marketing, engineering, and strategy alike. Organisations that prioritise innovation depend on people who challenge the status quo and prototype new approaches with confidence.</p>
+      <div class="resources">
+        <div class="resources-title">Recommended Resources</div>
+        <div class="resource-row"><span class="resource-icon book">B</span><span class="resource-text"><strong>Creative Confidence</strong> — Tom Kelley &amp; David Kelley <em>· IDEO founders on unleashing creativity</em></span></div>
+        <div class="resource-row"><span class="resource-icon book">B</span><span class="resource-text"><strong>Think Again</strong> — Adam Grant <em>· The power of rethinking &amp; unlearning</em></span></div>
+        <div class="resource-row"><span class="resource-icon book">B</span><span class="resource-text"><strong>A Whack on the Side of the Head</strong> — Roger von Oech <em>· Classic creativity catalyst</em></span></div>
+        <div class="resource-row"><span class="resource-icon course">C</span><span class="resource-text"><strong>Design Thinking for Innovation</strong> — Coursera · University of Virginia <em>· 5 weeks</em></span></div>
+        <div class="resource-row"><span class="resource-icon free">F</span><span class="resource-text"><strong>Virtual Crash Course in Design Thinking</strong> — Stanford d.school <em>· Free activities &amp; resources</em></span></div>
+      </div>
+    </div>
+  </article>
+
+  <!-- 09 -->
+  <article class="skill-card">
+    <div class="skill-rank">09</div>
+    <div class="skill-body">
+      <h3>Networking &amp; Relationship Building</h3>
+      <div class="skill-tags"><span class="skill-tag">Professional Network</span><span class="skill-tag">Mentorship</span></div>
+      <p>Opportunities rarely arrive through job boards alone — they travel through relationships. Graduates who invest early in building a genuine professional network gain access to mentorship, referrals, industry insights, and career advocacy that compounds over a lifetime. Relationship building is not transactional; it is about providing value, staying curious about others, and maintaining connections long before you need them.</p>
+      <div class="resources">
+        <div class="resources-title">Recommended Resources</div>
+        <div class="resource-row"><span class="resource-icon book">B</span><span class="resource-text"><strong>Never Eat Alone</strong> — Keith Ferrazzi <em>· The art of relationship-driven networking</em></span></div>
+        <div class="resource-row"><span class="resource-icon book">B</span><span class="resource-text"><strong>Give and Take</strong> — Adam Grant <em>· Why givers succeed in professional networks</em></span></div>
+        <div class="resource-row"><span class="resource-icon book">B</span><span class="resource-text"><strong>The Charisma Myth</strong> — Olivia Fox Cabane <em>· The science of personal magnetism</em></span></div>
+        <div class="resource-row"><span class="resource-icon course">C</span><span class="resource-text"><strong>People &amp; Soft Skills for Professional Success</strong> — Coursera · IBM <em>· 6-course specialisation</em></span></div>
+        <div class="resource-row"><span class="resource-icon free">F</span><span class="resource-text"><strong>Strengthening Your Widening Network</strong> — FutureLearn · University of Leeds <em>· Free short course</em></span></div>
+      </div>
+    </div>
+  </article>
+
+  <!-- 10 -->
+  <article class="skill-card">
+    <div class="skill-rank">10</div>
+    <div class="skill-body">
+      <h3>Work Ethic &amp; Professional Integrity</h3>
+      <div class="skill-tags"><span class="skill-tag">Accountability</span><span class="skill-tag">Reliability</span><span class="skill-tag">Ethics</span></div>
+      <p>All other skills are rendered meaningless without a foundation of consistent effort and ethical conduct. A strong work ethic means showing up prepared, honouring commitments, and delivering quality even when no one is watching. Integrity — doing the right thing when it is inconvenient — earns the kind of reputational capital that cannot be taught in a classroom. Employers overwhelmingly report that reliability and honesty are the traits they value most in the long run.</p>
+      <div class="resources">
+        <div class="resources-title">Recommended Resources</div>
+        <div class="resource-row"><span class="resource-icon book">B</span><span class="resource-text"><strong>The Speed of Trust</strong> — Stephen M.R. Covey <em>· How trust drives performance &amp; career growth</em></span></div>
+        <div class="resource-row"><span class="resource-icon book">B</span><span class="resource-text"><strong>The Hard Thing About Hard Things</strong> — Ben Horowitz <em>· Building grit through real-world business adversity</em></span></div>
+        <div class="resource-row"><span class="resource-icon book">B</span><span class="resource-text"><strong>Integrity: The Courage to Meet the Demands of Reality</strong> — Henry Cloud <em>· Character as career capital</em></span></div>
+        <div class="resource-row"><span class="resource-icon course">C</span><span class="resource-text"><strong>Human Excellence in the AI Age: A Soft Skills Course</strong> — Coursera <em>· Modern workplace readiness</em></span></div>
+        <div class="resource-row"><span class="resource-icon free">F</span><span class="resource-text"><strong>Soft Skills for Career Success</strong> — TCS iON <em>· Free introductory programme</em></span></div>
+      </div>
+    </div>
+  </article>
+
+</section>
+
+<!-- ═══ FOOTER ═══ -->
+<footer class="footer">
+  <div class="footer-brand">Architect U'r Career &nbsp;|&nbsp; Krishna Mohan Parsha</div>
+</footer>
+
+</body>
+</html>
