@@ -1,0 +1,864 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The AI Knowledge Map — Interactive Visual Diagram</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&family=Outfit:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg-primary: #070a0f;
+  --bg-secondary: #0d1117;
+  --bg-card: rgba(255,255,255,0.025);
+  --border: rgba(255,255,255,0.06);
+  --text-primary: #e2e8f0;
+  --text-secondary: #94a3b8;
+  --text-muted: #64748b;
+  --ai: #00D4AA;
+  --ml: #FF6B6B;
+  --nn: #A78BFA;
+  --nlp: #F59E0B;
+  --genai: #EC4899;
+  --llm: #06B6D4;
+  --rag: #10B981;
+  --mcp: #F97316;
+  --a2a: #8B5CF6;
+  --agent: #EF4444;
+  --agentic: #D946EF;
+}
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html, body { height: 100%; overflow: hidden; }
+body {
+  font-family: 'DM Sans', sans-serif;
+  background: var(--bg-primary);
+  color: var(--text-primary);
+  display: flex;
+  flex-direction: column;
+}
+
+/* ── HEADER ── */
+.header {
+  padding: 16px 24px;
+  border-bottom: 1px solid var(--border);
+  background: rgba(0,0,0,0.4);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-shrink: 0;
+  z-index: 20;
+}
+.header-title {
+  font-family: 'Outfit', sans-serif;
+  font-size: 20px;
+  font-weight: 800;
+  background: linear-gradient(135deg, #00D4AA, #06B6D4, #8B5CF6, #EC4899);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  letter-spacing: -0.5px;
+}
+.header-sub {
+  font-size: 12px;
+  color: var(--text-muted);
+  margin-top: 2px;
+  letter-spacing: 0.3px;
+}
+.header-legend {
+  display: flex;
+  gap: 6px;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+}
+.legend-chip {
+  font-size: 10px;
+  padding: 3px 10px;
+  border-radius: 12px;
+  font-weight: 600;
+  cursor: pointer;
+  border: 1.5px solid transparent;
+  transition: all 0.3s;
+  white-space: nowrap;
+}
+.legend-chip:hover { transform: scale(1.06); }
+.legend-chip.active { border-color: currentColor; }
+
+/* ── MAIN LAYOUT ── */
+.main {
+  flex: 1;
+  display: flex;
+  overflow: hidden;
+  position: relative;
+}
+
+/* ── DIAGRAM AREA ── */
+.diagram-area {
+  flex: 1;
+  position: relative;
+  overflow: hidden;
+  cursor: grab;
+}
+.diagram-area:active { cursor: grabbing; }
+
+.diagram-canvas {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+/* background grid effect */
+.diagram-area::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image:
+    radial-gradient(circle at 1px 1px, rgba(255,255,255,0.03) 1px, transparent 0);
+  background-size: 40px 40px;
+  z-index: 0;
+  pointer-events: none;
+}
+.diagram-area::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(ellipse at center, transparent 30%, var(--bg-primary) 80%);
+  pointer-events: none;
+  z-index: 1;
+}
+
+/* ── SVG NODES ── */
+.node-group { cursor: pointer; }
+.node-group:hover .node-glow { opacity: 0.6; }
+.node-group:hover .node-circle { transform: scale(1.12); }
+.node-group.active .node-glow { opacity: 0.8; }
+.node-group.active .node-ring { opacity: 1; stroke-dasharray: none; }
+.node-circle {
+  transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+  transform-origin: center;
+}
+.node-glow {
+  opacity: 0.3;
+  transition: opacity 0.3s;
+}
+.node-ring {
+  opacity: 0.5;
+  transition: opacity 0.3s;
+}
+.connection-line {
+  stroke: rgba(255,255,255,0.06);
+  stroke-width: 1;
+  fill: none;
+  transition: stroke 0.3s, stroke-width 0.3s;
+}
+.connection-line.highlight {
+  stroke-width: 1.8;
+}
+
+/* Node pulse animation */
+@keyframes pulse-ring {
+  0% { r: 32; opacity: 0.4; }
+  100% { r: 46; opacity: 0; }
+}
+.pulse-anim {
+  animation: pulse-ring 2s ease-out infinite;
+}
+
+/* ── DETAIL PANEL ── */
+.detail-panel {
+  width: 420px;
+  max-width: 45vw;
+  background: linear-gradient(180deg, rgba(13,17,23,0.98) 0%, rgba(7,10,15,0.99) 100%);
+  border-left: 1px solid var(--border);
+  overflow-y: auto;
+  flex-shrink: 0;
+  transform: translateX(100%);
+  transition: transform 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+  z-index: 10;
+  position: relative;
+  scrollbar-width: thin;
+  scrollbar-color: rgba(255,255,255,0.1) transparent;
+}
+.detail-panel.open { transform: translateX(0); }
+.detail-panel::-webkit-scrollbar { width: 4px; }
+.detail-panel::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.1); border-radius: 4px; }
+
+.panel-close {
+  position: sticky;
+  top: 0;
+  z-index: 5;
+  display: flex;
+  justify-content: flex-end;
+  padding: 12px 16px 0;
+  background: linear-gradient(180deg, rgba(13,17,23,0.98) 0%, transparent 100%);
+}
+.close-btn {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  border: 1px solid var(--border);
+  background: rgba(255,255,255,0.04);
+  color: var(--text-secondary);
+  cursor: pointer;
+  font-size: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s;
+}
+.close-btn:hover { background: rgba(255,255,255,0.1); color: #fff; }
+
+.panel-content { padding: 4px 22px 28px; }
+
+.panel-icon { font-size: 32px; margin-bottom: 8px; }
+.panel-title {
+  font-family: 'Outfit', sans-serif;
+  font-size: 22px;
+  font-weight: 800;
+  line-height: 1.2;
+  margin-bottom: 4px;
+}
+.panel-tagline {
+  font-size: 13px;
+  font-style: italic;
+  color: var(--text-secondary);
+  margin-bottom: 18px;
+}
+
+.section-label {
+  font-size: 10px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1.2px;
+  margin-bottom: 10px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+.section-label::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background: var(--border);
+}
+
+.def-box {
+  padding: 16px;
+  border-radius: 12px;
+  margin-bottom: 18px;
+  font-size: 13px;
+  line-height: 1.75;
+  color: #cbd5e1;
+}
+
+.key-point {
+  display: flex;
+  gap: 10px;
+  align-items: flex-start;
+  margin-bottom: 8px;
+}
+.kp-num {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 10px;
+  font-weight: 700;
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+.kp-text {
+  font-size: 12.5px;
+  line-height: 1.65;
+  color: #b0bec5;
+}
+
+.example-card {
+  padding: 12px 14px;
+  background: rgba(0,0,0,0.35);
+  border-radius: 10px;
+  margin-bottom: 8px;
+  border-left: 3px solid;
+}
+.example-name {
+  font-weight: 700;
+  font-size: 12.5px;
+  color: #f1f5f9;
+  margin-bottom: 3px;
+}
+.example-desc {
+  font-size: 12px;
+  color: var(--text-secondary);
+  line-height: 1.6;
+}
+
+.relations-box {
+  padding: 14px 16px;
+  border-radius: 12px;
+  font-size: 12.5px;
+  line-height: 1.7;
+  margin-bottom: 12px;
+}
+
+.section-group { margin-bottom: 18px; }
+
+/* ── HINT OVERLAY ── */
+.hint-overlay {
+  position: absolute;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 5;
+  background: rgba(0,0,0,0.7);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 8px 18px;
+  font-size: 12px;
+  color: var(--text-muted);
+  pointer-events: none;
+  transition: opacity 0.5s;
+  backdrop-filter: blur(8px);
+}
+.hint-overlay.hidden { opacity: 0; }
+
+/* ── FOOTER ── */
+.footer {
+  padding: 12px 24px;
+  border-top: 1px solid var(--border);
+  background: rgba(0,0,0,0.5);
+  text-align: center;
+  flex-shrink: 0;
+  z-index: 20;
+}
+.footer-brand {
+  font-family: 'Outfit', sans-serif;
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  background: linear-gradient(90deg, #00D4AA, #06B6D4, #8B5CF6);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+.footer-name {
+  font-size: 12.5px;
+  color: #FFFFFF;
+  font-weight: 700;
+  margin-top: 2px;
+  letter-spacing: 0.3px;
+}
+
+/* ── ANIMATIONS ── */
+@keyframes fadeSlideIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+.anim-in { animation: fadeSlideIn 0.35s ease forwards; }
+.anim-d1 { animation-delay: 0.05s; opacity: 0; }
+.anim-d2 { animation-delay: 0.1s; opacity: 0; }
+.anim-d3 { animation-delay: 0.15s; opacity: 0; }
+.anim-d4 { animation-delay: 0.2s; opacity: 0; }
+.anim-d5 { animation-delay: 0.25s; opacity: 0; }
+
+/* Connection line drawing animation */
+@keyframes drawLine {
+  from { stroke-dashoffset: 1000; }
+  to { stroke-dashoffset: 0; }
+}
+.line-draw {
+  stroke-dasharray: 1000;
+  animation: drawLine 2s ease forwards;
+}
+
+/* Node entrance */
+@keyframes nodeAppear {
+  from { opacity: 0; transform: scale(0); }
+  to { opacity: 1; transform: scale(1); }
+}
+
+@media (max-width: 768px) {
+  .detail-panel { width: 100vw; max-width: 100vw; position: absolute; right: 0; top: 0; bottom: 0; }
+  .header-legend { display: none; }
+  .header-title { font-size: 16px; }
+}
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<div class="header">
+  <div>
+    <div class="header-title">The AI Knowledge Map</div>
+    <div class="header-sub">Interactive Visual Diagram — Click any node to explore</div>
+  </div>
+  <div class="header-legend" id="legendChips"></div>
+</div>
+
+<!-- MAIN -->
+<div class="main">
+  <!-- DIAGRAM -->
+  <div class="diagram-area" id="diagramArea">
+    <svg class="diagram-canvas" id="canvas"></svg>
+    <div class="hint-overlay" id="hint">🖱️ Click any node to explore · Drag to pan · Scroll to zoom</div>
+  </div>
+
+  <!-- DETAIL PANEL -->
+  <div class="detail-panel" id="detailPanel">
+    <div class="panel-close"><button class="close-btn" onclick="closePanel()">✕</button></div>
+    <div class="panel-content" id="panelContent"></div>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<div class="footer">
+  <div class="footer-brand">Architect U'r Career</div>
+  <div class="footer-name">Krishna Mohan Parsha</div>
+</div>
+
+<script>
+// ══════════════════════════════════════════
+//  DATA — All 11 AI Concepts
+// ══════════════════════════════════════════
+const concepts = [
+  {
+    id:"ai", label:"AI", title:"Artificial Intelligence (AI)", color:"#00D4AA", icon:"🧠",
+    tagline:"The broadest umbrella — machines that think",
+    definition:"Artificial Intelligence is the science and engineering of creating computer systems capable of performing tasks that typically require human intelligence. This includes learning from experience, understanding natural language, recognizing patterns, making decisions, and solving problems. AI is not a single technology — it is a discipline encompassing dozens of subfields, from rule-based expert systems of the 1980s to today's deep learning and agentic systems.",
+    keyPoints:[
+      "Coined by John McCarthy at the 1956 Dartmouth Conference",
+      "Encompasses both Narrow AI (task-specific) and the theoretical General AI (human-level reasoning across all domains)",
+      "Includes subfields: Machine Learning, NLP, Computer Vision, Robotics, Expert Systems, Planning & Optimization",
+      "Today's AI is exclusively Narrow AI — exceptionally good at specific tasks but lacking general understanding"
+    ],
+    examples:[
+      {name:"Google Maps route optimization", desc:"Uses AI algorithms to find the fastest path considering live traffic, road closures, and historical patterns"},
+      {name:"Email spam filters", desc:"Classify incoming emails as spam or legitimate using pattern recognition — one of the earliest consumer AI applications"},
+      {name:"Tesla Autopilot", desc:"Combines computer vision, sensor fusion, and decision-making AI to assist with driving tasks"}
+    ],
+    relationships:"AI is the parent discipline. Every other concept on this map — ML, NLP, Neural Networks, GenAI, LLMs, RAG, MCP, A2A, Agents, and Agentic AI — is a subset, technique, protocol, or application pattern within AI.",
+    connections:["ml","nlp","nn","genai","llm","rag","mcp","a2a","agent","agentic"]
+  },
+  {
+    id:"ml", label:"AI / ML", title:"Machine Learning (ML)", color:"#FF6B6B", icon:"📊",
+    tagline:"Teaching machines to learn from data, not rules",
+    definition:"Machine Learning is a core subfield of AI where systems improve their performance on tasks by learning patterns from data, rather than being explicitly programmed with rules. Instead of writing 'if temperature > 30 then turn on AC', you feed the system thousands of examples and it discovers the optimal thresholds itself. ML is the engine behind most modern AI breakthroughs.",
+    keyPoints:[
+      "Three core paradigms: Supervised Learning (labeled data), Unsupervised Learning (pattern discovery), and Reinforcement Learning (reward-based trial and error)",
+      "Supervised: You provide input-output pairs (e.g., images labeled 'cat' or 'dog') and the model learns the mapping",
+      "Unsupervised: The model finds hidden structure (e.g., customer segmentation from purchase data with no predefined groups)",
+      "Reinforcement Learning: An agent learns by interacting with an environment and receiving rewards (e.g., AlphaGo learning Go)",
+      "ML models include: Linear Regression, Decision Trees, Random Forests, SVMs, k-Means, and Neural Networks"
+    ],
+    examples:[
+      {name:"Netflix Recommendations", desc:"Collaborative filtering + deep learning analyzes your viewing patterns and similar users to suggest what you'll enjoy next"},
+      {name:"Credit card fraud detection", desc:"ML models trained on millions of transactions learn to flag anomalous patterns in real-time"},
+      {name:"Predictive maintenance", desc:"Sensor data from factory equipment is analyzed to predict failures before they happen, saving millions in downtime"}
+    ],
+    relationships:"ML is a subset of AI. Deep Learning (Neural Networks) is a subset of ML. ML provides the learning foundation that powers LLMs, NLP systems, and the reasoning capabilities of AI Agents.",
+    connections:["ai","nn","nlp","genai","llm"]
+  },
+  {
+    id:"nn", label:"Neural Networks", title:"Neural Networks & Deep Learning", color:"#A78BFA", icon:"🔗",
+    tagline:"Inspired by the brain — layers of mathematical neurons",
+    definition:"Neural Networks are computing systems inspired by biological neural networks in the human brain. They consist of layers of interconnected nodes (neurons) that process information. Each connection has a weight that adjusts during training. Deep Learning refers to neural networks with many layers (hence 'deep'), enabling them to learn increasingly abstract representations of data. A shallow network might recognize edges; a deep network builds upon that to recognize faces.",
+    keyPoints:[
+      "Architecture: Input Layer → Hidden Layers → Output Layer. Each layer transforms data progressively",
+      "Key architectures: CNNs (Convolutional Neural Networks) for images, RNNs/LSTMs for sequential data, and Transformers for language",
+      "The Transformer architecture (2017, Vaswani et al. at Google — 'Attention Is All You Need' paper) revolutionized AI via the 'self-attention mechanism'",
+      "Training requires large datasets and significant compute — GPUs and TPUs are essential hardware",
+      "Backpropagation is the core learning algorithm: errors flow backwards through the network, adjusting weights to reduce mistakes"
+    ],
+    examples:[
+      {name:"Medical imaging (CNNs)", desc:"Convolutional neural networks detect tumors in X-rays and MRIs, sometimes outperforming radiologists"},
+      {name:"Voice assistants (Transformers)", desc:"Siri, Alexa, and Google Assistant use neural networks to convert speech to text and understand intent"},
+      {name:"AlphaFold (Deep Learning)", desc:"DeepMind's neural network predicted the 3D structure of 200+ million proteins — solving a 50-year biology challenge"}
+    ],
+    relationships:"Neural Networks are a subset of ML. Deep Learning is neural networks with many layers. The Transformer architecture (a type of neural network) is the foundation of modern LLMs like GPT-4, Claude, and Gemini.",
+    connections:["ml","llm","genai","nlp"]
+  },
+  {
+    id:"nlp", label:"NLP", title:"Natural Language Processing (NLP)", color:"#F59E0B", icon:"💬",
+    tagline:"Bridging the gap between human language and machines",
+    definition:"Natural Language Processing is the AI subfield focused on enabling computers to understand, interpret, generate, and meaningfully interact with human language — in both text and speech forms. NLP tackles the enormous complexity of human communication: ambiguity, context, sarcasm, idioms, multiple languages, and the gap between what people say and what they mean. Modern NLP is powered primarily by Transformer-based neural networks.",
+    keyPoints:[
+      "Core tasks: Tokenization, Part-of-Speech tagging, Named Entity Recognition (NER), Sentiment Analysis, Machine Translation, Summarization, Q&A",
+      "Evolution: Rule-based (1950s–1990s) → Statistical (1990s–2010s) → Deep Learning / Transformers (2017–present)",
+      "Word Embeddings (Word2Vec, GloVe) were a breakthrough: representing words as dense vectors where similar words are mathematically close",
+      "Transformers replaced sequential approaches by processing all words simultaneously using 'self-attention'",
+      "Modern LLMs are the most advanced NLP systems ever built"
+    ],
+    examples:[
+      {name:"Google Translate", desc:"Uses Transformer-based neural machine translation to convert between 130+ languages, handling context and idioms"},
+      {name:"Sentiment analysis for brands", desc:"Companies analyze millions of social media posts to gauge public sentiment about products in real-time"},
+      {name:"Legal document analysis", desc:"NLP systems review thousands of contracts to extract key clauses, obligations, and risks automatically"}
+    ],
+    relationships:"NLP is a subfield of AI that heavily uses ML and Neural Networks. LLMs are the most advanced form of NLP. NLP capabilities are essential for AI Agents to understand user instructions and communicate naturally.",
+    connections:["ai","ml","nn","llm","agent"]
+  },
+  {
+    id:"genai", label:"Generative AI", title:"Generative AI", color:"#EC4899", icon:"✨",
+    tagline:"AI that creates — text, images, code, music, and more",
+    definition:"Generative AI refers to AI systems that can create new, original content — text, images, audio, video, code, and synthetic data — rather than simply analyzing or classifying existing data. Powered primarily by large foundation models trained on massive datasets, Generative AI learns the underlying patterns and distributions of its training data and uses that knowledge to produce novel outputs that are statistically similar but not identical to what it learned from.",
+    keyPoints:[
+      "Key model types: Large Language Models (text), Diffusion Models (images — Stable Diffusion, DALL-E, Midjourney), GANs, VAEs",
+      "Foundation models trained on internet-scale data (trillions of tokens for LLMs, billions of image-text pairs for image models)",
+      "The 'generative' aspect means these models produce new outputs rather than choosing from predefined options",
+      "Emerged into mainstream with ChatGPT's launch in November 2022, achieving 100M users in ~2 months",
+      "Capabilities: Content creation, code generation, translation, creative writing, image/video synthesis, drug discovery"
+    ],
+    examples:[
+      {name:"ChatGPT / Claude", desc:"Generate human-quality text for writing, analysis, coding, tutoring, and creative tasks — trained on vast text corpora"},
+      {name:"Midjourney / DALL-E 3", desc:"Create photorealistic or artistic images from text descriptions — e.g., 'a cat astronaut painting the Mona Lisa in space'"},
+      {name:"GitHub Copilot", desc:"Generates code suggestions in real-time within your IDE, trained on billions of lines of open-source code"}
+    ],
+    relationships:"Generative AI is a category of AI applications. LLMs are a type of Generative AI for text. It uses Deep Learning / Neural Networks as its foundation. Agentic AI builds upon Generative AI by adding autonomy and action-taking.",
+    connections:["ml","nn","llm","agentic"]
+  },
+  {
+    id:"llm", label:"LLM", title:"Large Language Models (LLMs)", color:"#06B6D4", icon:"📝",
+    tagline:"The powerhouses of modern AI — predicting the next token",
+    definition:"Large Language Models are massive neural networks (specifically, Transformer architectures) trained on enormous text datasets to understand and generate human language. At their core, LLMs work by predicting the most probable next token (word or sub-word) given preceding tokens. Despite this seemingly simple mechanism, the scale of training (billions to trillions of parameters on terabytes of text) produces emergent capabilities: reasoning, coding, translation, summarization, and creative writing.",
+    keyPoints:[
+      "Architecture: Based on the Transformer (2017). Key innovation is 'self-attention' — the model learns which words are most relevant to each other",
+      "Scale: GPT-4 reportedly uses ~1.76T parameters in a Mixture-of-Experts architecture — though OpenAI never officially confirmed this",
+      "Training phases: Pre-training (learn language patterns), Fine-tuning (align with human preferences via RLHF/RLAIF), Instruction tuning",
+      "Context window: The amount of text an LLM processes at once — ranges from 4K to 10M+ tokens in cutting-edge models",
+      "Limitations: Hallucinations (confident but wrong outputs), knowledge cutoff dates, no real-world grounding without external tools"
+    ],
+    examples:[
+      {name:"Claude (Anthropic)", desc:"Advanced LLM family (Opus, Sonnet, Haiku) focused on helpfulness, harmlessness, and honesty — powers coding, analysis, and creative tasks"},
+      {name:"GPT-4 / GPT-5 series (OpenAI)", desc:"Multimodal LLM family (GPT-4, GPT-4o, GPT-5, GPT-5.4) processing text, images, and audio — powering ChatGPT"},
+      {name:"Llama 4 (Meta)", desc:"Open-weight LLM family using Mixture-of-Experts architecture (Scout, Maverick) for running powerful multimodal AI on your own infrastructure"}
+    ],
+    relationships:"LLMs are a specific type of Generative AI for language. They use the Transformer Neural Network architecture. LLMs are the 'brain' of AI Agents and Agentic AI. RAG enhances LLMs with external knowledge. NLP is the foundational discipline LLMs advance.",
+    connections:["nn","nlp","genai","rag","mcp","agent"]
+  },
+  {
+    id:"rag", label:"RAG", title:"Retrieval-Augmented Generation (RAG)", color:"#10B981", icon:"🔍",
+    tagline:"Grounding AI in facts — retrieve first, then generate",
+    definition:"Retrieval-Augmented Generation (RAG) is an architectural pattern that enhances LLM outputs by first retrieving relevant information from external knowledge bases, then feeding that information as context into the LLM before it generates a response. Coined in a 2020 research paper by Patrick Lewis et al. (Facebook AI Research / UCL / NYU), RAG solves critical LLM limitations: hallucination, outdated knowledge, and lack of domain-specific information. Think of it as giving the LLM a reference library to consult before answering.",
+    keyPoints:[
+      "Three-step pipeline: (1) Retrieve — search a knowledge base for relevant documents; (2) Augment — inject context into the prompt; (3) Generate — LLM produces a grounded response",
+      "Vector databases (Pinecone, Weaviate, ChromaDB) store document embeddings for semantic search — finding documents by meaning, not just keywords",
+      "Embeddings: Documents converted into numerical vectors using embedding models — similar concepts end up close together in vector space",
+      "Key advantage: No need to retrain the model. Just update the knowledge base and the LLM immediately has access to new information",
+      "Advanced variants: Self-RAG (self-reflective retrieval), GraphRAG (knowledge graphs), Corrective RAG, Agentic RAG"
+    ],
+    examples:[
+      {name:"Enterprise knowledge chatbot", desc:"Answers HR questions by retrieving from internal policy documents, employee handbooks, and benefits guides — always citing sources"},
+      {name:"Legal research assistant", desc:"Retrieves relevant case law and statutes from legal databases before generating analysis — grounding opinions in actual precedent"},
+      {name:"Customer support with product docs", desc:"Retrieves latest documentation and known issues so the AI gives accurate, up-to-date troubleshooting"}
+    ],
+    relationships:"RAG enhances LLMs by providing external knowledge. It uses embedding models (Neural Networks) for semantic search. RAG is a critical component in building reliable AI Agents. MCP can standardize connections between RAG systems and LLMs.",
+    connections:["llm","nn","agent","mcp"]
+  },
+  {
+    id:"mcp", label:"MCP", title:"Model Context Protocol (MCP)", color:"#F97316", icon:"🔌",
+    tagline:"The USB-C of AI — one standard to connect them all",
+    definition:"The Model Context Protocol (MCP) is an open standard introduced by Anthropic in November 2024 that provides a universal, standardized way to connect AI models (LLMs) with external data sources, tools, and services. Before MCP, every integration required custom code — creating an 'N×M' problem. MCP solves this with a single protocol. By December 2025, Anthropic donated MCP to the Linux Foundation's Agentic AI Foundation (AAIF), with OpenAI, Google, AWS, Microsoft, and Block as founding/supporting members.",
+    keyPoints:[
+      "Architecture: Host (AI app) → Client (session manager) → Server (tool/data provider). Each client has a 1:1 relationship with a server",
+      "Three primitives: Resources (read data), Tools (execute actions), and Prompts (reusable templates)",
+      "Built on JSON-RPC 2.0, inspired by the Language Server Protocol (LSP) that standardized IDE tooling",
+      "Adopted by: OpenAI (Mar 2025), Google DeepMind (Apr 2025), AWS, Microsoft — 10,000+ active servers",
+      "Nov 2025 spec: async operations, server-side agent loops, parallel tool calls, OAuth security. 97M monthly SDK downloads"
+    ],
+    examples:[
+      {name:"Claude Desktop + GitHub + Slack", desc:"Claude reads GitHub repos, searches Slack, queries Google Drive — all via standardized MCP connectors, no custom code"},
+      {name:"IDE coding assistants (Cursor, VS Code)", desc:"MCP servers provide AI tools with real-time project context, documentation, and file system access"},
+      {name:"Enterprise data integration", desc:"Connect CRM, databases, and analytics tools to any LLM using MCP servers — build once, use across models"}
+    ],
+    relationships:"MCP standardizes how LLMs connect to Tools and Data (agent-to-tool communication). A2A complements MCP by standardizing agent-to-agent communication. MCP is foundational infrastructure for building AI Agents and Agentic AI systems.",
+    connections:["llm","a2a","agent","agentic","rag"]
+  },
+  {
+    id:"a2a", label:"A2A", title:"Agent-to-Agent Protocol (A2A)", color:"#8B5CF6", icon:"🤝",
+    tagline:"Agents talking to agents — the internet of AI",
+    definition:"The Agent-to-Agent (A2A) Protocol is an open standard launched by Google in April 2025 that enables AI agents to discover, communicate, and collaborate with each other — regardless of framework, vendor, or platform. While MCP connects agents to tools, A2A connects agents to other agents. In June 2025, Google donated A2A to the Linux Foundation, with 150+ organizations supporting it including Salesforce, SAP, ServiceNow, and all major cloud providers.",
+    keyPoints:[
+      "Core concept: Client agents (request work) communicate with Remote agents (execute work) through standardized messages",
+      "Agent Cards: JSON metadata files describing capabilities, skills, supported data types, and auth requirements — like a LinkedIn profile for AI agents",
+      "Discovery: Agents find each other via /.well-known/agent.json endpoints — automatic capability matching",
+      "Task lifecycle: Defined states (submitted, working, completed, failed) — supports instant responses and long-running operations",
+      "Built on HTTP, SSE, JSON-RPC — integrates with existing enterprise infrastructure. Version 0.3 (Jul 2025) added gRPC support"
+    ],
+    examples:[
+      {name:"Hiring workflow automation", desc:"A hiring agent delegates to specialists: one sources candidates, another schedules interviews, a third runs background checks — all via A2A"},
+      {name:"Supply chain orchestration", desc:"Inventory agent detects low stock → contacts supplier agents → negotiates pricing → triggers procurement → confirms delivery"},
+      {name:"Cross-platform enterprise automation", desc:"Salesforce, ServiceNow, and SAP agents collaborate on a customer escalation — each handling their domain, A2A coordinates"}
+    ],
+    relationships:"A2A enables agent-to-agent communication; MCP enables agent-to-tool communication. Together, they form the communication backbone of Agentic AI. A2A is essential for multi-agent systems.",
+    connections:["mcp","agent","agentic"]
+  },
+  {
+    id:"agent", label:"AI Agent", title:"AI Agent", color:"#EF4444", icon:"🤖",
+    tagline:"AI that doesn't just think — it acts",
+    definition:"An AI Agent is a software system powered by an LLM that can perceive its environment, reason about tasks, use external tools, and take actions to achieve specific goals. Unlike a basic chatbot that simply responds to prompts, an AI Agent can break down complex tasks into steps, decide which tools to use, execute multi-step plans, and adapt based on results. The LLM serves as the 'brain' that drives reasoning, while tools and APIs serve as the 'hands.'",
+    keyPoints:[
+      "Core loop: Perceive → Reason → Plan → Act → Observe → Repeat until goal is achieved",
+      "Tool use: Agents call APIs, query databases, execute code, browse the web, read/write files, send emails",
+      "Memory: Short-term (conversation context) and long-term (persistent knowledge) allow agents to maintain state",
+      "Frameworks: LangChain, LlamaIndex, CrewAI, AutoGen (Microsoft), Google ADK, Amazon Bedrock Agents",
+      "Shipped agents: Devin (AI software engineer), OpenAI Operator, ChatGPT Deep Research, Manus, Claude computer use"
+    ],
+    examples:[
+      {name:"Devin (Cognition Labs)", desc:"AI software engineer that plans features, writes code across files, runs tests, debugs errors, and submits pull requests autonomously"},
+      {name:"Customer support agent", desc:"Diagnoses issues by querying CRM, checking order status via APIs, applying refund policies, and escalating to humans when needed"},
+      {name:"Research agent", desc:"Searches academic papers, extracts findings, synthesizes across sources, and produces a structured report with citations"}
+    ],
+    relationships:"AI Agents use LLMs as their reasoning engine. They use MCP for tool connectivity. They use A2A to communicate with other agents. RAG provides knowledge retrieval. Agentic AI is the broader paradigm of deploying agents at scale.",
+    connections:["llm","nlp","rag","mcp","a2a","agentic"]
+  },
+  {
+    id:"agentic", label:"Agentic AI", title:"Agentic AI", color:"#D946EF", icon:"⚡",
+    tagline:"The paradigm shift — from AI that assists to AI that operates",
+    definition:"Agentic AI is not a single technology but a paradigm — the design philosophy and architectural approach of building AI systems that operate with genuine autonomy, goal-driven behavior, and adaptive decision-making with minimal human oversight. While an 'AI Agent' is a single entity, 'Agentic AI' describes the broader ecosystem: multi-agent architectures, orchestration patterns, governance frameworks, and enterprise-scale deployment of autonomous AI systems.",
+    keyPoints:[
+      "Five characteristics (per Microsoft): Autonomy, Reasoning, Adaptable Planning, Context Understanding, and Action-Enabled",
+      "Key distinction from GenAI: GenAI creates content via prompts (reactive); Agentic AI pursues goals and takes action (proactive)",
+      "Architectures: Vertical (conductor oversees specialists), Horizontal (peer agents collaborate), Embedded (agentic capabilities in existing software)",
+      "AAIF formed under Linux Foundation (Dec 2025) — Anthropic, OpenAI, Google, AWS, Microsoft, Block as founding members",
+      "MIT Sloan/BCG (Spring 2025): 35% already adopted AI agents, 44% more planning deployment. McKinsey: 200%–2,000% productivity gains in banking KYC/AML"
+    ],
+    examples:[
+      {name:"Autonomous IT operations", desc:"Monitors infrastructure, detects anomalies, diagnoses root causes, applies fixes, verifies resolution, generates incident reports — no human needed"},
+      {name:"End-to-end procurement", desc:"Identifies needs from inventory, evaluates vendors, negotiates via A2A with supplier agents, generates purchase orders, tracks delivery"},
+      {name:"Clinical decision support", desc:"Reviews patient records, cross-references latest research (RAG), coordinates with specialist agents, generates treatment recommendations"}
+    ],
+    relationships:"Agentic AI is the culmination of all concepts: LLMs provide reasoning, Neural Networks enable learning, NLP provides language understanding, RAG provides knowledge, MCP provides tool connectivity, A2A provides inter-agent communication, and AI Agents are the building blocks.",
+    connections:["genai","llm","mcp","a2a","agent"]
+  }
+];
+
+// ══════════════════════════════════════════
+//  NODE POSITIONS (responsive layout)
+// ══════════════════════════════════════════
+function getNodePositions(w, h) {
+  const cx = w / 2, cy = h / 2;
+  const sx = w / 1200, sy = h / 700;
+  const s = Math.min(sx, sy, 1);
+  return {
+    ai:      { x: cx,             y: cy - 260*s },
+    ml:      { x: cx - 260*s,     y: cy - 150*s },
+    nn:      { x: cx - 380*s,     y: cy + 10*s },
+    nlp:     { x: cx + 260*s,     y: cy - 150*s },
+    genai:   { x: cx + 380*s,     y: cy + 10*s },
+    llm:     { x: cx,             y: cy - 40*s },
+    rag:     { x: cx - 180*s,     y: cy + 130*s },
+    mcp:     { x: cx + 180*s,     y: cy + 130*s },
+    a2a:     { x: cx + 320*s,     y: cy + 220*s },
+    agent:   { x: cx - 100*s,     y: cy + 260*s },
+    agentic: { x: cx + 100*s,     y: cy + 260*s }
+  };
+}
+
+// ══════════════════════════════════════════
+//  RENDER
+// ══════════════════════════════════════════
+let activeNode = null;
+let positions = {};
+
+function render() {
+  const svg = document.getElementById('canvas');
+  const area = document.getElementById('diagramArea');
+  const w = area.clientWidth;
+  const h = area.clientHeight;
+  svg.setAttribute('viewBox', `0 0 ${w} ${h}`);
+  positions = getNodePositions(w, h);
+
+  let html = '';
+
+  // Connections
+  const drawn = new Set();
+  concepts.forEach(c => {
+    c.connections.forEach(targetId => {
+      const key = [c.id, targetId].sort().join('-');
+      if (drawn.has(key)) return;
+      drawn.add(key);
+      const from = positions[c.id];
+      const to = positions[targetId];
+      if (!from || !to) return;
+
+      const isHighlight = activeNode && (c.id === activeNode || targetId === activeNode);
+      const targetConcept = concepts.find(x => x.id === targetId);
+      const col = isHighlight
+        ? (c.id === activeNode ? c.color : targetConcept.color)
+        : 'rgba(255,255,255,0.06)';
+
+      // Curved line
+      const mx = (from.x + to.x) / 2;
+      const my = (from.y + to.y) / 2;
+      const dx = to.x - from.x;
+      const dy = to.y - from.y;
+      const curvature = 0.15;
+      const cpx = mx - dy * curvature;
+      const cpy = my + dx * curvature;
+
+      html += `<path d="M${from.x},${from.y} Q${cpx},${cpy} ${to.x},${to.y}"
+        class="connection-line ${isHighlight ? 'highlight' : ''} line-draw"
+        stroke="${col}" style="${isHighlight ? 'opacity:0.5' : ''}"/>`;
+    });
+  });
+
+  // Nodes
+  const s = Math.min(w / 1200, h / 700, 1);
+  const nodeR = Math.max(22, 28 * s);
+  const fontSize = Math.max(9, 11 * s);
+
+  concepts.forEach((c, i) => {
+    const p = positions[c.id];
+    if (!p) return;
+    const isActive = activeNode === c.id;
+    const delay = i * 0.06;
+
+    html += `<g class="node-group ${isActive ? 'active' : ''}" onclick="selectNode('${c.id}')"
+      style="animation: nodeAppear 0.5s ${delay}s ease both;">`;
+
+    // Glow
+    html += `<circle class="node-glow" cx="${p.x}" cy="${p.y}" r="${nodeR * 2.2}" fill="${c.color}" opacity="0.08" filter="url(#blur)"/>`;
+
+    // Pulse ring (if active)
+    if (isActive) {
+      html += `<circle class="pulse-anim" cx="${p.x}" cy="${p.y}" r="${nodeR}" fill="none" stroke="${c.color}" stroke-width="1.5" opacity="0.4"/>`;
+    }
+
+    // Outer ring
+    html += `<circle class="node-ring" cx="${p.x}" cy="${p.y}" r="${nodeR + 4}" fill="none"
+      stroke="${c.color}" stroke-width="${isActive ? 2 : 1}" stroke-dasharray="${isActive ? 'none' : '3 4'}"
+      opacity="${isActive ? 1 : 0.35}"/>`;
+
+    // Main circle
+    html += `<circle class="node-circle" cx="${p.x}" cy="${p.y}" r="${nodeR}"
+      fill="${isActive ? c.color + '30' : 'rgba(13,17,23,0.9)'}"
+      stroke="${c.color}" stroke-width="${isActive ? 2.5 : 1.5}"/>`;
+
+    // Icon
+    html += `<text x="${p.x}" y="${p.y + 1}" text-anchor="middle" dominant-baseline="central"
+      font-size="${nodeR * 0.75}" style="pointer-events:none">${c.icon}</text>`;
+
+    // Label
+    html += `<text x="${p.x}" y="${p.y + nodeR + 16}" text-anchor="middle"
+      font-family="'Outfit', sans-serif" font-size="${fontSize}" font-weight="700"
+      fill="${isActive ? c.color : '#94a3b8'}" style="pointer-events:none">${c.label}</text>`;
+
+    html += `</g>`;
+  });
+
+  // SVG defs
+  const defs = `<defs>
+    <filter id="blur"><feGaussianBlur stdDeviation="18"/></filter>
+  </defs>`;
+
+  svg.innerHTML = defs + html;
+}
+
+// ══════════════════════════════════════════
+//  INTERACTION
+// ══════════════════════════════════════════
+function selectNode(id) {
+  activeNode = id;
+  render();
+  showPanel(id);
+  document.getElementById('hint').classList.add('hidden');
+  // Update legend chips
+  document.querySelectorAll('.legend-chip').forEach(el => {
+    el.classList.toggle('active', el.dataset.id === id);
+  });
+}
+
+function closePanel() {
+  activeNode = null;
+  document.getElementById('detailPanel').classList.remove('open');
+  document.querySelectorAll('.legend-chip').forEach(el => el.classList.remove('active'));
+  setTimeout(render, 50);
+}
+
+function showPanel(id) {
+  const c = concepts.find(x => x.id === id);
+  if (!c) return;
+
+  const panel = document.getElementById('detailPanel');
+  const content = document.getElementById('panelContent');
+
+  const kpHTML = c.keyPoints.map((p, i) => `
+    <div class="key-point anim-in anim-d${Math.min(i+1, 5)}">
+      <div class="kp-num" style="background:${c.color}22; color:${c.color}">${i + 1}</div>
+      <div class="kp-text">${p}</div>
+    </div>
+  `).join('');
+
+  const exHTML = c.examples.map((e, i) => `
+    <div class="example-card anim-in anim-d${Math.min(i+2, 5)}" style="border-left-color:${c.color}">
+      <div class="example-name">${e.name}</div>
+      <div class="example-desc">${e.desc}</div>
+    </div>
+  `).join('');
+
+  // Nav arrows
+  const idx = concepts.findIndex(x => x.id === id);
+  const prev = idx > 0 ? concepts[idx - 1] : null;
+  const next = idx < concepts.length - 1 ? concepts[idx + 1] : null;
+
+  content.innerHTML = `
+    <div class="panel-icon anim-in">${c.icon}</div>
+    <div class="panel-title anim-in anim-d1" style="color:${c.color}">${c.title}</div>
+    <div class="panel-tagline anim-in anim-d2">${c.tagline}</div>
+
+    <div class="section-group anim-in anim-d2">
+      <div class="section-label" style="color:${c.color}">Definition</div>
+      <div class="def-box" style="background:${c.color}0a; border:1px solid ${c.color}20">${c.definition}</div>
+    </div>
+
+    <div class="section-group anim-in anim-d3">
+      <div class="section-label" style="color:var(--text-secondary)">⚙️ Key Technical Points</div>
+      ${kpHTML}
+    </div>
+
+    <div class="section-group anim-in anim-d4">
+      <div class="section-label" style="color:var(--text-secondary)">🌍 Real-World Examples</div>
+      ${exHTML}
+    </div>
+
+    <div class="section-group anim-in anim-d5">
+      <div class="section-label" style="color:#a78bfa">🔗 How It Connects</div>
+      <div class="relations-box" style="background:rgba(139,92,246,0.07); border:1px solid rgba(139,92,246,0.15); color:#c4b5fd">${c.relationships}</div>
+    </div>
+
+    <div style="display:flex; justify-content:space-between; margin-top:8px;">
+      ${prev ? `<button onclick="selectNode('${prev.id}')" style="padding:7px 14px; background:rgba(255,255,255,0.04); border:1px solid rgba(255,255,255,0.08); border-radius:8px; color:#94a3b8; cursor:pointer; font-size:11px; font-weight:600; font-family:'DM Sans',sans-serif">← ${prev.icon} ${prev.label}</button>` : '<div></div>'}
+      ${next ? `<button onclick="selectNode('${next.id}')" style="padding:7px 14px; background:${next.color}15; border:1px solid ${next.color}30; border-radius:8px; color:${next.color}; cursor:pointer; font-size:11px; font-weight:600; font-family:'DM Sans',sans-serif">${next.icon} ${next.label} →</button>` : '<div></div>'}
+    </div>
+  `;
+
+  panel.classList.add('open');
+  panel.scrollTop = 0;
+}
+
+// ══════════════════════════════════════════
+//  LEGEND CHIPS
+// ══════════════════════════════════════════
+function renderLegend() {
+  const container = document.getElementById('legendChips');
+  container.innerHTML = concepts.map(c => `
+    <div class="legend-chip" data-id="${c.id}"
+      style="background:${c.color}12; color:${c.color}"
+      onclick="selectNode('${c.id}')">
+      ${c.icon} ${c.label}
+    </div>
+  `).join('');
+}
+
+// ══════════════════════════════════════════
+//  INIT
+// ══════════════════════════════════════════
+window.addEventListener('resize', render);
+renderLegend();
+render();
+
+// Hide hint after first click
+document.getElementById('diagramArea').addEventListener('click', () => {
+  document.getElementById('hint').classList.add('hidden');
+}, { once: true });
+</script>
+</body>
+</html>

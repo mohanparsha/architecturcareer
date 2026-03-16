@@ -1,0 +1,569 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>DevOps & DevSecOps Roadmap</title>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800;900&family=Nunito:ital,wght@0,400;0,500;0,600;0,700;0,800&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #ffffff;
+    --text: #1a1a2e;
+    --text-mid: #3d3d5c;
+    --text-soft: #6e6e8a;
+
+    --p1: #10b981; --p1-mid: #34d399; --p1-light: #d1fae5; --p1-glow: #ecfdf5;
+    --p2: #3b82f6; --p2-mid: #60a5fa; --p2-light: #dbeafe; --p2-glow: #eff6ff;
+    --p3: #8b5cf6; --p3-mid: #a78bfa; --p3-light: #ede9fe; --p3-glow: #f5f3ff;
+    --p4: #f97316; --p4-mid: #fb923c; --p4-light: #ffedd5; --p4-glow: #fff7ed;
+    --p5: #ec4899; --p5-mid: #f472b6; --p5-light: #fce7f3; --p5-glow: #fdf2f8;
+    --p6: #eab308; --p6-mid: #facc15; --p6-light: #fef9c3; --p6-glow: #fefce8;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Nunito', sans-serif;
+    min-height: 100vh;
+  }
+
+  .page {
+    max-width: 1280px;
+    margin: 0 auto;
+    padding: 32px 28px 36px;
+  }
+
+  /* --- HEADER --- */
+  .header {
+    text-align: center;
+    margin-bottom: 22px;
+    padding-bottom: 18px;
+    position: relative;
+  }
+
+  .header::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100%;
+    max-width: 600px;
+    height: 3px;
+    border-radius: 3px;
+    background: linear-gradient(90deg, var(--p1), var(--p2), var(--p3), var(--p4), var(--p5), var(--p6));
+  }
+
+  .header h1 {
+    font-family: 'Outfit', sans-serif;
+    font-size: 2.3rem;
+    font-weight: 900;
+    letter-spacing: -1.5px;
+    line-height: 1.1;
+    background: linear-gradient(135deg, var(--p1) 0%, var(--p2) 25%, var(--p3) 50%, var(--p5) 75%, var(--p4) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .header .subtitle {
+    font-family: 'Outfit', sans-serif;
+    font-size: 0.78rem;
+    color: var(--text-soft);
+    margin-top: 5px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    font-weight: 600;
+  }
+
+  .meta-bar {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin-top: 10px;
+    flex-wrap: wrap;
+  }
+
+  .meta-tag {
+    font-size: 0.64rem;
+    font-weight: 700;
+    padding: 4px 14px;
+    border-radius: 100px;
+    letter-spacing: 0.3px;
+  }
+  .meta-tag:nth-child(1) { color: var(--p1); background: var(--p1-glow); }
+  .meta-tag:nth-child(2) { color: var(--p2); background: var(--p2-glow); }
+  .meta-tag:nth-child(3) { color: var(--p3); background: var(--p3-glow); }
+  .meta-tag:nth-child(4) { color: var(--p4); background: var(--p4-glow); }
+
+  /* --- FLOW --- */
+  .phase-flow {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 4px;
+    margin-bottom: 14px;
+    padding: 8px 16px;
+    background: linear-gradient(135deg, var(--p1-glow), var(--p2-glow), var(--p3-glow), var(--p4-glow), var(--p5-glow), var(--p6-glow));
+    border-radius: 100px;
+    max-width: 720px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .flow-step {
+    display: flex;
+    align-items: center;
+    gap: 3px;
+    font-size: 0.56rem;
+    font-weight: 800;
+    letter-spacing: 0.2px;
+  }
+
+  .flow-num {
+    width: 18px;
+    height: 18px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.5rem;
+    font-weight: 900;
+    color: white;
+    font-family: 'Outfit', sans-serif;
+  }
+
+  .flow-step:nth-child(1)  { color: var(--p1); }
+  .flow-step:nth-child(3)  { color: var(--p2); }
+  .flow-step:nth-child(5)  { color: var(--p3); }
+  .flow-step:nth-child(7)  { color: var(--p4); }
+  .flow-step:nth-child(9)  { color: var(--p5); }
+  .flow-step:nth-child(11) { color: var(--p6); }
+
+  .flow-step:nth-child(1) .flow-num  { background: var(--p1); }
+  .flow-step:nth-child(3) .flow-num  { background: var(--p2); }
+  .flow-step:nth-child(5) .flow-num  { background: var(--p3); }
+  .flow-step:nth-child(7) .flow-num  { background: var(--p4); }
+  .flow-step:nth-child(9) .flow-num  { background: var(--p5); }
+  .flow-step:nth-child(11) .flow-num { background: var(--p6); }
+
+  .flow-arrow {
+    font-size: 0.6rem;
+    font-weight: 800;
+    color: #cbd5e1;
+  }
+
+  /* --- GRID --- */
+  .phases-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 14px;
+  }
+
+  /* --- PHASE CARD --- */
+  .phase-card {
+    border-radius: 12px;
+    padding: 16px 15px 14px;
+    position: relative;
+    overflow: hidden;
+    border: 1.5px solid;
+    transition: transform 0.2s, box-shadow 0.2s;
+  }
+
+  .phase-card:hover {
+    transform: translateY(-3px);
+  }
+
+  .phase-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 4px;
+  }
+
+  .phase-card:nth-child(1) { background: var(--p1-glow); border-color: var(--p1-light); }
+  .phase-card:nth-child(2) { background: var(--p2-glow); border-color: var(--p2-light); }
+  .phase-card:nth-child(3) { background: var(--p3-glow); border-color: var(--p3-light); }
+  .phase-card:nth-child(4) { background: var(--p4-glow); border-color: var(--p4-light); }
+  .phase-card:nth-child(5) { background: var(--p5-glow); border-color: var(--p5-light); }
+  .phase-card:nth-child(6) { background: var(--p6-glow); border-color: var(--p6-light); }
+
+  .phase-card:nth-child(1)::before { background: linear-gradient(90deg, var(--p1), var(--p1-mid)); }
+  .phase-card:nth-child(2)::before { background: linear-gradient(90deg, var(--p2), var(--p2-mid)); }
+  .phase-card:nth-child(3)::before { background: linear-gradient(90deg, var(--p3), var(--p3-mid)); }
+  .phase-card:nth-child(4)::before { background: linear-gradient(90deg, var(--p4), var(--p4-mid)); }
+  .phase-card:nth-child(5)::before { background: linear-gradient(90deg, var(--p5), var(--p5-mid)); }
+  .phase-card:nth-child(6)::before { background: linear-gradient(90deg, var(--p6), var(--p6-mid)); }
+
+  .phase-card:nth-child(1):hover { box-shadow: 0 8px 24px rgba(16,185,129,0.15); border-color: var(--p1-mid); }
+  .phase-card:nth-child(2):hover { box-shadow: 0 8px 24px rgba(59,130,246,0.15); border-color: var(--p2-mid); }
+  .phase-card:nth-child(3):hover { box-shadow: 0 8px 24px rgba(139,92,246,0.15); border-color: var(--p3-mid); }
+  .phase-card:nth-child(4):hover { box-shadow: 0 8px 24px rgba(249,115,22,0.15); border-color: var(--p4-mid); }
+  .phase-card:nth-child(5):hover { box-shadow: 0 8px 24px rgba(236,72,153,0.15); border-color: var(--p5-mid); }
+  .phase-card:nth-child(6):hover { box-shadow: 0 8px 24px rgba(234,179,8,0.15); border-color: var(--p6-mid); }
+
+  .phase-card:nth-child(1) { --c: var(--p1); --cl: var(--p1-light); }
+  .phase-card:nth-child(2) { --c: var(--p2); --cl: var(--p2-light); }
+  .phase-card:nth-child(3) { --c: var(--p3); --cl: var(--p3-light); }
+  .phase-card:nth-child(4) { --c: var(--p4); --cl: var(--p4-light); }
+  .phase-card:nth-child(5) { --c: var(--p5); --cl: var(--p5-light); }
+  .phase-card:nth-child(6) { --c: var(--p6); --cl: var(--p6-light); }
+
+  .phase-header {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 10px;
+  }
+
+  .phase-number {
+    font-family: 'Outfit', sans-serif;
+    font-size: 0.7rem;
+    font-weight: 900;
+    color: white;
+    background: var(--c);
+    width: 26px;
+    height: 26px;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    box-shadow: 0 2px 8px color-mix(in srgb, var(--c) 30%, transparent);
+  }
+
+  .phase-title-block { flex: 1; min-width: 0; }
+
+  .phase-title {
+    font-family: 'Outfit', sans-serif;
+    font-size: 0.88rem;
+    font-weight: 800;
+    color: var(--text);
+    line-height: 1.2;
+    letter-spacing: -0.3px;
+  }
+
+  .phase-timeline {
+    font-size: 0.62rem;
+    color: var(--c);
+    font-weight: 800;
+    letter-spacing: 0.3px;
+    margin-top: 1px;
+  }
+
+  .topics-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+
+  .topic-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 7px;
+    font-size: 0.7rem;
+    line-height: 1.4;
+  }
+
+  .topic-dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: var(--c);
+    flex-shrink: 0;
+    margin-top: 4px;
+  }
+
+  .topic-label {
+    font-weight: 700;
+    color: var(--text);
+  }
+
+  .topic-detail {
+    color: var(--text-mid);
+    font-weight: 500;
+  }
+
+  .milestone {
+    margin-top: 9px;
+    padding: 6px 10px;
+    background: white;
+    border: 1.5px solid var(--cl);
+    border-radius: 8px;
+    font-size: 0.62rem;
+    color: var(--c);
+    font-weight: 800;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    letter-spacing: 0.2px;
+  }
+
+  .milestone-icon { font-size: 0.7rem; }
+
+  /* --- FOOTER --- */
+  .footer {
+    margin-top: 22px;
+    text-align: center;
+    padding-top: 14px;
+    position: relative;
+  }
+
+  .footer::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100%;
+    max-width: 600px;
+    height: 3px;
+    border-radius: 3px;
+    background: linear-gradient(90deg, var(--p1), var(--p2), var(--p3), var(--p4), var(--p5), var(--p6));
+  }
+
+  .footer-text {
+    font-size: 0.66rem;
+    color: var(--text-soft);
+    line-height: 1.6;
+    max-width: 800px;
+    margin: 0 auto;
+  }
+
+  .footer-text strong {
+    color: var(--text);
+    font-weight: 800;
+  }
+
+  .cert-row {
+    display: flex;
+    justify-content: center;
+    gap: 8px;
+    margin-top: 8px;
+    flex-wrap: wrap;
+  }
+
+  .cert-badge {
+    font-size: 0.58rem;
+    font-weight: 800;
+    padding: 4px 12px;
+    border-radius: 100px;
+    letter-spacing: 0.2px;
+  }
+
+  .cert-badge.ccp { color: var(--p1); background: var(--p1-light); }
+  .cert-badge.aws { color: var(--p4); background: var(--p4-light); }
+  .cert-badge.cka { color: var(--p2); background: var(--p2-light); }
+  .cert-badge.tf  { color: var(--p3); background: var(--p3-light); }
+
+  .branding-footer {
+    margin-top: 14px;
+    padding-top: 10px;
+    border-top: 1.5px solid #e2e8f0;
+    font-family: 'Outfit', sans-serif;
+    font-size: 0.68rem;
+    font-weight: 800;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    text-align: center;
+    background: linear-gradient(135deg, var(--p1) 0%, var(--p2) 25%, var(--p3) 50%, var(--p5) 75%, var(--p4) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .branding-footer .brand-sep {
+    display: inline-block;
+    width: 4px;
+    height: 4px;
+    background: var(--p3);
+    border-radius: 50%;
+    margin: 0 8px;
+    vertical-align: middle;
+    -webkit-text-fill-color: var(--p3);
+  }
+
+  /* Print */
+  @media print {
+    body { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+    .phase-card { break-inside: avoid; }
+    .page { padding: 14px; }
+    .phase-flow { display: none; }
+    .branding-footer { -webkit-text-fill-color: #333; background: none; color: #333; }
+  }
+
+  @media (max-width: 900px) {
+    .phases-grid { grid-template-columns: repeat(2, 1fr); }
+    .header h1 { font-size: 1.8rem; }
+  }
+
+  @media (max-width: 600px) {
+    .phases-grid { grid-template-columns: 1fr; }
+    .phase-flow { flex-wrap: wrap; gap: 6px; border-radius: 16px; }
+  }
+</style>
+</head>
+<body>
+<div class="page">
+
+  <!-- HEADER -->
+  <div class="header">
+    <h1>DevOps & DevSecOps Roadmap</h1>
+    <div class="subtitle">12-Month Learning Path for CSE Students</div>
+    <div class="meta-bar">
+      <span class="meta-tag">6 Phases</span>
+      <span class="meta-tag">8–12 hrs / week</span>
+      <span class="meta-tag">Beginner → Job-Ready</span>
+      <span class="meta-tag">March 2026</span>
+    </div>
+  </div>
+
+  <!-- PHASE FLOW -->
+  <div class="phase-flow">
+    <div class="flow-step"><span class="flow-num">1</span> Foundation</div>
+    <span class="flow-arrow">→</span>
+    <div class="flow-step"><span class="flow-num">2</span> Core Skills</div>
+    <span class="flow-arrow">→</span>
+    <div class="flow-step"><span class="flow-num">3</span> Containers</div>
+    <span class="flow-arrow">→</span>
+    <div class="flow-step"><span class="flow-num">4</span> CI/CD & IaC</div>
+    <span class="flow-arrow">→</span>
+    <div class="flow-step"><span class="flow-num">5</span> Security</div>
+    <span class="flow-arrow">→</span>
+    <div class="flow-step"><span class="flow-num">6</span> Portfolio</div>
+  </div>
+
+  <!-- PHASES GRID -->
+  <div class="phases-grid">
+
+    <!-- PHASE 1 -->
+    <div class="phase-card">
+      <div class="phase-header">
+        <div class="phase-number">1</div>
+        <div class="phase-title-block">
+          <div class="phase-title">Foundation Building</div>
+          <div class="phase-timeline">Months 1–2</div>
+        </div>
+      </div>
+      <div class="topics-grid">
+        <div class="topic-item"><div class="topic-dot"></div><div><span class="topic-label">Linux OS</span> <span class="topic-detail">— Ubuntu 24.04, filesystem, permissions, users, processes, systemd, package management</span></div></div>
+        <div class="topic-item"><div class="topic-dot"></div><div><span class="topic-label">Shell Scripting</span> <span class="topic-detail">— Bash fundamentals, variables, loops, conditionals, cron, text processing (grep, awk, sed)</span></div></div>
+        <div class="topic-item"><div class="topic-dot"></div><div><span class="topic-label">Python (primary) + Go intro</span> <span class="topic-detail">— Scripting, file I/O, API calls, JSON/YAML parsing, automation scripts</span></div></div>
+        <div class="topic-item"><div class="topic-dot"></div><div><span class="topic-label">Git & GitHub</span> <span class="topic-detail">— Branching, merging, rebasing, PRs, conflict resolution, Git workflows</span></div></div>
+      </div>
+      <div class="milestone"><span class="milestone-icon">◆</span> Automate server setup with a Bash script + push to GitHub</div>
+    </div>
+
+    <!-- PHASE 2 -->
+    <div class="phase-card">
+      <div class="phase-header">
+        <div class="phase-number">2</div>
+        <div class="phase-title-block">
+          <div class="phase-title">Core DevOps Skills</div>
+          <div class="phase-timeline">Months 3–4</div>
+        </div>
+      </div>
+      <div class="topics-grid">
+        <div class="topic-item"><div class="topic-dot"></div><div><span class="topic-label">Networking</span> <span class="topic-detail">— OSI model, TCP/IP, DNS, IPv4/IPv6, CIDR, firewalls, load balancing, proxy/reverse proxy</span></div></div>
+        <div class="topic-item"><div class="topic-dot"></div><div><span class="topic-label">Web Servers</span> <span class="topic-detail">— Nginx & Apache — config, virtual hosts, reverse proxy, SSL/TLS termination</span></div></div>
+        <div class="topic-item"><div class="topic-dot"></div><div><span class="topic-label">Advanced Bash</span> <span class="topic-detail">— Functions, arrays, trap, heredoc, process substitution</span></div></div>
+        <div class="topic-item"><div class="topic-dot"></div><div><span class="topic-label">YAML & JSON</span> <span class="topic-detail">— Syntax mastery, jq parsing, config file fluency</span></div></div>
+      </div>
+      <div class="milestone"><span class="milestone-icon">◆</span> Deploy a static site on Nginx with SSL behind a reverse proxy</div>
+    </div>
+
+    <!-- PHASE 3 -->
+    <div class="phase-card">
+      <div class="phase-header">
+        <div class="phase-number">3</div>
+        <div class="phase-title-block">
+          <div class="phase-title">Containerization & Cloud</div>
+          <div class="phase-timeline">Months 5–6</div>
+        </div>
+      </div>
+      <div class="topics-grid">
+        <div class="topic-item"><div class="topic-dot"></div><div><span class="topic-label">Docker</span> <span class="topic-detail">— Images, containers, Dockerfiles, volumes, networks, Docker Compose, multi-stage builds</span></div></div>
+        <div class="topic-item"><div class="topic-dot"></div><div><span class="topic-label">Container Registries</span> <span class="topic-detail">— Docker Hub, AWS ECR, GHCR, Google Artifact Registry</span></div></div>
+        <div class="topic-item"><div class="topic-dot"></div><div><span class="topic-label">Kubernetes</span> <span class="topic-detail">— Pods, Deployments, Services, Ingress, ConfigMaps, Secrets, RBAC, Helm charts</span></div></div>
+        <div class="topic-item"><div class="topic-dot"></div><div><span class="topic-label">Cloud (AWS)</span> <span class="topic-detail">— EC2, S3, VPC, IAM, RDS, Route 53, CloudWatch, free tier labs</span></div></div>
+      </div>
+      <div class="milestone"><span class="milestone-icon">◆</span> Deploy a multi-container app on Kubernetes with Helm</div>
+    </div>
+
+    <!-- PHASE 4 -->
+    <div class="phase-card">
+      <div class="phase-header">
+        <div class="phase-number">4</div>
+        <div class="phase-title-block">
+          <div class="phase-title">CI/CD & Infrastructure as Code</div>
+          <div class="phase-timeline">Months 7–8</div>
+        </div>
+      </div>
+      <div class="topics-grid">
+        <div class="topic-item"><div class="topic-dot"></div><div><span class="topic-label">CI/CD Pipelines</span> <span class="topic-detail">— Jenkins, GitHub Actions — build, test, deploy automation, webhook triggers</span></div></div>
+        <div class="topic-item"><div class="topic-dot"></div><div><span class="topic-label">Terraform</span> <span class="topic-detail">— HCL, providers, state, modules, plan/apply workflow (note: OpenTofu as emerging fork)</span></div></div>
+        <div class="topic-item"><div class="topic-dot"></div><div><span class="topic-label">Ansible</span> <span class="topic-detail">— Playbooks, roles, inventory, idempotency, configuration management at scale</span></div></div>
+        <div class="topic-item"><div class="topic-dot"></div><div><span class="topic-label">GitOps</span> <span class="topic-detail">— ArgoCD / Flux — declarative deployments, Git as single source of truth</span></div></div>
+      </div>
+      <div class="milestone"><span class="milestone-icon">◆</span> Build a CI/CD pipeline: code → build → test → deploy to K8s</div>
+    </div>
+
+    <!-- PHASE 5 -->
+    <div class="phase-card">
+      <div class="phase-header">
+        <div class="phase-number">5</div>
+        <div class="phase-title-block">
+          <div class="phase-title">Monitoring, Security & DevSecOps</div>
+          <div class="phase-timeline">Months 9–10</div>
+        </div>
+      </div>
+      <div class="topics-grid">
+        <div class="topic-item"><div class="topic-dot"></div><div><span class="topic-label">Observability Stack</span> <span class="topic-detail">— Prometheus + Grafana + Loki — metrics, dashboards, log aggregation, alerting</span></div></div>
+        <div class="topic-item"><div class="topic-dot"></div><div><span class="topic-label">SRE Practices</span> <span class="topic-detail">— SLIs, SLOs, SLAs, error budgets, incident response, post-mortems</span></div></div>
+        <div class="topic-item"><div class="topic-dot"></div><div><span class="topic-label">DevSecOps</span> <span class="topic-detail">— SAST (Semgrep, SonarQube), DAST (OWASP ZAP), container scanning (Trivy), OWASP Top 10</span></div></div>
+        <div class="topic-item"><div class="topic-dot"></div><div><span class="topic-label">Secrets & IaC Security</span> <span class="topic-detail">— HashiCorp Vault, Checkov/Trivy for IaC, Gitleaks for secret detection</span></div></div>
+      </div>
+      <div class="milestone"><span class="milestone-icon">◆</span> Monitor a K8s cluster with Prometheus/Grafana + integrate security scanning in CI</div>
+    </div>
+
+    <!-- PHASE 6 -->
+    <div class="phase-card">
+      <div class="phase-header">
+        <div class="phase-number">6</div>
+        <div class="phase-title-block">
+          <div class="phase-title">Real-World Projects & Portfolio</div>
+          <div class="phase-timeline">Months 11–12</div>
+        </div>
+      </div>
+      <div class="topics-grid">
+        <div class="topic-item"><div class="topic-dot"></div><div><span class="topic-label">Capstone Project 1</span> <span class="topic-detail">— Full CI/CD: GitHub → Jenkins → Docker → K8s with monitoring and rollback</span></div></div>
+        <div class="topic-item"><div class="topic-dot"></div><div><span class="topic-label">Capstone Project 2</span> <span class="topic-detail">— GitOps: ArgoCD/Flux + Terraform IaC + security pipeline integration</span></div></div>
+        <div class="topic-item"><div class="topic-dot"></div><div><span class="topic-label">Interview Prep</span> <span class="topic-detail">— Linux, Docker, K8s, CI/CD, Cloud, Terraform, Networking, Security scenarios</span></div></div>
+        <div class="topic-item"><div class="topic-dot"></div><div><span class="topic-label">Portfolio & Soft Skills</span> <span class="topic-detail">— GitHub portfolio, resume, LinkedIn, communication, collaboration, documentation</span></div></div>
+      </div>
+      <div class="milestone"><span class="milestone-icon">◆</span> Job-ready portfolio with 2–3 comprehensive DevOps projects on GitHub</div>
+    </div>
+
+  </div>
+
+  <!-- FOOTER -->
+  <div class="footer">
+    <div class="footer-text">
+      <strong>Recommended Certifications</strong> — pursue after completing the roadmap to validate your skills
+    </div>
+    <div class="cert-row">
+      <span class="cert-badge ccp">AWS Cloud Practitioner</span>
+      <span class="cert-badge aws">AWS Solutions Architect Associate</span>
+      <span class="cert-badge cka">CKA – Certified Kubernetes Admin</span>
+      <span class="cert-badge tf">HashiCorp Terraform Associate</span>
+    </div>
+    <div class="branding-footer">
+      Architecting U'r Career <span class="brand-sep"></span> Krishna Mohan Parsha <span class="brand-sep"></span> DevOps - DevSecOps Roadmap
+    </div>
+  </div>
+
+</div>
+</body>
+</html>

@@ -1,0 +1,817 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="The definitive Secure SDLC Reference Guide — 8 stages, 46 activities, 75+ open source tools with descriptions, maturity model, RACI matrix, KPIs, compliance mapping, and CI/CD integration. By Krishna Mohan Parsha.">
+<meta name="author" content="Krishna Mohan Parsha">
+<meta name="keywords" content="Secure SDLC, DevSecOps, Application Security, SAST, DAST, IAST, SCA, Threat Modeling, OWASP, Security Testing, CI/CD Security, NIST SSDF, BSIMM, OWASP SAMM">
+<meta property="og:title" content="Secure SDLC Pipeline — The Definitive Reference Guide">
+<meta property="og:description" content="8 stages, 46 activities, 75+ open source tools, maturity model, RACI matrix, KPIs & compliance mapping. The single source of truth for DevSecOps teams.">
+<meta property="og:type" content="article">
+<meta property="og:locale" content="en_US">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Secure SDLC Pipeline — The Definitive Reference Guide">
+<meta name="twitter:description" content="8 stages, 46 activities, 75+ tools, maturity model, RACI, KPIs & compliance. By Krishna Mohan Parsha.">
+<title>Secure SDLC — The Definitive Reference Guide | Krishna Mohan Parsha</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700&family=Playfair+Display:wght@500;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --bg:#0a0e1a;--surface:#111827;--surface-2:#1a2236;--surface-3:#212b42;
+  --border:rgba(99,130,190,0.12);--border-hover:rgba(99,130,190,0.28);
+  --text:#e2e8f0;--text-muted:#8a9bc2;--text-dim:#5a6a8a;
+  --accent:#3b82f6;--accent-2:#06b6d4;--white:#fff;
+  --green:#10b981;
+  --font-body:'DM Sans',sans-serif;--font-display:'Playfair Display',serif;--font-mono:'JetBrains Mono',monospace;
+}
+html{scroll-behavior:smooth}
+body{font-family:var(--font-body);background:var(--bg);color:var(--text);min-height:100vh;overflow-x:hidden;line-height:1.6}
+body::before{content:'';position:fixed;inset:0;z-index:0;pointer-events:none;background:linear-gradient(rgba(59,130,246,0.03) 1px,transparent 1px),linear-gradient(90deg,rgba(59,130,246,0.03) 1px,transparent 1px);background-size:60px 60px}
+body::after{content:'';position:fixed;top:-40%;left:-20%;width:80%;height:80%;z-index:0;pointer-events:none;background:radial-gradient(ellipse,rgba(59,130,246,0.06) 0%,transparent 70%)}
+a{color:inherit;text-decoration:none}
+
+/* HEADER */
+.header{position:relative;z-index:1;text-align:center;padding:56px 24px 40px}
+.header-eyebrow{font-size:11px;letter-spacing:4px;text-transform:uppercase;color:var(--accent);font-weight:600;margin-bottom:14px;opacity:0;animation:fadeUp .6s .2s forwards}
+.header h1{font-family:var(--font-display);font-size:clamp(26px,5vw,46px);font-weight:700;color:var(--white);line-height:1.15;margin-bottom:10px;opacity:0;animation:fadeUp .6s .35s forwards}
+.header h1 span{background:linear-gradient(135deg,#3b82f6,#06b6d4);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;color:transparent}
+.header p{font-size:15px;color:var(--text-muted);max-width:580px;margin:0 auto;opacity:0;animation:fadeUp .6s .5s forwards}
+.header-version{font-size:11px;color:var(--text-dim);margin-top:14px;letter-spacing:1px;opacity:0;animation:fadeUp .6s .55s forwards}
+.header-line{width:60px;height:2px;margin:20px auto 0;background:linear-gradient(90deg,var(--accent),var(--accent-2));border-radius:2px;opacity:0;animation:fadeUp .6s .6s forwards}
+
+/* STATS BAR */
+.stats-bar{position:relative;z-index:1;display:flex;justify-content:center;gap:32px;flex-wrap:wrap;max-width:880px;margin:0 auto 28px;padding:0 24px;opacity:0;animation:fadeUp .6s .65s forwards}
+.stat{text-align:center}
+.stat-num{font-size:26px;font-weight:700;background:linear-gradient(135deg,#3b82f6,#06b6d4);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;color:transparent;line-height:1.2}
+.stat-label{font-size:10px;letter-spacing:1.5px;text-transform:uppercase;color:var(--text-dim);font-weight:500}
+
+/* CONTROLS */
+.controls{position:relative;z-index:1;text-align:center;margin:0 0 28px;display:flex;justify-content:center;gap:10px;flex-wrap:wrap;padding:0 24px;opacity:0;animation:fadeUp .6s .7s forwards}
+.btn{display:inline-flex;align-items:center;gap:8px;padding:9px 20px;border-radius:40px;background:var(--surface-2);border:1px solid var(--border);color:var(--text-muted);font-size:12px;font-weight:500;font-family:var(--font-body);cursor:pointer;transition:all .3s;outline:none}
+.btn:hover,.btn:focus-visible{border-color:var(--accent);color:var(--white);background:var(--surface-3)}
+.btn:focus-visible{box-shadow:0 0 0 2px var(--accent)}
+.btn svg{width:14px;height:14px}
+
+/* NAV PILLS */
+.nav-pills{position:relative;z-index:1;display:flex;justify-content:center;gap:6px;flex-wrap:wrap;max-width:880px;margin:0 auto 32px;padding:0 24px;opacity:0;animation:fadeUp .6s .75s forwards}
+.nav-pill{padding:6px 14px;border-radius:20px;font-size:11px;font-weight:500;color:var(--text-dim);border:1px solid var(--border);cursor:pointer;transition:all .25s;text-decoration:none}
+.nav-pill:hover{border-color:var(--accent);color:var(--white)}
+
+/* PIPELINE */
+.pipeline{position:relative;z-index:1;max-width:880px;margin:0 auto;padding:0 24px 32px}
+.spine{position:absolute;left:50%;top:0;bottom:0;width:2px;background:linear-gradient(to bottom,transparent,var(--border-hover) 5%,var(--border-hover) 95%,transparent);transform:translateX(-50%)}
+.spine::before{content:'';position:absolute;top:0;left:50%;width:10px;height:10px;border-radius:50%;background:var(--accent);transform:translate(-50%,-50%);box-shadow:0 0 16px rgba(59,130,246,0.5)}
+
+/* STAGE CARDS */
+.stage{position:relative;display:flex;margin-bottom:20px;opacity:0;transform:translateY(30px);animation:fadeUp .55s forwards}
+.stage:nth-child(1){animation-delay:.3s}.stage:nth-child(2){animation-delay:.4s}.stage:nth-child(3){animation-delay:.5s}.stage:nth-child(4){animation-delay:.6s}.stage:nth-child(5){animation-delay:.7s}.stage:nth-child(6){animation-delay:.8s}.stage:nth-child(7){animation-delay:.9s}.stage:nth-child(8){animation-delay:1s}
+.stage-dot{position:absolute;left:50%;top:28px;width:14px;height:14px;border-radius:50%;border:2px solid var(--accent);background:var(--bg);transform:translateX(-50%);z-index:2;transition:all .3s}
+.stage.open .stage-dot{background:var(--accent);box-shadow:0 0 12px rgba(59,130,246,0.5)}
+.stage-card{width:calc(50% - 40px);background:var(--surface);border:1px solid var(--border);border-radius:14px;cursor:pointer;transition:all .35s cubic-bezier(.4,0,.2,1);overflow:hidden;outline:none}
+.stage:nth-child(odd) .stage-card{margin-right:auto}
+.stage:nth-child(even) .stage-card{margin-left:auto}
+.stage-card:hover,.stage-card:focus-visible{border-color:var(--border-hover);transform:translateY(-2px);box-shadow:0 8px 32px rgba(0,0,0,0.3),0 0 0 1px var(--border-hover)}
+.stage-card:focus-visible{box-shadow:0 8px 32px rgba(0,0,0,0.3),0 0 0 2px var(--accent)}
+.stage.open .stage-card{border-color:rgba(59,130,246,0.3);box-shadow:0 12px 48px rgba(0,0,0,0.4),0 0 0 1px rgba(59,130,246,0.2)}
+.stage-head{padding:18px 20px;display:flex;align-items:center;gap:12px}
+.stage-num{flex-shrink:0;width:36px;height:36px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:14px}
+.stage-title{flex:1}
+.stage-title h3{font-size:14px;font-weight:600;color:var(--white);margin-bottom:2px;line-height:1.3}
+.stage-title p{font-size:11px;color:var(--text-dim);line-height:1.4}
+.stage-chevron{flex-shrink:0;width:18px;height:18px;color:var(--text-dim);transition:transform .3s}
+.stage.open .stage-chevron{transform:rotate(180deg);color:var(--accent)}
+
+/* EXPANDED */
+.stage-body{max-height:0;overflow:hidden;transition:max-height .5s cubic-bezier(.4,0,.2,1)}
+.stage.open .stage-body{max-height:2000px}
+.stage-content{padding:0 20px 20px;border-top:1px solid var(--border)}
+
+/* QUICK WIN */
+.quick-win{display:flex;align-items:flex-start;gap:10px;padding:12px 14px;border-radius:10px;background:rgba(16,185,129,0.06);border:1px solid rgba(16,185,129,0.15);margin:14px 0 4px}
+.quick-win-icon{flex-shrink:0;width:20px;height:20px;border-radius:50%;background:rgba(16,185,129,0.15);display:flex;align-items:center;justify-content:center;margin-top:1px}
+.quick-win-icon svg{width:10px;height:10px;color:var(--green)}
+.quick-win p{font-size:11px;color:var(--green);line-height:1.5;font-weight:500}
+.quick-win strong{color:#34d399}
+
+/* SECTION HEADERS */
+.stage-content h4{font-size:11px;letter-spacing:2px;text-transform:uppercase;color:var(--text-dim);margin:14px 0 8px;font-weight:600}
+
+/* ACTIVITIES LIST */
+.stage-content ul{list-style:none;padding:0}
+.stage-content li{font-size:12px;color:var(--text-muted);padding:4px 0 4px 16px;position:relative;line-height:1.5;display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+.stage-content li::before{content:'';position:absolute;left:0;top:11px;width:5px;height:5px;border-radius:50%}
+
+/* MATURITY TAGS */
+.mtag{display:inline-flex;padding:1px 7px;border-radius:10px;font-size:9px;font-weight:600;letter-spacing:.5px;text-transform:uppercase;flex-shrink:0}
+.mtag-e{background:rgba(16,185,129,0.12);color:#34d399;border:1px solid rgba(16,185,129,0.2)}
+.mtag-r{background:rgba(245,158,11,0.1);color:#fbbf24;border:1px solid rgba(245,158,11,0.2)}
+.mtag-a{background:rgba(139,92,246,0.1);color:#a78bfa;border:1px solid rgba(139,92,246,0.2)}
+
+/* TOOL CATEGORIES */
+.tool-cat{margin-top:10px}
+.tool-cat-label{font-size:10px;letter-spacing:1.5px;text-transform:uppercase;color:var(--text-dim);font-weight:600;margin-bottom:6px;display:block}
+
+/* TOOL CHIPS */
+.tools{display:flex;flex-wrap:wrap;gap:5px;margin-bottom:10px}
+.chip{display:inline-flex;align-items:center;gap:4px;padding:4px 10px;border-radius:18px;font-size:10px;font-weight:500;border:1px solid;transition:all .25s;cursor:pointer;text-decoration:none;position:relative}
+.chip:hover{transform:translateY(-1px)}
+.chip[data-tip]:hover::after{content:attr(data-tip);position:absolute;bottom:calc(100% + 6px);left:50%;transform:translateX(-50%);padding:6px 10px;border-radius:8px;background:var(--surface-3);color:var(--text);font-size:10px;white-space:normal;max-width:220px;text-align:center;z-index:10;border:1px solid var(--border-hover);pointer-events:none;box-shadow:0 4px 12px rgba(0,0,0,0.3)}
+
+/* COLOR SCHEMES */
+.s1 .stage-num{background:rgba(139,92,246,0.15);color:#a78bfa}
+.s1 .stage-content li::before{background:#a78bfa}
+.s1 .chip{background:rgba(139,92,246,0.08);border-color:rgba(139,92,246,0.2);color:#c4b5fd}
+.s2 .stage-num{background:rgba(6,182,212,0.15);color:#22d3ee}
+.s2 .stage-content li::before{background:#22d3ee}
+.s2 .chip{background:rgba(6,182,212,0.08);border-color:rgba(6,182,212,0.2);color:#67e8f9}
+.s3 .stage-num{background:rgba(59,130,246,0.15);color:#60a5fa}
+.s3 .stage-content li::before{background:#60a5fa}
+.s3 .chip{background:rgba(59,130,246,0.08);border-color:rgba(59,130,246,0.2);color:#93c5fd}
+.s4 .stage-num{background:rgba(16,185,129,0.15);color:#34d399}
+.s4 .stage-content li::before{background:#34d399}
+.s4 .chip{background:rgba(16,185,129,0.08);border-color:rgba(16,185,129,0.2);color:#6ee7b7}
+.s5 .stage-num{background:rgba(245,158,11,0.15);color:#fbbf24}
+.s5 .stage-content li::before{background:#fbbf24}
+.s5 .chip{background:rgba(245,158,11,0.08);border-color:rgba(245,158,11,0.2);color:#fcd34d}
+.s6 .stage-num{background:rgba(244,63,94,0.15);color:#fb7185}
+.s6 .stage-content li::before{background:#fb7185}
+.s6 .chip{background:rgba(244,63,94,0.08);border-color:rgba(244,63,94,0.2);color:#fda4af}
+.s7 .stage-num{background:rgba(236,72,153,0.15);color:#f472b6}
+.s7 .stage-content li::before{background:#f472b6}
+.s7 .chip{background:rgba(236,72,153,0.08);border-color:rgba(236,72,153,0.2);color:#f9a8d4}
+.s8 .stage-num{background:rgba(239,68,68,0.15);color:#f87171}
+.s8 .stage-content li::before{background:#f87171}
+.s8 .chip{background:rgba(239,68,68,0.08);border-color:rgba(239,68,68,0.2);color:#fca5a5}
+
+/* SECTION BLOCKS (RACI, KPIs, Compliance, CI/CD, Glossary) */
+.section{position:relative;z-index:1;max-width:880px;margin:0 auto;padding:0 24px}
+.section-block{background:var(--surface);border:1px solid var(--border);border-radius:14px;padding:28px 24px;margin-bottom:20px}
+.section-title{font-family:var(--font-display);font-size:clamp(18px,3vw,24px);font-weight:700;color:var(--white);margin-bottom:6px}
+.section-sub{font-size:13px;color:var(--text-dim);margin-bottom:20px}
+
+/* TABLES */
+.ref-table{width:100%;border-collapse:collapse;font-size:11px;overflow-x:auto;display:block}
+.ref-table thead{position:sticky;top:0}
+.ref-table th{padding:10px 8px;text-align:left;font-weight:600;color:var(--text-muted);border-bottom:1px solid var(--border);background:var(--surface-2);white-space:nowrap;font-size:10px;letter-spacing:1px;text-transform:uppercase}
+.ref-table td{padding:8px;border-bottom:1px solid var(--border);color:var(--text-muted);vertical-align:top}
+.ref-table tr:hover td{background:rgba(59,130,246,0.03)}
+.ref-table .stage-label{color:var(--white);font-weight:600;white-space:nowrap}
+.cell-check{color:var(--green);font-weight:700;text-align:center;font-size:13px}
+.cell-dash{color:var(--text-dim);text-align:center}
+.raci-r{color:#60a5fa;font-weight:700}.raci-a{color:#f87171;font-weight:700}.raci-c{color:#fbbf24;font-weight:700}.raci-i{color:var(--text-dim);font-weight:500}
+
+/* CI/CD PIPELINE */
+.cicd-flow{display:flex;align-items:center;gap:0;overflow-x:auto;padding:16px 0;margin:0 -8px}
+.cicd-step{flex-shrink:0;text-align:center;padding:12px 8px;min-width:90px}
+.cicd-box{padding:10px 6px;border-radius:10px;border:1px solid var(--border);background:var(--surface-2);margin-bottom:6px;transition:all .25s}
+.cicd-box:hover{border-color:var(--accent);transform:translateY(-2px)}
+.cicd-box .ico{font-size:18px;margin-bottom:4px}
+.cicd-box .nm{font-size:10px;font-weight:600;color:var(--white);line-height:1.3}
+.cicd-box .tl{font-size:9px;color:var(--text-dim);margin-top:2px;font-family:var(--font-mono)}
+.cicd-arrow{flex-shrink:0;color:var(--text-dim);font-size:16px;margin:0 -4px}
+
+/* KPI CARDS */
+.kpi-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:12px}
+.kpi-card{padding:16px;border-radius:12px;border:1px solid var(--border);background:var(--surface-2)}
+.kpi-card h5{font-size:12px;font-weight:600;color:var(--white);margin-bottom:4px}
+.kpi-card p{font-size:11px;color:var(--text-muted);line-height:1.5}
+.kpi-card .kpi-target{font-size:10px;color:var(--green);font-weight:600;margin-top:6px;padding-top:6px;border-top:1px solid var(--border)}
+
+/* GLOSSARY */
+.glossary-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:8px}
+.glossary-item{display:flex;gap:8px;padding:8px 12px;border-radius:8px;background:var(--surface-2);border:1px solid transparent;transition:border-color .2s}
+.glossary-item:hover{border-color:var(--border-hover)}
+.glossary-term{font-family:var(--font-mono);font-size:11px;font-weight:600;color:var(--accent);white-space:nowrap;min-width:52px}
+.glossary-def{font-size:11px;color:var(--text-muted);line-height:1.4}
+
+/* MATURITY LEGEND */
+.maturity-legend{display:flex;gap:16px;flex-wrap:wrap;margin-bottom:16px;padding:12px 16px;border-radius:10px;background:var(--surface-2);border:1px solid var(--border)}
+.maturity-legend-item{display:flex;align-items:center;gap:6px;font-size:11px;color:var(--text-muted)}
+
+/* BANNERS */
+.banner{position:relative;z-index:1;max-width:880px;margin:12px auto 0;padding:0 24px}
+.banner-inner{display:flex;align-items:center;gap:14px;padding:16px 20px;border-radius:12px;border:1px solid}
+.banner-icon{flex-shrink:0;width:34px;height:34px;border-radius:50%;display:flex;align-items:center;justify-content:center}
+.banner-icon svg{width:16px;height:16px}
+.banner-inner p{font-size:12px;color:var(--text-muted);line-height:1.5}
+.banner-inner strong{color:var(--white);font-weight:600}
+.loop-banner .banner-inner{background:linear-gradient(135deg,rgba(59,130,246,0.08),rgba(6,182,212,0.06));border-color:rgba(59,130,246,0.15)}
+.loop-banner .banner-icon{background:rgba(59,130,246,0.12)}
+.loop-banner .banner-icon svg{color:var(--accent)}
+.ref-banner .banner-inner{background:var(--surface);border-color:var(--border)}
+.ref-banner .banner-inner p{font-size:11px;color:var(--text-dim)}
+.ref-banner .banner-inner strong{color:var(--text-muted)}
+
+/* BACK TO TOP */
+.btt{position:fixed;bottom:24px;right:24px;z-index:99;width:40px;height:40px;border-radius:50%;background:var(--surface-2);border:1px solid var(--border);color:var(--text-muted);cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all .3s;opacity:0;pointer-events:none;outline:none;box-shadow:0 4px 16px rgba(0,0,0,0.3)}
+.btt.show{opacity:1;pointer-events:auto}
+.btt:hover,.btt:focus-visible{border-color:var(--accent);color:var(--white);background:var(--surface-3);transform:translateY(-2px)}
+.btt:focus-visible{box-shadow:0 4px 16px rgba(0,0,0,0.3),0 0 0 2px var(--accent)}
+.btt svg{width:16px;height:16px}
+
+/* FOOTER */
+.footer{position:relative;z-index:1;text-align:center;padding:44px 24px 32px;margin-top:44px;border-top:1px solid var(--border);background:linear-gradient(to top,rgba(10,14,26,1) 0%,transparent 100%)}
+.footer-line-text{font-size:clamp(14px,2.5vw,18px);letter-spacing:1.5px;color:#FFD700;font-weight:400}
+.footer-line-text span.sep{color:var(--text-dim);margin:0 10px}
+.footer-line-text strong{font-family:var(--font-display);font-weight:700;color:#fff;text-shadow:0 0 24px rgba(255,255,255,0.18),0 0 48px rgba(59,130,246,0.12)}
+.footer-line{width:48px;height:2px;margin:16px auto 0;background:linear-gradient(90deg,var(--accent),var(--accent-2));border-radius:2px}
+.footer-copy{margin-top:12px;font-size:10px;color:var(--text-dim);letter-spacing:1px}
+
+/* RESPONSIVE */
+@media(max-width:720px){
+  .spine,.stage-dot{display:none}
+  .stage-card{width:100%!important;margin:0!important}
+  .stage{flex-direction:column}
+  .banner-inner{flex-direction:column;text-align:center}
+  .stats-bar{gap:16px}
+  .cicd-flow{padding:12px 0}
+  .ref-table{font-size:10px}
+  .kpi-grid{grid-template-columns:1fr}
+  .glossary-grid{grid-template-columns:1fr}
+}
+
+/* PRINT */
+@media print{
+  body{background:#fff!important;color:#1a1a1a!important;font-size:11px}
+  body::before,body::after,.spine,.stage-dot,.stage-chevron,.controls,.nav-pills,.btt{display:none!important}
+  *{animation:none!important;opacity:1!important;transform:none!important}
+  .header{padding:16px 0 8px}
+  .header-eyebrow,.header p,.header-version{color:#555!important}
+  .header h1{color:#1a1a1a!important}
+  .header h1 span{-webkit-text-fill-color:#2563eb!important;color:#2563eb!important}
+  .header-line{background:#3b82f6!important}
+  .stat-num{-webkit-text-fill-color:#2563eb!important;color:#2563eb!important}
+  .stat-label,.stage-title p,.stage-content h4{color:#666!important}
+  .pipeline,.section,.banner{padding:0;max-width:100%}
+  .stage{margin-bottom:8px;page-break-inside:avoid}
+  .stage-card{width:100%!important;margin:0!important;border:1px solid #ddd!important;border-radius:6px!important;background:#fff!important}
+  .stage-body{max-height:none!important;overflow:visible!important}
+  .stage-content{border-top:1px solid #eee!important}
+  .stage-num{background:#f0f0f0!important;color:#333!important}
+  .stage-title h3{color:#1a1a1a!important}
+  .stage-content li{color:#333!important}
+  .stage-content li::before{background:#888!important}
+  .chip{background:#f5f5f5!important;border-color:#ddd!important;color:#333!important}
+  .chip::after{display:none!important}
+  .quick-win{background:#f0fdf4!important;border-color:#bbf7d0!important}
+  .quick-win p,.quick-win strong{color:#166534!important}
+  .mtag-e{background:#dcfce7!important;color:#166534!important;border-color:#86efac!important}
+  .mtag-r{background:#fef3c7!important;color:#92400e!important;border-color:#fcd34d!important}
+  .mtag-a{background:#ede9fe!important;color:#5b21b6!important;border-color:#c4b5fd!important}
+  .section-block{border:1px solid #ddd!important;background:#fff!important;page-break-inside:avoid}
+  .section-title{color:#1a1a1a!important}
+  .section-sub{color:#666!important}
+  .ref-table th{background:#f5f5f5!important;color:#333!important}
+  .ref-table td{color:#333!important}
+  .kpi-card{background:#f9f9f9!important;border-color:#ddd!important}
+  .kpi-card h5{color:#1a1a1a!important}
+  .kpi-card p{color:#333!important}
+  .kpi-card .kpi-target{color:#166534!important}
+  .glossary-item{background:#f9f9f9!important}
+  .glossary-term{color:#2563eb!important}
+  .glossary-def{color:#333!important}
+  .banner-inner{background:#f7faff!important;border:1px solid #ddd!important}
+  .banner-inner p{color:#333!important}
+  .banner-inner strong{color:#1a1a1a!important}
+  .cicd-box{background:#f5f5f5!important;border-color:#ddd!important}
+  .cicd-box .nm{color:#1a1a1a!important}
+  .cicd-box .tl{color:#555!important}
+  .footer{border-top:1px solid #ddd!important;background:none!important;padding:12px 0;margin-top:16px}
+  .footer-line-text{color:#b8860b!important}
+  .footer-line-text strong{color:#1a1a1a!important;text-shadow:none!important}
+  .footer-line{background:#3b82f6!important}
+  .footer-copy{color:#888!important}
+  .maturity-legend{background:#f9f9f9!important;border-color:#ddd!important}
+}
+
+@keyframes fadeUp{from{opacity:0;transform:translateY(24px)}to{opacity:1;transform:translateY(0)}}
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<header class="header">
+  <div class="header-eyebrow">The definitive reference guide</div>
+  <h1>Secure <span>SDLC</span> Pipeline</h1>
+  <p>A single source of truth for embedding security at every stage — with maturity levels, tool descriptions, RACI ownership, KPIs, and compliance mapping.</p>
+  <div class="header-version">v2.0 &middot; March 2026 &middot; Last updated: 16 Mar 2026</div>
+  <div class="header-line"></div>
+</header>
+
+<!-- STATS -->
+<div class="stats-bar" role="complementary" aria-label="Guide statistics">
+  <div class="stat"><div class="stat-num">8</div><div class="stat-label">Stages</div></div>
+  <div class="stat"><div class="stat-num">46</div><div class="stat-label">Activities</div></div>
+  <div class="stat"><div class="stat-num">75+</div><div class="stat-label">Tools</div></div>
+  <div class="stat"><div class="stat-num">6</div><div class="stat-label">Frameworks</div></div>
+  <div class="stat"><div class="stat-num">3</div><div class="stat-label">Maturity tiers</div></div>
+</div>
+
+<!-- CONTROLS -->
+<div class="controls">
+  <button class="btn" onclick="toggleAll()" aria-label="Expand or collapse all stages">
+    <svg viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M1 4l6 6 6-6"/></svg>
+    <span id="toggleLabel">Expand all</span>
+  </button>
+  <button class="btn" onclick="window.print()" aria-label="Download as PDF">
+    <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M4 12H2V7h12v5h-2"/><path d="M4 7V1h5l3 3v3"/><rect x="4" y="10" width="8" height="5" rx="1"/><path d="M6 13h4"/></svg>
+    Download PDF
+  </button>
+</div>
+
+<!-- NAV PILLS -->
+<nav class="nav-pills" aria-label="Jump to section">
+  <a class="nav-pill" href="#pipeline-section">Pipeline</a>
+  <a class="nav-pill" href="#cicd-section">CI/CD Integration</a>
+  <a class="nav-pill" href="#raci-section">RACI Matrix</a>
+  <a class="nav-pill" href="#kpi-section">KPIs &amp; Metrics</a>
+  <a class="nav-pill" href="#compliance-section">Compliance Map</a>
+  <a class="nav-pill" href="#glossary-section">Glossary</a>
+</nav>
+
+<!-- MATURITY LEGEND -->
+<div class="section"><div class="maturity-legend">
+  <div class="maturity-legend-item"><span class="mtag mtag-e">Essential</span> Start here — non-negotiable baseline</div>
+  <div class="maturity-legend-item"><span class="mtag mtag-r">Recommended</span> Standard for mature teams</div>
+  <div class="maturity-legend-item"><span class="mtag mtag-a">Advanced</span> Leading-edge practices</div>
+</div></div>
+
+<!-- ============ PIPELINE ============ -->
+<div class="pipeline" id="pipeline-section" role="list" aria-label="Secure SDLC stages">
+<div class="spine" aria-hidden="true"></div>
+
+<!-- STAGE 1 -->
+<div class="stage s1" role="listitem">
+<div class="stage-dot" aria-hidden="true"></div>
+<div class="stage-card" role="button" tabindex="0" aria-expanded="false" onclick="toggle(this.parentElement)" onkeydown="hk(event,this.parentElement)">
+<div class="stage-head">
+  <div class="stage-num" aria-hidden="true">01</div>
+  <div class="stage-title"><h3>Training &amp; Awareness</h3><p>Build a security-first culture across the team</p></div>
+  <svg class="stage-chevron" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" viewBox="0 0 20 20"><path d="M5 7l5 5 5-5"/></svg>
+</div>
+<div class="stage-body" role="region"><div class="stage-content">
+  <div class="quick-win"><div class="quick-win-icon"><svg fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 12 12"><path d="M2 7l3 3 5-6"/></svg></div><p><strong>Quick win:</strong> Deploy OWASP Juice Shop and run your first team CTF within a week.</p></div>
+  <h4>Key activities</h4>
+  <ul>
+    <li>Security onboarding &amp; OWASP Top 10 training <span class="mtag mtag-e">Essential</span></li>
+    <li>Secure coding guidelines &amp; standards adoption <span class="mtag mtag-e">Essential</span></li>
+    <li>Role-based training tracks (devs, QA, architects, PMs) <span class="mtag mtag-r">Recommended</span></li>
+    <li>Security champions program within dev teams <span class="mtag mtag-r">Recommended</span></li>
+    <li>Capture-the-flag exercises &amp; war games <span class="mtag mtag-a">Advanced</span></li>
+    <li>Periodic refreshers on SANS/CWE Top 25 <span class="mtag mtag-a">Advanced</span></li>
+  </ul>
+  <h4>Open source tools</h4>
+  <div class="tools">
+    <a class="chip" data-tip="Deliberately insecure Java app for learning" href="https://github.com/WebGoat/WebGoat" target="_blank" rel="noopener">OWASP WebGoat</a>
+    <a class="chip" data-tip="Modern vulnerable JS web app with challenges" href="https://github.com/juice-shop/juice-shop" target="_blank" rel="noopener">OWASP Juice Shop</a>
+    <a class="chip" data-tip="PHP-based vulnerability training platform" href="https://github.com/digininja/DVWA" target="_blank" rel="noopener">DVWA</a>
+    <a class="chip" data-tip="Gamified penetration testing labs" href="https://www.hackthebox.com" target="_blank" rel="noopener">HackTheBox CE</a>
+    <a class="chip" data-tip="Hands-on secure coding exercises" href="https://www.secureflag.com" target="_blank" rel="noopener">SecureFlag</a>
+    <a class="chip" data-tip="Guided cybersecurity learning paths" href="https://tryhackme.com" target="_blank" rel="noopener">TryHackMe</a>
+  </div>
+</div></div>
+</div></div>
+
+<!-- STAGE 2 -->
+<div class="stage s2" role="listitem">
+<div class="stage-dot" aria-hidden="true"></div>
+<div class="stage-card" role="button" tabindex="0" aria-expanded="false" onclick="toggle(this.parentElement)" onkeydown="hk(event,this.parentElement)">
+<div class="stage-head">
+  <div class="stage-num" aria-hidden="true">02</div>
+  <div class="stage-title"><h3>Security Requirements</h3><p>Define what to protect, from whom, and why</p></div>
+  <svg class="stage-chevron" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" viewBox="0 0 20 20"><path d="M5 7l5 5 5-5"/></svg>
+</div>
+<div class="stage-body" role="region"><div class="stage-content">
+  <div class="quick-win"><div class="quick-win-icon"><svg fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 12 12"><path d="M2 7l3 3 5-6"/></svg></div><p><strong>Quick win:</strong> Create your first threat model with OWASP Threat Dragon in under an hour.</p></div>
+  <h4>Key activities</h4>
+  <ul>
+    <li>Threat modeling (STRIDE / DREAD methodologies) <span class="mtag mtag-e">Essential</span></li>
+    <li>Compliance mapping (GDPR, HIPAA, PCI-DSS, SOC 2) <span class="mtag mtag-e">Essential</span></li>
+    <li>Security risk assessment &amp; data classification <span class="mtag mtag-r">Recommended</span></li>
+    <li>Abuse case &amp; misuse case development <span class="mtag mtag-r">Recommended</span></li>
+    <li>Security-focused user stories &amp; acceptance criteria <span class="mtag mtag-a">Advanced</span></li>
+    <li>Privacy impact assessments <span class="mtag mtag-a">Advanced</span></li>
+  </ul>
+  <h4>Open source tools</h4>
+  <div class="tools">
+    <a class="chip" data-tip="Diagram-based threat modeling tool" href="https://github.com/OWASP/threat-dragon" target="_blank" rel="noopener">OWASP Threat Dragon</a>
+    <a class="chip" data-tip="Browser-based threat modeling" href="https://github.com/mozilla/seasponge" target="_blank" rel="noopener">Mozilla SeaSponge</a>
+    <a class="chip" data-tip="Security verification requirements checklist" href="https://owasp.org/www-project-application-security-verification-standard/" target="_blank" rel="noopener">OWASP ASVS</a>
+    <a class="chip" data-tip="Maps requirements to test guidance" href="https://github.com/blabla1337/skf-flask" target="_blank" rel="noopener">OWASP SKF</a>
+    <a class="chip" data-tip="Threat modeling as Python code" href="https://github.com/izar/pytm" target="_blank" rel="noopener">PyTM</a>
+  </div>
+</div></div>
+</div></div>
+
+<!-- STAGE 3 -->
+<div class="stage s3" role="listitem">
+<div class="stage-dot" aria-hidden="true"></div>
+<div class="stage-card" role="button" tabindex="0" aria-expanded="false" onclick="toggle(this.parentElement)" onkeydown="hk(event,this.parentElement)">
+<div class="stage-head">
+  <div class="stage-num" aria-hidden="true">03</div>
+  <div class="stage-title"><h3>Secure Design</h3><p>Architecture with security as a first-class constraint</p></div>
+  <svg class="stage-chevron" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" viewBox="0 0 20 20"><path d="M5 7l5 5 5-5"/></svg>
+</div>
+<div class="stage-body" role="region"><div class="stage-content">
+  <div class="quick-win"><div class="quick-win-icon"><svg fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 12 12"><path d="M2 7l3 3 5-6"/></svg></div><p><strong>Quick win:</strong> Bookmark the OWASP Cheat Sheet Series — your instant design reference.</p></div>
+  <h4>Key activities</h4>
+  <ul>
+    <li>Attack surface analysis &amp; reduction <span class="mtag mtag-e">Essential</span></li>
+    <li>Secure design patterns (defense in depth, least privilege, fail-safe) <span class="mtag mtag-e">Essential</span></li>
+    <li>Cryptographic standards &amp; protocol review <span class="mtag mtag-r">Recommended</span></li>
+    <li>Authentication &amp; authorization framework selection <span class="mtag mtag-r">Recommended</span></li>
+    <li>Zero Trust architecture principles <span class="mtag mtag-a">Advanced</span></li>
+    <li>Architecture risk analysis &amp; formal design review <span class="mtag mtag-a">Advanced</span></li>
+  </ul>
+  <h4>Open source tools</h4>
+  <div class="tools">
+    <a class="chip" data-tip="Microsoft's free DFD threat modeler" href="https://learn.microsoft.com/en-us/azure/security/develop/threat-modeling-tool" target="_blank" rel="noopener">MS Threat Modeling Tool</a>
+    <a class="chip" data-tip="Open source threat modeling" href="https://github.com/OWASP/threat-dragon" target="_blank" rel="noopener">OWASP Threat Dragon</a>
+    <a class="chip" data-tip="Architecture diagramming tool" href="https://www.diagrams.net" target="_blank" rel="noopener">diagrams.net</a>
+    <a class="chip" data-tip="Secure design pattern quick reference" href="https://cheatsheetseries.owasp.org" target="_blank" rel="noopener">OWASP Cheat Sheets</a>
+    <a class="chip" data-tip="Vulnerability management dashboard" href="https://github.com/archerysec/archerysec" target="_blank" rel="noopener">Archery</a>
+  </div>
+</div></div>
+</div></div>
+
+<!-- STAGE 4 -->
+<div class="stage s4" role="listitem">
+<div class="stage-dot" aria-hidden="true"></div>
+<div class="stage-card" role="button" tabindex="0" aria-expanded="false" onclick="toggle(this.parentElement)" onkeydown="hk(event,this.parentElement)">
+<div class="stage-head">
+  <div class="stage-num" aria-hidden="true">04</div>
+  <div class="stage-title"><h3>Secure Coding</h3><p>SAST, SCA, secrets detection &amp; code review</p></div>
+  <svg class="stage-chevron" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" viewBox="0 0 20 20"><path d="M5 7l5 5 5-5"/></svg>
+</div>
+<div class="stage-body" role="region"><div class="stage-content">
+  <div class="quick-win"><div class="quick-win-icon"><svg fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 12 12"><path d="M2 7l3 3 5-6"/></svg></div><p><strong>Quick win:</strong> Add Semgrep + GitLeaks to your pre-commit hooks today — catches 80% of low-hanging fruit.</p></div>
+  <h4>Key activities</h4>
+  <ul>
+    <li>Static application security testing (SAST) <span class="mtag mtag-e">Essential</span></li>
+    <li>Secret detection in repos &amp; commits <span class="mtag mtag-e">Essential</span></li>
+    <li>Software composition analysis (SCA) <span class="mtag mtag-r">Recommended</span></li>
+    <li>Peer code review with security checklist <span class="mtag mtag-r">Recommended</span></li>
+    <li>Pre-commit hooks for automated gatekeeping <span class="mtag mtag-a">Advanced</span></li>
+  </ul>
+  <div class="tool-cat"><span class="tool-cat-label">SAST</span>
+  <div class="tools">
+    <a class="chip" data-tip="Multi-language static analysis platform" href="https://github.com/SonarSource/sonarqube" target="_blank" rel="noopener">SonarQube CE</a>
+    <a class="chip" data-tip="Lightweight rule-based code scanner" href="https://github.com/semgrep/semgrep" target="_blank" rel="noopener">Semgrep</a>
+    <a class="chip" data-tip="GitHub's semantic code analysis engine" href="https://github.com/github/codeql" target="_blank" rel="noopener">CodeQL</a>
+    <a class="chip" data-tip="Python-focused security linter" href="https://github.com/PyCQA/bandit" target="_blank" rel="noopener">Bandit</a>
+    <a class="chip" data-tip="Ruby on Rails static analyzer" href="https://github.com/presidentbeef/brakeman" target="_blank" rel="noopener">Brakeman</a>
+    <a class="chip" data-tip="Java bytecode security scanner" href="https://github.com/find-sec-bugs/find-sec-bugs" target="_blank" rel="noopener">SpotBugs + FindSecBugs</a>
+    <a class="chip" data-tip="JavaScript security lint rules" href="https://github.com/eslint-community/eslint-plugin-security" target="_blank" rel="noopener">ESLint Security</a>
+  </div></div>
+  <div class="tool-cat"><span class="tool-cat-label">SCA &amp; Dependencies</span>
+  <div class="tools">
+    <a class="chip" data-tip="Known vulnerability dependency scanner" href="https://github.com/jeremylong/DependencyCheck" target="_blank" rel="noopener">OWASP Dep-Check</a>
+    <a class="chip" data-tip="All-in-one vulnerability scanner" href="https://github.com/aquasecurity/trivy" target="_blank" rel="noopener">Trivy</a>
+    <a class="chip" data-tip="Fast container & dependency scanner" href="https://github.com/anchore/grype" target="_blank" rel="noopener">Grype</a>
+  </div></div>
+  <div class="tool-cat"><span class="tool-cat-label">Secret detection</span>
+  <div class="tools">
+    <a class="chip" data-tip="Git repo secret detection via regex" href="https://github.com/gitleaks/gitleaks" target="_blank" rel="noopener">GitLeaks</a>
+    <a class="chip" data-tip="Deep credential scanning with entropy" href="https://github.com/trufflesecurity/trufflehog" target="_blank" rel="noopener">TruffleHog</a>
+  </div></div>
+  <div class="tool-cat"><span class="tool-cat-label">Workflow</span>
+  <div class="tools">
+    <a class="chip" data-tip="Git hook framework for automation" href="https://github.com/pre-commit/pre-commit" target="_blank" rel="noopener">pre-commit</a>
+  </div></div>
+</div></div>
+</div></div>
+
+<!-- STAGE 5 -->
+<div class="stage s5" role="listitem">
+<div class="stage-dot" aria-hidden="true"></div>
+<div class="stage-card" role="button" tabindex="0" aria-expanded="false" onclick="toggle(this.parentElement)" onkeydown="hk(event,this.parentElement)">
+<div class="stage-head">
+  <div class="stage-num" aria-hidden="true">05</div>
+  <div class="stage-title"><h3>Security Testing</h3><p>DAST, IAST, fuzzing &amp; penetration testing</p></div>
+  <svg class="stage-chevron" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" viewBox="0 0 20 20"><path d="M5 7l5 5 5-5"/></svg>
+</div>
+<div class="stage-body" role="region"><div class="stage-content">
+  <div class="quick-win"><div class="quick-win-icon"><svg fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 12 12"><path d="M2 7l3 3 5-6"/></svg></div><p><strong>Quick win:</strong> Run OWASP ZAP baseline scan against your staging environment — automated and zero-config.</p></div>
+  <h4>Key activities</h4>
+  <ul>
+    <li>Dynamic application security testing (DAST) <span class="mtag mtag-e">Essential</span></li>
+    <li>Manual &amp; automated penetration testing <span class="mtag mtag-e">Essential</span></li>
+    <li>Interactive application security testing (IAST) <span class="mtag mtag-r">Recommended</span></li>
+    <li>API security validation &amp; contract testing <span class="mtag mtag-r">Recommended</span></li>
+    <li>Fuzz testing for unexpected inputs <span class="mtag mtag-a">Advanced</span></li>
+    <li>Regression security testing in CI/CD <span class="mtag mtag-a">Advanced</span></li>
+  </ul>
+  <div class="tool-cat"><span class="tool-cat-label">DAST</span>
+  <div class="tools">
+    <a class="chip" data-tip="Most popular open source DAST proxy" href="https://github.com/zaproxy/zaproxy" target="_blank" rel="noopener">OWASP ZAP</a>
+    <a class="chip" data-tip="Template-based vulnerability scanner" href="https://github.com/projectdiscovery/nuclei" target="_blank" rel="noopener">Nuclei</a>
+    <a class="chip" data-tip="Classic web server scanner" href="https://github.com/sullo/nikto" target="_blank" rel="noopener">Nikto</a>
+  </div></div>
+  <div class="tool-cat"><span class="tool-cat-label">Fuzzing</span>
+  <div class="tools">
+    <a class="chip" data-tip="Coverage-guided binary fuzzer" href="https://github.com/AFLplusplus/AFLplusplus" target="_blank" rel="noopener">AFL++</a>
+    <a class="chip" data-tip="In-process coverage-guided fuzzer" href="https://llvm.org/docs/LibFuzzer.html" target="_blank" rel="noopener">libFuzzer</a>
+  </div></div>
+  <div class="tool-cat"><span class="tool-cat-label">Penetration testing</span>
+  <div class="tools">
+    <a class="chip" data-tip="Exploit framework & pen test platform" href="https://github.com/rapid7/metasploit-framework" target="_blank" rel="noopener">Metasploit</a>
+    <a class="chip" data-tip="Web vulnerability scanner & proxy" href="https://portswigger.net/burp/communitydownload" target="_blank" rel="noopener">Burp Suite CE</a>
+    <a class="chip" data-tip="Automated SQL injection detection" href="https://github.com/sqlmapproject/sqlmap" target="_blank" rel="noopener">SQLMap</a>
+    <a class="chip" data-tip="Network discovery & port scanning" href="https://github.com/nmap/nmap" target="_blank" rel="noopener">Nmap</a>
+  </div></div>
+  <div class="tool-cat"><span class="tool-cat-label">API testing</span>
+  <div class="tools">
+    <a class="chip" data-tip="Fuzz testing for OpenAPI specs" href="https://github.com/schemathesis/schemathesis" target="_blank" rel="noopener">Schemathesis</a>
+  </div></div>
+</div></div>
+</div></div>
+
+<!-- STAGE 6 -->
+<div class="stage s6" role="listitem">
+<div class="stage-dot" aria-hidden="true"></div>
+<div class="stage-card" role="button" tabindex="0" aria-expanded="false" onclick="toggle(this.parentElement)" onkeydown="hk(event,this.parentElement)">
+<div class="stage-head">
+  <div class="stage-num" aria-hidden="true">06</div>
+  <div class="stage-title"><h3>Secure Deployment</h3><p>Hardening, IaC scanning &amp; release gates</p></div>
+  <svg class="stage-chevron" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" viewBox="0 0 20 20"><path d="M5 7l5 5 5-5"/></svg>
+</div>
+<div class="stage-body" role="region"><div class="stage-content">
+  <div class="quick-win"><div class="quick-win-icon"><svg fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 12 12"><path d="M2 7l3 3 5-6"/></svg></div><p><strong>Quick win:</strong> Add Trivy to your CI pipeline — scans containers, dependencies, and IaC in one tool.</p></div>
+  <h4>Key activities</h4>
+  <ul>
+    <li>Container &amp; infrastructure image scanning <span class="mtag mtag-e">Essential</span></li>
+    <li>CIS Benchmark hardening checks <span class="mtag mtag-e">Essential</span></li>
+    <li>Infrastructure-as-Code (IaC) security validation <span class="mtag mtag-r">Recommended</span></li>
+    <li>CI/CD pipeline security gates <span class="mtag mtag-r">Recommended</span></li>
+    <li>SBOM generation &amp; artifact signing <span class="mtag mtag-a">Advanced</span></li>
+  </ul>
+  <div class="tool-cat"><span class="tool-cat-label">Container scanning</span>
+  <div class="tools">
+    <a class="chip" data-tip="All-in-one vulnerability scanner" href="https://github.com/aquasecurity/trivy" target="_blank" rel="noopener">Trivy</a>
+    <a class="chip" data-tip="Static container image analyzer" href="https://github.com/quay/clair" target="_blank" rel="noopener">Clair</a>
+  </div></div>
+  <div class="tool-cat"><span class="tool-cat-label">IaC scanning</span>
+  <div class="tools">
+    <a class="chip" data-tip="Policy-as-code for Terraform, K8s, ARM" href="https://github.com/bridgecrewio/checkov" target="_blank" rel="noopener">Checkov</a>
+    <a class="chip" data-tip="Terraform-specific security scanner" href="https://github.com/aquasecurity/tfsec" target="_blank" rel="noopener">tfsec</a>
+    <a class="chip" data-tip="Multi-IaC scanner by Checkmarx" href="https://github.com/Checkmarx/kics" target="_blank" rel="noopener">KICS</a>
+    <a class="chip" data-tip="Cloud-native IaC policy engine" href="https://github.com/tenable/terrascan" target="_blank" rel="noopener">Terrascan</a>
+  </div></div>
+  <div class="tool-cat"><span class="tool-cat-label">Kubernetes</span>
+  <div class="tools">
+    <a class="chip" data-tip="CIS Kubernetes benchmark checks" href="https://github.com/aquasecurity/kube-bench" target="_blank" rel="noopener">Kube-bench</a>
+    <a class="chip" data-tip="K8s cluster penetration testing" href="https://github.com/aquasecurity/kube-hunter" target="_blank" rel="noopener">Kube-hunter</a>
+    <a class="chip" data-tip="Cloud-native runtime security" href="https://github.com/falcosecurity/falco" target="_blank" rel="noopener">Falco</a>
+  </div></div>
+  <div class="tool-cat"><span class="tool-cat-label">SBOM &amp; signing</span>
+  <div class="tools">
+    <a class="chip" data-tip="SBOM generation from containers" href="https://github.com/anchore/syft" target="_blank" rel="noopener">Syft</a>
+    <a class="chip" data-tip="Container image signing (Sigstore)" href="https://github.com/sigstore/cosign" target="_blank" rel="noopener">Cosign</a>
+    <a class="chip" data-tip="Standard SBOM specification tooling" href="https://github.com/CycloneDX" target="_blank" rel="noopener">CycloneDX</a>
+  </div></div>
+</div></div>
+</div></div>
+
+<!-- STAGE 7 -->
+<div class="stage s7" role="listitem">
+<div class="stage-dot" aria-hidden="true"></div>
+<div class="stage-card" role="button" tabindex="0" aria-expanded="false" onclick="toggle(this.parentElement)" onkeydown="hk(event,this.parentElement)">
+<div class="stage-head">
+  <div class="stage-num" aria-hidden="true">07</div>
+  <div class="stage-title"><h3>Operations &amp; Monitoring</h3><p>SIEM, runtime detection &amp; patch management</p></div>
+  <svg class="stage-chevron" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" viewBox="0 0 20 20"><path d="M5 7l5 5 5-5"/></svg>
+</div>
+<div class="stage-body" role="region"><div class="stage-content">
+  <div class="quick-win"><div class="quick-win-icon"><svg fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 12 12"><path d="M2 7l3 3 5-6"/></svg></div><p><strong>Quick win:</strong> Deploy Wazuh — it's an all-in-one SIEM + XDR + compliance checker out of the box.</p></div>
+  <h4>Key activities</h4>
+  <ul>
+    <li>SIEM — log aggregation &amp; correlation <span class="mtag mtag-e">Essential</span></li>
+    <li>Vulnerability scanning of live systems <span class="mtag mtag-e">Essential</span></li>
+    <li>Runtime anomaly &amp; intrusion detection <span class="mtag mtag-r">Recommended</span></li>
+    <li>Network traffic analysis &amp; IDS/IPS <span class="mtag mtag-r">Recommended</span></li>
+    <li>Proactive threat hunting <span class="mtag mtag-a">Advanced</span></li>
+    <li>Continuous patch management <span class="mtag mtag-a">Advanced</span></li>
+  </ul>
+  <div class="tool-cat"><span class="tool-cat-label">SIEM</span>
+  <div class="tools">
+    <a class="chip" data-tip="All-in-one SIEM + XDR platform" href="https://github.com/wazuh/wazuh" target="_blank" rel="noopener">Wazuh</a>
+    <a class="chip" data-tip="Elasticsearch, Logstash, Kibana stack" href="https://github.com/elastic" target="_blank" rel="noopener">ELK Stack</a>
+    <a class="chip" data-tip="Centralized log management" href="https://github.com/Graylog2/graylog2-server" target="_blank" rel="noopener">Graylog</a>
+  </div></div>
+  <div class="tool-cat"><span class="tool-cat-label">Vulnerability management</span>
+  <div class="tools">
+    <a class="chip" data-tip="Full-featured vulnerability scanner" href="https://github.com/greenbone/openvas-scanner" target="_blank" rel="noopener">OpenVAS</a>
+  </div></div>
+  <div class="tool-cat"><span class="tool-cat-label">Network &amp; host</span>
+  <div class="tools">
+    <a class="chip" data-tip="High-performance network IDS/IPS" href="https://github.com/OISF/suricata" target="_blank" rel="noopener">Suricata</a>
+    <a class="chip" data-tip="Deep network traffic analysis" href="https://github.com/zeek/zeek" target="_blank" rel="noopener">Zeek</a>
+    <a class="chip" data-tip="Host-based intrusion detection" href="https://github.com/ossec/ossec-hids" target="_blank" rel="noopener">OSSEC</a>
+    <a class="chip" data-tip="Cloud-native runtime security" href="https://github.com/falcosecurity/falco" target="_blank" rel="noopener">Falco</a>
+  </div></div>
+  <div class="tool-cat"><span class="tool-cat-label">Metrics &amp; alerting</span>
+  <div class="tools">
+    <a class="chip" data-tip="Time-series monitoring & alerting" href="https://github.com/prometheus/prometheus" target="_blank" rel="noopener">Prometheus</a>
+    <a class="chip" data-tip="Dashboarding & visualization" href="https://github.com/grafana/grafana" target="_blank" rel="noopener">Grafana</a>
+  </div></div>
+</div></div>
+</div></div>
+
+<!-- STAGE 8 -->
+<div class="stage s8" role="listitem">
+<div class="stage-dot" aria-hidden="true"></div>
+<div class="stage-card" role="button" tabindex="0" aria-expanded="false" onclick="toggle(this.parentElement)" onkeydown="hk(event,this.parentElement)">
+<div class="stage-head">
+  <div class="stage-num" aria-hidden="true">08</div>
+  <div class="stage-title"><h3>Incident Response &amp; Decommissioning</h3><p>Response playbooks, forensics &amp; secure EOL</p></div>
+  <svg class="stage-chevron" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" viewBox="0 0 20 20"><path d="M5 7l5 5 5-5"/></svg>
+</div>
+<div class="stage-body" role="region"><div class="stage-content">
+  <div class="quick-win"><div class="quick-win-icon"><svg fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 12 12"><path d="M2 7l3 3 5-6"/></svg></div><p><strong>Quick win:</strong> Deploy TheHive for incident case management — free, powerful, and integrates with everything.</p></div>
+  <h4>Key activities</h4>
+  <ul>
+    <li>Incident response playbook execution (NIST 800-61) <span class="mtag mtag-e">Essential</span></li>
+    <li>Digital forensics &amp; evidence preservation <span class="mtag mtag-e">Essential</span></li>
+    <li>Stakeholder &amp; regulatory comms (GDPR 72-hr notification) <span class="mtag mtag-r">Recommended</span></li>
+    <li>Blameless post-incident retrospectives <span class="mtag mtag-r">Recommended</span></li>
+    <li>Secure data disposal &amp; API retirement <span class="mtag mtag-a">Advanced</span></li>
+    <li>Automated SOAR orchestration &amp; threat intel sharing <span class="mtag mtag-a">Advanced</span></li>
+  </ul>
+  <div class="tool-cat"><span class="tool-cat-label">Case management &amp; SOAR</span>
+  <div class="tools">
+    <a class="chip" data-tip="Security incident case management" href="https://github.com/TheHive-Project/TheHive" target="_blank" rel="noopener">TheHive</a>
+    <a class="chip" data-tip="Open source SOAR platform" href="https://github.com/Shuffle/Shuffle" target="_blank" rel="noopener">Shuffle SOAR</a>
+    <a class="chip" data-tip="Threat intelligence sharing platform" href="https://github.com/MISP/MISP" target="_blank" rel="noopener">MISP</a>
+  </div></div>
+  <div class="tool-cat"><span class="tool-cat-label">Forensics &amp; endpoint</span>
+  <div class="tools">
+    <a class="chip" data-tip="Google's remote live forensics tool" href="https://github.com/google/grr" target="_blank" rel="noopener">GRR Rapid Response</a>
+    <a class="chip" data-tip="Endpoint forensics at scale" href="https://github.com/Velocidex/velociraptor" target="_blank" rel="noopener">Velociraptor</a>
+    <a class="chip" data-tip="SQL-powered endpoint visibility" href="https://github.com/osquery/osquery" target="_blank" rel="noopener">osquery</a>
+    <a class="chip" data-tip="Open source disk forensics platform" href="https://github.com/sleuthkit/autopsy" target="_blank" rel="noopener">Autopsy</a>
+    <a class="chip" data-tip="Memory forensics framework" href="https://github.com/volatilityfoundation/volatility3" target="_blank" rel="noopener">Volatility</a>
+    <a class="chip" data-tip="Malware pattern matching rules" href="https://github.com/VirusTotal/yara" target="_blank" rel="noopener">YARA</a>
+  </div></div>
+</div></div>
+</div></div>
+
+</div><!-- /pipeline -->
+
+<!-- ============ CI/CD INTEGRATION ============ -->
+<div class="section" id="cicd-section">
+<div class="section-block">
+  <div class="section-title">CI/CD pipeline integration</div>
+  <div class="section-sub">How security tools chain together in a real pipeline — from commit to production.</div>
+  <div class="cicd-flow">
+    <div class="cicd-step"><div class="cicd-box" style="border-color:rgba(139,92,246,0.3)"><div class="ico">&#128221;</div><div class="nm">Commit</div><div class="tl">pre-commit</div></div></div>
+    <div class="cicd-arrow">&#8594;</div>
+    <div class="cicd-step"><div class="cicd-box" style="border-color:rgba(139,92,246,0.3)"><div class="ico">&#128270;</div><div class="nm">Secrets scan</div><div class="tl">GitLeaks</div></div></div>
+    <div class="cicd-arrow">&#8594;</div>
+    <div class="cicd-step"><div class="cicd-box" style="border-color:rgba(16,185,129,0.3)"><div class="ico">&#128300;</div><div class="nm">SAST</div><div class="tl">Semgrep</div></div></div>
+    <div class="cicd-arrow">&#8594;</div>
+    <div class="cicd-step"><div class="cicd-box" style="border-color:rgba(16,185,129,0.3)"><div class="ico">&#128230;</div><div class="nm">SCA</div><div class="tl">Trivy</div></div></div>
+    <div class="cicd-arrow">&#8594;</div>
+    <div class="cicd-step"><div class="cicd-box" style="border-color:rgba(59,130,246,0.3)"><div class="ico">&#128736;</div><div class="nm">Build</div><div class="tl">Docker</div></div></div>
+    <div class="cicd-arrow">&#8594;</div>
+    <div class="cicd-step"><div class="cicd-box" style="border-color:rgba(244,63,94,0.3)"><div class="ico">&#128737;</div><div class="nm">Image scan</div><div class="tl">Trivy</div></div></div>
+    <div class="cicd-arrow">&#8594;</div>
+    <div class="cicd-step"><div class="cicd-box" style="border-color:rgba(244,63,94,0.3)"><div class="ico">&#128203;</div><div class="nm">IaC scan</div><div class="tl">Checkov</div></div></div>
+    <div class="cicd-arrow">&#8594;</div>
+    <div class="cicd-step"><div class="cicd-box" style="border-color:rgba(245,158,11,0.3)"><div class="ico">&#128680;</div><div class="nm">DAST</div><div class="tl">ZAP</div></div></div>
+    <div class="cicd-arrow">&#8594;</div>
+    <div class="cicd-step"><div class="cicd-box" style="border-color:rgba(16,185,129,0.3)"><div class="ico">&#9989;</div><div class="nm">Security gate</div><div class="tl">Pass/Fail</div></div></div>
+    <div class="cicd-arrow">&#8594;</div>
+    <div class="cicd-step"><div class="cicd-box" style="border-color:rgba(6,182,212,0.3)"><div class="ico">&#128640;</div><div class="nm">Deploy</div><div class="tl">Production</div></div></div>
+  </div>
+</div></div>
+
+<!-- ============ RACI MATRIX ============ -->
+<div class="section" id="raci-section">
+<div class="section-block">
+  <div class="section-title">RACI matrix</div>
+  <div class="section-sub">Who owns what — <span class="raci-r">R</span>=Responsible, <span class="raci-a">A</span>=Accountable, <span class="raci-c">C</span>=Consulted, <span class="raci-i">I</span>=Informed.</div>
+  <div style="overflow-x:auto">
+  <table class="ref-table">
+    <thead><tr><th>Stage</th><th>Developer</th><th>Security Eng.</th><th>DevOps</th><th>Architect</th><th>Product Owner</th><th>CISO/Mgmt</th></tr></thead>
+    <tbody>
+      <tr><td class="stage-label">01 Training</td><td class="raci-r">R</td><td class="raci-r">R</td><td class="raci-r">R</td><td class="raci-c">C</td><td class="raci-i">I</td><td class="raci-a">A</td></tr>
+      <tr><td class="stage-label">02 Requirements</td><td class="raci-c">C</td><td class="raci-r">R</td><td class="raci-c">C</td><td class="raci-r">R</td><td class="raci-a">A</td><td class="raci-i">I</td></tr>
+      <tr><td class="stage-label">03 Design</td><td class="raci-c">C</td><td class="raci-r">R</td><td class="raci-c">C</td><td class="raci-a">A</td><td class="raci-i">I</td><td class="raci-i">I</td></tr>
+      <tr><td class="stage-label">04 Coding</td><td class="raci-r">R</td><td class="raci-a">A</td><td class="raci-c">C</td><td class="raci-c">C</td><td class="raci-i">I</td><td class="raci-i">I</td></tr>
+      <tr><td class="stage-label">05 Testing</td><td class="raci-c">C</td><td class="raci-a">A</td><td class="raci-r">R</td><td class="raci-c">C</td><td class="raci-i">I</td><td class="raci-i">I</td></tr>
+      <tr><td class="stage-label">06 Deployment</td><td class="raci-c">C</td><td class="raci-r">R</td><td class="raci-a">A</td><td class="raci-c">C</td><td class="raci-i">I</td><td class="raci-i">I</td></tr>
+      <tr><td class="stage-label">07 Operations</td><td class="raci-i">I</td><td class="raci-a">A</td><td class="raci-r">R</td><td class="raci-c">C</td><td class="raci-i">I</td><td class="raci-i">I</td></tr>
+      <tr><td class="stage-label">08 Incident Resp.</td><td class="raci-c">C</td><td class="raci-r">R</td><td class="raci-r">R</td><td class="raci-c">C</td><td class="raci-c">C</td><td class="raci-a">A</td></tr>
+    </tbody>
+  </table></div>
+</div></div>
+
+<!-- ============ KPIs ============ -->
+<div class="section" id="kpi-section">
+<div class="section-block">
+  <div class="section-title">Key metrics &amp; KPIs</div>
+  <div class="section-sub">What to measure to prove your Secure SDLC is working.</div>
+  <div class="kpi-grid">
+    <div class="kpi-card"><h5>Mean time to remediate (MTTR)</h5><p>Average time from vulnerability detection to verified fix across all severity levels.</p><div class="kpi-target">Target: Critical &lt;24h, High &lt;7d, Medium &lt;30d</div></div>
+    <div class="kpi-card"><h5>Vulnerability escape rate</h5><p>Percentage of vulnerabilities found in production vs. pre-production (shift-left effectiveness).</p><div class="kpi-target">Target: &lt;10% escaping to production</div></div>
+    <div class="kpi-card"><h5>SAST/DAST coverage</h5><p>Percentage of codebases and applications actively scanned by automated security tools.</p><div class="kpi-target">Target: &gt;95% of repos with SAST enabled</div></div>
+    <div class="kpi-card"><h5>Security gate pass rate</h5><p>Percentage of builds that pass all security gates on first attempt without overrides.</p><div class="kpi-target">Target: &gt;85% first-pass rate</div></div>
+    <div class="kpi-card"><h5>Mean time to detect (MTTD)</h5><p>Average time between a security event occurring and being detected by monitoring.</p><div class="kpi-target">Target: &lt;1 hour for critical events</div></div>
+    <div class="kpi-card"><h5>Dependency currency</h5><p>Percentage of third-party dependencies that are within one major version of latest.</p><div class="kpi-target">Target: &gt;80% current, 0 known critical CVEs</div></div>
+    <div class="kpi-card"><h5>Training completion rate</h5><p>Percentage of engineering staff who completed security training in the past 12 months.</p><div class="kpi-target">Target: 100% annually</div></div>
+    <div class="kpi-card"><h5>Incident response time</h5><p>Time from incident declaration to containment achieved, measured per severity.</p><div class="kpi-target">Target: P1 contained within 4 hours</div></div>
+  </div>
+</div></div>
+
+<!-- ============ COMPLIANCE ============ -->
+<div class="section" id="compliance-section">
+<div class="section-block">
+  <div class="section-title">Compliance cross-reference</div>
+  <div class="section-sub">Which stages satisfy which compliance requirements.</div>
+  <div style="overflow-x:auto">
+  <table class="ref-table">
+    <thead><tr><th>Stage</th><th>GDPR Art. 25/32</th><th>PCI-DSS Req 6</th><th>SOC 2 CC7/CC8</th><th>HIPAA §164.312</th><th>ISO 27001 A.14</th><th>NIST SSDF</th></tr></thead>
+    <tbody>
+      <tr><td class="stage-label">01 Training</td><td class="cell-check">&#10003;</td><td class="cell-check">&#10003;</td><td class="cell-check">&#10003;</td><td class="cell-check">&#10003;</td><td class="cell-check">&#10003;</td><td class="cell-check">&#10003;</td></tr>
+      <tr><td class="stage-label">02 Requirements</td><td class="cell-check">&#10003;</td><td class="cell-check">&#10003;</td><td class="cell-check">&#10003;</td><td class="cell-check">&#10003;</td><td class="cell-check">&#10003;</td><td class="cell-check">&#10003;</td></tr>
+      <tr><td class="stage-label">03 Design</td><td class="cell-check">&#10003;</td><td class="cell-check">&#10003;</td><td class="cell-check">&#10003;</td><td class="cell-check">&#10003;</td><td class="cell-check">&#10003;</td><td class="cell-check">&#10003;</td></tr>
+      <tr><td class="stage-label">04 Coding</td><td class="cell-check">&#10003;</td><td class="cell-check">&#10003;</td><td class="cell-check">&#10003;</td><td class="cell-check">&#10003;</td><td class="cell-check">&#10003;</td><td class="cell-check">&#10003;</td></tr>
+      <tr><td class="stage-label">05 Testing</td><td class="cell-check">&#10003;</td><td class="cell-check">&#10003;</td><td class="cell-check">&#10003;</td><td class="cell-check">&#10003;</td><td class="cell-check">&#10003;</td><td class="cell-check">&#10003;</td></tr>
+      <tr><td class="stage-label">06 Deployment</td><td class="cell-check">&#10003;</td><td class="cell-check">&#10003;</td><td class="cell-check">&#10003;</td><td class="cell-check">&#10003;</td><td class="cell-check">&#10003;</td><td class="cell-check">&#10003;</td></tr>
+      <tr><td class="stage-label">07 Operations</td><td class="cell-check">&#10003;</td><td class="cell-check">&#10003;</td><td class="cell-check">&#10003;</td><td class="cell-check">&#10003;</td><td class="cell-check">&#10003;</td><td class="cell-check">&#10003;</td></tr>
+      <tr><td class="stage-label">08 Incident Resp.</td><td class="cell-check">&#10003;</td><td class="cell-check">&#10003;</td><td class="cell-check">&#10003;</td><td class="cell-check">&#10003;</td><td class="cell-check">&#10003;</td><td class="cell-check">&#10003;</td></tr>
+    </tbody>
+  </table></div>
+</div></div>
+
+<!-- ============ GLOSSARY ============ -->
+<div class="section" id="glossary-section">
+<div class="section-block">
+  <div class="section-title">Glossary</div>
+  <div class="section-sub">Quick reference for acronyms and terms used throughout this guide.</div>
+  <div class="glossary-grid">
+    <div class="glossary-item"><span class="glossary-term">SAST</span><span class="glossary-def">Static Application Security Testing — scans source code without execution</span></div>
+    <div class="glossary-item"><span class="glossary-term">DAST</span><span class="glossary-def">Dynamic Application Security Testing — tests running applications</span></div>
+    <div class="glossary-item"><span class="glossary-term">IAST</span><span class="glossary-def">Interactive AST — agents inside the app during testing</span></div>
+    <div class="glossary-item"><span class="glossary-term">SCA</span><span class="glossary-def">Software Composition Analysis — scans third-party dependencies</span></div>
+    <div class="glossary-item"><span class="glossary-term">SBOM</span><span class="glossary-def">Software Bill of Materials — inventory of all components</span></div>
+    <div class="glossary-item"><span class="glossary-term">SIEM</span><span class="glossary-def">Security Information &amp; Event Management</span></div>
+    <div class="glossary-item"><span class="glossary-term">SOAR</span><span class="glossary-def">Security Orchestration, Automation &amp; Response</span></div>
+    <div class="glossary-item"><span class="glossary-term">IaC</span><span class="glossary-def">Infrastructure as Code — version-controlled infra definitions</span></div>
+    <div class="glossary-item"><span class="glossary-term">IDS/IPS</span><span class="glossary-def">Intrusion Detection / Prevention System</span></div>
+    <div class="glossary-item"><span class="glossary-term">STRIDE</span><span class="glossary-def">Spoofing, Tampering, Repudiation, Info Disclosure, DoS, Elevation</span></div>
+    <div class="glossary-item"><span class="glossary-term">DREAD</span><span class="glossary-def">Damage, Reproducibility, Exploitability, Affected users, Discoverability</span></div>
+    <div class="glossary-item"><span class="glossary-term">CIS</span><span class="glossary-def">Center for Internet Security — publishes hardening benchmarks</span></div>
+    <div class="glossary-item"><span class="glossary-term">CVE</span><span class="glossary-def">Common Vulnerabilities &amp; Exposures — unique vuln identifiers</span></div>
+    <div class="glossary-item"><span class="glossary-term">CSPM</span><span class="glossary-def">Cloud Security Posture Management</span></div>
+    <div class="glossary-item"><span class="glossary-term">MTTR</span><span class="glossary-def">Mean Time to Remediate — avg fix time after detection</span></div>
+    <div class="glossary-item"><span class="glossary-term">MTTD</span><span class="glossary-def">Mean Time to Detect — avg time to notice an incident</span></div>
+    <div class="glossary-item"><span class="glossary-term">XDR</span><span class="glossary-def">Extended Detection &amp; Response — cross-layer threat detection</span></div>
+    <div class="glossary-item"><span class="glossary-term">RACI</span><span class="glossary-def">Responsible, Accountable, Consulted, Informed — ownership matrix</span></div>
+    <div class="glossary-item"><span class="glossary-term">ASVS</span><span class="glossary-def">Application Security Verification Standard (OWASP)</span></div>
+    <div class="glossary-item"><span class="glossary-term">SSDF</span><span class="glossary-def">Secure Software Development Framework (NIST SP 800-218)</span></div>
+  </div>
+</div></div>
+
+<!-- BANNERS -->
+<div class="loop-banner banner">
+  <div class="banner-inner">
+    <div class="banner-icon" aria-hidden="true"><svg fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" viewBox="0 0 24 24"><path d="M17 1l4 4-4 4"/><path d="M3 11V9a4 4 0 014-4h14"/><path d="M7 23l-4-4 4-4"/><path d="M21 13v2a4 4 0 01-4 4H3"/></svg></div>
+    <p><strong>Continuous feedback loop</strong> — Lessons from incidents, testing failures, and operational anomalies feed back into training, requirements, and design. A mature Secure SDLC never stops improving.</p>
+  </div>
+</div>
+
+<div class="ref-banner banner">
+  <div class="banner-inner">
+    <p><strong>Aligned with:</strong> Microsoft SDL &middot; OWASP SAMM &middot; NIST SP 800-218 (SSDF) &middot; NIST SP 800-61 (Incident Handling) &middot; BSIMM &middot; ISO 27034</p>
+  </div>
+</div>
+
+<!-- BACK TO TOP -->
+<button class="btt" id="btt" onclick="window.scrollTo({top:0,behavior:'smooth'})" aria-label="Back to top">
+  <svg fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" viewBox="0 0 16 16"><path d="M8 13V3"/><path d="M3 7l5-5 5 5"/></svg>
+</button>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <div class="footer-line-text">Architect U'r Career<span class="sep" aria-hidden="true">|</span><strong>Krishna Mohan Parsha</strong></div>
+  <div class="footer-line" aria-hidden="true"></div>
+  <div class="footer-copy">SECURE SDLC &middot; THE DEFINITIVE REFERENCE GUIDE &middot; v2.0 &middot; MARCH 2026</div>
+</footer>
+
+<script>
+function toggle(el){el.classList.toggle('open');var c=el.querySelector('.stage-card');if(c)c.setAttribute('aria-expanded',el.classList.contains('open'))}
+function hk(e,el){if(e.key==='Enter'||e.key===' '){e.preventDefault();toggle(el)}}
+var allOpen=false;
+function toggleAll(){allOpen=!allOpen;document.querySelectorAll('.stage').forEach(function(s){s.classList.toggle('open',allOpen);var c=s.querySelector('.stage-card');if(c)c.setAttribute('aria-expanded',allOpen)});document.getElementById('toggleLabel').textContent=allOpen?'Collapse all':'Expand all'}
+
+// Prevent chip link clicks from toggling the parent stage card
+document.querySelectorAll('.chip').forEach(function(c){c.addEventListener('click',function(e){e.stopPropagation()})});
+
+// Back to top button visibility
+var btt=document.getElementById('btt');
+window.addEventListener('scroll',function(){btt.classList.toggle('show',window.scrollY>600)},{passive:true});
+</script>
+</body>
+</html>
