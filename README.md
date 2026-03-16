@@ -1,2 +1,2 @@
-# architecturcareer
-Knowledge sharing 
+# Architect U'r Career
+Knowledge Sharing Blog
