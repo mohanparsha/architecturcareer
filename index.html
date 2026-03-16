@@ -400,6 +400,63 @@
         }
         .pub-card:hover .pub-link svg { transform: translateX(3px); }
 
+        /* ---- Resources ---- */
+        .resource-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1rem;
+        }
+        .resource-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            padding: 1.5rem;
+            text-decoration: none;
+            display: flex;
+            align-items: flex-start;
+            gap: 1rem;
+            transition: border-color 0.25s;
+        }
+        .resource-card:hover { border-color: var(--accent); }
+        .resource-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+            font-size: 0.58rem;
+            font-weight: 800;
+            letter-spacing: 0.02em;
+        }
+        .resource-card h3 {
+            font-size: 0.92rem;
+            color: var(--heading);
+            font-weight: 600;
+            margin-bottom: 0.3rem;
+            line-height: 1.4;
+        }
+        .resource-card .resource-desc {
+            font-size: 0.8rem;
+            color: var(--text-muted);
+            line-height: 1.6;
+        }
+        .resource-category {
+            margin-bottom: 2rem;
+        }
+        .resource-category:last-child {
+            margin-bottom: 0;
+        }
+        .resource-category-label {
+            font-size: 0.72rem;
+            font-weight: 600;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 0.07em;
+            margin-bottom: 0.75rem;
+        }
+
         /* ---- Tech Stack ---- */
         .tech-grid {
             display: flex;
@@ -626,6 +683,7 @@
             <li><a href="#experience">Experience</a></li>
             <li><a href="#expertise">Expertise</a></li>
             <li><a href="#publications">Insights</a></li>
+            <li><a href="#resources">Resources</a></li>
             <li><a href="#techstack">Tech</a></li>
             <li><a href="#contact">Contact</a></li>
         </ul>
@@ -813,8 +871,90 @@
     </div>
 </section>
 
+<!-- Interactive Resources -->
+<section id="resources" class="bg-alt">
+    <div class="container">
+        <div class="section-label reveal">Open Source</div>
+        <h2 class="section-title reveal">Interactive Visual Guides</h2>
+
+        <div class="resource-category reveal">
+            <div class="resource-category-label">AI & Machine Learning</div>
+            <div class="resource-grid">
+                <a href="ai-knowledge-map_v2.5.html" class="resource-card" aria-label="Open AI Knowledge Map interactive guide">
+                    <div class="resource-icon" style="background: rgba(129,140,248,0.1); color: var(--accent);">AI</div>
+                    <div>
+                        <h3>AI Knowledge Map</h3>
+                        <div class="resource-desc">A visual map of AI concepts, tools, and frameworks — from fundamentals to advanced applications.</div>
+                    </div>
+                </a>
+                <a href="llm-deep-dive_v3.0.html" class="resource-card" aria-label="Open LLM Deep Dive interactive guide">
+                    <div class="resource-icon" style="background: rgba(52,211,153,0.1); color: var(--accent);">LLM</div>
+                    <div>
+                        <h3>LLM Deep Dive</h3>
+                        <div class="resource-desc">An in-depth visual exploration of large language models — architecture, training, and enterprise use cases.</div>
+                    </div>
+                </a>
+                <a href="agentic-ai-runtime-architecture_3.0.html" class="resource-card" aria-label="Open Agentic AI Runtime Architecture interactive guide">
+                    <div class="resource-icon" style="background: rgba(249,115,22,0.1); color: var(--accent);">AGI</div>
+                    <div>
+                        <h3>Agentic AI Runtime Architecture</h3>
+                        <div class="resource-desc">Visual breakdown of runtime architectures powering autonomous AI agents and multi-agent systems.</div>
+                    </div>
+                </a>
+                <a href="ai_security_stack_v3.0.html" class="resource-card" aria-label="Open AI Security Stack interactive guide">
+                    <div class="resource-icon" style="background: rgba(239,68,68,0.1); color: var(--accent);">SEC</div>
+                    <div>
+                        <h3>AI Security Stack</h3>
+                        <div class="resource-desc">A layered view of the security stack for AI systems — covering data protection, model safety, and adversarial defense.</div>
+                    </div>
+                </a>
+            </div>
+        </div>
+
+        <div class="resource-category reveal">
+            <div class="resource-category-label">Security & DevOps</div>
+            <div class="resource-grid">
+                <a href="Secure_SDLC_Interactive_visual_v3.0.html" class="resource-card" aria-label="Open Secure SDLC interactive guide">
+                    <div class="resource-icon" style="background: rgba(56,189,248,0.1); color: var(--accent);">SDLC</div>
+                    <div>
+                        <h3>Secure SDLC</h3>
+                        <div class="resource-desc">Interactive visual of the Secure Software Development Lifecycle — integrating security at every phase from design to deployment.</div>
+                    </div>
+                </a>
+                <a href="devops-roadmap-colorful-v2.6.html" class="resource-card" aria-label="Open DevOps Roadmap interactive guide">
+                    <div class="resource-icon" style="background: rgba(30,90,138,0.1); color: var(--accent);">DEV</div>
+                    <div>
+                        <h3>DevOps Roadmap</h3>
+                        <div class="resource-desc">A colorful, structured roadmap covering the DevOps toolchain, practices, and career progression paths.</div>
+                    </div>
+                </a>
+            </div>
+        </div>
+
+        <div class="resource-category reveal">
+            <div class="resource-category-label">Leadership & Professional Growth</div>
+            <div class="resource-grid">
+                <a href="Thinking%20Skills%20Roadmap%202026.html" class="resource-card" aria-label="Open Thinking Skills Roadmap interactive guide">
+                    <div class="resource-icon" style="background: rgba(251,191,36,0.1); color: var(--accent);">TSR</div>
+                    <div>
+                        <h3>Thinking Skills Roadmap 2026</h3>
+                        <div class="resource-desc">A structured roadmap for developing critical thinking, analytical reasoning, and decision-making capabilities.</div>
+                    </div>
+                </a>
+                <a href="top-10-soft-skills-V2.5.html" class="resource-card" aria-label="Open Top 10 Soft Skills interactive guide">
+                    <div class="resource-icon" style="background: rgba(168,85,247,0.1); color: var(--accent);">SKL</div>
+                    <div>
+                        <h3>Top 10 Soft Skills</h3>
+                        <div class="resource-desc">An interactive guide to the most essential soft skills for technology professionals and leaders.</div>
+                    </div>
+                </a>
+            </div>
+        </div>
+    </div>
+</section>
+
 <!-- Tech Stack -->
-<section id="techstack" class="bg-alt">
+<section id="techstack">
     <div class="container">
         <div class="section-label reveal">Tools</div>
         <h2 class="section-title reveal">Technology Stack</h2>
@@ -856,7 +996,7 @@
 </section>
 
 <!-- Certifications -->
-<section id="certifications">
+<section id="certifications" class="bg-alt">
     <div class="container">
         <div class="section-label reveal">Credentials</div>
         <h2 class="section-title reveal">Certifications</h2>
@@ -944,7 +1084,7 @@
 </section>
 
 <!-- Academic Advisory -->
-<section id="advisory" class="bg-alt">
+<section id="advisory">
     <div class="container">
         <div class="section-label reveal">Governance</div>
         <h2 class="section-title reveal">Academic Advisory Leadership</h2>
@@ -971,7 +1111,7 @@
 </section>
 
 <!-- Topics -->
-<section id="topics">
+<section id="topics" class="bg-alt">
     <div class="container">
         <div class="section-label reveal">Currently Exploring</div>
         <h2 class="section-title reveal">Topics I Write About</h2>
@@ -995,7 +1135,7 @@
 </section>
 
 <!-- Contact -->
-<section class="contact-section bg-alt" id="contact">
+<section class="contact-section" id="contact">
     <div class="container">
         <div class="section-label reveal">Connect</div>
         <h2 class="section-title reveal">Get in Touch</h2>
