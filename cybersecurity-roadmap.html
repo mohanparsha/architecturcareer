@@ -1,0 +1,538 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Cybersecurity Career Roadmap 2026 | Krishna Mohan Parsha</title>
+<meta name="description" content="Interactive cybersecurity career roadmap — 7 domains, 18-month plan, self-assessment quiz, certification paths, and free resources. Your single source of truth from college to corporate roles.">
+<meta name="author" content="Krishna Mohan Parsha">
+<meta name="keywords" content="cybersecurity career, SOC analyst, penetration testing, GRC, cloud security, AppSec, IAM, OSCP, Security+, India cybersecurity jobs">
+<!-- Open Graph / LinkedIn -->
+<meta property="og:type" content="website">
+<meta property="og:title" content="Architecting U'r Cyber Career — Interactive Roadmap 2026">
+<meta property="og:description" content="7 domains, 18-month plan, self-assessment quiz, career pathways from entry to CISO, and 30+ free resources. Built for students and career switchers.">
+<meta property="og:site_name" content="Architect U'r Career | Krishna Mohan Parsha">
+<!-- Twitter Card -->
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Architecting U'r Cyber Career — Interactive Roadmap 2026">
+<meta name="twitter:description" content="7 domains, 18-month plan, self-assessment quiz, career pathways, and 30+ free resources. Your single source of truth for cybersecurity careers.">
+<!-- Favicon -->
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🛡️</text></svg>">
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+:root {
+  --bg-primary: #0a0f1a;
+  --bg-secondary: #0f1629;
+  --bg-card: #131b30;
+  --bg-card-hover: #182240;
+  --border: #1e2d50;
+  --green: #10b981;
+  --green-dim: #10b98130;
+  --green-bright: #34d399;
+  --green-dark: #059669;
+  --cyan: #22d3ee;
+  --amber: #f59e0b;
+  --purple: #a78bfa;
+  --blue: #60a5fa;
+  --pink: #f472b6;
+  --white: #ffffff;
+  --text: #e2e8f0;
+  --text-dim: #94a3b8;
+  --text-muted: #64748b;
+  --font-display: 'Outfit', sans-serif;
+  --font-mono: 'JetBrains Mono', monospace;
+  --radius: 12px;
+  --radius-sm: 8px;
+  --transition: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+html { scroll-behavior: smooth; }
+body { font-family: var(--font-display); background: var(--bg-primary); color: var(--text); line-height: 1.6; min-height: 100vh; -webkit-font-smoothing: antialiased; }
+body::before { content: ''; position: fixed; inset: 0; background: radial-gradient(ellipse 80% 50% at 50% -20%, #10b98112 0%, transparent 60%), linear-gradient(180deg, transparent 0%, var(--bg-primary) 100%); pointer-events: none; z-index: 0; }
+.container { max-width: 1200px; margin: 0 auto; padding: 0 20px; position: relative; z-index: 1; }
+
+/* HERO */
+.hero { text-align: center; padding: 60px 20px 40px; position: relative; z-index: 1; }
+.hero-badge { display: inline-flex; align-items: center; gap: 8px; background: var(--green-dim); border: 1px solid var(--green); color: var(--green-bright); padding: 6px 16px; border-radius: 50px; font-size: 0.8rem; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; margin-bottom: 20px; animation: fadeDown 0.6s ease-out; }
+.hero-badge::before { content: '\1F6E1\FE0F'; }
+.hero h1 { font-size: clamp(2rem, 5vw, 3.2rem); font-weight: 800; color: var(--white); line-height: 1.15; margin-bottom: 12px; animation: fadeDown 0.6s ease-out 0.1s both; }
+.hero h1 span { color: var(--green); }
+.hero p { font-size: clamp(0.95rem, 2vw, 1.15rem); color: var(--text-dim); max-width: 650px; margin: 0 auto; animation: fadeDown 0.6s ease-out 0.2s both; }
+.stats-bar { display: flex; justify-content: center; gap: 32px; flex-wrap: wrap; margin: 30px auto 10px; animation: fadeDown 0.6s ease-out 0.3s both; }
+.stat-item { text-align: center; padding: 12px 20px; background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius-sm); min-width: 140px; }
+.stat-item .num { font-size: 1.6rem; font-weight: 800; color: var(--green); font-family: var(--font-mono); }
+.stat-item .label { font-size: 0.75rem; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.06em; margin-top: 2px; }
+.print-btn { display: inline-flex; align-items: center; gap: 8px; margin-top: 20px; padding: 10px 24px; font-family: var(--font-display); font-size: 0.85rem; font-weight: 600; border: 1px solid var(--border); background: var(--bg-card); color: var(--text-dim); border-radius: 50px; cursor: pointer; transition: var(--transition); animation: fadeDown 0.6s ease-out 0.4s both; }
+.print-btn:hover { border-color: var(--green); color: var(--white); background: var(--bg-card-hover); }
+.print-btn svg { width: 16px; height: 16px; stroke: currentColor; fill: none; stroke-width: 2; }
+
+/* TAB NAV */
+.tab-nav { display: flex; justify-content: center; gap: 6px; flex-wrap: wrap; padding: 14px 20px; margin: 20px auto 0; max-width: 1100px; position: sticky; top: 0; z-index: 100; background: var(--bg-primary); border-bottom: 1px solid var(--border); }
+.tab-btn { padding: 10px 18px; font-family: var(--font-display); font-size: 0.85rem; font-weight: 600; border: 1px solid var(--border); background: var(--bg-card); color: var(--text-dim); border-radius: 50px; cursor: pointer; transition: var(--transition); white-space: nowrap; }
+.tab-btn:hover { border-color: var(--green); color: var(--white); background: var(--bg-card-hover); }
+.tab-btn.active { background: var(--green); color: var(--bg-primary); border-color: var(--green); box-shadow: 0 0 20px var(--green-dim); }
+.tab-btn:focus-visible { outline: 2px solid var(--green-bright); outline-offset: 2px; }
+
+/* TAB CONTENT */
+.tab-content { display: none; padding: 30px 0 60px; animation: fadeIn 0.4s ease-out; }
+.tab-content.active { display: block; }
+.section-title { font-size: clamp(1.4rem, 3vw, 1.9rem); font-weight: 700; color: var(--white); margin-bottom: 6px; }
+.section-title span { color: var(--green); }
+.section-subtitle { font-size: 0.95rem; color: var(--text-dim); margin-bottom: 32px; max-width: 680px; }
+
+/* DOMAINS */
+.domain-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(340px, 1fr)); gap: 20px; }
+.domain-card { background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius); overflow: hidden; transition: var(--transition); cursor: pointer; }
+.domain-card:hover { border-color: var(--green); transform: translateY(-3px); box-shadow: 0 8px 30px rgba(16,185,129,0.12); }
+.domain-card-header { padding: 20px 22px 14px; display: flex; align-items: center; gap: 14px; border-bottom: 1px solid var(--border); }
+.domain-icon { width: 44px; height: 44px; border-radius: 10px; display: flex; align-items: center; justify-content: center; font-size: 1.3rem; flex-shrink: 0; }
+.domain-card-header h3 { font-size: 1.05rem; font-weight: 700; color: var(--white); }
+.domain-card-header .domain-tag { font-size: 0.7rem; padding: 2px 8px; border-radius: 50px; font-weight: 600; letter-spacing: 0.04em; margin-left: auto; white-space: nowrap; }
+.domain-card-body { padding: 18px 22px; }
+.domain-card-body .protects { font-size: 0.78rem; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.06em; margin-bottom: 10px; font-weight: 600; }
+.skill-chips { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 16px; }
+.skill-chip { font-size: 0.73rem; padding: 4px 10px; background: var(--bg-secondary); border: 1px solid var(--border); border-radius: 50px; color: var(--text-dim); font-family: var(--font-mono); }
+.cert-path { margin-top: 14px; border-top: 1px solid var(--border); padding-top: 14px; }
+.cert-path-label { font-size: 0.72rem; color: var(--green); text-transform: uppercase; letter-spacing: 0.08em; font-weight: 700; margin-bottom: 8px; }
+.cert-flow { display: flex; align-items: center; gap: 6px; flex-wrap: wrap; }
+.cert-item { font-size: 0.75rem; padding: 4px 10px; background: var(--green-dim); border: 1px solid var(--green); border-radius: 6px; color: var(--green-bright); font-weight: 600; font-family: var(--font-mono); }
+.cert-arrow { color: var(--text-muted); font-size: 0.8rem; }
+.d-net .domain-icon { background: #1e3a5f; color: #60a5fa; } .d-net .domain-tag { background: #1e3a5f; color: #60a5fa; }
+.d-app .domain-icon { background: #3b1f4e; color: #a78bfa; } .d-app .domain-tag { background: #3b1f4e; color: #a78bfa; }
+.d-iam .domain-icon { background: #1a3a3a; color: #22d3ee; } .d-iam .domain-tag { background: #1a3a3a; color: #22d3ee; }
+.d-cloud .domain-icon { background: #1a2e1a; color: #34d399; } .d-cloud .domain-tag { background: #1a2e1a; color: #34d399; }
+.d-off .domain-icon { background: #3b1a1a; color: #f87171; } .d-off .domain-tag { background: #3b1a1a; color: #f87171; }
+.d-soc .domain-icon { background: #3b2e1a; color: #fbbf24; } .d-soc .domain-tag { background: #3b2e1a; color: #fbbf24; }
+.d-grc .domain-icon { background: #2e1a3b; color: #f472b6; } .d-grc .domain-tag { background: #2e1a3b; color: #f472b6; }
+.domain-detail { display: none; padding: 0 22px 18px; animation: fadeIn 0.3s ease; }
+.domain-detail.show { display: block; }
+.detail-section { margin-bottom: 14px; }
+.detail-section h4 { font-size: 0.82rem; color: var(--green); text-transform: uppercase; letter-spacing: 0.06em; margin-bottom: 8px; font-weight: 700; }
+.detail-list { list-style: none; }
+.detail-list li { padding: 6px 0; font-size: 0.85rem; color: var(--text); padding-left: 18px; position: relative; }
+.detail-list li::before { content: '\25B9'; position: absolute; left: 0; color: var(--green); font-weight: bold; }
+
+/* CAREER TABLE */
+.filter-bar { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 24px; }
+.filter-btn { padding: 8px 16px; font-family: var(--font-display); font-size: 0.8rem; font-weight: 600; border: 1px solid var(--border); background: var(--bg-card); color: var(--text-dim); border-radius: 50px; cursor: pointer; transition: var(--transition); }
+.filter-btn:hover { border-color: var(--green); color: var(--white); }
+.filter-btn.active { background: var(--green); color: var(--bg-primary); border-color: var(--green); }
+.career-table-wrap { overflow-x: auto; border: 1px solid var(--border); border-radius: var(--radius); background: var(--bg-card); }
+.career-table { width: 100%; border-collapse: collapse; min-width: 950px; }
+.career-table thead th { padding: 14px 16px; text-align: left; font-size: 0.73rem; text-transform: uppercase; letter-spacing: 0.08em; color: var(--green); font-weight: 700; background: var(--bg-secondary); border-bottom: 2px solid var(--green); white-space: nowrap; }
+.career-table tbody tr { border-bottom: 1px solid var(--border); transition: var(--transition); }
+.career-table tbody tr:hover { background: var(--bg-card-hover); }
+.career-table tbody tr.hidden { display: none; }
+.career-table td { padding: 14px 16px; font-size: 0.84rem; vertical-align: top; }
+.career-table td:first-child { font-weight: 700; color: var(--white); white-space: nowrap; }
+.role-list { list-style: none; }
+.role-list li { padding: 3px 0; color: var(--text); font-size: 0.82rem; }
+.role-list li::before { content: '\203A'; color: var(--green); margin-right: 6px; font-weight: bold; }
+.domain-badge { display: inline-block; padding: 2px 10px; border-radius: 50px; font-size: 0.72rem; font-weight: 700; }
+.convergence-box { margin-top: 30px; padding: 24px; background: linear-gradient(135deg, #10b98112, #22d3ee10); border: 1px solid var(--green); border-radius: var(--radius); position: relative; overflow: hidden; }
+.convergence-box::before { content: '\26A1'; position: absolute; top: 14px; right: 18px; font-size: 2rem; opacity: 0.3; }
+.convergence-box h3 { color: var(--green-bright); font-size: 1.05rem; margin-bottom: 8px; }
+.convergence-box p { color: var(--text); font-size: 0.9rem; line-height: 1.7; }
+
+/* QUIZ */
+.quiz-container { max-width: 720px; margin: 0 auto; }
+.quiz-intro { text-align: center; padding: 30px; background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius); margin-bottom: 30px; }
+.quiz-intro h3 { color: var(--white); font-size: 1.2rem; margin-bottom: 8px; }
+.quiz-intro p { color: var(--text-dim); font-size: 0.9rem; }
+.quiz-options { display: flex; flex-direction: column; gap: 12px; }
+.quiz-option { display: flex; align-items: flex-start; gap: 14px; padding: 18px 20px; background: var(--bg-card); border: 2px solid var(--border); border-radius: var(--radius); cursor: pointer; transition: var(--transition); }
+.quiz-option:hover { border-color: var(--green); background: var(--bg-card-hover); }
+.quiz-option.selected { border-color: var(--green); background: #10b98115; box-shadow: 0 0 20px var(--green-dim); }
+.quiz-option .q-icon { width: 40px; height: 40px; border-radius: 10px; display: flex; align-items: center; justify-content: center; font-size: 1.2rem; flex-shrink: 0; background: var(--bg-secondary); }
+.quiz-option.selected .q-icon { background: var(--green); }
+.quiz-option .q-text h4 { color: var(--white); font-size: 0.95rem; margin-bottom: 4px; }
+.quiz-option .q-text p { color: var(--text-dim); font-size: 0.82rem; line-height: 1.5; }
+.quiz-result { display: none; margin-top: 30px; padding: 30px; background: var(--bg-card); border: 2px solid var(--green); border-radius: var(--radius); text-align: center; animation: fadeIn 0.5s ease; box-shadow: 0 0 40px var(--green-dim); }
+.quiz-result.show { display: block; }
+.quiz-result h3 { color: var(--green-bright); font-size: 1.3rem; margin-bottom: 6px; }
+.quiz-result .result-domain { font-size: 1.6rem; font-weight: 800; color: var(--white); margin-bottom: 6px; }
+.quiz-result .result-role { font-size: 0.95rem; color: var(--text-dim); margin-bottom: 18px; }
+.quiz-result .result-details { text-align: left; margin-top: 16px; }
+.quiz-result .result-details h4 { color: var(--green); font-size: 0.82rem; text-transform: uppercase; letter-spacing: 0.06em; margin-bottom: 8px; font-weight: 700; }
+.quiz-result .result-details ul { list-style: none; }
+.quiz-result .result-details ul li { padding: 4px 0; font-size: 0.85rem; color: var(--text); padding-left: 18px; position: relative; }
+.quiz-result .result-details ul li::before { content: '\25B9'; position: absolute; left: 0; color: var(--green); }
+.reset-btn { margin-top: 20px; padding: 10px 28px; font-family: var(--font-display); font-size: 0.85rem; font-weight: 600; border: 1px solid var(--green); background: transparent; color: var(--green); border-radius: 50px; cursor: pointer; transition: var(--transition); }
+.reset-btn:hover { background: var(--green); color: var(--bg-primary); }
+
+/* TIMELINE */
+.timeline { position: relative; padding-left: 30px; }
+.timeline::before { content: ''; position: absolute; left: 14px; top: 0; bottom: 0; width: 2px; background: linear-gradient(to bottom, var(--green), var(--cyan)); border-radius: 2px; }
+.timeline-block { position: relative; margin-bottom: 24px; cursor: pointer; }
+.timeline-dot { position: absolute; left: -22px; top: 18px; width: 18px; height: 18px; border-radius: 50%; background: var(--bg-primary); border: 3px solid var(--green); z-index: 2; transition: var(--transition); }
+.timeline-block:hover .timeline-dot { background: var(--green); box-shadow: 0 0 12px var(--green); }
+.timeline-card { background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius); padding: 20px 24px; transition: var(--transition); }
+.timeline-block:hover .timeline-card { border-color: var(--green); box-shadow: 0 4px 20px rgba(16,185,129,0.08); }
+.timeline-card .phase-label { display: inline-block; font-size: 0.7rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; padding: 3px 10px; border-radius: 50px; margin-bottom: 10px; }
+.phase-1 .phase-label { background: #10b98125; color: var(--green-bright); }
+.phase-2 .phase-label { background: #22d3ee20; color: var(--cyan); }
+.phase-3 .phase-label { background: #f59e0b20; color: var(--amber); }
+.phase-4 .phase-label { background: #a78bfa20; color: var(--purple); }
+.phase-5 .phase-label { background: #f472b620; color: var(--pink); }
+.phase-6 .phase-label { background: #60a5fa20; color: var(--blue); }
+.timeline-card h3 { color: var(--white); font-size: 1.05rem; margin-bottom: 8px; }
+.timeline-actions { display: none; margin-top: 12px; padding-top: 12px; border-top: 1px solid var(--border); }
+.timeline-actions.show { display: block; animation: fadeIn 0.3s ease; }
+.timeline-actions ul { list-style: none; }
+.timeline-actions ul li { padding: 5px 0; font-size: 0.85rem; color: var(--text); padding-left: 20px; position: relative; }
+.timeline-actions ul li::before { content: '\2713'; position: absolute; left: 0; color: var(--green); font-weight: bold; font-size: 0.8rem; }
+.platforms-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 16px; margin-top: 30px; }
+.platform-card { padding: 18px 20px; background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius); transition: var(--transition); }
+.platform-card:hover { border-color: var(--green); transform: translateY(-2px); }
+.platform-card h4 { color: var(--white); font-size: 0.95rem; margin-bottom: 4px; }
+.platform-card .plat-for { font-size: 0.75rem; color: var(--green); font-weight: 600; text-transform: uppercase; letter-spacing: 0.06em; margin-bottom: 6px; }
+.platform-card p { font-size: 0.82rem; color: var(--text-dim); line-height: 1.5; }
+.platform-card .plat-url { display: inline-block; margin-top: 10px; font-size: 0.78rem; color: var(--green); font-family: var(--font-mono); text-decoration: none; border-bottom: 1px dashed var(--green); transition: var(--transition); }
+.platform-card .plat-url:hover { color: var(--green-bright); }
+
+/* FOUNDATION */
+.foundation-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 16px; }
+.foundation-card { padding: 22px; background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius); transition: var(--transition); }
+.foundation-card:hover { border-color: var(--green); }
+.foundation-card .f-icon { font-size: 1.6rem; margin-bottom: 10px; }
+.foundation-card h4 { color: var(--white); font-size: 1rem; margin-bottom: 6px; }
+.foundation-card .f-learn { font-size: 0.84rem; color: var(--text); margin-bottom: 10px; line-height: 1.6; }
+.foundation-card .f-where { font-size: 0.78rem; color: var(--green); font-family: var(--font-mono); line-height: 1.6; }
+
+/* FIRST 7 DAYS */
+.days-grid { display: flex; flex-direction: column; gap: 16px; }
+.day-card { display: grid; grid-template-columns: 70px 1fr; background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius); overflow: hidden; transition: var(--transition); }
+.day-card:hover { border-color: var(--green); transform: translateX(4px); box-shadow: 0 4px 24px rgba(16,185,129,0.1); }
+.day-num { display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 18px 10px; border-right: 1px solid var(--border); background: var(--bg-secondary); }
+.day-num .d-number { font-size: 1.5rem; font-weight: 800; font-family: var(--font-mono); color: var(--green); line-height: 1; }
+.day-num .d-label { font-size: 0.6rem; text-transform: uppercase; letter-spacing: 0.1em; color: var(--text-muted); margin-top: 2px; }
+.day-body { padding: 18px 22px; }
+.day-body h4 { color: var(--white); font-size: 0.95rem; margin-bottom: 6px; display: flex; align-items: center; gap: 8px; }
+.day-body p { color: var(--text); font-size: 0.85rem; line-height: 1.65; }
+.day-body .day-action { display: inline-block; margin-top: 10px; font-size: 0.75rem; font-family: var(--font-mono); color: var(--green); background: var(--green-dim); border: 1px solid var(--green); padding: 3px 12px; border-radius: 50px; font-weight: 600; }
+.day-highlight { margin-top: 30px; padding: 28px; background: linear-gradient(135deg, #10b98118, #22d3ee10); border: 2px solid var(--green); border-radius: var(--radius); text-align: center; position: relative; overflow: hidden; }
+.day-highlight::before { content: ''; position: absolute; inset: 0; background: radial-gradient(circle at 50% 0%, var(--green-dim), transparent 60%); pointer-events: none; }
+.day-highlight h3 { color: var(--green-bright); font-size: 1.15rem; margin-bottom: 8px; position: relative; }
+.day-highlight p { color: var(--text); font-size: 0.95rem; line-height: 1.7; position: relative; max-width: 540px; margin: 0 auto; }
+.day-highlight .cost-badge { display: inline-flex; align-items: center; gap: 6px; margin-top: 14px; padding: 6px 18px; background: var(--green); color: var(--bg-primary); font-weight: 700; font-size: 0.85rem; border-radius: 50px; position: relative; }
+
+/* RESOURCES */
+.resource-section { margin-bottom: 36px; }
+.resource-section-title { font-size: 1rem; font-weight: 700; color: var(--white); margin-bottom: 16px; padding-bottom: 8px; border-bottom: 1px solid var(--border); display: flex; align-items: center; gap: 10px; }
+.resource-section-title .rs-icon { width: 32px; height: 32px; border-radius: 8px; display: flex; align-items: center; justify-content: center; font-size: 1rem; background: var(--green-dim); flex-shrink: 0; }
+.resource-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 14px; }
+.resource-card { padding: 16px 20px; background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius); transition: var(--transition); display: flex; align-items: flex-start; gap: 14px; }
+.resource-card:hover { border-color: var(--green); transform: translateY(-2px); }
+.resource-card .rc-icon { font-size: 1.4rem; flex-shrink: 0; margin-top: 2px; }
+.resource-card .rc-body { flex: 1; }
+.resource-card .rc-body h4 { color: var(--white); font-size: 0.92rem; margin-bottom: 3px; }
+.resource-card .rc-body p { color: var(--text-dim); font-size: 0.8rem; line-height: 1.5; margin-bottom: 8px; }
+.resource-card .rc-body a { font-size: 0.76rem; color: var(--green); font-family: var(--font-mono); text-decoration: none; border-bottom: 1px dashed var(--green); transition: var(--transition); }
+.resource-card .rc-body a:hover { color: var(--green-bright); }
+.resource-card .rc-tag { font-size: 0.65rem; padding: 2px 8px; border-radius: 50px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.06em; white-space: nowrap; flex-shrink: 0; }
+.rc-free { background: #10b98120; color: var(--green-bright); }
+.rc-conf { background: #f59e0b20; color: var(--amber); }
+.rc-intel { background: #60a5fa20; color: var(--blue); }
+
+/* BACK TO TOP */
+.back-to-top { position: fixed; bottom: 28px; right: 28px; z-index: 200; width: 48px; height: 48px; border-radius: 50%; background: var(--green); color: var(--bg-primary); border: none; font-size: 1.3rem; cursor: pointer; display: flex; align-items: center; justify-content: center; box-shadow: 0 4px 20px rgba(16,185,129,0.35); transition: var(--transition); opacity: 0; pointer-events: none; transform: translateY(12px); }
+.back-to-top.visible { opacity: 1; pointer-events: auto; transform: translateY(0); }
+.back-to-top:hover { transform: translateY(-3px); box-shadow: 0 6px 28px rgba(16,185,129,0.5); }
+
+/* FOOTER */
+.footer { text-align: center; padding: 30px 20px; border-top: 1px solid var(--border); margin-top: 20px; position: relative; z-index: 1; }
+.footer p { font-size: 0.82rem; color: var(--text-muted); letter-spacing: 0.04em; }
+.footer p span { color: var(--green); font-weight: 600; }
+.footer p .author { color: var(--white); font-weight: 600; }
+.footer .updated { display: block; font-size: 0.72rem; color: var(--text-muted); margin-top: 6px; font-family: var(--font-mono); letter-spacing: 0.03em; }
+
+/* INTERACTION HINTS */
+.hint-text { display: flex; align-items: center; gap: 6px; font-size: 0.78rem; color: var(--text-muted); margin-bottom: 20px; font-style: italic; }
+.hint-text .hint-icon { animation: pulse 2s ease-in-out infinite; }
+@keyframes pulse { 0%,100% { opacity: 0.5; } 50% { opacity: 1; } }
+
+/* SCROLL INDICATOR */
+.scroll-hint { display: none; align-items: center; justify-content: center; gap: 6px; font-size: 0.72rem; color: var(--text-muted); margin-top: 8px; font-family: var(--font-mono); }
+.scroll-hint .scroll-arrow { animation: scrollNudge 1.5s ease-in-out infinite; display: inline-block; }
+@keyframes scrollNudge { 0%,100% { transform: translateX(0); } 50% { transform: translateX(6px); } }
+@media (max-width: 950px) { .scroll-hint { display: flex; } }
+
+/* ANIMATIONS */
+@keyframes fadeIn { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
+@keyframes fadeDown { from { opacity: 0; transform: translateY(-12px); } to { opacity: 1; transform: translateY(0); } }
+
+/* RESPONSIVE */
+@media (max-width: 768px) {
+  .hero { padding: 40px 16px 24px; } .stats-bar { gap: 12px; } .stat-item { min-width: 110px; padding: 10px 14px; } .stat-item .num { font-size: 1.3rem; }
+  .tab-nav { gap: 4px; padding: 10px 12px; } .tab-btn { padding: 8px 12px; font-size: 0.78rem; }
+  .domain-grid { grid-template-columns: 1fr; } .container { padding: 0 14px; } .timeline { padding-left: 24px; }
+  .filter-bar { gap: 6px; } .filter-btn { padding: 6px 12px; font-size: 0.75rem; } .career-table td { padding: 10px 10px; }
+  .platforms-grid, .foundation-grid, .resource-grid { grid-template-columns: 1fr; }
+  .back-to-top { bottom: 18px; right: 18px; width: 42px; height: 42px; font-size: 1.1rem; }
+}
+@media (max-width: 480px) {
+  .tab-btn { padding: 7px 10px; font-size: 0.72rem; } .hero h1 { font-size: 1.7rem; }
+  .quiz-option { flex-direction: column; gap: 10px; } .day-card { grid-template-columns: 56px 1fr; }
+  .day-num .d-number { font-size: 1.2rem; } .day-body { padding: 14px 16px; }
+}
+
+/* PRINT */
+@media print {
+  body { background: #fff !important; color: #111 !important; } body::before { display: none; }
+  .tab-nav, .back-to-top, .print-btn { display: none !important; }
+  .tab-content { display: block !important; page-break-inside: avoid; padding: 20px 0; border-bottom: 1px solid #ccc; }
+  .tab-content::before { content: attr(data-print-title); display: block; font-size: 1.2rem; font-weight: 700; color: #059669; margin-bottom: 14px; border-bottom: 2px solid #059669; padding-bottom: 6px; }
+  .domain-card, .career-table-wrap, .quiz-container, .timeline-card, .foundation-card, .platform-card, .day-card, .resource-card, .convergence-box, .day-highlight, .quiz-intro { background: #f8fafc !important; border-color: #d1d5db !important; color: #111 !important; box-shadow: none !important; transform: none !important; }
+  .section-title, .section-title span, h3, h4 { color: #111 !important; } .section-title span { color: #059669 !important; }
+  .domain-detail { display: block !important; } .timeline-actions { display: block !important; }
+  .hero { padding: 20px 0; }
+  .footer { border-color: #d1d5db; } .footer p, .footer p span, .footer p .author { color: #111 !important; }
+  a { color: #059669 !important; }
+}
+</style>
+</head>
+<body>
+
+<!-- HERO -->
+<header class="hero">
+  <div class="hero-badge">Cybersecurity Career Roadmap 2026</div>
+  <h1>Architecting U'r <span>Cyber Career</span></h1>
+  <p>Your single source of truth — from choosing a domain to landing your first role. Interactive, actionable, and built for both students and career switchers.</p>
+  <div class="stats-bar">
+    <div class="stat-item"><div class="num">7</div><div class="label">Core Domains</div></div>
+    <div class="stat-item"><div class="num">18</div><div class="label">Months to Job-Ready</div></div>
+    <div class="stat-item"><div class="num">&#8377;0</div><div class="label">To Start Tonight</div></div>
+    <div class="stat-item"><div class="num">30K+</div><div class="label">Open Roles in India</div></div>
+  </div>
+  <button class="print-btn" onclick="window.print()"><svg viewBox="0 0 24 24"><path d="M6 9V2h12v7M6 18H4a2 2 0 01-2-2v-5a2 2 0 012-2h16a2 2 0 012 2v5a2 2 0 01-2 2h-2"/><rect x="6" y="14" width="12" height="8"/></svg> Save as PDF / Print</button>
+</header>
+
+<!-- TAB NAV -->
+<nav class="tab-nav" id="tabNav" role="tablist">
+  <button class="tab-btn active" data-tab="domains" role="tab" aria-selected="true">&#x1F6E1; Domains</button>
+  <button class="tab-btn" data-tab="careers" role="tab">&#x1F4C8; Career Paths</button>
+  <button class="tab-btn" data-tab="quiz" role="tab">&#x1F9ED; Find Your Fit</button>
+  <button class="tab-btn" data-tab="roadmap" role="tab">&#x1F5FA; 18-Month Plan</button>
+  <button class="tab-btn" data-tab="foundation" role="tab">&#x1F4DA; Foundation</button>
+  <button class="tab-btn" data-tab="first7" role="tab">&#x1F680; First 7 Days</button>
+  <button class="tab-btn" data-tab="resources" role="tab">&#x1F517; Resources</button>
+</nav>
+
+<main class="container">
+
+<!-- TAB 1: DOMAINS -->
+<section class="tab-content active" id="tab-domains" data-print-title="Section 1 — The 7 Core Cybersecurity Domains" role="tabpanel">
+  <div style="margin-bottom:10px"></div>
+  <h2 class="section-title">The 7 Core <span>Cybersecurity Domains</span></h2>
+  <p class="section-subtitle">Each domain protects a specific category of business assets. Click any card to explore skills and certification paths.</p>
+  <div class="hint-text"><span class="hint-icon">&#x1F447;</span> Click any domain card below to expand detailed skills &amp; CIA mapping</div>
+  <div class="domain-grid">
+    <div class="domain-card d-net" onclick="toggleDetail(this)"><div class="domain-card-header"><div class="domain-icon">&#x1F310;</div><h3>Network Security</h3><span class="domain-tag">D1</span></div><div class="domain-card-body"><div class="protects">Protects &#8594; Network Infrastructure</div><div class="skill-chips"><span class="skill-chip">TCP/IP</span><span class="skill-chip">Firewalls</span><span class="skill-chip">IDS/IPS</span><span class="skill-chip">Wireshark</span><span class="skill-chip">VLANs</span><span class="skill-chip">DMZ</span></div><div class="cert-path"><div class="cert-path-label">Certification Path</div><div class="cert-flow"><span class="cert-item">Network+</span><span class="cert-arrow">&#8594;</span><span class="cert-item">Security+</span><span class="cert-arrow">&#8594;</span><span class="cert-item">CCNA CyberOps</span></div></div></div><div class="domain-detail"><div class="detail-section"><h4>Key Skills</h4><ul class="detail-list"><li>TCP/IP, subnetting, routing, NAT, DNS deep understanding</li><li>Firewall config — stateful inspection, zone-based policies</li><li>IDS/IPS — Snort, Suricata, Zeek</li><li>Packet analysis — Wireshark, tcpdump</li><li>Network segmentation — DMZ, VLANs, micro-segmentation</li></ul></div><div class="detail-section"><h4>CIA Pillar Most at Risk</h4><ul class="detail-list"><li>Availability &amp; Confidentiality</li></ul></div></div></div>
+    <div class="domain-card d-app" onclick="toggleDetail(this)"><div class="domain-card-header"><div class="domain-icon">&#x1F4BB;</div><h3>Application Security</h3><span class="domain-tag">D2</span></div><div class="domain-card-body"><div class="protects">Protects &#8594; Software &amp; Applications</div><div class="skill-chips"><span class="skill-chip">OWASP Top 10</span><span class="skill-chip">Burp Suite</span><span class="skill-chip">SAST/DAST</span><span class="skill-chip">DevSecOps</span><span class="skill-chip">API Security</span></div><div class="cert-path"><div class="cert-path-label">Certification Path</div><div class="cert-flow"><span class="cert-item">CEH</span><span class="cert-arrow">&#8594;</span><span class="cert-item">GWEB</span><span class="cert-arrow">&#8594;</span><span class="cert-item">CSSLP</span></div></div></div><div class="domain-detail"><div class="detail-section"><h4>Key Skills</h4><ul class="detail-list"><li>OWASP Top 10 — injection, XSS, IDOR, SSRF, misconfigurations</li><li>Secure coding — input validation, parameterised queries</li><li>SAST / DAST tools — Burp Suite, OWASP ZAP, SonarQube</li><li>API security — OAuth 2.0, JWT vulnerabilities, REST/GraphQL</li><li>DevSecOps — integrating security into CI/CD pipelines</li></ul></div><div class="detail-section"><h4>CIA Pillar Most at Risk</h4><ul class="detail-list"><li>Confidentiality &amp; Integrity</li></ul></div></div></div>
+    <div class="domain-card d-iam" onclick="toggleDetail(this)"><div class="domain-card-header"><div class="domain-icon">&#x1F511;</div><h3>Identity &amp; Access Management</h3><span class="domain-tag">D3</span></div><div class="domain-card-body"><div class="protects">Protects &#8594; People &amp; Identity</div><div class="skill-chips"><span class="skill-chip">MFA/FIDO2</span><span class="skill-chip">RBAC/ABAC</span><span class="skill-chip">Active Directory</span><span class="skill-chip">CyberArk</span><span class="skill-chip">SSO/SAML</span></div><div class="cert-path"><div class="cert-path-label">Certification Path</div><div class="cert-flow"><span class="cert-item">SC-300</span><span class="cert-arrow">&#8594;</span><span class="cert-item">SailPoint</span><span class="cert-arrow">&#8594;</span><span class="cert-item">CIAM</span></div></div></div><div class="domain-detail"><div class="detail-section"><h4>Key Skills</h4><ul class="detail-list"><li>Authentication — MFA, biometrics, FIDO2/WebAuthn, passwordless</li><li>Authorisation — RBAC, ABAC, least privilege, zero trust</li><li>Directory services — Active Directory, Azure AD / Entra ID</li><li>PAM tools — CyberArk, BeyondTrust</li><li>SSO &amp; Federation — SAML, OAuth 2.0, OpenID Connect</li></ul></div><div class="detail-section"><h4>CIA Pillar Most at Risk</h4><ul class="detail-list"><li>Confidentiality</li></ul></div></div></div>
+    <div class="domain-card d-cloud" onclick="toggleDetail(this)"><div class="domain-card-header"><div class="domain-icon">&#x2601;&#xFE0F;</div><h3>Cloud Security</h3><span class="domain-tag">D4</span></div><div class="domain-card-body"><div class="protects">Protects &#8594; Cloud Infrastructure &amp; SaaS</div><div class="skill-chips"><span class="skill-chip">AWS/Azure/GCP</span><span class="skill-chip">Shared Responsibility</span><span class="skill-chip">Kubernetes</span><span class="skill-chip">IaC Security</span><span class="skill-chip">CSPM</span></div><div class="cert-path"><div class="cert-path-label">Certification Path</div><div class="cert-flow"><span class="cert-item">AWS Security</span><span class="cert-arrow">&#8594;</span><span class="cert-item">AZ-500</span><span class="cert-arrow">&#8594;</span><span class="cert-item">CCSP</span></div></div></div><div class="domain-detail"><div class="detail-section"><h4>Key Skills</h4><ul class="detail-list"><li>Cloud Shared Responsibility Model — what you own vs provider</li><li>Cloud misconfigurations — open S3 buckets, overpermissive IAM</li><li>Cloud-native tools — GuardDuty, Azure Defender, GCP SCC</li><li>Container &amp; Kubernetes security — Docker scanning, pod policies</li><li>IaC security — Terraform scanning, CloudFormation policies</li></ul></div><div class="detail-section"><h4>CIA Pillar Most at Risk</h4><ul class="detail-list"><li>Availability &amp; Confidentiality</li></ul></div></div></div>
+    <div class="domain-card d-off" onclick="toggleDetail(this)"><div class="domain-card-header"><div class="domain-icon">&#x2694;&#xFE0F;</div><h3>Offensive Security</h3><span class="domain-tag">D5</span></div><div class="domain-card-body"><div class="protects">Protects &#8594; All Assets (Attacker Mindset)</div><div class="skill-chips"><span class="skill-chip">OSINT</span><span class="skill-chip">Metasploit</span><span class="skill-chip">Nessus</span><span class="skill-chip">Burp Suite Pro</span><span class="skill-chip">BloodHound</span></div><div class="cert-path"><div class="cert-path-label">Certification Path</div><div class="cert-flow"><span class="cert-item">eJPT</span><span class="cert-arrow">&#8594;</span><span class="cert-item">OSCP</span><span class="cert-arrow">&#8594;</span><span class="cert-item">CRTO</span><span class="cert-arrow">&#8594;</span><span class="cert-item">GPEN</span></div></div></div><div class="domain-detail"><div class="detail-section"><h4>Key Skills</h4><ul class="detail-list"><li>Reconnaissance — OSINT, Maltego, Shodan, theHarvester</li><li>Vulnerability scanning — Nessus, OpenVAS</li><li>Exploitation — Metasploit, manual CVE exploitation, privesc</li><li>Web app testing — Burp Suite Pro, SQL injection, traversal</li><li>AD attacks — Kerberoasting, Pass-the-Hash, BloodHound</li></ul></div><div class="detail-section"><h4>CIA Pillar Most at Risk</h4><ul class="detail-list"><li>All three — C, I, and A</li></ul></div></div></div>
+    <div class="domain-card d-soc" onclick="toggleDetail(this)"><div class="domain-card-header"><div class="domain-icon">&#x1F50D;</div><h3>SOC &amp; Incident Response</h3><span class="domain-tag">D6</span></div><div class="domain-card-body"><div class="protects">Protects &#8594; All Assets (24/7 Detection)</div><div class="skill-chips"><span class="skill-chip">Splunk</span><span class="skill-chip">SIEM</span><span class="skill-chip">MITRE ATT&amp;CK</span><span class="skill-chip">DFIR</span><span class="skill-chip">YARA/Sigma</span></div><div class="cert-path"><div class="cert-path-label">Certification Path</div><div class="cert-flow"><span class="cert-item">CySA+</span><span class="cert-arrow">&#8594;</span><span class="cert-item">BTL1</span><span class="cert-arrow">&#8594;</span><span class="cert-item">GCIH</span><span class="cert-arrow">&#8594;</span><span class="cert-item">SC-200</span></div></div></div><div class="domain-detail"><div class="detail-section"><h4>Key Skills</h4><ul class="detail-list"><li>SIEM — Wazuh, Splunk, Microsoft Sentinel, IBM QRadar</li><li>Detection — YARA rules, Sigma rules, custom correlation</li><li>IR lifecycle — Prepare, Detect, Contain, Eradicate, Recover</li><li>DFIR basics — Volatility (memory), Autopsy/FTK (disk)</li><li>MITRE ATT&amp;CK — threat actor TTPs, IOC analysis</li></ul></div><div class="detail-section"><h4>CIA Pillar Most at Risk</h4><ul class="detail-list"><li>All three — C, I, and A</li></ul></div></div></div>
+    <div class="domain-card d-grc" onclick="toggleDetail(this)"><div class="domain-card-header"><div class="domain-icon">&#x1F4CB;</div><h3>Governance, Risk &amp; Compliance</h3><span class="domain-tag">D7</span></div><div class="domain-card-body"><div class="protects">Protects &#8594; Processes &amp; Procedures</div><div class="skill-chips"><span class="skill-chip">ISO 27001</span><span class="skill-chip">NIST CSF</span><span class="skill-chip">DPDP Act</span><span class="skill-chip">PCI DSS</span><span class="skill-chip">Risk Registers</span></div><div class="cert-path"><div class="cert-path-label">Certification Path</div><div class="cert-flow"><span class="cert-item">CISA</span><span class="cert-arrow">&#8594;</span><span class="cert-item">CISM</span><span class="cert-arrow">&#8594;</span><span class="cert-item">CRISC</span></div></div></div><div class="domain-detail"><div class="detail-section"><h4>Key Skills</h4><ul class="detail-list"><li>Risk management — Qualitative/quantitative assessment, risk registers</li><li>Frameworks — ISO 27001, NIST CSF 2.0, CIS Controls v8, SOC 2</li><li>Regulations — DPDP Act 2023, GDPR, HIPAA, PCI DSS v4.0, RBI</li><li>Policy writing — InfoSec policies, standards, procedures</li><li>Audit &amp; TPRM — Internal audits, third-party risk, vendor assessments</li></ul></div><div class="detail-section"><h4>CIA Pillar Most at Risk</h4><ul class="detail-list"><li>Availability &amp; Integrity</li></ul></div></div></div>
+  </div>
+</section>
+
+<!-- TAB 2: CAREER PATHWAYS -->
+<section class="tab-content" id="tab-careers" data-print-title="Section 2 — Career Pathways (Entry &#8594; Mid &#8594; Senior)" role="tabpanel">
+  <div style="margin-bottom:10px"></div>
+  <h2 class="section-title">Domain-Based <span>Career Pathways</span></h2>
+  <p class="section-subtitle">Filter by domain to explore the full career ladder — entry, mid-level, and senior roles across all 7 domains.</p>
+  <div class="filter-bar" id="careerFilters">
+    <button class="filter-btn active" data-filter="all">All Domains</button>
+    <button class="filter-btn" data-filter="net">&#x1F310; Network</button>
+    <button class="filter-btn" data-filter="app">&#x1F4BB; AppSec</button>
+    <button class="filter-btn" data-filter="iam">&#x1F511; IAM</button>
+    <button class="filter-btn" data-filter="cloud">&#x2601;&#xFE0F; Cloud</button>
+    <button class="filter-btn" data-filter="off">&#x2694;&#xFE0F; Offensive</button>
+    <button class="filter-btn" data-filter="soc">&#x1F50D; SOC/IR</button>
+    <button class="filter-btn" data-filter="grc">&#x1F4CB; GRC</button>
+  </div>
+  <div class="career-table-wrap"><table class="career-table"><thead><tr><th>Domain</th><th>Entry Role (0-2 yrs)</th><th>Mid-Level (3-5 yrs)</th><th>Senior (5+ yrs) &#x2B50;</th></tr></thead>
+  <tbody id="careerBody">
+    <tr data-domain="net"><td><span class="domain-badge" style="background:#1e3a5f;color:#60a5fa">&#x1F310; Network Security</span></td><td><ul class="role-list"><li>Network Security Analyst</li><li>Junior Firewall Engineer</li><li>NOC Technician</li></ul></td><td><ul class="role-list"><li>Network Security Engineer</li><li>Firewall Architect</li><li>Network Penetration Tester</li></ul></td><td><ul class="role-list"><li>Principal Network Architect</li><li>Head of Network Security</li><li>Security Engineering Manager</li></ul></td></tr>
+    <tr data-domain="app"><td><span class="domain-badge" style="background:#3b1f4e;color:#a78bfa">&#x1F4BB; Application Security</span></td><td><ul class="role-list"><li>Junior AppSec Analyst</li><li>Secure Code Reviewer</li><li>Security QA Engineer</li></ul></td><td><ul class="role-list"><li>AppSec Engineer</li><li>DevSecOps Engineer</li><li>Web App Penetration Tester</li></ul></td><td><ul class="role-list"><li>Principal AppSec Architect</li><li>Head of Product Security</li><li>DevSecOps Lead / Director</li></ul></td></tr>
+    <tr data-domain="iam"><td><span class="domain-badge" style="background:#1a3a3a;color:#22d3ee">&#x1F511; IAM</span></td><td><ul class="role-list"><li>IAM Analyst</li><li>Identity Provisioning Specialist</li><li>Access Management Admin</li></ul></td><td><ul class="role-list"><li>IAM Engineer</li><li>PAM Specialist</li><li>Identity Governance Analyst</li></ul></td><td><ul class="role-list"><li>IAM Architect</li><li>Director of Identity Security</li><li>Zero Trust Program Lead</li></ul></td></tr>
+    <tr data-domain="cloud"><td><span class="domain-badge" style="background:#1a2e1a;color:#34d399">&#x2601;&#xFE0F; Cloud Security</span></td><td><ul class="role-list"><li>Junior Cloud Security Analyst</li><li>Cloud IAM Specialist</li><li>Cloud Compliance Analyst</li></ul></td><td><ul class="role-list"><li>Cloud Security Engineer</li><li>Cloud Security Architect</li><li>CSPM Specialist</li></ul></td><td><ul class="role-list"><li>Principal Cloud Security Architect</li><li>Head of Cloud Security</li><li>Cloud CISO / VP Security</li></ul></td></tr>
+    <tr data-domain="off"><td><span class="domain-badge" style="background:#3b1a1a;color:#f87171">&#x2694;&#xFE0F; Offensive Security</span></td><td><ul class="role-list"><li>Junior Penetration Tester</li><li>Bug Bounty Hunter</li><li>Vulnerability Analyst</li></ul></td><td><ul class="role-list"><li>Penetration Tester</li><li>Red Team Operator</li><li>Web App Pentester</li></ul></td><td><ul class="role-list"><li>Red Team Lead / Director</li><li>Principal Security Consultant</li><li>Offensive Security Manager</li></ul></td></tr>
+    <tr data-domain="soc"><td><span class="domain-badge" style="background:#3b2e1a;color:#fbbf24">&#x1F50D; SOC / IR</span></td><td><ul class="role-list"><li>SOC Analyst Tier 1</li><li>Cyber Threat Intel Trainee</li><li>Junior Incident Responder</li></ul></td><td><ul class="role-list"><li>SOC Analyst Tier 2/3</li><li>Incident Responder</li><li>Threat Hunter / DFIR Analyst</li></ul></td><td><ul class="role-list"><li>SOC Manager / Director</li><li>Head of Threat Intelligence</li><li>DFIR Practice Lead</li></ul></td></tr>
+    <tr data-domain="grc"><td><span class="domain-badge" style="background:#2e1a3b;color:#f472b6">&#x1F4CB; GRC</span></td><td><ul class="role-list"><li>GRC Analyst</li><li>Compliance Analyst</li><li>Risk Analyst / Junior Auditor</li></ul></td><td><ul class="role-list"><li>Senior GRC Analyst</li><li>Risk Manager</li><li>Data Privacy Officer</li></ul></td><td><ul class="role-list"><li>Head of GRC / VP Compliance</li><li>Chief Privacy Officer (CPO)</li><li>CISO</li></ul></td></tr>
+  </tbody></table></div>
+  <div class="scroll-hint"><span class="scroll-arrow">&#8594;</span> Scroll horizontally to see Senior roles</div>
+  <div class="convergence-box"><h3>The Convergence Advantage</h3><p>The highest-value cybersecurity professionals are those who cross domain boundaries — an Offensive Security specialist who understands Cloud, an AppSec engineer who can read GRC risk reports, a SOC analyst who understands IAM. Plan your foundation first, specialise deeply in one domain, then deliberately acquire adjacent domain knowledge after 3 years. This combination commands the highest salaries and the most interesting work.</p></div>
+</section>
+
+<!-- TAB 3: QUIZ -->
+<section class="tab-content" id="tab-quiz" data-print-title="Section 3 — Which Domain Fits You?" role="tabpanel">
+  <div style="margin-bottom:10px"></div>
+  <h2 class="section-title">Find <span>Your Domain</span></h2>
+  <p class="section-subtitle">Pick the statement that resonates most with you. Your answer maps directly to a cybersecurity domain and first role.</p>
+  <div class="quiz-container">
+    <div class="quiz-intro"><h3>&#x1F9ED; Quick Self-Assessment</h3><p>Select one option below that best describes your natural inclination. Don't overthink — trust your instinct.</p></div>
+    <div class="quiz-options" id="quizOptions">
+      <div class="quiz-option" data-result="offensive" onclick="selectQuiz(this)"><div class="q-icon">&#x2694;&#xFE0F;</div><div class="q-text"><h4>"I love finding weak spots. I want to think like the attacker — legally."</h4><p>You're drawn to breaking things to make them stronger. Puzzles, CTFs, and the thrill of exploitation excite you.</p></div></div>
+      <div class="quiz-option" data-result="soc" onclick="selectQuiz(this)"><div class="q-icon">&#x1F50D;</div><div class="q-text"><h4>"I prefer defending. When an attack hits, I want to detect it and shut it down."</h4><p>You want to be on the front line of cyber defence — monitoring, analyzing, and responding in real time.</p></div></div>
+      <div class="quiz-option" data-result="appsec" onclick="selectQuiz(this)"><div class="q-icon">&#x1F4BB;</div><div class="q-text"><h4>"I care about writing secure code. Security should be built in from day one."</h4><p>You want to embed security into the development process, catch vulnerabilities early, and build resilient software.</p></div></div>
+      <div class="quiz-option" data-result="cloud" onclick="selectQuiz(this)"><div class="q-icon">&#x2601;&#xFE0F;</div><div class="q-text"><h4>"Cloud infrastructure excites me — AWS, Kubernetes, containers."</h4><p>You're drawn to the scale and complexity of cloud environments and want to secure them.</p></div></div>
+      <div class="quiz-option" data-result="grc" onclick="selectQuiz(this)"><div class="q-icon">&#x1F4CB;</div><div class="q-text"><h4>"Policies, risk, and compliance make sense to me. I like the big-picture 'why'."</h4><p>You think in terms of governance, regulation, and organisational risk. You bridge security and business.</p></div></div>
+      <div class="quiz-option" data-result="iam" onclick="selectQuiz(this)"><div class="q-icon">&#x1F511;</div><div class="q-text"><h4>"Access control — who should have what permission — is fascinating to me."</h4><p>You care about identity, zero trust, and making sure the right people access the right resources.</p></div></div>
+      <div class="quiz-option" data-result="network" onclick="selectQuiz(this)"><div class="q-icon">&#x1F310;</div><div class="q-text"><h4>"Protocols, traffic, firewalls. I want to own the network perimeter."</h4><p>Packets, routing, and network architecture speak to you. You want to protect the communication layer.</p></div></div>
+      <div class="quiz-option" data-result="broad" onclick="selectQuiz(this)"><div class="q-icon">&#x1F3AF;</div><div class="q-text"><h4>"I'm unsure — everything sounds interesting."</h4><p>That's perfectly fine. Start broad with Security+, build your foundation, and your preference will emerge.</p></div></div>
+    </div>
+    <div class="quiz-result" id="quizResult"></div>
+  </div>
+</section>
+
+<!-- TAB 4: ROADMAP -->
+<section class="tab-content" id="tab-roadmap" data-print-title="Section 4 — 18-Month Roadmap &amp; Practice Platforms" role="tabpanel">
+  <div style="margin-bottom:10px"></div>
+  <h2 class="section-title">18-Month <span>Roadmap</span></h2>
+  <p class="section-subtitle">Click any phase to expand its action items. Every milestone is achievable with free resources.</p>
+  <div class="timeline">
+    <div class="timeline-block phase-1" onclick="toggleTimeline(this)"><div class="timeline-dot"></div><div class="timeline-card"><span class="phase-label">Months 1-3</span><h3>Foundation — Build Your Base</h3><p style="font-size:0.85rem;color:var(--text-dim)">Networking, Linux, scripting fundamentals, and your first free certification.</p><div class="timeline-actions"><ul><li>Complete TryHackMe Pre-Security learning path</li><li>Register &amp; pass (ISC)&#178; CC — completely free certification</li><li>Join the null community India chapter in your city</li><li>Master Linux CLI basics via OverTheWire Bandit</li><li>Start Python scripting with Automate the Boring Stuff</li></ul></div></div></div>
+    <div class="timeline-block phase-2" onclick="toggleTimeline(this)"><div class="timeline-dot"></div><div class="timeline-card"><span class="phase-label">Months 4-6</span><h3>Domain Selection — Choose Your Path</h3><p style="font-size:0.85rem;color:var(--text-dim)">Pick your domain from the self-assessment. Begin domain-specific labs and certification prep.</p><div class="timeline-actions"><ul><li>Use the "Find Your Fit" quiz to confirm your domain</li><li>Start domain-specific labs on TryHackMe / HackTheBox</li><li>Identify your entry-level certification target</li><li>Follow 10+ domain practitioners on LinkedIn &amp; X</li><li>Watch domain-specific conference talks (YouTube is free)</li></ul></div></div></div>
+    <div class="timeline-block phase-3" onclick="toggleTimeline(this)"><div class="timeline-dot"></div><div class="timeline-card"><span class="phase-label">Months 7-9</span><h3>First Certification — Prove Your Skills</h3><p style="font-size:0.85rem;color:var(--text-dim)">Sit CompTIA Security+ or equivalent. Attend your first community meetup. Join a CTF team.</p><div class="timeline-actions"><ul><li>Prepare for and sit CompTIA Security+ (or domain cert)</li><li>Attend first null community / OWASP chapter meetup</li><li>Join a CTF team — PicoCTF, TryHackMe competitions</li><li>Start documenting your learning journey publicly</li><li>Ask one practitioner 3-5 years ahead for 15 min of advice</li></ul></div></div></div>
+    <div class="timeline-block phase-4" onclick="toggleTimeline(this)"><div class="timeline-dot"></div><div class="timeline-card"><span class="phase-label">Months 10-12</span><h3>Portfolio Building — Show Your Work</h3><p style="font-size:0.85rem;color:var(--text-dim)">GitHub lab writeups, technical blog, and open-source contributions build your professional credibility.</p><div class="timeline-actions"><ul><li>Document 5+ lab writeups on GitHub with clear methodology</li><li>Start a technical blog (Medium, Hashnode, or personal site)</li><li>Contribute to an open-source security tool on GitHub</li><li>Build 1-2 projects showcasing your domain skills</li><li>Get your first peer review from a community member</li></ul></div></div></div>
+    <div class="timeline-block phase-5" onclick="toggleTimeline(this)"><div class="timeline-dot"></div><div class="timeline-card"><span class="phase-label">Months 13-15</span><h3>Internship &amp; Bug Bounty — Real World Exposure</h3><p style="font-size:0.85rem;color:var(--text-dim)">Apply for security internships, register on bug bounty platforms, attend Nullcon or regional events.</p><div class="timeline-actions"><ul><li>Apply for security internships (Big 4, product cos, consultancies)</li><li>Register on HackerOne / Bugcrowd — start beginner programs</li><li>Attend Nullcon, C0c0n, or a regional security conference</li><li>Get your first real-world finding or internship experience</li><li>Build relationships with 3+ practitioners in your domain</li></ul></div></div></div>
+    <div class="timeline-block phase-6" onclick="toggleTimeline(this)"><div class="timeline-dot"></div><div class="timeline-card"><span class="phase-label">Months 16-18</span><h3>Job-Ready — Launch Your Career</h3><p style="font-size:0.85rem;color:var(--text-dim)">Second certification, polished portfolio, optimised LinkedIn, active network, and targeted applications.</p><div class="timeline-actions"><ul><li>Earn second domain-specific certification</li><li>Have 2-3 strong portfolio projects ready for interviews</li><li>Optimise LinkedIn — headline, summary, skills, endorsements</li><li>Actively network at community events and online</li><li>Apply to target companies — SOC, AppSec, GRC, Pentest roles</li></ul></div></div></div>
+  </div>
+  <h3 style="color:var(--white);margin-top:40px;margin-bottom:6px;font-size:1.15rem">Hands-On <span style="color:var(--green)">Practice Platforms</span></h3>
+  <p style="color:var(--text-dim);font-size:0.88rem;margin-bottom:20px">Every platform below has a free tier — no excuses.</p>
+  <div class="platforms-grid">
+    <div class="platform-card"><h4>TryHackMe</h4><div class="plat-for">Beginners — Start Here</div><p>Guided learning paths with hands-on rooms. Free tier covers months of content. Pre-Security path is your Day 1.</p><a class="plat-url" href="https://tryhackme.com" target="_blank" rel="noopener">tryhackme.com</a></div>
+    <div class="platform-card"><h4>HackTheBox</h4><div class="plat-for">Intermediate — Challenge Labs</div><p>Challenge-based labs more realistic than THM. Excellent for offensive security and Active Directory skills.</p><a class="plat-url" href="https://hackthebox.com" target="_blank" rel="noopener">hackthebox.com</a></div>
+    <div class="platform-card"><h4>PicoCTF</h4><div class="plat-for">Students — CTF Competitions</div><p>CTF competitions designed for students. Great for problem-solving and foundational skills. Always free.</p><a class="plat-url" href="https://picoctf.org" target="_blank" rel="noopener">picoctf.org</a></div>
+    <div class="platform-card"><h4>OWASP WebGoat / DVWA</h4><div class="plat-for">AppSec — Web Vulnerabilities</div><p>Deliberately vulnerable web apps. Run locally. Best way to learn OWASP Top 10 hands-on.</p><a class="plat-url" href="https://github.com/WebGoat/WebGoat" target="_blank" rel="noopener">github.com/WebGoat</a></div>
+    <div class="platform-card"><h4>BlueTeamLabs Online</h4><div class="plat-for">SOC / Defensive — Log Analysis</div><p>Log analysis, SIEM, malware triage. Free labs simulating real SOC scenarios.</p><a class="plat-url" href="https://blueteamlabs.online" target="_blank" rel="noopener">blueteamlabs.online</a></div>
+    <div class="platform-card"><h4>LetsDefend</h4><div class="plat-for">SOC Analyst — Full Simulation</div><p>Full SOC simulation — alerts, playbooks, investigations. Closest to real Tier-1 analyst work.</p><a class="plat-url" href="https://letsdefend.io" target="_blank" rel="noopener">letsdefend.io</a></div>
+    <div class="platform-card"><h4>HackerOne / Bugcrowd</h4><div class="plat-for">Bug Bounty — Get Paid</div><p>Find real vulnerabilities in real products. Your first paid report = your first professional security credential.</p><a class="plat-url" href="https://hackerone.com" target="_blank" rel="noopener">hackerone.com</a></div>
+  </div>
+</section>
+
+<!-- TAB 5: FOUNDATION -->
+<section class="tab-content" id="tab-foundation" data-print-title="Section 5 — Foundation Stack" role="tabpanel">
+  <div style="margin-bottom:10px"></div>
+  <h2 class="section-title">Build the <span>Foundation First</span></h2>
+  <p class="section-subtitle">Regardless of your chosen domain, every cybersecurity professional needs the same core skills. Master these before specialising.</p>
+  <div class="foundation-grid">
+    <div class="foundation-card"><div class="f-icon">&#x1F310;</div><h4>Networking</h4><div class="f-learn">OSI model, TCP/IP, subnetting, DNS, HTTP/S, TLS — the backbone of everything in cybersecurity.</div><div class="f-where">Professor Messer &#183; Cisco NetAcad &#183; TryHackMe Pre-Security</div></div>
+    <div class="foundation-card"><div class="f-icon">&#x1F5A5;&#xFE0F;</div><h4>Operating Systems</h4><div class="f-learn">Linux CLI mastery, Windows Active Directory basics, file permissions, process management.</div><div class="f-where">OverTheWire Bandit &#183; Linux Journey &#183; HackTheBox Starting Point</div></div>
+    <div class="foundation-card"><div class="f-icon">&#x1F40D;</div><h4>Programming</h4><div class="f-learn">Python scripting, Bash basics, web technologies (HTML, JavaScript, SQL) — automate and understand.</div><div class="f-where">Automate the Boring Stuff &#183; CS50P &#183; Codecademy (free tiers)</div></div>
+    <div class="foundation-card"><div class="f-icon">&#x1F6E1;&#xFE0F;</div><h4>Security Basics</h4><div class="f-learn">CIA Triad in practice, common attacks, basic cryptography, OWASP Top 10 awareness.</div><div class="f-where">CompTIA Security+ material &#183; (ISC)&#178; CC (free cert) &#183; OWASP.org</div></div>
+  </div>
+  <div style="margin-top:40px;padding:28px;background:var(--bg-card);border:1px solid var(--border);border-radius:var(--radius)">
+    <h3 style="color:var(--white);font-size:1.1rem;margin-bottom:10px">&#x1F3AF; The Golden Rule</h3>
+    <p style="color:var(--text);font-size:0.92rem;line-height:1.7">Domain selection is <strong style="color:var(--green)">not permanent</strong>. Many of the best professionals have crossed domains multiple times. What matters is <strong style="color:var(--green)">starting</strong>. Pick the one that excites you most, go 12 months deep, then reassess with real experience under your belt. You discover your domain by <em>doing</em>, not by thinking.</p>
+  </div>
+</section>
+
+<!-- TAB 6: FIRST 7 DAYS -->
+<section class="tab-content" id="tab-first7" data-print-title="Section 6 — Your First 7 Days" role="tabpanel">
+  <div style="margin-bottom:10px"></div>
+  <h2 class="section-title">Your First <span>7 Days</span> — Starting Tonight</h2>
+  <p class="section-subtitle">The workshop ends. The motivation fades. This checklist stops that from happening. Every action takes under 30 minutes and costs nothing.</p>
+  <div class="days-grid">
+    <div class="day-card"><div class="day-num"><div class="d-number">1</div><div class="d-label">Day</div></div><div class="day-body"><h4><span class="day-emoji">&#x1F3AF;</span> TryHackMe Account — Tonight</h4><p>Go to tryhackme.com. Create a free account. Start the 'Pre-Security' learning path. Complete the first room. Screenshot your completion badge — this is proof you started.</p><span class="day-action">tryhackme.com</span></div></div>
+    <div class="day-card"><div class="day-num"><div class="d-number">2</div><div class="d-label">Day</div></div><div class="day-body"><h4><span class="day-emoji">&#x1F4DC;</span> (ISC)&#178; CC Registration</h4><p>Go to isc2.org. Register for the Certified in Cybersecurity (CC) exam — completely free for students. You now have a certification target with a deadline.</p><span class="day-action">isc2.org</span></div></div>
+    <div class="day-card"><div class="day-num"><div class="d-number">3</div><div class="d-label">Day</div></div><div class="day-body"><h4><span class="day-emoji">&#x1F5C2;&#xFE0F;</span> GitHub Profile</h4><p>Create a GitHub account. Create a repo called 'cybersecurity-notes'. Add your notes from today as the first commit. This is the start of your professional portfolio.</p><span class="day-action">github.com</span></div></div>
+    <div class="day-card"><div class="day-num"><div class="d-number">4</div><div class="d-label">Day</div></div><div class="day-body"><h4><span class="day-emoji">&#x1F91D;</span> Join Your Community</h4><p>Based on your domain: Offensive &#8594; HackTheBox Discord. SOC &#8594; BlueTeamLabs Discord. GRC &#8594; LinkedIn groups. Everyone &#8594; null.community. Register for the next local meetup.</p><span class="day-action">null.community</span></div></div>
+    <div class="day-card"><div class="day-num"><div class="d-number">5</div><div class="d-label">Day</div></div><div class="day-body"><h4><span class="day-emoji">&#x1F427;</span> Complete One TryHackMe Room</h4><p>Log into TryHackMe. Finish 'Linux Fundamentals Part 1'. The Linux CLI is the foundation of every domain — this is non-negotiable.</p><span class="day-action">Linux Fundamentals Part 1</span></div></div>
+    <div class="day-card"><div class="day-num"><div class="d-number">6</div><div class="d-label">Day</div></div><div class="day-body"><h4><span class="day-emoji">&#x1F4BC;</span> LinkedIn Update</h4><p>Update headline: 'Computer Engineering Student | Cybersecurity | (ISC)&#178; CC Candidate'. Follow 5 Indian + 5 global security professionals. Signal your intent to the industry.</p><span class="day-action">linkedin.com</span></div></div>
+    <div class="day-card"><div class="day-num"><div class="d-number">7</div><div class="d-label">Day</div></div><div class="day-body"><h4><span class="day-emoji">&#x1F52C;</span> Domain Deep-Dive (30 min)</h4><p>Offensive: read a HackTheBox writeup. SOC: watch a Wazuh/Splunk intro video. AppSec: read the OWASP Top 10 overview. GRC: read the DPDP Act 2023 summary. Write 5 things you learned.</p><span class="day-action">30 minutes of focused learning</span></div></div>
+  </div>
+  <div class="day-highlight"><h3>Every Action Above Costs &#8377;0</h3><p>No courses to buy. No tools to purchase. No subscriptions needed. Your entire first week of cybersecurity education is free — the only investment is your time and commitment.</p><div class="cost-badge">&#x1F4B0; Total Cost: &#8377;0 — Zero Rupees</div></div>
+</section>
+
+<!-- TAB 7: RESOURCES -->
+<section class="tab-content" id="tab-resources" data-print-title="Section 7 — Resources &amp; Community Hub" role="tabpanel">
+  <div style="margin-bottom:10px"></div>
+  <h2 class="section-title">Resources &amp; <span>Community Hub</span></h2>
+  <p class="section-subtitle">Every link you need in one place — India communities, conferences, certifications, threat intel, and daily reading. Bookmark this tab.</p>
+
+  <div class="resource-section">
+    <div class="resource-section-title"><div class="rs-icon">&#x1F1EE;&#x1F1F3;</div> India Cybersecurity Communities</div>
+    <div class="resource-grid">
+      <div class="resource-card"><div class="rc-icon">&#x1F513;</div><div class="rc-body"><h4>null Community India</h4><p>India's largest grassroots infosec community. Free monthly meetups in Bangalore, Hyderabad, Mumbai, Chennai, Pune, Delhi.</p><a href="https://null.community" target="_blank" rel="noopener">null.community</a></div><span class="rc-tag rc-free">Free</span></div>
+      <div class="resource-card"><div class="rc-icon">&#x1F310;</div><div class="rc-body"><h4>OWASP India Chapters</h4><p>20+ active India chapters focused on application and web security. Monthly practitioner talks. Open to students.</p><a href="https://owasp.org/chapters" target="_blank" rel="noopener">owasp.org/chapters</a></div><span class="rc-tag rc-free">Free</span></div>
+      <div class="resource-card"><div class="rc-icon">&#x1F4CA;</div><div class="rc-body"><h4>DSCI (Data Security Council of India)</h4><p>Publishes salary reports, India-specific threat research, and job boards. Organises AISS, India's largest security event.</p><a href="https://dsci.in" target="_blank" rel="noopener">dsci.in</a></div><span class="rc-tag rc-free">Free Student Membership</span></div>
+      <div class="resource-card"><div class="rc-icon">&#x1F4AC;</div><div class="rc-body"><h4>HackTheBox India Discord</h4><p>Active Indian CTF and ethical hacking community. 24/7 beginner help. Regular team CTF events.</p><a href="https://hackthebox.com" target="_blank" rel="noopener">hackthebox.com &#8594; Discord &#8594; India</a></div><span class="rc-tag rc-free">Free</span></div>
+    </div>
+  </div>
+
+  <div class="resource-section">
+    <div class="resource-section-title"><div class="rs-icon">&#x1F3A4;</div> India Conferences &amp; Events</div>
+    <div class="resource-grid">
+      <div class="resource-card"><div class="rc-icon">&#x1F3C6;</div><div class="rc-body"><h4>Nullcon</h4><p>India's premier security conference (Goa/Delhi). Best networking opportunity in India. Student passes heavily discounted.</p><a href="https://nullcon.net" target="_blank" rel="noopener">nullcon.net</a></div><span class="rc-tag rc-conf">Conference</span></div>
+      <div class="resource-card"><div class="rc-icon">&#x1F6E1;&#xFE0F;</div><div class="rc-body"><h4>C0c0n</h4><p>Kerala-based security conference with student pricing. Strong focus on governance and emerging threats.</p><a href="https://c0c0n.org" target="_blank" rel="noopener">c0c0n.org</a></div><span class="rc-tag rc-conf">Conference</span></div>
+    </div>
+  </div>
+
+  <div class="resource-section">
+    <div class="resource-section-title"><div class="rs-icon">&#x1F41B;</div> Bug Bounty Platforms</div>
+    <div class="resource-grid">
+      <div class="resource-card"><div class="rc-icon">&#x1F50D;</div><div class="rc-body"><h4>HackerOne</h4><p>World's largest bug bounty platform. Start with beginner-friendly programs. Indian companies including Razorpay and government portals.</p><a href="https://hackerone.com" target="_blank" rel="noopener">hackerone.com</a></div><span class="rc-tag rc-free">Free to Join</span></div>
+      <div class="resource-card"><div class="rc-icon">&#x1F41E;</div><div class="rc-body"><h4>Bugcrowd</h4><p>Alternative bug bounty platform with many Indian programs. Get paid for finding real vulnerabilities.</p><a href="https://bugcrowd.com" target="_blank" rel="noopener">bugcrowd.com</a></div><span class="rc-tag rc-free">Free to Join</span></div>
+    </div>
+  </div>
+
+  <div class="resource-section">
+    <div class="resource-section-title"><div class="rs-icon">&#x1F4DC;</div> Certification Starting Points</div>
+    <div class="resource-grid">
+      <div class="resource-card"><div class="rc-icon">&#x1F193;</div><div class="rc-body"><h4>(ISC)&#178; Certified in Cybersecurity (CC)</h4><p>Completely free certification. Perfect first milestone for students and career switchers.</p><a href="https://isc2.org/certifications/cc" target="_blank" rel="noopener">isc2.org/certifications/cc</a></div><span class="rc-tag rc-free">Free</span></div>
+      <div class="resource-card"><div class="rc-icon">&#x1F510;</div><div class="rc-body"><h4>CompTIA Security+</h4><p>Industry-standard entry certification. Widely recognised by employers globally.</p><a href="https://comptia.org/certifications/security" target="_blank" rel="noopener">comptia.org</a></div><span class="rc-tag rc-conf">Paid Exam</span></div>
+      <div class="resource-card"><div class="rc-icon">&#x2694;&#xFE0F;</div><div class="rc-body"><h4>eJPT (eLearnSecurity)</h4><p>Affordable, beginner-friendly pentesting cert. Hands-on practical exam.</p><a href="https://ine.com/certifications/ejpt" target="_blank" rel="noopener">ine.com/certifications/ejpt</a></div><span class="rc-tag rc-conf">Paid Exam</span></div>
+      <div class="resource-card"><div class="rc-icon">&#x1F3C5;</div><div class="rc-body"><h4>OSCP (Offensive Security)</h4><p>The gold-standard offensive cert. 24-hour hands-on exam. Highly respected by employers worldwide.</p><a href="https://offsec.com/courses/pen-200" target="_blank" rel="noopener">offsec.com/courses/pen-200</a></div><span class="rc-tag rc-conf">Paid Exam</span></div>
+    </div>
+  </div>
+
+  <div class="resource-section">
+    <div class="resource-section-title"><div class="rs-icon">&#x1F4E1;</div> Threat Intelligence &amp; Daily Reading</div>
+    <div class="resource-grid">
+      <div class="resource-card"><div class="rc-icon">&#x1F5FA;&#xFE0F;</div><div class="rc-body"><h4>MITRE ATT&amp;CK</h4><p>Globally accessible knowledge base of adversary tactics, techniques, and procedures. Essential for SOC and threat intel.</p><a href="https://attack.mitre.org" target="_blank" rel="noopener">attack.mitre.org</a></div><span class="rc-tag rc-intel">Intel</span></div>
+      <div class="resource-card"><div class="rc-icon">&#x1F522;</div><div class="rc-body"><h4>CVE Database</h4><p>Complete list of publicly known vulnerabilities. Every CVE assigned a unique identifier.</p><a href="https://cve.mitre.org" target="_blank" rel="noopener">cve.mitre.org</a></div><span class="rc-tag rc-intel">Intel</span></div>
+      <div class="resource-card"><div class="rc-icon">&#x1F51F;</div><div class="rc-body"><h4>OWASP Top 10</h4><p>The most critical web application security risks. Updated periodically. Foundation of AppSec knowledge.</p><a href="https://owasp.org/Top10" target="_blank" rel="noopener">owasp.org/Top10</a></div><span class="rc-tag rc-intel">Intel</span></div>
+      <div class="resource-card"><div class="rc-icon">&#x1F1EE;&#x1F1F3;</div><div class="rc-body"><h4>CERT-In</h4><p>Indian Computer Emergency Response Team. Official threat advisories for Indian organisations.</p><a href="https://cert-in.org.in" target="_blank" rel="noopener">cert-in.org.in</a></div><span class="rc-tag rc-intel">India</span></div>
+      <div class="resource-card"><div class="rc-icon">&#x1F4F0;</div><div class="rc-body"><h4>Krebs on Security</h4><p>Trusted cybersecurity journalism and breach reporting by Brian Krebs.</p><a href="https://krebsonsecurity.com" target="_blank" rel="noopener">krebsonsecurity.com</a></div><span class="rc-tag rc-intel">News</span></div>
+      <div class="resource-card"><div class="rc-icon">&#x1F4F0;</div><div class="rc-body"><h4>The Hacker News</h4><p>Daily cybersecurity news, vulnerability disclosures, and threat analysis. Free.</p><a href="https://thehackernews.com" target="_blank" rel="noopener">thehackernews.com</a></div><span class="rc-tag rc-intel">News</span></div>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<!-- BACK TO TOP -->
+<button class="back-to-top" id="backToTop" onclick="window.scrollTo({top:0,behavior:'smooth'})" aria-label="Back to top">&#x2191;</button>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <p><span>Architect U'r Career</span> | <span class="author">Krishna Mohan Parsha</span></p>
+  <span class="updated">Last Updated: March 2026</span>
+</footer>
+
+<script>
+const tabBtns=document.querySelectorAll('.tab-btn'),tabContents=document.querySelectorAll('.tab-content');
+tabBtns.forEach(b=>b.addEventListener('click',()=>{tabBtns.forEach(x=>{x.classList.remove('active');x.setAttribute('aria-selected','false')});tabContents.forEach(c=>c.classList.remove('active'));b.classList.add('active');b.setAttribute('aria-selected','true');document.getElementById('tab-'+b.dataset.tab).classList.add('active');window.scrollTo({top:document.getElementById('tabNav').offsetTop-10,behavior:'smooth'})}));
+
+document.getElementById('tabNav').addEventListener('keydown',e=>{const tabs=Array.from(tabBtns),idx=tabs.indexOf(document.activeElement);if(idx===-1)return;let n=-1;if(e.key==='ArrowRight'||e.key==='ArrowDown'){n=(idx+1)%tabs.length;e.preventDefault()}else if(e.key==='ArrowLeft'||e.key==='ArrowUp'){n=(idx-1+tabs.length)%tabs.length;e.preventDefault()}else if(e.key==='Home'){n=0;e.preventDefault()}else if(e.key==='End'){n=tabs.length-1;e.preventDefault()}if(n>=0){tabs[n].focus();tabs[n].click()}});
+
+const backBtn=document.getElementById('backToTop');
+window.addEventListener('scroll',()=>backBtn.classList.toggle('visible',window.scrollY>400),{passive:true});
+
+function toggleDetail(c){const d=c.querySelector('.domain-detail'),s=d.classList.contains('show');document.querySelectorAll('.domain-detail').forEach(x=>x.classList.remove('show'));if(!s)d.classList.add('show')}
+
+document.querySelectorAll('.filter-btn').forEach(b=>b.addEventListener('click',()=>{document.querySelectorAll('.filter-btn').forEach(x=>x.classList.remove('active'));b.classList.add('active');const f=b.dataset.filter;document.querySelectorAll('#careerBody tr').forEach(r=>r.classList.toggle('hidden',f!=='all'&&r.dataset.domain!==f))}));
+
+const Q={offensive:{domain:'Offensive Security & Ethical Hacking',role:'Junior Penetration Tester / Bug Bounty Hunter',certs:['eJPT (entry)','OSCP (gold standard)','CRTO','GPEN'],skills:['Reconnaissance — OSINT, Maltego, Shodan','Vulnerability scanning — Nessus, OpenVAS','Exploitation — Metasploit, manual CVE exploitation','Web app testing — Burp Suite Pro','AD attacks — Kerberoasting, Pass-the-Hash, BloodHound'],next:'Start with TryHackMe Offensive Pentesting path, then move to HackTheBox.'},soc:{domain:'Security Operations & Incident Response',role:'SOC Analyst Tier 1 / Junior Incident Responder',certs:['CompTIA CySA+','BTL1','GCIH','Microsoft SC-200'],skills:['SIEM — Wazuh, Splunk, Sentinel','Detection — YARA, Sigma rules','IR lifecycle — NIST framework','DFIR basics — Volatility, Autopsy','MITRE ATT&CK — TTPs & IOC analysis'],next:'Start with LetsDefend and BlueTeamLabs for SOC simulation.'},appsec:{domain:'Application Security (AppSec)',role:'Junior AppSec Analyst / DevSecOps Engineer',certs:['CEH','GWEB','CSSLP'],skills:['OWASP Top 10 — injection, XSS, SSRF','Secure coding — input validation, parameterised queries','SAST/DAST — Burp Suite, ZAP, SonarQube','API security — OAuth 2.0, JWT vulns','DevSecOps — CI/CD pipeline security'],next:'Start with OWASP WebGoat / DVWA for hands-on practice.'},cloud:{domain:'Cloud Security',role:'Junior Cloud Security Analyst / Cloud IAM Specialist',certs:['AWS Security Specialty','AZ-500','CCSP (ISC\u00B2)','CCSK'],skills:['Shared Responsibility Model','Cloud misconfigurations — S3, IAM roles','Cloud-native security tools','Container & Kubernetes security','IaC security — Terraform, CloudFormation'],next:'Start with AWS free tier + cloud security labs on TryHackMe.'},grc:{domain:'Governance, Risk & Compliance (GRC)',role:'GRC Analyst / Compliance Officer / Junior Auditor',certs:['CISA','CISM','CRISC','ISO 27001 Lead Implementer'],skills:['Risk management — qualitative & quantitative','Frameworks — ISO 27001, NIST CSF, CIS Controls','Regulations — DPDP Act, GDPR, PCI DSS','Policy writing & documentation','Audit & third-party risk management'],next:'Read the DPDP Act 2023 summary and explore ISO 27001 basics.'},iam:{domain:'Identity & Access Management (IAM)',role:'IAM Analyst / PAM Specialist',certs:['SC-300 (Microsoft)','SailPoint IdentityNow','CIAM'],skills:['Authentication — MFA, FIDO2, passwordless','Authorisation — RBAC, ABAC, zero trust','Active Directory & Entra ID','PAM tools — CyberArk, BeyondTrust','SSO & Federation — SAML, OAuth 2.0'],next:'Start with Active Directory labs on TryHackMe or HackTheBox.'},network:{domain:'Network Security',role:'Network Security Analyst / Junior Firewall Engineer',certs:['CompTIA Network+','CompTIA Security+','Cisco CCNA CyberOps'],skills:['TCP/IP, subnetting, routing, DNS','Firewall config — stateful inspection','IDS/IPS — Snort, Suricata, Zeek','Packet analysis — Wireshark, tcpdump','Network segmentation — DMZ, VLANs'],next:'Start with Professor Messer Network+ videos and TryHackMe networking rooms.'},broad:{domain:'Start Broad — Security Generalist',role:'Security Generalist \u2192 Specialise at 12 months',certs:['(ISC)\u00B2 CC (free)','CompTIA Security+'],skills:['CIA Triad & security fundamentals','Networking basics (TCP/IP, DNS)','Linux & Windows fundamentals','Common attack types & defenses','Security tools overview across domains'],next:'Complete TryHackMe Pre-Security path. After 90 days, your preference will be obvious.'}};
+
+function selectQuiz(el){document.querySelectorAll('.quiz-option').forEach(o=>o.classList.remove('selected'));el.classList.add('selected');const d=Q[el.dataset.result],r=document.getElementById('quizResult');r.innerHTML='<h3>Your Domain Match</h3><div class="result-domain">'+d.domain+'</div><div class="result-role">Recommended First Role: '+d.role+'</div><div class="result-details"><h4>Certification Path</h4><ul>'+d.certs.map(c=>'<li>'+c+'</li>').join('')+'</ul><h4 style="margin-top:14px">Core Skills to Build</h4><ul>'+d.skills.map(s=>'<li>'+s+'</li>').join('')+'</ul><h4 style="margin-top:14px">Your Next Step</h4><ul><li>'+d.next+'</li></ul></div><button class="reset-btn" onclick="resetQuiz()">\u21BB Try Again</button>';r.classList.add('show');setTimeout(()=>r.scrollIntoView({behavior:'smooth',block:'center'}),100)}
+
+function resetQuiz(){document.querySelectorAll('.quiz-option').forEach(o=>o.classList.remove('selected'));const r=document.getElementById('quizResult');r.classList.remove('show');r.innerHTML=''}
+
+function toggleTimeline(b){const a=b.querySelector('.timeline-actions'),s=a.classList.contains('show');document.querySelectorAll('.timeline-actions').forEach(x=>x.classList.remove('show'));if(!s)a.classList.add('show')}
+</script>
+</body>
+</html>
