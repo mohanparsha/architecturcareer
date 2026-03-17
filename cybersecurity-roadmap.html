@@ -276,17 +276,64 @@ body::before { content: ''; position: fixed; inset: 0; background: radial-gradie
   .day-num .d-number { font-size: 1.2rem; } .day-body { padding: 14px 16px; }
 }
 
+/* PRINT FOOTER (hidden on screen, repeats on every printed page) */
+.print-footer {
+  display: none;
+}
+
 /* PRINT */
 @media print {
-  body { background: #fff !important; color: #111 !important; } body::before { display: none; }
-  .tab-nav, .back-to-top, .print-btn { display: none !important; }
+  @page {
+    margin: 18mm 12mm 28mm 12mm;
+    size: A4;
+  }
+  body { background: #fff !important; color: #111 !important; }
+  body::before { display: none; }
+  .tab-nav, .back-to-top, .print-btn, .scroll-hint, .hint-text { display: none !important; }
+  .footer { display: none !important; }
+
+  /* Print footer — fixed position repeats on every page in Chromium */
+  .print-footer {
+    display: block !important;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    padding: 8px 20px;
+    text-align: center;
+    font-family: 'Outfit', sans-serif;
+    font-size: 9pt;
+    color: #059669;
+    border-top: 1.5px solid #059669;
+    background: #fff;
+    z-index: 9999;
+  }
+  .print-footer .pf-brand {
+    font-weight: 700;
+    color: #059669;
+  }
+  .print-footer .pf-author {
+    font-weight: 700;
+    color: #111;
+  }
+  .print-footer .pf-updated {
+    font-size: 7.5pt;
+    color: #666;
+    font-family: 'JetBrains Mono', monospace;
+    margin-left: 12px;
+  }
+  .print-footer .pf-page::after {
+    content: counter(page);
+  }
+
   .tab-content { display: block !important; page-break-inside: avoid; padding: 20px 0; border-bottom: 1px solid #ccc; }
   .tab-content::before { content: attr(data-print-title); display: block; font-size: 1.2rem; font-weight: 700; color: #059669; margin-bottom: 14px; border-bottom: 2px solid #059669; padding-bottom: 6px; }
   .domain-card, .career-table-wrap, .quiz-container, .timeline-card, .foundation-card, .platform-card, .day-card, .resource-card, .convergence-box, .day-highlight, .quiz-intro { background: #f8fafc !important; border-color: #d1d5db !important; color: #111 !important; box-shadow: none !important; transform: none !important; }
-  .section-title, .section-title span, h3, h4 { color: #111 !important; } .section-title span { color: #059669 !important; }
-  .domain-detail { display: block !important; } .timeline-actions { display: block !important; }
+  .section-title, .section-title span, h3, h4 { color: #111 !important; }
+  .section-title span { color: #059669 !important; }
+  .domain-detail { display: block !important; }
+  .timeline-actions { display: block !important; }
   .hero { padding: 20px 0; }
-  .footer { border-color: #d1d5db; } .footer p, .footer p span, .footer p .author { color: #111 !important; }
   a { color: #059669 !important; }
 }
 </style>
@@ -503,6 +550,12 @@ body::before { content: ''; position: fixed; inset: 0; background: radial-gradie
 </section>
 
 </main>
+
+<!-- PRINT FOOTER (repeats on every page when printing / saving as PDF) -->
+<div class="print-footer">
+  <span class="pf-brand">Architect U'r Career</span> | <span class="pf-author">Krishna Mohan Parsha</span>
+  <span class="pf-updated">Last Updated: March 2026</span>
+</div>
 
 <!-- BACK TO TOP -->
 <button class="back-to-top" id="backToTop" onclick="window.scrollTo({top:0,behavior:'smooth'})" aria-label="Back to top">&#x2191;</button>
