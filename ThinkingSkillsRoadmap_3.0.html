@@ -300,7 +300,7 @@ main{max-width:1380px;margin:0 auto;padding:2rem 1.5rem 3.5rem}
 ══════════════════════════════════════════ */
 footer{background:var(--s1);border-top:1px solid var(--bd);margin-top:3.5rem}
 .ft{max-width:1380px;margin:0 auto;padding:1.1rem 1.5rem;
-  display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:.65rem}
+  display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;gap:.45rem}
 .fdefs{font-size:.73rem;color:var(--t3);line-height:1.85}
 .fb{background:var(--bg);border-top:1px solid var(--bd)}
 .fbi{max-width:1380px;margin:0 auto;padding:.7rem 1.5rem;
@@ -313,19 +313,153 @@ footer{background:var(--s1);border-top:1px solid var(--bd);margin-top:3.5rem}
 /* ══════════════════════════════════════════
    RESPONSIVE
 ══════════════════════════════════════════ */
+
+/* ── Bottom Nav Bar (mobile only, hidden on desktop) ── */
+.bnav{display:none}
+
 @media(max-width:1024px){
   .sg{grid-template-columns:1fr}.mseq{grid-template-columns:1fr}
   .fwin{grid-template-columns:1fr 1fr}
   .g3{grid-template-columns:1fr 1fr}
 }
+
 @media(max-width:768px){
+  /* ── LAYOUT ── */
   main{padding:1.25rem 1rem 2.5rem}
-  .hi{padding:0 1rem}.ab{padding:6px 10px;font-size:.7rem}
+  .hi{padding:0 1rem}
   .stats{flex-direction:column}
   .fwin{grid-template-columns:1fr}
   .g3,.g2{grid-template-columns:1fr}
   .stabs{width:100%}
-  .ft{flex-direction:column}
+  .plan-intro{grid-template-columns:1fr}
+  .prog-ov{grid-template-columns:1fr 1fr}
+  .total-prog{flex-direction:column;align-items:flex-start}
+  .reset-btn{margin-left:0}
+
+  /* ── HIDE HEADER NAV, SHOW BOTTOM BAR ── */
+  nav[role="tablist"]{display:none}
+  .vdiv{display:none}
+  .hi{justify-content:space-between;height:50px}
+  .ab{padding:7px 12px;font-size:.72rem}
+
+  .bnav{
+    display:flex;
+    position:fixed;bottom:0;left:0;right:0;z-index:200;
+    background:rgba(6,13,27,.98);
+    backdrop-filter:blur(16px);
+    border-top:1px solid var(--bd);
+    padding:4px 4px calc(4px + env(safe-area-inset-bottom,0px));
+    gap:2px;
+    justify-content:space-around;
+  }
+  .bnav .bn{
+    display:flex;flex-direction:column;align-items:center;justify-content:center;
+    gap:2px;padding:6px 2px;
+    background:none;border:none;border-radius:8px;
+    color:var(--t3);cursor:pointer;
+    font-family:var(--ff);font-size:.58rem;font-weight:600;
+    letter-spacing:.02em;
+    flex:1;min-width:0;
+    transition:all .2s;
+    -webkit-tap-highlight-color:transparent;
+    min-height:48px;
+  }
+  .bnav .bn .bn-ico{font-size:1.15rem;line-height:1}
+  .bnav .bn:hover,.bnav .bn:active{color:var(--t2);background:var(--s2)}
+  .bnav .bn.on{color:var(--green);background:var(--gx)}
+  .bnav .bn.on .bn-lbl{color:var(--green)}
+
+  /* Pad body so content isn't hidden behind bottom bar */
+  body{padding-bottom:68px}
+
+  /* ── TYPOGRAPHY — MOBILE READABILITY ── */
+  p{font-size:.92rem;line-height:1.75;color:#a8b8cc}
+  .sc p{font-size:.88rem}
+  .fws p,.fws li{font-size:.88rem}
+  .fc .fb2 p{font-size:.85rem}
+  .fc .fsteps li{font-size:.82rem}
+  .ib{font-size:.88rem;line-height:1.6}
+  h2{font-size:clamp(1.25rem,5vw,1.6rem)}
+
+  /* ── TOUCH TARGETS ── */
+  .sbt{padding:9px 14px;font-size:.8rem;min-height:40px}
+  .rbt{padding:9px 14px;font-size:.8rem;min-height:40px}
+  .plan-btn{padding:11px 18px;font-size:.82rem;min-height:44px}
+  .fwh{padding:1rem;min-height:52px}
+  .ci{padding:11px .9rem;min-height:44px}
+  .rc-link{padding:8px 14px;font-size:.78rem;min-height:40px}
+
+  /* ── FRAMEWORK ACCORDION ── */
+  .fwnm{font-size:.88rem}
+  .fwtl{font-size:.82rem}
+  .fwin{padding:.85rem .9rem 1rem;gap:.85rem}
+
+  /* ── FOUNDATION CARDS ── */
+  .fg{grid-template-columns:1fr}
+  .fc{padding:.9rem}
+
+  /* ── INLINE GRIDS — prevent overflow on 320px ── */
+  .res-grid{grid-template-columns:1fr}
+
+  /* ── LEARNING PLAN CARDS ── */
+  .month-grid{grid-template-columns:1fr}
+  .mc-body{padding:.75rem}
+  .wk li{font-size:.82rem;line-height:1.55}
+  .milestone{font-size:.8rem}
+
+  /* ── ASSESSMENT MODAL ── */
+  .modal{padding:1.5rem 1.25rem;max-width:100%;border-radius:12px}
+  .aqt{font-size:.95rem}
+  .aopt{padding:.75rem .9rem;font-size:.88rem;min-height:48px}
+
+  /* ── FOOTER ── */
+  .fdefs{text-align:center;font-size:.76rem}
+  .fbi{flex-wrap:wrap;justify-content:center;gap:4px}
+  .fsep{margin:0 6px}
+  .fauc,.fname,.fdoc{font-size:.76rem}
+}
+
+@media(max-width:480px){
+  .brand-s{display:none}
+  .msteps{width:100%}
+
+  /* ── FURTHER TYPOGRAPHY BOOST ── */
+  p{font-size:.94rem}
+  h2{font-size:1.2rem}
+  .fwnm{font-size:.86rem}
+
+  /* ── STATS BAR ── */
+  .stv{font-size:1.3rem}
+  .stl{font-size:.72rem}
+
+  /* ── BOTTOM NAR LABEL ── */
+  .bnav .bn{font-size:.55rem}
+  .bnav .bn .bn-ico{font-size:1.05rem}
+
+  /* ── PROGRESS TRACKER ── */
+  .prog-ov{grid-template-columns:1fr}
+
+  /* ── GLOSSARY ── */
+  #rs-gl > div{grid-template-columns:1fr !important}
+
+  /* ── QUICK START / DECISION AID safe min ── */
+  .card{padding:1rem}
+}
+
+@media(max-width:360px){
+  /* Very small phones — tighten spacing */
+  main{padding:1rem .75rem 2rem}
+  .hi{padding:0 .75rem;gap:.5rem}
+  .bnav .bn{padding:5px 1px;min-height:44px}
+  .bnav .bn .bn-ico{font-size:1rem}
+  .bnav .bn{font-size:.5rem}
+  .ab{font-size:.66rem;padding:6px 8px}
+}
+
+@media print{
+  header{position:static}.ovl,.ab,.bnav{display:none!important}
+  body{padding-bottom:0}
+  *{print-color-adjust:exact;-webkit-print-color-adjust:exact}
 }
 /* ══════════════════════════════════════════
    LEARNING PLANS
@@ -477,24 +611,7 @@ footer{background:var(--s1);border-top:1px solid var(--bd);margin-top:3.5rem}
 .ci-dt{background:var(--ax);color:#fbbf24}
 .ci-fo{background:var(--gx);color:var(--green)}
 
-@media(max-width:1024px){.prog-ov{grid-template-columns:1fr 1fr}}
-@media(max-width:768px){
-  .plan-intro{grid-template-columns:1fr}
-  .prog-ov{grid-template-columns:1fr 1fr}
-  .total-prog{flex-direction:column;align-items:flex-start}
-  .reset-btn{margin-left:0}
-}
-@media(max-width:480px){.prog-ov{grid-template-columns:1fr 1fr}}
-
-/* ── keep original mobile rules ── */
-@media(max-width:480px){
-  .brand-s{display:none}
-  .msteps{width:100%}
-}
-@media print{
-  header{position:static}.ovl,.ab{display:none!important}
-  *{print-color-adjust:exact;-webkit-print-color-adjust:exact}
-}
+/* ── (mobile plan/progress rules merged into main responsive block above) ── */
 </style>
 </head>
 <body>
@@ -526,6 +643,28 @@ footer{background:var(--s1);border-top:1px solid var(--bd);margin-top:3.5rem}
     <button class="ab" onclick="openA()">⚡ Self-Assessment</button>
   </div>
 </header>
+
+<!-- ════ BOTTOM NAV BAR (mobile only, hidden on desktop via CSS) ════ -->
+<div class="bnav" id="bnav">
+  <button class="bn on" data-tab="ov" onclick="gT('ov',document.getElementById('nav-ov'),this)">
+    <span class="bn-ico">📊</span><span class="bn-lbl">Overview</span>
+  </button>
+  <button class="bn" data-tab="fo" onclick="gT('fo',document.getElementById('nav-fo'),this)">
+    <span class="bn-ico">🧱</span><span class="bn-lbl">Found.</span>
+  </button>
+  <button class="bn" data-tab="fw" onclick="gT('fw',document.getElementById('nav-fw'),this)">
+    <span class="bn-ico">🧩</span><span class="bn-lbl">Frames</span>
+  </button>
+  <button class="bn" data-tab="pl" onclick="gT('pl',document.getElementById('nav-pl'),this)">
+    <span class="bn-ico">📅</span><span class="bn-lbl">Plans</span>
+  </button>
+  <button class="bn" data-tab="rs" onclick="gT('rs',document.getElementById('nav-rs'),this)">
+    <span class="bn-ico">📚</span><span class="bn-lbl">Resources</span>
+  </button>
+  <button class="bn" data-tab="pg" onclick="gT('pg',document.getElementById('nav-pg'),this)">
+    <span class="bn-ico">✅</span><span class="bn-lbl">Progress</span>
+  </button>
+</div>
 
 <!-- ════ MAIN ════ -->
 <main>
@@ -839,7 +978,7 @@ footer{background:var(--s1);border-top:1px solid var(--bd);margin-top:3.5rem}
         <h4 style="font-size:.92rem;margin:0">Your Thinking Journal — Daily Template</h4>
       </div>
     </div>
-    <div style="padding:1rem;display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:.85rem">
+    <div style="padding:1rem;display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:.85rem">
       <div>
         <div style="font-family:var(--fm);font-size:.63rem;color:var(--green);letter-spacing:.1em;text-transform:uppercase;margin-bottom:.45rem">5 Daily Core Questions (5–10 min)</div>
         <ol style="padding-left:1.1rem">
@@ -1892,7 +2031,7 @@ footer{background:var(--s1);border-top:1px solid var(--bd);margin-top:3.5rem}
       </div>
       <div style="padding:1rem">
         <p style="font-size:.82rem;margin-bottom:.85rem">Faced with a new problem, use the Master Sequence (DT → AT → CT) — but within each skill, this aid helps you pick the right entry framework. Start at the top and follow the first "Yes."</p>
-        <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:.85rem">
+        <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:.85rem">
 
           <div style="background:var(--ax);border:1px solid rgba(245,158,11,.25);border-radius:6px;padding:.75rem">
             <div style="font-family:var(--ff);font-size:.82rem;font-weight:700;color:#fbbf24;margin-bottom:.5rem">💡 Step 1 — Frame the Right Problem (DT)</div>
@@ -1983,7 +2122,7 @@ footer{background:var(--s1);border-top:1px solid var(--bd);margin-top:3.5rem}
       <h3 style="margin-bottom:.75rem;font-size:1rem;color:var(--green)">🧪 Worked Example — All 3 Skills on One Real Problem</h3>
       <div class="ib ib-b" style="margin-bottom:1rem">This walkthrough demonstrates the Master Sequence applied to a single problem: <strong>"My exam scores have been declining for three months despite studying more."</strong> Follow each step to see exactly what each skill contributes — and what the others would have missed.</div>
 
-      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:1rem">
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:1rem">
 
         <div style="background:var(--s1);border:1px solid var(--bd);border-radius:var(--r);overflow:hidden">
           <div style="background:var(--bx);border-bottom:1px solid rgba(59,130,246,.25);padding:.6rem 1rem;display:flex;align-items:center;gap:.6rem">
@@ -2910,7 +3049,7 @@ footer{background:var(--s1);border-top:1px solid var(--bd);margin-top:3.5rem}
   <!-- ── GLOSSARY ── -->
   <div class="res-sec" id="rs-gl">
     <div class="res-note">32 key terms used throughout this guide — alphabetical order. Each entry notes which framework or foundation uses it most directly.</div>
-    <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(310px,1fr));gap:.75rem">
+    <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:.75rem">
 
       <div style="background:var(--s1);border:1px solid var(--bd);border-radius:var(--rs);padding:.85rem"><div style="font-family:var(--ff);font-size:.84rem;font-weight:700;color:var(--w);margin-bottom:.25rem">Abductive Reasoning</div><p style="font-size:.79rem;margin-bottom:.25rem">Inference to the best explanation from incomplete data. Used in diagnosis and investigation. Distinct from deductive (certainty) and inductive (probability).</p><span style="font-family:var(--fm);font-size:.6rem;color:var(--green)">→ Foundation 02: Logical Reasoning</span></div>
 
@@ -3061,7 +3200,6 @@ footer{background:var(--s1);border-top:1px solid var(--bd);margin-top:3.5rem}
     </div>
     <div style="font-size:.73rem;color:var(--t3)">
       WEF Future of Jobs 2025 &nbsp;·&nbsp; 19 Frameworks &nbsp;·&nbsp; 10 Foundations &nbsp;·&nbsp; 3 Learning Plans &nbsp;·&nbsp; v3.0 — March 2026
-      &nbsp;&nbsp;<button onclick="window.print()" style="padding:3px 9px;background:none;border:1px solid var(--bd);border-radius:4px;color:var(--t3);font-size:.7rem;cursor:pointer;transition:all .2s;font-family:var(--ff)" onmouseover="this.style.borderColor='var(--bdl)';this.style.color='var(--w)'" onmouseout="this.style.borderColor='var(--bd)';this.style.color='var(--t3)'">🖨 Print current tab</button>
     </div>
   </div>
   <div class="fb">
@@ -3087,12 +3225,21 @@ function collapseAllFW() {
 }
 
 /* ── Tab switching ── */
-function gT(id, btn) {
+function gT(id, btn, bnBtn) {
+  /* Clear all tabs */
   document.querySelectorAll('.tab').forEach(t => t.classList.remove('on'));
   document.querySelectorAll('.nb').forEach(b => { b.classList.remove('on'); b.setAttribute('aria-selected','false'); });
+  document.querySelectorAll('.bnav .bn').forEach(b => b.classList.remove('on'));
+  /* Show selected tab */
   const el = document.getElementById('tab-' + id);
   if (el) el.classList.add('on');
+  /* Sync header nav */
   if (btn) { btn.classList.add('on'); btn.setAttribute('aria-selected','true'); }
+  const hb = document.getElementById('nav-' + id);
+  if (hb && hb !== btn) { hb.classList.add('on'); hb.setAttribute('aria-selected','true'); }
+  /* Sync bottom nav */
+  if (bnBtn) { bnBtn.classList.add('on'); }
+  else { const bn = document.querySelector('.bnav .bn[data-tab="'+id+'"]'); if(bn) bn.classList.add('on'); }
   window.scrollTo({ top: 0, behavior: 'smooth' });
   if (id === 'pg') renderProgress();
 }
