@@ -78,7 +78,7 @@ header{
 }
 .brand{display:flex;flex-direction:column;flex-shrink:0;margin-right:.25rem}
 .brand-n{font-family:var(--ff);font-size:.9rem;font-weight:800;color:var(--green);letter-spacing:-.02em;line-height:1}
-.brand-s{font-size:.58rem;color:var(--t3);letter-spacing:.12em;text-transform:uppercase;margin-top:2px}
+.brand-s{font-size:.58rem;color:#ffffff;letter-spacing:.12em;text-transform:uppercase;margin-top:2px}
 .vdiv{width:1px;height:22px;background:var(--bd);flex-shrink:0}
 nav{flex:1;display:flex;gap:1px;overflow-x:auto;scrollbar-width:none}
 nav::-webkit-scrollbar{display:none}
@@ -311,6 +311,52 @@ footer{background:var(--s1);border-top:1px solid var(--bd);margin-top:3.5rem}
 .fname{font-family:var(--ff);font-size:.82rem;font-weight:600;color:#fff}
 .fdoc{font-family:var(--fm);font-size:.75rem;font-weight:500;color:var(--green);letter-spacing:.04em}
 .fsep{color:#fff;margin:0 11px}
+
+/* ══════════════════════════════════════════
+   LABS
+══════════════════════════════════════════ */
+.lab-tabs{display:flex;gap:3px;padding:4px;background:var(--s2);border-radius:8px;
+  width:fit-content;margin-bottom:1.5rem;flex-wrap:wrap}
+.lbt{padding:6px 14px;background:none;border:none;border-radius:6px;
+  color:var(--t2);font-family:var(--ff);font-size:.78rem;font-weight:600;
+  cursor:pointer;transition:all .2s;white-space:nowrap}
+.lbt:hover{color:var(--w)}
+.lbt.act{background:var(--s3);color:var(--w)}
+.lab-sec{display:none}
+.lab-sec.on{display:block;animation:fu .25s ease}
+
+/* Difficulty badges */
+.diff{display:inline-flex;align-items:center;gap:4px;padding:2px 8px;border-radius:10px;
+  font-family:var(--fm);font-size:.6rem;font-weight:500;letter-spacing:.04em;text-transform:uppercase}
+.diff-f{background:rgba(16,185,129,.12);color:#6ee7b7;border:1px solid rgba(16,185,129,.25)}
+.diff-a{background:rgba(245,158,11,.1);color:#fcd34d;border:1px solid rgba(245,158,11,.25)}
+.diff-x{background:rgba(239,68,68,.1);color:#fca5a5;border:1px solid rgba(239,68,68,.25)}
+
+/* Lab card body sections */
+.lab-grid{display:grid;grid-template-columns:1fr 1fr;gap:1rem}
+.lab-col h5{font-family:var(--fm);font-size:.62rem;color:var(--green);
+  letter-spacing:.14em;text-transform:uppercase;
+  margin-bottom:.4rem;padding-bottom:4px;border-bottom:1px solid var(--bd)}
+.lab-col h5:not(:first-child){margin-top:.75rem}
+.lab-col p{font-size:.82rem}
+.lab-col ul,.lab-col ol{padding-left:1rem}
+.lab-col li{font-size:.82rem;color:var(--t2);margin-bottom:.18rem}
+.rubric{background:var(--s2);border:1px solid var(--bd);border-radius:6px;padding:.65rem .85rem;margin-top:.5rem}
+.rubric ol{padding-left:1.1rem;margin:0}
+.rubric li{font-size:.78rem;color:var(--t2);margin-bottom:.25rem;line-height:1.5}
+.rubric li strong{color:var(--w)}
+.lab-meta{display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin-top:2px}
+.lab-time{display:inline-flex;align-items:center;gap:3px;padding:2px 7px;
+  background:var(--gx);border-radius:4px;font-family:var(--fm);font-size:.6rem;color:var(--green)}
+.lab-fw{display:inline-flex;align-items:center;gap:3px;padding:2px 7px;
+  background:var(--s2);border:1px solid var(--bd);border-radius:4px;font-family:var(--fm);font-size:.6rem;color:var(--t2)}
+.lab-close{background:var(--gx);border:1px solid rgba(16,185,129,.2);border-radius:6px;padding:.55rem .8rem;margin-top:.5rem}
+.lab-close p{font-size:.79rem;color:#a7f3d0;margin:0}
+.lab-close .lc-lbl{font-family:var(--fm);font-size:.6rem;color:var(--green);letter-spacing:.1em;text-transform:uppercase;margin-bottom:.2rem}
+@media(max-width:768px){
+  .lab-grid{grid-template-columns:1fr}
+  .lab-tabs{width:100%}
+}
 
 /* ══════════════════════════════════════════
    RESPONSIVE
@@ -549,7 +595,7 @@ footer{background:var(--s1);border-top:1px solid var(--bd);margin-top:3.5rem}
 /* ══════════════════════════════════════════
    PROGRESS TRACKER
 ══════════════════════════════════════════ */
-.prog-ov{display:grid;grid-template-columns:repeat(4,1fr);gap:.85rem;margin-bottom:1.5rem}
+.prog-ov{display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:.85rem;margin-bottom:1.5rem}
 .pd{background:var(--s1);border:1px solid var(--bd);border-radius:var(--r);padding:.9rem}
 .pd-name{font-family:var(--ff);font-size:.82rem;font-weight:700;margin-bottom:.4rem}
 .pd-track{background:var(--s3);border-radius:4px;height:6px;overflow:hidden;margin-bottom:.3rem}
@@ -558,6 +604,7 @@ footer{background:var(--s1);border-top:1px solid var(--bd);margin-top:3.5rem}
 .pd-at .pd-fill{background:var(--teal)}
 .pd-dt .pd-fill{background:var(--amber)}
 .pd-fo .pd-fill{background:var(--green)}
+.pd-lb .pd-fill{background:var(--purple)}
 .pd-pct{font-family:var(--fm);font-size:.65rem;color:var(--t3)}
 .pd-frac{font-family:var(--fm);font-size:.7rem;color:var(--t2);margin-top:2px}
 .total-prog{
@@ -612,6 +659,7 @@ footer{background:var(--s1);border-top:1px solid var(--bd);margin-top:3.5rem}
 .ci-at{background:var(--tx);color:#22d3ee}
 .ci-dt{background:var(--ax);color:#fbbf24}
 .ci-fo{background:var(--gx);color:var(--green)}
+.ci-lb{background:var(--px);color:#c4b5fd}
 
 /* ── (mobile plan/progress rules merged into main responsive block above) ── */
 </style>
@@ -639,6 +687,7 @@ footer{background:var(--s1);border-top:1px solid var(--bd);margin-top:3.5rem}
       <button class="nb"     id="nav-fo" onclick="gT('fo',this)" role="tab" tabindex="0" aria-selected="false" aria-label="Foundations">🧱 Foundations</button>
       <button class="nb"     id="nav-fw" onclick="gT('fw',this)" role="tab" tabindex="0" aria-selected="false" aria-label="Frameworks">🧩 Frameworks</button>
       <button class="nb"     id="nav-pl" onclick="gT('pl',this)" role="tab" tabindex="0" aria-selected="false" aria-label="Learning Plans">📅 Learning Plans</button>
+      <button class="nb"     id="nav-lb" onclick="gT('lb',this)" role="tab" tabindex="0" aria-selected="false" aria-label="Labs">🧪 Labs</button>
       <button class="nb"     id="nav-rs" onclick="gT('rs',this)" role="tab" tabindex="0" aria-selected="false" aria-label="Resources">📚 Resources</button>
       <button class="nb"     id="nav-pg" onclick="gT('pg',this)" role="tab" tabindex="0" aria-selected="false" aria-label="Progress Tracker">✅ Progress</button>
     </nav>
@@ -659,6 +708,9 @@ footer{background:var(--s1);border-top:1px solid var(--bd);margin-top:3.5rem}
   </button>
   <button class="bn" data-tab="pl" onclick="gT('pl',document.getElementById('nav-pl'),this)">
     <span class="bn-ico">📅</span><span class="bn-lbl">Plans</span>
+  </button>
+  <button class="bn" data-tab="lb" onclick="gT('lb',document.getElementById('nav-lb'),this)">
+    <span class="bn-ico">🧪</span><span class="bn-lbl">Labs</span>
   </button>
   <button class="bn" data-tab="rs" onclick="gT('rs',document.getElementById('nav-rs'),this)">
     <span class="bn-ico">📚</span><span class="bn-lbl">Resources</span>
@@ -2707,6 +2759,443 @@ footer{background:var(--s1);border-top:1px solid var(--bd);margin-top:3.5rem}
   </div>
 </section>
 
+
+<!-- ════════════ TAB: LABS ════════════ -->
+<section class="tab" id="tab-lb">
+  <div class="sh">
+    <div class="sl">Hands-On Practice</div>
+    <h2>36 Thinking Skills Labs</h2>
+    <p>Scenario-based labs that push you from understanding frameworks to <strong>using them fluently under realistic conditions</strong>. Every lab produces a written artefact, includes a self-assessment rubric, and closes with metacognitive reflection. Three difficulty tiers: <span class="diff diff-f">🟢 Foundation</span> <span class="diff diff-a">🟡 Applied</span> <span class="diff diff-x">🔴 Advanced</span></p>
+  </div>
+
+  <div class="ib ib-g">🧪 <strong>Lab Design Principles:</strong> Every lab is scenario-first (you diagnose which framework fits), deliverable-driven (you produce something tangible), time-boxed (30–90 min), and self-assessed via rubric. Advanced labs don't name the framework — you must select the right tool yourself.</div>
+
+  <div class="lab-tabs" id="lab-tabs">
+    <button class="lbt act" onclick="gLB('lfo',this)">🧱 Foundations (6)</button>
+    <button class="lbt" onclick="gLB('lct',this)">🔬 Critical Thinking (6)</button>
+    <button class="lbt" onclick="gLB('lat',this)">📐 Analytical Thinking (6)</button>
+    <button class="lbt" onclick="gLB('ldt',this)">💡 Design Thinking (6)</button>
+    <button class="lbt" onclick="gLB('lic',this)">🎯 Integrated Cases (6)</button>
+    <button class="lbt" onclick="gLB('lrf',this)">📓 Reflection &amp; Journal (6)</button>
+  </div>
+
+  <!-- ══════════ FOUNDATIONS LABS ══════════ -->
+  <div class="lab-sec on" id="lab-lfo">
+    <div class="ib ib-g" style="margin-bottom:1.25rem">🧱 <strong>Foundations Labs</strong> build the 10-foundation mental substrate <em>before</em> frameworks. These labs don't use the 19 frameworks — they develop the raw cognitive capabilities the frameworks require.</div>
+    <div class="fwl">
+
+      <!-- LAB F1 -->
+      <div class="fwi" id="lf01">
+        <div class="fwh" onclick="tFW('lf01')" role="button" tabindex="0" onkeydown="if(event.key==='Enter'||event.key===' ')tFW('lf01')">
+          <div class="fwhl">
+            <div class="fwtr"><span class="fwnum">F1</span><span class="fwnm">The Bias Detective</span><span class="diff diff-f">🟢 Foundation</span></div>
+            <div class="lab-meta"><span class="lab-time">⏱ 45 min</span><span class="lab-fw">Foundation 1 · Foundation 3</span></div>
+          </div>
+          <div class="fwtog">▾</div>
+        </div>
+        <div class="fwb"><div class="lab-grid">
+          <div class="lab-col">
+            <h5>Scenario</h5>
+            <p>You are given 5 real news headlines and 5 product advertisements. Your job is to identify the primary cognitive bias each one exploits — and then identify one bias <em>in your own reaction</em> to each.</p>
+            <h5>Deliverables</h5>
+            <ul>
+              <li>Table: 10 items × (Bias Name | How It's Exploited | My Own Bias in Reaction)</li>
+              <li>100-word reflection: Which bias caught you most off-guard and why?</li>
+            </ul>
+            <div class="lab-close"><div class="lc-lbl">Metacognitive Close</div><p>What bias did I almost miss in myself? What pattern connects my personal blind spots?</p></div>
+          </div>
+          <div class="lab-col">
+            <h5>Self-Assessment Rubric (1–5)</h5>
+            <div class="rubric"><ol>
+              <li><strong>1:</strong> Named fewer than 5 biases correctly</li>
+              <li><strong>2:</strong> Named 5–7 biases but couldn't identify own biases</li>
+              <li><strong>3:</strong> Named 8+ biases and identified 3+ personal biases</li>
+              <li><strong>4:</strong> All 10 biases with mechanisms AND identified personal biases with evidence</li>
+              <li><strong>5:</strong> Level 4 + identified a second-order bias (e.g., "I'm biased about my own bias resistance")</li>
+            </ol></div>
+            <h5>Why This Lab Matters</h5>
+            <p>Most students can <em>list</em> biases from a textbook. Very few can catch them in the wild — and almost nobody catches them in their own thinking. This lab builds that habit.</p>
+          </div>
+        </div></div>
+      </div>
+
+      <!-- LAB F2 -->
+      <div class="fwi" id="lf02">
+        <div class="fwh" onclick="tFW('lf02')" role="button" tabindex="0" onkeydown="if(event.key==='Enter'||event.key===' ')tFW('lf02')">
+          <div class="fwhl">
+            <div class="fwtr"><span class="fwnum">F2</span><span class="fwnm">The Fermi Arena</span><span class="diff diff-f">🟢 Foundation</span></div>
+            <div class="lab-meta"><span class="lab-time">⏱ 30 min</span><span class="lab-fw">Foundation 6 · Foundation 2</span></div>
+          </div>
+          <div class="fwtog">▾</div>
+        </div>
+        <div class="fwb"><div class="lab-grid">
+          <div class="lab-col">
+            <h5>Scenario</h5>
+            <p>Estimate 5 quantities using only decomposition and reasoning — no searching. Show your decomposition chain for each (minimum 3 steps).</p>
+            <p style="margin-top:.4rem"><strong>Prompt Set A:</strong> How many litres of chai are consumed daily in Hyderabad? · How many WhatsApp messages are sent globally per minute? · How many dentists practise in Mumbai? · How many flights are in the air right now? · How many words have you spoken in your lifetime?</p>
+            <h5>Deliverables</h5>
+            <ul>
+              <li>5 estimates with full decomposition chains (minimum 3 steps each)</li>
+              <li>After completing, look up actual figures — calculate your error ratio</li>
+              <li>Identify which assumptions drove the most error in each estimate</li>
+            </ul>
+            <div class="lab-close"><div class="lc-lbl">Metacognitive Close</div><p>Was I systematically over- or under-estimating? What does that reveal about my default quantitative instinct?</p></div>
+          </div>
+          <div class="lab-col">
+            <h5>Self-Assessment Rubric (1–5)</h5>
+            <div class="rubric"><ol>
+              <li><strong>1:</strong> Guessed without decomposition</li>
+              <li><strong>2:</strong> Decomposed but fewer than 3 steps per estimate</li>
+              <li><strong>3:</strong> 3+ steps for all 5; within 10× of actual for 3+</li>
+              <li><strong>4:</strong> Clean decomposition; within 5× for 4+; identified error-driving assumptions</li>
+              <li><strong>5:</strong> Level 4 + identified systematic bias direction and explained why</li>
+            </ol></div>
+          </div>
+        </div></div>
+      </div>
+
+      <!-- LAB F3 -->
+      <div class="fwi" id="lf03">
+        <div class="fwh" onclick="tFW('lf03')" role="button" tabindex="0" onkeydown="if(event.key==='Enter'||event.key===' ')tFW('lf03')">
+          <div class="fwhl">
+            <div class="fwtr"><span class="fwnum">F3</span><span class="fwnm">Source Autopsy</span><span class="diff diff-a">🟡 Applied</span></div>
+            <div class="lab-meta"><span class="lab-time">⏱ 45 min</span><span class="lab-fw">Foundation 5 · Foundation 8</span></div>
+          </div>
+          <div class="fwtog">▾</div>
+        </div>
+        <div class="fwb"><div class="lab-grid">
+          <div class="lab-col">
+            <h5>Scenario</h5>
+            <p>You encounter 3 claims shared on social media, each with a linked source. Trace each claim to its primary source using the SIFT method. Determine whether the claim accurately represents the original evidence.</p>
+            <p style="margin-top:.4rem"><em>Example claims:</em> "A new study proves remote work increases productivity by 40%" · "Scientists confirm that [food item] causes cancer" · "Company X's revenue grew 300% last year"</p>
+            <h5>Deliverables</h5>
+            <ul>
+              <li>For each claim: Source trail (original → secondary → social), distortion analysis, credibility verdict</li>
+              <li>150-word synthesis: What pattern of distortion did you observe most commonly?</li>
+            </ul>
+            <div class="lab-close"><div class="lc-lbl">Metacognitive Close</div><p>Which claim did I want to be true? How did that desire affect my evaluation rigour?</p></div>
+          </div>
+          <div class="lab-col">
+            <h5>Self-Assessment Rubric (1–5)</h5>
+            <div class="rubric"><ol>
+              <li><strong>1:</strong> Accepted claims at face value</li>
+              <li><strong>2:</strong> Checked one secondary source per claim but not original</li>
+              <li><strong>3:</strong> Traced all 3 to primary sources; identified distortion in 2+</li>
+              <li><strong>4:</strong> Full SIFT on all 3; identified specific distortion mechanism (selection bias, misquotation, context stripping)</li>
+              <li><strong>5:</strong> Level 4 + assigned calibrated confidence scores and identified what additional evidence would change your verdict</li>
+            </ol></div>
+          </div>
+        </div></div>
+      </div>
+
+      <!-- LAB F4 -->
+      <div class="fwi" id="lf04">
+        <div class="fwh" onclick="tFW('lf04')" role="button" tabindex="0" onkeydown="if(event.key==='Enter'||event.key===' ')tFW('lf04')">
+          <div class="fwhl">
+            <div class="fwtr"><span class="fwnum">F4</span><span class="fwnm">The Observation Notebook</span><span class="diff diff-a">🟡 Applied</span></div>
+            <div class="lab-meta"><span class="lab-time">⏱ 60 min</span><span class="lab-fw">Foundation 9 · Foundation 10</span></div>
+          </div>
+          <div class="fwtog">▾</div>
+        </div>
+        <div class="fwb"><div class="lab-grid">
+          <div class="lab-col">
+            <h5>Scenario</h5>
+            <p>Go to a public space (café, library, campus, bus stop). Observe people interacting with a product, system, or environment for 45 minutes. Use the <strong>Thick Description</strong> method — describe <em>only what you see</em>, with zero interpretation, for the first 30 minutes. Then add interpretive notes for 15 minutes.</p>
+            <h5>Deliverables</h5>
+            <ul>
+              <li>1 page of thick description (pure observation, no interpretation)</li>
+              <li>½ page of interpretive notes (patterns, contradictions, surprises)</li>
+              <li>3 "How Might We" questions that emerged from your observations</li>
+            </ul>
+            <div class="lab-close"><div class="lc-lbl">Metacognitive Close</div><p>Where did interpretation leak into my observation? What did I see that contradicted my prior assumption?</p></div>
+          </div>
+          <div class="lab-col">
+            <h5>Self-Assessment Rubric (1–5)</h5>
+            <div class="rubric"><ol>
+              <li><strong>1:</strong> Notes are mostly interpretation disguised as observation</li>
+              <li><strong>2:</strong> Some genuine observation, but interpretation leaks in frequently</li>
+              <li><strong>3:</strong> Clean separation; 10+ distinct observations</li>
+              <li><strong>4:</strong> 15+ observations; interpretations grounded in evidence; HMW questions are non-obvious</li>
+              <li><strong>5:</strong> Level 4 + identified at least one observation that contradicted your prior assumption</li>
+            </ol></div>
+          </div>
+        </div></div>
+      </div>
+
+      <!-- LAB F5 -->
+      <div class="fwi" id="lf05">
+        <div class="fwh" onclick="tFW('lf05')" role="button" tabindex="0" onkeydown="if(event.key==='Enter'||event.key===' ')tFW('lf05')">
+          <div class="fwhl">
+            <div class="fwtr"><span class="fwnum">F5</span><span class="fwnm">The Argument Classifier</span><span class="diff diff-a">🟡 Applied</span></div>
+            <div class="lab-meta"><span class="lab-time">⏱ 30 min</span><span class="lab-fw">Foundation 2 · Foundation 5</span></div>
+          </div>
+          <div class="fwtog">▾</div>
+        </div>
+        <div class="fwb"><div class="lab-grid">
+          <div class="lab-col">
+            <h5>Scenario</h5>
+            <p>You're given 10 real-world arguments (from editorials, business pitches, political speeches, advertisements). Classify each by inference type (deductive, inductive, abductive) AND identify any logical fallacies present.</p>
+            <h5>Deliverables</h5>
+            <ul>
+              <li>Table: 10 arguments × (Inference Type | Fallacy If Present | Strength Rating 1–5 | Justification)</li>
+              <li>100-word reflection: Which inference type was most common? Which was most reliable?</li>
+            </ul>
+          </div>
+          <div class="lab-col">
+            <h5>Self-Assessment Rubric (1–5)</h5>
+            <div class="rubric"><ol>
+              <li><strong>1:</strong> Classified fewer than 5 correctly</li>
+              <li><strong>2:</strong> Classified 5–7 correctly but missed most fallacies</li>
+              <li><strong>3:</strong> Classified 8+ correctly; identified 3+ fallacies with correct names</li>
+              <li><strong>4:</strong> All 10 classified; all fallacies identified; strength ratings justified</li>
+              <li><strong>5:</strong> Level 4 + identified how each flawed argument could be restructured to be valid</li>
+            </ol></div>
+          </div>
+        </div></div>
+      </div>
+
+      <!-- LAB F6 -->
+      <div class="fwi" id="lf06">
+        <div class="fwh" onclick="tFW('lf06')" role="button" tabindex="0" onkeydown="if(event.key==='Enter'||event.key===' ')tFW('lf06')">
+          <div class="fwhl">
+            <div class="fwtr"><span class="fwnum">F6</span><span class="fwnm">The Belief Audit</span><span class="diff diff-x">🔴 Advanced</span></div>
+            <div class="lab-meta"><span class="lab-time">⏱ 45 min</span><span class="lab-fw">Foundation 8 · Foundation 1 · Foundation 4</span></div>
+          </div>
+          <div class="fwtog">▾</div>
+        </div>
+        <div class="fwb"><div class="lab-grid">
+          <div class="lab-col">
+            <h5>Scenario</h5>
+            <p>List 10 beliefs you hold with high confidence (professional, personal, political, or technical). For each, assign a probability score (50%–99%), write the specific evidence that would cause you to update downward. For 3 beliefs, actively search for disconfirming evidence.</p>
+            <h5>Deliverables</h5>
+            <ul>
+              <li>Table: 10 beliefs × (Confidence % | Evidence For | Evidence That Would Change My Mind)</li>
+              <li>For 3 beliefs: actual disconfirming evidence found, with updated confidence score</li>
+              <li>150-word reflection: Did any belief shift? What does this reveal about your epistemic calibration?</li>
+            </ul>
+          </div>
+          <div class="lab-col">
+            <h5>Self-Assessment Rubric (1–5)</h5>
+            <div class="rubric"><ol>
+              <li><strong>1:</strong> All beliefs scored at 95%+ with vague disconfirming criteria</li>
+              <li><strong>2:</strong> Range of scores but disconfirming evidence is hypothetical only</li>
+              <li><strong>3:</strong> Found real disconfirming evidence for 2+; updated at least 1 score</li>
+              <li><strong>4:</strong> Substantive disconfirming evidence for all 3; calibrated updates; genuine epistemic growth</li>
+              <li><strong>5:</strong> Level 4 + identified structural pattern in which belief types you over-weight</li>
+            </ol></div>
+          </div>
+        </div></div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ══════════ CRITICAL THINKING LABS ══════════ -->
+  <div class="lab-sec" id="lab-lct">
+    <div class="ib ib-b" style="margin-bottom:1.25rem">🔬 <strong>Critical Thinking Labs</strong> deploy CT frameworks (FW01–FW06) on realistic scenarios. Progress from single-framework application to fluid multi-framework evaluation.</div>
+    <div class="fwl">
+
+      <div class="fwi" id="lc01"><div class="fwh" onclick="tFW('lc01')" role="button" tabindex="0" onkeydown="if(event.key==='Enter'||event.key===' ')tFW('lc01')"><div class="fwhl"><div class="fwtr"><span class="fwnum">CT1</span><span class="fwnm">The Paul-Elder Courtroom</span><span class="diff diff-f">🟢 Foundation</span></div><div class="lab-meta"><span class="lab-time">⏱ 45 min</span><span class="lab-fw">FW01 Paul-Elder</span></div></div><div class="fwtog">▾</div></div>
+        <div class="fwb"><div class="lab-grid"><div class="lab-col"><h5>Scenario</h5><p>You are a critical thinking consultant evaluating a company's strategic recommendation: <em>"We should expand into the Indian market because our competitor succeeded there."</em> Map all 8 Elements of Thought, evaluate against all 9 Standards, and deliver a verdict.</p><h5>Deliverables</h5><ul><li>Completed 8-Element map (one paragraph per element)</li><li>9-Standard evaluation grid with pass/fail + evidence for each</li><li>200-word verdict: Accept, Reject, or Requires More Evidence</li></ul><div class="lab-close"><div class="lc-lbl">Metacognitive Close</div><p>Which Element did I most struggle to identify? Which Standard was the recommendation weakest on?</p></div></div>
+          <div class="lab-col"><h5>Self-Assessment Rubric (1–5)</h5><div class="rubric"><ol><li><strong>1:</strong> Mapped fewer than 5 Elements</li><li><strong>2:</strong> Mapped all 8 but Standards evaluation is superficial</li><li><strong>3:</strong> All 8 Elements + 5+ Standards evaluated with evidence</li><li><strong>4:</strong> Complete analysis; verdict is qualified and evidence-based</li><li><strong>5:</strong> Level 4 + identified which missing element, if supplied, would change the verdict</li></ol></div></div>
+        </div></div></div>
+
+      <div class="fwi" id="lc02"><div class="fwh" onclick="tFW('lc02')" role="button" tabindex="0" onkeydown="if(event.key==='Enter'||event.key===' ')tFW('lc02')"><div class="fwhl"><div class="fwtr"><span class="fwnum">CT2</span><span class="fwnm">The RED Speed Round</span><span class="diff diff-f">🟢 Foundation</span></div><div class="lab-meta"><span class="lab-time">⏱ 30 min</span><span class="lab-fw">FW04 RED Model</span></div></div><div class="fwtog">▾</div></div>
+        <div class="fwb"><div class="lab-grid"><div class="lab-col"><h5>Scenario</h5><p>You receive 6 business recommendations (2 strong, 2 flawed, 2 deliberately misleading). Apply RED to each in under 5 minutes. Identify assumptions, evaluate argument strength, draw your conclusion. Rank all 6 by reliability.</p><h5>Deliverables</h5><ul><li>6 completed RED analyses (Recognise, Evaluate, Draw — 3 bullets each)</li><li>Ranked list with justification</li><li>Note: which recommendation fooled you longest and why?</li></ul></div>
+          <div class="lab-col"><h5>Self-Assessment Rubric (1–5)</h5><div class="rubric"><ol><li><strong>1:</strong> Completed fewer than 4 in time</li><li><strong>2:</strong> All 6 completed but assumptions are surface-level</li><li><strong>3:</strong> Identified key assumptions for 4+; correct ranking for 4+</li><li><strong>4:</strong> All 6 rigorous; correctly identified both misleading recommendations</li><li><strong>5:</strong> Level 4 + explained the specific rhetorical technique each misleading rec used</li></ol></div></div>
+        </div></div></div>
+
+      <div class="fwi" id="lc03"><div class="fwh" onclick="tFW('lc03')" role="button" tabindex="0" onkeydown="if(event.key==='Enter'||event.key===' ')tFW('lc03')"><div class="fwhl"><div class="fwtr"><span class="fwnum">CT3</span><span class="fwnm">The Socratic Self-Examination</span><span class="diff diff-a">🟡 Applied</span></div><div class="lab-meta"><span class="lab-time">⏱ 45 min</span><span class="lab-fw">FW03 Socratic · Foundation 8</span></div></div><div class="fwtog">▾</div></div>
+        <div class="fwb"><div class="lab-grid"><div class="lab-col"><h5>Scenario</h5><p>Choose your single strongest professional belief (e.g., "Agile is the best project methodology" or "AI will replace most white-collar jobs"). Apply all 6 Socratic question categories to your own belief. Write the strongest possible counterargument (steelman). Write your post-examination position.</p><h5>Deliverables</h5><ul><li>6-category Socratic analysis (1 paragraph per category)</li><li>Steelmanned counterargument (200+ words — must be genuinely strong)</li><li>Post-examination position with updated confidence score</li></ul></div>
+          <div class="lab-col"><h5>Self-Assessment Rubric (1–5)</h5><div class="rubric"><ol><li><strong>1:</strong> Socratic questions are rhetorical, not genuinely probing</li><li><strong>2:</strong> Genuine probing on 3+ categories; steelman is weak</li><li><strong>3:</strong> All 6 categories probed; steelman is plausible; confidence score updated</li><li><strong>4:</strong> Steelman is strong enough that a reasonable person would hold it; position genuinely shifted</li><li><strong>5:</strong> Level 4 + identified which Socratic category revealed the most about your reasoning blind spot</li></ol></div></div>
+        </div></div></div>
+
+      <div class="fwi" id="lc04"><div class="fwh" onclick="tFW('lc04')" role="button" tabindex="0" onkeydown="if(event.key==='Enter'||event.key===' ')tFW('lc04')"><div class="fwhl"><div class="fwtr"><span class="fwnum">CT4</span><span class="fwnm">The Six Hats War Room</span><span class="diff diff-a">🟡 Applied</span></div><div class="lab-meta"><span class="lab-time">⏱ 60 min</span><span class="lab-fw">FW05 Six Hats</span></div></div><div class="fwtog">▾</div></div>
+        <div class="fwb"><div class="lab-grid"><div class="lab-col"><h5>Scenario</h5><p>A startup founder must decide whether to pivot their product, double down on current direction, or sell the company. Run a full 6-hat session — 8 minutes per hat. Produce a decision recommendation.</p><h5>Deliverables</h5><ul><li>6 documented hat outputs (White data, Red gut, Black risks, Yellow benefits, Green alternatives, Blue synthesis)</li><li>Final recommendation with reasoning</li><li>Reflection: Which hat produced the insight you would have missed?</li></ul></div>
+          <div class="lab-col"><h5>Self-Assessment Rubric (1–5)</h5><div class="rubric"><ol><li><strong>1:</strong> Mixed modes — opinions in White, facts in Red</li><li><strong>2:</strong> Separated modes but Black (risks) is thin</li><li><strong>3:</strong> Clean separation; Black hat has 3+ substantive risks; recommendation is justified</li><li><strong>4:</strong> Green hat produced genuinely creative alternatives; recommendation weighs all 6 hats</li><li><strong>5:</strong> Level 4 + identified which hat you naturally resist and why</li></ol></div></div>
+        </div></div></div>
+
+      <div class="fwi" id="lc05"><div class="fwh" onclick="tFW('lc05')" role="button" tabindex="0" onkeydown="if(event.key==='Enter'||event.key===' ')tFW('lc05')"><div class="fwhl"><div class="fwtr"><span class="fwnum">CT5</span><span class="fwnm">The OODA Replay</span><span class="diff diff-a">🟡 Applied</span></div><div class="lab-meta"><span class="lab-time">⏱ 45 min</span><span class="lab-fw">FW06 OODA · FW02 Bloom's</span></div></div><div class="fwtog">▾</div></div>
+        <div class="fwb"><div class="lab-grid"><div class="lab-col"><h5>Scenario</h5><p>Study a case of a major strategic failure (Kodak and digital photography, Blockbuster and streaming, or Nokia and smartphones). Map their decision through OODA. Identify exactly where Orient failed — what mental model was outdated?</p><h5>Deliverables</h5><ul><li>Full OODA map of the failed decision</li><li>Orient phase autopsy: which mental model was stale, what evidence was ignored</li><li>Redesigned Orient model with updated assumptions</li><li>Bloom's self-assessment: at what level are you now operating on OODA?</li></ul></div>
+          <div class="lab-col"><h5>Self-Assessment Rubric (1–5)</h5><div class="rubric"><ol><li><strong>1:</strong> OODA map is superficial; Orient analysis is hindsight-only</li><li><strong>2:</strong> Identified the stale mental model but not what evidence was available at the time</li><li><strong>3:</strong> Identified stale model + contemporary evidence that was ignored + redesigned Orient</li><li><strong>4:</strong> Drew parallels to a mental model you currently hold that may be similarly outdated</li><li><strong>5:</strong> Level 4 + honest Bloom's self-assessment with specific evidence for the level claimed</li></ol></div></div>
+        </div></div></div>
+
+      <div class="fwi" id="lc06"><div class="fwh" onclick="tFW('lc06')" role="button" tabindex="0" onkeydown="if(event.key==='Enter'||event.key===' ')tFW('lc06')"><div class="fwhl"><div class="fwtr"><span class="fwnum">CT6</span><span class="fwnm">The Multi-Framework Verdict</span><span class="diff diff-x">🔴 Advanced</span></div><div class="lab-meta"><span class="lab-time">⏱ 90 min</span><span class="lab-fw">3+ CT Frameworks (you select)</span></div></div><div class="fwtog">▾</div></div>
+        <div class="fwb"><div class="lab-grid"><div class="lab-col"><h5>Scenario</h5><p>Evaluate a high-stakes policy proposal: <em>"All university degrees should be replaced by competency-based micro-credentials"</em> or <em>"AI-generated content should be legally required to carry disclosure labels."</em> Apply minimum 3 CT frameworks sequentially. Produce a 500-word position paper.</p><h5>Deliverables</h5><ul><li>Framework selection justification (why these 3 from the 6?)</li><li>Analysis outputs from each framework</li><li>500-word position paper: thesis, evidence, qualified conclusion</li><li>100-word metacognitive reflection: How did each framework change your analysis?</li></ul></div>
+          <div class="lab-col"><h5>Self-Assessment Rubric (1–5)</h5><div class="rubric"><ol><li><strong>1:</strong> Used only 1–2 frameworks; conclusion is opinion, not analysis</li><li><strong>2:</strong> 3 frameworks applied but sequentially disconnected</li><li><strong>3:</strong> 3 frameworks integrated; conclusion follows from analysis; qualified appropriately</li><li><strong>4:</strong> Framework selection justified; each framework visibly changed the analysis direction</li><li><strong>5:</strong> Level 4 + position paper demonstrates a conclusion you did NOT hold before the analysis</li></ol></div></div>
+        </div></div></div>
+
+    </div>
+  </div>
+
+  <!-- ══════════ ANALYTICAL THINKING LABS ══════════ -->
+  <div class="lab-sec" id="lab-lat">
+    <div class="ib ib-b" style="border-color:var(--teal);color:#a5f3fc;background:var(--tx);margin-bottom:1.25rem">📐 <strong>Analytical Thinking Labs</strong> build structuring, decomposition, and systematic reasoning skills using FW07–FW13. Progress from guided decomposition to open-ended framework selection.</div>
+    <div class="fwl">
+
+      <div class="fwi" id="la01"><div class="fwh" onclick="tFW('la01')" role="button" tabindex="0" onkeydown="if(event.key==='Enter'||event.key===' ')tFW('la01')"><div class="fwhl"><div class="fwtr"><span class="fwnum">AT1</span><span class="fwnm">The MECE Machine</span><span class="diff diff-f">🟢 Foundation</span></div><div class="lab-meta"><span class="lab-time">⏱ 45 min</span><span class="lab-fw">FW07 MECE + Issue Trees</span></div></div><div class="fwtog">▾</div></div>
+        <div class="fwb"><div class="lab-grid"><div class="lab-col"><h5>Scenario</h5><p>A university department has seen a 25% drop in student satisfaction scores over 2 years. Build a 3-level MECE Issue Tree to identify all possible causes. Apply the MECE test to every branch.</p><h5>Deliverables</h5><ul><li>Hand-drawn or digital 3-level Issue Tree (minimum 12 leaf nodes)</li><li>MECE test results: overlaps circled, gaps marked</li><li>Top 3 priority branches with probability reasoning</li></ul><div class="lab-close"><div class="lc-lbl">Metacognitive Close</div><p>Where did I find a gap in my CE test? Which branch was I unconsciously avoiding?</p></div></div>
+          <div class="lab-col"><h5>Self-Assessment Rubric (1–5)</h5><div class="rubric"><ol><li><strong>1:</strong> Fewer than 8 leaf nodes; no MECE test run</li><li><strong>2:</strong> 8–11 nodes; MECE test reveals 2+ unresolved overlaps</li><li><strong>3:</strong> 12+ nodes; MECE validated; top 3 branches identified with reasoning</li><li><strong>4:</strong> Clean MECE at every level; priority branches supported with evidence or data logic</li><li><strong>5:</strong> Level 4 + identified a branch others would miss + restructured after the first test</li></ol></div></div>
+        </div></div></div>
+
+      <div class="fwi" id="la02"><div class="fwh" onclick="tFW('la02')" role="button" tabindex="0" onkeydown="if(event.key==='Enter'||event.key===' ')tFW('la02')"><div class="fwhl"><div class="fwtr"><span class="fwnum">AT2</span><span class="fwnm">The Pyramid Memo</span><span class="diff diff-f">🟢 Foundation</span></div><div class="lab-meta"><span class="lab-time">⏱ 45 min</span><span class="lab-fw">FW08 Pyramid Principle</span></div></div><div class="fwtog">▾</div></div>
+        <div class="fwb"><div class="lab-grid"><div class="lab-col"><h5>Scenario</h5><p>You've analysed a problem (use Lab AT1 output or a provided case). Write a one-page executive memo: SCR opening paragraph, answer-first structure, 3 MECE supporting arguments with evidence.</p><h5>Deliverables</h5><ul><li>One-page Pyramid Principle memo (SCR + 3 arguments + evidence)</li><li>"Before" version: same content written bottom-up (building to the conclusion)</li><li>Side-by-side comparison: which would a decision-maker act on faster?</li></ul></div>
+          <div class="lab-col"><h5>Self-Assessment Rubric (1–5)</h5><div class="rubric"><ol><li><strong>1:</strong> Conclusion is buried; no SCR structure</li><li><strong>2:</strong> SCR present but supporting arguments overlap or lack evidence</li><li><strong>3:</strong> Clean SCR; 3 MECE arguments; evidence under each</li><li><strong>4:</strong> A decision-maker could act on the first paragraph alone; arguments are compelling</li><li><strong>5:</strong> Level 4 + the "before" comparison reveals a dramatic clarity improvement</li></ol></div></div>
+        </div></div></div>
+
+      <div class="fwi" id="la03"><div class="fwh" onclick="tFW('la03')" role="button" tabindex="0" onkeydown="if(event.key==='Enter'||event.key===' ')tFW('la03')"><div class="fwhl"><div class="fwtr"><span class="fwnum">AT3</span><span class="fwnm">The Root Cause Excavation</span><span class="diff diff-a">🟡 Applied</span></div><div class="lab-meta"><span class="lab-time">⏱ 60 min</span><span class="lab-fw">FW10 5 Whys · FW09 First Principles</span></div></div><div class="fwtog">▾</div></div>
+        <div class="fwb"><div class="lab-grid"><div class="lab-col"><h5>Scenario</h5><p>A real recurring problem from your own life (e.g., consistently missing deadlines, low energy in afternoons, project scope creep). Map causes using Fishbone (6M). Apply 5 Whys to the top branch. Then apply First Principles: is the root cause a convention or a genuine constraint?</p><h5>Deliverables</h5><ul><li>Fishbone diagram (6 categories, 3+ causes per category)</li><li>5 Whys chain for top branch (each "why" justified)</li><li>First Principles test + action plan targeting root cause</li></ul></div>
+          <div class="lab-col"><h5>Self-Assessment Rubric (1–5)</h5><div class="rubric"><ol><li><strong>1:</strong> Fishbone has fewer than 3 categories populated</li><li><strong>2:</strong> Full Fishbone but 5 Whys stopped at a symptom (Why 2–3)</li><li><strong>3:</strong> Reached genuine root cause; First Principles test applied</li><li><strong>4:</strong> Root cause is actionable; intervention targets structure not symptoms</li><li><strong>5:</strong> Level 4 + First Principles revealed the root cause was a convention, not a constraint</li></ol></div></div>
+        </div></div></div>
+
+      <div class="fwi" id="la04"><div class="fwh" onclick="tFW('la04')" role="button" tabindex="0" onkeydown="if(event.key==='Enter'||event.key===' ')tFW('la04')"><div class="fwhl"><div class="fwtr"><span class="fwnum">AT4</span><span class="fwnm">The Strategic Landscape</span><span class="diff diff-a">🟡 Applied</span></div><div class="lab-meta"><span class="lab-time">⏱ 60 min</span><span class="lab-fw">FW11 SWOT + PESTEL</span></div></div><div class="fwtog">▾</div></div>
+        <div class="fwb"><div class="lab-grid"><div class="lab-col"><h5>Scenario</h5><p>Apply SWOT + PESTEL to a real career decision, business idea, or professional opportunity. PESTEL must come first (to generate O and T). Be ruthlessly honest about weaknesses — get external input if possible.</p><h5>Deliverables</h5><ul><li>PESTEL grid (2–3 trends per factor with evidence sources)</li><li>SWOT matrix with PESTEL-derived O and T</li><li>Strategy table: SO, ST, WO, WT (1 strategy per cell)</li><li>Highest-priority action: the single WO strategy that creates most value</li></ul></div>
+          <div class="lab-col"><h5>Self-Assessment Rubric (1–5)</h5><div class="rubric"><ol><li><strong>1:</strong> SWOT without PESTEL; OT analysis is shallow</li><li><strong>2:</strong> PESTEL present but trends lack evidence; Weaknesses are sugar-coated</li><li><strong>3:</strong> PESTEL with sources; honest Weaknesses; all 4 strategy cells filled</li><li><strong>4:</strong> WO strategy is specific, actionable, and non-obvious</li><li><strong>5:</strong> Level 4 + validated Weaknesses with external input; PESTEL trends include second-order effects</li></ol></div></div>
+        </div></div></div>
+
+      <div class="fwi" id="la05"><div class="fwh" onclick="tFW('la05')" role="button" tabindex="0" onkeydown="if(event.key==='Enter'||event.key===' ')tFW('la05')"><div class="fwhl"><div class="fwtr"><span class="fwnum">AT5</span><span class="fwnm">The System Map</span><span class="diff diff-a">🟡 Applied</span></div><div class="lab-meta"><span class="lab-time">⏱ 60 min</span><span class="lab-fw">FW12 Systems Thinking · FW13 Cynefin</span></div></div><div class="fwtog">▾</div></div>
+        <div class="fwb"><div class="lab-grid"><div class="lab-col"><h5>Scenario</h5><p>Map a persistent problem as a system. Identify stocks, flows, reinforcing loops (R), balancing loops (B), and delays. Classify using Cynefin. If Complex — design a safe-to-fail experiment. If Complicated — design an expert analysis plan.</p><h5>Deliverables</h5><ul><li>Causal loop diagram with R and B loops, delays marked</li><li>Leverage point identified with reasoning</li><li>Cynefin classification with justification</li><li>Intervention: safe-to-fail experiment (Complex) or analysis plan (Complicated)</li></ul></div>
+          <div class="lab-col"><h5>Self-Assessment Rubric (1–5)</h5><div class="rubric"><ol><li><strong>1:</strong> Linear cause-effect chain only; no loops identified</li><li><strong>2:</strong> One loop identified but delays and leverage points missing</li><li><strong>3:</strong> R + B loops with delays; Cynefin classification justified; intervention designed</li><li><strong>4:</strong> Leverage point is non-obvious; Cynefin classification changes intervention approach</li><li><strong>5:</strong> Level 4 + identified a problem you've been treating as Complicated that is actually Complex</li></ol></div></div>
+        </div></div></div>
+
+      <div class="fwi" id="la06"><div class="fwh" onclick="tFW('la06')" role="button" tabindex="0" onkeydown="if(event.key==='Enter'||event.key===' ')tFW('la06')"><div class="fwhl"><div class="fwtr"><span class="fwnum">AT6</span><span class="fwnm">The Framework Selection Challenge</span><span class="diff diff-x">🔴 Advanced</span></div><div class="lab-meta"><span class="lab-time">⏱ 90 min</span><span class="lab-fw">3+ AT Frameworks (you select)</span></div></div><div class="fwtog">▾</div></div>
+        <div class="fwb"><div class="lab-grid"><div class="lab-col"><h5>Scenario</h5><p><em>"A mid-size retailer is losing market share despite increasing marketing spend — diagnose and recommend."</em> The lab does NOT tell you which framework to use. Select, justify, apply, and integrate at least 3 AT frameworks.</p><h5>Deliverables</h5><ul><li>Framework selection justification (why these 3?)</li><li>Analysis outputs from each framework</li><li>Integrated 500-word recommendation memo (Pyramid Principle structure)</li><li>Reflection: Which framework added most value? Which did you misapply initially?</li></ul></div>
+          <div class="lab-col"><h5>Self-Assessment Rubric (1–5)</h5><div class="rubric"><ol><li><strong>1:</strong> Applied 1–2 frameworks without justification</li><li><strong>2:</strong> 3 frameworks applied but selection is arbitrary</li><li><strong>3:</strong> Selection justified; each framework contributes distinct insight; memo is structured</li><li><strong>4:</strong> Frameworks reinforce each other; recommendation is actionable and non-obvious</li><li><strong>5:</strong> Level 4 + documented a mid-lab framework switch (started with one, realised another was better)</li></ol></div></div>
+        </div></div></div>
+
+    </div>
+  </div>
+
+  <!-- ══════════ DESIGN THINKING LABS ══════════ -->
+  <div class="lab-sec" id="lab-ldt">
+    <div class="ib ib-b" style="border-color:var(--amber);color:#fcd34d;background:var(--ax);margin-bottom:1.25rem">💡 <strong>Design Thinking Labs</strong> build empathy, problem-framing, ideation, prototyping, and testing skills using FW14–FW19. Ensure you are solving the right problem for real people.</div>
+    <div class="fwl">
+
+      <div class="fwi" id="ld01"><div class="fwh" onclick="tFW('ld01')" role="button" tabindex="0" onkeydown="if(event.key==='Enter'||event.key===' ')tFW('ld01')"><div class="fwhl"><div class="fwtr"><span class="fwnum">DT1</span><span class="fwnm">The Empathy Deep Dive</span><span class="diff diff-f">🟢 Foundation</span></div><div class="lab-meta"><span class="lab-time">⏱ 60 min</span><span class="lab-fw">FW14 d.school HCD</span></div></div><div class="fwtog">▾</div></div>
+        <div class="fwb"><div class="lab-grid"><div class="lab-col"><h5>Scenario</h5><p>Choose a group you belong to (students, commuters, gym users). Conduct 2 empathy interviews (15 min each) about a specific frustration. Synthesise into a POV statement and 10 HMW questions.</p><h5>Deliverables</h5><ul><li>2 interview transcripts (key quotes verbatim)</li><li>Empathy Map per interviewee (Says / Thinks / Does / Feels)</li><li>POV: "[User] needs [need] because [insight]"</li><li>10 HMW questions ranked by potential impact</li></ul></div>
+          <div class="lab-col"><h5>Self-Assessment Rubric (1–5)</h5><div class="rubric"><ol><li><strong>1:</strong> Interview questions were leading; POV is a solution disguised as a need</li><li><strong>2:</strong> Open questions but POV lacks the "because" insight</li><li><strong>3:</strong> Genuine empathy; POV has deep "because"; 10 HMW questions generated</li><li><strong>4:</strong> Empathy Maps reveal Says/Does contradictions; HMW questions are non-obvious</li><li><strong>5:</strong> Level 4 + identified an emotional or social need the user didn't explicitly state</li></ol></div></div>
+        </div></div></div>
+
+      <div class="fwi" id="ld02"><div class="fwh" onclick="tFW('ld02')" role="button" tabindex="0" onkeydown="if(event.key==='Enter'||event.key===' ')tFW('ld02')"><div class="fwhl"><div class="fwtr"><span class="fwnum">DT2</span><span class="fwnm">The Crazy 8s Sprint</span><span class="diff diff-f">🟢 Foundation</span></div><div class="lab-meta"><span class="lab-time">⏱ 45 min</span><span class="lab-fw">FW17 GV Design Sprint</span></div></div><div class="fwtog">▾</div></div>
+        <div class="fwb"><div class="lab-grid"><div class="lab-col"><h5>Scenario</h5><p>Using the top HMW from Lab DT1 (or a provided prompt), run Crazy 8s: fold paper into 8 panels, sketch 8 distinct ideas in 8 minutes. Select the best. Build a 3-screen paper prototype. Test with 1 person.</p><h5>Deliverables</h5><ul><li>Crazy 8s sheet (8 sketches)</li><li>Selected concept with justification</li><li>3-screen paper prototype</li><li>5 key observations from 1-person test</li></ul></div>
+          <div class="lab-col"><h5>Self-Assessment Rubric (1–5)</h5><div class="rubric"><ol><li><strong>1:</strong> Fewer than 6 distinct ideas; ideas are variations of one concept</li><li><strong>2:</strong> 8 ideas but prototype wasn't tested</li><li><strong>3:</strong> 8 genuinely distinct ideas; prototype tested; 3+ observations captured</li><li><strong>4:</strong> 8th idea is qualitatively different from 1st; test revealed a surprise</li><li><strong>5:</strong> Level 4 + iterated the prototype based on test feedback within the session</li></ol></div></div>
+        </div></div></div>
+
+      <div class="fwi" id="ld03"><div class="fwh" onclick="tFW('ld03')" role="button" tabindex="0" onkeydown="if(event.key==='Enter'||event.key===' ')tFW('ld03')"><div class="fwhl"><div class="fwtr"><span class="fwnum">DT3</span><span class="fwnm">The Double Diamond Audit</span><span class="diff diff-a">🟡 Applied</span></div><div class="lab-meta"><span class="lab-time">⏱ 45 min</span><span class="lab-fw">FW15 Double Diamond · FW16 IBM Hills</span></div></div><div class="fwtog">▾</div></div>
+        <div class="fwb"><div class="lab-grid"><div class="lab-col"><h5>Scenario</h5><p>Take any current project. Map it to the Double Diamond's 4 phases. Identify which diamond you're in. Write 3 IBM Hills for the project. If you're in Develop but skipped Define — stop and go back.</p><h5>Deliverables</h5><ul><li>Double Diamond map with current position + evidence</li><li>Honest assessment: did you skip the first diamond?</li><li>3 IBM Hills (WHO + WHAT + WOW) — no technology or features referenced</li><li>Reflection: What would change if you returned to Discover?</li></ul></div>
+          <div class="lab-col"><h5>Self-Assessment Rubric (1–5)</h5><div class="rubric"><ol><li><strong>1:</strong> Cannot identify which phase you're in</li><li><strong>2:</strong> Identified phase but Hills reference features, not outcomes</li><li><strong>3:</strong> Honest placement; 3 clean outcome-based Hills; acknowledged if first diamond was skipped</li><li><strong>4:</strong> Hills are testable and user-validated; Diamond 1 gap was identified and addressed</li><li><strong>5:</strong> Level 4 + going back to Discover produced a fundamentally different problem definition</li></ol></div></div>
+        </div></div></div>
+
+      <div class="fwi" id="ld04"><div class="fwh" onclick="tFW('ld04')" role="button" tabindex="0" onkeydown="if(event.key==='Enter'||event.key===' ')tFW('ld04')"><div class="fwhl"><div class="fwtr"><span class="fwnum">DT4</span><span class="fwnm">The SCAMPER Explosion</span><span class="diff diff-a">🟡 Applied</span></div><div class="lab-meta"><span class="lab-time">⏱ 30 min</span><span class="lab-fw">FW18 SCAMPER</span></div></div><div class="fwtog">▾</div></div>
+        <div class="fwb"><div class="lab-grid"><div class="lab-col"><h5>Scenario</h5><p>Choose a product or service you use daily. Apply all 7 SCAMPER lenses — 3 min per lens, 3 ideas minimum. Do NOT evaluate during generation. After all 7, cluster and evaluate.</p><h5>Deliverables</h5><ul><li>SCAMPER grid: 7 rows × 3+ ideas (minimum 21 ideas)</li><li>Top 3 most original ideas circled</li><li>Feasibility assessment for the top idea</li><li>Reflection: Which lens produced your most surprising idea?</li></ul></div>
+          <div class="lab-col"><h5>Self-Assessment Rubric (1–5)</h5><div class="rubric"><ol><li><strong>1:</strong> Fewer than 14 ideas; most are incremental variations</li><li><strong>2:</strong> 21 ideas but many are repetitive across lenses</li><li><strong>3:</strong> 21+ genuinely distinct ideas; top 3 are non-obvious</li><li><strong>4:</strong> Lenses 5–7 produced qualitatively different ideas from 1–4; feasibility is realistic</li><li><strong>5:</strong> Level 4 + identified a pattern: later lenses force more original thinking because obvious ideas are exhausted</li></ol></div></div>
+        </div></div></div>
+
+      <div class="fwi" id="ld05"><div class="fwh" onclick="tFW('ld05')" role="button" tabindex="0" onkeydown="if(event.key==='Enter'||event.key===' ')tFW('ld05')"><div class="fwhl"><div class="fwtr"><span class="fwnum">DT5</span><span class="fwnm">The JTBD Interview</span><span class="diff diff-a">🟡 Applied</span></div><div class="lab-meta"><span class="lab-time">⏱ 60 min</span><span class="lab-fw">FW19 Jobs-To-Be-Done</span></div></div><div class="fwtog">▾</div></div>
+        <div class="fwb"><div class="lab-grid"><div class="lab-col"><h5>Scenario</h5><p>Choose a product you use regularly. Interview 2 people about past behaviour ("When did you last…?"), not future desires. Extract functional, emotional, and social job statements.</p><h5>Deliverables</h5><ul><li>2 interview notes with verbatim quotes about past behaviour</li><li>3 job statements per interviewee (functional, emotional, social)</li><li>Synthesis: primary underserved job</li><li>Design brief: one paragraph describing a solution addressing the underserved job</li></ul></div>
+          <div class="lab-col"><h5>Self-Assessment Rubric (1–5)</h5><div class="rubric"><ol><li><strong>1:</strong> Interview asked about preferences, not past behaviour</li><li><strong>2:</strong> Past behaviour captured but job statements are features, not jobs</li><li><strong>3:</strong> 3 job types per interviewee; underserved job identified; design brief written</li><li><strong>4:</strong> Emotional and social jobs reveal motivation not obvious from functional job alone</li><li><strong>5:</strong> Level 4 + identified a job the current product accidentally serves but wasn't designed for</li></ol></div></div>
+        </div></div></div>
+
+      <div class="fwi" id="ld06"><div class="fwh" onclick="tFW('ld06')" role="button" tabindex="0" onkeydown="if(event.key==='Enter'||event.key===' ')tFW('ld06')"><div class="fwhl"><div class="fwtr"><span class="fwnum">DT6</span><span class="fwnm">The End-to-End Design Sprint</span><span class="diff diff-x">🔴 Advanced</span></div><div class="lab-meta"><span class="lab-time">⏱ 90 min</span><span class="lab-fw">All 6 DT Frameworks (integrated)</span></div></div><div class="fwtog">▾</div></div>
+        <div class="fwb"><div class="lab-grid"><div class="lab-col"><h5>Scenario</h5><p>A community you belong to has an unsolved problem (campus food waste, new employee onboarding, neighbourhood parking). Run a compressed sprint: Empathise (20 min), Define POV + Hills (15 min), Ideate with SCAMPER + Crazy 8s (15 min), Prototype (20 min), Test with 2 people (20 min).</p><h5>Deliverables</h5><ul><li>Empathy notes + POV statement + 3 Hills</li><li>SCAMPER or Crazy 8s output</li><li>Paper or digital prototype</li><li>Test results: 3 key learnings from 2 user tests</li><li>Reflection: What did DT reveal that analysis alone would have missed?</li></ul></div>
+          <div class="lab-col"><h5>Self-Assessment Rubric (1–5)</h5><div class="rubric"><ol><li><strong>1:</strong> Skipped Empathise; jumped to solutions</li><li><strong>2:</strong> Empathised but Define phase is weak; prototype wasn't tested</li><li><strong>3:</strong> Full cycle completed; tested with 2 people; 3 learnings captured</li><li><strong>4:</strong> Test results caused a pivot; final direction differs from initial assumption</li><li><strong>5:</strong> Level 4 + documented how each DT stage (including JTBD and SCAMPER) contributed a distinct insight</li></ol></div></div>
+        </div></div></div>
+
+    </div>
+  </div>
+
+  <!-- ══════════ INTEGRATED CASE LABS ══════════ -->
+  <div class="lab-sec" id="lab-lic">
+    <div class="ib ib-b" style="border-color:var(--purple);color:#c4b5fd;background:var(--px);margin-bottom:1.25rem">🎯 <strong>Integrated Case Labs</strong> are the capstone. Deploy the full <strong>Master Sequence (DT → AT → CT)</strong> on complex, ambiguous, real-world cases. These prove genuine thinking fluency.</div>
+    <div class="fwl">
+
+      <div class="fwi" id="li01"><div class="fwh" onclick="tFW('li01')" role="button" tabindex="0" onkeydown="if(event.key==='Enter'||event.key===' ')tFW('li01')"><div class="fwhl"><div class="fwtr"><span class="fwnum">IC1</span><span class="fwnm">The Declining Product</span><span class="diff diff-a">🟡 Applied</span></div><div class="lab-meta"><span class="lab-time">⏱ 90 min</span><span class="lab-fw">Master Sequence: DT → AT → CT</span></div></div><div class="fwtog">▾</div></div>
+        <div class="fwb"><div class="lab-grid"><div class="lab-col"><h5>Scenario</h5><p>A SaaS company's flagship product has seen 30% revenue decline over 18 months despite no major competitor entry. Customer complaints are up but vague: <em>"It just doesn't feel right anymore."</em> Apply the full Master Sequence.</p><h5>Required Frameworks</h5><ul><li><strong>DT:</strong> Analyse customer quotes (Empathise), Define POV, JTBD analysis</li><li><strong>AT:</strong> MECE decomposition of revenue decline, 5 Whys on top branch, Systems Thinking for feedback loops</li><li><strong>CT:</strong> Paul-Elder evaluation of your conclusions, RED Model to check assumptions</li></ul><h5>Deliverables</h5><ul><li>Full Master Sequence with labelled framework outputs</li><li>500-word Pyramid Principle recommendation memo</li><li>"What each skill alone would have missed" (150 words)</li></ul></div>
+          <div class="lab-col"><h5>Self-Assessment Rubric (1–5)</h5><div class="rubric"><ol><li><strong>1:</strong> Applied only 1–2 skills; sequence is absent</li><li><strong>2:</strong> All 3 skills present but disconnected; outputs don't build on each other</li><li><strong>3:</strong> DT framed the problem → AT structured the solution → CT validated; memo is clear</li><li><strong>4:</strong> "What each skill missed" section reveals genuine insight; memo is actionable</li><li><strong>5:</strong> Level 4 + CT caused you to loop back and revise your DT problem definition</li></ol></div></div>
+        </div></div></div>
+
+      <div class="fwi" id="li02"><div class="fwh" onclick="tFW('li02')" role="button" tabindex="0" onkeydown="if(event.key==='Enter'||event.key===' ')tFW('li02')"><div class="fwhl"><div class="fwtr"><span class="fwnum">IC2</span><span class="fwnm">The Career Crossroads</span><span class="diff diff-a">🟡 Applied</span></div><div class="lab-meta"><span class="lab-time">⏱ 60 min</span><span class="lab-fw">Master Sequence (personal)</span></div></div><div class="fwtog">▾</div></div>
+        <div class="fwb"><div class="lab-grid"><div class="lab-col"><h5>Scenario</h5><p>Apply the Master Sequence to a real career decision — your own. The frameworks must work on your life, not just case studies.</p><h5>Required Frameworks</h5><ul><li><strong>DT:</strong> Empathise with your future self (5- and 10-year), JTBD for your career</li><li><strong>AT:</strong> SWOT + PESTEL, MECE issue tree, Cynefin classification</li><li><strong>CT:</strong> Six Hats full session, Socratic examination of your strongest assumption</li></ul><h5>Deliverables</h5><ul><li>Complete analysis portfolio across all 3 skills</li><li>Decision with calibrated confidence ("I'll do X with 70% confidence because…")</li><li>Pre-mortem: if this fails in 3 years, what was the most likely cause?</li></ul></div>
+          <div class="lab-col"><h5>Self-Assessment Rubric (1–5)</h5><div class="rubric"><ol><li><strong>1:</strong> Analysis is superficial; conclusion was predetermined before frameworks</li><li><strong>2:</strong> Frameworks applied but Weaknesses and Black Hat are sugar-coated</li><li><strong>3:</strong> Ruthlessly honest analysis; confidence is calibrated; pre-mortem is specific</li><li><strong>4:</strong> Socratic examination genuinely challenged your strongest assumption</li><li><strong>5:</strong> Level 4 + the decision changed from what you expected before starting the analysis</li></ol></div></div>
+        </div></div></div>
+
+      <div class="fwi" id="li03"><div class="fwh" onclick="tFW('li03')" role="button" tabindex="0" onkeydown="if(event.key==='Enter'||event.key===' ')tFW('li03')"><div class="fwhl"><div class="fwtr"><span class="fwnum">IC3</span><span class="fwnm">The Policy Debate</span><span class="diff diff-a">🟡 Applied</span></div><div class="lab-meta"><span class="lab-time">⏱ 90 min</span><span class="lab-fw">Master Sequence × 2 (FOR + AGAINST)</span></div></div><div class="fwtog">▾</div></div>
+        <div class="fwb"><div class="lab-grid"><div class="lab-col"><h5>Scenario</h5><p>Take a contentious policy question (e.g., <em>"AI-generated content should carry mandatory disclosure labels"</em>). Produce TWO full Master Sequence analyses — one FOR and one AGAINST. Then write your actual position.</p><h5>Deliverables</h5><ul><li>FOR: DT (who benefits) → AT (MECE arguments) → CT (strongest evidence)</li><li>AGAINST: DT (who is harmed) → AT (counter-arguments) → CT (counter-evidence)</li><li>300-word argued position with calibrated confidence</li><li>Reflection: Did the exercise change your starting position? At which framework?</li></ul></div>
+          <div class="lab-col"><h5>Self-Assessment Rubric (1–5)</h5><div class="rubric"><ol><li><strong>1:</strong> AGAINST side is a strawman; position was never genuinely at risk</li><li><strong>2:</strong> Both sides have substance but the Master Sequence isn't visible</li><li><strong>3:</strong> Both sides use DT → AT → CT; position is qualified; confidence is calibrated</li><li><strong>4:</strong> The weaker side (from your perspective) is argued so well a reader wouldn't know your position</li><li><strong>5:</strong> Level 4 + your starting position shifted during the analysis; you can identify the exact framework that caused the shift</li></ol></div></div>
+        </div></div></div>
+
+      <div class="fwi" id="li04"><div class="fwh" onclick="tFW('li04')" role="button" tabindex="0" onkeydown="if(event.key==='Enter'||event.key===' ')tFW('li04')"><div class="fwhl"><div class="fwtr"><span class="fwnum">IC4</span><span class="fwnm">The Startup Diagnostic</span><span class="diff diff-x">🔴 Advanced</span></div><div class="lab-meta"><span class="lab-time">⏱ 90 min</span><span class="lab-fw">5+ Frameworks (you select)</span></div></div><div class="fwtog">▾</div></div>
+        <div class="fwb"><div class="lab-grid"><div class="lab-col"><h5>Scenario</h5><p>A startup case study with financials, customer data, team profiles, and market context. Diagnose the core problem and produce a recommendation. You choose all frameworks — the lab doesn't tell you.</p><h5>Deliverables</h5><ul><li>Framework selection log (minimum 5 across all 3 skills, with justification)</li><li>Complete analysis outputs</li><li>1-page Pyramid Principle recommendation</li><li>Framework effectiveness audit: which added most value? Which was misapplied?</li></ul></div>
+          <div class="lab-col"><h5>Self-Assessment Rubric (1–5)</h5><div class="rubric"><ol><li><strong>1:</strong> Fewer than 3 frameworks; no selection justification</li><li><strong>2:</strong> 5 frameworks but selection feels random, not diagnostic</li><li><strong>3:</strong> Selection justified; Master Sequence visible; recommendation is actionable</li><li><strong>4:</strong> Framework audit reveals genuine learning about which tools fit which problem types</li><li><strong>5:</strong> Level 4 + switched frameworks mid-analysis after discovering initial selection was wrong</li></ol></div></div>
+        </div></div></div>
+
+      <div class="fwi" id="li05"><div class="fwh" onclick="tFW('li05')" role="button" tabindex="0" onkeydown="if(event.key==='Enter'||event.key===' ')tFW('li05')"><div class="fwhl"><div class="fwtr"><span class="fwnum">IC5</span><span class="fwnm">The Personal System Redesign</span><span class="diff diff-x">🔴 Advanced</span></div><div class="lab-meta"><span class="lab-time">⏱ 90 min</span><span class="lab-fw">Master Sequence (deeply personal)</span></div></div><div class="fwtog">▾</div></div>
+        <div class="fwb"><div class="lab-grid"><div class="lab-col"><h5>Scenario</h5><p>Identify the single biggest persistent problem in your life. Apply the full Master Sequence. This lab proves the frameworks work on <em>real, messy, personal complexity</em> — not sanitised case studies.</p><h5>Deliverables</h5><ul><li>DT: Self-empathy interview, POV, HMW questions</li><li>AT: Full system map (stocks, flows, R/B loops, delays, leverage point), 5 Whys to root cause</li><li>CT: Paul-Elder audit of your analysis; Six Hats on your intervention</li><li>Intervention plan with measurable, time-bound actions</li><li>30-day check-in template to evaluate if the structural change held</li></ul></div>
+          <div class="lab-col"><h5>Self-Assessment Rubric (1–5)</h5><div class="rubric"><ol><li><strong>1:</strong> Chose a surface-level problem; analysis avoids real complexity</li><li><strong>2:</strong> Genuine problem but system map is linear, not systemic</li><li><strong>3:</strong> Full system map with loops; root cause is structural; intervention targets structure</li><li><strong>4:</strong> CT audit revealed a flaw in your own analysis that you corrected</li><li><strong>5:</strong> Level 4 + 30-day follow-up shows the structural change actually held</li></ol></div></div>
+        </div></div></div>
+
+      <div class="fwi" id="li06"><div class="fwh" onclick="tFW('li06')" role="button" tabindex="0" onkeydown="if(event.key==='Enter'||event.key===' ')tFW('li06')"><div class="fwhl"><div class="fwtr"><span class="fwnum">IC6</span><span class="fwnm">The Teach-Back Capstone</span><span class="diff diff-x">🔴 Advanced</span></div><div class="lab-meta"><span class="lab-time">⏱ 90 min</span><span class="lab-fw">Master Sequence (teaching)</span></div></div><div class="fwtog">▾</div></div>
+        <div class="fwb"><div class="lab-grid"><div class="lab-col"><h5>Scenario</h5><p>Choose any complex topic. Design a 15-minute teaching session using the Master Sequence. Apply DT to understand your learner, AT to structure content (Pyramid), CT to anticipate misunderstandings. Deliver to a real person and collect feedback.</p><h5>Deliverables</h5><ul><li>Learner empathy analysis (who, what do they know, what's their JTBD for learning this?)</li><li>Structured plan (Pyramid: answer first, 3 supporting ideas)</li><li>Anticipated objections (Socratic + Black Hat)</li><li>Delivery notes + 3 pieces of learner feedback</li><li>Reflection: What gap in YOUR understanding did teaching reveal?</li></ul></div>
+          <div class="lab-col"><h5>Self-Assessment Rubric (1–5)</h5><div class="rubric"><ol><li><strong>1:</strong> Taught from your perspective, not the learner's</li><li><strong>2:</strong> Learner empathy attempted but content structure is unfocused</li><li><strong>3:</strong> Pyramid structure clear; anticipated 2+ objections; feedback collected</li><li><strong>4:</strong> Learner feedback confirms understanding; teaching revealed a gap in your own knowledge</li><li><strong>5:</strong> Level 4 + the gap teaching revealed caused you to go back and deepen your own understanding</li></ol></div></div>
+        </div></div></div>
+
+    </div>
+  </div>
+
+  <!-- ══════════ REFLECTION & JOURNAL LABS ══════════ -->
+  <div class="lab-sec" id="lab-lrf">
+    <div class="ib ib-g" style="margin-bottom:1.25rem">📓 <strong>Reflection &amp; Journal Labs</strong> turn your Thinking Journal into a deliberate practice tool. These labs use the journal itself as the primary instrument — they deepen the metacognitive habit that makes all other thinking skills compound.</div>
+    <div class="fwl">
+
+      <div class="fwi" id="lr01"><div class="fwh" onclick="tFW('lr01')" role="button" tabindex="0" onkeydown="if(event.key==='Enter'||event.key===' ')tFW('lr01')"><div class="fwhl"><div class="fwtr"><span class="fwnum">R1</span><span class="fwnm">The Decision Autopsy Journal</span><span class="diff diff-f">🟢 Foundation</span></div><div class="lab-meta"><span class="lab-time">⏱ 30 min</span><span class="lab-fw">FW06 OODA · Foundation 1</span></div></div><div class="fwtog">▾</div></div>
+        <div class="fwb"><div class="lab-grid"><div class="lab-col"><h5>Scenario</h5><p>Review the last 7 days of your Thinking Journal. Identify the single most important decision. Map it through OODA retrospectively. Write a one-page decision autopsy.</p><h5>Deliverables</h5><ul><li>OODA map of the decision (Orient phase deeply examined)</li><li>Autopsy: what mental model drove Orient? Was it current?</li><li>Counterfactual: what would you have decided with a different Orient?</li></ul></div>
+          <div class="lab-col"><h5>Self-Assessment Rubric (1–5)</h5><div class="rubric"><ol><li><strong>1:</strong> Decision choice is trivial; OODA map is superficial</li><li><strong>2:</strong> Significant decision but Orient analysis is hindsight-only</li><li><strong>3:</strong> Orient model identified; counterfactual is plausible and specific</li><li><strong>4:</strong> Identified a mental model you need to update going forward</li><li><strong>5:</strong> Level 4 + connected this Orient pattern to a recurring theme in your journal entries</li></ol></div></div>
+        </div></div></div>
+
+      <div class="fwi" id="lr02"><div class="fwh" onclick="tFW('lr02')" role="button" tabindex="0" onkeydown="if(event.key==='Enter'||event.key===' ')tFW('lr02')"><div class="fwhl"><div class="fwtr"><span class="fwnum">R2</span><span class="fwnm">The Bias Frequency Log</span><span class="diff diff-f">🟢 Foundation</span></div><div class="lab-meta"><span class="lab-time">⏱ 30 min</span><span class="lab-fw">Foundation 3 · Foundation 1</span></div></div><div class="fwtog">▾</div></div>
+        <div class="fwb"><div class="lab-grid"><div class="lab-col"><h5>Scenario</h5><p>After maintaining a bias log for 2 weeks (Foundation 3), analyse your entries. Which 3 biases appeared most frequently? In what contexts? Design a personal "bias firewall" — 3 specific process changes.</p><h5>Deliverables</h5><ul><li>Frequency analysis: bias name × count × context pattern</li><li>Top 3 biases with situational triggers identified</li><li>"Bias firewall": 3 structural interventions (not "try harder" — actual process changes)</li></ul></div>
+          <div class="lab-col"><h5>Self-Assessment Rubric (1–5)</h5><div class="rubric"><ol><li><strong>1:</strong> Log has fewer than 7 entries; analysis is surface-level</li><li><strong>2:</strong> Frequency counted but no pattern analysis</li><li><strong>3:</strong> Clear patterns; triggers identified; 3 structural interventions designed</li><li><strong>4:</strong> Interventions are genuinely structural (change the process, not "be more careful")</li><li><strong>5:</strong> Level 4 + tested one intervention during the analysis period and measured the result</li></ol></div></div>
+        </div></div></div>
+
+      <div class="fwi" id="lr03"><div class="fwh" onclick="tFW('lr03')" role="button" tabindex="0" onkeydown="if(event.key==='Enter'||event.key===' ')tFW('lr03')"><div class="fwhl"><div class="fwtr"><span class="fwnum">R3</span><span class="fwnm">The Framework Application Log</span><span class="diff diff-a">🟡 Applied</span></div><div class="lab-meta"><span class="lab-time">⏱ 30 min</span><span class="lab-fw">FW02 Bloom's · All Frameworks</span></div></div><div class="fwtog">▾</div></div>
+        <div class="fwb"><div class="lab-grid"><div class="lab-col"><h5>Scenario</h5><p>Review one month of journal entries. For every framework applied: at what Bloom's level did you operate? Map on a Bloom's grid. Identify your ceiling — the level above which you struggle.</p><h5>Deliverables</h5><ul><li>Table: Framework × Date × Problem × Bloom's Level (1–6)</li><li>Pattern analysis: which frameworks at L5–6? Which stuck at L3?</li><li>Targeted practice plan: one exercise per framework to push to the next level</li></ul></div>
+          <div class="lab-col"><h5>Self-Assessment Rubric (1–5)</h5><div class="rubric"><ol><li><strong>1:</strong> Bloom's levels self-assessed without evidence</li><li><strong>2:</strong> Evidence provided but levels are inflated</li><li><strong>3:</strong> Honest assessment; ceiling identified; practice plan is specific</li><li><strong>4:</strong> Practice plan targets exact L4→L5 or L5→L6 transitions per framework</li><li><strong>5:</strong> Level 4 + identified a correlation between framework mastery level and frequency of use</li></ol></div></div>
+        </div></div></div>
+
+      <div class="fwi" id="lr04"><div class="fwh" onclick="tFW('lr04')" role="button" tabindex="0" onkeydown="if(event.key==='Enter'||event.key===' ')tFW('lr04')"><div class="fwhl"><div class="fwtr"><span class="fwnum">R4</span><span class="fwnm">The Quarterly Skills Audit</span><span class="diff diff-a">🟡 Applied</span></div><div class="lab-meta"><span class="lab-time">⏱ 45 min</span><span class="lab-fw">All 19 Frameworks · All 10 Foundations</span></div></div><div class="fwtog">▾</div></div>
+        <div class="fwb"><div class="lab-grid"><div class="lab-col"><h5>Scenario</h5><p>Score yourself 1–10 on all 19 frameworks and all 10 foundations. For each score below 7, write specific evidence (not a feeling). Compare to previous quarter if available.</p><h5>Deliverables</h5><ul><li>29-item scoring table with evidence column</li><li>Quarter-over-quarter comparison</li><li>Top 3 gaps with targeted lab assignments for next quarter</li><li>200-word reflection: biggest growth area and biggest surprise</li></ul></div>
+          <div class="lab-col"><h5>Self-Assessment Rubric (1–5)</h5><div class="rubric"><ol><li><strong>1:</strong> Scores lack evidence; all above 7 with no weaknesses identified</li><li><strong>2:</strong> Some scores below 7 but evidence is vague</li><li><strong>3:</strong> Honest scoring with observable evidence; 3 gaps with lab assignments</li><li><strong>4:</strong> Quarter comparison shows measurable growth; gaps are genuinely prioritised</li><li><strong>5:</strong> Level 4 + identified a systematic blind spot (e.g., "I avoid all DT frameworks")</li></ol></div></div>
+        </div></div></div>
+
+      <div class="fwi" id="lr05"><div class="fwh" onclick="tFW('lr05')" role="button" tabindex="0" onkeydown="if(event.key==='Enter'||event.key===' ')tFW('lr05')"><div class="fwhl"><div class="fwtr"><span class="fwnum">R5</span><span class="fwnm">The Metacognitive Replay</span><span class="diff diff-x">🔴 Advanced</span></div><div class="lab-meta"><span class="lab-time">⏱ 45 min</span><span class="lab-fw">Foundation 1 · FW02 Bloom's</span></div></div><div class="fwtog">▾</div></div>
+        <div class="fwb"><div class="lab-grid"><div class="lab-col"><h5>Scenario</h5><p>Choose your most recent complex analysis. Re-read it. Write a commentary on <em>your thinking process</em> — not the content. What did you think first? Where did you get stuck? Where did emotion enter? Where was reasoning strongest?</p><h5>Deliverables</h5><ul><li>Original analysis (referenced)</li><li>500-word metacognitive commentary focused on <em>process</em>, not conclusions</li><li>3 thinking habits to change next time</li><li>Bloom's self-assessment: at what level is your metacognition itself operating?</li></ul></div>
+          <div class="lab-col"><h5>Self-Assessment Rubric (1–5)</h5><div class="rubric"><ol><li><strong>1:</strong> Commentary describes content, not process</li><li><strong>2:</strong> Some process reflection but stays at surface level</li><li><strong>3:</strong> Identified specific thinking moments: where stuck, where shortcut taken, where emotion entered</li><li><strong>4:</strong> Identified a recurring thinking pattern that transcends this single analysis</li><li><strong>5:</strong> Level 4 + Bloom's self-assessment of metacognition is itself at L5 (evaluating your evaluation process)</li></ol></div></div>
+        </div></div></div>
+
+      <div class="fwi" id="lr06"><div class="fwh" onclick="tFW('lr06')" role="button" tabindex="0" onkeydown="if(event.key==='Enter'||event.key===' ')tFW('lr06')"><div class="fwhl"><div class="fwtr"><span class="fwnum">R6</span><span class="fwnm">The Year-End Thinking Portfolio</span><span class="diff diff-x">🔴 Advanced</span></div><div class="lab-meta"><span class="lab-time">⏱ 90 min</span><span class="lab-fw">All Skills · Capstone Reflection</span></div></div><div class="fwtog">▾</div></div>
+        <div class="fwb"><div class="lab-grid"><div class="lab-col"><h5>Scenario</h5><p>Select 5 lab outputs that demonstrate growth across all 3 thinking skills. Write a portfolio introduction narrating your development arc. This is the capstone that proves mastery — to yourself and others.</p><h5>Deliverables</h5><ul><li>5 selected outputs (1 foundation, 1 CT, 1 AT, 1 DT, 1 integrated)</li><li>800-word portfolio introduction: where you started, what changed, what you can now do</li><li>Before/after comparison on one framework</li><li>Next-year development plan: 3 priorities for continued deepening</li></ul></div>
+          <div class="lab-col"><h5>Self-Assessment Rubric (1–5)</h5><div class="rubric"><ol><li><strong>1:</strong> Portfolio is a collection, not a narrative</li><li><strong>2:</strong> Narrative exists but growth claims lack evidence</li><li><strong>3:</strong> Clear arc; before/after comparison is specific; next-year plan is actionable</li><li><strong>4:</strong> Portfolio demonstrates integration across skills; growth is measurable</li><li><strong>5:</strong> Level 4 + portfolio could be shared with a mentor or employer as evidence of thinking capability</li></ol></div></div>
+        </div></div></div>
+
+    </div>
+  </div>
+
+  <!-- LAB SUMMARY -->
+  <div style="margin-top:1.5rem;background:var(--s2);border:1px solid var(--bdl);border-radius:var(--r);padding:1rem">
+    <div style="font-family:var(--fm);font-size:.63rem;color:var(--green);letter-spacing:.1em;text-transform:uppercase;margin-bottom:.5rem">Lab Architecture Summary</div>
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:.65rem">
+      <div style="font-size:.79rem;color:var(--t2)"><strong style="color:var(--green)">🧱 Foundations:</strong> 6 labs · F1–F6 · ~4.5 hrs total</div>
+      <div style="font-size:.79rem;color:var(--t2)"><strong style="color:#7bb3ff">🔬 Critical Thinking:</strong> 6 labs · CT1–CT6 · ~5.25 hrs total</div>
+      <div style="font-size:.79rem;color:var(--t2)"><strong style="color:#22d3ee">📐 Analytical Thinking:</strong> 6 labs · AT1–AT6 · ~5.75 hrs total</div>
+      <div style="font-size:.79rem;color:var(--t2)"><strong style="color:#fbbf24">💡 Design Thinking:</strong> 6 labs · DT1–DT6 · ~5.25 hrs total</div>
+      <div style="font-size:.79rem;color:var(--t2)"><strong style="color:#c4b5fd">🎯 Integrated Cases:</strong> 6 labs · IC1–IC6 · ~8.5 hrs total</div>
+      <div style="font-size:.79rem;color:var(--t2)"><strong style="color:var(--green)">📓 Reflection:</strong> 6 labs · R1–R6 · ~4.5 hrs total</div>
+    </div>
+    <p style="font-size:.78rem;color:var(--t3);margin-top:.6rem;margin-bottom:0"><strong style="color:var(--w)">36 labs</strong> · <strong style="color:var(--w)">~34 hours</strong> total · <span class="diff diff-f" style="font-size:.55rem">12 🟢</span> <span class="diff diff-a" style="font-size:.55rem">14 🟡</span> <span class="diff diff-x" style="font-size:.55rem">10 🔴</span> · Every lab maps to specific frameworks and foundations · Self-assessed via 5-point rubric</p>
+  </div>
+
+</section>
+
 <!-- ════════════ TAB: RESOURCES ════════════ -->
 <section class="tab" id="tab-rs">
   <div class="sh">
@@ -3158,6 +3647,11 @@ footer{background:var(--s1);border-top:1px solid var(--bd);margin-top:3.5rem}
       <div class="pd-track"><div class="pd-fill" id="pf-dt" style="width:0%"></div></div>
       <div class="pd-pct" id="pp-dt">0 / 6</div>
     </div>
+    <div class="pd pd-lb">
+      <div class="pd-name">🧪 Labs</div>
+      <div class="pd-track"><div class="pd-fill" id="pf-lb" style="width:0%"></div></div>
+      <div class="pd-pct" id="pp-lb">0 / 36</div>
+    </div>
   </div>
 
   <!-- Foundations checklist -->
@@ -3184,6 +3678,12 @@ footer{background:var(--s1);border-top:1px solid var(--bd);margin-top:3.5rem}
     <div class="chk-list" id="cl-dt"></div>
   </div>
 
+  <!-- Labs checklist -->
+  <div class="chk-sec">
+    <div class="chk-hdr"><h4 style="color:var(--purple)">🧪 Labs (36)</h4></div>
+    <div class="chk-list" id="cl-lb"></div>
+  </div>
+
   <div class="ib ib-g" style="margin-top:1.5rem">
     💡 <strong>Quarterly Audit:</strong> Once per quarter, score yourself 1–10 on each of the 19 frameworks. Write the scores in your Thinking Journal. Any score below 6 means: apply that framework to a real problem this week before moving on.
   </div>
@@ -3200,7 +3700,7 @@ footer{background:var(--s1);border-top:1px solid var(--bd);margin-top:3.5rem}
       <span style="color:#fbbf24;font-weight:600">Design Thinking</span> = Human-centred iterative problem solving
     </div>
     <div style="font-size:.73rem;color:#ffffff">
-      WEF Future of Jobs 2025 &nbsp;·&nbsp; 19 Frameworks &nbsp;·&nbsp; 10 Foundations &nbsp;·&nbsp; 3 Learning Plans &nbsp;·&nbsp; v3.0 — March 2026
+      WEF Future of Jobs 2025 &nbsp;·&nbsp; 19 Frameworks &nbsp;·&nbsp; 10 Foundations &nbsp;·&nbsp; 36 Labs &nbsp;·&nbsp; 3 Learning Plans &nbsp;·&nbsp; v3.0 — March 2026
     </div>
   </div>
   <div class="fb">
@@ -3288,6 +3788,15 @@ function gRS(id, btn) {
   if (btn) btn.classList.add('act');
 }
 
+/* ── Lab sub-tabs ── */
+function gLB(id, btn) {
+  document.querySelectorAll('.lab-sec').forEach(s => s.classList.remove('on'));
+  document.querySelectorAll('#lab-tabs .lbt').forEach(b => b.classList.remove('act'));
+  const el = document.getElementById('lab-' + id);
+  if (el) el.classList.add('on');
+  if (btn) btn.classList.add('act');
+}
+
 /* ── Progress Tracker ── */
 const ITEMS = {
   fo: [
@@ -3326,10 +3835,48 @@ const ITEMS = {
     'GV Design Sprint — Run a 5-hour sprint with prototype and 3+ user tests',
     'SCAMPER — Generate 21 ideas from 7 lenses in 14 minutes on one problem',
     'Jobs-To-Be-Done — Write 3 job statements (functional, emotional, social)'
+  ],
+  lb: [
+    'Lab F1: The Bias Detective — Identify 10 biases in headlines + own reactions',
+    'Lab F2: The Fermi Arena — 5 estimates with decomposition chains',
+    'Lab F3: Source Autopsy — Trace 3 claims to primary sources via SIFT',
+    'Lab F4: The Observation Notebook — 45-min thick description session',
+    'Lab F5: The Argument Classifier — Classify 10 arguments by inference type',
+    'Lab F6: The Belief Audit — Audit 10 beliefs with disconfirming evidence search',
+    'Lab CT1: Paul-Elder Courtroom — Full 8-Element + 9-Standard analysis',
+    'Lab CT2: RED Speed Round — 6 rapid RED analyses in 30 min',
+    'Lab CT3: Socratic Self-Examination — Examine your strongest belief',
+    'Lab CT4: Six Hats War Room — Full 6-hat session with recommendation',
+    'Lab CT5: OODA Replay — Map a strategic failure through OODA',
+    'Lab CT6: Multi-Framework Verdict — 3+ CT frameworks on one policy',
+    'Lab AT1: MECE Machine — Build validated 3-level Issue Tree',
+    'Lab AT2: Pyramid Memo — Write SCR conclusion-first memo',
+    'Lab AT3: Root Cause Excavation — Fishbone + 5 Whys + First Principles',
+    'Lab AT4: Strategic Landscape — Full SWOT + PESTEL on real decision',
+    'Lab AT5: System Map — Causal loops + Cynefin classification',
+    'Lab AT6: Framework Selection Challenge — Choose your own AT frameworks',
+    'Lab DT1: Empathy Deep Dive — 2 interviews + POV + 10 HMW questions',
+    'Lab DT2: Crazy 8s Sprint — 8 ideas + prototype + 1-person test',
+    'Lab DT3: Double Diamond Audit — Map project + write 3 IBM Hills',
+    'Lab DT4: SCAMPER Explosion — 21 ideas from 7 lenses',
+    'Lab DT5: JTBD Interview — Extract functional, emotional, social jobs',
+    'Lab DT6: End-to-End Design Sprint — Compressed 90-min full sprint',
+    'Lab IC1: The Declining Product — Full Master Sequence on SaaS case',
+    'Lab IC2: Career Crossroads — Master Sequence on your career',
+    'Lab IC3: Policy Debate — FOR + AGAINST with Master Sequence',
+    'Lab IC4: Startup Diagnostic — 5+ self-selected frameworks',
+    'Lab IC5: Personal System Redesign — Master Sequence on real problem',
+    'Lab IC6: Teach-Back Capstone — Design + deliver a teaching session',
+    'Lab R1: Decision Autopsy Journal — OODA replay of weekly decision',
+    'Lab R2: Bias Frequency Log — Analyse 2-week bias log + design firewall',
+    'Lab R3: Framework Application Log — Bloom\'s level per framework used',
+    'Lab R4: Quarterly Skills Audit — Score all 29 items with evidence',
+    'Lab R5: Metacognitive Replay — 500-word commentary on your process',
+    'Lab R6: Year-End Thinking Portfolio — 5 outputs + 800-word arc narrative'
   ]
 };
 
-let checked = { fo: [], ct: [], at: [], dt: [] };
+let checked = { fo: [], ct: [], at: [], dt: [], lb: [] };
 
 function saveProgress() {
   try { localStorage.setItem('ts_guide_progress', JSON.stringify(checked)); } catch(e) {}
@@ -3349,7 +3896,7 @@ function buildChecklists() {
       <div class="ci ${checked[domain].includes(i) ? 'done' : ''}" onclick="toggleItem('${domain}',${i})">
         <div class="ci-box"></div>
         <div class="ci-txt">${txt}</div>
-        <span class="ci-tag ci-${domain}">${domain === 'fo' ? 'Foundation' : domain.toUpperCase()}</span>
+        <span class="ci-tag ci-${domain}">${domain === 'fo' ? 'Foundation' : domain === 'lb' ? 'Lab' : domain.toUpperCase()}</span>
       </div>`).join('');
   });
   renderProgress();
@@ -3364,7 +3911,7 @@ function toggleItem(domain, idx) {
 }
 
 function renderProgress() {
-  const domains = ['fo', 'ct', 'at', 'dt'];
+  const domains = ['fo', 'ct', 'at', 'dt', 'lb'];
   let total = 0, done = 0;
   domains.forEach(d => {
     const n = ITEMS[d].length, c = checked[d].length;
@@ -3385,7 +3932,7 @@ function renderProgress() {
 
 function resetAll() {
   if (!confirm('Reset all progress? This cannot be undone.')) return;
-  checked = { fo: [], ct: [], at: [], dt: [] };
+  checked = { fo: [], ct: [], at: [], dt: [], lb: [] };
   saveProgress();
   buildChecklists();
 }
