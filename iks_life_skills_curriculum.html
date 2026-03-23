@@ -1,0 +1,2304 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Indian Intelligence Stack — 12-Week IKS Life Skills Curriculum</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:ital,wght@0,400;0,500;0,700;0,800;1,400&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #f7f3ec;
+      --card: #fffdf9;
+      --ink: #2f241d;
+      --muted: #6b5b4d;
+      --line: #e6d8c9;
+      --foundation: #2d6a4f;
+      --foundation-soft: #e9f5ee;
+      --cognitive: #1f5f8b;
+      --cognitive-soft: #eaf4fb;
+      --ethical: #c28a17;
+      --ethical-soft: #fff6df;
+      --strategic: #a64032;
+      --strategic-soft: #fdecea;
+      --navy: #3b2a22;
+      --saffron: #d97706;
+      --terracotta: #b45309;
+      --peacock: #0f766e;
+      --lotus: #b83280;
+      --shadow: 0 12px 28px rgba(63, 42, 31, 0.08);
+    }
+
+    * { box-sizing: border-box; margin: 0; }
+    body {
+      font-family: 'DM Sans', Segoe UI, sans-serif;
+      background:
+        radial-gradient(circle at top right, rgba(217,119,6,.08), transparent 25%),
+        radial-gradient(circle at bottom left, rgba(15,118,110,.08), transparent 24%),
+        linear-gradient(180deg, #fbf8f3 0%, #f7f3ec 100%);
+      color: var(--ink);
+      position: relative;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      opacity: .07;
+      background-image:
+        radial-gradient(circle at 20px 20px, #b45309 2px, transparent 2px),
+        radial-gradient(circle at 60px 60px, #0f766e 1.5px, transparent 1.5px);
+      background-size: 120px 120px;
+      mask-image: linear-gradient(180deg, rgba(0,0,0,.9), rgba(0,0,0,.2));
+    }
+
+    .wrap {
+      max-width: 1440px;
+      margin: 0 auto;
+      padding: 28px;
+      position: relative;
+      z-index: 1;
+      flex: 1;
+      width: 100%;
+    }
+
+    /* ── Hero ── */
+    .hero {
+      background: linear-gradient(135deg, #4a2d1f, #8a4b1f 48%, #0f766e);
+      color: #fff;
+      border-radius: 28px;
+      padding: 34px 32px 28px;
+      box-shadow: var(--shadow);
+      position: relative;
+      overflow: hidden;
+      border: 1px solid rgba(255,255,255,.12);
+    }
+    .hero::after {
+      content: "";
+      position: absolute;
+      inset: auto -60px -60px auto;
+      width: 280px;
+      height: 280px;
+      background: radial-gradient(circle, rgba(255,255,255,.14), transparent 60%);
+      border-radius: 50%;
+    }
+    .hero h1 {
+      margin: 0 0 10px 0;
+      font-family: 'DM Serif Display', Georgia, serif;
+      font-size: clamp(30px, 4vw, 52px);
+      line-height: 1.08;
+      letter-spacing: -.01em;
+    }
+    .hero-desc {
+      max-width: 1000px;
+      color: rgba(255,255,255,.92);
+      font-size: 15px;
+      line-height: 1.7;
+    }
+    .hero-lineage {
+      margin-top: 10px;
+      padding: 10px 14px;
+      background: rgba(255,255,255,.08);
+      border: 1px solid rgba(255,255,255,.14);
+      border-radius: 12px;
+      color: rgba(255,255,255,.82);
+      font-size: 13px;
+      line-height: 1.6;
+      max-width: 1000px;
+      backdrop-filter: blur(4px);
+    }
+    .hero-lineage strong { color: #fff; }
+
+    .badge-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 16px;
+    }
+    .badge {
+      padding: 9px 13px;
+      border: 1px solid rgba(255,255,255,.18);
+      border-radius: 999px;
+      background: rgba(255,255,255,.08);
+      color: #fff;
+      font-size: 12px;
+      font-weight: 700;
+      backdrop-filter: blur(6px);
+      white-space: nowrap;
+    }
+
+    /* ── Layout ── */
+    .top-grid {
+      display: grid;
+      grid-template-columns: 310px 1fr;
+      gap: 20px;
+      margin-top: 20px;
+    }
+
+    .panel {
+      background: var(--card);
+      border: 1px solid var(--line);
+      border-radius: 22px;
+      box-shadow: var(--shadow);
+    }
+
+    .side {
+      padding: 18px;
+      position: sticky;
+      top: 18px;
+      height: fit-content;
+      background: linear-gradient(180deg, #fffdf9, #fff8ef);
+    }
+    .side h3, .content h3 {
+      margin: 4px 0 12px 0;
+      font-size: 12px;
+      text-transform: uppercase;
+      letter-spacing: .1em;
+      color: var(--muted);
+      font-weight: 800;
+    }
+
+    .phase-list { display: grid; gap: 10px; }
+
+    .phase-card {
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      padding: 12px 14px;
+      cursor: pointer;
+      transition: .25s ease;
+      background: #fff;
+      position: relative;
+      overflow: hidden;
+    }
+    .phase-card::after {
+      position: absolute;
+      right: 12px;
+      top: 10px;
+      font-size: 22px;
+      opacity: .16;
+    }
+    .phase-card.foundation::after { content: "🌿"; }
+    .phase-card.cognitive::after { content: "🦚"; }
+    .phase-card.ethical::after { content: "🪔"; }
+    .phase-card.strategic::after { content: "👑"; }
+    .phase-card:hover,
+    .phase-card.active {
+      transform: translateY(-2px);
+      box-shadow: 0 10px 24px rgba(16, 42, 67, 0.08);
+      border-color: transparent;
+    }
+    .phase-card.foundation.active { background: linear-gradient(135deg, var(--foundation-soft), #fff); }
+    .phase-card.cognitive.active { background: linear-gradient(135deg, var(--cognitive-soft), #fff); }
+    .phase-card.ethical.active { background: linear-gradient(135deg, var(--ethical-soft), #fff); }
+    .phase-card.strategic.active { background: linear-gradient(135deg, var(--strategic-soft), #fff); }
+
+    .phase-name {
+      font-weight: 800;
+      font-size: 14px;
+      margin-bottom: 4px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .phase-meta {
+      font-size: 12px;
+      color: var(--muted);
+      line-height: 1.5;
+    }
+
+    .progress-box {
+      margin-top: 16px;
+      border-top: 1px dashed var(--line);
+      padding-top: 16px;
+    }
+    .meter {
+      height: 10px;
+      background: #efe4d6;
+      border-radius: 999px;
+      overflow: hidden;
+      margin: 8px 0;
+    }
+    .meter > span {
+      display: block;
+      height: 100%;
+      width: 0%;
+      background: linear-gradient(90deg, var(--saffron), var(--peacock));
+      transition: width .3s ease;
+    }
+    .tiny { font-size: 11px; color: var(--muted); }
+
+    .btn-row { display: flex; gap: 8px; margin-top: 10px; }
+    .btn {
+      border: 1px solid var(--line);
+      background: #fff;
+      color: var(--ink);
+      border-radius: 10px;
+      padding: 8px 12px;
+      font-weight: 700;
+      cursor: pointer;
+      font-size: 12px;
+      font-family: inherit;
+      transition: .2s;
+    }
+    .btn:hover { background: #f5f0e8; }
+    .btn.primary { background: var(--navy); color: #fff; border-color: var(--navy); }
+    .btn.primary:hover { background: #2a1d16; }
+
+    .content { padding: 22px; background: linear-gradient(180deg, #fffdf9, #ffffff); }
+
+    .toolbar {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 16px;
+    }
+
+    .filters { display: flex; gap: 8px; flex-wrap: wrap; }
+    .chip {
+      border: 1px solid var(--line);
+      background: #fff;
+      color: var(--ink);
+      padding: 8px 14px;
+      border-radius: 999px;
+      cursor: pointer;
+      font-weight: 700;
+      font-size: 12px;
+      font-family: inherit;
+      transition: .2s;
+    }
+    .chip:hover { background: #f5f0e8; }
+    .chip.active { background: var(--navy); color: #fff; border-color: var(--navy); }
+
+    /* ── Week Cards ── */
+    .week-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 14px;
+    }
+
+    .week-card {
+      background: #fff;
+      border: 1px solid var(--line);
+      border-radius: 18px;
+      padding: 18px;
+      box-shadow: var(--shadow);
+      display: flex;
+      flex-direction: column;
+      min-height: 280px;
+      transition: .25s ease;
+      position: relative;
+      overflow: hidden;
+    }
+    .week-card::before {
+      position: absolute;
+      right: 14px;
+      top: 12px;
+      font-size: 22px;
+      opacity: .12;
+    }
+    .week-card.foundation::before { content: "📜"; }
+    .week-card.cognitive::before { content: "🧠"; }
+    .week-card.ethical::before { content: "⚖"; }
+    .week-card.strategic::before { content: "♜"; }
+    .week-card:hover { transform: translateY(-4px); }
+    .week-card.foundation { border-top: 5px solid var(--foundation); background: linear-gradient(180deg, #fff, var(--foundation-soft)); }
+    .week-card.cognitive { border-top: 5px solid var(--cognitive); background: linear-gradient(180deg, #fff, var(--cognitive-soft)); }
+    .week-card.ethical { border-top: 5px solid var(--ethical); background: linear-gradient(180deg, #fff, var(--ethical-soft)); }
+    .week-card.strategic { border-top: 5px solid var(--strategic); background: linear-gradient(180deg, #fff, var(--strategic-soft)); }
+
+    .week-number {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 42px;
+      height: 42px;
+      border-radius: 12px;
+      font-weight: 900;
+      color: #fff;
+      margin-bottom: 10px;
+      box-shadow: 0 10px 20px rgba(0,0,0,.08);
+      font-size: 15px;
+    }
+    .week-card.foundation .week-number { background: var(--foundation); }
+    .week-card.cognitive .week-number { background: var(--cognitive); }
+    .week-card.ethical .week-number { background: var(--ethical); }
+    .week-card.strategic .week-number { background: var(--strategic); }
+
+    .week-title {
+      font-family: 'DM Serif Display', Georgia, serif;
+      font-size: 19px;
+      font-weight: 400;
+      margin: 0 0 5px;
+      line-height: 1.2;
+    }
+    .week-theme {
+      color: var(--muted);
+      font-size: 12px;
+      font-weight: 700;
+      margin-bottom: 12px;
+      text-transform: uppercase;
+      letter-spacing: .04em;
+    }
+    .week-snippet {
+      color: var(--muted);
+      font-size: 13px;
+      line-height: 1.6;
+      flex: 1;
+    }
+    .skill-tags { display: flex; flex-wrap: wrap; gap: 5px; margin-top: 8px; }
+    .skill-tag {
+      font-size: 10px;
+      font-weight: 700;
+      padding: 3px 8px;
+      border-radius: 999px;
+      background: rgba(0,0,0,.04);
+      color: var(--muted);
+      border: 1px solid rgba(0,0,0,.06);
+    }
+    .week-actions {
+      display: flex;
+      gap: 8px;
+      margin-top: 14px;
+      flex-wrap: wrap;
+    }
+    .action-link {
+      border: 1px solid var(--line);
+      border-radius: 10px;
+      padding: 8px 12px;
+      background: #fff;
+      cursor: pointer;
+      font-weight: 800;
+      font-size: 12px;
+      color: var(--ink);
+      font-family: inherit;
+      transition: .2s;
+    }
+    .action-link:hover { background: #f5f0e8; }
+    .action-link.done {
+      background: #e8f5f1;
+      border-color: #b7e4d4;
+      color: var(--foundation);
+    }
+
+    /* ── Method Grid ── */
+    .method-grid {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 10px;
+      margin-top: 18px;
+    }
+    .method-card {
+      background: linear-gradient(180deg, #fff, #fdf7ef);
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      padding: 14px 12px;
+      text-align: center;
+    }
+    .method-card strong {
+      display: block;
+      margin-bottom: 5px;
+      font-size: 13px;
+    }
+    .method-card span {
+      font-size: 11px;
+      color: var(--muted);
+      line-height: 1.4;
+    }
+
+    /* ── Dialog / Modal ── */
+    dialog {
+      width: min(980px, calc(100vw - 32px));
+      max-height: 92vh;
+      border: none;
+      border-radius: 22px;
+      padding: 0;
+      box-shadow: 0 25px 80px rgba(0,0,0,.24);
+      overflow: hidden;
+    }
+    dialog::backdrop { background: rgba(53, 37, 27, 0.55); backdrop-filter: blur(3px); }
+
+    .modal-head {
+      padding: 22px 24px 16px;
+      color: #fff;
+      position: relative;
+      overflow: hidden;
+    }
+    .modal-head::after {
+      content: "✦";
+      position: absolute;
+      right: 18px;
+      top: 10px;
+      font-size: 44px;
+      opacity: .16;
+    }
+    .modal-head.foundation { background: linear-gradient(135deg, var(--foundation), #0f766e); }
+    .modal-head.cognitive { background: linear-gradient(135deg, var(--cognitive), #2457a6); }
+    .modal-head.ethical { background: linear-gradient(135deg, var(--ethical), #a97d12); }
+    .modal-head.strategic { background: linear-gradient(135deg, var(--strategic), #8f352d); }
+
+    .modal-close-x {
+      position: absolute;
+      top: 14px;
+      right: 54px;
+      background: rgba(255,255,255,.15);
+      border: 1px solid rgba(255,255,255,.2);
+      color: #fff;
+      width: 32px;
+      height: 32px;
+      border-radius: 8px;
+      cursor: pointer;
+      font-size: 18px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 2;
+      transition: .2s;
+      font-family: inherit;
+    }
+    .modal-close-x:hover { background: rgba(255,255,255,.25); }
+
+    .modal-title {
+      margin: 0;
+      font-family: 'DM Serif Display', Georgia, serif;
+      font-size: 28px;
+      line-height: 1.15;
+      font-weight: 400;
+    }
+    .modal-sub { margin-top: 5px; color: rgba(255,255,255,.88); font-weight: 600; font-size: 14px; }
+
+    .modal-body {
+      padding: 20px 24px 24px;
+      background: #fff;
+      overflow-y: auto;
+      max-height: calc(92vh - 100px);
+    }
+
+    .detail-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 12px;
+      margin-top: 4px;
+    }
+    .detail-card {
+      border: 1px solid var(--line);
+      border-radius: 16px;
+      padding: 14px 16px;
+      background: #fafcfe;
+    }
+    .detail-card.story-card {
+      grid-column: 1 / -1;
+      background: linear-gradient(135deg, #fef9f0, #fdf6e8);
+      border-color: #e8d5b8;
+    }
+    .detail-card.rubric-card {
+      grid-column: 1 / -1;
+      background: linear-gradient(135deg, #f0f7f4, #edf5f1);
+      border-color: #c8ddd2;
+    }
+    .detail-card.template-card {
+      grid-column: 1 / -1;
+      background: linear-gradient(135deg, #f4f1fa, #f0edf7);
+      border-color: #d4cae6;
+    }
+    .detail-card h4 {
+      margin: 0 0 6px;
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: .1em;
+      color: var(--muted);
+      font-weight: 800;
+    }
+    .detail-card p, .detail-card ul {
+      margin: 0;
+      color: var(--ink);
+      line-height: 1.65;
+      font-size: 13.5px;
+    }
+    .detail-card ul { padding-left: 18px; }
+    .detail-card li { margin-bottom: 3px; }
+
+    .rubric-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 12px;
+      margin-top: 6px;
+    }
+    .rubric-table th {
+      background: var(--foundation);
+      color: #fff;
+      padding: 7px 10px;
+      text-align: left;
+      font-weight: 700;
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: .04em;
+    }
+    .rubric-table th:first-child { border-radius: 8px 0 0 0; }
+    .rubric-table th:last-child { border-radius: 0 8px 0 0; }
+    .rubric-table td {
+      padding: 6px 10px;
+      border-bottom: 1px solid var(--line);
+      vertical-align: top;
+      line-height: 1.5;
+    }
+    .rubric-table tr:last-child td { border-bottom: none; }
+    .rubric-table tr:nth-child(even) td { background: rgba(0,0,0,.02); }
+
+    .template-block {
+      background: #fff;
+      border: 1px dashed var(--line);
+      border-radius: 10px;
+      padding: 10px 14px;
+      font-size: 12px;
+      margin-top: 6px;
+      font-family: 'DM Sans', monospace;
+      color: var(--muted);
+      line-height: 1.6;
+    }
+    .template-block strong { color: var(--ink); }
+
+    .outcome-box {
+      margin-top: 12px;
+      padding: 14px 16px;
+      border-radius: 14px;
+      background: #fff7eb;
+      border: 1px solid #f1dcb8;
+      font-size: 13px;
+      line-height: 1.6;
+    }
+
+    .modal-foot {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 14px;
+      margin-top: 16px;
+      flex-wrap: wrap;
+    }
+
+    .legend {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      margin-top: 18px;
+    }
+    .legend span {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 11px;
+      font-weight: 700;
+      color: var(--muted);
+    }
+    .dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 999px;
+      display: inline-block;
+    }
+
+    /* ── Footer ── */
+    .site-footer {
+      background: linear-gradient(135deg, #1a110b, #2a1d16 60%, #0a3d2e);
+      padding: 14px 28px;
+      text-align: center;
+      font-size: 13px;
+      color: #d97706;
+      font-weight: 700;
+      letter-spacing: .02em;
+      position: relative;
+      z-index: 1;
+    }
+    .site-footer strong {
+      color: #fff;
+      font-weight: 800;
+    }
+    .site-footer .sep { margin: 0 8px; color: #fff; opacity: 1; font-weight: 400; }
+
+    .footer-note {
+      margin-top: 16px;
+      color: var(--muted);
+      font-size: 11px;
+      line-height: 1.6;
+    }
+
+    /* ── Responsive ── */
+    @media (max-width: 1100px) {
+      .top-grid { grid-template-columns: 1fr; }
+      .side { position: static; }
+      .week-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      .method-grid { grid-template-columns: repeat(3, 1fr); }
+    }
+
+    @media (max-width: 760px) {
+      .wrap { padding: 14px; }
+      .week-grid, .detail-grid, .method-grid { grid-template-columns: 1fr; }
+      .hero { padding: 20px; }
+      .content { padding: 14px; }
+      .side { padding: 14px; }
+      .badge-row { gap: 6px; }
+      .badge { font-size: 11px; padding: 7px 10px; }
+    }
+  
+    /* ── Logo in Hero ── */
+    .hero-flex {
+      display: flex;
+      align-items: center;
+      gap: 28px;
+    }
+    .hero-logo {
+      flex-shrink: 0;
+      width: 220px;
+      height: auto;
+      border-radius: 16px;
+    }
+    .hero-text { flex: 1; min-width: 0; }
+
+    /* ── Tier-2: Teacher Notes, Timing, Resources ── */
+    .teacher-card {
+      grid-column: 1 / -1;
+      background: linear-gradient(135deg, #fef9ef, #fdf5e3);
+      border-color: #e8d5a8;
+    }
+    .teacher-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 8px;
+      margin-top: 6px;
+    }
+    .teacher-item {
+      font-size: 12.5px;
+      line-height: 1.5;
+      padding: 6px 10px;
+      background: rgba(255,255,255,.6);
+      border-radius: 8px;
+      border: 1px solid rgba(0,0,0,.04);
+    }
+    .teacher-item strong { display: block; font-size: 11px; text-transform: uppercase; letter-spacing: .06em; color: var(--muted); margin-bottom: 2px; }
+
+    .timing-bar {
+      display: flex;
+      height: 22px;
+      border-radius: 8px;
+      overflow: hidden;
+      margin: 8px 0 4px;
+      font-size: 0;
+    }
+    .timing-bar > span {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 10px;
+      font-weight: 700;
+      color: #fff;
+      white-space: nowrap;
+      padding: 0 6px;
+      min-width: 0;
+    }
+    .timing-legend {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      font-size: 11px;
+      color: var(--muted);
+      margin-top: 4px;
+    }
+    .timing-legend span { display: inline-flex; align-items: center; gap: 4px; }
+    .timing-dot { width: 8px; height: 8px; border-radius: 50%; display: inline-block; }
+
+    .resource-list {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      margin-top: 6px;
+    }
+    .resource-link {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 7px 10px;
+      background: rgba(255,255,255,.6);
+      border: 1px solid rgba(0,0,0,.04);
+      border-radius: 8px;
+      font-size: 12.5px;
+      text-decoration: none;
+      color: var(--ink);
+      transition: .2s;
+    }
+    .resource-link:hover { background: rgba(255,255,255,.9); }
+    .resource-icon { font-size: 14px; flex-shrink: 0; }
+    .resource-type {
+      font-size: 10px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: .04em;
+      color: var(--muted);
+      margin-left: auto;
+      flex-shrink: 0;
+    }
+
+    .capstone-options {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 6px;
+      margin-top: 6px;
+    }
+    .capstone-opt {
+      font-size: 12px;
+      padding: 7px 10px;
+      background: rgba(255,255,255,.6);
+      border: 1px solid rgba(0,0,0,.04);
+      border-radius: 8px;
+      line-height: 1.4;
+    }
+    .capstone-opt::before {
+      content: "→ ";
+      color: var(--strategic);
+      font-weight: 800;
+    }
+
+    @media (max-width: 760px) {
+      .hero-flex { flex-direction: column; align-items: center; text-align: center; }
+      .hero-logo { width: 150px; }
+      .teacher-grid { grid-template-columns: 1fr; }
+      .capstone-options { grid-template-columns: 1fr; }
+    }
+</style>
+</head>
+
+<body>
+  <div class="wrap">
+    <section class="hero">
+      <div class="hero-flex">
+        <img class="hero-logo" src="data:image/png;base64,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" alt="Indian Intelligence Stack Logo" />
+        <div class="hero-text">
+          <h1>Indian Intelligence Stack Architecture</h1>
+          <p class="hero-desc">
+            Interactive 12-week life skills curriculum built on the progression of <strong>Story → Reflection → Strategy → Simulation → Application</strong>.
+            Designed for Classes 9–12 in the Indian context, this guide converts ancient Indian wisdom into a structured decision-intelligence learning system.
+          </p>
+          <div class="hero-lineage">
+            <strong>📋 Framework Lineage:</strong> Adapted from UGC's <strong>Curriculum &amp; Guidelines for Life Skills (Jeevan Kaushal) 2.0</strong> (August 2023) under <strong>NEP 2020</strong>. This curriculum uses Indian Knowledge Systems (IKS) as source material to introduce secondary school students to core life skills through story-driven experiential learning. It serves as a structured starting point aligned with the national vision for holistic, value-based education.
+          </div>
+          <div class="badge-row">
+            <span class="badge">🪔 12 Weeks</span>
+            <span class="badge">🏛 4 Phases</span>
+            <span class="badge">🎓 Classes 9–12</span>
+            <span class="badge">🕒 1–2 Periods / Week</span>
+            <span class="badge">📜 5-Step Pedagogy: Story → Reflection → Strategy → Simulation → Application</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <div class="top-grid">
+      <aside class="panel side">
+        <h3>Programme Architecture</h3>
+        <div class="phase-list" id="phaseList"></div>
+
+        <div class="progress-box">
+          <h3>Student Progress</h3>
+          <div class="meter"><span id="meterBar"></span></div>
+          <div class="tiny"><span id="progressText">0 of 12 weeks marked complete</span></div>
+          <div class="tiny" style="margin-top:4px;opacity:.7;">⚠ Progress is saved in this browser only.</div>
+          <div class="btn-row">
+            <button class="btn primary" id="expandAll">Open First Week</button>
+            <button class="btn" id="resetProgress">Reset Progress</button>
+          </div>
+        </div>
+
+        <div class="legend">
+          <span><i class="dot" style="background: var(--foundation)"></i> Foundation</span>
+          <span><i class="dot" style="background: var(--cognitive)"></i> Cognitive</span>
+          <span><i class="dot" style="background: var(--ethical)"></i> Ethical</span>
+          <span><i class="dot" style="background: var(--strategic)"></i> Strategic</span>
+        </div>
+      </aside>
+
+      <main class="panel content">
+        <div class="toolbar">
+          <div>
+            <h3>Clickable Weekly Modules</h3>
+            <div class="tiny">Click <strong>Explore Module</strong> for the complete session: story, strategy, simulation, rubric, templates, timing, teacher notes, and resources.</div>
+          </div>
+          <div class="filters" id="filters"></div>
+        </div>
+
+        <div class="week-grid" id="weekGrid"></div>
+
+        <div class="toolbar" style="margin-top: 20px;">
+          <div>
+            <h3>Teaching Method Loop</h3>
+            <div class="tiny">Use the same 5-step session structure every week for consistency, reflection, and measurable skill growth.</div>
+          </div>
+        </div>
+
+        <div class="method-grid">
+          <div class="method-card"><strong>1. Story</strong><span>Anchor the theme through a culturally rooted IKS narrative.</span></div>
+          <div class="method-card"><strong>2. Reflection</strong><span>Surface meaning, motive, and consequence through guided questions.</span></div>
+          <div class="method-card"><strong>3. Strategy</strong><span>Extract decision frameworks and practical life lessons.</span></div>
+          <div class="method-card"><strong>4. Simulation</strong><span>Practice the skill through role-play, scenario, or lab.</span></div>
+          <div class="method-card"><strong>5. Application</strong><span>Connect learning to school, home, society, and future work.</span></div>
+        </div>
+
+        <div class="footer-note">
+          This interactive guide is structured as a single source of truth for both students and teachers. Each module includes story summaries, assessment rubrics, deliverable templates, session timing, teacher preparation notes, and curated resources.
+        </div>
+      </main>
+    </div>
+  </div>
+
+  <footer class="site-footer">
+    Architect U'r Career <span class="sep">|</span> <strong>Krishna Mohan Parsha</strong>
+  </footer>
+
+  <dialog id="moduleDialog">
+    <div id="modalHead" class="modal-head"></div>
+    <div class="modal-body" id="modalBody"></div>
+  </dialog>
+
+  <script>
+    const phases = [{"id": "foundation", "name": "🌿 Phase 1 — Foundation", "weeks": "Weeks 1–3", "focus": "Observation, empathy, cause–effect thinking, basic decisions", "summary": "Story-based learning through Panchatantra, Jataka, and Hitopadesa traditions."}, {"id": "cognitive", "name": "🦚 Phase 2 — Cognitive Intelligence", "weeks": "Weeks 4–6", "focus": "Logic, communication, creativity, problem solving", "summary": "Applied reasoning using Akbar–Birbal, Tenali Rama, and communication labs."}, {"id": "ethical", "name": "🪔 Phase 3 — Ethical Intelligence", "weeks": "Weeks 7–9", "focus": "Dharma, emotional control, difficult decisions, responsibility", "summary": "Value-centered decision training using Gita, Ramayana, and Mahabharata."}, {"id": "strategic", "name": "👑 Phase 4 — Strategic Intelligence", "weeks": "Weeks 10–12", "focus": "Systems thinking, leadership, governance, competition, execution", "summary": "Strategic decision architecture using Arthashastra and capstone simulation."}];
+    const weeks = [
+  {
+    "week": 1,
+    "phase": "foundation",
+    "title": "Panchatantra: Thinking Before Acting",
+    "theme": "Intelligence over force",
+    "skills": [
+      "Problem Solving",
+      "Critical Thinking",
+      "Self-Awareness"
+    ],
+    "story": "The Lion and the Hare",
+    "storySource": "Panchatantra, Book 1 — Mitra-Bheda (Loss of Friends)",
+    "storySummary": "A fierce lion terrorised a forest, killing animals daily for food. The desperate animals struck a deal: they would send one animal each day so the lion would stop random hunting. When it was the hare's turn, he arrived late and told the lion that another, rival lion in a well had tried to steal him. The enraged lion rushed to the well, saw his own reflection, roared at it, and leapt in to attack — drowning himself. The tiny hare had defeated the mighty lion not with strength, but with wit and strategic framing of the problem.",
+    "reflection": "Why did brute strength fail? How did the hare change the problem instead of fighting it directly?",
+    "strategy": "Problem framing, indirect strategy, thinking before reacting, intelligence as a survival tool.",
+    "simulation": "Escape the Problem — students receive a locked scenario and must solve it through constraints, not force.",
+    "application": "Use when dealing with peer conflict, pressure situations, or obstacles where direct confrontation will worsen the issue.",
+    "sessionFlow": "Story narration & scene-setting (8 min) → Guided reflection with paired discussion (7 min) → Strategy extraction on board (5 min) → Escape the Problem simulation in teams of 4 (15 min) → Debrief & oral summaries (5 min).",
+    "timing": {
+      "story": 8,
+      "reflection": 7,
+      "strategy": 5,
+      "simulation": 15,
+      "debrief": 5,
+      "total": 40
+    },
+    "teacherNotes": {
+      "materials": "Printed scenario cards (1 per team), chart paper, markers",
+      "setup": "Teams of 4 at clustered desks",
+      "groupSize": "4 students per team",
+      "prep": "Read the Panchatantra story beforehand; prepare 3–4 locked-scenario cards with different difficulty levels"
+    },
+    "resources": [
+      {
+        "title": "Panchatantra Full Text (Vishnu Sharma)",
+        "url": "https://www.wisdomlib.org/hinduism/book/panchatantra",
+        "type": "story"
+      },
+      {
+        "title": "NCERT — Problem Solving & Decision Making",
+        "url": "https://ncert.nic.in/textbook.php?kepy1=6-6",
+        "type": "teaching"
+      },
+      {
+        "title": "TED-Ed: The Panchatantra",
+        "url": "https://www.youtube.com/watch?v=ZGMiJC3QGPM",
+        "type": "video"
+      }
+    ],
+    "deliverables": [
+      "Reflection note: strength vs intelligence",
+      "Team puzzle sheet",
+      "1-minute oral summary"
+    ],
+    "deliverableTemplates": [
+      {
+        "name": "Reflection Note",
+        "columns": [
+          "Situation",
+          "Force-Based Response",
+          "Intelligence-Based Response",
+          "Why Smarter Wins"
+        ]
+      },
+      {
+        "name": "Team Puzzle Sheet",
+        "columns": [
+          "Constraint Given",
+          "Approach Tried",
+          "Did It Work?",
+          "Final Solution"
+        ]
+      }
+    ],
+    "outcomes": [
+      "Students distinguish reaction from strategy",
+      "Students identify indirect problem-solving methods"
+    ],
+    "rubric": [
+      {
+        "criteria": "Problem Reframing",
+        "developing": "Attempts direct solution only",
+        "competent": "Identifies an alternative angle",
+        "proficient": "Reframes the problem entirely and explains why"
+      },
+      {
+        "criteria": "Reflection Depth",
+        "developing": "Surface-level retelling",
+        "competent": "Connects story to a personal example",
+        "proficient": "Extracts a transferable life principle with nuance"
+      },
+      {
+        "criteria": "Team Participation",
+        "developing": "Passive observer",
+        "competent": "Contributes ideas when prompted",
+        "proficient": "Actively drives team discussion and builds on others' ideas"
+      }
+    ],
+    "assessment": "Teacher observation + reflection journal + group participation rubric"
+  },
+  {
+    "week": 2,
+    "phase": "foundation",
+    "title": "Jataka Tales: Compassion and Consequences",
+    "theme": "Empathy as decision intelligence",
+    "skills": [
+      "Empathy",
+      "Decision-Making",
+      "Leadership"
+    ],
+    "story": "The Selfless King (Sivi Jataka)",
+    "storySource": "Jataka Tales — Sivi Jataka (No. 499)",
+    "storySummary": "King Sivi was renowned for his boundless generosity. To test him, the god Indra disguised himself as a blind old man and asked the king for his eyes. Without hesitation, the king had his own eyes removed and gave them to the stranger, plunging himself into darkness. The gods, moved by his selfless compassion, restored his sight. The story asks: when does sacrifice become leadership? When is personal loss justified by the good it creates for others?",
+    "reflection": "What is sacrifice? When should a leader choose collective good over personal gain?",
+    "strategy": "Empathy-led leadership, long-term consequence mapping, responsibility to the group.",
+    "simulation": "Leader's Choice — students choose between personal benefit and team welfare across evolving scenarios.",
+    "application": "Useful in team projects, family decisions, student council roles, and social service activities.",
+    "sessionFlow": "Narrate the Sivi Jataka with dramatic pauses (8 min) → Paired reflection: 'Would you give up something precious for a stranger?' (6 min) → Strategy mapping: consequences of selfishness vs. sacrifice (6 min) → Leader's Choice simulation with 3 evolving rounds (14 min) → Group debrief & empathy checklist (6 min).",
+    "timing": {
+      "story": 8,
+      "reflection": 6,
+      "strategy": 6,
+      "simulation": 14,
+      "debrief": 6,
+      "total": 40
+    },
+    "teacherNotes": {
+      "materials": "Leader's Choice scenario cards (3 rounds), consequence map worksheets",
+      "setup": "Pairs for reflection, then groups of 5 for simulation",
+      "groupSize": "Pairs → Groups of 5",
+      "prep": "Prepare 3 progressively harder dilemma cards; read the Sivi Jataka story aloud with emotion"
+    },
+    "resources": [
+      {
+        "title": "Jataka Tales — Sacred Texts Archive",
+        "url": "https://www.sacred-texts.com/bud/j1/index.htm",
+        "type": "story"
+      },
+      {
+        "title": "NCERT Life Skills — Empathy Module",
+        "url": "https://ncert.nic.in/textbook.php?kepy1=7-7",
+        "type": "teaching"
+      },
+      {
+        "title": "Animated Jataka Tales (YouTube)",
+        "url": "https://www.youtube.com/results?search_query=jataka+tales+animated",
+        "type": "video"
+      }
+    ],
+    "deliverables": [
+      "Consequence map",
+      "Empathy checklist",
+      "Small-group discussion notes"
+    ],
+    "deliverableTemplates": [
+      {
+        "name": "Consequence Map",
+        "columns": [
+          "Decision Made",
+          "Immediate Effect (Self)",
+          "Immediate Effect (Others)",
+          "Long-Term Outcome"
+        ]
+      },
+      {
+        "name": "Empathy Checklist",
+        "columns": [
+          "Did I consider how others feel?",
+          "Did I think beyond my own benefit?",
+          "Did I weigh short-term vs long-term?",
+          "Would I be okay receiving this decision?"
+        ]
+      }
+    ],
+    "outcomes": [
+      "Students evaluate short-term vs long-term impact",
+      "Students articulate compassionate decision criteria"
+    ],
+    "rubric": [
+      {
+        "criteria": "Consequence Mapping",
+        "developing": "Lists only obvious immediate effects",
+        "competent": "Maps both short and long-term effects",
+        "proficient": "Traces ripple effects across multiple stakeholders"
+      },
+      {
+        "criteria": "Empathy Articulation",
+        "developing": "Acknowledges others' feelings in general terms",
+        "competent": "Identifies specific perspectives of affected parties",
+        "proficient": "Integrates multiple perspectives into a decision rationale"
+      },
+      {
+        "criteria": "Scenario Decision Quality",
+        "developing": "Chooses the easy/selfish option",
+        "competent": "Weighs trade-offs before deciding",
+        "proficient": "Justifies decision with empathy and long-term reasoning"
+      }
+    ],
+    "assessment": "Peer feedback + empathy scale + teacher anecdotal record"
+  },
+  {
+    "week": 3,
+    "phase": "foundation",
+    "title": "Hitopadesa: Friendship, Influence, and Awareness",
+    "theme": "Know when not to interfere",
+    "skills": [
+      "Risk Assessment",
+      "Self-Control",
+      "Cause-Effect Thinking"
+    ],
+    "story": "The Monkey and the Wedge",
+    "storySource": "Hitopadesa, Book 1 — Mitralabha (Gaining of Friends)",
+    "storySummary": "A carpenter left a half-split log with a wedge holding it open while he went for lunch. A curious monkey, playing nearby, sat on the log and began pulling at the wedge for no reason. When the wedge came free, the log snapped shut on the monkey's tail, trapping and injuring him. The monkey had no business with the log, no understanding of the task, and no reason to interfere — yet curiosity without comprehension led to painful consequences. The story warns against meddling in matters one does not understand.",
+    "reflection": "Why do people enter situations they do not understand? What is the cost of careless intervention?",
+    "strategy": "Boundary awareness, risk recognition, influence without impulsiveness, cause–effect mapping.",
+    "simulation": "Cause–Effect Mapping Lab — students trace how one careless action multiplies into larger consequences.",
+    "application": "Use in social media behaviour, friendships, gossip chains, and emotional decision-making.",
+    "sessionFlow": "Story narration with 'what would you do?' pauses (7 min) → Individual reflection: 'A time I acted without understanding' (5 min) → Cause–effect chain exercise on board (8 min) → Mapping Lab in groups — trace 3 cascading scenarios (15 min) → Personal action pledge writing (5 min).",
+    "timing": {
+      "story": 7,
+      "reflection": 5,
+      "strategy": 8,
+      "simulation": 15,
+      "debrief": 5,
+      "total": 40
+    },
+    "teacherNotes": {
+      "materials": "Cause–effect worksheets, risk alert cards (printed), pledge cards",
+      "setup": "Individual desks for reflection, then groups of 4 for lab",
+      "groupSize": "Individual → Groups of 4",
+      "prep": "Prepare 3 cascading scenario prompts (e.g., 'You share a rumour about a classmate...')"
+    },
+    "resources": [
+      {
+        "title": "Hitopadesa — Wisdom Library",
+        "url": "https://www.wisdomlib.org/hinduism/book/hitopadesa",
+        "type": "story"
+      },
+      {
+        "title": "Social Media Awareness for Teens (NCERT)",
+        "url": "https://ncert.nic.in/textbook.php?lepy1=5-5",
+        "type": "teaching"
+      },
+      {
+        "title": "Hitopadesa Stories Animated",
+        "url": "https://www.youtube.com/results?search_query=hitopadesa+monkey+and+wedge",
+        "type": "video"
+      }
+    ],
+    "deliverables": [
+      "Cause–effect worksheet",
+      "Risk alert card",
+      "Personal action pledge"
+    ],
+    "deliverableTemplates": [
+      {
+        "name": "Cause–Effect Worksheet",
+        "columns": [
+          "Initial Action",
+          "Effect 1 (Immediate)",
+          "Effect 2 (Ripple)",
+          "Effect 3 (Long-term)",
+          "Could It Have Been Avoided?"
+        ]
+      },
+      {
+        "name": "Risk Alert Card",
+        "columns": [
+          "Situation",
+          "Do I Understand It Fully?",
+          "Am I Needed Here?",
+          "What Could Go Wrong?",
+          "Decision: Act / Wait / Walk Away"
+        ]
+      }
+    ],
+    "outcomes": [
+      "Students identify triggers for impulsive action",
+      "Students connect behaviour with predictable outcomes"
+    ],
+    "rubric": [
+      {
+        "criteria": "Cause-Effect Chain",
+        "developing": "Identifies one cause-one effect",
+        "competent": "Maps a 3-step chain accurately",
+        "proficient": "Maps branching consequences with multiple stakeholders"
+      },
+      {
+        "criteria": "Boundary Awareness",
+        "developing": "Does not recognise overstepping",
+        "competent": "Identifies when to pause",
+        "proficient": "Articulates clear criteria for when to act vs. when to stay out"
+      },
+      {
+        "criteria": "Personal Pledge Quality",
+        "developing": "Generic statement",
+        "competent": "Specific, actionable commitment",
+        "proficient": "Commitment tied to a real personal scenario with follow-through plan"
+      }
+    ],
+    "assessment": "Scenario sheet + self-evaluation + teacher review"
+  },
+  {
+    "week": 4,
+    "phase": "cognitive",
+    "title": "Akbar–Birbal: Logical Thinking and Fairness",
+    "theme": "Reason beats appearance",
+    "skills": [
+      "Logical Reasoning",
+      "Fairness",
+      "Evidence-Based Thinking"
+    ],
+    "story": "Birbal and the Khichdi",
+    "storySource": "Akbar-Birbal folklore tradition",
+    "storySummary": "Emperor Akbar challenged a poor man to stand in a freezing lake all night for a reward. The man survived by gazing at a distant lamp for warmth of hope. Akbar refused the reward, arguing the lamp had warmed him. Birbal protested this was unfair — a lamp miles away gives no heat. To prove his point, Birbal cooked khichdi by hanging a pot high above a candle, far from the flame. When Akbar said the food would never cook that way, Birbal replied: 'Exactly, Your Majesty — just as a distant lamp gives no warmth.' Akbar understood the injustice and paid the man. Logic and analogy defeated surface-level judgment.",
+    "reflection": "What is fairness? Why do surface judgments often create bad decisions?",
+    "strategy": "Evidence-based reasoning, structured argument, fairness testing, separating emotion from proof.",
+    "simulation": "Mock Courtroom Debate — students examine evidence, question assumptions, and defend a verdict.",
+    "application": "Use in classroom disputes, group work disagreements, and argument evaluation.",
+    "sessionFlow": "Story narration with audience voting at the dilemma point (8 min) → 'Was Akbar fair?' reflection debate (6 min) → Strategy: what makes an argument logical? (5 min) → Mock Courtroom in two teams — prosecution vs. defence (16 min) → Verdict & fairness checklist (5 min).",
+    "timing": {
+      "story": 8,
+      "reflection": 6,
+      "strategy": 5,
+      "simulation": 16,
+      "debrief": 5,
+      "total": 40
+    },
+    "teacherNotes": {
+      "materials": "Mock case briefs (1 per team), claim vs. evidence sheets, fairness checklists",
+      "setup": "Two halves of classroom facing each other (courtroom style)",
+      "groupSize": "2 teams of 8–15 each",
+      "prep": "Prepare a simple case brief with 3 pieces of evidence and 2 red herrings; assign roles: judge, lawyers, witnesses"
+    },
+    "resources": [
+      {
+        "title": "Akbar-Birbal Stories Collection",
+        "url": "https://www.pitara.com/fiction-for-kids/stories-for-kids/akbar-birbal-stories/",
+        "type": "story"
+      },
+      {
+        "title": "NCERT — Critical Thinking & Logical Reasoning",
+        "url": "https://ncert.nic.in/textbook.php?kepy1=8-8",
+        "type": "teaching"
+      },
+      {
+        "title": "Birbal and the Khichdi (Animated)",
+        "url": "https://www.youtube.com/results?search_query=birbal+khichdi+story+animated",
+        "type": "video"
+      }
+    ],
+    "deliverables": [
+      "Claim vs evidence sheet",
+      "Debate note card",
+      "Fairness checklist"
+    ],
+    "deliverableTemplates": [
+      {
+        "name": "Claim vs Evidence Sheet",
+        "columns": [
+          "Claim Made",
+          "Evidence For",
+          "Evidence Against",
+          "Verdict: Strong / Weak / Unfounded"
+        ]
+      },
+      {
+        "name": "Fairness Checklist",
+        "columns": [
+          "Is the rule applied equally?",
+          "Are all sides heard?",
+          "Is evidence real or assumed?",
+          "Would I accept this if roles were reversed?"
+        ]
+      }
+    ],
+    "outcomes": [
+      "Students use facts to support claims",
+      "Students identify weak arguments and emotional bias"
+    ],
+    "rubric": [
+      {
+        "criteria": "Argument Structure",
+        "developing": "Makes a claim with no evidence",
+        "competent": "Supports claim with one relevant fact",
+        "proficient": "Builds a structured argument with evidence, counterpoint, and conclusion"
+      },
+      {
+        "criteria": "Bias Detection",
+        "developing": "Accepts arguments at face value",
+        "competent": "Identifies one form of bias",
+        "proficient": "Distinguishes emotional, authority, and logical bias in an argument"
+      },
+      {
+        "criteria": "Debate Conduct",
+        "developing": "Talks over others or stays silent",
+        "competent": "Listens and responds on topic",
+        "proficient": "Builds on others' points while respectfully challenging weak logic"
+      }
+    ],
+    "assessment": "Debate rubric + logic checklist + reflection note"
+  },
+  {
+    "week": 5,
+    "phase": "cognitive",
+    "title": "Tenali Rama: Creative Problem Solving",
+    "theme": "Unusual solutions create advantage",
+    "skills": [
+      "Creative Thinking",
+      "Lateral Thinking",
+      "Improvisation"
+    ],
+    "story": "Tenali Rama and the Thieves",
+    "storySource": "Tenali Rama folklore, Vijayanagara tradition",
+    "storySummary": "Thieves broke into Tenali Rama's house one dark night. Aware of their presence but unarmed, Tenali whispered loudly to his wife: 'Let us hide all our gold in the well — thieves might come!' They wrapped stones in cloth and dropped bundle after bundle into the well. The thieves waited, then spent the entire night drawing water from the well to find the gold. They found nothing. Come morning, Tenali thanked the thieves — they had unknowingly watered his entire garden. He turned a threat into a benefit using misdirection, humour, and lateral thinking.",
+    "reflection": "Why do clever people solve the same problem differently? How does humour reduce tension and create options?",
+    "strategy": "Lateral thinking, reframing, creative improvisation, using wit as an intelligence tool.",
+    "simulation": "Unusual Solutions Challenge — teams redesign an everyday school problem using unexpected methods.",
+    "application": "Useful in innovation tasks, hackathons, clubs, and resource-limited problem solving.",
+    "sessionFlow": "Story with dramatic comedy (7 min) → 'What would YOU have done?' individual brainstorm (5 min) → Strategy: reframing vs. direct solving (6 min) → Unusual Solutions Challenge in teams — 3 school problems, wildest idea wins (16 min) → Team pitches & peer voting (6 min).",
+    "timing": {
+      "story": 7,
+      "reflection": 5,
+      "strategy": 6,
+      "simulation": 16,
+      "debrief": 6,
+      "total": 40
+    },
+    "teacherNotes": {
+      "materials": "Problem cards (3 school-based problems), idea sketch paper, voting tokens",
+      "setup": "Teams of 4 at clustered desks with whiteboard/chart access",
+      "groupSize": "4 students per team",
+      "prep": "Prepare 3 real school problems (e.g., 'Library is always noisy', 'Nobody reads the notice board', 'Too many students skip assembly')"
+    },
+    "resources": [
+      {
+        "title": "Tenali Raman Stories Collection",
+        "url": "https://www.culturalindia.net/folklore/tenali-raman.html",
+        "type": "story"
+      },
+      {
+        "title": "Edward de Bono — Lateral Thinking Explained",
+        "url": "https://www.youtube.com/results?search_query=lateral+thinking+de+bono+explained",
+        "type": "video"
+      },
+      {
+        "title": "NCERT — Creative Thinking Activities",
+        "url": "https://ncert.nic.in/textbook.php?kepy1=9-9",
+        "type": "teaching"
+      }
+    ],
+    "deliverables": [
+      "Idea sketch",
+      "Alternative solution board",
+      "Team presentation"
+    ],
+    "deliverableTemplates": [
+      {
+        "name": "Alternative Solution Board",
+        "columns": [
+          "Problem Statement",
+          "Obvious Solution",
+          "Unusual Solution 1",
+          "Unusual Solution 2",
+          "Best Pick & Why"
+        ]
+      },
+      {
+        "name": "Idea Sketch",
+        "columns": [
+          "Sketch / Diagram of your solution",
+          "What makes it creative?",
+          "What resource does it save?"
+        ]
+      }
+    ],
+    "outcomes": [
+      "Students generate multiple options before choosing one",
+      "Students reframe a problem creatively"
+    ],
+    "rubric": [
+      {
+        "criteria": "Solution Originality",
+        "developing": "Offers only the obvious solution",
+        "competent": "Proposes one non-obvious alternative",
+        "proficient": "Generates 3+ alternatives with clear reasoning for the best pick"
+      },
+      {
+        "criteria": "Reframing Ability",
+        "developing": "Sees only the stated problem",
+        "competent": "Identifies a hidden opportunity in the problem",
+        "proficient": "Turns the problem into an advantage (like Tenali did)"
+      },
+      {
+        "criteria": "Team Presentation",
+        "developing": "Unclear or disorganised",
+        "competent": "Clear explanation of one idea",
+        "proficient": "Engaging presentation with visuals, logic, and audience interaction"
+      }
+    ],
+    "assessment": "Creativity rubric + peer voting + teacher comments"
+  },
+  {
+    "week": 6,
+    "phase": "cognitive",
+    "title": "Communication Skills Lab",
+    "theme": "Clarity, listening, and presence",
+    "skills": [
+      "Active Listening",
+      "Verbal Communication",
+      "Body Language"
+    ],
+    "story": "Vidura's Counsel to Dhritarashtra",
+    "storySource": "Mahabharata — Vidura Niti (Udyoga Parva)",
+    "storySummary": "In the Mahabharata, Vidura was the wisest counsellor in Hastinapura. When the kingdom hurtled toward war, Vidura spoke truth to the blind king Dhritarashtra — clearly, respectfully, and without anger. He warned of consequences, chose words carefully, listened before speaking, and never lost composure even when ignored. Dhritarashtra heard him but did not listen. The kingdom fell. Vidura's counsel is a masterclass in communication: it shows that how you speak matters as much as what you say, and that the listener's willingness is half the equation.",
+    "reflection": "What breaks communication first: poor listening, poor wording, or poor body language?",
+    "strategy": "Active listening, verbal clarity, body language, constructive speaking, respectful disagreement.",
+    "simulation": "Role-plays, group discussions, and peer review on listening, speaking, and non-verbal communication.",
+    "application": "Directly useful for interviews, classroom presentations, exams, and leadership roles.",
+    "sessionFlow": "Vidura's story + 'Who failed: the speaker or the listener?' (7 min) → Active Listening drill in pairs — Partner A speaks 90 sec, Partner B paraphrases (8 min) → Body language demo & observation (5 min) → Role-play stations: 3 scenarios rotating every 5 min (15 min) → Peer feedback using observation sheets (5 min).",
+    "timing": {
+      "story": 7,
+      "reflection": 8,
+      "strategy": 5,
+      "simulation": 15,
+      "debrief": 5,
+      "total": 40
+    },
+    "teacherNotes": {
+      "materials": "Listening observation sheets, body language checklists, 3 printed role-play scenarios",
+      "setup": "Pairs for listening drill, then 3 station corners for role-plays",
+      "groupSize": "Pairs → Rotating groups of 3",
+      "prep": "Prepare 3 role-play scenarios: (1) A student apologising to a teacher, (2) Resolving a group project disagreement, (3) Convincing a parent about a career choice"
+    },
+    "resources": [
+      {
+        "title": "Vidura Niti — Complete Text",
+        "url": "https://www.wisdomlib.org/hinduism/book/the-mahabharata-mohan/d/doc5-4.html",
+        "type": "story"
+      },
+      {
+        "title": "British Council — Active Listening Skills",
+        "url": "https://www.britishcouncil.org/voices-magazine/five-essential-listening-skills-english-learners",
+        "type": "teaching"
+      },
+      {
+        "title": "Body Language Power (Video)",
+        "url": "https://www.youtube.com/watch?v=Ks-_Mh1QhMc",
+        "type": "video"
+      }
+    ],
+    "deliverables": [
+      "Listening observation sheet",
+      "Body language checklist",
+      "Peer feedback log"
+    ],
+    "deliverableTemplates": [
+      {
+        "name": "Listening Observation Sheet",
+        "columns": [
+          "Speaker",
+          "Key Point Made",
+          "Did I Understand Correctly? (Y/N)",
+          "My Paraphrase of Their Point"
+        ]
+      },
+      {
+        "name": "Body Language Checklist",
+        "columns": [
+          "Eye contact maintained?",
+          "Open posture?",
+          "Gestures match words?",
+          "Fidgeting or distracted?",
+          "Overall impression"
+        ]
+      }
+    ],
+    "outcomes": [
+      "Students listen actively before responding",
+      "Students communicate with greater clarity and confidence"
+    ],
+    "rubric": [
+      {
+        "criteria": "Active Listening",
+        "developing": "Interrupts or zones out",
+        "competent": "Listens fully, then responds on topic",
+        "proficient": "Paraphrases the speaker's point before adding their own"
+      },
+      {
+        "criteria": "Verbal Clarity",
+        "developing": "Rambling or unclear",
+        "competent": "Makes a clear point with structure",
+        "proficient": "Communicates concisely with appropriate tone and vocabulary"
+      },
+      {
+        "criteria": "Non-Verbal Awareness",
+        "developing": "Unaware of own body language",
+        "competent": "Maintains eye contact and open posture",
+        "proficient": "Reads and adapts to others' non-verbal cues during conversation"
+      }
+    ],
+    "assessment": "Performance rubric + peer assessment + teacher observation"
+  },
+  {
+    "week": 7,
+    "phase": "ethical",
+    "title": "Bhagavad Gita: Decision Under Pressure",
+    "theme": "Clarity in confusion",
+    "skills": [
+      "Emotional Regulation",
+      "Principled Decision-Making",
+      "Resilience"
+    ],
+    "story": "Arjuna's Dilemma",
+    "storySource": "Bhagavad Gita, Chapters 1–2 (Arjuna Vishada Yoga & Sankhya Yoga)",
+    "storySummary": "On the battlefield of Kurukshetra, the warrior Arjuna looked across at the opposing army and saw his own grandfathers, teachers, cousins, and friends. Overwhelmed by grief and moral confusion, he dropped his bow and refused to fight. His charioteer, Krishna, did not simply say 'fight.' Instead, he spent 18 chapters helping Arjuna think clearly: about duty (dharma), about detachment from outcomes, about acting with integrity regardless of results. The core lesson is not about war — it is about what happens when emotion clouds judgment, and how principled thinking restores clarity under extreme pressure.",
+    "reflection": "What happens when emotion blocks duty? How do we think clearly under pressure?",
+    "strategy": "Duty vs emotion, inner clarity, emotional regulation, principled decision-making.",
+    "simulation": "Exam Pressure Scenario — students navigate a high-stress academic dilemma using structured reflection.",
+    "application": "Useful for exam stress, conflicting expectations, fear of failure, and moral confusion.",
+    "sessionFlow": "Set the Kurukshetra scene dramatically — read Arjuna's breakdown aloud (8 min) → Silent individual journaling: 'A time I froze under pressure' (6 min) → Strategy: the Pause → Identify → Choose → Act framework (6 min) → Exam Pressure simulation with timed decision rounds (14 min) → Debrief: what helped you think clearly? (6 min).",
+    "timing": {
+      "story": 8,
+      "reflection": 6,
+      "strategy": 6,
+      "simulation": 14,
+      "debrief": 6,
+      "total": 40
+    },
+    "teacherNotes": {
+      "materials": "Decision journals, pressure-response map worksheets, exam pressure scenario cards",
+      "setup": "Individual desks for journaling, then simulation in groups of 4",
+      "groupSize": "Individual → Groups of 4",
+      "prep": "Read Gita Chapter 2 summary; prepare 3 exam-pressure scenarios (e.g., 'Your friend asks you to cheat', 'Parents expect 95% but you're struggling', 'You know the answer but freeze in the viva')"
+    },
+    "resources": [
+      {
+        "title": "Bhagavad Gita — Eknath Easwaran Translation",
+        "url": "https://www.holy-bhagavad-gita.org/",
+        "type": "story"
+      },
+      {
+        "title": "NPTEL — Indian Philosophy (Gita Modules)",
+        "url": "https://nptel.ac.in/courses/109106117",
+        "type": "teaching"
+      },
+      {
+        "title": "Gita's Lesson on Decision-Making (Animated)",
+        "url": "https://www.youtube.com/results?search_query=bhagavad+gita+arjuna+dilemma+animated",
+        "type": "video"
+      }
+    ],
+    "deliverables": [
+      "Decision journal",
+      "Pressure-response map",
+      "Personal dharma reflection"
+    ],
+    "deliverableTemplates": [
+      {
+        "name": "Pressure-Response Map",
+        "columns": [
+          "Pressure Source",
+          "Emotional Reaction",
+          "Distortion It Creates",
+          "Clear-Headed Alternative Response"
+        ]
+      },
+      {
+        "name": "Decision Journal",
+        "columns": [
+          "Dilemma",
+          "What My Emotions Say",
+          "What My Duty Says",
+          "My Chosen Action & Why"
+        ]
+      }
+    ],
+    "outcomes": [
+      "Students identify emotion-driven distortion",
+      "Students use structured thinking in high-pressure situations"
+    ],
+    "rubric": [
+      {
+        "criteria": "Emotion-Duty Separation",
+        "developing": "Cannot distinguish emotion from duty",
+        "competent": "Identifies the emotional pull and the duty separately",
+        "proficient": "Articulates how emotion distorts judgment and applies a correction process"
+      },
+      {
+        "criteria": "Pressure Navigation",
+        "developing": "Freezes or panics in scenario",
+        "competent": "Pauses, then makes a considered choice",
+        "proficient": "Uses the Pause → Identify → Choose → Act framework under pressure"
+      },
+      {
+        "criteria": "Reflection Quality",
+        "developing": "Surface-level diary entry",
+        "competent": "Honest self-examination of emotions",
+        "proficient": "Deep reflection connecting personal dharma to real-life situations"
+      }
+    ],
+    "assessment": "Journal review + participation + reflective dialogue"
+  },
+  {
+    "week": 8,
+    "phase": "ethical",
+    "title": "Ramayana: Leadership and Integrity",
+    "theme": "Values-based leadership",
+    "skills": [
+      "Leadership",
+      "Integrity",
+      "Trust-Building"
+    ],
+    "story": "Rama and Ravana as contrasting leadership models",
+    "storySource": "Valmiki Ramayana — contrasting Ayodhya Kanda & Lanka Kanda",
+    "storySummary": "Rama, prince of Ayodhya, gave up a throne to honour his father's word. He walked into exile, built alliances through trust and respect (with Sugriva, Hanuman, Vibhishana), and led an army of ordinary beings to extraordinary victory. Ravana, king of Lanka, possessed ten heads of knowledge, immense power, and unmatched wealth — yet his leadership was built on fear, ego, and the abduction of another's wife. His own brother Vibhishana defected to Rama. The contrast teaches that legitimate leadership is earned through integrity, self-control, and service — never through power alone.",
+    "reflection": "What makes leadership legitimate? Is power enough without values?",
+    "strategy": "Integrity, trust, responsibility, self-control, values-centered authority.",
+    "simulation": "Leader Evaluation Matrix — teams compare leadership behaviours and design their own student leadership code.",
+    "application": "Useful for prefect roles, student clubs, group leadership, and personal conduct.",
+    "sessionFlow": "Dual narration: Rama's exile choice vs. Ravana's Lanka (8 min) → Reflection: 'Who would you follow and why?' (5 min) → Strategy: traits that build vs. destroy trust (7 min) → Leadership matrix activity — fill the Rama/Ravana comparison (10 min) → Design your class leadership charter (10 min).",
+    "timing": {
+      "story": 8,
+      "reflection": 5,
+      "strategy": 7,
+      "simulation": 10,
+      "debrief": 10,
+      "total": 40
+    },
+    "teacherNotes": {
+      "materials": "Leadership matrix worksheets, charter poster sheets, coloured markers",
+      "setup": "Groups of 5 around large tables or floor space for poster work",
+      "groupSize": "Groups of 5",
+      "prep": "Prepare a Rama vs. Ravana trait comparison starter sheet; have examples of real school leadership codes from prefect councils"
+    },
+    "resources": [
+      {
+        "title": "Valmiki Ramayana — IIT Kanpur Digital Library",
+        "url": "https://www.valmiki.iitk.ac.in/",
+        "type": "story"
+      },
+      {
+        "title": "NCERT — Leadership & Teamwork Values",
+        "url": "https://ncert.nic.in/textbook.php?kepy1=11-11",
+        "type": "teaching"
+      },
+      {
+        "title": "Ramayana Leadership Lessons (YouTube)",
+        "url": "https://www.youtube.com/results?search_query=ramayana+leadership+lessons",
+        "type": "video"
+      }
+    ],
+    "deliverables": [
+      "Leadership matrix",
+      "Class leadership charter",
+      "Self-rating on integrity"
+    ],
+    "deliverableTemplates": [
+      {
+        "name": "Leadership Evaluation Matrix",
+        "columns": [
+          "Trait",
+          "Rama's Approach",
+          "Ravana's Approach",
+          "Which Builds Trust?"
+        ]
+      },
+      {
+        "name": "Class Leadership Charter",
+        "columns": [
+          "Principle We Commit To",
+          "What It Looks Like in Practice",
+          "How We Hold Each Other Accountable"
+        ]
+      }
+    ],
+    "outcomes": [
+      "Students distinguish leadership from domination",
+      "Students define integrity in action-oriented terms"
+    ],
+    "rubric": [
+      {
+        "criteria": "Leadership Analysis",
+        "developing": "Sees leadership as power/authority only",
+        "competent": "Distinguishes power-based and values-based leadership",
+        "proficient": "Analyses specific behaviours that build or destroy trust"
+      },
+      {
+        "criteria": "Charter Quality",
+        "developing": "Generic rules ('be nice')",
+        "competent": "Specific principles with examples",
+        "proficient": "Actionable charter with accountability mechanisms"
+      },
+      {
+        "criteria": "Self-Assessment Honesty",
+        "developing": "All high self-ratings with no justification",
+        "competent": "Identifies at least one weakness honestly",
+        "proficient": "Connects self-rating to specific actions they will change"
+      }
+    ],
+    "assessment": "Leadership rubric + group charter + self-assessment"
+  },
+  {
+    "week": 9,
+    "phase": "ethical",
+    "title": "Mahabharata: Ethical Complexity",
+    "theme": "Gray zones and consequences",
+    "skills": [
+      "Ethical Reasoning",
+      "Consequence Analysis",
+      "Moral Courage"
+    ],
+    "story": "The Dice Game",
+    "storySource": "Mahabharata — Sabha Parva (Book of the Assembly Hall)",
+    "storySummary": "The Pandavas were invited to a game of dice by their cousins the Kauravas. Yudhishthira, the eldest Pandava known for his dharma, could not refuse a challenge. The game was rigged — Shakuni rolled loaded dice. Yet Yudhishthira kept playing, staking his kingdom, his brothers, himself, and finally his wife Draupadi. When Draupadi was dragged into the court and humiliated, the elders — Bhishma, Drona, Vidura — sat in silence. They knew it was wrong, but none intervened decisively. The story is not just about gambling. It is about how intelligent, moral people make disastrous choices under pressure, pride, and obligation — and how silence in the face of injustice is itself a choice with catastrophic consequences.",
+    "reflection": "Why do intelligent people make disastrous choices? How do pressure, pride, and silence distort ethics?",
+    "strategy": "Consequence analysis, ethical gray zones, speaking up, responsibility in systems of power.",
+    "simulation": "Difficult Choices Workshop — students respond to dilemmas where every option has cost.",
+    "application": "Useful in friendship conflicts, online behaviour, cheating pressure, and decision chains.",
+    "sessionFlow": "Narrate the Dice Game with building tension — pause at Draupadi's question (10 min) → 'Why did everyone stay silent?' open discussion (5 min) → Strategy: the cost of silence vs. the cost of speaking up (5 min) → Difficult Choices Workshop — 3 dilemma stations, rotate every 5 min (15 min) → Ethics circle: share one dilemma response aloud (5 min).",
+    "timing": {
+      "story": 10,
+      "reflection": 5,
+      "strategy": 5,
+      "simulation": 15,
+      "debrief": 5,
+      "total": 40
+    },
+    "teacherNotes": {
+      "materials": "Dilemma cards (3 sets), consequence ladder worksheets, discussion note sheets",
+      "setup": "3 stations around the room; ethics circle at the end (chairs in a circle)",
+      "groupSize": "Groups of 4, rotating across 3 stations",
+      "prep": "Prepare 3 age-appropriate ethical dilemmas (e.g., 'A friend is cheating — you're asked to keep quiet', 'You find a lost phone with private photos', 'Your group takes credit for your individual work')"
+    },
+    "resources": [
+      {
+        "title": "Mahabharata — Sabha Parva Summary",
+        "url": "https://www.wisdomlib.org/hinduism/book/the-mahabharata-mohan/d/doc5-12.html",
+        "type": "story"
+      },
+      {
+        "title": "NCERT — Values Education & Ethics",
+        "url": "https://ncert.nic.in/textbook.php?kepy1=12-12",
+        "type": "teaching"
+      },
+      {
+        "title": "The Dice Game — Animated Mahabharata",
+        "url": "https://www.youtube.com/results?search_query=mahabharata+dice+game+animated",
+        "type": "video"
+      }
+    ],
+    "deliverables": [
+      "Dilemma response sheet",
+      "Consequence ladder",
+      "Ethics circle discussion note"
+    ],
+    "deliverableTemplates": [
+      {
+        "name": "Consequence Ladder",
+        "columns": [
+          "Decision Point",
+          "Option A",
+          "Option B",
+          "What A Costs",
+          "What B Costs",
+          "What Silence Costs"
+        ]
+      },
+      {
+        "name": "Dilemma Response Sheet",
+        "columns": [
+          "Dilemma Description",
+          "My First Instinct",
+          "After Group Discussion",
+          "Final Reasoned Choice & Why"
+        ]
+      }
+    ],
+    "outcomes": [
+      "Students analyse ethical ambiguity without oversimplification",
+      "Students recognise silence as a decision"
+    ],
+    "rubric": [
+      {
+        "criteria": "Ethical Complexity",
+        "developing": "Sees only right vs wrong",
+        "competent": "Identifies the gray zone and competing values",
+        "proficient": "Analyses trade-offs across multiple stakeholders and timeframes"
+      },
+      {
+        "criteria": "Consequence Thinking",
+        "developing": "Considers only immediate outcome",
+        "competent": "Maps first and second-order effects",
+        "proficient": "Traces full consequence chain including systemic effects"
+      },
+      {
+        "criteria": "Moral Courage",
+        "developing": "Avoids taking a position",
+        "competent": "Takes a position with basic reasoning",
+        "proficient": "Defends a difficult position with evidence and empathy for opposing views"
+      }
+    ],
+    "assessment": "Case analysis rubric + teacher facilitation notes"
+  },
+  {
+    "week": 10,
+    "phase": "strategic",
+    "title": "Arthashastra: Strategy and Competition",
+    "theme": "Think in systems, not impulses",
+    "skills": [
+      "Strategic Thinking",
+      "Systems Analysis",
+      "Competitive Intelligence"
+    ],
+    "story": "Mandala Theory — Chanakya's Circle of Kings",
+    "storySource": "Kautilya's Arthashastra, Book 6 — Mandala Theory",
+    "storySummary": "Chanakya (Kautilya), advisor to Chandragupta Maurya, devised the Mandala Theory: your immediate neighbour is your natural rival, but your neighbour's neighbour is your natural ally. Every king exists in a web of relationships — some cooperative, some competitive, some neutral. Strategy is not about defeating everyone; it is about understanding the system, building alliances where interests align, and anticipating threats before they materialise. Chandragupta used this framework to defeat the Nanda dynasty and build the Maurya Empire — not through brute force alone, but through calculated alliances, timing, and strategic positioning.",
+    "reflection": "How do competitors, allies, and interests shape decisions? Why is strategy different from reaction?",
+    "strategy": "Competitor analysis, alliance thinking, indirect power, strategic positioning, anticipation of threat.",
+    "simulation": "Business War Game — teams act as competing groups and build strategy under changing conditions.",
+    "application": "Useful for debates, startups, school clubs, market understanding, and decision architecture.",
+    "sessionFlow": "Story of Chandragupta & Chanakya + Mandala diagram on board (10 min) → Reflection: 'Who are your allies and rivals in school life?' (4 min) → Strategy: mapping the competition system (6 min) → Business War Game — 3 rounds with changing conditions (16 min) → Debrief: what surprised you about others' strategies? (4 min).",
+    "timing": {
+      "story": 10,
+      "reflection": 4,
+      "strategy": 6,
+      "simulation": 16,
+      "debrief": 4,
+      "total": 40
+    },
+    "teacherNotes": {
+      "materials": "Competitor map worksheets, alliance matrix sheets, War Game instruction cards (3 rounds), play currency/tokens",
+      "setup": "4–5 team clusters, each representing a 'kingdom' or 'company'",
+      "groupSize": "Teams of 4–5",
+      "prep": "Design 3 War Game rounds with escalating complexity: Round 1 — basic competition, Round 2 — alliance option introduced, Round 3 — surprise disruption (new rule/constraint)"
+    },
+    "resources": [
+      {
+        "title": "Kautilya's Arthashastra — Full Text",
+        "url": "https://www.wisdomlib.org/hinduism/book/kautilyas-arthashastra",
+        "type": "story"
+      },
+      {
+        "title": "NPTEL — Arthashastra & Strategy",
+        "url": "https://nptel.ac.in/courses/109106117",
+        "type": "teaching"
+      },
+      {
+        "title": "Chanakya's Mandala Theory Explained",
+        "url": "https://www.youtube.com/results?search_query=chanakya+mandala+theory+arthashastra",
+        "type": "video"
+      }
+    ],
+    "deliverables": [
+      "Competitor map",
+      "Alliance matrix",
+      "Strategy note"
+    ],
+    "deliverableTemplates": [
+      {
+        "name": "Competitor Map",
+        "columns": [
+          "Player / Team",
+          "Their Goal",
+          "Their Strength",
+          "Their Weakness",
+          "Threat Level to Us"
+        ]
+      },
+      {
+        "name": "Alliance Matrix",
+        "columns": [
+          "Potential Ally",
+          "Shared Interest",
+          "What We Offer Them",
+          "What They Offer Us",
+          "Risk of Alliance"
+        ]
+      }
+    ],
+    "outcomes": [
+      "Students understand systems of competition and alliance",
+      "Students think beyond immediate gain"
+    ],
+    "rubric": [
+      {
+        "criteria": "Systems Mapping",
+        "developing": "Sees only own position",
+        "competent": "Maps 3+ players and their relationships",
+        "proficient": "Identifies indirect threats and second-order alliance effects"
+      },
+      {
+        "criteria": "Strategic Quality",
+        "developing": "Reactive, impulse-based plan",
+        "competent": "Proactive plan with one contingency",
+        "proficient": "Multi-layered strategy with alliances, timing, and fallback positions"
+      },
+      {
+        "criteria": "Simulation Performance",
+        "developing": "Eliminated early or passive",
+        "competent": "Survives with basic strategy",
+        "proficient": "Adapts strategy to changing conditions and finishes strong"
+      }
+    ],
+    "assessment": "Simulation scoring + strategic clarity rubric + reflection"
+  },
+  {
+    "week": 11,
+    "phase": "strategic",
+    "title": "Governance and Systems Thinking",
+    "theme": "Build systems that work",
+    "skills": [
+      "Systems Thinking",
+      "Organisational Design",
+      "Teamwork"
+    ],
+    "story": "Chandragupta's Empire — Saptanga in Action",
+    "storySource": "Kautilya's Arthashastra, Book 6 — Saptanga (Seven Limbs of the State)",
+    "storySummary": "When Chandragupta Maurya built India's first great empire, Chanakya taught him that a kingdom stands on seven pillars (Saptanga): the King (leader), the Minister (strategy), the Territory (resources), the Fort (defence), the Treasury (finance), the Army (execution), and the Ally (partnerships). Remove any one pillar and the system weakens. Chandragupta's genius was not personal bravery — it was building a system where each pillar reinforced the others. When he retired, the empire survived because the system was bigger than any single person. The lesson: great leaders build systems, not dependencies.",
+    "reflection": "Why do systems fail even when people are talented? What pillars make an organization stable?",
+    "strategy": "Systems thinking, governance design, role clarity, interdependence, control and coordination.",
+    "simulation": "Build a Mini Nation / Mini Company — students design leadership, finance, operations, security, and alliances.",
+    "application": "Useful for school event planning, student clubs, entrepreneurship, and management thinking.",
+    "sessionFlow": "Story of Chandragupta's system + draw Saptanga on board (8 min) → Reflection: 'Which pillar is weakest in your school club / class?' (5 min) → Strategy: interdependency mapping (5 min) → Build a Mini Nation/Company — assign 7 roles, design the system (18 min) → Present: 'What happens if your Treasury fails?' stress test (4 min).",
+    "timing": {
+      "story": 8,
+      "reflection": 5,
+      "strategy": 5,
+      "simulation": 18,
+      "debrief": 4,
+      "total": 40
+    },
+    "teacherNotes": {
+      "materials": "System map worksheets, role cards (7 per team), large chart paper for system diagrams",
+      "setup": "Teams of 7 (one per Saptanga role) around large table or floor",
+      "groupSize": "Teams of 7",
+      "prep": "Print role cards defining each Saptanga pillar's responsibilities; prepare 2 stress-test scenarios ('Your ally betrays you', 'Your treasury runs out')"
+    },
+    "resources": [
+      {
+        "title": "Arthashastra Saptanga Theory — Explained",
+        "url": "https://www.wisdomlib.org/hinduism/book/kautilyas-arthashastra/d/doc365342.html",
+        "type": "story"
+      },
+      {
+        "title": "Systems Thinking for Students (Video)",
+        "url": "https://www.youtube.com/results?search_query=systems+thinking+for+students+explained",
+        "type": "video"
+      },
+      {
+        "title": "Chandragupta Maurya — History",
+        "url": "https://www.britannica.com/biography/Chandragupta",
+        "type": "teaching"
+      }
+    ],
+    "deliverables": [
+      "System map",
+      "Role allocation sheet",
+      "Mini-enterprise presentation"
+    ],
+    "deliverableTemplates": [
+      {
+        "name": "System Map (7 Pillars)",
+        "columns": [
+          "Pillar",
+          "Who Fills This Role?",
+          "What They Control",
+          "What Happens If This Pillar Fails?"
+        ]
+      },
+      {
+        "name": "Role Allocation Sheet",
+        "columns": [
+          "Team Member",
+          "Assigned Pillar",
+          "Key Responsibilities",
+          "Reports To / Coordinates With"
+        ]
+      }
+    ],
+    "outcomes": [
+      "Students understand interdependency in institutions",
+      "Students see governance as system design",
+      "Students allocate roles based on strengths"
+    ],
+    "rubric": [
+      {
+        "criteria": "System Completeness",
+        "developing": "Designs only 2–3 pillars",
+        "competent": "Covers all 7 pillars with basic descriptions",
+        "proficient": "Shows how each pillar connects to and depends on others"
+      },
+      {
+        "criteria": "Role Clarity",
+        "developing": "Vague or overlapping roles",
+        "competent": "Clear role per person",
+        "proficient": "Roles match individual strengths with accountability mechanisms"
+      },
+      {
+        "criteria": "Presentation Quality",
+        "developing": "Disorganised or incomplete",
+        "competent": "Structured walkthrough of the system",
+        "proficient": "Compelling presentation showing how the system handles a crisis scenario"
+      }
+    ],
+    "assessment": "Model evaluation + group presentation + peer review"
+  },
+  {
+    "week": 12,
+    "phase": "strategic",
+    "title": "Capstone: Story to Strategy Integration",
+    "theme": "Apply the full stack",
+    "skills": [
+      "Integration",
+      "Presentation",
+      "Problem-Solving",
+      "Collaboration"
+    ],
+    "story": "Student-selected IKS source mapped to a modern challenge",
+    "storySource": "Student's choice from any IKS tradition studied in Weeks 1–11",
+    "storySummary": "In the capstone week, students become the architects. Each team selects one Indian wisdom source from the 11 weeks studied — a Panchatantra fable, a Jataka tale, a Birbal episode, a Gita verse, a Ramayana contrast, a Mahabharata dilemma, or an Arthashastra framework — and maps it to a real modern challenge they care about: a school problem, a community issue, a startup idea, or a social cause. They must show how the ancient insight translates into a practical, actionable strategy today.",
+    "reflection": "Which layer helped most: story, logic, ethics, or strategy? How do they combine in real life?",
+    "strategy": "Integration of observation, communication, ethics, leadership, and systems thinking.",
+    "simulation": "Capstone Presentation Day — teams solve a real-world problem through story, analysis, and structured solution design.",
+    "sessionFlow": "This is a 2-period capstone. PERIOD 1: Team formation & topic selection (8 min) → Research, IKS mapping & strategy building (20 min) → Presentation prep: poster/deck/skit (12 min). PERIOD 2: Team presentations — 5 min each × 6 teams (30 min) → Peer evaluation forms (5 min) → Teacher debrief & awards (5 min).",
+    "timing": {
+      "story": 0,
+      "reflection": 0,
+      "strategy": 28,
+      "simulation": 30,
+      "debrief": 22,
+      "total": 80
+    },
+    "teacherNotes": {
+      "materials": "Chart paper, markers, peer evaluation forms, presentation timer, optional: projector for slide decks",
+      "setup": "Period 1: team clusters for building. Period 2: presentation-style with audience seating facing a 'stage' area",
+      "groupSize": "Teams of 4–5 (aim for 5–6 teams total)",
+      "prep": "Print peer evaluation forms; prepare a list of 10 suggested capstone topics for teams that struggle to choose; set up a timer visible to all; optional: small prizes/certificates for categories like 'Best IKS Connection', 'Most Actionable', 'Best Presentation'"
+    },
+    "capstoneOptions": [
+      "Reduce phone addiction in our school using a Panchatantra lesson",
+      "Design a student council using Saptanga governance",
+      "Solve classroom bullying using Mahabharata's 'cost of silence' lesson",
+      "Plan a school startup using Arthashastra competition strategy",
+      "Improve teacher-student communication using Vidura Niti principles",
+      "Build a class conflict-resolution system using Gita's clarity framework",
+      "Create a peer mentoring programme using Jataka compassion principles",
+      "Redesign how school events are managed using systems thinking"
+    ],
+    "application": "Students build solutions for school improvement, entrepreneurship, social impact, or community problem-solving.",
+    "deliverables": [
+      "Capstone deck / poster",
+      "Team pitch (5 minutes)",
+      "Reflection essay",
+      "Peer evaluation form"
+    ],
+    "deliverableTemplates": [
+      {
+        "name": "Capstone Deck Structure",
+        "columns": [
+          "Slide 1: The Problem",
+          "Slide 2: The IKS Story & Insight",
+          "Slide 3: Our Strategy",
+          "Slide 4: Action Plan (Who, What, When)",
+          "Slide 5: Expected Impact & Metrics"
+        ]
+      },
+      {
+        "name": "Peer Evaluation Form",
+        "columns": [
+          "Team Evaluated",
+          "Clarity of Problem (1–5)",
+          "IKS Connection Quality (1–5)",
+          "Strategy Feasibility (1–5)",
+          "Presentation Delivery (1–5)",
+          "Total / 20"
+        ]
+      }
+    ],
+    "outcomes": [
+      "Students apply the full Indian Intelligence Stack to a real problem",
+      "Students demonstrate practical decision intelligence",
+      "Students present with clarity, ethics, and strategic depth"
+    ],
+    "rubric": [
+      {
+        "criteria": "IKS Integration (25%)",
+        "developing": "Mentions a story but doesn't connect it",
+        "competent": "Clearly links IKS insight to the modern problem",
+        "proficient": "Weaves IKS wisdom throughout the solution as a guiding framework"
+      },
+      {
+        "criteria": "Solution Quality (25%)",
+        "developing": "Vague or impractical",
+        "competent": "Feasible plan with clear steps",
+        "proficient": "Actionable strategy with timeline, resources, stakeholders, and metrics"
+      },
+      {
+        "criteria": "Presentation Delivery (25%)",
+        "developing": "Reads from notes, unclear",
+        "competent": "Organised, clear, within time",
+        "proficient": "Engaging, confident, handles questions, all team members contribute"
+      },
+      {
+        "criteria": "Ethical Grounding (25%)",
+        "developing": "No ethical consideration",
+        "competent": "Acknowledges ethical dimensions",
+        "proficient": "Solution is explicitly grounded in values with trade-off awareness"
+      }
+    ],
+    "assessment": "Capstone rubric: IKS Integration 25% + Solution Quality 25% + Presentation 25% + Ethics 25%"
+  }
+];
+
+    const phaseList = document.getElementById('phaseList');
+    const filters = document.getElementById('filters');
+    const weekGrid = document.getElementById('weekGrid');
+    const dialog = document.getElementById('moduleDialog');
+    const modalHead = document.getElementById('modalHead');
+    const modalBody = document.getElementById('modalBody');
+    const meterBar = document.getElementById('meterBar');
+    const progressText = document.getElementById('progressText');
+
+    let selectedPhase = 'all';
+    let progress = JSON.parse(localStorage.getItem('iistack-progress') || '{}');
+
+    function renderPhaseCards() {
+      phaseList.innerHTML = phases.map((p, idx) => `
+        <div class="phase-card ${p.id} ${idx === 0 ? 'active' : ''}" data-phase="${p.id}" role="button" aria-label="Filter to ${p.name}">
+          <div class="phase-name">${p.name}</div>
+          <div class="phase-meta"><strong>${p.weeks}</strong><br>${p.focus}<br><span class="tiny">${p.summary}</span></div>
+        </div>
+      `).join('');
+      document.querySelectorAll('.phase-card').forEach(card => {
+        card.addEventListener('click', () => {
+          document.querySelectorAll('.phase-card').forEach(x => x.classList.remove('active'));
+          card.classList.add('active');
+          selectedPhase = card.dataset.phase;
+          syncChips(selectedPhase);
+          renderWeeks();
+        });
+      });
+    }
+
+    function renderFilters() {
+      const chips = [
+        { id: 'all', label: 'All Weeks' },
+        { id: 'foundation', label: 'Foundation' },
+        { id: 'cognitive', label: 'Cognitive' },
+        { id: 'ethical', label: 'Ethical' },
+        { id: 'strategic', label: 'Strategic' }
+      ];
+      filters.innerHTML = chips.map(c => `<button class="chip ${c.id === 'all' ? 'active' : ''}" data-chip="${c.id}" role="button">${c.label}</button>`).join('');
+      document.querySelectorAll('.chip').forEach(chip => {
+        chip.addEventListener('click', () => {
+          document.querySelectorAll('.chip').forEach(x => x.classList.remove('active'));
+          chip.classList.add('active');
+          selectedPhase = chip.dataset.chip;
+          if (selectedPhase === 'all') {
+            document.querySelectorAll('.phase-card').forEach(x => x.classList.remove('active'));
+          } else {
+            document.querySelectorAll('.phase-card').forEach(x => x.classList.toggle('active', x.dataset.phase === selectedPhase));
+          }
+          renderWeeks();
+        });
+      });
+    }
+
+    function syncChips(id) {
+      document.querySelectorAll('.chip').forEach(x => x.classList.toggle('active', x.dataset.chip === id));
+    }
+
+    function renderWeeks() {
+      const visible = weeks.filter(w => selectedPhase === 'all' ? true : w.phase === selectedPhase);
+      weekGrid.innerHTML = visible.map(w => {
+        const done = progress[w.week] ? 'done' : '';
+        const skillHtml = w.skills ? w.skills.map(s => `<span class="skill-tag">${s}</span>`).join('') : '';
+        return `
+          <article class="week-card ${w.phase}">
+            <div class="week-number">${w.week}</div>
+            <h4 class="week-title">${w.title}</h4>
+            <div class="week-theme">${w.theme}</div>
+            <div class="week-snippet"><strong>Story:</strong> ${w.story}<br><br><strong>Core move:</strong> ${w.strategy}</div>
+            ${skillHtml ? `<div class="skill-tags">${skillHtml}</div>` : ''}
+            <div class="week-actions">
+              <button class="action-link" data-open="${w.week}">Explore Module</button>
+              <button class="action-link ${done}" data-done="${w.week}">${progress[w.week] ? '✓ Completed' : 'Mark Complete'}</button>
+            </div>
+          </article>
+        `;
+      }).join('');
+      document.querySelectorAll('[data-open]').forEach(btn => btn.addEventListener('click', () => openWeek(Number(btn.dataset.open))));
+      document.querySelectorAll('[data-done]').forEach(btn => btn.addEventListener('click', () => toggleDone(Number(btn.dataset.done))));
+      updateProgress();
+    }
+
+    function toggleDone(week) {
+      progress[week] = !progress[week];
+      localStorage.setItem('iistack-progress', JSON.stringify(progress));
+      renderWeeks();
+    }
+
+    function updateProgress() {
+      const total = weeks.length;
+      const complete = Object.values(progress).filter(Boolean).length;
+      meterBar.style.width = `${Math.round((complete / total) * 100)}%`;
+      progressText.textContent = `${complete} of ${total} weeks marked complete`;
+    }
+
+    const timingColors = { story: '#b45309', reflection: '#0f766e', strategy: '#1f5f8b', simulation: '#a64032', debrief: '#6b5b4d' };
+
+    function openWeek(weekNo) {
+      const w = weeks.find(x => x.week === weekNo);
+      modalHead.className = `modal-head ${w.phase}`;
+      modalHead.innerHTML = `
+        <button class="modal-close-x" id="closeX" aria-label="Close">✕</button>
+        <h2 class="modal-title">Week ${w.week} — ${w.title}</h2>
+        <div class="modal-sub">${w.theme}</div>
+      `;
+
+      // Rubric table
+      let rubricHtml = '';
+      if (w.rubric && w.rubric.length) {
+        rubricHtml = `<section class="detail-card rubric-card"><h4>📋 Assessment Rubric</h4>
+          <table class="rubric-table"><thead><tr><th>Criteria</th><th>Developing</th><th>Competent</th><th>Proficient</th></tr></thead>
+          <tbody>${w.rubric.map(r => `<tr><td><strong>${r.criteria}</strong></td><td>${r.developing}</td><td>${r.competent}</td><td>${r.proficient}</td></tr>`).join('')}</tbody></table></section>`;
+      }
+
+      // Templates
+      let templateHtml = '';
+      if (w.deliverableTemplates && w.deliverableTemplates.length) {
+        templateHtml = `<section class="detail-card template-card"><h4>📎 Deliverable Templates</h4>
+          ${w.deliverableTemplates.map(t => `<div class="template-block"><strong>${t.name}:</strong><br>Columns → ${t.columns.join(' │ ')}</div>`).join('')}</section>`;
+      }
+
+      // Timing bar
+      let timingHtml = '';
+      if (w.timing && w.timing.total > 0) {
+        const t = w.timing;
+        const tot = t.total;
+        const segs = [
+          { key: 'story', label: 'Story', min: t.story || 0 },
+          { key: 'reflection', label: 'Reflect', min: t.reflection || 0 },
+          { key: 'strategy', label: 'Strategy', min: t.strategy || 0 },
+          { key: 'simulation', label: 'Simulate', min: t.simulation || 0 },
+          { key: 'debrief', label: 'Debrief', min: t.debrief || 0 }
+        ].filter(s => s.min > 0);
+
+        const bar = segs.map(s => `<span style="width:${(s.min/tot*100).toFixed(1)}%;background:${timingColors[s.key]}">${s.min}m</span>`).join('');
+        const legend = segs.map(s => `<span><span class="timing-dot" style="background:${timingColors[s.key]}"></span>${s.label} ${s.min} min</span>`).join('');
+
+        timingHtml = `<section class="detail-card" style="grid-column:1/-1;">
+          <h4>⏱ Session Timing (${tot} min total)</h4>
+          <div class="timing-bar">${bar}</div>
+          <div class="timing-legend">${legend}</div></section>`;
+      }
+
+      // Teacher notes
+      let teacherHtml = '';
+      if (w.teacherNotes) {
+        const tn = w.teacherNotes;
+        teacherHtml = `<section class="detail-card teacher-card"><h4>👩‍🏫 Teacher Preparation Notes</h4>
+          <div class="teacher-grid">
+            <div class="teacher-item"><strong>Materials Needed</strong>${tn.materials}</div>
+            <div class="teacher-item"><strong>Classroom Setup</strong>${tn.setup}</div>
+            <div class="teacher-item"><strong>Group Size</strong>${tn.groupSize}</div>
+            <div class="teacher-item"><strong>Teacher Prep</strong>${tn.prep}</div>
+          </div></section>`;
+      }
+
+      // Resources
+      let resourceHtml = '';
+      if (w.resources && w.resources.length) {
+        const icons = { story: '📖', teaching: '📚', video: '🎬' };
+        resourceHtml = `<section class="detail-card" style="grid-column:1/-1;background:linear-gradient(135deg,#f0f4f8,#edf2f7);border-color:#c8d6e5;">
+          <h4>🔗 Suggested Resources</h4>
+          <div class="resource-list">${w.resources.map(r => `<a class="resource-link" href="${r.url}" target="_blank" rel="noopener"><span class="resource-icon">${icons[r.type] || '📄'}</span>${r.title}<span class="resource-type">${r.type}</span></a>`).join('')}</div></section>`;
+      }
+
+      // Capstone options
+      let capstoneHtml = '';
+      if (w.capstoneOptions && w.capstoneOptions.length) {
+        capstoneHtml = `<section class="detail-card" style="grid-column:1/-1;background:linear-gradient(135deg,var(--strategic-soft),#fff);border-color:#e8b8b3;">
+          <h4>💡 Suggested Capstone Project Topics</h4>
+          <div class="capstone-options">${w.capstoneOptions.map(o => `<div class="capstone-opt">${o}</div>`).join('')}</div></section>`;
+      }
+
+      const flowText = w.sessionFlow || 'Begin with the story anchor and classroom framing, move into guided reflection questions, extract the strategic lesson, run the simulation activity, and close with a written or oral application task.';
+
+      modalBody.innerHTML = `
+        <div class="detail-grid">
+          <section class="detail-card story-card">
+            <h4>📖 Story Anchor — ${w.story}</h4>
+            <p>${w.storySummary}</p>
+            <p style="margin-top:8px;font-size:12px;color:var(--muted);"><em>Source: ${w.storySource}</em></p>
+          </section>
+          ${timingHtml}
+          <section class="detail-card"><h4>🔍 Reflection Questions</h4><p>${w.reflection}</p></section>
+          <section class="detail-card"><h4>🧭 Strategy Extraction</h4><p>${w.strategy}</p></section>
+          <section class="detail-card"><h4>🎮 Simulation Design</h4><p>${w.simulation}</p></section>
+          <section class="detail-card"><h4>🌍 Real-Life Application</h4><p>${w.application}</p></section>
+          <section class="detail-card"><h4>📦 Student Deliverables</h4><ul>${w.deliverables.map(x => `<li>${x}</li>`).join('')}</ul></section>
+          <section class="detail-card"><h4>🎯 Expected Outcomes</h4><ul>${w.outcomes.map(x => `<li>${x}</li>`).join('')}</ul></section>
+          ${rubricHtml}
+          ${templateHtml}
+          ${teacherHtml}
+          ${capstoneHtml}
+          ${resourceHtml}
+        </div>
+        <div class="outcome-box"><strong>Recommended session flow:</strong> ${flowText}</div>
+        <div class="modal-foot">
+          <div class="tiny">Phase: <strong>${phases.find(p => p.id === w.phase).name}</strong>${w.skills ? ' · Skills: ' + w.skills.join(', ') : ''}</div>
+          <div class="btn-row">
+            <button class="btn ${progress[w.week] ? '' : 'primary'}" id="modalCompleteBtn">${progress[w.week] ? 'Mark Incomplete' : 'Mark Complete'}</button>
+            <button class="btn" id="closeDialogBtn">Close</button>
+          </div>
+        </div>
+      `;
+
+      dialog.showModal();
+      document.getElementById('closeX').addEventListener('click', () => dialog.close());
+      document.getElementById('closeDialogBtn').addEventListener('click', () => dialog.close());
+      document.getElementById('modalCompleteBtn').addEventListener('click', () => { toggleDone(w.week); dialog.close(); });
+    }
+
+    document.getElementById('resetProgress').addEventListener('click', () => { progress = {}; localStorage.setItem('iistack-progress', JSON.stringify(progress)); renderWeeks(); });
+    document.getElementById('expandAll').addEventListener('click', () => openWeek(1));
+    dialog.addEventListener('click', (e) => { const r = dialog.getBoundingClientRect(); if (!(r.top<=e.clientY&&e.clientY<=r.top+r.height&&r.left<=e.clientX&&e.clientX<=r.left+r.width)) dialog.close(); });
+
+    renderPhaseCards();
+    renderFilters();
+    renderWeeks();
+  </script>
+  <script data-goatcounter="https://km-auc.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
+</body>
+</html>
