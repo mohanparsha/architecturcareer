@@ -821,6 +821,43 @@
       .modal-foot { flex-direction: column; align-items: flex-start; gap: 10px; }
     }
 
+
+    /* ── Tier Selector ── */
+    .tier-box { margin-bottom: 16px; }
+    .tier-box h3 { margin-bottom: 6px; }
+    .tier-btns { display: flex; gap: 4px; }
+    .tier-btn {
+      flex: 1;
+      padding: 8px 4px;
+      border: 1px solid var(--line);
+      border-radius: 10px;
+      background: var(--bg);
+      cursor: pointer;
+      text-align: center;
+      font-size: 11px;
+      font-weight: 700;
+      font-family: inherit;
+      color: var(--muted);
+      transition: all .2s;
+      line-height: 1.3;
+    }
+    .tier-btn:hover { background: rgba(0,0,0,.04); }
+    .tier-btn.active-t1 { background: #E1F5EE; border-color: #0F6E56; color: #085041; }
+    .tier-btn.active-t2 { background: #E6F1FB; border-color: #185FA5; color: #0C447C; }
+    .tier-btn.active-t3 { background: #FAEEDA; border-color: #854F0B; color: #633806; }
+    .tier-badge {
+      display: inline-block;
+      font-size: 10px;
+      font-weight: 700;
+      padding: 2px 8px;
+      border-radius: 99px;
+      margin-left: 6px;
+      vertical-align: middle;
+    }
+    .tier-badge.tb1 { background: #E1F5EE; color: #085041; }
+    .tier-badge.tb2 { background: #E6F1FB; color: #0C447C; }
+    .tier-badge.tb3 { background: #FAEEDA; color: #633806; }
+
     /* ── Hero Load Animations ── */
     @keyframes heroShimmer {
       0%   { background-position: 0% 50%; }
@@ -921,6 +958,16 @@
         <h3>Programme Architecture</h3>
         <div class="phase-list" id="phaseList"></div>
 
+        <div class="tier-box">
+          <h3>Curriculum Tier</h3>
+          <div class="tier-btns">
+            <button class="tier-btn active-t1" id="tierBtn1" onclick="setTier(1)">T1<br>Foundation</button>
+            <button class="tier-btn" id="tierBtn2" onclick="setTier(2)">T2<br>Applied</button>
+            <button class="tier-btn" id="tierBtn3" onclick="setTier(3)">T3<br>Mastery</button>
+          </div>
+          <div class="tiny" style="margin-top:4px;opacity:.7;">T1: Class 9 · T2: Class 10 · T3: Class 11+</div>
+        </div>
+
         <div class="progress-box">
           <h3>Student Progress</h3>
           <div class="meter"><span id="meterBar"></span></div>
@@ -944,7 +991,7 @@
         <div class="toolbar">
           <div>
             <h3>How to Use This Guide</h3>
-            <div class="tiny" style="max-width:700px;">Start from <strong>Week 1</strong> and progress sequentially through all 4 phases. Click <strong>Explore Module</strong> on any week card to open the full session plan — it contains the story, reflection questions, simulation design, assessment rubric, deliverable templates, session timing, teacher preparation notes, and curated resources. Use <strong>Mark Complete</strong> to track your progress. Teachers: each module is designed for a single 40-minute period (Week 12 uses two periods).</div>
+            <div class="tiny" style="max-width:700px;">Start from <strong>Week 1</strong> and progress sequentially through all 4 phases. Select your <strong>Curriculum Tier</strong> in the sidebar: <strong>T1 Foundation</strong> (Class 9, first-time), <strong>T2 Applied</strong> (Class 10, transfer & real-world), or <strong>T3 Mastery</strong> (Class 11+, teach & design). The same 12 stories deepen with each tier — T1 uses guided templates, T2 requires freeform analysis, T3 asks students to design learning for others. Click <strong>Explore Module</strong> for the full session plan. Use <strong>Mark Complete</strong> to track progress. Each module is 40 minutes (Week 12 uses two periods).</div>
           </div>
         </div>
 
@@ -981,7 +1028,7 @@
   </div>
 
   <footer class="site-footer">
-    Architect U'r Career <span class="sep">|</span> <strong>Krishna Mohan Parsha</strong> <span class="sep">|</span> <span style="font-weight:400;font-size:11px;opacity:.6;">v4.4 · March 2026</span>
+    Architect U'r Career <span class="sep">|</span> <strong>Krishna Mohan Parsha</strong> <span class="sep">|</span> <span style="font-weight:400;font-size:11px;opacity:.6;">v5.1 · March 2026</span>
   </footer>
 
   <dialog id="moduleDialog">
@@ -1090,7 +1137,138 @@
         "proficient": "Actively drives team discussion and builds on others' ideas"
       }
     ],
-    "assessment": "Teacher observation + reflection journal + group participation rubric"
+    "assessment": "Teacher observation + reflection journal + group participation rubric",
+    "tier2": {
+      "reflection": "The hare reframed the problem entirely — instead of fighting strength with strength, it used the lion's own aggression against him. Find a real-world news example where someone solved a problem by reframing it. What would happen if the hare's trick had failed? What was the hare's backup plan — or did it have one?",
+      "simulation": "Negotiation Under Asymmetry — Teams of 4 are assigned roles: a powerful landlord, a resourceful tenant, a neutral mediator, and a local journalist. The landlord wants to evict; the tenant has limited options but strategic information. Each role has a hidden agenda card. Teams must negotiate to one of 4 possible outcomes: eviction, compromise, reversal, or public escalation. Debrief compares which teams reframed power dynamics vs. which fought head-on.",
+      "deliverables": [
+        "Strategy memo (400–500 words): analyse the power dynamics and your reframing approach",
+        "Negotiation outcome map showing all 4 possible endings and which path your team took",
+        "Peer assessment of one other team's strategy"
+      ],
+      "deliverableTemplates": [
+        {
+          "name": "Strategy Memo",
+          "columns": [
+            "Power Analysis: Who held what leverage?",
+            "Reframing Move: How did you change the terms?",
+            "Outcome Achieved: What result and why?",
+            "Transfer: A real situation where this would work"
+          ]
+        },
+        {
+          "name": "Negotiation Outcome Map",
+          "columns": [
+            "Starting Positions (all 4 roles)",
+            "Turning Point: What shifted the dynamic?",
+            "Path Taken: Which of the 4 outcomes?",
+            "Alternative Path: What would you do differently?"
+          ]
+        }
+      ],
+      "rubric": [
+        {
+          "criteria": "Problem Reframing",
+          "developing": "Relies on direct confrontation",
+          "competent": "Identifies one alternative angle",
+          "proficient": "Reframes the problem and explains why the new frame works better"
+        },
+        {
+          "criteria": "Transfer to Real World",
+          "developing": "Cannot connect to a modern parallel",
+          "competent": "Identifies a parallel but analysis is surface-level",
+          "proficient": "Draws a detailed parallel with specific evidence"
+        },
+        {
+          "criteria": "Negotiation Strategy",
+          "developing": "Follows one approach rigidly",
+          "competent": "Adapts strategy mid-negotiation",
+          "proficient": "Reads the room, adjusts strategy, and achieves a preferred outcome"
+        },
+        {
+          "criteria": "Written Analysis",
+          "developing": "Summary only, no insight",
+          "competent": "Clear argument with some reasoning",
+          "proficient": "Structured memo with power analysis, evidence, and transfer application"
+        }
+      ],
+      "assessment": "Strategy memo quality (40%) + negotiation simulation performance (30%) + peer assessment accuracy (15%) + participation in debrief (15%)",
+      "sessionFlow": "Independent story reading & modern parallel identification (8 min) → Small-group analysis of power dynamics (5 min) → Role assignment and hidden agenda distribution (2 min) → Multi-outcome negotiation simulation (15 min) → Outcome comparison across teams and debrief (10 min)"
+    },
+    "tier3": {
+      "reflection": "You've encountered this story twice now. This time, critique it: Is the Hare's solution actually ethical? He used deception — lying to the lion about a 'rival lion' in the well. Does the end (saving the forest) justify the means (trickery)? Design three alternative endings where the Hare uses a different strategy — one based on negotiation, one on coalition-building, and one on institutional change. Which would work best in a modern organisation?",
+      "simulation": "Teach-Back Design Lab — You are now the teacher. Design a 20-minute simulation for Tier 1 (Class 9) students that teaches 'problem reframing' using the Lion and the Hare story. Your simulation must include: a scenario card, role assignments, at least 2 possible outcomes, a debrief question, and a 1-page student handout. Then run your simulation with a group of T1 students (or classmates role-playing as T1). Collect feedback and revise your design.",
+      "deliverables": [
+        "Simulation design document: complete lesson plan for a T1 audience",
+        "Student handout (1 page): the scenario, roles, and reflection prompt you designed",
+        "Peer teaching observation: run the simulation and collect structured feedback from 3 observers",
+        "Design revision memo (300 words): what you changed after feedback and why"
+      ],
+      "deliverableTemplates": [
+        {
+          "name": "Simulation Design Document",
+          "columns": [
+            "Learning Objective (1 sentence)",
+            "Scenario Description (the problem students face)",
+            "Roles (who plays what)",
+            "Rules & Constraints",
+            "Possible Outcomes (at least 2)",
+            "Debrief Question",
+            "Materials Needed",
+            "Timing (minute by minute)"
+          ]
+        },
+        {
+          "name": "Peer Teaching Observation Form",
+          "columns": [
+            "Observer Name",
+            "Were instructions clear? (1-5)",
+            "Did students engage? (1-5)",
+            "Was the learning objective achieved? (1-5)",
+            "Most effective moment",
+            "Least effective moment",
+            "One specific improvement suggestion"
+          ]
+        },
+        {
+          "name": "Design Revision Memo",
+          "columns": [
+            "What feedback I received",
+            "Which feedback I accepted (and why)",
+            "Which feedback I rejected (and why)",
+            "My revised design change"
+          ]
+        }
+      ],
+      "rubric": [
+        {
+          "criteria": "Simulation Design Quality",
+          "developing": "Scenario is vague or has no clear learning objective",
+          "competent": "Clear scenario with defined roles and 2 outcomes",
+          "proficient": "Elegant design that naturally leads students to discover the skill through experience"
+        },
+        {
+          "criteria": "Teaching Execution",
+          "developing": "Reads instructions without facilitating",
+          "competent": "Manages the simulation and keeps students on track",
+          "proficient": "Adapts in real-time to student responses, asks probing questions, and draws out insights"
+        },
+        {
+          "criteria": "Feedback Integration",
+          "developing": "Ignores or dismisses feedback",
+          "competent": "Accepts feedback and makes surface changes",
+          "proficient": "Critically evaluates feedback, distinguishes useful from unhelpful, and makes principled revisions"
+        },
+        {
+          "criteria": "Story Critique",
+          "developing": "Accepts the story at face value",
+          "competent": "Identifies one ethical tension in the story",
+          "proficient": "Produces a multi-perspective critique and designs alternative endings with different ethical frameworks"
+        }
+      ],
+      "assessment": "Simulation design document (30%) + live teaching execution (25%) + peer feedback quality received (15%) + design revision memo (15%) + story critique depth (15%)",
+      "sessionFlow": "Story critique and alternative ending design (8 min) → Simulation design workshop — create scenario, roles, handout (12 min) → Run the simulation with a peer group (12 min) → Collect observer feedback and write revision memo (8 min)"
+    }
   },
   {
     "week": 2,
@@ -1190,7 +1368,137 @@
         "proficient": "Justifies decision with empathy and long-term reasoning"
       }
     ],
-    "assessment": "Peer feedback + empathy scale + teacher anecdotal record"
+    "assessment": "Peer feedback + empathy scale + teacher anecdotal record",
+    "tier2": {
+      "reflection": "King Sivi's sacrifice was absolute — he gave his own flesh to save a pigeon. But was this wise leadership or reckless self-destruction? Find a modern case where a leader made a significant personal sacrifice for others. Was the outcome worth it? Where is the line between empathy and self-harm in leadership?",
+      "simulation": "The Resource Dilemma — A school has ₹50,000 to spend. Four stakeholder groups (students, teachers, parents, administration) each have a compelling need. Hidden constraint: two needs are mutually exclusive. Groups must negotiate, form alliances, and reach a consensus allocation. At least one group will be disappointed. Debrief focuses on whose empathy led to better outcomes vs. whose led to exploitation.",
+      "deliverables": [
+        "Stakeholder analysis document: map all 4 groups' needs, power, and vulnerability",
+        "Alliance justification (300 words): why you chose your coalition partner",
+        "Reflection on where empathy helped and where it was exploited"
+      ],
+      "deliverableTemplates": [
+        {
+          "name": "Stakeholder Map",
+          "columns": [
+            "Group",
+            "Stated Need",
+            "Hidden Need",
+            "Power Level (1-5)",
+            "Vulnerability",
+            "Potential Allies"
+          ]
+        },
+        {
+          "name": "Alliance Justification",
+          "columns": [
+            "Who I allied with and why",
+            "What I gave up to form the alliance",
+            "How empathy influenced my decision",
+            "What I would change in hindsight"
+          ]
+        }
+      ],
+      "rubric": [
+        {
+          "criteria": "Empathy Application",
+          "developing": "Understands empathy in the story only",
+          "competent": "Applies empathy to the simulation context",
+          "proficient": "Uses empathy strategically while protecting own interests"
+        },
+        {
+          "criteria": "Stakeholder Analysis",
+          "developing": "Lists needs without analysis",
+          "competent": "Maps relationships between stakeholders",
+          "proficient": "Identifies hidden needs and power dynamics accurately"
+        },
+        {
+          "criteria": "Negotiation Conduct",
+          "developing": "Passive or dominating",
+          "competent": "Listens and proposes compromises",
+          "proficient": "Builds coalitions and reaches a fair outcome"
+        },
+        {
+          "criteria": "Reflective Writing",
+          "developing": "Descriptive only",
+          "competent": "Identifies where empathy was effective",
+          "proficient": "Analyses the tension between empathy and strategy with nuance"
+        }
+      ],
+      "assessment": "Stakeholder analysis (30%) + negotiation conduct observation (25%) + alliance justification quality (25%) + reflective depth (20%)",
+      "sessionFlow": "Independent reading + modern case identification (6 min) → Stakeholder mapping in groups (6 min) → Resource allocation negotiation with hidden constraints (15 min) → Alliance justification writing (5 min) → Cross-group debrief on empathy vs. strategy (8 min)"
+    },
+    "tier3": {
+      "reflection": "King Sivi's sacrifice is often held up as the ideal of compassionate leadership. But critique this: in a modern context, a leader who gives away their own flesh (resources, health, reputation) for every individual cause will burn out and leave the institution leaderless. Design a 'sustainable empathy' framework — a set of principles that preserves Sivi's compassion while protecting the leader's capacity to continue leading. When should a leader say no?",
+      "simulation": "Empathy Curriculum Design — You must design a 3-session mini-curriculum on 'empathy in decision-making' for Class 9 students, using the Sivi Jataka as the anchor story. Session 1 should build awareness (what is empathy?), Session 2 should develop skill (empathy in practice), Session 3 should test transfer (empathy under pressure). For each session, provide: a learning objective, an activity, a deliverable, and an assessment criterion. Then teach Session 1 to your peers and collect feedback.",
+      "deliverables": [
+        "3-session curriculum outline with objectives, activities, deliverables, and assessments",
+        "Sustainable empathy framework (visual diagram + 300-word explanation)",
+        "Teaching reflection: what happened when you taught Session 1, and what you'd change",
+        "Peer assessment of another T3 student's curriculum design"
+      ],
+      "deliverableTemplates": [
+        {
+          "name": "Mini-Curriculum Outline",
+          "columns": [
+            "Session #",
+            "Title",
+            "Learning Objective",
+            "IKS Connection",
+            "Activity Design (10 min description)",
+            "Student Deliverable",
+            "Assessment Criteria"
+          ]
+        },
+        {
+          "name": "Sustainable Empathy Framework",
+          "columns": [
+            "Principle 1: When to say yes (criteria)",
+            "Principle 2: When to say no (criteria)",
+            "Principle 3: How to say no without losing compassion",
+            "Principle 4: How to recover after sacrifice",
+            "Real-world example of each principle"
+          ]
+        },
+        {
+          "name": "Teaching Reflection",
+          "columns": [
+            "What I planned vs. what happened",
+            "Student responses I didn't expect",
+            "The moment I had to adapt",
+            "What I would redesign"
+          ]
+        }
+      ],
+      "rubric": [
+        {
+          "criteria": "Curriculum Design",
+          "developing": "3 disconnected activities",
+          "competent": "Logical progression with clear objectives per session",
+          "proficient": "Spiral design where each session builds on the previous, with visible skill development arc"
+        },
+        {
+          "criteria": "Framework Originality",
+          "developing": "Restates the story's moral without adding insight",
+          "competent": "Adds practical boundaries to the empathy concept",
+          "proficient": "Creates a genuinely useful framework that balances compassion with sustainability"
+        },
+        {
+          "criteria": "Teaching Skill",
+          "developing": "Delivers content without engaging learners",
+          "competent": "Facilitates discussion and manages time",
+          "proficient": "Creates 'aha moments' through questioning, reads the room, and adapts"
+        },
+        {
+          "criteria": "Peer Assessment Quality",
+          "developing": "Generic praise or criticism",
+          "competent": "Specific feedback on curriculum structure",
+          "proficient": "Constructive feedback that identifies both strengths and actionable improvements"
+        }
+      ],
+      "assessment": "Curriculum outline quality (30%) + sustainable empathy framework (20%) + live teaching of Session 1 (25%) + peer assessment quality (15%) + teaching reflection depth (10%)",
+      "sessionFlow": "Story critique and sustainable empathy framework design (10 min) → 3-session curriculum outline workshop (10 min) → Teach Session 1 to peers (10 min) → Peer assessment exchange and teaching reflection writing (10 min)"
+    }
   },
   {
     "week": 3,
@@ -1292,7 +1600,137 @@
         "proficient": "Commitment tied to a real personal scenario with follow-through plan"
       }
     ],
-    "assessment": "Scenario sheet + self-evaluation + teacher review"
+    "assessment": "Scenario sheet + self-evaluation + teacher review",
+    "tier2": {
+      "reflection": "The monkey's curiosity was not inherently wrong — curiosity drives innovation. The problem was acting on curiosity without assessing the stakes. Identify a recent technology or business failure caused by someone 'pulling the wedge' — acting without understanding the system they were disrupting. What signals should they have noticed?",
+      "simulation": "The Innovation Audit — Teams receive a proposal for a new school policy (e.g., replacing textbooks with tablets, making exams open-book, or removing homework). Each team has a stakeholder role (student council, teachers' union, parent committee, school board). The policy sounds good but has hidden second-order consequences. Teams must identify risks, propose safeguards, and vote. Debrief: which teams spotted the 'wedge' before pulling it?",
+      "deliverables": [
+        "Risk assessment matrix for the proposed policy",
+        "Second-order consequences map (at least 3 cascading effects)",
+        "Policy recommendation memo (300 words) with go/no-go verdict"
+      ],
+      "deliverableTemplates": [
+        {
+          "name": "Risk Assessment Matrix",
+          "columns": [
+            "Risk Identified",
+            "Likelihood (High/Med/Low)",
+            "Impact (High/Med/Low)",
+            "Who Bears the Risk?",
+            "Proposed Safeguard"
+          ]
+        },
+        {
+          "name": "Consequences Map",
+          "columns": [
+            "First-Order Effect (Obvious)",
+            "Second-Order Effect (Hidden)",
+            "Third-Order Effect (Cascading)",
+            "Who is affected at each level?"
+          ]
+        }
+      ],
+      "rubric": [
+        {
+          "criteria": "Risk Identification",
+          "developing": "Sees only obvious risks",
+          "competent": "Identifies 1–2 hidden risks",
+          "proficient": "Maps a chain of cascading second-order consequences"
+        },
+        {
+          "criteria": "Systems Awareness",
+          "developing": "Treats the policy in isolation",
+          "competent": "Considers impact on 2+ stakeholder groups",
+          "proficient": "Analyses the full system and identifies interdependencies"
+        },
+        {
+          "criteria": "Decision Quality",
+          "developing": "Binary yes/no without nuance",
+          "competent": "Recommends with conditions",
+          "proficient": "Provides a staged implementation plan with safeguards"
+        },
+        {
+          "criteria": "Transfer Application",
+          "developing": "Cannot cite a real-world parallel",
+          "competent": "Cites a parallel but analysis is thin",
+          "proficient": "Draws a detailed parallel with evidence of cause-effect failure"
+        }
+      ],
+      "assessment": "Risk matrix quality (30%) + consequences map depth (25%) + policy memo (25%) + simulation participation (20%)",
+      "sessionFlow": "Independent reading + tech/business failure research (7 min) → Policy proposal distribution and stakeholder role assignment (3 min) → Risk assessment and consequences mapping (8 min) → Multi-stakeholder debate and vote (14 min) → Debrief: who spotted the wedge? (8 min)"
+    },
+    "tier3": {
+      "reflection": "The Monkey and the Wedge is usually taught as 'don't meddle in things you don't understand.' But is that always good advice? Some of humanity's greatest innovations came from outsiders meddling in fields they didn't fully understand. Design a decision framework: when should you intervene in an unfamiliar system, and when should you stay out? What's the difference between reckless curiosity and productive disruption?",
+      "simulation": "Risk Assessment Curriculum — Design a workshop for T1 students that teaches 'second-order thinking' using the Monkey and the Wedge story. The workshop must include: (1) a scenario where students face a tempting but risky intervention, (2) a tool or template that helps them map consequences before acting, (3) a debrief that distinguishes productive risk from reckless action. Create all materials, run the workshop, and collect participant feedback.",
+      "deliverables": [
+        "Workshop design package: scenario, consequence-mapping tool, debrief guide, and student handout",
+        "Curiosity vs. recklessness decision framework (visual + 300-word explanation)",
+        "Workshop observation report from 3 peer observers",
+        "Iteration log: what you changed between your first draft and the final version"
+      ],
+      "deliverableTemplates": [
+        {
+          "name": "Workshop Design Package",
+          "columns": [
+            "Workshop Title",
+            "Learning Objective",
+            "Scenario Description",
+            "Consequence-Mapping Tool (template design)",
+            "Debrief Questions (at least 3)",
+            "Student Handout Content",
+            "Timing Plan"
+          ]
+        },
+        {
+          "name": "Decision Framework: Intervene or Not?",
+          "columns": [
+            "Question 1: Do I understand the system I'm entering?",
+            "Question 2: What's the worst case if I act?",
+            "Question 3: What's the worst case if I don't act?",
+            "Question 4: Can I reverse my action if it goes wrong?",
+            "Question 5: Who else is affected by my decision?",
+            "Decision: Act / Wait / Seek expertise"
+          ]
+        },
+        {
+          "name": "Iteration Log",
+          "columns": [
+            "Original Design Element",
+            "Feedback Received",
+            "Change Made",
+            "Reasoning for the Change"
+          ]
+        }
+      ],
+      "rubric": [
+        {
+          "criteria": "Workshop Design",
+          "developing": "Activity without clear learning objective",
+          "competent": "Clear objective with a functional scenario and debrief",
+          "proficient": "Scenario naturally creates a 'wedge moment' where students must choose between curiosity and caution"
+        },
+        {
+          "criteria": "Framework Quality",
+          "developing": "Binary rule (always/never intervene)",
+          "competent": "Nuanced criteria with some situational awareness",
+          "proficient": "Practical decision tree that works across multiple contexts (school, career, relationships)"
+        },
+        {
+          "criteria": "Facilitation",
+          "developing": "Reads from notes",
+          "competent": "Engages participants and manages time",
+          "proficient": "Creates genuine tension in the scenario and draws out both sides of the argument"
+        },
+        {
+          "criteria": "Iterative Improvement",
+          "developing": "No changes after feedback",
+          "competent": "Makes changes based on feedback",
+          "proficient": "Documents reasoning for accepting/rejecting each piece of feedback, showing design thinking"
+        }
+      ],
+      "assessment": "Workshop design quality (30%) + decision framework (20%) + live facilitation (25%) + iteration log (15%) + peer observer scores (10%)",
+      "sessionFlow": "Story critique and decision framework design (8 min) → Workshop materials creation (10 min) → Run workshop with peer group (12 min) → Observer feedback collection and iteration log writing (10 min)"
+    }
   },
   {
     "week": 4,
@@ -1392,7 +1830,138 @@
         "proficient": "Builds on others' points while respectfully challenging weak logic"
       }
     ],
-    "assessment": "Debate rubric + logic checklist + reflection note"
+    "assessment": "Debate rubric + logic checklist + reflection note",
+    "tier2": {
+      "reflection": "Birbal's genius was exposing the flaw in the rules themselves, not just winning within the rules. Find a real case where someone challenged an unjust rule or process rather than just complying. When is it appropriate to challenge the system itself rather than play within it? What risks does Birbal's approach carry?",
+      "simulation": "The Unfair Trial — A mock court case with deliberately biased evidence. Roles: judge, prosecution, defence, jury, and a 'Birbal' role (an observer who can intervene once to challenge the process itself). The case has a logical trap that only becomes visible if someone questions the framing, not just the facts. Debrief compares teams where the Birbal intervened early vs. late vs. never.",
+      "deliverables": [
+        "Logical fallacy identification sheet from the trial",
+        "Process critique (400 words): how the trial's rules created injustice",
+        "Counter-argument design: how you would restructure the process"
+      ],
+      "deliverableTemplates": [
+        {
+          "name": "Logical Fallacy Sheet",
+          "columns": [
+            "Statement from Trial",
+            "Fallacy Type (e.g., false dilemma, appeal to authority)",
+            "Why It's Misleading",
+            "How to Counter It"
+          ]
+        },
+        {
+          "name": "Process Critique",
+          "columns": [
+            "What rule/process was unfair?",
+            "Who benefited from the unfairness?",
+            "Evidence that it was systemic, not accidental",
+            "Your proposed alternative process"
+          ]
+        }
+      ],
+      "rubric": [
+        {
+          "criteria": "Logical Analysis",
+          "developing": "Accepts evidence at face value",
+          "competent": "Identifies surface-level bias",
+          "proficient": "Deconstructs the logical structure and identifies systemic flaws"
+        },
+        {
+          "criteria": "Process Critique",
+          "developing": "Criticises outcomes only",
+          "competent": "Questions the process that produced the outcome",
+          "proficient": "Proposes an alternative process with fairness safeguards"
+        },
+        {
+          "criteria": "Argumentation",
+          "developing": "Opinion without evidence",
+          "competent": "Claims supported by reasoning",
+          "proficient": "Structured argument with evidence, counter-evidence, and conclusion"
+        },
+        {
+          "criteria": "Transfer Thinking",
+          "developing": "Discusses only the simulation",
+          "competent": "Connects to one real-world example",
+          "proficient": "Identifies systemic fairness issues in school, work, or civic life"
+        }
+      ],
+      "assessment": "Fallacy identification (25%) + process critique memo (30%) + mock trial participation (25%) + transfer discussion (20%)",
+      "sessionFlow": "Independent reading + real-world rule-challenger case (6 min) → Mock trial setup and role assignment (4 min) → Trial simulation with Birbal intervention point (16 min) → Logical fallacy identification exercise (6 min) → Debrief: when should you challenge the system? (8 min)"
+    },
+    "tier3": {
+      "reflection": "Birbal challenged the rules of the game itself — not just the outcome. This is a dangerous and powerful skill. History is full of people who challenged unjust systems: some succeeded (Gandhi, Mandela), some were crushed (countless unnamed). Design a 'system challenge' risk assessment: when is it worth challenging the rules rather than playing within them? What factors determine whether the challenger succeeds or fails?",
+      "simulation": "Justice System Design Lab — Your task is to design a fair decision-making process for a school context (e.g., how disciplinary hearings should work, how student council elections should be structured, or how academic dishonesty should be adjudicated). You must build in safeguards against the exact kind of logical manipulation Birbal exposed. Then present your system to the class, and classmates will try to find loopholes. If they find a loophole, you must redesign on the spot.",
+      "deliverables": [
+        "System design document: the process you designed with all rules, roles, and safeguards",
+        "Loophole analysis: document every loophole classmates found and how you patched it",
+        "System challenge risk assessment framework (visual + 300 words)",
+        "Peer evaluation of another team's system design"
+      ],
+      "deliverableTemplates": [
+        {
+          "name": "Fair Process Design",
+          "columns": [
+            "Process Name",
+            "Purpose (what it decides)",
+            "Roles (who participates)",
+            "Rules (step by step)",
+            "Safeguard 1: Against bias",
+            "Safeguard 2: Against manipulation",
+            "Safeguard 3: Against power imbalance",
+            "Appeal mechanism"
+          ]
+        },
+        {
+          "name": "Loophole Analysis Log",
+          "columns": [
+            "Loophole Found",
+            "Who Found It",
+            "How It Exploits the System",
+            "My Patch (redesign)",
+            "Does the Patch Create New Loopholes?"
+          ]
+        },
+        {
+          "name": "System Challenge Risk Assessment",
+          "columns": [
+            "Factor: Power of the challenger relative to the system",
+            "Factor: Evidence of injustice (is it provable?)",
+            "Factor: Allies available",
+            "Factor: Cost of failure",
+            "Factor: Public visibility",
+            "Decision: Challenge / Work within / Build alternative"
+          ]
+        }
+      ],
+      "rubric": [
+        {
+          "criteria": "System Design Quality",
+          "developing": "Simple rules with obvious loopholes",
+          "competent": "Thoughtful design with 2-3 safeguards",
+          "proficient": "Robust system with checks and balances, appeal mechanisms, and anti-manipulation features"
+        },
+        {
+          "criteria": "Adversarial Thinking",
+          "developing": "Cannot find loopholes in others' systems",
+          "competent": "Finds surface-level loopholes",
+          "proficient": "Identifies structural vulnerabilities and proposes exploits that reveal design flaws"
+        },
+        {
+          "criteria": "Live Redesign",
+          "developing": "Freezes when a loophole is found",
+          "competent": "Patches the loophole but may create new ones",
+          "proficient": "Redesigns elegantly under pressure, addressing root causes rather than symptoms"
+        },
+        {
+          "criteria": "Risk Assessment Framework",
+          "developing": "Binary (challenge or don't)",
+          "competent": "Multi-factor assessment with some nuance",
+          "proficient": "Practical framework with real-world case studies showing when each factor was decisive"
+        }
+      ],
+      "assessment": "System design document (25%) + surviving adversarial testing (25%) + loophole analysis log (15%) + risk assessment framework (20%) + peer evaluation quality (15%)",
+      "sessionFlow": "Story critique and risk assessment framework design (6 min) → System design workshop (10 min) → System presentations + adversarial loophole testing (14 min) → Loophole patching and analysis log (5 min) → Debrief: when should systems be challenged? (5 min)"
+    }
   },
   {
     "week": 5,
@@ -1492,7 +2061,137 @@
         "proficient": "Engaging presentation with visuals, logic, and audience interaction"
       }
     ],
-    "assessment": "Creativity rubric + peer voting + teacher comments"
+    "assessment": "Creativity rubric + peer voting + teacher comments",
+    "tier2": {
+      "reflection": "Tenali Rama's success came from thinking laterally — using an unexpected approach that his opponents couldn't predict. But creative solutions carry risk: they only work once, and they require the audience to 'get it.' Find a business or innovation example where lateral thinking created a breakthrough. What made it work? What would have happened if it had failed?",
+      "simulation": "The Impossible Brief — Each team receives a design challenge with contradictory constraints (e.g., 'Build a school event that costs nothing, attracts 500 students, and happens tomorrow'). The constraints are deliberately impossible if taken literally. Teams must find a creative reframe — like Tenali Rama, the solution lies in changing what the words mean. Teams pitch to a panel. Scoring: originality × feasibility.",
+      "deliverables": [
+        "Creative pitch deck (5 slides max): the impossible brief and your lateral solution",
+        "Constraint reframe analysis: which constraint you bent and how",
+        "Innovation risk assessment: what could go wrong with your approach"
+      ],
+      "deliverableTemplates": [
+        {
+          "name": "Pitch Deck Outline",
+          "columns": [
+            "Slide 1: The Impossible Brief (as given)",
+            "Slide 2: The Reframe (how you changed the question)",
+            "Slide 3: Your Solution",
+            "Slide 4: Why It Works",
+            "Slide 5: What Could Go Wrong"
+          ]
+        },
+        {
+          "name": "Constraint Reframe Analysis",
+          "columns": [
+            "Original Constraint (literal reading)",
+            "Reframed Constraint (your interpretation)",
+            "Justification: Why this reframe is valid",
+            "Risk: What if the audience rejects the reframe?"
+          ]
+        }
+      ],
+      "rubric": [
+        {
+          "criteria": "Creative Originality",
+          "developing": "Conventional solution within given constraints",
+          "competent": "One creative twist on one constraint",
+          "proficient": "Fundamentally reframes the problem with an unexpected approach"
+        },
+        {
+          "criteria": "Feasibility",
+          "developing": "Creative but impractical",
+          "competent": "Could work with some adjustments",
+          "proficient": "Actionable and realistic within the reframed constraints"
+        },
+        {
+          "criteria": "Pitch Quality",
+          "developing": "Unclear or unfocused",
+          "competent": "Clear argument but lacks persuasion",
+          "proficient": "Compelling narrative that makes the audience see the problem differently"
+        },
+        {
+          "criteria": "Risk Awareness",
+          "developing": "Ignores failure modes",
+          "competent": "Acknowledges one risk",
+          "proficient": "Maps multiple failure modes and has contingency plans"
+        }
+      ],
+      "assessment": "Pitch deck quality (35%) + creativity of reframe (25%) + risk assessment (20%) + peer voting on most innovative solution (20%)",
+      "sessionFlow": "Independent reading + innovation case study (5 min) → Impossible Brief distribution and team brainstorm (8 min) → Constraint reframe exercise (5 min) → Pitch preparation (7 min) → Pitches to panel + peer voting (10 min) → Debrief: creativity vs. risk (5 min)"
+    },
+    "tier3": {
+      "reflection": "Tenali Rama's lateral thinking worked because his audience (the king, the thieves) operated within conventional logic. But what happens when everyone thinks laterally? Does creativity become a commodity? Design a typology of creative thinking: categorise at least 4 different types of creativity (e.g., reframing, combination, inversion, analogy) and identify when each type is most effective. Use examples from both IKS stories and modern innovation.",
+      "simulation": "Innovation Workshop Design — Create a complete 30-minute creativity workshop for T1/T2 students. The workshop must: (1) use a Tenali Rama story as the anchor, (2) teach one specific creative thinking technique (SCAMPER, lateral thinking, design thinking, or constraint-based innovation), (3) include a hands-on challenge where participants apply the technique, and (4) have a scoring rubric for creative output. Run the workshop and evaluate its effectiveness.",
+      "deliverables": [
+        "Complete workshop facilitator guide (30 min, minute-by-minute plan)",
+        "Creativity typology diagram: 4+ types of creative thinking with IKS and modern examples for each",
+        "Participant feedback analysis (collect from at least 5 participants)",
+        "Workshop effectiveness report (400 words): did participants learn the technique? evidence?"
+      ],
+      "deliverableTemplates": [
+        {
+          "name": "Workshop Facilitator Guide",
+          "columns": [
+            "Minute 0-5: Hook and Story",
+            "Minute 5-10: Technique Introduction",
+            "Minute 10-20: Hands-On Challenge",
+            "Minute 20-25: Gallery Walk / Peer Review",
+            "Minute 25-30: Debrief and Takeaway",
+            "Materials List",
+            "Backup Plan (if activity finishes early/late)"
+          ]
+        },
+        {
+          "name": "Creativity Typology",
+          "columns": [
+            "Type of Creativity",
+            "Definition (1 sentence)",
+            "IKS Example",
+            "Modern Example",
+            "Best Used When...",
+            "Limitations"
+          ]
+        },
+        {
+          "name": "Workshop Effectiveness Report",
+          "columns": [
+            "Objective: What I wanted participants to learn",
+            "Evidence: How I know they learned it (or didn't)",
+            "Surprises: What happened that I didn't expect",
+            "Redesign: What I would change for next time"
+          ]
+        }
+      ],
+      "rubric": [
+        {
+          "criteria": "Workshop Design",
+          "developing": "Activity without clear technique instruction",
+          "competent": "Teaches a technique and provides practice",
+          "proficient": "Scaffolds learning so participants can apply the technique independently after the workshop"
+        },
+        {
+          "criteria": "Creativity Typology",
+          "developing": "Lists types without analysis",
+          "competent": "Defines types with examples",
+          "proficient": "Creates a useful framework with clear criteria for when to use each type"
+        },
+        {
+          "criteria": "Facilitation Skill",
+          "developing": "Lectures instead of facilitating",
+          "competent": "Manages time and engagement",
+          "proficient": "Creates an environment where participants surprise themselves with their own creativity"
+        },
+        {
+          "criteria": "Evidence-Based Evaluation",
+          "developing": "Claims workshop 'went well' without evidence",
+          "competent": "Collects feedback and summarises it",
+          "proficient": "Analyses feedback critically, identifies what actually caused learning, and proposes evidence-based redesigns"
+        }
+      ],
+      "assessment": "Workshop design quality (25%) + creativity typology (15%) + live facilitation (25%) + participant feedback analysis (15%) + effectiveness report (20%)",
+      "sessionFlow": "Creativity typology design (8 min) → Workshop planning and material creation (10 min) → Run the workshop with peers (15 min) → Feedback collection and effectiveness analysis (7 min)"
+    }
   },
   {
     "week": 6,
@@ -1594,7 +2293,139 @@
         "proficient": "Reads and adapts to others' non-verbal cues during conversation"
       }
     ],
-    "assessment": "Performance rubric + peer assessment + teacher observation"
+    "assessment": "Performance rubric + peer assessment + teacher observation",
+    "tier2": {
+      "reflection": "Vidura's counsel to Dhritarashtra was masterful communication — direct truth delivered with respect, even to a king who didn't want to hear it. But Dhritarashtra ignored him. When is honest communication not enough? Find a modern example of someone delivering an important message that was ignored. What could they have done differently? Is it the speaker's failure or the listener's?",
+      "simulation": "The Difficult Conversation Lab — Pairs are assigned realistic scenarios: giving negative feedback to a friend, telling a teacher they made an error, reporting a safety concern to someone who won't listen, or persuading a parent to change their mind. Each scenario has a 'listener' with a hidden resistance card. Speakers must adapt their communication style in real-time. Observers score using a communication rubric.",
+      "deliverables": [
+        "Communication strategy document: planned approach for your difficult conversation",
+        "Observer feedback form: scored assessment of a peer's communication",
+        "Reflection: what you learned about your own communication blind spots"
+      ],
+      "deliverableTemplates": [
+        {
+          "name": "Communication Strategy",
+          "columns": [
+            "My Core Message (in 1 sentence)",
+            "Listener's Likely Resistance",
+            "Opening Approach: How I'll start",
+            "Adaptation Plan: What I'll do if they resist",
+            "Success Metric: How I'll know it worked"
+          ]
+        },
+        {
+          "name": "Observer Feedback Form",
+          "columns": [
+            "Speaker's Name",
+            "Eye Contact & Body Language (1-5)",
+            "Clarity of Message (1-5)",
+            "Listening & Adaptation (1-5)",
+            "Emotional Control (1-5)",
+            "Overall Effectiveness (1-5)",
+            "One specific improvement suggestion"
+          ]
+        }
+      ],
+      "rubric": [
+        {
+          "criteria": "Message Clarity",
+          "developing": "Rambles or avoids the point",
+          "competent": "Delivers the core message clearly",
+          "proficient": "Adapts the message format to the listener's style and resistance"
+        },
+        {
+          "criteria": "Active Listening",
+          "developing": "Waits to speak, doesn't hear",
+          "competent": "Acknowledges the listener's perspective",
+          "proficient": "Uses listener's own words to reframe and build connection"
+        },
+        {
+          "criteria": "Adaptability",
+          "developing": "Uses one approach regardless of response",
+          "competent": "Adjusts tone when met with resistance",
+          "proficient": "Reads the listener's hidden concern and addresses it directly"
+        },
+        {
+          "criteria": "Peer Assessment Quality",
+          "developing": "Generic or unhelpful feedback",
+          "competent": "Specific observations with some depth",
+          "proficient": "Actionable feedback with evidence from the conversation"
+        }
+      ],
+      "assessment": "Communication strategy document (25%) + live conversation performance (30%) + observer feedback quality (20%) + self-reflection depth (25%)",
+      "sessionFlow": "Independent reading + modern case of ignored advice (5 min) → Communication strategy planning (5 min) → Difficult conversation role-plays with hidden resistance cards (16 min) → Observer feedback forms (4 min) → Self-reflection writing and debrief (10 min)"
+    },
+    "tier3": {
+      "reflection": "Vidura was perhaps the greatest communicator in the Mahabharata — yet he failed. Dhritarashtra heard every word and still chose war. This raises a fundamental question: is communication a skill of the speaker or a condition of the listener? Design a communication failure taxonomy: categorise the different ways important messages fail to land, with a remedy for each. Use examples from IKS, history, and your own experience.",
+      "simulation": "Communication Masterclass Design — Create a 30-minute communication skills workshop for T1 students. It must include: (1) a Vidura-based case study on 'delivering truth to power,' (2) a structured practice activity where participants deliver difficult messages, (3) an observer scoring system, and (4) a self-assessment tool participants take home. Run the workshop, then have T2 students evaluate your teaching using a rubric you also designed.",
+      "deliverables": [
+        "Communication workshop facilitator guide (30 min plan)",
+        "Communication failure taxonomy (visual diagram + examples)",
+        "Self-assessment tool for participants (a take-home checklist or questionnaire)",
+        "Cross-tier evaluation: have T2 students score your teaching, then reflect on their feedback"
+      ],
+      "deliverableTemplates": [
+        {
+          "name": "Communication Failure Taxonomy",
+          "columns": [
+            "Failure Type (e.g., Timing, Framing, Channel, Authority, Emotion)",
+            "Definition",
+            "IKS Example",
+            "Modern Example",
+            "Remedy / Prevention Strategy"
+          ]
+        },
+        {
+          "name": "Participant Self-Assessment Tool",
+          "columns": [
+            "I stated my core message in one sentence (Y/N)",
+            "I acknowledged the listener's perspective before my own (Y/N)",
+            "I adapted when I sensed resistance (Y/N)",
+            "I maintained emotional control throughout (Y/N)",
+            "The listener understood my message (Y/N)",
+            "One thing I'll practice this week"
+          ]
+        },
+        {
+          "name": "Cross-Tier Evaluation Reflection",
+          "columns": [
+            "Feedback from T2 evaluators (verbatim)",
+            "What surprised me about the feedback",
+            "What I agree with and why",
+            "What I disagree with and why",
+            "My action plan for improvement"
+          ]
+        }
+      ],
+      "rubric": [
+        {
+          "criteria": "Workshop Design",
+          "developing": "Lecture-based, no practice opportunity",
+          "competent": "Includes practice with basic observer feedback",
+          "proficient": "Progressive practice with escalating difficulty, structured feedback loops, and a take-home tool"
+        },
+        {
+          "criteria": "Taxonomy Quality",
+          "developing": "Lists communication problems without categorisation",
+          "competent": "Creates useful categories with examples",
+          "proficient": "Framework is diagnostic — users can identify which failure type is occurring and select the right remedy"
+        },
+        {
+          "criteria": "Teaching Effectiveness",
+          "developing": "Participants cannot articulate what they learned",
+          "competent": "Participants demonstrate improved communication in practice",
+          "proficient": "Participants use the self-assessment tool unprompted and identify their own growth areas"
+        },
+        {
+          "criteria": "Feedback Receptiveness",
+          "developing": "Defensive about T2 evaluator feedback",
+          "competent": "Accepts feedback and identifies changes",
+          "proficient": "Models the communication skills being taught — listens deeply, acknowledges, adapts"
+        }
+      ],
+      "assessment": "Workshop design (25%) + communication failure taxonomy (20%) + live teaching (25%) + self-assessment tool quality (10%) + cross-tier evaluation reflection (20%)",
+      "sessionFlow": "Communication failure taxonomy design (8 min) → Workshop planning and self-assessment tool creation (8 min) → Run workshop with T1/peer group (16 min) → Cross-tier evaluation and reflection writing (8 min)"
+    }
   },
   {
     "week": 7,
@@ -1696,7 +2527,140 @@
         "proficient": "Deep reflection connecting personal dharma to real-life situations"
       }
     ],
-    "assessment": "Journal review + participation + reflective dialogue"
+    "assessment": "Journal review + participation + reflective dialogue",
+    "tier2": {
+      "reflection": "Arjuna's paralysis wasn't weakness — it was the weight of genuinely understanding the consequences of his actions. Krishna didn't tell him to stop feeling; he gave him a framework for deciding despite the feeling. Find a modern case where a leader had to act decisively despite personal moral conflict. How did they resolve the tension? Did they use a framework, or did they just act?",
+      "simulation": "The Ethical Pressure Cooker — Teams face a cascading series of decisions, each with a 60-second timer. Decision 1 is easy. Decision 2 adds a personal cost. Decision 3 introduces a moral conflict. Decision 4 forces a choice between two bad options. No 'good' answer exists for Decision 4 — only trade-offs. Teams document their reasoning at each stage. Debrief: how did time pressure affect moral reasoning?",
+      "deliverables": [
+        "Decision trail document: all 4 decisions with reasoning at each stage",
+        "Moral framework analysis (400 words): which framework you used and whether it held under pressure",
+        "Pressure-decision reflection: how did the timer change your thinking?"
+      ],
+      "deliverableTemplates": [
+        {
+          "name": "Decision Trail",
+          "columns": [
+            "Decision #",
+            "The Dilemma",
+            "Options Available",
+            "What We Chose",
+            "Why (reasoning)",
+            "What We Sacrificed",
+            "Confidence Level (1-5)"
+          ]
+        },
+        {
+          "name": "Moral Framework Analysis",
+          "columns": [
+            "Framework Used (duty, consequence, virtue, or other)",
+            "How it guided Decisions 1-3",
+            "Where it broke down at Decision 4",
+            "What framework would you use next time?"
+          ]
+        }
+      ],
+      "rubric": [
+        {
+          "criteria": "Moral Reasoning",
+          "developing": "Decides based on instinct alone",
+          "competent": "Applies a consistent framework through Decisions 1-3",
+          "proficient": "Maintains principled reasoning even under Decision 4 pressure"
+        },
+        {
+          "criteria": "Decision Under Pressure",
+          "developing": "Freezes or rushes without reasoning",
+          "competent": "Decides within time limit with basic reasoning",
+          "proficient": "Articulates trade-offs clearly even under 60-second constraint"
+        },
+        {
+          "criteria": "Framework Awareness",
+          "developing": "Cannot name the framework they used",
+          "competent": "Identifies their framework after the fact",
+          "proficient": "Consciously selects and applies a framework, and evaluates its limits"
+        },
+        {
+          "criteria": "Transfer Analysis",
+          "developing": "Discusses only the simulation",
+          "competent": "Connects to one real-world ethical dilemma",
+          "proficient": "Analyses a modern leader's ethical conflict using the same framework"
+        }
+      ],
+      "assessment": "Decision trail quality (30%) + simulation conduct under pressure (25%) + moral framework analysis (25%) + transfer discussion (20%)",
+      "sessionFlow": "Independent reading + modern ethical leadership case (6 min) → Cascading decision simulation with 60-second timers (16 min) → Decision trail documentation (5 min) → Moral framework analysis writing (5 min) → Cross-team debrief: did time pressure corrupt reasoning? (8 min)"
+    },
+    "tier3": {
+      "reflection": "Krishna's Gita is essentially a coaching conversation — he helps Arjuna build a decision framework rather than telling him what to do. This is the highest form of teaching. But critique Krishna's method: does it work for everyone, or only for someone already as capable as Arjuna? Design a 'decision coaching protocol' — a step-by-step guide for helping someone else make a difficult decision without telling them the answer.",
+      "simulation": "Ethical Decision-Making Curriculum — Design a 3-session programme on 'making decisions under moral uncertainty' for T1/T2 students. Session 1: introduce 3 ethical frameworks (duty, consequence, virtue). Session 2: apply frameworks to the Arjuna dilemma. Session 3: apply frameworks to a modern case students choose themselves. Create all materials, teach Session 2, and have participants evaluate whether the frameworks actually helped them decide.",
+      "deliverables": [
+        "3-session ethical decision-making curriculum with complete materials for each session",
+        "Decision coaching protocol: a step-by-step guide (visual + 400-word explanation)",
+        "Session 2 teaching recording or detailed observation notes from 3 observers",
+        "Participant effectiveness survey: did the frameworks help? (design the survey, collect data, analyse results)"
+      ],
+      "deliverableTemplates": [
+        {
+          "name": "Ethical Decision-Making Curriculum",
+          "columns": [
+            "Session #",
+            "Title",
+            "Frameworks Covered",
+            "IKS Case Study",
+            "Modern Case Study (student-chosen in S3)",
+            "Activity Design",
+            "Assessment Method"
+          ]
+        },
+        {
+          "name": "Decision Coaching Protocol",
+          "columns": [
+            "Step 1: Listen without judging (what to say)",
+            "Step 2: Help them name the conflict (questions to ask)",
+            "Step 3: Introduce frameworks as lenses, not answers",
+            "Step 4: Let them choose — resist the urge to advise",
+            "Step 5: Help them anticipate consequences of their choice",
+            "Step 6: Follow up — did they act? what happened?"
+          ]
+        },
+        {
+          "name": "Effectiveness Survey Design",
+          "columns": [
+            "Q1: Before this session, how confident were you in making ethical decisions? (1-5)",
+            "Q2: Did learning the frameworks change how you'd approach the Arjuna dilemma? (Y/N + explain)",
+            "Q3: Which framework felt most useful to you and why?",
+            "Q4: Can you apply these frameworks to a decision you're facing right now? (describe)",
+            "Q5: What was missing from this training?"
+          ]
+        }
+      ],
+      "rubric": [
+        {
+          "criteria": "Curriculum Design",
+          "developing": "Teaches frameworks as rules to follow",
+          "competent": "Presents frameworks as lenses and lets students choose",
+          "proficient": "Creates genuine moral tension where frameworks conflict, forcing students to think rather than apply"
+        },
+        {
+          "criteria": "Coaching Protocol",
+          "developing": "Tells people what to decide",
+          "competent": "Asks questions but steers toward a preferred answer",
+          "proficient": "Genuinely helps the other person think — resists advice-giving, uses Socratic questioning"
+        },
+        {
+          "criteria": "Teaching Execution",
+          "developing": "Delivers content without creating engagement",
+          "competent": "Creates discussion and manages disagreement",
+          "proficient": "Facilitates a genuine ethical struggle where students change their minds in real-time"
+        },
+        {
+          "criteria": "Evidence-Based Evaluation",
+          "developing": "Assumes it worked without data",
+          "competent": "Collects survey data and summarises",
+          "proficient": "Analyses survey critically — identifies what actually shifted thinking and what didn't"
+        }
+      ],
+      "assessment": "Curriculum design (25%) + decision coaching protocol (20%) + Session 2 teaching (25%) + survey design and analysis (20%) + observer feedback integration (10%)",
+      "sessionFlow": "Decision coaching protocol design (8 min) → Curriculum outline for 3 sessions (8 min) → Teach Session 2 to peers (14 min) → Survey distribution, collection, and quick analysis (10 min)"
+    }
   },
   {
     "week": 8,
@@ -1795,7 +2759,138 @@
         "proficient": "Connects self-rating to specific actions they will change"
       }
     ],
-    "assessment": "Leadership rubric + group charter + self-assessment"
+    "assessment": "Leadership rubric + group charter + self-assessment",
+    "tier2": {
+      "reflection": "Rama led through personal example and sacrifice; Ravana led through power, intelligence, and control. Both were effective — but their kingdoms ended very differently. Is Ravana's leadership style ever justified? Find a modern organisation or leader who uses each style. Under what conditions does command-and-control outperform values-based leadership?",
+      "simulation": "The Leadership Experiment — Two teams are given the same complex project task (organising a school cultural event in 20 minutes of planning). Team A must use Rama's style: consensus, shared values, no one gives direct orders. Team B must use Ravana's style: clear hierarchy, one leader decides everything, efficiency above all. After 20 minutes, teams present their plan. The class votes on which plan is better — then discusses which team they'd rather work in.",
+      "deliverables": [
+        "Leadership observation log: document specific behaviours from both styles",
+        "Comparative analysis (400 words): strengths and weaknesses of each approach",
+        "Personal leadership profile: which elements of each style you would adopt"
+      ],
+      "deliverableTemplates": [
+        {
+          "name": "Leadership Observation Log",
+          "columns": [
+            "Moment/Decision",
+            "What the Leader Did",
+            "Team Response",
+            "Style Label (Rama/Ravana)",
+            "Effectiveness (1-5)"
+          ]
+        },
+        {
+          "name": "Comparative Analysis",
+          "columns": [
+            "Dimension",
+            "Rama Style: Strength",
+            "Rama Style: Weakness",
+            "Ravana Style: Strength",
+            "Ravana Style: Weakness",
+            "When each is better"
+          ]
+        }
+      ],
+      "rubric": [
+        {
+          "criteria": "Leadership Analysis",
+          "developing": "Prefers one style without nuance",
+          "competent": "Acknowledges strengths of both styles",
+          "proficient": "Identifies specific contexts where each style is optimal"
+        },
+        {
+          "criteria": "Observation Quality",
+          "developing": "General impressions only",
+          "competent": "Records specific behaviours and decisions",
+          "proficient": "Links specific behaviours to team outcomes with evidence"
+        },
+        {
+          "criteria": "Self-Awareness",
+          "developing": "Claims a style without reflection",
+          "competent": "Identifies own tendencies honestly",
+          "proficient": "Constructs a personal leadership profile with situational adaptations"
+        },
+        {
+          "criteria": "Written Argument",
+          "developing": "Opinion-based",
+          "competent": "Supported by simulation evidence",
+          "proficient": "Uses simulation + modern examples to build a nuanced argument"
+        }
+      ],
+      "assessment": "Observation log detail (25%) + comparative analysis (30%) + leadership experiment participation (25%) + personal profile depth (20%)",
+      "sessionFlow": "Independent reading + modern leadership case research (6 min) → Team assignment and style briefing (4 min) → Parallel leadership experiment — both teams plan simultaneously (15 min) → Plan presentations and class vote (7 min) → Debrief: which plan was better? which team was happier? (8 min)"
+    },
+    "tier3": {
+      "reflection": "You've studied Rama and Ravana as contrasting leadership archetypes. Now go beyond: design a 'Leadership Situational Guide' that tells a leader when to use Rama-style (consensus, values, sacrifice) and when to use Ravana-style (hierarchy, decisiveness, control). Include at least 5 situations and defend your recommendation for each. Consider: crisis management, routine operations, creative projects, conflict resolution, and institutional change.",
+      "simulation": "Leadership Development Programme Design — Create a 2-session leadership training programme for T1 students using the Rama/Ravana contrast. Session 1 should let students experience both styles (design two parallel activities). Session 2 should help students develop their own 'leadership style profile.' Create the full programme, run Session 1, collect pre/post assessments to measure whether students' understanding of leadership became more nuanced.",
+      "deliverables": [
+        "2-session leadership training programme with complete facilitator guides",
+        "Leadership Situational Guide (visual matrix + 400-word explanation)",
+        "Pre/post assessment design: measure whether students' leadership understanding changed",
+        "Programme evaluation report: analyse the pre/post data and draw conclusions"
+      ],
+      "deliverableTemplates": [
+        {
+          "name": "Leadership Situational Guide",
+          "columns": [
+            "Situation Type",
+            "Rama Style: What to Do",
+            "Rama Style: Risk",
+            "Ravana Style: What to Do",
+            "Ravana Style: Risk",
+            "My Recommendation and Why"
+          ]
+        },
+        {
+          "name": "Pre/Post Assessment",
+          "columns": [
+            "Pre-Q1: What makes a good leader? (open)",
+            "Pre-Q2: Is it better to be loved or feared? (scale 1-5)",
+            "Post-Q1: Same as Pre-Q1 (compare answers)",
+            "Post-Q2: Same as Pre-Q2 (compare shift)",
+            "Post-Q3: Describe a situation where the 'wrong' leadership style is actually right"
+          ]
+        },
+        {
+          "name": "Programme Evaluation Report",
+          "columns": [
+            "What changed in students' answers from pre to post?",
+            "Most common pre-training belief",
+            "Most common post-training belief",
+            "Evidence that the programme caused the shift (not just time)",
+            "What I would redesign"
+          ]
+        }
+      ],
+      "rubric": [
+        {
+          "criteria": "Programme Design",
+          "developing": "Teaches one style as 'right'",
+          "competent": "Presents both styles fairly and lets students compare",
+          "proficient": "Creates experiences where students discover that context determines the right style"
+        },
+        {
+          "criteria": "Situational Guide",
+          "developing": "Generic advice without context",
+          "competent": "Matches styles to situations with reasoning",
+          "proficient": "Nuanced guide with real-world examples, acknowledging that most situations need a blend"
+        },
+        {
+          "criteria": "Assessment Design",
+          "developing": "Yes/no questions that don't measure understanding",
+          "competent": "Open questions that reveal thinking",
+          "proficient": "Pre/post design that can detect genuine conceptual change, not just recall"
+        },
+        {
+          "criteria": "Evaluation Rigour",
+          "developing": "Claims success without data",
+          "competent": "Reports data honestly",
+          "proficient": "Analyses data critically, distinguishes correlation from causation, identifies limitations"
+        }
+      ],
+      "assessment": "Programme design (25%) + situational guide (20%) + Session 1 facilitation (25%) + assessment design and analysis (20%) + evaluation report (10%)",
+      "sessionFlow": "Leadership Situational Guide design (8 min) → Programme outline and pre-assessment creation (8 min) → Run Session 1 parallel leadership experiment (14 min) → Post-assessment and evaluation report writing (10 min)"
+    }
   },
   {
     "week": 9,
@@ -1898,7 +2993,137 @@
         "proficient": "Defends a difficult position with evidence and empathy for opposing views"
       }
     ],
-    "assessment": "Case analysis rubric + teacher facilitation notes"
+    "assessment": "Case analysis rubric + teacher facilitation notes",
+    "tier2": {
+      "reflection": "In the Dice Game, almost everyone present knew what was happening was wrong — yet almost no one intervened. Bhishma, Drona, Vidura — all wise, all silent (or silenced). Find a modern case of collective moral failure: a situation where many people saw wrongdoing but didn't act. What creates bystander silence? What would it have cost each of them to speak up?",
+      "simulation": "The Bystander Experiment — A staged scenario unfolds in class: a student (secretly briefed) begins publicly copying from another's work during a group task. Everyone can see it. The teacher (also in on it) appears to ignore it. The class must decide: intervene, report, stay silent, or confront. After the reveal, teams analyse: who acted, who froze, who rationalised. Then they design an 'intervention protocol' — a concrete plan for what to do when you witness wrongdoing.",
+      "deliverables": [
+        "Bystander analysis: document what happened, who acted, and why others didn't",
+        "Intervention protocol: a step-by-step plan for responding to witnessed wrongdoing",
+        "Ethical courage reflection (300 words): what it would cost you personally to intervene"
+      ],
+      "deliverableTemplates": [
+        {
+          "name": "Bystander Analysis",
+          "columns": [
+            "What Happened",
+            "Who Noticed?",
+            "Who Acted? (and how)",
+            "Who Stayed Silent? (and why)",
+            "What Would Have Changed the Outcome?"
+          ]
+        },
+        {
+          "name": "Intervention Protocol",
+          "columns": [
+            "Step 1: Confirm (is this really wrong?)",
+            "Step 2: Assess risk (what could happen if I act?)",
+            "Step 3: Choose method (direct, indirect, report, delay)",
+            "Step 4: Act (specific words/actions)",
+            "Step 5: Follow up (ensure accountability)"
+          ]
+        }
+      ],
+      "rubric": [
+        {
+          "criteria": "Ethical Analysis",
+          "developing": "Judges characters as simply good/bad",
+          "competent": "Analyses the pressures that created silence",
+          "proficient": "Maps the systemic factors that enable collective moral failure"
+        },
+        {
+          "criteria": "Intervention Design",
+          "developing": "Vague ('just speak up')",
+          "competent": "Concrete steps with some risk awareness",
+          "proficient": "Realistic protocol that accounts for power dynamics and personal cost"
+        },
+        {
+          "criteria": "Self-Honesty",
+          "developing": "Claims they would always act heroically",
+          "competent": "Acknowledges the difficulty of intervening",
+          "proficient": "Honestly assesses their own likely response and designs personal safeguards"
+        },
+        {
+          "criteria": "Transfer Application",
+          "developing": "Stays in the story world",
+          "competent": "Connects to one modern example",
+          "proficient": "Analyses a systemic bystander failure with evidence and structural solutions"
+        }
+      ],
+      "assessment": "Bystander analysis (25%) + intervention protocol quality (30%) + live simulation response (20%) + ethical courage reflection (25%)",
+      "sessionFlow": "Independent reading + modern bystander case research (6 min) → Staged bystander scenario (8 min, students don't know it's staged) → Reveal and immediate reaction documentation (4 min) → Bystander analysis and intervention protocol design (12 min) → Debrief: what creates courage vs. silence? (10 min)"
+    },
+    "tier3": {
+      "reflection": "The Dice Game is the Mahabharata's deepest moral failure — not because of Duryodhana's villainy, but because of the silence of the wise. You now have the maturity to ask: what structural conditions create bystander paralysis? It's not just personal cowardice — it's institutional design. Design an 'institutional courage framework' — a set of organisational structures that make it easier (not harder) for individuals to speak up when they see wrongdoing.",
+      "simulation": "Ethics Programme Design — Create a complete 'Speak Up' training programme for a school or youth organisation. The programme must include: (1) a Mahabharata-based case study on institutional silence, (2) a bystander simulation where participants practice intervening, (3) an anonymous reporting mechanism design, and (4) a follow-up protocol. Build all materials, run the bystander simulation, and evaluate whether participants felt more prepared to act after the training.",
+      "deliverables": [
+        "Complete 'Speak Up' programme: case study, simulation, reporting mechanism, follow-up protocol",
+        "Institutional courage framework (visual + 400-word explanation)",
+        "Bystander simulation facilitator guide with all scenario cards",
+        "Programme effectiveness assessment: pre/post confidence survey and analysis"
+      ],
+      "deliverableTemplates": [
+        {
+          "name": "Institutional Courage Framework",
+          "columns": [
+            "Structure 1: Anonymous reporting channel (design)",
+            "Structure 2: Protection for reporters (policy)",
+            "Structure 3: Leadership accountability mechanism",
+            "Structure 4: Regular 'ethics check-in' process",
+            "Structure 5: Reward for speaking up (not just punishment for silence)",
+            "How these structures reinforce each other"
+          ]
+        },
+        {
+          "name": "Bystander Simulation Facilitator Guide",
+          "columns": [
+            "Setup: How to stage the scenario without alerting participants",
+            "Scenario 1: Low-stakes (easy to intervene)",
+            "Scenario 2: Medium-stakes (social cost to intervene)",
+            "Scenario 3: High-stakes (authority figure is the wrongdoer)",
+            "Debrief Questions for Each Scenario",
+            "Safety Protocol: How to handle emotional responses"
+          ]
+        },
+        {
+          "name": "Confidence Survey",
+          "columns": [
+            "Pre-Q: How confident are you that you would intervene if you saw wrongdoing? (1-10)",
+            "Post-Q: Same question after training",
+            "Post-Q2: What specific technique from the training would you use?",
+            "Post-Q3: What is still your biggest barrier to speaking up?"
+          ]
+        }
+      ],
+      "rubric": [
+        {
+          "criteria": "Programme Design",
+          "developing": "Tells people to 'be brave' without structural support",
+          "competent": "Provides both personal techniques and institutional mechanisms",
+          "proficient": "Creates a system where courage is the easier path — structures reduce the cost of speaking up"
+        },
+        {
+          "criteria": "Framework Originality",
+          "developing": "Restates common advice",
+          "competent": "Designs concrete mechanisms for a specific context",
+          "proficient": "Creates interconnected structures that reinforce each other, with failure-mode analysis"
+        },
+        {
+          "criteria": "Simulation Facilitation",
+          "developing": "Scenarios are obvious and low-tension",
+          "competent": "Creates genuine discomfort and realistic pressure",
+          "proficient": "Escalates tension progressively, handles emotional responses with care, and creates lasting learning"
+        },
+        {
+          "criteria": "Impact Measurement",
+          "developing": "Asks 'did you like the training?'",
+          "competent": "Measures confidence change pre/post",
+          "proficient": "Assesses both confidence and behavioural intent, identifies remaining barriers, and proposes follow-up"
+        }
+      ],
+      "assessment": "Programme design (25%) + institutional courage framework (20%) + bystander simulation facilitation (25%) + effectiveness assessment and analysis (20%) + cross-tier teaching quality (10%)",
+      "sessionFlow": "Institutional courage framework design (8 min) → Programme and simulation materials creation (10 min) → Run escalating bystander simulation (14 min) → Confidence survey and programme evaluation (8 min)"
+    }
   },
   {
     "week": 10,
@@ -2000,7 +3225,138 @@
         "proficient": "Adapts strategy to changing conditions and finishes strong"
       }
     ],
-    "assessment": "Simulation scoring + strategic clarity rubric + reflection"
+    "assessment": "Simulation scoring + strategic clarity rubric + reflection",
+    "tier2": {
+      "reflection": "Chanakya's Mandala Theory assumes every neighbour is a potential enemy and every enemy's enemy is a potential friend. This is brilliantly strategic — but is it cynical? Find a modern geopolitical or business example of Mandala thinking in action. When does strategic paranoia become self-fulfilling? When does trust become strategic weakness?",
+      "simulation": "The Alliance Game — 5 teams represent 'kingdoms' on a map. Each starts with resources (population, army, treasury). Neighbours are rivals; distant kingdoms are potential allies. Over 4 rounds, teams negotiate alliances, trade, or prepare for conflict. Hidden event cards disrupt plans each round (drought, rebellion, trade route closure). The team that controls the most resources after 4 rounds wins — but only if their alliances hold. Betrayal is allowed.",
+      "deliverables": [
+        "Strategic position paper (before the game): your opening strategy and alliance targets",
+        "Alliance map (after the game): diagram of who allied with whom and when betrayals occurred",
+        "Post-game strategic analysis (400 words): what worked, what failed, and what you'd do differently"
+      ],
+      "deliverableTemplates": [
+        {
+          "name": "Strategic Position Paper",
+          "columns": [
+            "My Kingdom's Strengths",
+            "My Kingdom's Vulnerabilities",
+            "Target Ally (and why)",
+            "Primary Rival (and why)",
+            "Opening Move Strategy"
+          ]
+        },
+        {
+          "name": "Post-Game Strategic Analysis",
+          "columns": [
+            "What was my strategy?",
+            "When did I first adapt it?",
+            "Biggest strategic success",
+            "Biggest strategic failure",
+            "What I learned about trust in competitive environments"
+          ]
+        }
+      ],
+      "rubric": [
+        {
+          "criteria": "Strategic Thinking",
+          "developing": "Reactive, no pre-game plan",
+          "competent": "Has a plan but doesn't adapt to disruptions",
+          "proficient": "Plans ahead, adapts to events, and anticipates opponents' moves"
+        },
+        {
+          "criteria": "Alliance Management",
+          "developing": "Ignores diplomacy or trusts blindly",
+          "competent": "Forms alliances with basic reciprocity",
+          "proficient": "Manages alliances strategically — knows when to commit and when to hedge"
+        },
+        {
+          "criteria": "Systems Analysis",
+          "developing": "Focuses on own kingdom only",
+          "competent": "Tracks 2-3 kingdoms' positions",
+          "proficient": "Reads the full board and identifies systemic dynamics"
+        },
+        {
+          "criteria": "Post-Game Reflection",
+          "developing": "Describes what happened",
+          "competent": "Analyses why things happened",
+          "proficient": "Extracts transferable strategic principles with modern parallels"
+        }
+      ],
+      "assessment": "Pre-game position paper (20%) + in-game strategic decisions (30%) + alliance map accuracy (15%) + post-game analysis (35%)",
+      "sessionFlow": "Independent reading + geopolitical/business case (5 min) → Pre-game position paper writing (5 min) → Alliance Game: 4 rounds of negotiation with event cards (18 min) → Alliance map and post-game analysis writing (5 min) → Debrief: trust vs. strategy (7 min)"
+    },
+    "tier3": {
+      "reflection": "Chanakya's Mandala Theory is a model of strategic paranoia — trust no one fully, hedge every alliance. Critique this: what does a society look like when everyone operates on Mandala logic? Is there a point where strategic thinking becomes corrosive to trust? Design a 'trust calibration framework' that helps leaders decide how much to trust in different contexts — from personal friendships to geopolitical alliances.",
+      "simulation": "Strategy Workshop Design — Create a simulation-based workshop that teaches 'systems-level strategic thinking' to T1/T2 students. The workshop must use an Arthashastra concept (Mandala, Saptanga, or Shadgunya — the six-fold policy) and translate it into a modern decision-making context. Design the simulation, all game materials, scoring rules, and a debrief that connects ancient strategy to modern application. Run the simulation and evaluate learning outcomes.",
+      "deliverables": [
+        "Complete strategy workshop: simulation design, all game materials, scoring rules, debrief guide",
+        "Trust calibration framework (visual matrix + 400-word explanation)",
+        "Game balance analysis: was the simulation fair? did the right strategies win?",
+        "Learning outcome evaluation: did participants develop strategic thinking? (evidence required)"
+      ],
+      "deliverableTemplates": [
+        {
+          "name": "Strategy Workshop Design",
+          "columns": [
+            "Arthashastra Concept Used",
+            "Modern Context Translation",
+            "Number of Players/Teams",
+            "Game Mechanics (turns, resources, actions)",
+            "Win Condition",
+            "Hidden Information Design",
+            "Debrief Questions (connecting ancient to modern)"
+          ]
+        },
+        {
+          "name": "Trust Calibration Framework",
+          "columns": [
+            "Context: Personal relationships",
+            "Context: Team/workplace",
+            "Context: Business partnerships",
+            "Context: Institutional/political",
+            "For each: Trust Level (1-5) + Verification Mechanism + What to do if trust is broken"
+          ]
+        },
+        {
+          "name": "Game Balance Analysis",
+          "columns": [
+            "Did the intended strategy win? (Y/N)",
+            "Were there unintended dominant strategies?",
+            "Was any role/team unfairly advantaged?",
+            "What would I change to improve balance?",
+            "Did the simulation teach the intended lesson?"
+          ]
+        }
+      ],
+      "rubric": [
+        {
+          "criteria": "Simulation Design",
+          "developing": "Board game with no strategic depth",
+          "competent": "Creates meaningful choices with hidden information",
+          "proficient": "Elegant game design where the strategic lesson emerges naturally from play, not from lecture"
+        },
+        {
+          "criteria": "Ancient-to-Modern Translation",
+          "developing": "Superficial analogy",
+          "competent": "Identifies structural parallels between Arthashastra and modern strategy",
+          "proficient": "Shows that the ancient framework reveals insights about modern situations that modern frameworks miss"
+        },
+        {
+          "criteria": "Trust Framework",
+          "developing": "Trust is binary (yes/no)",
+          "competent": "Graduated trust with context-awareness",
+          "proficient": "Practical framework with verification mechanisms, recovery protocols, and cultural sensitivity"
+        },
+        {
+          "criteria": "Evaluation Rigour",
+          "developing": "Enjoyed the game ≠ learned strategy",
+          "competent": "Identifies specific strategic insights participants gained",
+          "proficient": "Distinguishes between game enjoyment and strategic learning, proposes evidence-based redesigns"
+        }
+      ],
+      "assessment": "Simulation design and materials (25%) + trust framework quality (15%) + live facilitation (25%) + game balance analysis (15%) + learning outcome evaluation (20%)",
+      "sessionFlow": "Trust calibration framework design (6 min) → Simulation design and material preparation (10 min) → Run the strategy simulation (16 min) → Game balance analysis and learning evaluation (8 min)"
+    }
   },
   {
     "week": 11,
@@ -2101,7 +3457,134 @@
         "proficient": "Compelling presentation showing how the system handles a crisis scenario"
       }
     ],
-    "assessment": "Model evaluation + group presentation + peer review"
+    "assessment": "Model evaluation + group presentation + peer review",
+    "tier2": {
+      "reflection": "The Saptanga model says a state needs 7 elements working together: king, minister, territory, fort, treasury, army, and allies. If any one fails, the whole system weakens. Map your school onto the Saptanga model — who/what plays each role? Which element is the weakest? What would happen if that element failed?",
+      "simulation": "The System Stress Test — Teams build a model organisation (a school, a startup, or a village council) using the Saptanga framework. Each team member is responsible for one 'limb.' Then the teacher introduces a crisis (budget cut, key person leaves, natural disaster, scandal). Teams must show how their system responds — which limbs compensate, which fail, and what cascades. Teams with the most resilient design win.",
+      "deliverables": [
+        "Saptanga system map of your organisation (visual diagram)",
+        "Stress test report: how each limb responded to the crisis",
+        "Resilience recommendation memo (400 words): which limb needs strengthening and how"
+      ],
+      "deliverableTemplates": [
+        {
+          "name": "Saptanga System Map",
+          "columns": [
+            "Limb (King/Minister/Territory/Fort/Treasury/Army/Allies)",
+            "Who/What fills this role in our org?",
+            "Current Strength (1-5)",
+            "Dependency: Which other limbs rely on this one?"
+          ]
+        },
+        {
+          "name": "Stress Test Report",
+          "columns": [
+            "Crisis Introduced",
+            "First Limb to Fail",
+            "Cascading Effects (which other limbs weakened?)",
+            "Compensating Limb (what absorbed the shock?)",
+            "System Recovery Plan"
+          ]
+        }
+      ],
+      "rubric": [
+        {
+          "criteria": "Systems Mapping",
+          "developing": "Lists components without connections",
+          "competent": "Shows dependencies between 3+ limbs",
+          "proficient": "Maps the full system with feedback loops and single points of failure"
+        },
+        {
+          "criteria": "Crisis Response",
+          "developing": "Panics or ignores the crisis",
+          "competent": "Addresses the immediate failure",
+          "proficient": "Traces cascading effects and deploys compensating mechanisms"
+        },
+        {
+          "criteria": "Organisational Design",
+          "developing": "Generic structure",
+          "competent": "Thoughtful role assignments with some redundancy",
+          "proficient": "Designs for resilience — no single point of failure, clear succession"
+        },
+        {
+          "criteria": "Transfer Thinking",
+          "developing": "Stays in the simulation",
+          "competent": "Maps Saptanga to one real organisation",
+          "proficient": "Analyses a real organisational failure through the Saptanga lens"
+        }
+      ],
+      "assessment": "System map quality (25%) + stress test resilience (30%) + recommendation memo (25%) + team coordination during crisis (20%)",
+      "sessionFlow": "Independent reading + school-as-Saptanga mapping exercise (6 min) → Organisation design and role assignment (6 min) → System building phase (8 min) → Crisis injection and stress test (10 min) → Resilience debrief and cross-team comparison (10 min)"
+    },
+    "tier3": {
+      "reflection": "The Saptanga model describes a state as 7 interdependent limbs. But it's a model from the 3rd century BCE. What's missing? Design a 'Neo-Saptanga' — an updated model for modern organisations. Keep the 7-limb structure but replace or redefine limbs to reflect 21st-century realities (technology, stakeholder voice, sustainability, data, culture). Justify each change and explain what Kautilya would think of your updates.",
+      "simulation": "Organisational Resilience Workshop — Design and facilitate a 'stress test' workshop for T1/T2 students. The workshop must: (1) teach the Saptanga framework, (2) have students build a model organisation, (3) inject a crisis, and (4) evaluate resilience. You design the crisis scenarios, the evaluation criteria, and the debrief. After running it, analyse which team designs were most resilient and why — then write a set of 'resilience design principles' based on what you observed.",
+      "deliverables": [
+        "Complete stress test workshop: teaching module, building activity, crisis scenarios, evaluation criteria",
+        "Neo-Saptanga model (visual diagram + 500-word justification of changes)",
+        "Resilience design principles (extracted from observing the workshop, with evidence from team performance)",
+        "Workshop facilitation self-assessment and improvement plan"
+      ],
+      "deliverableTemplates": [
+        {
+          "name": "Neo-Saptanga Model",
+          "columns": [
+            "Original Limb",
+            "Modern Equivalent",
+            "Why I Changed It (or kept it)",
+            "How It Connects to Other Limbs",
+            "What Kautilya Would Think"
+          ]
+        },
+        {
+          "name": "Resilience Design Principles",
+          "columns": [
+            "Principle (1 sentence)",
+            "Evidence: Which team demonstrated this?",
+            "Counter-evidence: Which team violated this and what happened?",
+            "How to build this into an organisation from day one"
+          ]
+        },
+        {
+          "name": "Facilitation Self-Assessment",
+          "columns": [
+            "What I did well as a facilitator",
+            "Where I lost the room",
+            "The hardest moment and how I handled it",
+            "What I would do differently next time",
+            "Skill I need to develop"
+          ]
+        }
+      ],
+      "rubric": [
+        {
+          "criteria": "Neo-Saptanga Model",
+          "developing": "Replaces labels without changing the logic",
+          "competent": "Adds genuinely modern elements with reasoning",
+          "proficient": "Creates a coherent updated system where new limbs interact in ways Kautilya's didn't, with justified trade-offs"
+        },
+        {
+          "criteria": "Workshop Design",
+          "developing": "Crisis is random, not diagnostic",
+          "competent": "Crisis reveals specific organisational weaknesses",
+          "proficient": "Multiple crisis types that test different limbs, creating a comprehensive stress test"
+        },
+        {
+          "criteria": "Principle Extraction",
+          "developing": "Generic advice ('be prepared')",
+          "competent": "Specific principles with evidence from the workshop",
+          "proficient": "Principles are grounded in observed team behaviour, with both confirming and disconfirming evidence"
+        },
+        {
+          "criteria": "Self-Assessment Honesty",
+          "developing": "Claims everything went perfectly",
+          "competent": "Identifies weaknesses honestly",
+          "proficient": "Shows genuine self-awareness, connects facilitation gaps to learning outcomes, and creates a concrete improvement plan"
+        }
+      ],
+      "assessment": "Neo-Saptanga model quality (20%) + workshop design (20%) + live facilitation (25%) + resilience principles (20%) + self-assessment honesty (15%)",
+      "sessionFlow": "Neo-Saptanga model design (8 min) → Workshop setup and Saptanga teaching (6 min) → Team organisation building (6 min) → Crisis injection and stress test (10 min) → Resilience principle extraction and self-assessment (10 min)"
+    }
   },
   {
     "week": 12,
@@ -2243,7 +3726,173 @@
         "url": "https://dschool.stanford.edu/resources/getting-started-with-design-thinking",
         "type": "video"
       }
-    ]
+    ],
+    "tier2": {
+      "reflection": "You've now completed 11 weeks of IKS-based life skills. Looking back, which story changed your thinking the most? Which skill do you use most often in daily life? Which week's lesson have you already applied outside the classroom? The capstone is your chance to prove that ancient wisdom isn't just stories — it's a living toolkit.",
+      "simulation": "Applied Capstone — Teams select a real problem facing their school, community, or peer group. They must: (1) identify which IKS source is most relevant to the problem, (2) extract the strategic principle, (3) design a realistic solution using the 5-step pedagogy, and (4) pitch it to the class as if presenting to a school management committee. Pitches are scored by peers using a structured rubric. The winning team's proposal is submitted to the actual school administration.",
+      "deliverables": [
+        "Capstone pitch deck (8 slides max): problem, IKS link, strategy, solution, implementation plan, risks, team roles, call to action",
+        "Implementation timeline: 4-week action plan with milestones",
+        "Individual reflection essay (500 words): my IKS journey and what I'm taking forward",
+        "Peer evaluation of one other team's pitch"
+      ],
+      "deliverableTemplates": [
+        {
+          "name": "Capstone Deck Structure",
+          "columns": [
+            "Slide 1: The Real Problem (with evidence)",
+            "Slide 2: Which IKS Source and Why",
+            "Slide 3: The Strategic Principle Extracted",
+            "Slide 4: Our Solution Design",
+            "Slide 5: Implementation Plan (4 weeks)",
+            "Slide 6: Risks and Mitigation",
+            "Slide 7: Team Roles and Accountability",
+            "Slide 8: Call to Action for the School"
+          ]
+        },
+        {
+          "name": "Peer Evaluation Form",
+          "columns": [
+            "Team Name",
+            "Problem Clarity (1-5)",
+            "IKS Connection Strength (1-5)",
+            "Solution Feasibility (1-5)",
+            "Presentation Quality (1-5)",
+            "Would you fund this proposal? (Yes/No)",
+            "One specific improvement suggestion"
+          ]
+        },
+        {
+          "name": "Reflection Essay Structure",
+          "columns": [
+            "Para 1: The IKS source that changed my thinking most",
+            "Para 2: A specific situation where I applied a lesson",
+            "Para 3: The skill I struggled with and how I improved",
+            "Para 4: How this will shape my decisions going forward"
+          ]
+        },
+        {
+          "name": "Implementation Timeline",
+          "columns": [
+            "Week 1: Research and Stakeholder Interviews",
+            "Week 2: Solution Prototyping",
+            "Week 3: Testing and Feedback",
+            "Week 4: Final Presentation to School Administration"
+          ]
+        }
+      ],
+      "rubric": [
+        {
+          "criteria": "IKS Integration",
+          "developing": "Mentions a story without connecting it to the solution",
+          "competent": "Extracts a principle and applies it to the problem",
+          "proficient": "Demonstrates deep understanding of the IKS source and creates a novel application"
+        },
+        {
+          "criteria": "Solution Quality",
+          "developing": "Vague or impractical",
+          "competent": "Feasible with clear steps",
+          "proficient": "Detailed implementation plan with milestones, risks, and accountability"
+        },
+        {
+          "criteria": "Presentation & Persuasion",
+          "developing": "Reads from slides",
+          "competent": "Clear delivery with audience engagement",
+          "proficient": "Compelling narrative that would persuade a real decision-maker"
+        },
+        {
+          "criteria": "Reflective Depth",
+          "developing": "Surface summary of the course",
+          "competent": "Identifies specific learning moments",
+          "proficient": "Demonstrates genuine personal transformation with concrete evidence"
+        }
+      ],
+      "assessment": "Capstone pitch quality (30%) + implementation plan feasibility (20%) + individual reflection essay (25%) + peer evaluation accuracy (15%) + team collaboration (10%)",
+      "sessionFlow": "Period 1: Team formation, problem selection, IKS source mapping, strategy extraction, solution brainstorm, deck outline (40 min) → Period 2: Pitch rehearsal (10 min) → Team pitches to class panel (20 min) → Peer evaluation and scoring (5 min) → Final debrief and reflection essay time (5 min)"
+    },
+    "tier3": {
+      "reflection": "This is your final capstone. You've spent 11 weeks learning from IKS stories, and then learning how to teach what you learned. The ultimate test: can you create something that outlasts this course? Your capstone should not be a presentation — it should be a contribution. Design something that the next cohort of students can actually use: a resource, a tool, a simulation, a guide, or a programme.",
+      "simulation": "Legacy Capstone — Teams design a lasting contribution to the IIS programme. Options: (1) Design a complete new week (Week 13) using an IKS source not covered in the curriculum. (2) Create a digital simulation or game that teaches one of the 10 WHO life skills using an IKS story. (3) Build a 'Teacher's Companion Guide' for one phase (3 weeks) with enhanced materials, common student questions, and troubleshooting tips. (4) Design and pilot a 'Parent Engagement Programme' using IKS stories as family conversation starters. The deliverable must be ready for actual use by the next cohort.",
+      "deliverables": [
+        "Legacy project: the complete, usable deliverable (not a plan — the actual product)",
+        "Project design rationale (500 words): why this contribution matters and how you designed it",
+        "User testing report: test your product with at least 3 potential users and document their feedback",
+        "Individual mastery reflection (600 words): your journey from T1 to T3 — what changed in how you think, decide, and lead"
+      ],
+      "deliverableTemplates": [
+        {
+          "name": "Legacy Project Rationale",
+          "columns": [
+            "What gap in the programme does this fill?",
+            "Who is the target user (T1 students? teachers? parents?)",
+            "How does it connect to IKS?",
+            "How did you design it (process, not just outcome)?",
+            "How will you know if it works?"
+          ]
+        },
+        {
+          "name": "User Testing Report",
+          "columns": [
+            "Tester 1: Role, Feedback, Suggested Changes",
+            "Tester 2: Role, Feedback, Suggested Changes",
+            "Tester 3: Role, Feedback, Suggested Changes",
+            "Common Themes Across Testers",
+            "Changes Made Based on Testing"
+          ]
+        },
+        {
+          "name": "Mastery Reflection Essay Structure",
+          "columns": [
+            "Para 1: Where I started — my assumptions about 'life skills' before this programme",
+            "Para 2: The story that challenged me most and why",
+            "Para 3: The moment I went from learning to teaching — what shifted",
+            "Para 4: A decision I made differently because of this programme (specific, real)",
+            "Para 5: What I'm contributing to the next cohort and why it matters",
+            "Para 6: The one IKS principle I'll carry for life"
+          ]
+        },
+        {
+          "name": "Week 13 Design Template (if chosen)",
+          "columns": [
+            "IKS Source and Story",
+            "Story Summary (5 sentences)",
+            "Phase Alignment (Foundation/Cognitive/Ethical/Strategic)",
+            "5-Step Pedagogy: Reflection Q, Strategy, Simulation Design, Application, Deliverables",
+            "Rubric (4 criteria × 3 levels for each tier)",
+            "Teacher Notes",
+            "Resources (3 curated)"
+          ]
+        }
+      ],
+      "rubric": [
+        {
+          "criteria": "Legacy Product Quality",
+          "developing": "A plan or outline, not a usable product",
+          "competent": "A functional product that could be used with minor adjustments",
+          "proficient": "A polished, tested, ready-to-deploy product that genuinely improves the programme"
+        },
+        {
+          "criteria": "Design Thinking",
+          "developing": "Built what they wanted, not what users need",
+          "competent": "Identified user needs and designed accordingly",
+          "proficient": "Iterated based on user testing, showing genuine design thinking process"
+        },
+        {
+          "criteria": "IKS Mastery",
+          "developing": "References IKS superficially",
+          "competent": "Demonstrates understanding of IKS principles and applies them",
+          "proficient": "Creates novel applications of IKS wisdom that surprise even the teacher"
+        },
+        {
+          "criteria": "Mastery Reflection",
+          "developing": "Summary of activities completed",
+          "competent": "Identifies specific moments of growth with examples",
+          "proficient": "Demonstrates genuine transformation in thinking — can articulate how their decision-making process has changed with concrete evidence"
+        }
+      ],
+      "assessment": "Legacy product quality and usability (35%) + user testing rigour (15%) + project rationale (10%) + individual mastery reflection (25%) + presentation to next cohort (15%)",
+      "sessionFlow": "Period 1: Legacy project type selection, team formation, design sprint, and initial prototyping (40 min) → Period 2: User testing with 3+ testers (15 min) → Revision based on feedback (10 min) → Legacy presentations to class (10 min) → Individual mastery reflection writing (5 min)"
+    }
   }
 ];
 
@@ -2258,6 +3907,27 @@
 
     let selectedPhase = 'all';
     let progress = JSON.parse(localStorage.getItem('iistack-progress') || '{}');
+    let currentTier = parseInt(localStorage.getItem('iistack-tier') || '1');
+
+    function setTier(t) {
+      currentTier = t;
+      localStorage.setItem('iistack-tier', t);
+      document.querySelectorAll('.tier-btn').forEach(b => b.className = 'tier-btn');
+      document.getElementById('tierBtn' + t).className = 'tier-btn active-t' + t;
+      renderWeeks();
+    }
+
+    // Restore tier on load
+    (function() {
+      document.querySelectorAll('.tier-btn').forEach(b => b.className = 'tier-btn');
+      document.getElementById('tierBtn' + currentTier).className = 'tier-btn active-t' + currentTier;
+    })();
+
+    function getTiered(w, field) {
+      if (currentTier === 2 && w.tier2 && w.tier2[field] !== undefined) return w.tier2[field];
+      if (currentTier === 3 && w.tier3 && w.tier3[field] !== undefined) return w.tier3[field];
+      return w[field];
+    }
 
     function renderPhaseCards() {
       phaseList.innerHTML = phases.map((p, idx) => `
@@ -2354,18 +4024,20 @@
       `;
 
       // Rubric table
+      const tierRubric = getTiered(w, 'rubric');
       let rubricHtml = '';
-      if (w.rubric && w.rubric.length) {
+      if (tierRubric && tierRubric.length) {
         rubricHtml = `<section class="detail-card rubric-card"><h4>📋 Assessment Rubric</h4>
           <table class="rubric-table"><thead><tr><th>Criteria</th><th>Developing</th><th>Competent</th><th>Proficient</th></tr></thead>
-          <tbody>${w.rubric.map(r => `<tr><td><strong>${r.criteria}</strong></td><td>${r.developing}</td><td>${r.competent}</td><td>${r.proficient}</td></tr>`).join('')}</tbody></table></section>`;
+          <tbody>${tierRubric.map(r => `<tr><td><strong>${r.criteria}</strong></td><td>${r.developing}</td><td>${r.competent}</td><td>${r.proficient}</td></tr>`).join('')}</tbody></table></section>`;
       }
 
       // Templates
+      const tierTemplates = getTiered(w, 'deliverableTemplates');
       let templateHtml = '';
-      if (w.deliverableTemplates && w.deliverableTemplates.length) {
+      if (tierTemplates && tierTemplates.length) {
         templateHtml = `<section class="detail-card template-card"><h4>📎 Deliverable Templates</h4>
-          ${w.deliverableTemplates.map(t => `<div class="template-block"><strong>${t.name}:</strong><br>Columns → ${t.columns.join(' │ ')}</div>`).join('')}</section>`;
+          ${tierTemplates.map(t => `<div class="template-block"><strong>${t.name}:</strong><br>Columns → ${t.columns.join(' │ ')}</div>`).join('')}</section>`;
       }
 
       // Timing bar
@@ -2420,21 +4092,29 @@
           <div class="capstone-options">${w.capstoneOptions.map(o => `<div class="capstone-opt">${o}</div>`).join('')}</div></section>`;
       }
 
-      const flowText = w.sessionFlow || 'Begin with the story anchor and classroom framing, move into guided reflection questions, extract the strategic lesson, run the simulation activity, and close with a written or oral application task.';
+      const flowText = getTiered(w, 'sessionFlow') || 'Begin with the story anchor and classroom framing, move into guided reflection questions, extract the strategic lesson, run the simulation activity, and close with a written or oral application task.';
+
+      const tierReflection = getTiered(w, 'reflection');
+      const tierSimulation = getTiered(w, 'simulation');
+      const tierDeliverables = getTiered(w, 'deliverables');
+      const tierAssessment = getTiered(w, 'assessment');
+      const tierNames = {1: 'Foundation', 2: 'Applied', 3: 'Mastery'};
+      const tierBadgeClass = {1: 'tb1', 2: 'tb2', 3: 'tb3'};
+      const tierBadge = `<span class="tier-badge ${tierBadgeClass[currentTier]}">Tier ${currentTier}: ${tierNames[currentTier]}</span>`;
 
       modalBody.innerHTML = `
         <div class="detail-grid">
           <section class="detail-card story-card">
-            <h4>📖 Story Anchor — ${w.story}</h4>
+            <h4>📖 Story Anchor — ${w.story} ${tierBadge}</h4>
             <p>${w.storySummary}</p>
             <p style="margin-top:8px;font-size:12px;color:var(--muted);"><em>Source: ${w.storySource}</em></p>
           </section>
           ${timingHtml}
-          <section class="detail-card"><h4>🔍 Reflection Questions</h4><p>${w.reflection}</p></section>
+          <section class="detail-card"><h4>🔍 Reflection Questions</h4><p>${tierReflection}</p></section>
           <section class="detail-card"><h4>🧭 Strategy Extraction</h4><p>${w.strategy}</p></section>
-          <section class="detail-card"><h4>🎮 Simulation Design</h4><p>${w.simulation}</p></section>
+          <section class="detail-card"><h4>🎮 Simulation Design</h4><p>${tierSimulation}</p></section>
           <section class="detail-card"><h4>🌍 Real-Life Application</h4><p>${w.application}</p></section>
-          <section class="detail-card"><h4>📦 Student Deliverables</h4><ul>${w.deliverables.map(x => `<li>${x}</li>`).join('')}</ul></section>
+          <section class="detail-card"><h4>📦 Student Deliverables</h4><ul>${tierDeliverables.map(x => `<li>${x}</li>`).join('')}</ul></section>
           <section class="detail-card"><h4>🎯 Expected Outcomes</h4><ul>${w.outcomes.map(x => `<li>${x}</li>`).join('')}</ul></section>
           ${rubricHtml}
           ${templateHtml}
@@ -2445,6 +4125,7 @@
         <div class="outcome-box"><strong>Recommended session flow:</strong> ${flowText}</div>
         <div class="modal-foot">
           <div class="tiny">Phase: <strong>${phases.find(p => p.id === w.phase).name}</strong>${w.skills ? ' · Skills: ' + w.skills.join(', ') : ''}</div>
+            <div class="tiny" style="margin-top:4px;">Assessment: ${getTiered(w, 'assessment')}</div>
           <div class="btn-row">
             <button class="btn ${progress[w.week] ? '' : 'primary'}" id="modalCompleteBtn">${progress[w.week] ? 'Mark Incomplete' : 'Mark Complete'}</button>
             <button class="btn" id="closeDialogBtn">Close</button>
