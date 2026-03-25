@@ -1,0 +1,803 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Jeevan Kaushal 2.0 — Life Skills Curriculum</title>
+<meta name="description" content="Interactive Jeevan Kaushal 2.0 life skills curriculum for Classes 9-12. Story-driven IKS pedagogy: Panchatantra, Gita, Ramayana, Arthashastra. 12-week core + 24-week electives.">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700;800;900&family=Nunito:wght@300;400;500;600;700;800&family=Noto+Sans+Devanagari:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+--bg:#f7f3ec;--card:#fffdf9;--ink:#2c1810;--muted:#6b5b4d;--line:#e6d8c9;--sand:#f5e6d3;
+--found:#2d6a4f;--found-s:#e9f5ee;--cog:#1f5f8b;--cog-s:#eaf4fb;--eth:#b8860b;--eth-s:#fff6df;--strat:#a64032;--strat-s:#fdecea;
+--saffron:#d97706;--deep-saffron:#c65d0d;--terracotta:#b45309;--ochre:#d4a43a;--mahogany:#5d2e1a;--maroon:#7b2d26;--deep-brown:#3e2723;
+--indigo:#1b3a5c;--peacock:#0f766e;--cream:#fff8f0;
+--shadow:0 8px 28px rgba(60,30,10,.1);--radius:14px;
+}
+*{box-sizing:border-box;margin:0}
+body{font-family:'Nunito',sans-serif;background:var(--bg);color:var(--ink);min-height:100vh;line-height:1.6}
+body::before{content:'';position:fixed;inset:0;pointer-events:none;opacity:.05;background-image:radial-gradient(circle at 20px 20px,var(--indigo) 1.5px,transparent 1.5px),radial-gradient(circle at 60px 60px,var(--peacock) 1px,transparent 1px);background-size:100px 100px}
+.wrap{max-width:1440px;margin:0 auto;padding:20px;position:relative;z-index:1}
+
+/* HERO */
+.hero{background:linear-gradient(135deg,#0c2340,var(--indigo) 50%,#0d4f4f);color:#fff;border-radius:24px;padding:34px 32px 28px;box-shadow:var(--shadow);position:relative;overflow:hidden;border:1px solid rgba(255,255,255,.12)}
+.hero::after{content:'';position:absolute;inset:auto -60px -60px auto;width:280px;height:280px;background:radial-gradient(circle,rgba(13,79,79,.3),transparent 60%);border-radius:50%}
+.hero-inner{display:flex;align-items:center;gap:32px;position:relative;z-index:1}
+.hero-logo{width:180px;height:auto;flex-shrink:0;border-radius:18px;filter:drop-shadow(0 10px 28px rgba(0,0,0,.45))}
+.hero-text{flex:1}
+.hero h1{font-family:'Playfair Display',serif;font-size:clamp(26px,3.8vw,46px);line-height:1.1;margin-bottom:8px;letter-spacing:-.01em}
+.hero h1 .hindi{font-family:'Noto Sans Devanagari','Playfair Display',serif;color:var(--ochre)}
+.hero-desc{max-width:1000px;color:rgba(255,255,255,.9);font-size:14px;line-height:1.7}
+.hero-lineage{margin-top:10px;padding:10px 14px;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.14);border-radius:12px;color:rgba(255,255,255,.82);font-size:12px;line-height:1.6;max-width:1000px}
+.hero-lineage strong{color:#fff}
+.badge-row{display:flex;flex-wrap:wrap;gap:8px;margin-top:14px}
+.badge{padding:7px 12px;border:1px solid rgba(255,255,255,.18);border-radius:999px;background:rgba(255,255,255,.08);color:#fff;font-size:11px;font-weight:700;white-space:nowrap}
+
+/* PEDAGOGY BAR */
+.ped-bar{display:grid;grid-template-columns:repeat(5,1fr);gap:0;background:var(--card);border-radius:var(--radius);margin:16px 0;box-shadow:var(--shadow);overflow:hidden}
+.ped-step{padding:14px 12px;text-align:center;border-right:1px solid var(--line);position:relative}
+.ped-step:last-child{border-right:none}
+.ped-step::after{content:'→';position:absolute;right:-10px;top:50%;transform:translateY(-50%);font-size:16px;color:var(--muted);z-index:2}
+.ped-step:last-child::after{display:none}
+.ped-num{font-size:22px;margin-bottom:4px}
+.ped-label{font-size:11px;font-weight:800;text-transform:uppercase;letter-spacing:.8px;color:var(--muted)}
+.ped-name{font-family:'Playfair Display',serif;font-size:14px;font-weight:700}
+
+/* LAYOUT */
+.top-grid{display:grid;grid-template-columns:280px 1fr;gap:16px;margin-top:16px}
+.panel{background:var(--card);border:1px solid var(--line);border-radius:18px;box-shadow:var(--shadow)}
+.side{padding:16px;position:sticky;top:16px;height:fit-content;background:linear-gradient(180deg,#fffdf9,#fff8ef)}
+.side h3,.content h3{margin:4px 0 10px;font-size:11px;text-transform:uppercase;letter-spacing:.1em;color:var(--muted);font-weight:800}
+.content{padding:20px;background:linear-gradient(180deg,#fffdf9,#ffffff)}
+
+/* PHASE CARDS */
+.phase-list{display:grid;gap:8px}
+.phase-card{border:1px solid var(--line);border-radius:12px;padding:10px 12px;cursor:pointer;transition:.25s;background:#fff;position:relative;overflow:hidden}
+.phase-card:hover,.phase-card.active{transform:translateY(-2px);box-shadow:0 8px 20px rgba(16,42,67,.08);border-color:transparent}
+.phase-card.found.active{background:linear-gradient(135deg,var(--found-s),#fff)}
+.phase-card.cog.active{background:linear-gradient(135deg,var(--cog-s),#fff)}
+.phase-card.eth.active{background:linear-gradient(135deg,var(--eth-s),#fff)}
+.phase-card.strat.active{background:linear-gradient(135deg,var(--strat-s),#fff)}
+.phase-name{font-weight:800;font-size:13px;margin-bottom:2px;display:flex;align-items:center;gap:6px}
+.phase-meta{font-size:11px;color:var(--muted);line-height:1.5}
+
+/* TIER SELECTOR */
+.tier-row{display:flex;gap:4px;margin-top:14px;border-top:1px dashed var(--line);padding-top:12px}
+.tier-btn{flex:1;padding:8px 4px;border:1px solid var(--line);background:#fff;border-radius:8px;cursor:pointer;font-family:inherit;font-size:11px;font-weight:700;text-align:center;transition:.2s;line-height:1.3}
+.tier-btn:hover{background:var(--sand)}
+.tier-btn.at1{background:var(--found);color:#fff;border-color:var(--found)}
+.tier-btn.at2{background:var(--cog);color:#fff;border-color:var(--cog)}
+.tier-btn.at3{background:var(--eth);color:#fff;border-color:var(--eth)}
+.tier-btn.at4{background:var(--strat);color:#fff;border-color:var(--strat)}
+
+/* PROGRESS */
+.meter{height:8px;background:#efe4d6;border-radius:999px;overflow:hidden;margin:8px 0}
+.meter>span{display:block;height:100%;width:0%;background:linear-gradient(90deg,var(--saffron),var(--peacock));transition:width .3s}
+.tiny{font-size:10px;color:var(--muted)}
+
+/* WEEK CARDS */
+.week-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+.week-card{background:#fff;border:1px solid var(--line);border-radius:16px;padding:16px;box-shadow:var(--shadow);display:flex;flex-direction:column;min-height:240px;transition:.25s;cursor:pointer;position:relative;overflow:hidden}
+.week-card:hover{transform:translateY(-3px);box-shadow:0 12px 32px rgba(60,30,10,.15)}
+.week-card.found{border-top:4px solid var(--found);background:linear-gradient(180deg,#fff,var(--found-s))}
+.week-card.cog{border-top:4px solid var(--cog);background:linear-gradient(180deg,#fff,var(--cog-s))}
+.week-card.eth{border-top:4px solid var(--eth);background:linear-gradient(180deg,#fff,var(--eth-s))}
+.week-card.strat{border-top:4px solid var(--strat);background:linear-gradient(180deg,#fff,var(--strat-s))}
+.wk-num{display:inline-flex;align-items:center;justify-content:center;width:36px;height:36px;border-radius:10px;font-weight:900;color:#fff;margin-bottom:8px;font-size:14px}
+.week-card.found .wk-num{background:var(--found)}
+.week-card.cog .wk-num{background:var(--cog)}
+.week-card.eth .wk-num{background:var(--eth)}
+.week-card.strat .wk-num{background:var(--strat)}
+.wk-title{font-family:'Playfair Display',serif;font-size:16px;margin-bottom:4px;line-height:1.2}
+.wk-theme{color:var(--muted);font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.5px;margin-bottom:6px}
+.wk-story{font-size:12px;color:var(--ink);line-height:1.5;flex:1}
+.wk-story em{color:var(--muted);font-style:normal;font-weight:600}
+.wk-pills{display:flex;flex-wrap:wrap;gap:4px;margin-top:8px}
+.wk-pill{font-size:9px;padding:3px 8px;border-radius:99px;font-weight:700;background:rgba(0,0,0,.06);color:var(--muted)}
+.wk-done{position:absolute;top:10px;right:10px;font-size:18px;opacity:.3;cursor:pointer;transition:.2s}
+.wk-done.checked{opacity:1}
+
+/* MODAL */
+dialog{border:none;border-radius:20px;padding:0;max-width:900px;width:92vw;max-height:88vh;box-shadow:0 20px 60px rgba(0,0,0,.3);background:var(--bg);overflow:hidden}
+dialog::backdrop{background:rgba(0,0,0,.5);backdrop-filter:blur(4px)}
+.dlg-head{padding:20px 24px 16px;color:#fff;position:relative}
+.dlg-head.found{background:linear-gradient(135deg,var(--found),#1a5c3f)}
+.dlg-head.cog{background:linear-gradient(135deg,var(--cog),#164b6e)}
+.dlg-head.eth{background:linear-gradient(135deg,var(--eth),#8a6510)}
+.dlg-head.strat{background:linear-gradient(135deg,var(--strat),#7a2e24)}
+.dlg-head h2{font-family:'Playfair Display',serif;font-size:22px;margin-bottom:4px}
+.dlg-head .dlg-sub{font-size:12px;opacity:.85}
+.dlg-close{position:absolute;top:12px;right:16px;background:rgba(255,255,255,.2);border:none;color:#fff;width:32px;height:32px;border-radius:50%;cursor:pointer;font-size:18px;display:flex;align-items:center;justify-content:center}
+.dlg-body{padding:20px 24px 24px;overflow-y:auto;max-height:calc(88vh - 120px)}
+.tier-badge{display:inline-block;padding:3px 10px;border-radius:99px;font-size:10px;font-weight:800;color:#fff;margin-left:8px}
+.tb1{background:var(--found)}.tb2{background:var(--cog)}.tb3{background:var(--eth)}.tb4{background:var(--strat)}
+
+/* 5-STEP SECTIONS */
+.step-section{margin-bottom:16px;border-radius:12px;overflow:hidden;border:1px solid var(--line)}
+.step-head{display:flex;align-items:center;gap:10px;padding:12px 16px;cursor:pointer;background:var(--card);transition:.2s;font-weight:700;font-size:13px}
+.step-head:hover{background:var(--sand)}
+.step-head .s-icon{font-size:18px}
+.step-head .s-num{font-size:10px;background:var(--deep-brown);color:#fff;padding:2px 8px;border-radius:99px}
+.step-body{display:none;padding:16px;background:#fff;border-top:1px solid var(--line);font-size:13px;line-height:1.7;color:var(--ink)}
+.step-body.open{display:block}
+
+/* DETAIL CARDS */
+.detail-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:12px}
+.detail-card{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:14px}
+.detail-card h4{font-size:12px;font-weight:800;text-transform:uppercase;letter-spacing:.5px;margin-bottom:8px;display:flex;align-items:center;gap:6px}
+.detail-card p,.detail-card li{font-size:12px;color:var(--muted);line-height:1.6}
+.detail-card ul{padding-left:16px}
+
+/* SESSION FLOW */
+.flow-bar{display:flex;gap:0;border-radius:8px;overflow:hidden;margin:10px 0;font-size:10px;font-weight:700;min-height:32px}
+.flow-seg{padding:6px 8px;color:#fff;display:flex;align-items:center;justify-content:center;text-align:center;line-height:1.2}
+
+/* RUBRIC TABLE */
+.rub-table{width:100%;border-collapse:collapse;font-size:11px;margin:8px 0}
+.rub-table th{background:var(--deep-brown);color:var(--cream);padding:8px 10px;text-align:left;font-size:10px;text-transform:uppercase;letter-spacing:.5px}
+.rub-table td{padding:8px 10px;border-bottom:1px solid var(--line);color:var(--muted);line-height:1.4}
+.rub-table tr:hover td{background:var(--sand)}
+
+/* ELECTIVES */
+.elect-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:14px;margin:16px 0}
+.elect-card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:16px;box-shadow:var(--shadow)}
+.elect-card h4{font-family:'Playfair Display',serif;font-size:15px;margin-bottom:6px}
+.elect-card .el-pills{display:flex;flex-wrap:wrap;gap:4px;margin-top:8px}
+.elect-card .el-pill{font-size:9px;padding:3px 8px;border-radius:99px;font-weight:700}
+
+/* LEGEND */
+.legend{display:flex;gap:16px;flex-wrap:wrap;margin:10px 0;font-size:11px;font-weight:700;color:var(--muted)}
+.legend .dot{display:inline-block;width:10px;height:10px;border-radius:50%;margin-right:4px;vertical-align:middle}
+
+/* FOOTER */
+.footer{background:var(--deep-brown);color:rgba(255,248,240,.6);padding:24px;margin-top:32px;text-align:center;font-size:11px;border-radius:0 0 20px 20px}
+.footer a{color:var(--ochre);text-decoration:none}
+
+/* GUIDE CARD */
+.guide-card{background:linear-gradient(135deg,#f0f7f4,#edf4f8);border:1px solid #c8ddd3;border-radius:14px;padding:18px 20px;margin-bottom:16px}
+.guide-card h3{font-size:13px;font-weight:800;text-transform:uppercase;letter-spacing:.06em;color:#0d4f4f;margin:0 0 12px}
+.guide-steps{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:12px}
+.guide-step{background:rgba(255,255,255,.7);border-radius:8px;padding:10px 12px;border:1px solid rgba(0,0,0,.04)}
+.guide-step-num{display:inline-flex;align-items:center;justify-content:center;width:20px;height:20px;border-radius:50%;background:#0d4f4f;color:#fff;font-size:10px;font-weight:800;margin-bottom:4px}
+.guide-step-title{display:block;font-size:12px;font-weight:700;margin-bottom:2px}
+.guide-step-desc{font-size:11px;color:var(--muted);line-height:1.4}
+.guide-note{font-size:11px;color:var(--muted);line-height:1.5;padding-top:8px;border-top:1px solid rgba(0,0,0,.06)}
+.guide-note strong{color:var(--ink)}
+
+/* MAIN TABS */
+.main-tabs{display:flex;gap:0;background:var(--card);border-radius:var(--radius);padding:4px;box-shadow:var(--shadow);margin-bottom:12px}
+.main-tab{flex:1;padding:10px 8px;border:none;background:transparent;border-radius:10px;cursor:pointer;font-family:inherit;font-size:12px;font-weight:700;color:var(--muted);transition:.2s;display:flex;flex-direction:column;align-items:center;gap:3px}
+.main-tab .ti{font-size:18px}
+.main-tab:hover{background:var(--sand)}
+.main-tab.active{color:#fff;box-shadow:0 4px 12px rgba(0,0,0,.15)}
+.main-tab[data-t="core"].active{background:var(--indigo)}
+.main-tab[data-t="elect"].active{background:var(--peacock)}
+.main-tab[data-t="arch"].active{background:var(--saffron)}
+.main-tab[data-t="res"].active{background:var(--maroon)}
+.tab-pan{display:none}.tab-pan.active{display:block;animation:fadeIn .3s ease}
+@keyframes fadeIn{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
+
+/* RESPONSIVE */
+@media(max-width:900px){
+.top-grid{grid-template-columns:1fr}.side{position:static}
+.week-grid{grid-template-columns:repeat(2,1fr)}.detail-grid{grid-template-columns:1fr}
+.ped-bar{grid-template-columns:repeat(3,1fr)}.guide-steps{grid-template-columns:1fr}
+.elect-grid{grid-template-columns:1fr}
+}
+@media(max-width:600px){
+.week-grid{grid-template-columns:1fr}.hero h1{font-size:24px}
+.hero-inner{flex-direction:column;text-align:center}.hero-logo{width:120px}
+.ped-bar{grid-template-columns:1fr}.flow-bar{flex-direction:column}
+}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<!-- HERO -->
+<section class="hero">
+<div class="hero-inner">
+<img class="hero-logo" src="data:image/png;base64,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" alt="Jeevan Kaushal Logo — Where Wisdom Guides Intelligence">
+<div class="hero-text">
+<h1>Jeevan Kaushal 2.0 <span class="hindi">— जीवन कौशल</span></h1>
+<p class="hero-desc">A complete life skills curriculum for Classes 9–12 built on the <strong>Indian Intelligence Stack Architecture</strong>. Every module follows IKS-first, story-driven pedagogy: <strong>Story → Reflection → Strategy → Simulation → Application</strong>. Same stories deepen across 4 tiers (T1–T4) through spiral learning.</p>
+<div class="hero-lineage">
+<strong>📋 Framework Lineage:</strong> UGC <strong>Jeevan Kaushal 2.0</strong> (Aug 2023) × <strong>Indian Intelligence Stack Architecture</strong> × <strong>NEP 2020</strong>. 4 Pillars restructured into 4 Phases. 33 modules compressed into 12-week core + 24-week electives. IKS stories as primary pedagogy across all pillars.
+</div>
+<div class="badge-row">
+<span class="badge">🪔 12-Week Core</span>
+<span class="badge">📚 24 Elective Weeks</span>
+<span class="badge">🔄 4-Tier Spiral (Class 9→12)</span>
+<span class="badge">📜 5-Step Pedagogy</span>
+<span class="badge">🕒 40-Min Sessions</span>
+<span class="badge">🎓 8 Credits / 120 Hours</span>
+<span class="badge">🇮🇳 NEP 2020 + IKS Aligned</span>
+</div>
+</div>
+</div>
+</section>
+
+<!-- 5-STEP PEDAGOGY BAR -->
+<div class="ped-bar">
+<div class="ped-step"><div class="ped-num">📖</div><div class="ped-label">Step 1</div><div class="ped-name">Story</div></div>
+<div class="ped-step"><div class="ped-num">🔍</div><div class="ped-label">Step 2</div><div class="ped-name">Reflection</div></div>
+<div class="ped-step"><div class="ped-num">🧭</div><div class="ped-label">Step 3</div><div class="ped-name">Strategy</div></div>
+<div class="ped-step"><div class="ped-num">🎮</div><div class="ped-label">Step 4</div><div class="ped-name">Simulation</div></div>
+<div class="ped-step"><div class="ped-num">🚀</div><div class="ped-label">Step 5</div><div class="ped-name">Application</div></div>
+</div>
+
+<!-- MAIN TABS -->
+<div class="main-tabs">
+<button class="main-tab active" data-t="core" onclick="showTab('core')"><span class="ti">🏛️</span>12-Week Core</button>
+<button class="main-tab" data-t="elect" onclick="showTab('elect')"><span class="ti">📦</span>24 Electives</button>
+<button class="main-tab" data-t="arch" onclick="showTab('arch')"><span class="ti">🧬</span>Architecture</button>
+<button class="main-tab" data-t="res" onclick="showTab('res')"><span class="ti">📚</span>Resources</button>
+</div>
+
+<!-- TAB: 12-WEEK CORE -->
+<div class="tab-pan active" id="pan-core">
+<div class="top-grid">
+<div class="panel side">
+<h3>Select Class Tier</h3>
+<div class="tier-row" style="margin-top:0;border-top:none;padding-top:0">
+<button class="tier-btn at1" id="tb1" onclick="setTier(1)">T1<br>Class 9</button>
+<button class="tier-btn" id="tb2" onclick="setTier(2)">T2<br>Class 10</button>
+<button class="tier-btn" id="tb3" onclick="setTier(3)">T3<br>Class 11</button>
+<button class="tier-btn" id="tb4" onclick="setTier(4)">T4<br>Class 12</button>
+</div>
+<h3 style="margin-top:14px">4 Intelligence Phases</h3>
+<div class="phase-list" id="phaseList"></div>
+<div style="margin-top:12px">
+<h3>Progress</h3>
+<div class="meter"><span id="progBar"></span></div>
+<div class="tiny"><span id="progText">0 / 12 weeks complete</span></div>
+</div>
+<div class="legend" style="margin-top:14px">
+<span><i class="dot" style="background:var(--found)"></i> Foundation</span>
+<span><i class="dot" style="background:var(--cog)"></i> Cognitive</span>
+<span><i class="dot" style="background:var(--eth)"></i> Ethical</span>
+<span><i class="dot" style="background:var(--strat)"></i> Strategic</span>
+</div>
+</div>
+<div class="panel content">
+<!-- GUIDE CARD -->
+<div class="guide-card">
+<h3>🪔 How to Use This Curriculum</h3>
+<div class="guide-steps">
+<div class="guide-step"><div class="guide-step-num">1</div><span class="guide-step-title">Select Tier</span><span class="guide-step-desc">Choose <strong>T1</strong> (Class 9) through <strong>T4</strong> (Class 12). Same 12 stories deepen with each tier.</span></div>
+<div class="guide-step"><div class="guide-step-num">2</div><span class="guide-step-title">Follow Phases</span><span class="guide-step-desc">Progress through 4 phases: Foundation → Cognitive → Ethical → Strategic. Each has 3 weeks.</span></div>
+<div class="guide-step"><div class="guide-step-num">3</div><span class="guide-step-title">5-Step Each Week</span><span class="guide-step-desc">Every module: <strong>Story → Reflection → Strategy → Simulation → Application</strong>. 40-min sessions.</span></div>
+</div>
+<div class="guide-note"><strong>Spiral Learning:</strong> The same Panchatantra story in Week 1 is explored as observation (T1), analysis (T2), teaching design (T3), and legacy creation (T4). Students build mastery over 4 years.</div>
+</div>
+<h3>12-Week Core Modules</h3>
+<div class="week-grid" id="weekGrid"></div>
+</div>
+</div>
+</div>
+
+<!-- TAB: ELECTIVES -->
+<div class="tab-pan" id="pan-elect">
+<h2 style="font-family:'Playfair Display',serif;font-size:22px;margin-bottom:4px">📦 24-Week Extended Electives</h2>
+<p style="font-size:13px;color:var(--muted);margin-bottom:16px">After completing the 12-week core, students choose electives to deepen specific pillars. Each elective follows the same 5-step IKS pedagogy. 6 electives per phase × 4 phases = 24 weeks.</p>
+<div id="electGrid" class="elect-grid"></div>
+</div>
+
+<!-- TAB: ARCHITECTURE -->
+<div class="tab-pan" id="pan-arch">
+<h2 style="font-family:'Playfair Display',serif;font-size:22px;margin-bottom:4px">🧬 Curriculum Architecture</h2>
+<p style="font-size:13px;color:var(--muted);margin-bottom:16px">How UGC Jeevan Kaushal's 4 Pillars map to IISA's 4 Intelligence Phases with IKS-first pedagogy.</p>
+<div id="archContent"></div>
+</div>
+
+<!-- TAB: RESOURCES -->
+<div class="tab-pan" id="pan-res">
+<h2 style="font-family:'Playfair Display',serif;font-size:22px;margin-bottom:4px">📚 Resources & References</h2>
+<p style="font-size:13px;color:var(--muted);margin-bottom:16px">Curated IKS sources, NPTEL courses, books, and project ideas for each phase.</p>
+<div id="resContent"></div>
+</div>
+
+</div><!-- /wrap -->
+
+<!-- MODAL -->
+<dialog id="dlg">
+<div class="dlg-head" id="dlgHead">
+<button class="dlg-close" onclick="document.getElementById('dlg').close()">✕</button>
+<h2 id="dlgTitle"></h2>
+<div class="dlg-sub" id="dlgSub"></div>
+</div>
+<div class="dlg-body" id="dlgBody"></div>
+</dialog>
+
+<footer class="footer">
+<div style="font-family:'Playfair Display',serif;font-size:15px;color:var(--ochre);margin-bottom:6px">जीवन कौशल — Jeevan Kaushal 2.0</div>
+<div>Based on: UGC <a href="https://www.ugc.gov.in">Jeevan Kaushal 2.0</a> (Aug 2023) × Indian Intelligence Stack Architecture × NEP 2020</div>
+<div style="margin-top:3px">4 Pillars → 4 Phases | 33 Modules → 12 Core + 24 Electives | IKS-First Pedagogy | 4-Tier Spiral Learning</div>
+<div style="margin-top:12px;padding-top:12px;border-top:1px solid rgba(255,248,240,.15);font-family:'Playfair Display',serif;font-size:14px;color:#FFFFFF;font-weight:800;letter-spacing:1.5px;">Architect U'r Career &nbsp;|&nbsp; Krishna Mohan Parsha</div>
+</footer>
+
+<script>
+// ═══ DATA ═══
+const phases=[
+{id:"found",name:"🌿 Phase 1 — Foundation",weeks:"Weeks 1–3",jkPillar:"Communication Skills",focus:"Listening, observation, empathy, basic expression",summary:"Story-based learning through Panchatantra, Jataka, and Thirukkural traditions. Maps to JK's Communication Skills pillar."},
+{id:"cog",name:"🦚 Phase 2 — Cognitive Intelligence",weeks:"Weeks 4–6",jkPillar:"Professional Skills",focus:"Logic, career readiness, creativity, teamwork",summary:"Applied reasoning using Akbar-Birbal, Tenali Rama, and Vidura Niti. Maps to JK's Professional Skills pillar."},
+{id:"eth",name:"🪔 Phase 3 — Ethical Intelligence",weeks:"Weeks 7–9",jkPillar:"Universal Human Values",focus:"Dharma, truth, compassion, non-violence, peace",summary:"Value-centered decision training using Gita, Ramayana, and Mahabharata. Maps to JK's Universal Human Values pillar."},
+{id:"strat",name:"👑 Phase 4 — Strategic Intelligence",weeks:"Weeks 10–12",jkPillar:"Leadership & Management",focus:"Leadership, systems thinking, entrepreneurship, governance",summary:"Strategic architecture using Arthashastra and capstone integration. Maps to JK's Leadership & Management pillar."}
+];
+
+const weeks=[
+// PHASE 1: FOUNDATION (Communication Skills)
+{week:1,phase:"found",title:"The Art of Listening",story:"Panchatantra: The Hasty Tortoise",jkModules:"Listening, Empathy",theme:"Observation & Active Listening",
+skills:["Active Listening","Empathy","Cause-Effect Thinking"],
+storySource:"Panchatantra, Book 1 — Mitra-Bheda",
+storySummary:"A tortoise who refuses to listen to wise counsel falls from the sky. The hare and crane tried to warn him, but his eagerness overrode their advice. The lesson: listening is the first and most critical life skill.",
+tiers:{
+t1:{reflection:"Why did the tortoise fail? When have you not listened and faced consequences?",simulation:"Chinese Whisper Challenge + 'Escape the Problem' team exercise. Teams solve a scenario only by listening to clues.",deliverables:["Reflection note: listening vs hearing","Team listening scorecard"],assessment:"Listening accuracy 30% + Reflection depth 40% + Team participation 30%"},
+t2:{reflection:"Analyse the power dynamics in the story. Who had information advantage? How does selective listening create bias in professional settings?",simulation:"Mock Interview Listening Lab — One student describes a complex problem while the other must summarise accurately without notes, then swap.",deliverables:["Listening bias analysis","Interview listening scorecard","Peer feedback form"],assessment:"Analysis depth 30% + Simulation performance 35% + Peer feedback quality 35%"},
+t3:{reflection:"Design a listening taxonomy: categorise 4+ types of listening failures with IKS and modern examples for each.",simulation:"Create a 2-session listening skills workshop for T1 students using the Panchatantra story as anchor.",deliverables:["Listening failure taxonomy","Workshop design document","Teaching reflection"],assessment:"Taxonomy quality 25% + Workshop design 30% + Live teaching 25% + Reflection 20%"},
+t4:{reflection:"Critique the Panchatantra's pedagogical approach. How effective is animal fable as a teaching tool for Gen Z?",simulation:"Design a digital listening assessment tool (rubric + scenarios + scoring) that a school can actually deploy.",deliverables:["Pedagogical critique essay","Assessment tool prototype","Implementation plan"],assessment:"Critique depth 25% + Tool quality 30% + Usability 25% + Legacy value 20%"}
+},
+sessionFlow:[{label:"Story",min:8,color:"var(--found)"},{label:"Reflection",min:7,color:"var(--cog)"},{label:"Strategy",min:5,color:"var(--eth)"},{label:"Simulation",min:15,color:"var(--strat)"},{label:"Debrief",min:5,color:"var(--deep-brown)"}],
+teacherPrep:"Read the Panchatantra story beforehand; prepare 3–4 scenario cards with different difficulty levels. For T2+, prepare interview simulation briefs.",
+rubric:[{criteria:"Listening Accuracy",dev:"Misses key points; distracted",comp:"Captures main ideas; basic paraphrasing",prof:"Full comprehension; empathetic paraphrasing; builds on others"},{criteria:"Reflection Depth",dev:"Surface-level retelling",comp:"Connects story to personal experience",prof:"Extracts universal principle; applies to multiple contexts"},{criteria:"Simulation Engagement",dev:"Passive participant",comp:"Active contributor within team",prof:"Leads team; resolves conflicts through listening"}]
+},
+{week:2,phase:"found",title:"Power of Speech",story:"Thirukkural: The Weight of Words",jkModules:"Speaking, Vocabulary, Fluency",theme:"Effective Verbal Communication",
+skills:["Public Speaking","Vocabulary","Persuasion"],
+storySource:"Thirukkural — Chapters on Speech (Chs. 20, 65, 70)",
+storySummary:"Thiruvalluvar teaches: 'சொல்லுக சொல்லைப் பிறிதோர்சொல்' — speak words that have no equal. A single well-chosen word can build empires; a careless one can destroy relationships. Speech is the most visible form of intelligence.",
+tiers:{
+t1:{reflection:"When has a single word changed a situation for you? Why does Thiruvalluvar say 'the wound caused by fire will heal, but a wound caused by the tongue will not'?",simulation:"2-Minute Extempore Challenge + Tongue Twister Tournament. Each student speaks on a random topic for 2 minutes without fillers.",deliverables:["Vocabulary journal (10 new words this week)","Self-rating: filler word count"],assessment:"Fluency 35% + Vocabulary usage 30% + Reflection 35%"},
+t2:{reflection:"Analyse how vocabulary shapes perception. Compare formal vs informal registers using Thirukkural couplets.",simulation:"Persuasive Speech Lab — Convince the class to adopt your position on a school policy in 3 minutes.",deliverables:["Persuasive speech script","Register analysis worksheet","Peer evaluation form"],assessment:"Persuasion effectiveness 35% + Register analysis 30% + Peer feedback 35%"},
+t3:{reflection:"Design a speech evaluation framework using Thirukkural principles.",simulation:"Create and run a 'Communication Masterclass' for T1 students.",deliverables:["Evaluation framework","Masterclass lesson plan","Teaching reflection"],assessment:"Framework quality 30% + Teaching execution 35% + Reflection 35%"},
+t4:{reflection:"Thiruvalluvar wrote in Tamil couplets 2000 years ago yet remains universal. What makes communication timeless?",simulation:"Design a cross-cultural communication workshop bridging 2 Indian languages.",deliverables:["Timelessness analysis essay","Workshop prototype","Cultural bridge toolkit"],assessment:"Analysis depth 30% + Workshop design 35% + Legacy contribution 35%"}
+},
+sessionFlow:[{label:"Story",min:7,color:"var(--found)"},{label:"Reflect",min:5,color:"var(--cog)"},{label:"Strategy",min:6,color:"var(--eth)"},{label:"Simulation",min:16,color:"var(--strat)"},{label:"Debrief",min:6,color:"var(--deep-brown)"}],
+teacherPrep:"Select 5–6 Thirukkural couplets on speech; prepare random topic cards for extempore. For T2+, prepare policy debate topics.",
+rubric:[{criteria:"Fluency & Clarity",dev:"Frequent fillers; unclear",comp:"Mostly fluent; clear structure",prof:"Commanding; zero fillers; audience engaged"},{criteria:"Vocabulary Precision",dev:"Basic words; repetition",comp:"Varied vocabulary; appropriate register",prof:"Powerful word choice; context-perfect"},{criteria:"IKS Connection",dev:"No reference to Thirukkural",comp:"Quotes relevant couplet",prof:"Integrates Thirukkural philosophy into argument"}]
+},
+{week:3,phase:"found",title:"Reading, Writing & Digital Wisdom",story:"Vedic Tradition: Svādhyāya & Kabir's Dohas",jkModules:"Reading, Writing, Digital Literacy, Nonverbal Communication",theme:"Comprehension, Expression & Digital Ethics",
+skills:["Critical Reading","Academic Writing","Digital Literacy","Nonverbal Awareness"],
+storySource:"Taittiriya Upanishad ('स्वाध्यायान्मा प्रमदः') + Kabir's Dohas on truth in speech",
+storySummary:"The Vedic tradition commands: 'Never neglect self-study.' Kabir adds: 'ऐसी वाणी बोलिए मन का आपा खोय' — speak and write words that cool the mind. In the digital age, svādhyāya includes discerning truth from misinformation, and vāṇī includes what we post online.",
+tiers:{
+t1:{reflection:"What does 'self-study' mean in the age of Instagram? When did you last verify something before sharing it online?",simulation:"Fake News Detection Lab + Write a 'Letter to Your Future Self' (sealed for 1 year). Digital Footprint Audit exercise.",deliverables:["Fake news detection worksheet","Letter to future self","Digital footprint report"],assessment:"Detection accuracy 30% + Writing quality 35% + Reflection 35%"},
+t2:{reflection:"Compare Vedic svādhyāya with modern 'information diet' concepts. How does Kabir's doha about speech apply to social media posts?",simulation:"Blog Writing Workshop on a social issue + Nonverbal Communication lab (silent movie exercise).",deliverables:["Blog post (500 words)","Nonverbal analysis report","IT Act awareness quiz"],assessment:"Blog quality 35% + Nonverbal analysis 30% + Digital ethics understanding 35%"},
+t3:{reflection:"Design a 'Digital Dharma' framework: what ethical principles should govern online behaviour?",simulation:"Create a digital literacy workshop for T1 students anchored in Vedic/Kabir wisdom.",deliverables:["Digital Dharma framework","Workshop design","Teaching reflection"],assessment:"Framework originality 30% + Workshop execution 35% + Teaching quality 35%"},
+t4:{reflection:"Svādhyāya was oral tradition; Kabir was illiterate yet India's greatest poet. How does medium shape message?",simulation:"Design a school-wide 'Digital Svādhyāya' programme with assessment rubrics.",deliverables:["Medium-message analysis essay","Programme blueprint","Implementation plan"],assessment:"Analysis depth 25% + Programme design 35% + Legacy value 40%"}
+},
+sessionFlow:[{label:"Story",min:7,color:"var(--found)"},{label:"Reflect",min:5,color:"var(--cog)"},{label:"Strategy",min:8,color:"var(--eth)"},{label:"Simulation",min:15,color:"var(--strat)"},{label:"Apply",min:5,color:"var(--deep-brown)"}],
+teacherPrep:"Prepare Kabir dohas with translations; set up fake vs real news examples; prepare 'Letter to Future Self' envelopes.",
+rubric:[{criteria:"Critical Reading",dev:"Accepts information at face value",comp:"Identifies bias; checks sources",prof:"Systematic verification; teaches others"},{criteria:"Writing Quality",dev:"Grammatical errors; no structure",comp:"Clear structure; minimal errors",prof:"Compelling; publishable quality"},{criteria:"Digital Ethics",dev:"Unaware of risks",comp:"Follows safe practices",prof:"Advocates digital dharma; mentors peers"}]
+},
+// PHASE 2: COGNITIVE (Professional Skills)
+{week:4,phase:"cog",title:"Facing the Interview",story:"Vidura Niti: Speaking Truth to Power",jkModules:"Interview Skills, Résumé, Group Discussion",theme:"Career Readiness & Professional Communication",
+skills:["Interview Confidence","Résumé Craft","Group Discussion","STAR Technique"],
+storySource:"Mahabharata — Vidura's counsel to Dhritarashtra (Udyoga Parva)",
+storySummary:"Vidura, the wisest counsellor, spoke truth to a king who didn't want to hear it. He structured his arguments with evidence, showed courage without arrogance, and persisted even when ignored. The ultimate professional communicator — yet Dhritarashtra still chose war. When does truth fail?",
+tiers:{
+t1:{reflection:"Why did Dhritarashtra ignore Vidura? When is it hardest to speak truth in a professional setting?",simulation:"Mock Interview (video recorded) + Résumé Writing Workshop using SWOT self-analysis.",deliverables:["First résumé draft","Mock interview video","SWOT self-analysis"],assessment:"Résumé quality 30% + Interview performance 35% + SWOT depth 35%"},
+t2:{reflection:"Analyse Vidura's communication strategy. What makes an argument land — and what makes it fail — in professional contexts?",simulation:"Panel Interview Simulation + Fishbowl Group Discussion: 'AI in Education — Opportunity or Threat?'",deliverables:["Communication strategy analysis","GD self-evaluation","Interview error log"],assessment:"Analysis depth 30% + GD performance 35% + Interview improvement 35%"},
+t3:{reflection:"Design an interview assessment rubric based on Vidura Niti principles.",simulation:"Create and run a career readiness workshop for T1 students.",deliverables:["Interview rubric based on Vidura Niti","Workshop materials","Teaching reflection"],assessment:"Rubric quality 30% + Workshop execution 35% + Peer feedback 35%"},
+t4:{reflection:"Vidura failed. Does professional communication have limits? When should you stop trying to convince?",simulation:"Design a school-wide 'Career Launchpad' programme with mock interviews, résumé clinics, and GD practice.",deliverables:["Failure analysis essay","Programme blueprint","Pilot results report"],assessment:"Analysis 25% + Programme design 35% + Implementation 40%"}
+},
+sessionFlow:[{label:"Story",min:8,color:"var(--found)"},{label:"Reflect",min:6,color:"var(--cog)"},{label:"Strategy",min:5,color:"var(--eth)"},{label:"Simulation",min:16,color:"var(--strat)"},{label:"Debrief",min:5,color:"var(--deep-brown)"}],
+teacherPrep:"Read Vidura Niti summary; prepare 3 mock interview scenarios; print résumé templates.",
+rubric:[{criteria:"Professional Presence",dev:"Hesitant; poor eye contact",comp:"Confident; appropriate formality",prof:"Commanding; handles pressure gracefully"},{criteria:"Argument Structure",dev:"Rambling; no evidence",comp:"Clear structure; some evidence",prof:"STAR technique mastery; persuasive evidence"},{criteria:"Self-Awareness",dev:"Cannot identify weaknesses",comp:"Honest SWOT; some blind spots",prof:"Deep self-knowledge; actionable growth plan"}]
+},
+{week:5,phase:"cog",title:"Logic & Creative Problem-Solving",story:"Akbar-Birbal & Tenali Rama",jkModules:"Cognitive Skills, Brainstorming, Presentation",theme:"Critical Thinking, Creativity & Innovation",
+skills:["Logical Reasoning","Lateral Thinking","Brainstorming","Presentation"],
+storySource:"Akbar-Birbal tales (oral tradition) + Tenali Rama and the Thieves (Vijayanagara folklore)",
+storySummary:"Birbal solved impossible problems through logic; Tenali Rama solved them through absurdity. When Akbar asked 'How many crows in Delhi?', Birbal gave an exact number — and a brilliant justification for any count. Tenali tricked thieves by moving water between wells. Both teach: intelligence isn't knowledge, it's reframing.",
+tiers:{
+t1:{reflection:"Was Birbal's answer honest? Is creative problem-solving the same as cheating?",simulation:"Mock Courtroom: prosecution vs defence of Birbal's honesty + 'Unusual Solutions Challenge' for 3 school problems.",deliverables:["Courtroom argument transcript","3 creative solutions with rationale"],assessment:"Logical reasoning 35% + Creativity 35% + Reflection 30%"},
+t2:{reflection:"Map Birbal's logic vs Tenali's creativity. When should you use each approach?",simulation:"PechaKucha Presentation (20×20 format) on 'My Biggest Problem, Solved Creatively' + Six Thinking Hats exercise.",deliverables:["Thinking style analysis","PechaKucha deck","De Bono Hats reflection"],assessment:"Analysis 30% + Presentation quality 35% + Creative depth 35%"},
+t3:{reflection:"Create a typology of creative thinking: 4+ types with IKS and modern examples.",simulation:"Design a 'Problem-Solving Olympics' for your school — rules, scoring, categories.",deliverables:["Creativity typology diagram","Olympics design document","Pilot report"],assessment:"Typology 25% + Design quality 35% + Facilitation 40%"},
+t4:{reflection:"If everyone thinks laterally, does creativity become a commodity?",simulation:"Design an innovation lab programme that a school can run permanently.",deliverables:["Innovation philosophy essay","Lab programme blueprint","Sustainability plan"],assessment:"Philosophy depth 25% + Programme quality 35% + Legacy value 40%"}
+},
+sessionFlow:[{label:"Story",min:8,color:"var(--found)"},{label:"Reflect",min:6,color:"var(--cog)"},{label:"Strategy",min:5,color:"var(--eth)"},{label:"Simulation",min:16,color:"var(--strat)"},{label:"Debrief",min:5,color:"var(--deep-brown)"}],
+teacherPrep:"Prepare 3 Akbar-Birbal and 2 Tenali Rama stories; create problem cards for Unusual Solutions Challenge.",
+rubric:[{criteria:"Logical Reasoning",dev:"Assertion without logic",comp:"Clear reasoning chain",prof:"Multi-layered argument with counterpoints"},{criteria:"Creative Thinking",dev:"Conventional solutions only",comp:"1–2 original ideas",prof:"Paradigm-shifting reframe"},{criteria:"Presentation Quality",dev:"Reads from notes",comp:"Structured delivery; some engagement",prof:"Compelling; audience responds; visual aids"}]
+},
+{week:6,phase:"cog",title:"Trust, Teamwork & Communication",story:"Ramayana: Ram-Hanuman Bond & Panchayat Tradition",jkModules:"Trust, Collaboration, Team Listening, Social Etiquette, Internal Communication",theme:"Building Professional Relationships",
+skills:["Trust Building","Collaboration","Team Communication","Etiquette","MOM Drafting"],
+storySource:"Ramayana — Sundara Kanda (Hanuman's mission) + Indian Panchayat governance tradition",
+storySummary:"Ram entrusted Hanuman with the most critical mission — finding Sita. Hanuman succeeded because trust was mutual: Ram believed in Hanuman's capability, and Hanuman believed in Ram's cause. Meanwhile, India's Panchayat system shows how structured community discussion — with roles, rules, and minutes — creates collective wisdom.",
+tiers:{
+t1:{reflection:"What makes someone trustworthy? Is trust given or earned?",simulation:"Trust Fall Exercise + Paper Bridge Challenge (team collaboration) + Simulated Panchayat: discuss a school issue with assigned roles.",deliverables:["Trust principles list","Team reflection note","Panchayat MOM draft"],assessment:"Team participation 35% + MOM quality 30% + Reflection 35%"},
+t2:{reflection:"Analyse why Hanuman succeeded where others might have failed. What is the 'trust formula'?",simulation:"Slack/Teams Simulation — run a 20-minute project thread with facilitator, note-taker, and devil's advocate roles.",deliverables:["Trust formula analysis","Professional MOM","Communication audit"],assessment:"Analysis 30% + Simulation performance 35% + Professional writing 35%"},
+t3:{reflection:"Design a 'Trust Assessment Tool' for teams based on the Ram-Hanuman model.",simulation:"Create and facilitate a team-building workshop for T1 students.",deliverables:["Trust Assessment Tool","Workshop materials","Facilitation reflection"],assessment:"Tool quality 30% + Workshop execution 35% + Peer feedback 35%"},
+t4:{reflection:"Trust enabled Ram's empire; distrust destroyed Ravana's. Can organisations measure trust?",simulation:"Design a school-wide 'Professional Communication Protocol' with templates, etiquette guide, and assessment.",deliverables:["Trust-distrust comparative essay","Protocol blueprint","Implementation plan"],assessment:"Analysis 25% + Protocol design 35% + Legacy value 40%"}
+},
+sessionFlow:[{label:"Story",min:8,color:"var(--found)"},{label:"Reflect",min:5,color:"var(--cog)"},{label:"Strategy",min:7,color:"var(--eth)"},{label:"Simulation",min:15,color:"var(--strat)"},{label:"Apply",min:5,color:"var(--deep-brown)"}],
+teacherPrep:"Prepare Sundara Kanda summary; print Panchayat role cards (Sarpanch, Secretary, Members); set up Slack/Teams simulation for T2+.",
+rubric:[{criteria:"Trust & Collaboration",dev:"Works alone; avoids group",comp:"Active participant; respects others",prof:"Builds team trust; resolves conflicts"},{criteria:"Professional Communication",dev:"Informal; no structure",comp:"Appropriate formality; basic MOM",prof:"Polished professional writing; complete MOM"},{criteria:"Cultural Etiquette",dev:"Unaware of norms",comp:"Follows basic etiquette",prof:"Navigates multi-cultural settings with ease"}]
+},
+// PHASE 3: ETHICAL (Universal Human Values)
+{week:7,phase:"eth",title:"Decision Under Pressure",story:"Bhagavad Gita: Arjuna's Dilemma",jkModules:"Love & Compassion, Truth, Ethics & Integrity",theme:"Values-Based Decision Making",
+skills:["Ethical Reasoning","Decision Frameworks","Emotional Regulation","Compassion"],
+storySource:"Bhagavad Gita, Chapters 1–2 (Arjuna Vishada Yoga & Sankhya Yoga)",
+storySummary:"On the battlefield of Kurukshetra, Arjuna faces the ultimate dilemma: fight his own family for justice, or walk away from his duty. His hands tremble, his bow falls. Krishna doesn't tell him what to do — he teaches him HOW to decide. The Gita is not an answer; it's a decision framework.",
+tiers:{
+t1:{reflection:"If your best friend cheated in an exam and you saw it, what would you do? Why did Arjuna hesitate?",simulation:"Ethical Dilemma Cards — 4 escalating scenarios with 60-second decisions. Start easy, end impossible.",deliverables:["Personal ethics statement (5 principles)","Dilemma response journal"],assessment:"Ethics clarity 35% + Dilemma reasoning 35% + Reflection 30%"},
+t2:{reflection:"Krishna coaches Arjuna through questions, not answers. Is this the best way to teach ethics?",simulation:"The Ethical Pressure Cooker — cascading decisions with time pressure. Decision 4 has no good answer.",deliverables:["Decision framework document","Pressure response analysis","Gandhi's 'Experiments with Truth' reflection"],assessment:"Framework quality 30% + Pressure performance 35% + Reflection 35%"},
+t3:{reflection:"Design a 'decision coaching protocol' — how to help someone decide without telling them the answer.",simulation:"Create a 3-session ethics programme using Gita as anchor. Teach Session 2 to peers.",deliverables:["Decision coaching protocol","Ethics curriculum design","Teaching evaluation"],assessment:"Protocol quality 25% + Curriculum design 30% + Teaching 25% + Evaluation 20%"},
+t4:{reflection:"Does Krishna's method work for everyone, or only someone already capable like Arjuna?",simulation:"Design an 'Ethical Decision Lab' that a school can run permanently for all classes.",deliverables:["Gita pedagogy critique","Lab programme blueprint","Pilot results + iteration plan"],assessment:"Critique depth 25% + Lab design 35% + Legacy impact 40%"}
+},
+sessionFlow:[{label:"Story",min:8,color:"var(--found)"},{label:"Reflect",min:5,color:"var(--cog)"},{label:"Strategy",min:7,color:"var(--eth)"},{label:"Simulation",min:15,color:"var(--strat)"},{label:"Apply",min:5,color:"var(--deep-brown)"}],
+teacherPrep:"Read Gita Chapter 2 summary; prepare 4 escalating ethical dilemma cards. For T2+, add time-pressure mechanics.",
+rubric:[{criteria:"Ethical Reasoning",dev:"Right/wrong binary thinking",comp:"Considers multiple perspectives",prof:"Nuanced framework; acknowledges trade-offs"},{criteria:"Decision Quality",dev:"Avoids decision or follows crowd",comp:"Makes reasoned choice with evidence",prof:"Articulates framework; accepts consequences"},{criteria:"Compassion Integration",dev:"Ignores emotional dimension",comp:"Acknowledges feelings in decisions",prof:"Integrates compassion with justice"}]
+},
+{week:8,phase:"eth",title:"Leadership & Integrity",story:"Ramayana: Rama vs Ravana — Two Models of Power",jkModules:"Non-Violence, Dharma, Righteousness, Peace",theme:"Ethical Leadership & Ahimsa",
+skills:["Leadership Models","Integrity","Non-Violence","Peace & Conflict Resolution"],
+storySource:"Valmiki Ramayana — Ayodhya Kanda & Lanka Kanda",
+storySummary:"Rama chose exile over kingdom — leading through sacrifice. Ravana had everything — power, knowledge, devotion — yet destroyed it through arrogance. The Jain principle 'अहिंसा परमो धर्मः' and the Bishnoi community's 363 lives for trees show ahimsa isn't passivity — it's the strongest form of leadership.",
+tiers:{
+t1:{reflection:"Who would you follow — Rama or Ravana? Why? Is non-violence weakness or strength?",simulation:"Leadership Matrix: fill Rama/Ravana comparison + Design a 'Class Leadership Charter' + Anti-bullying pledge.",deliverables:["Leadership matrix worksheet","Class charter draft","Ahimsa reflection note"],assessment:"Leadership understanding 35% + Charter quality 30% + Reflection 35%"},
+t2:{reflection:"Ravana was a great scholar and devotee. How can someone so capable fail so completely? Apply this to modern leaders.",simulation:"Conflict Resolution Role-Play + Guided Meditation (10 min) + 'Peace Letter' to someone you disagree with.",deliverables:["Modern leader analysis","Peace letter","Meditation reflection journal"],assessment:"Analysis depth 30% + Role-play performance 35% + Reflection 35%"},
+t3:{reflection:"Design a leadership assessment framework using Rama/Ravana as poles.",simulation:"Create an Ahimsa workshop for T1 students incorporating Bishnoi and Jain traditions.",deliverables:["Leadership assessment framework","Ahimsa workshop design","Teaching reflection"],assessment:"Framework 25% + Workshop design 35% + Teaching 25% + Reflection 15%"},
+t4:{reflection:"Is the Rama ideal achievable? Or is it aspirational mythology that can never translate to reality?",simulation:"Design a school-wide 'Ethical Leadership Programme' with mentoring, assessment, and community service.",deliverables:["Ideal vs reality essay","Programme blueprint","Implementation + measurement plan"],assessment:"Essay depth 25% + Programme design 35% + Legacy impact 40%"}
+},
+sessionFlow:[{label:"Dual Story",min:8,color:"var(--found)"},{label:"Reflect",min:5,color:"var(--cog)"},{label:"Strategy",min:7,color:"var(--eth)"},{label:"Simulation",min:15,color:"var(--strat)"},{label:"Charter",min:5,color:"var(--deep-brown)"}],
+teacherPrep:"Prepare dual narration: Rama's exile choice vs Ravana's Lanka. Print leadership matrix worksheets. For T2+, prepare meditation script.",
+rubric:[{criteria:"Leadership Understanding",dev:"Equates leadership with authority",comp:"Distinguishes authority from influence",prof:"Articulates multiple leadership models with trade-offs"},{criteria:"Integrity Practice",dev:"Says right things but inconsistent",comp:"Consistent in familiar situations",prof:"Maintains integrity under pressure; inspires others"},{criteria:"Non-Violence Depth",dev:"Equates ahimsa with non-action",comp:"Understands ahimsa as active principle",prof:"Applies ahimsa to bullying, environment, speech"}]
+},
+{week:9,phase:"eth",title:"Ethical Complexity & Service",story:"Mahabharata: When Right and Wrong Blur",jkModules:"Service (Seva), Sacrifice (Tyaga), Constitutional Values",theme:"Moral Courage, Seva & Citizenship",
+skills:["Ethical Complexity","Community Service","Sacrifice","Constitutional Awareness"],
+storySource:"Mahabharata — Karna's loyalty dilemma + Ishopanishad ('तेन त्यक्तेन भुञ्जीथा') + Indian Constitution Preamble",
+storySummary:"Karna knew he was on the wrong side, yet stayed loyal to Duryodhana who showed him kindness when everyone rejected him. The Ishopanishad teaches renunciation not as escape but as engaged action. India's Constitution transforms these ancient values into modern citizenship: liberty, equality, fraternity, justice.",
+tiers:{
+t1:{reflection:"Was Karna right to stay loyal to Duryodhana? Can loyalty be wrong? What does 'seva' mean to you?",simulation:"Moral Dilemma Theatre (act out Karna's choice) + Plan a 'Seva Diwas' activity + Read the Preamble aloud and discuss each word.",deliverables:["Karna dilemma analysis","Seva Diwas plan","Preamble reflection"],assessment:"Ethical reasoning 35% + Seva plan quality 30% + Citizenship understanding 35%"},
+t2:{reflection:"Map Karna's dilemma to modern situations: whistleblowers, loyalty vs truth, institutional pressure. What do constitutional values demand?",simulation:"Mock Parliament — debate a bill on education or environment + 'Give Away' week planning + RTI case study.",deliverables:["Whistleblower case analysis","Bill draft + debate notes","RTI success story report"],assessment:"Case analysis 30% + Parliamentary performance 35% + Constitutional understanding 35%"},
+t3:{reflection:"Design a 'Seva Assessment Framework' — how do you measure genuine service vs performative service?",simulation:"Organise an actual Seva Diwas event + Create a constitutional values workshop.",deliverables:["Seva assessment framework","Event execution report","Workshop design"],assessment:"Framework 25% + Event execution 30% + Workshop 25% + Reflection 20%"},
+t4:{reflection:"Ambedkar, Karna, and the Constitution all grapple with the same question: what do we owe society?",simulation:"Design a year-long 'Citizenship Lab' programme integrating seva, constitutional literacy, and ethical leadership.",deliverables:["Social contract essay","Citizenship Lab blueprint","Pilot results"],assessment:"Essay depth 25% + Programme design 35% + Legacy impact 40%"}
+},
+sessionFlow:[{label:"Story",min:8,color:"var(--found)"},{label:"Reflect",min:5,color:"var(--cog)"},{label:"Strategy",min:7,color:"var(--eth)"},{label:"Simulation",min:15,color:"var(--strat)"},{label:"Apply",min:5,color:"var(--deep-brown)"}],
+teacherPrep:"Prepare Karna's story; print Constitution Preamble; prepare Mock Parliament roles. For T2+, research RTI success stories.",
+rubric:[{criteria:"Ethical Complexity",dev:"Black-and-white moral thinking",comp:"Acknowledges grey areas; considers perspectives",prof:"Navigates contradictions; articulates trade-offs"},{criteria:"Service Orientation",dev:"Service as obligation",comp:"Service as choice; plans concrete action",prof:"Service as identity; organises community action"},{criteria:"Constitutional Literacy",dev:"Cannot name fundamental rights",comp:"Understands key rights and duties",prof:"Applies constitutional values to daily decisions"}]
+},
+// PHASE 4: STRATEGIC (Leadership & Management)
+{week:10,phase:"strat",title:"Strategy & Competition",story:"Arthashastra: Chanakya's Mandala",jkModules:"Leadership Skills, Managerial Skills",theme:"Strategic Thinking & Leadership",
+skills:["Strategic Planning","Alliance Building","Competition Analysis","Leadership Vision"],
+storySource:"Kautilya's Arthashastra, Book 6 — Mandala Theory",
+storySummary:"Chanakya taught Chandragupta: 'Your neighbour is your rival; your neighbour's neighbour is your ally.' The Mandala theory maps every relationship as strategic. Combined with leadership models (autocratic, democratic, free-rein), this week builds systems-level thinking about power, influence, and governance.",
+tiers:{
+t1:{reflection:"Who are your 'allies' and 'rivals' in school life? Is competition always bad?",simulation:"Business War Game (3 rounds with changing conditions) + Leadership Style Quiz + NPTEL Leadership video discussion.",deliverables:["Strategic map of school ecosystem","Leadership style self-assessment","Game reflection"],assessment:"Strategic thinking 35% + Game performance 30% + Reflection 35%"},
+t2:{reflection:"Map Chanakya's Mandala to modern business competition. How do alliances shift when conditions change?",simulation:"Eisenhower Matrix Workshop + Johari Window Exercise + Conflict Resolution Simulation.",deliverables:["Mandala business analysis","Johari Window results","Time management audit"],assessment:"Analysis depth 30% + Simulation performance 35% + Self-management 35%"},
+t3:{reflection:"Design a trust calibration framework: how do strategic leaders decide whom to trust?",simulation:"Create a strategy simulation that teaches Mandala theory to T1 students.",deliverables:["Trust calibration framework","Simulation design + materials","Facilitation report"],assessment:"Framework 25% + Simulation design 30% + Facilitation 25% + Reflection 20%"},
+t4:{reflection:"Chanakya built an empire; it eventually fell. What makes strategic systems sustainable?",simulation:"Design a leadership development programme for the school student council.",deliverables:["Strategic sustainability essay","Leadership programme blueprint","Council pilot results"],assessment:"Essay depth 25% + Programme design 35% + Legacy impact 40%"}
+},
+sessionFlow:[{label:"Story",min:10,color:"var(--found)"},{label:"Reflect",min:4,color:"var(--cog)"},{label:"Strategy",min:6,color:"var(--eth)"},{label:"War Game",min:16,color:"var(--strat)"},{label:"Debrief",min:4,color:"var(--deep-brown)"}],
+teacherPrep:"Draw Mandala diagram; prepare Business War Game rules (3 rounds); print leadership style quiz.",
+rubric:[{criteria:"Strategic Quality",dev:"Reactive; no planning",comp:"Basic strategy with reasoning",prof:"Multi-move thinking; anticipates opponents"},{criteria:"Leadership Self-Knowledge",dev:"Cannot identify own style",comp:"Identifies style with examples",prof:"Adapts style to context; articulates vision"},{criteria:"Systems Thinking",dev:"Thinks in isolation",comp:"Sees basic connections",prof:"Maps interdependencies; predicts cascading effects"}]
+},
+{week:11,phase:"strat",title:"Entrepreneurship & Systems",story:"Arthashastra: Saptanga — Seven Pillars of a Nation",jkModules:"Entrepreneurial Skills, Design Thinking, Personal Finance",theme:"Building Sustainable Systems",
+skills:["Entrepreneurship","Design Thinking","Personal Finance","Systems Architecture"],
+storySource:"Kautilya's Arthashastra, Book 6 — Saptanga (Seven Limbs of the State)",
+storySummary:"Chanakya taught that a kingdom stands on seven pillars (Saptanga): the King (leader), Minister (strategy), Territory (resources), Fort (defence), Treasury (finance), Army (execution), Ally (partnerships). Remove any pillar and the system fails. Modern parallels: Amul Cooperative, Lijjat Papad — both built on the Saptanga principle of interdependent pillars.",
+tiers:{
+t1:{reflection:"Which pillar is weakest in your school club? What happens if the treasury fails?",simulation:"Lemonade Stand Challenge (1-day micro-business) + Build a Mini Nation (assign 7 Saptanga roles) + Monthly Budget Tracker.",deliverables:["Business plan (1 page)","Mini Nation system diagram","Monthly budget"],assessment:"Business viability 35% + System design 30% + Financial literacy 35%"},
+t2:{reflection:"Map Saptanga to Amul/Lijjat Papad. Why do cooperatives succeed where corporations sometimes fail?",simulation:"Business Model Canvas for a real local problem + Design Thinking Sprint (5 stages) + Savings Challenge: ₹10→₹50→₹100 weekly.",deliverables:["Business Model Canvas","Design Thinking report","Cooperative case study"],assessment:"Canvas quality 30% + Sprint execution 35% + Case analysis 35%"},
+t3:{reflection:"Design a 'Neo-Saptanga' model for modern organisations. What's the 8th pillar?",simulation:"Create a comprehensive entrepreneurship workshop for T1/T2 students.",deliverables:["Neo-Saptanga model","Workshop + all materials","Student evaluation results"],assessment:"Model quality 25% + Workshop design 30% + Facilitation 25% + Evaluation 20%"},
+t4:{reflection:"Chandragupta retired and the empire survived because the system was bigger than one person. Can schools be designed this way?",simulation:"Design a permanent 'Student Innovation Lab' with governance, funding model, and succession planning.",deliverables:["Systemic sustainability essay","Innovation Lab blueprint","Pilot + handover plan"],assessment:"Essay 25% + Lab design 35% + Sustainability plan 40%"}
+},
+sessionFlow:[{label:"Story",min:8,color:"var(--found)"},{label:"Reflect",min:5,color:"var(--cog)"},{label:"Strategy",min:5,color:"var(--eth)"},{label:"Build",min:18,color:"var(--strat)"},{label:"Stress Test",min:4,color:"var(--deep-brown)"}],
+teacherPrep:"Print Saptanga role cards; prepare stress-test scenarios ('Your ally betrays you', 'Treasury runs out'). For T2+, prepare BMC templates.",
+rubric:[{criteria:"Entrepreneurial Thinking",dev:"Sees problems, no solutions",comp:"Generates viable ideas",prof:"Complete business model with risk analysis"},{criteria:"Systems Architecture",dev:"Designs 2–3 pillars only",comp:"Covers all 7 with basic descriptions",prof:"Shows interdependencies; stress-tests design"},{criteria:"Financial Literacy",dev:"No budget awareness",comp:"Basic income/expense tracking",prof:"Savings plan + investment understanding"}]
+},
+{week:12,phase:"strat",title:"Capstone: Story to Strategy Integration",story:"All 11 IKS Sources — Integration Challenge",jkModules:"All 33 Jeevan Kaushal modules",theme:"Synthesis, Legacy & Leadership",
+skills:["Integration","Public Speaking","Project Management","Legacy Thinking"],
+storySource:"All IKS sources: Panchatantra, Thirukkural, Vedas, Kabir, Vidura Niti, Akbar-Birbal, Tenali Rama, Ramayana, Gita, Mahabharata, Arthashastra",
+storySummary:"The capstone brings together 11 weeks of IKS wisdom. Teams select a real-world problem and solve it by integrating story, analysis, and strategy from across all 4 phases. This is not a test — it's a demonstration of transformation.",
+tiers:{
+t1:{reflection:"Which IKS story changed how you think? What is the one life skill you've genuinely improved?",simulation:"Capstone Presentation Day — teams solve a real school problem using IKS wisdom. 5-min presentations + peer evaluation.",deliverables:["Capstone poster/deck","Peer evaluation form","Personal growth reflection"],assessment:"IKS Integration 25% + Solution Quality 25% + Presentation 25% + Reflection 25%"},
+t2:{reflection:"Which IKS principle do you disagree with? Honest critique is the highest form of learning.",simulation:"Applied Capstone — pitch a real school improvement to administration. 8-slide max. Winning team submits to principal.",deliverables:["Capstone pitch deck","Implementation plan","Individual reflection essay"],assessment:"Pitch quality 30% + Implementation plan 20% + Reflection 25% + Peer evaluation 15% + Teamwork 10%"},
+t3:{reflection:"Can you teach what you've learned? The ultimate test of mastery is teaching.",simulation:"Legacy Capstone — design something the next cohort can use: a new Week 13, a simulation game, or a Teacher's Guide.",deliverables:["Legacy product (usable, not a plan)","User testing report","Mastery reflection (600 words)"],assessment:"Product quality 35% + User testing 15% + Rationale 10% + Reflection 25% + Presentation 15%"},
+t4:{reflection:"You've spent 4 years with these stories. What will you carry into adult life? What will you leave behind for others?",simulation:"Grand Legacy — Design a complete 'Life Skills Orientation Programme' for incoming Class 9 students. Run a pilot.",deliverables:["Complete programme with all materials","Pilot execution report","'My India 2047' personal essay","Valedictory keynote (15 min)"],assessment:"Programme completeness 30% + Pilot quality 25% + Keynote 20% + Legacy essay 25%"}
+},
+sessionFlow:[{label:"Team Formation",min:8,color:"var(--found)"},{label:"Research & Map",min:12,color:"var(--cog)"},{label:"Build",min:10,color:"var(--eth)"},{label:"Present",min:8,color:"var(--strat)"},{label:"Evaluate",min:2,color:"var(--deep-brown)"}],
+teacherPrep:"This is a 2-period capstone. Period 1: team formation, research, build. Period 2: presentations, evaluation, awards. Prepare evaluation rubric printouts and 'Best Capstone' certificates.",
+rubric:[{criteria:"IKS Integration",dev:"Mentions 1 story superficially",comp:"Connects 2–3 stories meaningfully",prof:"Weaves multiple IKS sources into coherent framework"},{criteria:"Solution Quality",dev:"Generic suggestion",comp:"Specific, actionable plan",prof:"Implementable strategy with timeline and metrics"},{criteria:"Presentation Impact",dev:"Reads from notes",comp:"Clear delivery; some audience connection",prof:"Inspiring; audience moved to action"}]
+}
+];
+
+// ELECTIVES DATA
+const electives=[
+{phase:"found",title:"Nonverbal Communication Mastery",story:"Natyashastra — Bharata Muni's 9 Rasas",desc:"Explore body language through classical Indian dance mudras. Silent movie exercises, mirror practice, video analysis.",weeks:"2 weeks",jkMod:"Nonverbal Communication"},
+{phase:"found",title:"Advanced Digital Ethics",story:"Panchatantra — Mitra-Bheda (Digital Trust)",desc:"Deep dive into IT Act 2000, cyberbullying case studies, password security audits, digital footprint management.",weeks:"2 weeks",jkMod:"Digital Ethics & Cyber Security"},
+{phase:"found",title:"Reading as a Life Practice",story:"Vedic Svādhyāya Tradition",desc:"SQ3R method mastery, speed reading, book reviews, newspaper editorial analysis. Build a lifelong reading habit.",weeks:"2 weeks",jkMod:"Reading"},
+{phase:"cog",title:"Career Exploration Lab",story:"Gita 3.35: Follow Your Dharma",desc:"SWOT career mapping, alumni interactions, job portal navigation, career roadmap with gap analysis.",weeks:"2 weeks",jkMod:"Exploring Career Opportunities"},
+{phase:"cog",title:"Advanced Presentations",story:"Chanakya on Persuasion",desc:"TED-style talks, PechaKucha, visual storytelling. Cross-cultural communication workshop.",weeks:"2 weeks",jkMod:"Presentation Skills"},
+{phase:"cog",title:"Cognitive & Non-Cognitive Skills Lab",story:"Nyaya Shastra — Indian Logic Tradition",desc:"Edward de Bono's Six Hats, lateral thinking puzzles, empathy mapping, design thinking sprint.",weeks:"2 weeks",jkMod:"Cognitive & Non-Cognitive Skills"},
+{phase:"eth",title:"Deep Dive: Love & Compassion",story:"Buddha's Renunciation + Meera Bai's Devotion",desc:"Compassion journal, old-age home visit, 'Love vs Attachment' debate, regional bhakti traditions.",weeks:"2 weeks",jkMod:"Love & Compassion (Prem & Karuna)"},
+{phase:"eth",title:"Peace & Mindfulness Practice",story:"Shanti Mantra + Sufi Poetry",desc:"Weekly guided meditation, conflict resolution workshops, peace letter writing, Waris Shah's poetry.",weeks:"2 weeks",jkMod:"Peace (Shanti)"},
+{phase:"eth",title:"Constitutional Values Deep Dive",story:"Ambedkar's Vision + Gram Sabha",desc:"Mock Parliament extended, RTI workshops, UDHR awareness, grassroots democracy simulation.",weeks:"2 weeks",jkMod:"Constitutional Values, Justice & Human Rights"},
+{phase:"strat",title:"Advanced Entrepreneurship",story:"Jugaad Innovation + Lijjat Papad Model",desc:"Full Business Model Canvas, lemonade stand to startup progression, cooperative economics study.",weeks:"2 weeks",jkMod:"Entrepreneurial Skills"},
+{phase:"strat",title:"Design Thinking & Innovation Lab",story:"Vishwakarma — India's Divine Architect",desc:"5-stage design thinking, empathy interviews, rapid prototyping, stepwell architecture as case study.",weeks:"2 weeks",jkMod:"Innovative Leadership & Design Thinking"},
+{phase:"strat",title:"Personal Finance & Ethics Masterclass",story:"Arthashastra on Treasury + Dharma Ethics",desc:"Monthly budgeting, savings challenge, investment basics, ethical dilemma series, personal code of ethics.",weeks:"2 weeks",jkMod:"Managing Personal Finance + Ethics & Integrity"}
+];
+
+// ═══ STATE ═══
+let currentTier=1;
+let currentPhase="found";
+let completed=JSON.parse(localStorage.getItem('iisajk-done')||'{}');
+
+// ═══ FUNCTIONS ═══
+function setTier(t){
+currentTier=t;
+localStorage.setItem('iisajk-tier',t);
+document.querySelectorAll('.tier-btn').forEach(b=>b.className='tier-btn');
+document.getElementById('tb'+t).className='tier-btn at'+t;
+renderWeeks();
+}
+
+function showTab(t){
+document.querySelectorAll('.main-tab').forEach(b=>b.classList.remove('active'));
+document.querySelector(`.main-tab[data-t="${t}"]`).classList.add('active');
+document.querySelectorAll('.tab-pan').forEach(p=>p.classList.remove('active'));
+document.getElementById('pan-'+t).classList.add('active');
+}
+
+function setPhase(p){
+currentPhase=p;
+document.querySelectorAll('.phase-card').forEach(c=>c.classList.remove('active'));
+document.querySelector(`.phase-card.${p}`).classList.add('active');
+renderWeeks();
+}
+
+function toggleDone(w,e){
+e.stopPropagation();
+completed[w]=!completed[w];
+localStorage.setItem('iisajk-done',JSON.stringify(completed));
+updateProgress();
+renderWeeks();
+}
+
+function updateProgress(){
+const n=Object.values(completed).filter(Boolean).length;
+document.getElementById('progBar').style.width=(n/12*100)+'%';
+document.getElementById('progText').textContent=n+' / 12 weeks complete';
+}
+
+function getTiered(w,field){
+const tKey='t'+currentTier;
+if(w.tiers&&w.tiers[tKey]&&w.tiers[tKey][field]!==undefined)return w.tiers[tKey][field];
+return w[field];
+}
+
+function renderPhases(){
+const el=document.getElementById('phaseList');
+el.innerHTML=phases.map(p=>`
+<div class="phase-card ${p.id} ${p.id===currentPhase?'active':''}" onclick="setPhase('${p.id}')">
+<div class="phase-name">${p.name}</div>
+<div class="phase-meta">${p.weeks} · JK: ${p.jkPillar}<br>${p.focus}</div>
+</div>`).join('');
+}
+
+function renderWeeks(){
+const filtered=currentPhase==='all'?weeks:weeks.filter(w=>w.phase===currentPhase);
+const el=document.getElementById('weekGrid');
+const tierNames={1:'Foundation',2:'Applied',3:'Design',4:'Mastery'};
+el.innerHTML=filtered.map(w=>{
+const done=completed[w.week];
+return`<div class="week-card ${w.phase}" onclick="openModule(${w.week})">
+<div class="wk-done ${done?'checked':''}" onclick="toggleDone(${w.week},event)">${done?'✅':'○'}</div>
+<div class="wk-num">W${w.week}</div>
+<div class="wk-theme">${w.theme}</div>
+<div class="wk-title">${w.title}</div>
+<div class="wk-story"><em>📖 ${w.story}</em></div>
+<div class="wk-pills">
+${w.skills.map(s=>`<span class="wk-pill">${s}</span>`).join('')}
+<span class="wk-pill" style="background:var(--${w.phase==='found'?'found':w.phase==='cog'?'cog':w.phase==='eth'?'eth':'strat'});color:#fff">T${currentTier}: ${tierNames[currentTier]}</span>
+</div></div>`;
+}).join('');
+}
+
+function openModule(wn){
+const w=weeks.find(x=>x.week===wn);if(!w)return;
+const dlg=document.getElementById('dlg');
+const tierNames={1:'Foundation (Class 9)',2:'Applied (Class 10)',3:'Design (Class 11)',4:'Mastery (Class 12)'};
+const tbClass={1:'tb1',2:'tb2',3:'tb3',4:'tb4'};
+const tierBadge=`<span class="tier-badge ${tbClass[currentTier]}">T${currentTier}: ${tierNames[currentTier]}</span>`;
+
+const refl=getTiered(w,'reflection')||'';
+const sim=getTiered(w,'simulation')||'';
+const deliv=getTiered(w,'deliverables')||[];
+const assess=getTiered(w,'assessment')||'';
+const rubric=getTiered(w,'rubric')||w.rubric||[];
+
+// Session flow bar
+let flowHtml='';
+if(w.sessionFlow){
+const total=w.sessionFlow.reduce((a,s)=>a+s.min,0);
+flowHtml=`<div class="flow-bar">${w.sessionFlow.map(s=>
+`<div class="flow-seg" style="background:${s.color};flex:${s.min}">${s.label}<br>${s.min}m</div>`
+).join('')}</div><div class="tiny">Total: ${total} minutes</div>`;
+}
+
+// Rubric table
+let rubricHtml='';
+if(rubric.length){
+rubricHtml=`<h4 style="margin-top:16px">📋 Assessment Rubric</h4>
+<table class="rub-table"><thead><tr><th>Criteria</th><th>Developing</th><th>Competent</th><th>Proficient</th></tr></thead>
+<tbody>${rubric.map(r=>`<tr><td><strong>${r.criteria}</strong></td><td>${r.dev}</td><td>${r.comp}</td><td>${r.prof}</td></tr>`).join('')}</tbody></table>`;
+}
+
+document.getElementById('dlgHead').className='dlg-head '+w.phase;
+document.getElementById('dlgTitle').innerHTML=`Week ${w.week}: ${w.title} ${tierBadge}`;
+document.getElementById('dlgSub').textContent=w.theme+' · JK Modules: '+w.jkModules;
+
+document.getElementById('dlgBody').innerHTML=`
+<div class="detail-card" style="margin-bottom:12px;background:linear-gradient(135deg,var(--${w.phase}-s,var(--sand)),#fff)">
+<h4>📖 Story Anchor: ${w.story}</h4>
+<p><strong>Source:</strong> ${w.storySource}</p>
+<p style="margin-top:6px">${w.storySummary}</p>
+</div>
+
+<h4>⏱️ Session Flow (40 minutes)</h4>
+${flowHtml}
+
+<h4 style="margin-top:16px">📜 5-Step Pedagogy for This Week</h4>
+
+<div class="step-section"><div class="step-head" onclick="this.nextElementSibling.classList.toggle('open')"><span class="s-num">1</span><span class="s-icon">📖</span> Step 1: Story — Narrate the IKS anchor</div><div class="step-body">${w.storySummary}<br><br><strong>Source:</strong> ${w.storySource}</div></div>
+
+<div class="step-section"><div class="step-head" onclick="this.nextElementSibling.classList.toggle('open')"><span class="s-num">2</span><span class="s-icon">🔍</span> Step 2: Reflection — Guide inquiry</div><div class="step-body open">${refl}</div></div>
+
+<div class="step-section"><div class="step-head" onclick="this.nextElementSibling.classList.toggle('open')"><span class="s-num">3</span><span class="s-icon">🧭</span> Step 3: Strategy — Extract the principle</div><div class="step-body">Extract the strategic/ethical/cognitive principle from the story. Write it on the board. Connect to JK competencies: <strong>${w.jkModules}</strong>.</div></div>
+
+<div class="step-section"><div class="step-head" onclick="this.nextElementSibling.classList.toggle('open')"><span class="s-num">4</span><span class="s-icon">🎮</span> Step 4: Simulation — Practice the skill</div><div class="step-body open">${sim}</div></div>
+
+<div class="step-section"><div class="step-head" onclick="this.nextElementSibling.classList.toggle('open')"><span class="s-num">5</span><span class="s-icon">🚀</span> Step 5: Application — Create deliverables</div><div class="step-body">${deliv.length?'<ul>'+deliv.map(d=>'<li>'+d+'</li>').join('')+'</ul>':'Defined per tier.'}</div></div>
+
+<div class="detail-grid">
+<div class="detail-card"><h4>👩‍🏫 Teacher Preparation Notes</h4><p>${w.teacherPrep}</p></div>
+<div class="detail-card"><h4>📊 Assessment Weighting</h4><p>${assess}</p></div>
+</div>
+
+${rubricHtml}
+
+<div class="detail-card" style="margin-top:12px;background:linear-gradient(135deg,#f0f4f8,#edf2f7);border-color:#c8d6e5">
+<h4>🔄 Spiral Learning: How This Week Deepens Across Tiers</h4>
+<p><strong>T1 (Class 9):</strong> Observe & understand the story's lesson.<br>
+<strong>T2 (Class 10):</strong> Analyse, critique & apply to professional contexts.<br>
+<strong>T3 (Class 11):</strong> Design teaching materials & facilitate for juniors.<br>
+<strong>T4 (Class 12):</strong> Create lasting contributions & lead programmes.</p>
+</div>
+`;
+dlg.showModal();
+}
+
+// ═══ RENDER ELECTIVES ═══
+function renderElectives(){
+const el=document.getElementById('electGrid');
+el.innerHTML=electives.map(e=>{
+const colors={found:'var(--found)',cog:'var(--cog)',eth:'var(--eth)',strat:'var(--strat)'};
+const labels={found:'Foundation',cog:'Cognitive',eth:'Ethical',strat:'Strategic'};
+return`<div class="elect-card">
+<h4>${e.title}</h4>
+<div style="font-size:12px;color:var(--muted);margin-bottom:4px">📖 ${e.story}</div>
+<div style="font-size:12px;line-height:1.6">${e.desc}</div>
+<div class="el-pills">
+<span class="el-pill" style="background:${colors[e.phase]};color:#fff">${labels[e.phase]}</span>
+<span class="el-pill" style="background:var(--sand)">${e.weeks}</span>
+<span class="el-pill" style="background:var(--sand)">JK: ${e.jkMod}</span>
+</div></div>`;
+}).join('');
+}
+
+// ═══ RENDER ARCHITECTURE ═══
+function renderArch(){
+document.getElementById('archContent').innerHTML=`
+<div class="detail-grid">
+<div class="detail-card" style="grid-column:1/-1">
+<h4>🏗️ Structural Transformation: JK → Enhanced</h4>
+<table class="rub-table">
+<thead><tr><th>Dimension</th><th>Original Jeevan Kaushal</th><th>Enhanced Version</th></tr></thead>
+<tbody>
+<tr><td><strong>Structure</strong></td><td>4 parallel pillars, 33 modules</td><td>4 sequential phases, 12-week core + 24 electives</td></tr>
+<tr><td><strong>Pedagogy</strong></td><td>Activity-based (loosely structured)</td><td>5-Step: Story → Reflection → Strategy → Simulation → Application</td></tr>
+<tr><td><strong>Progression</strong></td><td>Different topics per class (linear)</td><td>Same stories deepen across 4 tiers (spiral)</td></tr>
+<tr><td><strong>IKS Role</strong></td><td>Supplementary examples</td><td>Primary pedagogy — IKS stories ARE the curriculum</td></tr>
+<tr><td><strong>Session Planning</strong></td><td>Week-level descriptions</td><td>Minute-by-minute session flows (40-min periods)</td></tr>
+<tr><td><strong>Assessment</strong></td><td>Generic rubric for all pillars</td><td>3-level rubrics per week (Developing/Competent/Proficient)</td></tr>
+<tr><td><strong>Deliverables</strong></td><td>Checklist items</td><td>Specific templates with structured columns per tier</td></tr>
+<tr><td><strong>Teacher Support</strong></td><td>Not included</td><td>Prep notes, timing, backup plans per module</td></tr>
+<tr><td><strong>Depth Model</strong></td><td>Cover once, move on</td><td>T1: Observe → T2: Analyse → T3: Design & Teach → T4: Lead & Create Legacy</td></tr>
+</tbody></table>
+</div>
+<div class="detail-card">
+<h4>🔗 Pillar → Phase Mapping</h4>
+<p><strong>Communication Skills</strong> → Phase 1: Foundation Intelligence<br>
+<em>Listening, Speaking, Reading, Writing, Digital, Nonverbal</em></p>
+<p style="margin-top:8px"><strong>Professional Skills</strong> → Phase 2: Cognitive Intelligence<br>
+<em>Interview, GD, Career, Teamwork, Presentation, Brainstorming</em></p>
+<p style="margin-top:8px"><strong>Universal Human Values</strong> → Phase 3: Ethical Intelligence<br>
+<em>Love, Truth, Ahimsa, Dharma, Peace, Seva, Tyaga, Constitution</em></p>
+<p style="margin-top:8px"><strong>Leadership & Management</strong> → Phase 4: Strategic Intelligence<br>
+<em>Leadership, Management, Entrepreneurship, Design Thinking, Ethics, Finance</em></p>
+</div>
+<div class="detail-card">
+<h4>🔄 4-Tier Spiral Model</h4>
+<p><strong>Tier 1 (Class 9) — DISCOVER</strong><br>Observe the story. Feel the lesson. Begin practising basic skills.</p>
+<p style="margin-top:6px"><strong>Tier 2 (Class 10) — ANALYSE</strong><br>Critique the story. Apply to modern contexts. Build professional skills.</p>
+<p style="margin-top:6px"><strong>Tier 3 (Class 11) — DESIGN</strong><br>Create teaching materials. Facilitate workshops for juniors. Design systems.</p>
+<p style="margin-top:6px"><strong>Tier 4 (Class 12) — LEAD</strong><br>Build lasting contributions. Run programmes. Mentor. Leave a legacy.</p>
+</div>
+</div>
+<div class="detail-card" style="margin-top:12px;grid-column:1/-1">
+<h4>📐 Modular System: 12 Core + 24 Elective Weeks</h4>
+<p>The <strong>12-week core</strong> covers the essential IKS stories and maps to all 33 JK modules. Students then choose from <strong>24 elective weeks</strong> (6 per phase) to deepen specific areas. Total available: 36 weeks per academic year, matching the original JK scope of 120 hours across 4 years.</p>
+<p style="margin-top:6px"><strong>Core:</strong> 12 weeks × 40 min = 8 hours minimum contact time per year.<br>
+<strong>Electives:</strong> Up to 24 additional weeks = 16 more hours per year.<br>
+<strong>4-Year Total:</strong> 4 × (8 + 16) = 96 hours contact + self-directed projects = 120+ hours.</p>
+</div>`;
+}
+
+// ═══ RENDER RESOURCES ═══
+function renderRes(){
+document.getElementById('resContent').innerHTML=`
+<div class="detail-grid">
+<div class="detail-card"><h4>📖 IKS Primary Sources</h4>
+<ul>
+<li><strong>Panchatantra</strong> — Vishnu Sharma (Phase 1 anchor)</li>
+<li><strong>Thirukkural</strong> — Thiruvalluvar, English translation (Phase 1)</li>
+<li><strong>Bhagavad Gita</strong> — Eknath Easwaran translation (Phase 3)</li>
+<li><strong>Valmiki Ramayana</strong> — IIT Kanpur Digital Library (Phase 3)</li>
+<li><strong>Mahabharata</strong> — C. Rajagopalachari abridgement (Phase 3)</li>
+<li><strong>Arthashastra</strong> — Kautilya, Wisdom Library full text (Phase 4)</li>
+<li><strong>Akbar-Birbal Tales</strong> — Oral tradition collections (Phase 2)</li>
+<li><strong>Tenali Rama Stories</strong> — Vijayanagara folklore (Phase 2)</li>
+<li><strong>Kabir Dohas</strong> — With Hindi-English translations (Phase 1)</li>
+<li><strong>Vidura Niti</strong> — From Udyoga Parva (Phase 2)</li>
+<li><strong>Natyashastra</strong> — Bharata Muni (Elective)</li>
+</ul></div>
+<div class="detail-card"><h4>🎓 NPTEL & Online Courses</h4>
+<ul>
+<li>NPTEL: Soft Skills — IIT Kharagpur</li>
+<li>NPTEL: Leadership (Course 122108038)</li>
+<li>NPTEL: Leadership Styles (Course 122105021)</li>
+<li>NPTEL: Entrepreneurship — IIM Bangalore</li>
+<li>NPTEL: Emotional Intelligence — IIT Kharagpur</li>
+<li>Swayam Portal: Value Education (UGC)</li>
+<li>DIKSHA Platform: Life Skills (NCERT)</li>
+<li>Stanford d.school: Design Thinking Resources</li>
+</ul></div>
+<div class="detail-card"><h4>📚 Recommended Reading</h4>
+<ul>
+<li><em>My Experiments with Truth</em> — Gandhi</li>
+<li><em>Wings of Fire</em> — APJ Abdul Kalam</li>
+<li><em>The 7 Habits of Highly Effective Teens</em> — Covey</li>
+<li><em>Ikigai</em> — Héctor García</li>
+<li><em>How to Win Friends</em> — Dale Carnegie</li>
+<li><em>India After Gandhi</em> — Ramachandra Guha</li>
+</ul></div>
+<div class="detail-card"><h4>🎥 TED Talks & Videos</h4>
+<ul>
+<li>Simon Sinek — How Great Leaders Inspire Action</li>
+<li>Brené Brown — The Power of Vulnerability</li>
+<li>Chimamanda Adichie — The Danger of a Single Story</li>
+<li>Angela Duckworth — Grit</li>
+<li>Amy Cuddy — Your Body Language Shapes You</li>
+<li>Arunachalam Muruganantham — TEDx India (Pad Man)</li>
+<li>Bhagavad Gita Explained — Epified (YouTube)</li>
+</ul></div>
+<div class="detail-card" style="grid-column:1/-1"><h4>🌍 Real-World Projects per Phase</h4>
+<div class="detail-grid" style="margin-top:8px">
+<div><strong>Phase 1 (Foundation):</strong> 'My Village/City Story' documentary, school radio/podcast, digital footprint audit campaign.</div>
+<div><strong>Phase 2 (Cognitive):</strong> Career Fair organisation, Problem-Solving Olympics, alumni mentorship programme.</div>
+<div><strong>Phase 3 (Ethical):</strong> Seva Diwas community service, anti-bullying campaign, constitutional literacy drive, peer tutoring.</div>
+<div><strong>Phase 4 (Strategic):</strong> Student Innovation Lab, social enterprise pitch to local leaders, 'India 2047' vision project.</div>
+</div></div>
+</div>`;
+}
+
+// ═══ INIT ═══
+renderPhases();
+renderWeeks();
+renderElectives();
+renderArch();
+renderRes();
+updateProgress();
+</script>
+<script data-goatcounter="https://km-auc.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
+</body>
+</html>
