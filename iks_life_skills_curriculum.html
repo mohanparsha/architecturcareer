@@ -276,7 +276,9 @@
       border: 1px solid #c8ddd3;
       border-radius: 16px;
       padding: 20px 24px;
-      margin-bottom: 20px;
+      margin-top: 20px;
+      margin-bottom: 0;
+      box-shadow: var(--shadow);
     }
     .guide-card h3 {
       font-size: 15px;
@@ -977,7 +979,7 @@
       .hero { background: #0c2340 !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; border-radius: 0; animation: none !important; }
       .hero * { animation: none !important; }
       .hero-logo { width: 120px !important; }
-      .side, .filters, .btn-row, .action-link, .chip, .progress-box, .legend, .method-grid, .footer-note { display: none !important; }
+      .side, .filters, .btn-row, .action-link, .chip, .progress-box, .legend, .method-grid, .footer-note, .guide-card { display: none !important; }
       .top-grid { display: block !important; }
       .panel { box-shadow: none !important; border: 1px solid #ccc !important; }
       .week-grid { grid-template-columns: 1fr 1fr !important; gap: 10px !important; }
@@ -1023,6 +1025,31 @@
       </div>
     </section>
 
+    <div class="guide-card">
+      <h3>How to Use This Guide</h3>
+      <div class="guide-steps">
+        <div class="guide-step">
+          <div class="guide-step-num">1</div>
+          <span class="guide-step-title">Choose your tier</span>
+          <span class="guide-step-desc">Select <strong>T1 Foundation</strong> (Class 9), <strong>T2 Applied</strong> (Class 10), or <strong>T3 Mastery</strong> (Class 11+) in the sidebar. The same 12 stories deepen with each tier.</span>
+        </div>
+        <div class="guide-step">
+          <div class="guide-step-num">2</div>
+          <span class="guide-step-title">Follow the sequence</span>
+          <span class="guide-step-desc">Start from <strong>Week 1</strong> and progress through all 4 phases: Foundation → Cognitive → Ethical → Strategic. Each module is one 40-min period.</span>
+        </div>
+        <div class="guide-step">
+          <div class="guide-step-num">3</div>
+          <span class="guide-step-title">Explore each module</span>
+          <span class="guide-step-desc">Click <strong>Explore Module</strong> on any week card. Inside: story, reflection, simulation, rubric, templates, timing, teacher notes, and resources.</span>
+        </div>
+      </div>
+      <div class="guide-note">
+        <strong>Tier differences:</strong> T1 uses guided fill-in templates. T2 requires freeform analysis and real-world transfer. T3 asks students to design and teach learning experiences for others.
+        Use <strong>Mark Complete</strong> to track progress. Week 12 (Capstone) uses two periods.
+      </div>
+    </div>
+
     <div class="top-grid">
       <aside class="panel side">
         <div class="tier-box">
@@ -1058,31 +1085,6 @@
       </aside>
 
       <main class="panel content">
-        <div class="guide-card">
-          <h3>How to Use This Guide</h3>
-          <div class="guide-steps">
-            <div class="guide-step">
-              <div class="guide-step-num">1</div>
-              <span class="guide-step-title">Choose your tier</span>
-              <span class="guide-step-desc">Select <strong>T1 Foundation</strong> (Class 9), <strong>T2 Applied</strong> (Class 10), or <strong>T3 Mastery</strong> (Class 11+) in the sidebar. The same 12 stories deepen with each tier.</span>
-            </div>
-            <div class="guide-step">
-              <div class="guide-step-num">2</div>
-              <span class="guide-step-title">Follow the sequence</span>
-              <span class="guide-step-desc">Start from <strong>Week 1</strong> and progress through all 4 phases: Foundation → Cognitive → Ethical → Strategic. Each module is one 40-min period.</span>
-            </div>
-            <div class="guide-step">
-              <div class="guide-step-num">3</div>
-              <span class="guide-step-title">Explore each module</span>
-              <span class="guide-step-desc">Click <strong>Explore Module</strong> on any week card. Inside: story, reflection, simulation, rubric, templates, timing, teacher notes, and resources.</span>
-            </div>
-          </div>
-          <div class="guide-note">
-            <strong>Tier differences:</strong> T1 uses guided fill-in templates. T2 requires freeform analysis and real-world transfer. T3 asks students to design and teach learning experiences for others.
-            Use <strong>Mark Complete</strong> to track progress. Week 12 (Capstone) uses two periods.
-          </div>
-        </div>
-
         <div class="toolbar">
           <div>
             <h3>Clickable Weekly Modules</h3>
