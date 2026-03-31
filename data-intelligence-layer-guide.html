@@ -1,0 +1,1177 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Data Intelligence Layer — The Complete Guide | Architect U'r Career</title>
+<meta name="description" content="A comprehensive interactive guide to the Data Intelligence Layer — the brain of modern enterprise data architecture. Covers Data Mesh, Lakehouse, Fabric, Governance, and more.">
+<meta property="og:title" content="Data Intelligence Layer — The Complete Guide">
+<meta property="og:description" content="The brain of your enterprise data architecture. A definitive reference guide covering Data Mesh, Lakehouse, Data Fabric, Governance, GenAI, 50+ tools, and a maturity model.">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="Architect U'r Career">
+<meta name="author" content="Krishna Mohan Parsha">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Data Intelligence Layer — The Complete Guide">
+<meta name="twitter:description" content="The brain of your enterprise data architecture. 5 Layers, 4 Pillars, 7 Advanced Capabilities, 50+ tools.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+/* ===== CSS VARIABLES ===== */
+:root {
+  --bg-primary: #0a0c14;
+  --bg-card: #121624;
+  --bg-card-hover: #181d32;
+  --bg-surface: #0e1120;
+  --cyan: #00e6ff;
+  --cyan-dim: rgba(0,230,255,0.15);
+  --cyan-glow: rgba(0,230,255,0.3);
+  --neon-blue: #3c8cff;
+  --neon-green: #00ffaa;
+  --neon-orange: #ffa028;
+  --neon-purple: #9b50ff;
+  --neon-red: #ff4646;
+  --neon-pink: #ff3c82;
+  --gold: #ffc832;
+  --text-primary: #dce1eb;
+  --text-secondary: #8c96aa;
+  --text-faint: #5a6478;
+  --border-dim: #283046;
+  --font-display: 'Plus Jakarta Sans', sans-serif;
+  --font-mono: 'JetBrains Mono', monospace;
+  --max-w: 1200px;
+  --glow-cyan: 0 0 20px rgba(0,230,255,0.25), 0 0 60px rgba(0,230,255,0.1);
+  --glow-orange: 0 0 20px rgba(255,160,40,0.25), 0 0 60px rgba(255,160,40,0.1);
+}
+
+/* ===== RESET & BASE ===== */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; font-size: 16px; }
+body {
+  font-family: var(--font-display);
+  background: var(--bg-primary);
+  color: var(--text-primary);
+  line-height: 1.7;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+}
+a { color: var(--cyan); text-decoration: none; }
+a:hover { text-decoration: underline; }
+a.arch-layer:hover { text-decoration: none; }
+img { max-width: 100%; }
+
+/* ===== BACKGROUND GRADIENT ===== */
+body::before {
+  content: '';
+  position: fixed;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: radial-gradient(ellipse at 50% 30%, rgba(20,28,60,0.6) 0%, transparent 70%);
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* ===== CONTAINER ===== */
+.container { max-width: var(--max-w); margin: 0 auto; padding: 0 24px; position: relative; z-index: 1; }
+
+/* ===== SECTION ===== */
+.section {
+  padding: 80px 0;
+  position: relative;
+  z-index: 1;
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity 0.7s ease, transform 0.7s ease;
+}
+.section.visible { opacity: 1; transform: translateY(0); }
+.section + .section { border-top: 1px solid var(--border-dim); }
+
+/* ===== TYPOGRAPHY ===== */
+.section-label {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: var(--cyan);
+  margin-bottom: 8px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.section-label::before {
+  content: '';
+  width: 24px; height: 2px;
+  background: var(--cyan);
+  box-shadow: var(--glow-cyan);
+}
+h1 {
+  font-size: clamp(2.5rem, 6vw, 4.2rem);
+  font-weight: 800;
+  line-height: 1.1;
+  letter-spacing: -1px;
+}
+h2 {
+  font-size: clamp(1.6rem, 3.5vw, 2.4rem);
+  font-weight: 700;
+  line-height: 1.2;
+  margin-bottom: 16px;
+}
+h3 {
+  font-size: clamp(1.1rem, 2vw, 1.4rem);
+  font-weight: 700;
+  margin-bottom: 8px;
+}
+.subtitle {
+  font-size: clamp(1rem, 2vw, 1.25rem);
+  color: var(--text-secondary);
+  max-width: 700px;
+}
+.glow-text { color: var(--cyan); text-shadow: var(--glow-cyan); }
+.gold-text { color: var(--gold); }
+.orange-text { color: var(--neon-orange); }
+
+/* ===== HERO ===== */
+.hero {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 40px 0;
+  opacity: 1;
+  transform: none;
+}
+.hero h1 { margin-bottom: 20px; }
+.hero h1 .line1 { display: block; color: var(--cyan); text-shadow: var(--glow-cyan); }
+.hero h1 .line2 { display: block; color: var(--neon-blue); }
+.hero h1 .line3 { display: block; color: var(--cyan); text-shadow: var(--glow-cyan); }
+.hero .subtitle { margin: 0 auto 30px; }
+.hero-divider {
+  width: 200px; height: 2px; margin: 0 auto 24px;
+  background: var(--gold);
+  box-shadow: var(--glow-orange);
+}
+.hero-pills {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 10px;
+  margin-bottom: 40px;
+}
+.hero-pill {
+  padding: 8px 20px;
+  border: 1px solid var(--cyan);
+  border-radius: 20px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--cyan);
+  background: var(--bg-card);
+  transition: all 0.3s;
+}
+.hero-pill:hover { background: var(--cyan-dim); box-shadow: var(--glow-cyan); }
+.hero-stats {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+  gap: 20px;
+  max-width: 700px;
+  margin: 0 auto;
+}
+.hero-stat {
+  background: var(--bg-card);
+  border: 1px solid var(--border-dim);
+  border-radius: 12px;
+  padding: 20px 16px;
+  text-align: center;
+}
+.hero-stat .val { font-size: 2rem; font-weight: 800; color: var(--cyan); font-family: var(--font-mono); }
+.hero-stat .desc { font-size: 0.8rem; color: var(--text-secondary); margin-top: 4px; }
+.scroll-hint {
+  margin-top: 40px;
+  font-size: 0.8rem;
+  color: var(--text-faint);
+  animation: float 2s ease-in-out infinite;
+}
+@keyframes float {
+  0%,100% { transform: translateY(0); }
+  50% { transform: translateY(8px); }
+}
+
+/* ===== NAVIGATION ===== */
+.toc-nav {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: rgba(10,12,20,0.92);
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--border-dim);
+  padding: 0;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+}
+.toc-nav::-webkit-scrollbar { height: 0; }
+.toc-inner {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  max-width: var(--max-w);
+  margin: 0 auto;
+  padding: 10px 16px;
+  white-space: nowrap;
+}
+.toc-link {
+  padding: 6px 14px;
+  border-radius: 20px;
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: var(--text-secondary);
+  transition: all 0.3s;
+  flex-shrink: 0;
+}
+.toc-link:hover, .toc-link.active {
+  color: var(--cyan);
+  background: var(--cyan-dim);
+  text-decoration: none;
+}
+
+/* ===== LAYER CARDS ===== */
+.layer-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 24px;
+  margin-top: 32px;
+}
+.layer-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border-dim);
+  border-radius: 16px;
+  padding: 28px 24px;
+  transition: all 0.35s ease;
+  position: relative;
+  overflow: hidden;
+}
+.layer-card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 4px;
+  background: var(--card-accent, var(--cyan));
+}
+.layer-card:hover {
+  border-color: var(--card-accent, var(--cyan));
+  transform: translateY(-4px);
+  box-shadow: 0 8px 32px rgba(0,0,0,0.4), 0 0 20px rgba(0,230,255,0.08);
+}
+.card-icon {
+  width: 44px; height: 44px;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 800;
+  font-size: 0.85rem;
+  margin-bottom: 16px;
+  color: var(--bg-primary);
+}
+.card-title { font-size: 1.1rem; font-weight: 700; margin-bottom: 8px; }
+.card-desc { font-size: 0.9rem; color: var(--text-secondary); line-height: 1.6; }
+.card-list { list-style: none; margin-top: 12px; }
+.card-list li {
+  padding: 6px 0;
+  font-size: 0.88rem;
+  color: var(--text-secondary);
+  border-bottom: 1px solid rgba(40,48,70,0.5);
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+}
+.card-list li::before {
+  content: '›';
+  color: var(--card-accent, var(--cyan));
+  font-weight: 700;
+  flex-shrink: 0;
+}
+.card-list li:last-child { border-bottom: none; }
+
+/* ===== ARCHITECTURE DIAGRAM ===== */
+.arch-stack {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  max-width: 800px;
+  margin: 32px auto 0;
+}
+.arch-layer {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 18px 24px;
+  background: var(--bg-card);
+  border-radius: 12px;
+  border-left: 4px solid var(--layer-color, var(--cyan));
+  cursor: pointer;
+  transition: all 0.3s;
+  position: relative;
+}
+.arch-layer:hover {
+  background: var(--bg-card-hover);
+  box-shadow: 0 0 20px rgba(0,230,255,0.08);
+  transform: translateX(8px);
+}
+.arch-layer.active {
+  border-color: var(--gold);
+  background: rgba(255,200,50,0.06);
+}
+.arch-layer-num {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: var(--layer-color, var(--cyan));
+  width: 28px;
+  flex-shrink: 0;
+}
+.arch-layer-name { font-weight: 700; font-size: 1rem; flex: 1; }
+.arch-layer-sub { font-size: 0.8rem; color: var(--text-secondary); }
+.arch-layer-badge {
+  padding: 4px 12px;
+  border-radius: 6px;
+  font-size: 0.7rem;
+  font-weight: 700;
+  background: var(--neon-orange);
+  color: var(--bg-primary);
+}
+.arch-arrows {
+  text-align: center;
+  color: var(--cyan);
+  font-size: 0.9rem;
+  padding: 2px 0;
+  letter-spacing: 3px;
+}
+
+/* ===== PILLAR SECTION ===== */
+.pillars-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 20px;
+  margin-top: 28px;
+}
+.pillar-card {
+  background: var(--bg-card);
+  border-radius: 16px;
+  overflow: hidden;
+  border: 1px solid var(--border-dim);
+  transition: all 0.3s;
+}
+.pillar-card:hover {
+  border-color: var(--pillar-color, var(--cyan));
+  box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+}
+.pillar-header {
+  padding: 18px 20px;
+  background: var(--pillar-color, var(--cyan));
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.pillar-icon {
+  width: 36px; height: 36px;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.2);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 800;
+  font-size: 0.85rem;
+  color: #fff;
+}
+.pillar-name { font-weight: 700; font-size: 1rem; color: #fff; }
+.pillar-body { padding: 16px 20px; }
+.pillar-item {
+  padding: 10px 12px;
+  margin-bottom: 8px;
+  background: rgba(30,35,55,0.6);
+  border-radius: 8px;
+  font-size: 0.88rem;
+  color: var(--text-primary);
+  transition: background 0.2s;
+}
+.pillar-item:hover { background: rgba(40,50,70,0.8); }
+.pillar-item strong { color: var(--pillar-color, var(--cyan)); font-weight: 600; }
+
+/* ===== TOOLS REFERENCE ===== */
+.tools-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 12px;
+  margin-top: 20px;
+}
+.tool-chip {
+  padding: 12px 16px;
+  background: var(--bg-card);
+  border: 1px solid var(--border-dim);
+  border-radius: 10px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  text-align: center;
+  transition: all 0.2s;
+}
+.tool-chip:hover { border-color: var(--cyan); background: var(--cyan-dim); }
+.tool-chip .tool-cat {
+  font-size: 0.65rem;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: var(--text-faint);
+  display: block;
+  margin-bottom: 4px;
+}
+
+/* ===== MATURITY MODEL ===== */
+.maturity-track {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 16px;
+  margin-top: 28px;
+}
+.maturity-stage {
+  background: var(--bg-card);
+  border: 1px solid var(--border-dim);
+  border-radius: 14px;
+  padding: 24px 20px;
+  text-align: center;
+  position: relative;
+  transition: all 0.3s;
+}
+.maturity-stage:hover { border-color: var(--stage-color, var(--cyan)); transform: translateY(-4px); }
+.maturity-num {
+  font-family: var(--font-mono);
+  font-size: 2.5rem;
+  font-weight: 800;
+  color: var(--stage-color, var(--cyan));
+  line-height: 1;
+}
+.maturity-name { font-weight: 700; font-size: 1rem; margin: 8px 0; }
+.maturity-desc { font-size: 0.8rem; color: var(--text-secondary); line-height: 1.5; }
+
+/* ===== FOOTER ===== */
+.site-footer {
+  background: #050810;
+  border-top: 2px solid var(--cyan);
+  padding: 30px 0;
+  text-align: center;
+  position: relative;
+  z-index: 1;
+}
+.footer-brand { font-size: 1.1rem; font-weight: 700; color: var(--gold); }
+.footer-author { font-size: 0.95rem; color: var(--text-primary); margin-top: 4px; }
+.footer-sub { font-size: 0.75rem; color: var(--text-faint); margin-top: 8px; }
+
+/* ===== BADGES / TAGS ===== */
+.tag-row { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 12px; }
+.tag {
+  padding: 4px 12px;
+  border-radius: 6px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  background: var(--cyan-dim);
+  color: var(--cyan);
+  border: 1px solid rgba(0,230,255,0.2);
+}
+.tag.green { background: rgba(0,255,170,0.1); color: var(--neon-green); border-color: rgba(0,255,170,0.2); }
+.tag.orange { background: rgba(255,160,40,0.1); color: var(--neon-orange); border-color: rgba(255,160,40,0.2); }
+.tag.purple { background: rgba(155,80,255,0.1); color: var(--neon-purple); border-color: rgba(155,80,255,0.2); }
+.tag.red { background: rgba(255,70,70,0.1); color: var(--neon-red); border-color: rgba(255,70,70,0.2); }
+.tag.pink { background: rgba(255,60,130,0.1); color: var(--neon-pink); border-color: rgba(255,60,130,0.2); }
+
+/* ===== CALLOUT ===== */
+.callout {
+  margin-top: 28px;
+  padding: 24px;
+  border-radius: 14px;
+  border: 1px solid var(--border-dim);
+  background: var(--bg-card);
+  position: relative;
+}
+.callout.cyan { border-color: rgba(0,230,255,0.3); background: rgba(0,230,255,0.04); }
+.callout.orange { border-color: rgba(255,160,40,0.3); background: rgba(255,160,40,0.04); }
+.callout.gold { border-color: rgba(255,200,50,0.3); background: rgba(255,200,50,0.04); }
+.callout-title { font-weight: 700; font-size: 1rem; margin-bottom: 8px; display: flex; align-items: center; gap: 8px; }
+
+/* ===== TWO COLUMN ===== */
+.two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 32px; margin-top: 28px; }
+@media (max-width: 768px) {
+  .two-col { grid-template-columns: 1fr; }
+  .hero h1 { font-size: 2.2rem; }
+  .section { padding: 50px 0; }
+  .pillars-grid { grid-template-columns: 1fr; }
+  .layer-grid { grid-template-columns: 1fr; }
+  .maturity-track { grid-template-columns: repeat(2, 1fr); }
+}
+@media (max-width: 480px) {
+  .container { padding: 0 16px; }
+  .maturity-track { grid-template-columns: 1fr; }
+  .hero-stats { grid-template-columns: repeat(2, 1fr); }
+  .toc-link { padding: 6px 10px; font-size: 0.72rem; }
+}
+
+/* ===== PRINT ===== */
+@media print {
+  body { background: #fff; color: #000; }
+  .toc-nav, .scroll-hint, .back-to-top { display: none; }
+  .section { opacity: 1; transform: none; page-break-inside: avoid; }
+}
+
+/* ===== BACK TO TOP ===== */
+.back-to-top {
+  position: fixed;
+  bottom: 28px;
+  right: 28px;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: var(--bg-card);
+  border: 1px solid var(--cyan);
+  color: var(--cyan);
+  font-size: 1.2rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  z-index: 200;
+  opacity: 0;
+  pointer-events: none;
+  transition: all 0.3s;
+  box-shadow: 0 0 16px rgba(0,230,255,0.15);
+}
+.back-to-top.show { opacity: 1; pointer-events: auto; }
+.back-to-top:hover { background: var(--cyan); color: var(--bg-primary); transform: translateY(-2px); }
+
+</style>
+</head>
+<body>
+
+<!-- ===== HERO ===== -->
+<section class="section hero visible" id="top">
+  <div class="container">
+    <div class="section-label">Enterprise Data Architecture Guide</div>
+    <h1>
+      <span class="line1">DATA</span>
+      <span class="line2">INTELLIGENCE</span>
+      <span class="line3">LAYER</span>
+    </h1>
+    <div class="hero-divider"></div>
+    <p class="subtitle">The brain of your enterprise data architecture — a definitive reference guide covering Data Mesh, Lakehouse, Data Fabric, Governance, and the full modern data stack.</p>
+    <div class="hero-pills">
+      <span class="hero-pill">Data Mesh</span>
+      <span class="hero-pill">Lakehouse</span>
+      <span class="hero-pill">Data Fabric</span>
+      <span class="hero-pill">Governance</span>
+      <span class="hero-pill">GenAI</span>
+    </div>
+    <div class="hero-stats">
+      <div class="hero-stat"><div class="val">5</div><div class="desc">Architecture Layers</div></div>
+      <div class="hero-stat"><div class="val">4</div><div class="desc">Core Pillars</div></div>
+      <div class="hero-stat"><div class="val">7</div><div class="desc">Advanced Capabilities</div></div>
+      <div class="hero-stat"><div class="val">50+</div><div class="desc">Tools & Platforms</div></div>
+    </div>
+    <div class="scroll-hint">↓ Scroll to explore</div>
+  </div>
+</section>
+
+<!-- ===== NAVIGATION ===== -->
+<nav class="toc-nav" id="toc">
+  <div class="toc-inner">
+    <a href="#top" class="toc-link" style="color:var(--gold);">⌂</a>
+    <a href="#problem" class="toc-link">Problem</a>
+    <a href="#overview" class="toc-link">Overview</a>
+    <a href="#sources" class="toc-link">L1: Sources</a>
+    <a href="#processing" class="toc-link">L2: Processing</a>
+    <a href="#storage" class="toc-link">L3: Storage</a>
+    <a href="#intelligence" class="toc-link">L4: Intelligence</a>
+    <a href="#advanced" class="toc-link">L4: Advanced</a>
+    <a href="#consumption" class="toc-link">L5: Consumption</a>
+    <a href="#tools" class="toc-link">Tools</a>
+    <a href="#maturity" class="toc-link">Maturity</a>
+    <a href="#takeaways" class="toc-link">Takeaways</a>
+  </div>
+</nav>
+
+<!-- ===== THE PROBLEM ===== -->
+<section class="section" id="problem">
+  <div class="container">
+    <div class="section-label">Why This Matters</div>
+    <h2 style="color: var(--neon-red);">The Problem</h2>
+    <p class="subtitle">Enterprise data is scattered, siloed, and ungoverned. Organizations generate exponentially more data, yet derive diminishing value from it.</p>
+
+    <div class="layer-grid" style="margin-top:28px;">
+      <div class="layer-card" style="--card-accent: var(--neon-red);">
+        <div class="card-icon" style="background: var(--neon-red);">!</div>
+        <div class="card-title">Data Silos</div>
+        <div class="card-desc">ERP, CRM, IoT, Cloud Apps, and Legacy Systems operate in isolation. No single source of truth exists, leading to conflicting reports and duplicated efforts across teams.</div>
+      </div>
+      <div class="layer-card" style="--card-accent: var(--neon-orange);">
+        <div class="card-icon" style="background: var(--neon-orange);">!</div>
+        <div class="card-title">Quality Crisis</div>
+        <div class="card-desc">Poor data quality costs organizations an average of $12.9M annually (Gartner). Inconsistent formats, missing values, and stale data erode trust in analytics.</div>
+      </div>
+      <div class="layer-card" style="--card-accent: var(--neon-purple);">
+        <div class="card-icon" style="background: var(--neon-purple);">!</div>
+        <div class="card-title">Governance Gaps</div>
+        <div class="card-desc">Regulatory requirements (GDPR, CCPA, DPDPA, HIPAA) demand strict data controls. Without governance, compliance risks and audit failures multiply.</div>
+      </div>
+      <div class="layer-card" style="--card-accent: var(--neon-green);">
+        <div class="card-icon" style="background: var(--neon-green);">!</div>
+        <div class="card-title">Wasted Potential</div>
+        <div class="card-desc">70% of enterprise data is never analyzed. 68% is not used for analytics. Shadow IT and untracked data usage create blind spots in decision-making.</div>
+      </div>
+    </div>
+
+    <div class="callout orange" style="margin-top:32px;">
+      <div class="callout-title" style="color:var(--neon-orange);">💡 The Solution</div>
+      <p style="color:var(--text-secondary);">What if there was a unified intelligent layer that sits across your entire data estate — cataloging, governing, monitoring quality, and tracing lineage automatically? That is the <strong style="color:var(--cyan);">Data Intelligence Layer</strong>.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ===== ARCHITECTURE OVERVIEW ===== -->
+<section class="section" id="overview">
+  <div class="container">
+    <div class="section-label">Architecture</div>
+    <h2 class="glow-text">The 5-Layer Architecture</h2>
+    <p class="subtitle">Data flows upward from sources to consumers. The Data Intelligence Layer (L4) is the brain that governs everything.</p>
+
+    <div class="arch-stack">
+      <a href="#consumption" class="arch-layer" style="--layer-color: var(--neon-green);">
+        <span class="arch-layer-num">L5</span>
+        <div><div class="arch-layer-name">Data Consumers</div><div class="arch-layer-sub">BI / AI-ML / Apps / Reverse ETL</div></div>
+      </a>
+      <div class="arch-arrows">↑ ↑ ↑</div>
+      <a href="#intelligence" class="arch-layer active" style="--layer-color: var(--neon-orange);">
+        <span class="arch-layer-num">L4</span>
+        <div><div class="arch-layer-name">Data Intelligence Layer</div><div class="arch-layer-sub">Catalog · Quality · Lineage · Governance · GenAI</div></div>
+        <span class="arch-layer-badge">CORE</span>
+      </a>
+      <div class="arch-arrows">↑ ↑ ↑</div>
+      <a href="#storage" class="arch-layer" style="--layer-color: var(--neon-blue);">
+        <span class="arch-layer-num">L3</span>
+        <div><div class="arch-layer-name">Data Storage</div><div class="arch-layer-sub">Lakehouse / Mesh Domains / Fabric</div></div>
+      </a>
+      <div class="arch-arrows">↑ ↑ ↑</div>
+      <a href="#processing" class="arch-layer" style="--layer-color: var(--neon-purple);">
+        <span class="arch-layer-num">L2</span>
+        <div><div class="arch-layer-name">Data Processing</div><div class="arch-layer-sub">Batch + Stream (ETL/ELT)</div></div>
+      </a>
+      <div class="arch-arrows">↑ ↑ ↑</div>
+      <a href="#sources" class="arch-layer" style="--layer-color: var(--neon-red);">
+        <span class="arch-layer-num">L1</span>
+        <div><div class="arch-layer-name">Data Sources</div><div class="arch-layer-sub">ERP · CRM · IoT · Files · APIs · Databases</div></div>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ===== LAYER 1: DATA SOURCES ===== -->
+<section class="section" id="sources">
+  <div class="container">
+    <div class="section-label">Layer 1</div>
+    <h2 style="color: var(--neon-red);">Data Sources</h2>
+    <p class="subtitle">Where your enterprise data originates. Modern enterprises ingest data from dozens of heterogeneous systems spanning structured, semi-structured, and unstructured formats.</p>
+
+    <div class="layer-grid">
+      <div class="layer-card" style="--card-accent: var(--neon-blue);">
+        <div class="card-icon" style="background: var(--neon-blue);">S</div>
+        <div class="card-title">ERP Systems</div>
+        <div class="card-desc">Core business operations and financial data.</div>
+        <div class="tag-row"><span class="tag">SAP S/4HANA</span><span class="tag">Oracle EBS</span><span class="tag">MS Dynamics</span></div>
+      </div>
+      <div class="layer-card" style="--card-accent: var(--cyan);">
+        <div class="card-icon" style="background: var(--cyan);">C</div>
+        <div class="card-title">CRM Platforms</div>
+        <div class="card-desc">Customer interactions, sales pipelines, and marketing data.</div>
+        <div class="tag-row"><span class="tag">Salesforce</span><span class="tag">HubSpot</span><span class="tag">Dynamics 365</span></div>
+      </div>
+      <div class="layer-card" style="--card-accent: var(--neon-purple);">
+        <div class="card-icon" style="background: var(--neon-purple);">D</div>
+        <div class="card-title">Databases</div>
+        <div class="card-desc">Transactional and analytical datastores.</div>
+        <div class="tag-row"><span class="tag purple">PostgreSQL</span><span class="tag purple">MongoDB</span><span class="tag purple">Neo4j</span><span class="tag purple">Redis</span></div>
+      </div>
+      <div class="layer-card" style="--card-accent: var(--neon-green);">
+        <div class="card-icon" style="background: var(--neon-green);">A</div>
+        <div class="card-title">APIs & SaaS</div>
+        <div class="card-desc">Third-party service integrations and webhooks.</div>
+        <div class="tag-row"><span class="tag green">REST</span><span class="tag green">GraphQL</span><span class="tag green">Webhooks</span><span class="tag green">gRPC</span></div>
+      </div>
+      <div class="layer-card" style="--card-accent: var(--neon-orange);">
+        <div class="card-icon" style="background: var(--neon-orange);">F</div>
+        <div class="card-title">File Systems</div>
+        <div class="card-desc">Flat files, data lakes, and document stores.</div>
+        <div class="tag-row"><span class="tag orange">CSV</span><span class="tag orange">JSON</span><span class="tag orange">Parquet</span><span class="tag orange">Avro</span><span class="tag orange">XML</span></div>
+      </div>
+      <div class="layer-card" style="--card-accent: var(--neon-pink);">
+        <div class="card-icon" style="background: var(--neon-pink);">I</div>
+        <div class="card-title">IoT & Streaming</div>
+        <div class="card-desc">Real-time sensor data, clickstreams, and event logs.</div>
+        <div class="tag-row"><span class="tag pink">Kafka</span><span class="tag pink">MQTT</span><span class="tag pink">Kinesis</span><span class="tag pink">Event Hubs</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== LAYER 2: DATA PROCESSING ===== -->
+<section class="section" id="processing">
+  <div class="container">
+    <div class="section-label">Layer 2</div>
+    <h2 style="color: var(--neon-purple);">Data Processing</h2>
+    <p class="subtitle">Transform raw data into consumable formats using batch and real-time processing paradigms.</p>
+
+    <div class="two-col">
+      <div>
+        <h3 style="color: var(--neon-purple);">Batch Processing</h3>
+        <p style="color:var(--text-secondary); font-size:0.9rem; margin-bottom:16px;">Scheduled, high-volume transformations for historical and aggregate workloads.</p>
+        <ul class="card-list" style="--card-accent: var(--neon-purple);">
+          <li>ETL / ELT Pipelines</li>
+          <li>Data Cleansing & Deduplication</li>
+          <li>Schema Validation & Evolution</li>
+          <li>Historical Loads & Backfills</li>
+          <li>Aggregation, Rollups & Materialized Views</li>
+          <li>Data Partitioning & Compaction</li>
+        </ul>
+      </div>
+      <div>
+        <h3 style="color: var(--neon-green);">Real-Time Streaming</h3>
+        <p style="color:var(--text-secondary); font-size:0.9rem; margin-bottom:16px;">Low-latency, event-driven processing for operational and analytical use cases.</p>
+        <ul class="card-list" style="--card-accent: var(--neon-green);">
+          <li>Event-Driven Ingestion</li>
+          <li>Stream Processing (Kafka Streams / Flink)</li>
+          <li>CDC — Change Data Capture</li>
+          <li>Micro-batch Windows</li>
+          <li>Real-time Enrichment & Joins</li>
+          <li>Exactly-once & At-least-once Delivery</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="callout cyan" style="margin-top:28px;">
+      <div class="callout-title glow-text">Engines & Platforms</div>
+      <div class="tag-row">
+        <span class="tag">Apache Spark</span><span class="tag">Apache Flink</span><span class="tag">dbt</span><span class="tag">Apache Airflow</span><span class="tag">Azure Data Factory</span><span class="tag">AWS Glue</span><span class="tag">Prefect</span><span class="tag">Dagster</span>
+      </div>
+      <div class="tag-row" style="margin-top:8px;">
+        <span class="tag orange">Databricks</span><span class="tag orange">Snowflake</span><span class="tag orange">Google BigQuery</span><span class="tag orange">Azure Synapse</span><span class="tag orange">Amazon Redshift</span>
+      </div>
+    </div>
+
+    <div class="callout" style="margin-top:16px;">
+      <div class="callout-title" style="color:var(--neon-green);">Data Ingestion & Integration</div>
+      <p style="color:var(--text-secondary); font-size:0.9rem; margin-bottom:12px;">Before transformation, data must be extracted and loaded from source systems. Modern EL(T) and integration tools handle this at scale with pre-built connectors, schema detection, and incremental sync.</p>
+      <div class="tag-row">
+        <span class="tag green">Fivetran</span><span class="tag green">Airbyte</span><span class="tag green">Meltano</span><span class="tag green">Stitch</span><span class="tag green">Hevo Data</span>
+      </div>
+      <div class="tag-row" style="margin-top:8px;">
+        <span class="tag purple">Informatica PowerCenter</span><span class="tag purple">Talend</span><span class="tag purple">MuleSoft</span><span class="tag purple">SnapLogic</span><span class="tag purple">EIIG (Orion Governance)</span>
+      </div>
+    </div>
+
+    <div class="callout" style="margin-top:16px;">
+      <div class="callout-title" style="color:var(--neon-purple);">Orchestration</div>
+      <p style="color:var(--text-secondary); font-size:0.9rem;">Orchestrators manage the scheduling, dependency resolution, retries, and monitoring of data pipelines using DAG-based workflows. They ensure the right data moves through the right transformations in the right order.</p>
+      <div class="tag-row" style="margin-top:8px;">
+        <span class="tag">Apache Airflow</span><span class="tag">Dagster</span><span class="tag">Prefect</span><span class="tag">Mage</span><span class="tag">Kestra</span><span class="tag orange">Azure Data Factory</span><span class="tag orange">AWS Step Functions</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== LAYER 3: DATA STORAGE ===== -->
+<section class="section" id="storage">
+  <div class="container">
+    <div class="section-label">Layer 3</div>
+    <h2 style="color: var(--neon-blue);">Data Storage</h2>
+    <p class="subtitle">Unified, scalable, open storage paradigms. Three complementary approaches define the modern data storage landscape.</p>
+
+    <div class="layer-grid" style="grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));">
+      <div class="layer-card" style="--card-accent: var(--neon-blue);">
+        <div class="card-icon" style="background: var(--neon-blue);">LH</div>
+        <div class="card-title">Data Lakehouse</div>
+        <div class="card-desc">Combines the flexibility of data lakes with the reliability of data warehouses.</div>
+        <ul class="card-list">
+          <li>ACID transactions on object storage</li>
+          <li>Open table formats: Delta Lake, Apache Iceberg, Apache Hudi</li>
+          <li>Schema enforcement & evolution</li>
+          <li>Time travel & version history</li>
+          <li>Unified batch + streaming support</li>
+        </ul>
+      </div>
+      <div class="layer-card" style="--card-accent: var(--neon-green);">
+        <div class="card-icon" style="background: var(--neon-green);">DM</div>
+        <div class="card-title">Data Mesh</div>
+        <div class="card-desc">Decentralized, domain-oriented approach to data ownership. Coined by Zhamak Dehghani (2019).</div>
+        <ul class="card-list">
+          <li>Domain ownership of data</li>
+          <li>Data as a product (discoverable, addressable, trustworthy)</li>
+          <li>Data contracts & SLAs between producer-consumer</li>
+          <li>Federated computational governance</li>
+          <li>Self-serve data infrastructure as platform</li>
+        </ul>
+      </div>
+      <div class="layer-card" style="--card-accent: var(--neon-purple);">
+        <div class="card-icon" style="background: var(--neon-purple);">DF</div>
+        <div class="card-title">Data Fabric</div>
+        <div class="card-desc">Metadata-driven, AI-automated integration layer that works across cloud and on-prem. Microsoft Fabric (2023) is one commercial implementation.</div>
+        <ul class="card-list">
+          <li>Metadata-driven architecture</li>
+          <li>AI-automated data integration</li>
+          <li>Cross-cloud & hybrid connectivity</li>
+          <li>Knowledge graph based discovery</li>
+          <li>Active metadata management</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="callout gold" style="margin-top:28px;">
+      <div class="callout-title" style="color:var(--gold);">Medallion Architecture (Bronze → Silver → Gold)</div>
+      <p style="color:var(--text-secondary); font-size:0.9rem;"><strong style="color:var(--neon-orange);">Bronze</strong> (Raw) — ingested as-is from source systems.  <strong style="color:var(--cyan);">Silver</strong> (Cleaned) — validated, deduplicated, and conformed.  <strong style="color:var(--gold);">Gold</strong> (Business-Ready) — aggregated, enriched, and optimized for consumption. This pattern is foundational in Databricks, Microsoft Fabric, and most modern lakehouse architectures.</p>
+      <div class="tag-row" style="margin-top:12px;">
+        <span class="tag orange">Databricks Lakehouse</span><span class="tag purple">Microsoft Fabric</span><span class="tag">Snowflake</span><span class="tag green">Google BigLake</span><span class="tag">AWS Lake Formation</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== LAYER 4: DATA INTELLIGENCE LAYER (CORE) ===== -->
+<section class="section" id="intelligence">
+  <div class="container">
+    <div class="section-label">Layer 4 — Core</div>
+    <h2 style="color: var(--neon-orange);">The Data Intelligence Layer</h2>
+    <p class="subtitle">The brain that makes your data ecosystem smart. These four pillars are the foundation of enterprise data intelligence.</p>
+
+    <div class="pillars-grid">
+      <!-- CATALOG -->
+      <div class="pillar-card" style="--pillar-color: var(--neon-blue);">
+        <div class="pillar-header" style="background: var(--neon-blue);">
+          <div class="pillar-icon">C</div>
+          <div class="pillar-name">Data Catalog</div>
+        </div>
+        <div class="pillar-body">
+          <div class="pillar-item"><strong>Metadata Discovery</strong> — Automatically crawl and index datasets across all sources.</div>
+          <div class="pillar-item"><strong>Search & Browse</strong> — Google-like search for datasets, tables, dashboards.</div>
+          <div class="pillar-item"><strong>Business Glossary</strong> — Standardized definitions, owners, and stewards.</div>
+          <div class="pillar-item"><strong>Tags & Classification</strong> — PII detection, sensitivity labels, domain tagging.</div>
+          <div class="pillar-item"><strong>Data Products</strong> — Package datasets with documentation, SLAs, and contracts.</div>
+        </div>
+      </div>
+      <!-- QUALITY -->
+      <div class="pillar-card" style="--pillar-color: var(--neon-green);">
+        <div class="pillar-header" style="background: var(--neon-green);">
+          <div class="pillar-icon">Q</div>
+          <div class="pillar-name">Data Quality</div>
+        </div>
+        <div class="pillar-body">
+          <div class="pillar-item"><strong>Profiling & Rules</strong> — Automated statistical profiling, custom validation rules.</div>
+          <div class="pillar-item"><strong>Anomaly Detection</strong> — ML-based detection of distribution shifts and outliers.</div>
+          <div class="pillar-item"><strong>Freshness Monitoring</strong> — SLA tracking for data timeliness and staleness alerts.</div>
+          <div class="pillar-item"><strong>Completeness & Accuracy</strong> — Null checks, referential integrity, cross-source validation.</div>
+          <div class="pillar-item"><strong>Data Contracts</strong> — Schema and quality guarantees between producer and consumer.</div>
+        </div>
+      </div>
+      <!-- LINEAGE -->
+      <div class="pillar-card" style="--pillar-color: var(--neon-purple);">
+        <div class="pillar-header" style="background: var(--neon-purple);">
+          <div class="pillar-icon">L</div>
+          <div class="pillar-name">Data Lineage</div>
+        </div>
+        <div class="pillar-body">
+          <div class="pillar-item"><strong>End-to-End Tracking</strong> — Trace data from source to dashboard through every transformation.</div>
+          <div class="pillar-item"><strong>Impact Analysis</strong> — Understand downstream effects before making changes.</div>
+          <div class="pillar-item"><strong>Column-Level Lineage</strong> — Granular field-level tracking across pipelines.</div>
+          <div class="pillar-item"><strong>Visual Flow Maps</strong> — Interactive DAGs showing data dependencies.</div>
+          <div class="pillar-item"><strong>Root Cause Analysis</strong> — Quickly trace data issues back to origin.</div>
+        </div>
+      </div>
+      <!-- GOVERNANCE -->
+      <div class="pillar-card" style="--pillar-color: var(--neon-red);">
+        <div class="pillar-header" style="background: var(--neon-red);">
+          <div class="pillar-icon">G</div>
+          <div class="pillar-name">Governance</div>
+        </div>
+        <div class="pillar-body">
+          <div class="pillar-item"><strong>Access Control (RBAC/ABAC)</strong> — Role and attribute-based fine-grained permissions.</div>
+          <div class="pillar-item"><strong>Privacy & Masking</strong> — Dynamic masking, tokenization, and anonymization.</div>
+          <div class="pillar-item"><strong>Retention Policies</strong> — Automated lifecycle management and data deletion.</div>
+          <div class="pillar-item"><strong>Audit Trails</strong> — Complete history of who accessed what, when, and why.</div>
+          <div class="pillar-item"><strong>Regulatory Compliance</strong> — GDPR, CCPA, DPDPA, HIPAA, SOX frameworks.</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="callout orange" style="margin-top:28px;">
+      <div class="callout-title" style="color:var(--neon-orange);">Master Data Management (MDM)</div>
+      <p style="color:var(--text-secondary); font-size:0.9rem; margin-bottom:12px;">MDM ensures that critical business entities — customers, products, suppliers, locations — have a single, consistent, authoritative definition across the enterprise. MDM feeds into the catalog (golden records), quality (matching & dedup), and governance (ownership & stewardship).</p>
+      <div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(200px,1fr)); gap:12px; margin-top:12px;">
+        <div style="padding:12px; background:var(--bg-card); border:1px solid var(--border-dim); border-radius:8px;">
+          <div style="font-weight:700; font-size:0.85rem; color:var(--neon-orange); margin-bottom:4px;">Key Capabilities</div>
+          <div style="font-size:0.82rem; color:var(--text-secondary);">Golden record creation, entity resolution, match & merge, hierarchy management, reference data management</div>
+        </div>
+        <div style="padding:12px; background:var(--bg-card); border:1px solid var(--border-dim); border-radius:8px;">
+          <div style="font-weight:700; font-size:0.85rem; color:var(--neon-orange); margin-bottom:4px;">Tools</div>
+          <div style="font-size:0.82rem; color:var(--text-secondary);">Informatica MDM, Reltio, Profisee, Semarchy, SAP MDG, TIBCO EBX, EIIG (Orion Governance)</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== LAYER 4: ADVANCED CAPABILITIES ===== -->
+<section class="section" id="advanced">
+  <div class="container">
+    <div class="section-label">Layer 4 — Advanced</div>
+    <h2 style="color: var(--neon-orange);">Advanced Capabilities</h2>
+    <p class="subtitle">Beyond the four pillars — AI-powered capabilities that transform raw data into a trusted, intelligent enterprise asset.</p>
+
+    <div class="layer-grid" style="grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));">
+      <div class="layer-card" style="--card-accent: var(--neon-blue);">
+        <div class="card-icon" style="background: var(--neon-blue);">AI</div>
+        <div class="card-title">AI/ML-Powered</div>
+        <ul class="card-list"><li>Auto-classification & smart tagging</li><li>ML-driven anomaly detection</li><li>Predictive data quality scoring</li><li>Automated PII/PHI detection</li></ul>
+      </div>
+      <div class="layer-card" style="--card-accent: var(--neon-green);">
+        <div class="card-icon" style="background: var(--neon-green);">OB</div>
+        <div class="card-title">Observability</div>
+        <ul class="card-list"><li>Pipeline health monitoring</li><li>Data drift detection</li><li>Freshness SLA dashboards</li><li>Incident management & alerting</li></ul>
+      </div>
+      <div class="layer-card" style="--card-accent: var(--cyan);">
+        <div class="card-icon" style="background: var(--cyan);">CO</div>
+        <div class="card-title">Collaboration</div>
+        <ul class="card-list"><li>Data steward workflows</li><li>Request & approval processes</li><li>Slack/Teams integration</li><li>Inline annotations & discussions</li></ul>
+      </div>
+      <div class="layer-card" style="--card-accent: var(--neon-pink);">
+        <div class="card-icon" style="background: var(--neon-pink);">AI</div>
+        <div class="card-title">GenAI / LLM</div>
+        <ul class="card-list"><li>Natural language data queries</li><li>AI agents over enterprise data</li><li>Text-to-SQL interfaces</li><li>Auto-generated documentation</li></ul>
+      </div>
+      <div class="layer-card" style="--card-accent: var(--neon-purple);">
+        <div class="card-icon" style="background: var(--neon-purple);">SS</div>
+        <div class="card-title">Self-Service</div>
+        <ul class="card-list"><li>No-code data preparation</li><li>Data marketplace / storefront</li><li>Democratized access for analysts</li><li>Semantic layer for business users</li></ul>
+      </div>
+      <div class="layer-card" style="--card-accent: var(--neon-orange);">
+        <div class="card-icon" style="background: var(--neon-orange);">CG</div>
+        <div class="card-title">Cost Governance</div>
+        <ul class="card-list"><li>Usage analytics & chargeback</li><li>Query cost optimization</li><li>Storage tiering recommendations</li><li>FinOps integration</li></ul>
+      </div>
+      <div class="layer-card" style="--card-accent: var(--neon-red);">
+        <div class="card-icon" style="background: var(--neon-red);">IO</div>
+        <div class="card-title">Interoperability</div>
+        <ul class="card-list"><li>Multi-cloud & hybrid support</li><li>Open standards (OpenLineage, OpenMetadata)</li><li>Vendor-agnostic connectors</li><li>Apache XTable / UniForm for table formats</li></ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== LAYER 5: DATA CONSUMPTION ===== -->
+<section class="section" id="consumption">
+  <div class="container">
+    <div class="section-label">Layer 5</div>
+    <h2 style="color: var(--neon-green);">Data Consumption</h2>
+    <p class="subtitle">Trusted data delivered to every stakeholder. With the Data Intelligence Layer, every consumer gets governed, documented, and discoverable data.</p>
+
+    <div class="layer-grid">
+      <div class="layer-card" style="--card-accent: var(--neon-blue);">
+        <div class="card-icon" style="background: var(--neon-blue);">BI</div>
+        <div class="card-title">Business Intelligence</div>
+        <div class="card-desc">Dashboards, reports, and self-service analytics for business decision-makers.</div>
+        <div class="tag-row"><span class="tag">Power BI</span><span class="tag">Tableau</span><span class="tag">Looker</span><span class="tag">Qlik</span><span class="tag">MicroStrategy</span><span class="tag">Metabase</span></div>
+      </div>
+      <div class="layer-card" style="--card-accent: var(--neon-purple);">
+        <div class="card-icon" style="background: var(--neon-purple);">ML</div>
+        <div class="card-title">AI & Machine Learning</div>
+        <div class="card-desc">Feature stores, model training, and MLOps pipelines powered by governed data.</div>
+        <div class="tag-row"><span class="tag purple">Vertex AI</span><span class="tag purple">SageMaker</span><span class="tag purple">MLflow</span><span class="tag purple">Feast</span><span class="tag purple">Tecton</span></div>
+      </div>
+      <div class="layer-card" style="--card-accent: var(--neon-green);">
+        <div class="card-icon" style="background: var(--neon-green);">AP</div>
+        <div class="card-title">Data Applications</div>
+        <div class="card-desc">Embedded analytics, operational applications, and customer-facing data products.</div>
+        <div class="tag-row"><span class="tag green">Streamlit</span><span class="tag green">Retool</span><span class="tag green">Superset</span><span class="tag green">Custom Apps</span></div>
+      </div>
+      <div class="layer-card" style="--card-accent: var(--neon-orange);">
+        <div class="card-icon" style="background: var(--neon-orange);">RE</div>
+        <div class="card-title">Reverse ETL & Sharing</div>
+        <div class="card-desc">Sync insights back into operational SaaS tools, clean rooms, and partner data exchanges. Closes the loop.</div>
+        <div class="tag-row"><span class="tag orange">Hightouch</span><span class="tag orange">Census</span><span class="tag orange">Snowflake Sharing</span><span class="tag orange">Delta Sharing</span></div>
+      </div>
+    </div>
+
+    <div class="callout cyan" style="margin-top:28px;">
+      <div class="callout-title glow-text">Semantic Layer</div>
+      <p style="color:var(--text-secondary); font-size:0.9rem;">The semantic layer provides a unified business-friendly abstraction over raw data — defining metrics, dimensions, and relationships once and reusing them across all consumption tools. Key players include <strong style="color:var(--cyan);">dbt Semantic Layer</strong>, <strong style="color:var(--cyan);">Cube</strong>, <strong style="color:var(--cyan);">AtScale</strong>, and <strong style="color:var(--cyan);">Looker Modeling Layer</strong>.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ===== TOOLS & PLATFORMS REFERENCE ===== -->
+<section class="section" id="tools">
+  <div class="container">
+    <div class="section-label">Reference</div>
+    <h2 class="glow-text">Tools & Platforms Landscape</h2>
+    <p class="subtitle">A curated reference of leading tools across each capability area of the Data Intelligence Layer.</p>
+
+    <h3 style="margin-top:28px; color:var(--neon-orange);">Data Catalog & Discovery</h3>
+    <div class="tools-grid">
+      <div class="tool-chip"><span class="tool-cat">Enterprise</span>Collibra</div>
+      <div class="tool-chip"><span class="tool-cat">Modern</span>Atlan</div>
+      <div class="tool-chip"><span class="tool-cat">Enterprise</span>Alation</div>
+      <div class="tool-chip"><span class="tool-cat">Open Source</span>DataHub (LinkedIn)</div>
+      <div class="tool-chip"><span class="tool-cat">Open Source</span>OpenMetadata</div>
+      <div class="tool-chip"><span class="tool-cat">Cloud-Native</span>Unity Catalog (Databricks)</div>
+      <div class="tool-chip"><span class="tool-cat">Cloud-Native</span>Purview (Microsoft)</div>
+      <div class="tool-chip"><span class="tool-cat">Cloud-Native</span>Dataplex (Google)</div>
+      <div class="tool-chip"><span class="tool-cat">Cloud-Native</span>AWS Glue Catalog</div>
+      <div class="tool-chip"><span class="tool-cat">Enterprise</span>Informatica CDGC</div>
+      <div class="tool-chip"><span class="tool-cat">Enterprise</span>EIIG (Orion Governance)</div>
+    </div>
+
+    <h3 style="margin-top:28px; color:var(--neon-green);">Data Quality & Observability</h3>
+    <div class="tools-grid">
+      <div class="tool-chip"><span class="tool-cat">Observability</span>Monte Carlo</div>
+      <div class="tool-chip"><span class="tool-cat">Quality</span>Great Expectations</div>
+      <div class="tool-chip"><span class="tool-cat">Quality</span>Soda</div>
+      <div class="tool-chip"><span class="tool-cat">Observability</span>Bigeye</div>
+      <div class="tool-chip"><span class="tool-cat">Quality</span>Anomalo</div>
+      <div class="tool-chip"><span class="tool-cat">Quality</span>Ataccama</div>
+      <div class="tool-chip"><span class="tool-cat">Enterprise</span>Informatica DQ</div>
+      <div class="tool-chip"><span class="tool-cat">Observability</span>Databand (IBM)</div>
+      <div class="tool-chip"><span class="tool-cat">Enterprise</span>EIIG (Orion Governance)</div>
+    </div>
+
+    <h3 style="margin-top:28px; color:var(--neon-purple);">Lineage & Governance</h3>
+    <div class="tools-grid">
+      <div class="tool-chip"><span class="tool-cat">Standard</span>OpenLineage</div>
+      <div class="tool-chip"><span class="tool-cat">Governance</span>Collibra Governance</div>
+      <div class="tool-chip"><span class="tool-cat">Governance</span>Informatica Axon</div>
+      <div class="tool-chip"><span class="tool-cat">Lineage</span>Marquez (OSS)</div>
+      <div class="tool-chip"><span class="tool-cat">Privacy</span>Privacera</div>
+      <div class="tool-chip"><span class="tool-cat">Privacy</span>Immuta</div>
+      <div class="tool-chip"><span class="tool-cat">Access</span>Apache Ranger</div>
+      <div class="tool-chip"><span class="tool-cat">Contracts</span>Schemata</div>
+      <div class="tool-chip"><span class="tool-cat">Governance</span>EIIG (Orion Governance)</div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== MATURITY MODEL ===== -->
+<section class="section" id="maturity">
+  <div class="container">
+    <div class="section-label">Adoption Roadmap</div>
+    <h2 class="glow-text">Data Intelligence Maturity Model</h2>
+    <p class="subtitle">Where is your organization on the journey? Most enterprises sit between Levels 1 and 3. The goal is to reach Level 4 — AI-augmented intelligence.</p>
+
+    <div class="maturity-track">
+      <div class="maturity-stage" style="--stage-color: var(--neon-red);">
+        <div class="maturity-num">1</div>
+        <div class="maturity-name" style="color:var(--neon-red);">Reactive</div>
+        <div class="maturity-desc">Manual processes. No catalog. Tribal knowledge. Data quality is an afterthought. Governance is spreadsheet-based.</div>
+      </div>
+      <div class="maturity-stage" style="--stage-color: var(--neon-orange);">
+        <div class="maturity-num">2</div>
+        <div class="maturity-name" style="color:var(--neon-orange);">Managed</div>
+        <div class="maturity-desc">Basic catalog deployed. Some quality rules in place. Lineage tracked for critical pipelines. Initial governance policies defined.</div>
+      </div>
+      <div class="maturity-stage" style="--stage-color: var(--neon-blue);">
+        <div class="maturity-num">3</div>
+        <div class="maturity-name" style="color:var(--neon-blue);">Proactive</div>
+        <div class="maturity-desc">Automated quality monitoring. Full lineage coverage. Self-service catalog widely adopted. Data stewards active. Observability dashboards live.</div>
+      </div>
+      <div class="maturity-stage" style="--stage-color: var(--neon-green);">
+        <div class="maturity-num">4</div>
+        <div class="maturity-name" style="color:var(--neon-green);">Intelligent</div>
+        <div class="maturity-desc">AI-augmented classification. GenAI-powered querying. Predictive quality. Automated governance. Data mesh with contracts. Full FinOps integration.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== KEY TAKEAWAYS ===== -->
+<section class="section" id="takeaways">
+  <div class="container">
+    <div class="section-label">Summary</div>
+    <h2 class="glow-text">Key Takeaways</h2>
+
+    <div class="two-col">
+      <div>
+        <ul class="card-list" style="--card-accent: var(--neon-green); font-size:1rem;">
+          <li>Centralized metadata & catalog for discoverability</li>
+          <li>Automated data quality checks at every stage</li>
+          <li>End-to-end data lineage from source to dashboard</li>
+          <li>Unified governance framework (RBAC, masking, audit)</li>
+          <li>AI/GenAI-powered insights, agents, and automation</li>
+          <li>Self-service data democratization via semantic layer</li>
+          <li>Cost optimization, observability, and FinOps</li>
+          <li>Reverse ETL closes the operational loop</li>
+          <li>Open standards ensure vendor-agnostic portability</li>
+          <li>Data contracts formalize producer-consumer trust</li>
+        </ul>
+      </div>
+      <div>
+        <div class="callout gold">
+          <div class="callout-title" style="color:var(--gold); font-size:1.2rem;">Data Intelligence Layer =<br>The Brain of Modern Data Architecture</div>
+          <p style="color:var(--text-secondary); margin-top:12px; font-size:0.95rem;">It's not a single tool — it's an architectural layer that combines catalog, quality, lineage, governance, observability, and AI into a unified control plane over your entire data estate.</p>
+          <p style="color:var(--text-secondary); margin-top:12px; font-size:0.95rem;">Without it, your Lakehouse is a data swamp. Your Data Mesh is a data mess. Your Fabric is just fabric.</p>
+          <p style="color:var(--gold); margin-top:16px; font-weight:700; font-size:0.95rem;">Start with catalog. Add quality. Then lineage. Then governance. Then AI. Build incrementally.</p>
+        </div>
+
+        <div class="callout" style="margin-top:20px;">
+          <div class="callout-title" style="color:var(--cyan);">Industry Frameworks & Standards</div>
+          <p style="color:var(--text-secondary); font-size:0.9rem; margin-bottom:10px;">This guide aligns with established industry frameworks that every data professional should know:</p>
+          <ul class="card-list" style="--card-accent: var(--cyan);">
+            <li><strong style="color:var(--cyan);">DAMA DMBOK</strong> (Data Management Body of Knowledge) — THE industry-standard reference defining 11 knowledge areas of data management including governance, quality, metadata, master data, and more.</li>
+            <li><strong style="color:var(--cyan);">TOGAF / Zachman</strong> — Enterprise architecture frameworks that provide the structural context for where the Data Intelligence Layer fits within broader IT architecture.</li>
+            <li><strong style="color:var(--cyan);">DCAM</strong> (Data Management Capability Assessment Model by EDM Council) — Maturity assessment framework used by financial services and regulated industries.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== BACK TO TOP ===== -->
+<button class="back-to-top" id="backToTop" onclick="window.scrollTo({top:0,behavior:'smooth'})" aria-label="Back to top">↑</button>
+
+<!-- ===== FOOTER ===== -->
+<footer class="site-footer">
+  <div class="container">
+    <div style="font-size:1.1rem; font-weight:700;"><span style="color:var(--gold);">Architect U'r Career</span> <span style="color:var(--text-faint);">|</span> <span style="color:#ffffff;">Krishna Mohan Parsha</span></div>
+    <div class="footer-sub" style="margin-top:10px;">Enterprise Data Architecture Series · The Data Intelligence Layer · 2026</div>
+    <div class="footer-sub" style="margin-top:8px;">Like & Share if this resonates! Follow for more deep-dives on data architecture.</div>
+  </div>
+</footer>
+
+<script>
+// Scroll-triggered section reveal
+const sections = document.querySelectorAll('.section:not(.hero)');
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); } });
+}, { threshold: 0.08, rootMargin: '0px 0px -40px 0px' });
+sections.forEach(s => observer.observe(s));
+
+// Sticky nav active state
+const tocLinks = document.querySelectorAll('.toc-link');
+const navObserver = new IntersectionObserver((entries) => {
+  entries.forEach(e => {
+    if (e.isIntersecting) {
+      tocLinks.forEach(l => l.classList.remove('active'));
+      const link = document.querySelector(`.toc-link[href="#${e.target.id}"]`);
+      if (link) { link.classList.add('active'); link.scrollIntoView({ block: 'nearest', inline: 'center', behavior: 'smooth' }); }
+    }
+  });
+}, { threshold: 0.3, rootMargin: '-80px 0px -50% 0px' });
+document.querySelectorAll('section[id]').forEach(s => navObserver.observe(s));
+
+// Back to top button
+const btt = document.getElementById('backToTop');
+window.addEventListener('scroll', () => {
+  btt.classList.toggle('show', window.scrollY > 600);
+}, { passive: true });
+</script>
+
+<!-- GoatCounter Analytics -->
+<script data-goatcounter="https://km-auc.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
+</body>
+</html>
