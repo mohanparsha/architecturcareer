@@ -789,14 +789,17 @@
     [data-theme="dark"] .rubric-table th { background: #0F172A; }
     [data-theme="dark"] .rubric-table td { border-color: var(--line); }
     [data-theme="dark"] .rubric-table tr:nth-child(even) td { background: rgba(255,255,255,.03); }
-    [data-theme="dark"] .teacher-card { background: var(--card); border-color: var(--line); }
+    [data-theme="dark"] .teacher-card { background: linear-gradient(135deg, #1A2030, #1E2940); border-color: #334155; }
+    [data-theme="dark"] .teacher-item { background: rgba(255,255,255,.06); border-color: rgba(255,255,255,.08); }
     [data-theme="dark"] .method-card { background: var(--card); }
     [data-theme="dark"] dialog { background: #0F172A; color: var(--ink); }
     [data-theme="dark"] dialog::backdrop { background: var(--backdrop); }
     [data-theme="dark"] .modal-foot { border-color: var(--line); }
-    [data-theme="dark"] .resource-link { background: var(--card); border-color: var(--line); color: var(--ink); }
-    [data-theme="dark"] .resource-link:hover { background: var(--hover-bg); }
-    [data-theme="dark"] .resource-link .resource-type { background: rgba(255,255,255,.08); color: var(--muted); }
+    [data-theme="dark"] .resource-card { background: linear-gradient(135deg, #141E30, #1A2744); border-color: #334155; }
+    [data-theme="dark"] .capstone-card { background: linear-gradient(135deg, var(--strategic-soft), #1E293B); border-color: #334155; }
+    [data-theme="dark"] .resource-link { background: rgba(255,255,255,.06); border-color: rgba(255,255,255,.08); color: var(--ink); }
+    [data-theme="dark"] .resource-link:hover { background: rgba(255,255,255,.12); }
+    [data-theme="dark"] .resource-link .resource-type { background: rgba(255,255,255,.1); color: var(--muted); }
     [data-theme="dark"] .tier-btn { background: var(--card); color: var(--muted); border-color: var(--line); }
     [data-theme="dark"] .tier-btn:hover { background: var(--hover-bg); }
     [data-theme="dark"] .tier-btn.active-t1 { background: #0D3B2F; border-color: #10B981; color: #6EE7B7; }
@@ -978,6 +981,16 @@
       color: var(--muted);
       margin-left: auto;
       flex-shrink: 0;
+    }
+    .resource-card {
+      grid-column: 1 / -1;
+      background: linear-gradient(135deg, #f0f4f8, #edf2f7);
+      border-color: #c8d6e5;
+    }
+    .capstone-card {
+      grid-column: 1 / -1;
+      background: linear-gradient(135deg, var(--strategic-soft), #fff);
+      border-color: #e8b8b3;
     }
 
     .capstone-options {
@@ -4296,7 +4309,7 @@
       let resourceHtml = '';
       if (w.resources && w.resources.length) {
         const icons = { story: '📖', teaching: '📚', video: '🎬' };
-        resourceHtml = `<section class="detail-card" style="grid-column:1/-1;background:linear-gradient(135deg,#f0f4f8,#edf2f7);border-color:#c8d6e5;">
+        resourceHtml = `<section class="detail-card resource-card">
           <h4>🔗 Suggested Resources</h4>
           <div class="resource-list">${w.resources.map(r => `<a class="resource-link" href="${r.url}" target="_blank" rel="noopener"><span class="resource-icon">${icons[r.type] || '📄'}</span>${r.title}<span class="resource-type">${r.type}</span></a>`).join('')}</div></section>`;
       }
@@ -4304,7 +4317,7 @@
       // Capstone options
       let capstoneHtml = '';
       if (w.capstoneOptions && w.capstoneOptions.length) {
-        capstoneHtml = `<section class="detail-card" style="grid-column:1/-1;background:linear-gradient(135deg,var(--strategic-soft),#fff);border-color:#e8b8b3;">
+        capstoneHtml = `<section class="detail-card capstone-card">
           <h4>💡 Suggested Capstone Project Topics</h4>
           <div class="capstone-options">${w.capstoneOptions.map(o => `<div class="capstone-opt">${o}</div>`).join('')}</div></section>`;
       }
