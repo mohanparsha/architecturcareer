@@ -1,0 +1,1173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Operating Systems Unit 1 — Interactive Reference | Architect U'r Career</title>
+  <style>
+    :root {
+      --bg: #f4f8fb;
+      --panel: #ffffff;
+      --ink: #16364a;
+      --muted: #5f798a;
+      --line: #d9e7ef;
+      --blue: #0f5f8f;
+      --blue2: #0a7aa6;
+      --green: #0d7a6d;
+      --navy: #103650;
+      --soft-blue: #ebf7fc;
+      --soft-green: #ecfaf5;
+      --soft-amber: #fff8e8;
+      --soft-red: #fff2f1;
+      --soft-purple: #f4efff;
+      --soft-gray: #f7fafc;
+      --shadow: 0 14px 34px rgba(12, 37, 54, 0.08);
+      --shadow-soft: 0 6px 18px rgba(12, 37, 54, 0.05);
+    }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      font-family: Inter, Segoe UI, Roboto, Arial, sans-serif;
+      color: var(--ink);
+      background:
+        radial-gradient(circle at 0% 0%, rgba(15,122,166,.08), transparent 24%),
+        radial-gradient(circle at 100% 0%, rgba(13,122,109,.08), transparent 24%),
+        var(--bg);
+    }
+    .wrap { width: min(1560px, calc(100vw - 28px)); margin: 0 auto; padding: 22px 0 56px; }
+    .hero {
+      position: relative; overflow: hidden; border-radius: 32px;
+      background: linear-gradient(135deg, #0f3550 0%, #10638e 52%, #0c7c6a 100%);
+      color: #fff; padding: 32px; box-shadow: var(--shadow);
+    }
+    .hero::before,.hero::after { content:""; position:absolute; border-radius:50%; background:rgba(255,255,255,.08); }
+    .hero::before { width:260px; height:260px; right:-70px; top:-70px; }
+    .hero::after { width:180px; height:180px; left:-60px; bottom:-60px; }
+    .eyebrow {
+      display:inline-flex; align-items:center; gap:8px; padding:8px 12px; border-radius:999px;
+      background:rgba(255,255,255,.14); font-size:13px; font-weight:700; letter-spacing:.2px;
+    }
+    h1 { margin:14px 0 10px; font-size:clamp(32px,5vw,58px); line-height:1.03; letter-spacing:-.02em; }
+    .hero p { margin:0; max-width:1160px; font-size:16px; line-height:1.72; color:rgba(255,255,255,.94); }
+    .hero-grid { display:grid; grid-template-columns:1.2fr 1fr 1fr; gap:16px; margin-top:22px; }
+    .hero-card { background:rgba(255,255,255,.11); border:1px solid rgba(255,255,255,.15); border-radius:22px; padding:18px; backdrop-filter:blur(4px); }
+    .hero-card h3 { margin:0 0 10px; font-size:18px; }
+    .hero-card ul { margin:0; padding-left:18px; line-height:1.7; }
+    .hero-card li + li { margin-top:6px; }
+    .metric-strip { display:grid; grid-template-columns: repeat(5, minmax(0,1fr)); gap:12px; margin-top:18px; }
+    .metric { border-radius:18px; padding:16px; border:1px solid rgba(255,255,255,.15); background:rgba(255,255,255,.10); }
+    .metric b { display:block; font-size:22px; margin-bottom:4px; }
+    .sticky-nav {
+      position:sticky; top:0; z-index:30; margin:18px 0 22px;
+      border-top:1px solid rgba(217,231,239,.8); border-bottom:1px solid rgba(217,231,239,.8);
+      backdrop-filter:blur(10px); background:rgba(244,248,251,.9);
+    }
+    .sticky-nav .inner { width:min(1560px, calc(100vw - 28px)); margin:0 auto; display:flex; flex-wrap:wrap; gap:10px; padding:12px 0; }
+    .nav-chip { text-decoration:none; color:var(--blue); font-weight:700; font-size:14px; padding:10px 14px; border:1px solid var(--line); background:#fff; border-radius:999px; transition:.2s ease; }
+    .nav-chip:hover { transform:translateY(-1px); box-shadow:var(--shadow-soft); }
+    .searchbar { margin-left:auto; min-width:280px; display:flex; align-items:center; background:#fff; border:1px solid var(--line); border-radius:999px; padding:0 12px; }
+    .searchbar input { border:none; outline:none; width:100%; padding:10px 6px; font:inherit; color:var(--ink); background:transparent; }
+    .section { margin-top:24px; background:var(--panel); border:1px solid var(--line); border-radius:28px; padding:26px; box-shadow:var(--shadow-soft); }
+    .section h2 { margin:0 0 8px; color:var(--navy); font-size:clamp(24px,3vw,36px); }
+    .lead { margin:0 0 18px; color:var(--muted); line-height:1.72; }
+    .grid-2,.grid-3,.grid-4,.grid-5,.grid-6 { display:grid; gap:18px; }
+    .grid-2 { grid-template-columns:repeat(2,minmax(0,1fr)); }
+    .grid-3 { grid-template-columns:repeat(3,minmax(0,1fr)); }
+    .grid-4 { grid-template-columns:repeat(4,minmax(0,1fr)); }
+    .grid-5 { grid-template-columns:repeat(5,minmax(0,1fr)); }
+    .grid-6 { grid-template-columns:repeat(6,minmax(0,1fr)); }
+    .card { min-width:0; overflow:hidden; background:linear-gradient(180deg,#fff 0%, #fbfdff 100%); border:1px solid var(--line); border-radius:22px; padding:18px; box-shadow: 0 2px 8px rgba(12,37,54,0.02); }
+    .card h3,.card h4 { margin:0 0 10px; color:var(--green); }
+    .small { font-size:13px; color:var(--muted); }
+    .badge { display:inline-flex; align-items:center; gap:6px; font-size:12px; font-weight:800; color:var(--green); background:var(--soft-green); border:1px solid #cdece1; border-radius:999px; padding:6px 10px; margin-bottom:10px; }
+    .tag { display:inline-block; padding:6px 10px; border-radius:999px; border:1px solid var(--line); background:#f8fdff; color:var(--blue); font-size:12px; font-weight:700; margin:0 8px 8px 0; }
+    .level { display:inline-block; padding:6px 10px; border-radius:999px; font-size:11px; font-weight:800; margin:0 6px 8px 0; }
+    .l1 { background:#eefaf5; color:#0d7a6d; border:1px solid #cce9df; }
+    .l2 { background:#fff8e8; color:#8f5b00; border:1px solid #f2e1af; }
+    .l3 { background:#fff2f1; color:#8c2f28; border:1px solid #f0d4d2; }
+    .muted-list { margin:8px 0 0; padding-left:18px; color:var(--muted); line-height:1.72; }
+    .muted-list li + li { margin-top:6px; }
+    .table-wrap { overflow:auto; border:1px solid var(--line); border-radius:18px; }
+    table { width:100%; min-width:680px; border-collapse:collapse; background:#fff; }
+    th,td { text-align:left; vertical-align:top; padding:14px 12px; border-bottom:1px solid var(--line); line-height:1.6; }
+    th { background:linear-gradient(180deg,#eaf7fb 0%, #f9fdff 100%); color:var(--blue); font-size:14px; }
+    tr:last-child td { border-bottom:none; }
+    .concept-shell { display:grid; grid-template-columns:minmax(240px,300px) minmax(0,1fr); gap:18px; align-items:start; }
+    .concept-shell > div:last-child { min-width:0; overflow:hidden; }
+    .topic-list { display:grid; gap:10px; position:sticky; top:78px; align-self:start; }
+    .topic-btn { display:block; text-align:left; width:100%; border:1px solid var(--line); background:#fff; border-radius:16px; padding:14px; color:var(--ink); cursor:pointer; font-weight:800; transition:.2s ease; box-shadow:0 1px 3px rgba(12,37,54,0.03); }
+    .topic-btn small { display:block; margin-top:6px; color:var(--muted); font-weight:600; line-height:1.45; }
+    .topic-btn.active { background:linear-gradient(135deg,#eef8fc,#edf9f4); border-color:#b9dde9; color:var(--blue); box-shadow:var(--shadow-soft); }
+    .topic-panel { display:none; min-width:0; overflow:hidden; }
+    .topic-panel.active { display:block; }
+    .two-col { display:grid; grid-template-columns:1.1fr .9fr; gap:18px; align-items:start; }
+    .two-col > * { min-width:0; }
+    .diagram { border-radius:20px; border:1px dashed #9fc7d7; background:linear-gradient(180deg,var(--soft-blue) 0%, #ffffff 100%); padding:16px; white-space:pre-wrap; overflow:auto; font-family:ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; line-height:1.6; color:#164459; font-size:13px; max-width:100%; }
+    .analogy { background:var(--soft-amber); border:1px solid #f2e1af; border-radius:18px; padding:14px; color:#5f4a13; line-height:1.7; }
+    .insight { background:linear-gradient(180deg,var(--soft-green) 0%, #fff 100%); border:1px solid #cce9df; border-radius:18px; padding:14px; color:#134840; line-height:1.7; margin-top:14px; }
+    .highlight { background:var(--soft-red); border:1px solid #f0d4d2; color:#6d2b26; border-radius:16px; padding:14px; }
+    .purple { background:var(--soft-purple); border:1px solid #ddd1ff; color:#423272; border-radius:16px; padding:14px; }
+    .master-note { background:var(--soft-gray); border:1px solid var(--line); color:var(--ink); border-radius:16px; padding:14px; }
+    details { border:1px solid var(--line); border-radius:16px; background:#fff; padding:14px 16px; }
+    details + details { margin-top:10px; }
+    summary { cursor:pointer; font-weight:800; color:var(--blue); }
+    .tabs { display:flex; flex-wrap:wrap; gap:10px; margin-bottom:16px; }
+    .tab-btn { border:1px solid var(--line); background:#fff; color:var(--blue); border-radius:14px; padding:12px 16px; cursor:pointer; font-weight:800; transition:.2s ease; }
+    .tab-btn.active { color:#fff; background:linear-gradient(135deg,var(--blue2), var(--green)); border-color:transparent; box-shadow:var(--shadow-soft); }
+    .tab-panel { display:none; }
+    .tab-panel.active { display:block; }
+    .formula { font-family:ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; background:#f7fcff; border:1px solid var(--line); border-radius:12px; padding:10px 12px; color:var(--blue); margin:8px 0; }
+    .quiz-question { margin-top: 12px; border:1px solid var(--line); border-radius:16px; padding:14px; background:#fff; }
+    .quiz-options { display:grid; gap:8px; margin-top:10px; }
+    .quiz-options button { text-align:left; border:1px solid var(--line); background:#fff; border-radius:12px; padding:10px 12px; cursor:pointer; font:inherit; transition:.15s ease; }
+    .quiz-options button:hover:not(:disabled) { border-color:#b9dde9; background:#f8fdff; }
+    .quiz-options button.correct { background:#ecfaf5; border-color:#bfe7d9; color:#0d7a6d; }
+    .quiz-options button.wrong { background:#fff2f1; border-color:#f0d4d2; color:#8c2f28; }
+    .quiz-feedback { margin-top:10px; font-size:14px; color:var(--muted); }
+    .footer { margin-top:26px; border-radius:30px; background:linear-gradient(135deg,#0f3550 0%, #10628a 50%, #0e7967 100%); padding:24px; color:#fff; box-shadow:var(--shadow); }
+    .footer h2 { margin-top:0; color:#fff; }
+    .footer p,.footer li { color:rgba(255,255,255,.94); line-height:1.72; }
+    mark.search-hit { background:#fff1a8; color:inherit; padding:0 2px; }
+    .hidden-by-search { display:none !important; }
+    .back-top {
+      position:fixed; bottom:28px; right:28px; z-index:50;
+      width:48px; height:48px; border-radius:50%; border:1px solid var(--line);
+      background:linear-gradient(135deg,var(--blue2),var(--green)); color:#fff;
+      font-size:22px; cursor:pointer; box-shadow:var(--shadow);
+      display:none; align-items:center; justify-content:center;
+      transition:.25s ease;
+    }
+    .back-top:hover { transform:translateY(-2px); box-shadow:0 8px 24px rgba(12,37,54,.18); }
+    .back-top.visible { display:flex; }
+    @media print {
+      .sticky-nav, .back-top, .searchbar, .quiz-options button, .nav-chip { display:none !important; }
+      body { background:#fff !important; }
+      .hero { background:#103650 !important; -webkit-print-color-adjust:exact; print-color-adjust:exact; }
+      .section, .card, .diagram, .analogy, .insight, .highlight, .purple, .master-note, details { break-inside:avoid; }
+      .topic-panel { display:block !important; page-break-before:auto; }
+      .concept-shell { grid-template-columns:1fr !important; }
+      .topic-list { display:none !important; }
+      .tab-panel { display:block !important; }
+      .tabs { display:none !important; }
+      .footer { background:#103650 !important; -webkit-print-color-adjust:exact; print-color-adjust:exact; }
+    }
+    @media (max-width: 1440px) {
+      .concept-shell .two-col { grid-template-columns:1fr; }
+    }
+    @media (max-width: 1180px) {
+      .hero-grid,.metric-strip,.grid-6,.grid-5,.grid-4,.grid-3,.grid-2,.concept-shell,.two-col { grid-template-columns:1fr; }
+      .topic-list { position:static; }
+      .concept-shell { grid-template-columns:1fr; }
+      .topic-list { grid-template-columns:repeat(2,1fr); }
+      .searchbar { margin-left:0; width:100%; }
+    }
+    @media (max-width: 640px) {
+      .topic-list { grid-template-columns:1fr; }
+      .metric-strip { grid-template-columns:repeat(2,1fr); }
+    }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <section class="hero">
+      <div class="eyebrow">📘 Operating Systems &nbsp;|&nbsp; Unit 1 &nbsp;|&nbsp; Silberschatz, Galvin &amp; Gagne, 10th Ed.</div>
+            <h1>Operating Systems — Unit 1<br />Master Edition</h1>
+      <p style="margin:4px 0 14px; font-size:13px; color:rgba(255,255,255,.65);">Version 3.2 &nbsp;|&nbsp; Published April 2026</p>
+      <p>
+        Unit 1 covers the three foundational chapters of Silberschatz, Galvin &amp; Gagne, 10th Edition: Chapter 1 (Introduction), Chapter 2 (OS Structures), and Chapter 3 (Processes). Use the concept explorer for understanding, the system flows for narrative answers, the worked scheduling examples for calculation practice, and the glossary and self-test quiz for exam preparation.
+      </p>
+      <div class="metric-strip">
+        <div class="metric"><b>3</b><span>Core chapters</span></div>
+        <div class="metric"><b>8</b><span>Interactive concept blocks</span></div>
+        <div class="metric"><b>5</b><span>Comparison dashboards</span></div>
+        <div class="metric"><b>5</b><span>Self-test questions</span></div>
+        <div class="metric"><b>1</b><span>Single-source reference</span></div>
+      </div>
+      <div class="hero-grid">
+        <div class="hero-card">
+          <h3>Academic scope</h3>
+          <ul>
+            <li>Chapter 1 — Introduction</li>
+            <li>Chapter 2 — OS Structures</li>
+            <li>Chapter 3 — Processes</li>
+            <li>Coverage includes boot, interrupts, DMA, system calls, structure models, PCB, scheduling, context switching, fork–exec, and IPC</li>
+          </ul>
+        </div>
+        <div class="hero-card">
+          <h3>Student mode outcomes</h3>
+          <ul>
+            <li>Understand core Unit 1 concepts quickly</li>
+            <li>Revise using comparisons, formulas, and traps</li>
+            <li>Practice via mini quiz and question bank</li>
+          </ul>
+        </div>
+        <div class="hero-card">
+          <h3>Instructor mode outcomes</h3>
+          <ul>
+            <li>Lecture-ready diagrams and concept sequencing</li>
+            <li>End-to-end “how everything connects” narrative</li>
+            <li>Exam, viva, and discussion-ready prompts</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <nav class="sticky-nav">
+    <div class="inner">
+      <a class="nav-chip" href="#orientation">Orientation</a>
+      <a class="nav-chip" href="#alignment">Alignment</a>
+      <a class="nav-chip" href="#chapters">Chapter Objectives</a>
+      <a class="nav-chip" href="#concepts">Concept Explorer</a>
+      <a class="nav-chip" href="#flows">System Flows</a>
+      <a class="nav-chip" href="#control-model">Control Model</a>
+      <a class="nav-chip" href="#algorithms">Algorithms</a>
+      <a class="nav-chip" href="#worked">Worked Scheduling</a>
+      <a class="nav-chip" href="#answer-templates">Answer Templates</a>
+      <a class="nav-chip" href="#exam-words">Exam Words</a>
+      <a class="nav-chip" href="#traps">Exam Traps</a>
+      <a class="nav-chip" href="#glossary">Glossary</a>
+      <a class="nav-chip" href="#quiz">Quiz</a>
+      <a class="nav-chip" href="#practice">Practice</a>
+      <div class="searchbar"><span>🔎</span><input id="searchInput" type="text" placeholder="Search topics, terms, formulas..." /></div>
+    </div>
+  </nav>
+
+  <div class="wrap">
+    <section class="section searchable" id="orientation">
+      <div class="grid-2" style="margin-bottom:18px;">
+        <div class="master-note"><strong>How to use this page</strong><br /><br />Start with the 2-minute revision strip for recall, move into the concept explorer for understanding, use the system flows for narrative answers, then finish with the worked example, traps, glossary, and quiz for exam preparation.</div>
+        <div class="master-note"><strong>Best mode of use</strong><br /><br />For faculty, use the concept explorer and system flows as lecture anchors. For students, use the search bar, traps, formulas, glossary, and quiz as a last-mile revision set.</div>
+      </div>
+      <h2>2-Minute Revision Strip</h2>
+      <p class="lead">Use this strip when you need the fastest possible recall of Unit 1 before a class, viva, or exam.</p>
+      <div class="grid-6">
+        <div class="card"><h4>OS</h4><p>Resource manager + abstraction layer between apps and hardware.</p></div>
+        <div class="card"><h4>Kernel</h4><p>The always-running privileged core of the operating system.</p></div>
+        <div class="card"><h4>Trap</h4><p>Intentional software entry into the OS, usually for a system call.</p></div>
+        <div class="card"><h4>Interrupt</h4><p>Hardware event that demands CPU attention.</p></div>
+        <div class="card"><h4>PCB</h4><p>Data structure that stores everything needed to manage a process.</p></div>
+        <div class="card"><h4>Timer</h4><p>Guarantees the OS can regain CPU control and enforce fairness.</p></div>
+      </div>
+    </section>
+
+    <section class="section searchable" id="chapter-map">
+      <h2>Chapter-to-Section Map</h2>
+      <p class="lead">This quick map helps students understand how Unit 1 is organized and where each topic fits academically.</p>
+      <div class="grid-3">
+        <div class="card"><h3>Chapter 1 — Foundations</h3><p>Focuses on what the OS is, how it controls hardware, how booting and dual mode work, and how computing environments shape OS design.</p><div class="tag">Control</div><div class="tag">Protection</div><div class="tag">Hardware interface</div></div>
+        <div class="card"><h3>Chapter 2 — Interfaces & Structure</h3><p>Explains how users and programs request OS services, how executables are built and loaded, and how different OS architectures are organized.</p><div class="tag">Services</div><div class="tag">System calls</div><div class="tag">Design models</div></div>
+        <div class="card"><h3>Chapter 3 — Execution & Scheduling</h3><p>Covers processes, PCB, states, scheduling, context switching, process creation, and inter-process communication.</p><div class="tag">Execution</div><div class="tag">Scheduling</div><div class="tag">IPC</div></div>
+      </div>
+    </section>
+
+    <section class="section searchable" id="alignment">
+      <h2>LO–CO Alignment Framework</h2>
+      <p class="lead">Unit 1 directly develops LO1 and LO2 while constructing the conceptual foundation needed for later LO3 and LO4 mastery.</p>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr><th>Learning Objective</th><th>Unit 1 Concepts Covered</th><th>Mapped Outcome</th><th>Expected Student Capability</th><th>Teaching Lens</th></tr>
+          </thead>
+          <tbody>
+            <tr><td><strong>LO1</strong><br />OS services and structure</td><td>OS role, services, interfaces, system calls, boot, dual mode, structure models, policy vs mechanism</td><td><strong>CO1</strong></td><td>Explain how the OS offers services and how a request moves from user space into kernel space</td><td>Service governance</td></tr>
+            <tr><td><strong>LO2</strong><br />Scheduling and synchronization</td><td>Process concept, PCB, states, scheduling, dispatcher, context switch, fork–exec, IPC</td><td><strong>CO2</strong></td><td>Compare CPU scheduling policies and explain process coordination and concurrency control</td><td>Queueing and control</td></tr>
+            <tr><td><strong>LO3</strong><br />Deadlock, memory, virtual memory</td><td>Resource management, storage hierarchy, page-table context, kernel data structures</td><td><strong>CO3</strong></td><td>Use Unit 1 as a base to later analyze deadlocks and memory-management behavior</td><td>Resource contention</td></tr>
+            <tr><td><strong>LO4</strong><br />File, disk, protection</td><td>File-system manipulation, DMA, storage hierarchy, ACLs, protection/security</td><td><strong>CO4</strong></td><td>Understand the structural base behind file, disk, and protection techniques</td><td>Controlled access</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section class="section searchable" id="chapters">
+      <h2>Chapter Learning Objectives</h2>
+      <div class="grid-3">
+        <div class="card"><span class="level l2">High importance</span><h3>Chapter 1 — Introduction</h3><ul class="muted-list"><li>Define the OS and its dual role.</li><li>Explain boot sequence.</li><li>Describe dual-mode operation and the mode bit.</li><li>Differentiate interrupts, traps, exceptions.</li><li>Compare multiprogramming and multitasking.</li><li>Identify kernel data structures and distributed models.</li></ul></div>
+        <div class="card"><span class="level l2">High importance</span><h3>Chapter 2 — OS Structures</h3><ul class="muted-list"><li>Classify OS services.</li><li>Compare CLI, GUI, touch interfaces.</li><li>Trace the path of a system call.</li><li>Categorize system calls.</li><li>Explain OS-specific binaries.</li><li>Trace compile → link → load.</li><li>Apply policy vs mechanism.</li><li>Compare OS structure models.</li></ul></div>
+        <div class="card"><span class="level l3">Must master</span><h3>Chapter 3 — Processes</h3><ul class="muted-list"><li>Distinguish program vs process.</li><li>Identify PCB fields and states.</li><li>Calculate scheduling metrics.</li><li>Explain convoy effect, starvation, aging.</li><li>Describe context-switch overhead.</li><li>Trace fork–exec and IPC.</li></ul></div>
+      </div>
+    </section>
+
+    <section class="section searchable" id="chapter-takeaways">
+      <h2>One-Line Chapter Takeaways</h2>
+      <div class="grid-3">
+        <div class="insight"><strong>Chapter 1:</strong> how the operating system gains, keeps, and protects control of the machine.</div>
+        <div class="insight"><strong>Chapter 2:</strong> how users and applications ask the operating system for services and how the OS is internally structured.</div>
+        <div class="insight"><strong>Chapter 3:</strong> how programs become processes, how CPU time is allocated, and how processes communicate safely.</div>
+      </div>
+    </section>
+
+    <section class="section searchable" id="concepts">
+      <!-- concept-explorer-fix -->
+      <h2>Interactive Unit 1 Concept Explorer</h2>
+      <p class="lead">Select a concept block on the left. Each block contains the core explanation, mechanics, distinctions, and exam framing needed for Unit 1.</p>
+      <div class="concept-shell">
+        <div class="topic-list">
+          <button class="topic-btn active" data-topic="intro">What Operating Systems Do<small>Role, layers, goals</small></button>
+          <button class="topic-btn" data-topic="hardware">Hardware Organization & Interrupts<small>Controller, driver, ISR, DMA</small></button>
+          <button class="topic-btn" data-topic="ops">Boot, Dual Mode, Timer<small>Multiprogramming, multitasking</small></button>
+          <button class="topic-btn" data-topic="structures">Resource Management, Data Structures & Environments<small>Lists, trees, protection, virtualization</small></button>
+          <button class="topic-btn" data-topic="services">OS Services, UI, and System Calls<small>CLI, GUI, touch, syscall flow</small></button>
+          <button class="topic-btn" data-topic="design">Linkers, Loaders, OS-Specific Apps, Structure Models<small>Compile-link-load, policy/mechanism</small></button>
+          <button class="topic-btn" data-topic="process">Process Concept, PCB, States<small>Memory layout and control</small></button>
+          <button class="topic-btn" data-topic="schedule">Scheduling, Context Switching, IPC<small>Algorithms, overhead, fork-exec</small></button>
+        </div>
+        <div>
+          <div class="topic-panel active" id="topic-intro">
+            <div class="two-col">
+              <div>
+                <div class="card">
+                  <div class="badge">Foundation concept • LO1</div>
+                  <h3>What an operating system is</h3>
+                  <p class="lead" style="margin-bottom:10px;">An operating system is system software that sits between hardware and users, manages hardware resources, and provides the environment in which application programs execute.</p>
+                  <div class="tag">User viewpoint</div><div class="tag">Resource allocator</div><div class="tag">Kernel</div><div class="tag">System program</div><div class="tag">Middleware</div>
+                  <ul class="muted-list">
+                    <li><strong>User viewpoint:</strong> convenience, ease of use, responsiveness.</li>
+                    <li><strong>System viewpoint:</strong> CPU, memory, storage, and I/O are limited resources that must be allocated efficiently.</li>
+                    <li><strong>Kernel:</strong> the one program always running, with full hardware access.</li>
+                    <li><strong>System programs:</strong> shells, compilers, file managers.</li>
+                    <li><strong>Middleware:</strong> service layers such as databases, graphics, and multimedia frameworks.</li>
+                  </ul>
+                </div>
+                <div class="diagram" style="margin-top:18px;">USERS
+  │ uses
+  ▼
+APPLICATION PROGRAMS
+  │ invoke
+  ▼
+OPERATING SYSTEM
+  ├─ Process Scheduler
+  ├─ Memory Manager
+  ├─ File / I-O Manager
+  ├─ Protection & Security
+  └─ Communication / IPC
+  │ manages
+  ▼
+HARDWARE</div>
+              </div>
+              <div>
+                <div class="analogy"><strong>Restaurant analogy:</strong><br /><br />Hardware is the kitchen equipment. The OS is the restaurant manager coordinating tools, timing, and safety. Applications are the chefs producing output. Users are the customers placing orders without touching the equipment directly.</div>
+                <div class="insight"><strong>Four goals of the OS</strong><br /><br />Execute user programs, make the system convenient, use hardware efficiently, and provide a stable, safe, secure environment.</div>
+                <div class="master-note"><strong>Why the OS is needed</strong><br /><br />Abstraction hides hardware complexity. Resource sharing prevents chaos. Protection prevents unauthorized access. Convenience improves usability. Efficiency ensures scarce resources are used well.</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="topic-panel" id="topic-hardware">
+            <div class="two-col">
+              <div>
+                <div class="card">
+                  <div class="badge">Chapter 1.2–1.3</div>
+                  <h3>Computer-system organization</h3>
+                  <ul class="muted-list">
+                    <li><strong>Device controller:</strong> dedicated hardware chip managing a device type.</li>
+                    <li><strong>Device driver:</strong> OS software providing a uniform interface to the kernel.</li>
+                    <li><strong>Local buffer:</strong> temporary memory inside the controller.</li>
+                    <li><strong>Common bus:</strong> shared pathway linking CPU, memory, and controllers.</li>
+                    <li><strong>Interrupt vector:</strong> table mapping interrupts to ISRs.</li>
+                    <li><strong>ISR:</strong> interrupt service routine running in kernel mode.</li>
+                  </ul>
+                </div>
+                <div class="diagram" style="margin-top:18px;">User Process       CPU                Device Controller
+    │ read()         │                          │
+    ├──────────────▶ │                          │
+    │                ├── issue I/O command ───▶│
+    │                │                          │
+    │                │ does other work          │
+    │                │◀──── interrupt line ─────┤  I/O done
+    │                │ save state, jump to ISR  │
+    │                │ execute ISR              │
+    │                │ restore state            │
+    │◀───────────────┤ return from interrupt    │</div>
+              </div>
+              <div>
+                <div class="table-wrap"><table><thead><tr><th>Mechanism</th><th>Who triggers it</th><th>Nature</th><th>Example</th></tr></thead><tbody><tr><td>Interrupt</td><td>Hardware</td><td>Usually asynchronous</td><td>Keyboard press, timer, disk completion</td></tr><tr><td>Non-Maskable Interrupt (NMI)</td><td>Hardware</td><td>Cannot be disabled or delayed</td><td>Memory parity error, critical hardware failure</td></tr><tr><td>Maskable Interrupt</td><td>Hardware</td><td>Can be temporarily disabled by CPU</td><td>Most device I/O; OS disables during critical sections</td></tr><tr><td>Trap</td><td>User program</td><td>Intentional, synchronous</td><td>System call request</td></tr><tr><td>Exception</td><td>Faulting instruction / CPU</td><td>Unintentional, synchronous</td><td>Divide by zero, segfault</td></tr><tr><td>DMA</td><td>OS-configured controller</td><td>Bulk transfer mechanism</td><td>Disk block copied to RAM</td></tr></tbody></table></div>
+                <div class="analogy" style="margin-top:18px;"><strong>Analogy:</strong><br /><br />A hardware interrupt is an emergency bell. A trap is a formal request. An exception is an accidental error. DMA is like assigning a logistics crew to move bulk material directly while the manager handles other work.</div>
+                <div class="insight"><strong>Storage hierarchy</strong><br /><br />Registers → Cache → RAM → SSD/NVM → HDD → Optical/Tape. Upward means faster but smaller. Caching copies hot data upward.<br /><br /><strong>Volatile</strong> (data lost on power off): Registers, Cache, RAM.<br /><strong>Non-volatile</strong> (data retained): SSD, HDD, Optical, Tape.</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="topic-panel" id="topic-ops">
+            <div class="two-col">
+              <div>
+                <div class="card">
+                  <div class="badge">Chapter 1.4</div>
+                  <h3>Boot, multiprogramming, multitasking, dual mode</h3>
+                  <ul class="muted-list">
+                    <li><strong>Bootstrap / firmware</strong> starts first and loads the kernel.</li>
+                    <li><strong>Multiprogramming</strong> keeps multiple jobs in memory to avoid CPU idle time.</li>
+                    <li><strong>Multitasking / time-sharing</strong> rapidly switches CPU among jobs to improve responsiveness.</li>
+                    <li><strong>Dual mode</strong> separates restricted user mode from privileged kernel mode.</li>
+                    <li><strong>Hardware timer</strong> prevents CPU monopoly and enables preemption.</li>
+                  </ul>
+                </div>
+                <div class="diagram" style="margin-top:18px;">POWER ON
+  ▼
+Bootstrap / BIOS / UEFI
+  ▼
+POST + hardware initialization
+  ▼
+Locate bootloader / kernel
+  ▼
+Kernel loaded into RAM
+  ▼
+Initialize tables, memory, file systems
+  ▼
+Start services / daemons
+  ▼
+Login prompt or desktop</div>
+              </div>
+              <div>
+                <div class="table-wrap"><table><thead><tr><th>Concept</th><th>Primary purpose</th><th>Keyword</th></tr></thead><tbody><tr><td>Multiprogramming</td><td>Keep CPU busy by running another job when one waits for I/O</td><td>Efficiency</td></tr><tr><td>Multitasking</td><td>Make many programs appear simultaneous to interactive users</td><td>Responsiveness</td></tr></tbody></table></div>
+                <div class="highlight" style="margin-top:18px;"><strong>Exam trap:</strong><br /><br />Multiprogramming focuses on utilization. Multitasking focuses on responsiveness.</div>
+                <div class="insight"><strong>Privileged instructions</strong><br /><br />Direct I/O, interrupt enable/disable, halt CPU, load timer register, and modify page tables are kernel-only instructions.</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="topic-panel" id="topic-structures">
+            <div class="two-col">
+              <div>
+                <div class="master-note"><strong>Unit 1 foundation note:</strong><br /><br />Resource management in Unit 1 is introductory but essential. Later units expand this into memory management, virtual memory, deadlocks, file systems, and disk scheduling.</div>
+                <div class="card" style="margin-top:18px;">
+                  <div class="badge">Chapter 1.5–1.10</div>
+                  <h3>Resource management and kernel data structures</h3>
+                  <ul class="muted-list">
+                    <li>Process, memory, file-system, mass-storage, cache, and I/O management are core OS responsibilities.</li>
+                    <li>Protection controls internal access. Security defends against internal and external attacks.</li>
+                    <li>Traditional, mobile, cloud, embedded, virtualized, and distributed environments all shape OS design priorities.</li>
+                  </ul>
+                </div>
+                <div class="table-wrap" style="margin-top:18px;"><table><thead><tr><th>Resource Type</th><th>OS Responsibility</th><th>Example</th></tr></thead><tbody><tr><td>Process Management</td><td>Create, schedule, suspend, resume, and terminate processes</td><td>Dispatcher assigning CPU time</td></tr><tr><td>Memory Management</td><td>Track allocation and protection of memory space</td><td>Process heap and stack layout</td></tr><tr><td>File-System Management</td><td>Create, delete, organize, and protect files and directories</td><td>Opening and reading a report file</td></tr><tr><td>Mass-Storage Management</td><td>Manage free space, allocation, and storage access order</td><td>Disk block allocation</td></tr><tr><td>Cache Management</td><td>Move hot data to faster storage levels and maintain consistency</td><td>CPU cache holding recently used data</td></tr><tr><td>I/O System Management</td><td>Provide uniform device access and manage buffering, caching, spooling</td><td>Printer queue and disk buffering</td></tr></tbody></table></div>
+                <div class="grid-2" style="margin-top:18px;">
+                  <div class="card"><h4>Singly Linked List</h4><p>Simple process and file lists</p></div>
+                  <div class="card"><h4>Doubly Linked List</h4><p>Linux task list, O(1) deletion when node pointer is known</p></div>
+                  <div class="card"><h4>Stack</h4><p>Call stack and interrupt state save/restore</p></div>
+                  <div class="card"><h4>Queue</h4><p>Ready queue, I/O queue, printer spooler</p></div>
+                  <div class="card"><h4>Tree</h4><p>Linux CFS red-black tree; file indexing</p></div>
+                  <div class="card"><h4>Hash Table / Bitmap</h4><p>Inode cache, PID/socket lookup, and free-block/page tracking</p></div>
+                </div>
+              </div>
+              <div>
+                <div class="insight"><strong>Protection vs security</strong><br /><br />Protection asks who can access what inside the system. Security asks how the system resists unauthorized access, exploitation, and abuse.</div>
+                <div class="table-wrap" style="margin-top:18px;"><table><thead><tr><th>Aspect</th><th>Protection</th><th>Security</th></tr></thead><tbody><tr><td>Scope</td><td>Internal access control</td><td>Defense against internal and external attacks</td></tr><tr><td>Goal</td><td>Controlled sharing of resources</td><td>Prevent compromise, misuse, or breach</td></tr><tr><td>Mechanisms</td><td>UID/GID, ACLs, permissions</td><td>Authentication, encryption, sandboxing, patching</td></tr></tbody></table></div>
+                <div class="master-note" style="margin-top:12px;"><strong>Security mechanisms in detail</strong><br /><br /><strong>UID/GID:</strong> Every user/group has a unique numeric ID; every process runs with its owner's UID. OS checks ID against permissions.<br /><strong>ACLs:</strong> Per-file list of (user/group, permissions) pairs — e.g., alice=rw, bob=r, others=none.<br /><strong>Privilege Escalation:</strong> sudo lets a user run commands as root after password verification.<br /><strong>Authentication:</strong> Verifying identity — passwords, biometrics (fingerprint, face), hardware tokens (YubiKey), multi-factor (MFA).</div>
+                <div class="purple" style="margin-top:18px;"><strong>Cloud layer mapping</strong><br /><br />IaaS gives you the VM. PaaS gives you the runtime platform. SaaS gives you the finished application.</div>
+                <div class="card" style="margin-top:18px;"><h3>Virtualization types and distributed models</h3><ul class="muted-list"><li><strong>Type 1 Hypervisor:</strong> runs directly on hardware. Example: VMware ESXi, Xen.</li><li><strong>Type 2 Hypervisor:</strong> runs on top of a host OS. Example: VirtualBox, VMware Workstation.</li><li><strong>VM benefits:</strong> Isolation (crash in one VM ≠ crash in others), resource efficiency (multiple VMs per server), portability (live migration), dev/testing (many OSes without separate hardware), snapshots (instant rollback).</li><li><strong>Network OS:</strong> machines remain visibly separate and are accessed explicitly.</li><li><strong>Distributed OS:</strong> multiple machines appear as one unified system.</li><li><strong>Client–Server:</strong> clients request, servers respond.</li><li><strong>P2P:</strong> each node can act as both client and server.</li></ul></div>
+                <div class="highlight" style="margin-top:18px;"><strong>Hard vs Soft Real-Time</strong><br /><br /><strong>Hard real-time:</strong> Missing a deadline is catastrophic. Examples: pacemakers, ABS brakes, aircraft control systems.<br /><strong>Soft real-time:</strong> Missing a deadline degrades quality but is not fatal. Examples: video streaming (dropped frames), VoIP audio.</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="topic-panel" id="topic-services">
+            <div class="two-col">
+              <div>
+                <div class="card">
+                  <div class="badge">Chapter 2.1–2.4</div>
+                  <h3>OS services and user interfaces</h3>
+                  <div class="tag">CLI</div><div class="tag">GUI</div><div class="tag">Touch</div><div class="tag">API</div>
+                  <ul class="muted-list">
+                    <li><strong>User-facing services:</strong> UI, program execution, I/O, file manipulation, communication.</li>
+                    <li><strong>System-efficiency services:</strong> error detection, resource allocation, accounting, protection, security.</li>
+                    <li><strong>CLI</strong> uses shells and command parsing.</li>
+                    <li><strong>GUI</strong> uses windows, icons, menus, pointer.</li>
+                    <li><strong>Touch</strong> converts gestures into events.</li>
+                  </ul>
+                  <div class="table-wrap" style="margin-top:12px;"><table><thead><tr><th>Shell</th><th>Platform &amp; Notes</th></tr></thead><tbody><tr><td>sh (Bourne)</td><td>Original UNIX shell; scripting standard</td></tr><tr><td>bash</td><td>Default on most Linux; history, tab completion, arrays</td></tr><tr><td>zsh</td><td>macOS default since Catalina; plugins, themes</td></tr><tr><td>PowerShell</td><td>Windows; object-oriented piping for system admin</td></tr><tr><td>cmd.exe</td><td>Legacy Windows command prompt; basic tasks</td></tr></tbody></table></div>
+                </div>
+                <div class="diagram" style="margin-top:18px;">CLI / GUI / TOUCH
+   ▼
+User-space interface component
+   ▼
+API / library wrapper
+   ▼
+SYSCALL / TRAP instruction
+   ▼
+Kernel validates request
+   ▼
+Service routine executes
+   ▼
+Return to user mode</div>
+                <div class="purple" style="margin-top:18px;"><strong>Same result, different path:</strong><br />Open a file by command, icon, or touch. The interaction changes, but the underlying OS services remain the same.</div>
+                <div class="card" style="margin-top:18px;"><h3>GUI platform examples</h3><ul class="muted-list"><li><strong>Windows:</strong> Explorer shell with user-space graphics APIs.</li><li><strong>macOS:</strong> Aqua/Cocoa with Quartz on Darwin/XNU.</li><li><strong>Linux:</strong> X Window or Wayland with GNOME/KDE in user space.</li></ul></div>
+              </div>
+              <div>
+                <div class="card">
+                  <h3>System call implementation path</h3>
+                  <div class="tag">Portability</div><div class="tag">Convenience</div><div class="tag">Error handling</div>
+                  <ol class="muted-list"><li>User program calls API wrapper such as <code>read()</code>.</li><li>Wrapper places syscall number and parameters into registers or memory.</li><li>Wrapper executes trap/syscall instruction.</li><li>CPU flips into kernel mode.</li><li>Kernel validates arguments and permissions.</li><li>Kernel identifies service routine via syscall table.</li><li>Service executes and sets return value.</li><li>CPU returns to user mode and application resumes.</li></ol>
+                </div>
+                <div class="master-note" style="margin-top:18px;"><strong>Why APIs are preferred over raw system calls:</strong><br /><br />APIs improve portability, hide low-level calling details, and provide better error handling.</div>
+                <div class="card" style="margin-top:18px;"><h3>Types of system calls</h3><ul class="muted-list"><li><strong>Process control:</strong> fork, exec, exit, wait</li><li><strong>File management:</strong> open, read, write, close, stat</li><li><strong>Device management:</strong> ioctl, mmap, device reads/writes</li><li><strong>Information maintenance:</strong> gettimeofday, sleep, alarm</li><li><strong>Communications:</strong> pipe, socket, send/recv, shared memory</li><li><strong>Protection:</strong> chmod, chown, setuid</li></ul></div>
+              </div>
+            </div>
+          </div>
+
+          <div class="topic-panel" id="topic-design">
+            <div class="two-col">
+              <div>
+                <div class="card">
+                  <div class="badge">Chapter 2.5–2.8</div>
+                  <h3>Compile, link, load, and OS-specific applications</h3>
+                  <div class="diagram">SOURCE FILE (.c / .cpp)
+   ▼ compile
+OBJECT FILE (.o / .obj)
+   ▼ link
+EXECUTABLE (ELF / PE / Mach-O)
+   ▼ load via exec()
+RUNNING PROCESS in RAM</div>
+                  <ul class="muted-list"><li><strong>Compiler</strong> translates source into machine code.</li><li><strong>Linker</strong> resolves references and combines code and libraries.</li><li><strong>Loader</strong> maps executable into memory and starts execution.</li><li><strong>Relocation</strong> adjusts addresses to actual RAM placement.</li></ul>
+                </div>
+              </div>
+              <div>
+                <div class="table-wrap"><table><thead><tr><th>Concept</th><th>Meaning</th><th>Why it matters</th></tr></thead><tbody><tr><td>Static linking</td><td>Library code copied into executable</td><td>Self-contained, larger binary</td></tr><tr><td>Dynamic linking</td><td>Libraries loaded at runtime</td><td>Smaller binary, RAM sharing</td></tr><tr><td>ELF / PE / Mach-O</td><td>OS-specific executable formats</td><td>Loaders only understand native formats</td></tr><tr><td>Policy vs mechanism</td><td>Changeable decision vs fixed implementation</td><td>Flexibility without redesigning mechanisms</td></tr></tbody></table></div>
+                <div class="insight" style="margin-top:18px;"><strong>Why applications are OS-specific</strong><br /><br />Different system call interfaces, binary formats, libraries/APIs, and calling conventions prevent direct execution across OSes.</div>
+                <div class="master-note" style="margin-top:12px;"><strong>How cross-platform compatibility IS achieved</strong><br /><br /><strong>1. Interpreted languages:</strong> Python/Java run on an OS-specific interpreter/JVM — program code is portable.<br /><strong>2. Cross-compilation:</strong> Same source compiled into separate binaries per OS (e.g., Chromium → .exe, ELF, .app).<br /><strong>3. Compatibility layers:</strong> WSL translates Linux syscalls to Windows NT calls; Wine does the reverse.<br /><strong>4. Containers / VMs:</strong> Package the app with its OS environment (Docker runs Linux ELF on any Linux kernel host).</div>
+                <div class="master-note" style="margin-top:12px;"><strong>OS implementation language</strong><br /><br />Modern OSes are mostly C/C++ — portable and performant. Some assembly is still needed for CPU-specific tasks (boot sequence, context switch entry point, interrupt vectors). Linux: ~95% C, ~5% assembly. Windows NT: primarily C/C++.</div>
+                <div class="purple" style="margin-top:18px;"><strong>OS structure models</strong><br /><br />Monolithic is fast, layered is clean, microkernel is safer but IPC-heavy, modular kernels load features dynamically, and hybrid systems combine ideas for production trade-offs.</div>
+                <div class="master-note" style="margin-top:18px;"><strong>Hybrid-system note:</strong><br /><br />Modern production operating systems are rarely pure. macOS combines Mach and BSD layers, Windows NT is hybrid/modular in practice, and Android uses a Linux kernel with higher user-space runtime layers.</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="topic-panel" id="topic-process">
+            <div class="two-col">
+              <div>
+                <div class="card"><div class="badge">Chapter 3.1</div><h3>Program, process, address space, PCB</h3><ul class="muted-list"><li><strong>Program:</strong> passive file on disk.</li><li><strong>Process:</strong> active execution instance with memory, state, and resources.</li><li>Multiple processes can share the same program text while maintaining separate dynamic state.</li></ul></div>
+                <div class="diagram" style="margin-top:18px;">PROCESS ADDRESS SPACE
+High
+ ┌────────────────────────────┐
+ │ Kernel Space (protected)   │ OS code; mapped but inaccessible from user mode
+ ├────────────────────────────┤
+ │ Stack ↓                    │ Local vars, function params, return addresses
+ ├────────────────────────────┤
+ │ Guard Gap                  │ Unmapped — segfault if accessed (stack/heap protection)
+ ├────────────────────────────┤
+ │ Heap ↑                     │ Dynamic memory: malloc()/free(), new/delete
+ ├────────────────────────────┤
+ │ BSS Section                │ Uninitialized globals/statics — zeroed by OS at load
+ ├────────────────────────────┤
+ │ Data Section               │ Initialized globals/statics (e.g., int maxSize = 100)
+ ├────────────────────────────┤
+ │ Text Section (Read-Only)   │ Machine instructions; shared across instances
+ └────────────────────────────┘
+Low</div>
+              </div>
+              <div>
+                <div class="card"><h3>PCB field map</h3><ul class="muted-list"><li><strong>PID, PPID, UID:</strong> e.g., PID=4521, PPID=1 (init), UID=1000 (student)</li><li><strong>Process state:</strong> NEW / READY / RUNNING / WAITING / TERMINATED</li><li><strong>Program counter:</strong> Address of next instruction, e.g., PC = 0x00401A3C</li><li><strong>CPU registers:</strong> All general-purpose, FP, SIMD registers (~100–200 bytes per process)</li><li><strong>Scheduling info:</strong> Priority level, CPU time consumed, quantum remaining</li><li><strong>Memory-management info:</strong> Pointer to page table, base/limit registers</li><li><strong>Accounting info:</strong> CPU time used, elapsed time, start timestamp</li><li><strong>Open files / I/O status:</strong> e.g., fd[0]=stdin, fd[3]=homework.txt, fd[4]=socket(TCP)</li><li><strong>Signal handlers</strong></li><li><strong>Parent/child links</strong></li></ul></div>
+                <div class="diagram" style="margin-top:18px;">FIVE-STATE PROCESS MODEL
+
+    NEW
+     │ admitted
+     ▼
+  READY ◄─────────────────────────┐
+     │ scheduler dispatch          │ I/O / event complete
+     ▼                             │ (WAITING → READY)
+  RUNNING ──── interrupt / ────►  READY (above)
+     │          preemption
+     │
+     ├──── I/O or event wait ────► WAITING
+     │                               │
+     │                               └─── I/O complete ──► READY
+     │
+     └──── exit() ────────────────► TERMINATED
+
+Key transitions:
+  NEW → READY        admitted to memory
+  READY → RUNNING    scheduler dispatches
+  RUNNING → READY    preempted (timer / interrupt)
+  RUNNING → WAITING  blocks on I/O or event
+  WAITING → READY    I/O / event completes
+  RUNNING → TERMINATED  process calls exit()</div>
+                <div class="analogy"><strong>Analogy:</strong><br /><br />The PCB is the process dossier. If the process is paused, the OS stores everything needed to resume it exactly where it left off.</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="topic-panel" id="topic-schedule">
+            <div class="two-col">
+              <div>
+                <div class="card"><div class="badge">Chapter 3.2–3.4</div><h3>Scheduling, dispatcher, context switching, fork–exec, IPC</h3><ul class="muted-list"><li><strong>CPU scheduler</strong> decides which ready process runs next.</li><li><strong>Dispatcher</strong> performs the handoff and restores CPU state.</li><li><strong>Context switching</strong> is overhead but enables multitasking.</li><li><strong>fork()</strong> duplicates the process; <strong>exec()</strong> replaces the process image.</li><li><strong>IPC</strong> uses shared memory or message passing.</li></ul></div>
+                <div class="diagram" style="margin-top:18px;">TRIGGER: timer expiry or blocking call
+  ▼
+Save outgoing state to PCB
+  ▼
+Scheduler selects next READY process
+  ▼
+Restore incoming PCB state
+  ▼
+Return to user mode</div>
+                <div class="formula">Turnaround Time = Finish Time − Arrival Time</div>
+                <div class="formula">Waiting Time = Finish Time − Arrival Time − Burst Time</div>
+                <div class="formula">Response Time = First CPU Allocation Time − Arrival Time</div>
+                <div class="formula">CPU Utilisation = (CPU Active Time / Total Time) × 100%</div>
+                <div class="formula">Throughput = Number of Processes Completed / Time Period</div>
+                <div class="formula">SJF Burst Prediction (Exponential Average): τ<sub>n+1</sub> = α × t<sub>n</sub> + (1 − α) × τ<sub>n</sub></div>
+              </div>
+              <div>
+                <div class="card"><h3>Context-switch overhead factors</h3><ul class="muted-list"><li>Register save/restore</li><li>TLB flush or partial invalidation</li><li>CPU cache eviction and cold-cache restart</li><li>Page-table or memory-map switch</li></ul>
+                <div class="formula" style="margin-top:10px;">Practical example (modern Intel/AMD, ~2μs per switch):
+50 processes, quantum = 10ms → 5,000 switches/sec → 10ms/sec → ~1% overhead ✓
+50 processes, quantum = 1ms → 50,000 switches/sec → 100ms/sec → 10% overhead ✗</div>
+                <div class="small" style="margin-top:6px;">Modern optimization: Process-Context Identifiers (PCID) tag TLB entries per process, avoiding full flush on switch.</div></div>
+                <div class="insight"><strong>Mode switch vs context switch</strong><br /><br />Mode switch changes privilege level for the same process. Context switch changes which process runs.</div>
+                <div class="purple"><strong>IPC comparison</strong><br /><br />
+                  <strong>Shared Memory</strong> is zero-copy: both processes map the same physical RAM into their virtual address spaces — no data is ever copied. This makes it the fastest IPC method for large same-machine data exchange. However, it requires explicit mutex or semaphore synchronization to prevent race conditions.<br /><br />
+                  <strong>Message Passing</strong> (pipes, sockets, queues) is safer: the OS manages the channel, preventing race conditions. It works across a network but incurs system-call and kernel buffer copy overhead per message.</div>
+                <div class="master-note"><strong>Zombie, orphan, daemon</strong><br /><br />A zombie is a terminated child awaiting wait() cleanup. An orphan is a child whose parent exits first. A daemon is a long-running background service process.</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section searchable" id="flows">
+      <h2>High-Value System Flows</h2>
+      <div class="grid-3">
+        <div class="card"><h3>Boot sequence</h3><div class="diagram">Power ON
+→ BIOS / UEFI firmware starts
+→ POST checks hardware health
+→ Bootloader located (for example, GRUB)
+→ Kernel loaded into memory
+→ Kernel initializes memory, process tables, file systems
+→ init / systemd starts core services
+→ Shell / GUI launched for user interaction</div></div>
+        <div class="card"><h3>System call path</h3><div class="diagram">User code → API wrapper → trap/syscall → kernel handler → service execution → return value → user resumes</div></div>
+        <div class="card"><h3>Interrupt handling</h3><div class="diagram">Device event → interrupt line → CPU saves state → vector lookup → ISR → state restore → continue</div></div>
+        <div class="card"><h3>Shell command execution</h3><div class="diagram">Parse command → fork() → child exec() → binary loads → runs → exit() → parent wait() → prompt returns</div></div>
+        <div class="card"><h3>fork–exec–wait lifecycle</h3><div class="diagram">fork() duplicates parent → child path begins → exec() replaces child image → child finishes → wait() reaps zombie</div></div>
+        <div class="card" style="grid-column:1/-1;"><h3>How everything connects — The Big Picture</h3><div class="diagram" style="font-size:13.5px;">The Full Lifecycle: From Power-On to Multitasking
+
+ 1. POWER ON → BOOTSTRAP (BIOS/UEFI) loads OS kernel into RAM
+ 2. Kernel initializes KERNEL DATA STRUCTURES
+    (linked lists for processes, queues for scheduling, hash tables for fast lookup, bitmaps for free-block tracking)
+ 3. User logs in via CLI (shell) or GUI → USER & OS INTERFACE
+ 4. User launches 'python3 script.py'
+    → Shell calls fork() + exec() → SYSTEM CALLS
+    → LINKER/LOADER maps the program into RAM
+    → New PROCESS created with its own PCB, memory layout, state = READY
+ 5. Scheduler dispatches → Process runs in USER MODE (mode bit = 1)
+    [DUAL MODE OPERATION — OS is protected from user code]
+ 6. Process calls open('data.txt')
+    → TRAP instruction fires → CPU switches to KERNEL MODE (mode bit = 0)
+    → OS kernel handler services the open() request, returns file descriptor
+    → SYSRET → CPU returns to USER MODE, process continues
+ 7. Timer interrupt fires (process has used its quantum)
+    → CPU enters KERNEL MODE → CONTEXT SWITCH begins
+    → Save outgoing process state to its PCB
+    → SCHEDULER selects next READY process (using FCFS / RR / Priority / SJF)
+    → Load next process's PCB, restore its registers, switch page table
+    → CPU returns to USER MODE — new process runs
+ 8. This cycle repeats THOUSANDS of times per second
+    → MULTITASKING: multiple processes appear to run simultaneously
+ 9. Processes communicate via IPC (shared memory or message passing)
+10. Process calls exit() → TERMINATED → parent calls wait() → PCB cleaned up
+
+All of this is enabled by: Hardware interrupts + Dual mode + Timer + Scheduling + IPC</div></div>
+      </div>
+    </section>
+
+    <section class="section searchable" id="control-model">
+      <h2>Core Control Model of the Operating System</h2>
+      <p class="lead">These control concepts explain how the OS stays in charge of the machine, protects hardware, and enforces fairness.</p>
+      <div class="grid-3">
+        <div class="card">
+          <h3>Dual Mode Operation</h3>
+          <ul class="muted-list">
+            <li><strong>User Mode:</strong> restricted execution for applications</li>
+            <li><strong>Kernel Mode:</strong> full privilege for OS code</li>
+            <li>The hardware mode bit is changed only by the CPU during trap, interrupt, exception, or return operations.</li>
+          </ul>
+        </div>
+        <div class="card">
+          <h3>Hardware Timer</h3>
+          <ul class="muted-list">
+            <li>The OS loads a timer before giving CPU control to a process.</li>
+            <li>When the timer expires, an interrupt forces control back to the OS.</li>
+            <li>This prevents infinite loops from monopolizing the CPU.</li>
+          </ul>
+        </div>
+        <div class="card">
+          <h3>Interrupt Vector Table</h3>
+          <ul class="muted-list">
+            <li>Maps interrupt numbers to interrupt handler addresses.</li>
+            <li>Lets the CPU jump directly to the correct ISR.</li>
+            <li>Essential for fast, deterministic interrupt handling.</li>
+          </ul>
+        </div>
+      </div>
+      <div class="grid-2" style="margin-top:18px;">
+        <div class="diagram">USER MODE (restricted)
+   │  trap / interrupt / exception
+   ▼
+KERNEL MODE (privileged)
+   │  IRET / SYSRET
+   ▼
+USER MODE
+
+Only hardware changes the mode bit.</div>
+        <div class="diagram">CPU receives interrupt signal
+   ▼
+Finishes current instruction
+   ▼
+Saves current state (registers, PC) to stack
+   ▼
+Looks up interrupt vector table
+   ▼
+Finds handler address (ISR)
+   ▼
+Jumps to ISR (kernel mode)
+   ▼
+ISR completes
+   ▼
+Restores state and returns to user mode</div>
+      </div>
+    </section>
+
+    <section class="section searchable" id="algorithms">
+      <h2>Algorithms, Structures, and Comparisons</h2>
+      <p class="lead">Use these dashboards as rapid comparison tools during delivery and revision.</p>
+      <div class="tabs">
+        <button class="tab-btn active" data-tab="tab-sched">CPU Scheduling</button>
+        <button class="tab-btn" data-tab="tab-kernel">Kernel Data Structures</button>
+        <button class="tab-btn" data-tab="tab-io">I/O and Storage</button>
+        <button class="tab-btn" data-tab="tab-structure">OS Structure Models</button>
+        <button class="tab-btn" data-tab="tab-dist">Distributed and Cloud</button>
+      </div>
+
+      <div class="tab-panel active" id="tab-sched">
+        <div class="table-wrap" style="margin-bottom:18px;"><table><thead><tr><th>Scheduling Criterion</th><th>Meaning</th><th>What a Good Scheduler Tries to Do</th></tr></thead><tbody><tr><td>CPU Utilization</td><td>How busy the CPU stays</td><td>Keep it high</td></tr><tr><td>Throughput</td><td>Processes completed per unit time</td><td>Increase completions</td></tr><tr><td>Turnaround Time</td><td>Finish time minus arrival time</td><td>Keep total completion time low</td></tr><tr><td>Waiting Time</td><td>Time spent waiting in ready queue</td><td>Reduce queue delays</td></tr><tr><td>Response Time</td><td>Time until first CPU service</td><td>Improve interactive responsiveness</td></tr></tbody></table></div>
+        <div class="table-wrap" style="margin-bottom:18px;"><table><thead><tr><th>Classification</th><th>Meaning</th><th>Examples</th></tr></thead><tbody><tr><td>Preemptive Scheduling</td><td>OS can forcibly remove the CPU from a running process</td><td>Round Robin, preemptive Priority, SRTF</td></tr><tr><td>Non-preemptive Scheduling</td><td>Running process keeps CPU until it blocks or finishes</td><td>FCFS, non-preemptive SJF, non-preemptive Priority</td></tr></tbody></table></div>
+        <div class="grid-4">
+          <div class="card"><span class="level l2">High probability</span><h4>FCFS</h4><p>Simple and starvation-free. Suffers from convoy effect and poor interactive response.</p></div>
+          <div class="card"><span class="level l3">Must prepare</span><h4>SJF / SRTF</h4><p>Best average waiting time. Needs burst prediction and can starve long jobs.</p></div>
+          <div class="card"><span class="level l3">Must prepare</span><h4>Round Robin</h4><p>Fair and interactive. Sensitive to quantum size; increases switching overhead.</p></div>
+          <div class="card"><span class="level l2">High probability</span><h4>Priority</h4><p>Urgent tasks run first. Aging prevents starvation.</p></div>
+        </div>
+        <div class="highlight" style="margin-top:18px;"><strong>Trade-off insight:</strong> Scheduling is never about one universally best algorithm. It is always a trade-off among fairness, throughput, waiting time, and response time.</div>
+      </div>
+
+      <div class="tab-panel" id="tab-kernel">
+        <div class="grid-6">
+          <div class="card"><h4>Linked List</h4><p>Simple process and file lists</p></div>
+          <div class="card"><h4>Doubly Linked List</h4><p>Linux task list, O(1) deletion when node pointer is known</p></div>
+          <div class="card"><h4>Queue</h4><p>Ready queue, I/O queue</p></div>
+          <div class="card"><h4>Stack</h4><p>Interrupt state, function calls</p></div>
+          <div class="card"><h4>Tree</h4><p>Linux CFS uses a red-black tree; file systems use tree-like indexing for fast lookup</p></div>
+          <div class="card"><h4>Hash Table / Bitmap</h4><p>Inode cache, PID/socket lookup, and disk block/page free tracking</p></div>
+        </div>
+      </div>
+
+      <div class="tab-panel" id="tab-io">
+        <div class="grid-3">
+          <div class="card"><h4>Programmed I/O</h4><p>CPU remains involved continuously. Simple but inefficient for large transfers.</p></div>
+          <div class="card"><h4>DMA</h4><p>Controller transfers data directly to RAM. CPU receives one completion interrupt.</p><div class="formula">CPU programs DMA → DMA moves block → interrupt on completion</div></div>
+          <div class="card"><h4>Storage Hierarchy</h4><p>Registers, cache, RAM, SSD, HDD, optical/tape. Speed falls downward; capacity rises.</p></div>
+        </div>
+      </div>
+
+      <div class="tab-panel" id="tab-structure">
+        <div class="grid-5">
+          <div class="card"><h4>Monolithic</h4><p>Fast but tightly coupled. One big binary in kernel space. A bug anywhere can crash the whole OS.</p><div class="small">Examples: Original UNIX, MS-DOS</div></div>
+          <div class="card"><h4>Layered</h4><p>Clean and debuggable but can be slow. Each layer uses only the layer below.</p><div class="small">Example: THE OS (Dijkstra, 1968)</div></div>
+          <div class="card"><h4>Microkernel</h4><p>Safer and more isolated. Minimal kernel; services run in user space. IPC overhead.</p><div class="small">Examples: Mach, QNX, L4</div></div>
+          <div class="card"><h4>Modular (LKM)</h4><p>Dynamic features without reboot. Core kernel + loadable modules at runtime.</p><div class="small">Example: Linux (modprobe/rmmod)</div></div>
+          <div class="card"><h4>Hybrid</h4><p>Real-world production compromise combining multiple approaches.</p><div class="small">macOS: Mach + BSD; Windows NT: modular/hybrid; Android: Linux kernel + ART</div></div>
+        </div>
+      </div>
+
+      <div class="tab-panel" id="tab-dist">
+        <div class="grid-4">
+          <div class="card"><h4>Client–Server</h4><p>Dedicated servers respond to client requests. Clear role separation.</p></div>
+          <div class="card"><h4>Peer-to-Peer</h4><p>Every node can act as both client and server. No central authority.</p></div>
+          <div class="card"><h4>Cloud</h4><p>IaaS, PaaS, SaaS represent increasing abstraction and decreasing direct control.</p></div>
+          <div class="card"><h4>Virtualization</h4><p>Multiple VMs share one physical machine via a hypervisor. Benefits: isolation, resource efficiency, portability (live migration), dev/testing flexibility, and instant snapshots/rollback. Cloud IaaS is built on this.</p></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section searchable" id="exam-words">
+      <h2>Common Exam Words — What They Really Ask You To Do</h2>
+      <div class="grid-5">
+        <div class="card"><h4>Define</h4><p>Give a precise textbook-aligned meaning.</p></div>
+        <div class="card"><h4>Distinguish</h4><p>Highlight key differences point by point.</p></div>
+        <div class="card"><h4>Trace</h4><p>Explain step-by-step flow or sequence.</p></div>
+        <div class="card"><h4>Compare</h4><p>Show advantages, disadvantages, and trade-offs.</p></div>
+        <div class="card"><h4>Justify</h4><p>State your conclusion and support it with concepts or examples.</p></div>
+      </div>
+    </section>
+
+    <section class="section searchable" id="worked">
+      <div class="master-note" style="margin-bottom:18px;"><strong>Exam reminder:</strong> In scheduling problems, always draw the Gantt chart first, then calculate individual turnaround and waiting times per process, then compute the averages. A correct final number without working earns partial credit only.</div>
+      <div class="card" style="margin-bottom:18px; background:linear-gradient(180deg,var(--soft-blue) 0%, #fff 100%); border-color:#b9dde9;">
+        <h3 style="color:var(--blue);">Quick Formula Reference</h3>
+        <div class="grid-3" style="gap:10px;">
+          <div class="formula">Turnaround = Finish − Arrival</div>
+          <div class="formula">Waiting = Turnaround − Burst</div>
+          <div class="formula">Response = First CPU − Arrival</div>
+          <div class="formula">CPU Util = Active / Total × 100%</div>
+          <div class="formula">Throughput = Completed / Time</div>
+          <div class="formula">SJF Predict: τ<sub>n+1</sub> = α·t<sub>n</sub> + (1−α)·τ<sub>n</sub></div>
+        </div>
+      </div>
+      <h2>Worked Scheduling Example</h2>
+      <p class="lead">This section converts theory into calculation-ready reasoning.</p>
+      <div class="grid-2">
+        <div class="card">
+          <h3>Input process set</h3>
+          <div class="diagram">P1: Arrival = 0, Burst = 8
+P2: Arrival = 0, Burst = 4
+P3: Arrival = 0, Burst = 9
+P4: Arrival = 0, Burst = 5</div>
+          <p class="small">Use this set to compare FCFS and Round Robin quickly.</p>
+        </div>
+        <div class="card">
+          <h3>FCFS view</h3>
+          <div class="diagram">Gantt:
+| P1 0–8 | P2 8–12 | P3 12–21 | P4 21–26 |
+
+Turnaround:
+P1=8, P2=12, P3=21, P4=26
+
+Waiting:
+P1=0, P2=8, P3=12, P4=21
+
+Average Waiting    = 10.25
+Average Turnaround = 16.75</div>
+        </div>
+        <div class="card">
+          <h3>Round Robin view (q = 4)</h3>
+          <div class="diagram">Gantt:
+| P1 0–4 | P2 4–8 | P3 8–12 | P4 12–16 |
+| P1 16–20 | P3 20–24 | P4 24–25 | P3 25–26 |
+
+Turnaround:  P1=20  P2=8   P3=26  P4=25
+Waiting:     P1=12  P2=4   P3=17  P4=20
+
+Average Waiting    = 13.25 ms
+Average Turnaround = 19.75 ms
+
+RR average waiting is higher than FCFS here,
+but every process gets first CPU service by t=16.
+RR trades average wait for response-time fairness.</div>
+        </div>
+        <div class="card">
+          <h3>SJF view (same process set)</h3>
+          <div class="diagram">Order by shortest burst first:
+P2(4) → P4(5) → P1(8) → P3(9)
+
+Gantt:
+| P2 0–4 | P4 4–9 | P1 9–17 | P3 17–26 |
+
+Turnaround:  P2=4  P4=9  P1=17  P3=26
+Waiting:     P2=0  P4=4  P1=9   P3=17
+
+Average Waiting    = 7.50 ms  ← optimal
+Average Turnaround = 14.00 ms
+
+SJF gives the mathematically minimum
+average waiting time for this arrival set.</div>
+        </div>
+        <div class="card">
+          <h3>SJF view — Priority process set</h3>
+          <div class="diagram">Process set (for Priority comparison):
+P1(burst=6, pri=2), P2(burst=2, pri=4),
+P3(burst=8, pri=1), P4(burst=3, pri=3)
+
+SJF order (shortest burst first):
+P2(2) → P4(3) → P1(6) → P3(8)
+
+Gantt:
+| P2 0–2 | P4 2–5 | P1 5–11 | P3 11–19 |
+
+Turnaround:  P2=2  P4=5  P1=11  P3=19
+Waiting:     P2=0  P4=2  P1=5   P3=11
+
+Average Waiting    = 4.50 ms  ← optimal
+Average Turnaround = 9.25 ms</div>
+        </div>
+        <div class="card">
+          <h3>Priority scheduling — key lesson</h3>
+          <div class="master-note"><strong>Use a redesigned process set to show the difference from SJF:</strong><br /><br />
+            P1(burst=6, priority=2), P2(burst=2, priority=4),<br />
+            P3(burst=8, priority=1), P4(burst=3, priority=3)<br /><br />
+            <strong>Priority order (1=highest):</strong> P3 → P1 → P4 → P2<br />
+            Gantt: | P3 0–8 | P1 8–14 | P4 14–17 | P2 17–19 |<br /><br />
+            Avg Waiting = 9.75 ms (vs SJF = 4.50 ms)<br /><br />
+            <strong>Key lesson:</strong> Priority promotes P3 (the longest job!) because it has the highest priority.
+            P2 (shortest burst) runs last. This is exactly the starvation risk — solved by aging.
+          </div>
+        </div>
+        <div class="card">
+          <h3>Teaching interpretation</h3>
+          <div class="master-note"><strong>Key lesson:</strong><br /><br />FCFS can outperform Round Robin on average waiting time for some workloads, but Round Robin is still preferred in interactive systems because it improves fairness and first response.</div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section searchable" id="answer-templates">
+      <h2>Exam Answer Templates</h2>
+      <p class="lead">Use these structures to write faster, clearer, and more complete answers in exams.</p>
+      <div class="grid-3">
+        <div class="card"><h4>What is a System Call?</h4><ol class="muted-list"><li>Write a definition</li><li>Explain why it is needed</li><li>Show user mode → kernel mode flow</li><li>Give one example like read() or open()</li></ol></div>
+        <div class="card"><h4>Explain Context Switching</h4><ol class="muted-list"><li>Define context and context switch</li><li>List save → schedule → restore phases</li><li>Differentiate from mode switch</li><li>State overhead sources</li></ol></div>
+        <div class="card"><h4>Compare Scheduling Algorithms</h4><ol class="muted-list"><li>Name the algorithms</li><li>State rule of selection</li><li>Mention advantage and disadvantage</li><li>Add one fairness/performance conclusion</li></ol></div>
+      </div>
+    </section>
+
+    <section class="section searchable" id="traps">
+      <h2>Common Exam Traps — Do Not Confuse</h2>
+      <div class="grid-3">
+        <div class="highlight"><strong>Multiprogramming vs Multitasking</strong><br /><br />Utilization vs responsiveness.</div>
+        <div class="highlight"><strong>Synchronous vs Asynchronous</strong><br /><br />Trap and exception are synchronous — triggered by the CPU executing an instruction. Hardware interrupts are asynchronous — triggered by external devices independently of CPU execution.</div>
+        <div class="highlight"><strong>Trap vs Exception</strong><br /><br />Intentional syscall vs accidental program fault.</div>
+        <div class="highlight"><strong>Interrupt vs Trap</strong><br /><br />External hardware signal vs internal deliberate software entry.</div>
+        <div class="highlight"><strong>Mode Switch vs Context Switch</strong><br /><br />Privilege change vs process change.</div>
+        <div class="highlight"><strong>Program vs Process</strong><br /><br />Passive file vs active execution state.</div>
+        <div class="highlight"><strong>Kernel vs Shell</strong><br /><br />Kernel manages hardware; shell interprets user commands.</div>
+      </div>
+    </section>
+
+    <section class="section searchable" id="os-specifics">
+      <h2>System Programs, Shell, and Kernel Clarification</h2>
+      <div class="grid-3">
+        <div class="card">
+          <h3>System Programs</h3>
+          <ul class="muted-list">
+            <li>File manipulation programs</li>
+            <li>Status information programs</li>
+            <li>File modification programs</li>
+            <li>Programming language support</li>
+            <li>Program loading and execution tools</li>
+            <li>Communication programs</li>
+            <li>Background services / daemons</li>
+          </ul>
+        </div>
+        <div class="card">
+          <h3>Shell vs Kernel</h3>
+          <ul class="muted-list">
+            <li><strong>Shell:</strong> user-facing command interpreter</li>
+            <li><strong>Kernel:</strong> privileged core managing hardware and resources</li>
+            <li>The shell requests services; the kernel actually performs privileged operations.</li>
+          </ul>
+        </div>
+        <div class="card">
+          <h3>Open vs Closed Perspective</h3>
+          <ul class="muted-list">
+            <li>Open systems emphasize portability and standard interfaces.</li>
+            <li>Closed systems are tightly coupled to one environment or vendor stack.</li>
+            <li>This helps explain why APIs, ABIs, and portability matter.</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section class="section searchable" id="glossary">
+      <h2>Unit 1 Glossary</h2>
+      <p class="lead">Compact, exam-friendly definitions for the most important Unit 1 terms.</p>
+      <div class="grid-3">
+        <details open><summary>Core system terms</summary><p><strong>Operating System:</strong> System software that manages hardware and provides services to applications.<br><strong>Kernel:</strong> Core OS component always running with full privilege.<br><strong>System Program:</strong> Supporting software such as shells, compilers, and file managers.<br><strong>Middleware:</strong> Additional service layer above the kernel used by applications.</p></details>
+        <details open><summary>Protection and control terms</summary><p><strong>Interrupt:</strong> Hardware signal needing attention.<br><strong>Non-Maskable Interrupt (NMI):</strong> Cannot be disabled or delayed; used for critical hardware errors (e.g., memory parity).<br><strong>Maskable Interrupt:</strong> Can be temporarily disabled by the CPU; used for most device I/O. OS disables them during critical sections.<br><strong>Trap:</strong> Intentional software entry into the OS.<br><strong>Exception:</strong> Unintentional error condition during execution.<br><strong>Mode Bit:</strong> Hardware bit marking user or kernel mode.<br><strong>Privileged Instruction:</strong> Instruction allowed only in kernel mode.</p></details>
+        <details open><summary>Build and execution terms</summary><p><strong>Object File:</strong> Intermediate machine-code file with unresolved symbols.<br><strong>Linker:</strong> Combines object files and libraries into an executable.<br><strong>Loader:</strong> OS component that reads executable into memory and starts it.<br><strong>Relocation:</strong> Adjusting addresses to actual loaded memory locations.</p></details>
+        <details open><summary>Process terms</summary><p><strong>Process:</strong> Program in execution.<br><strong>PCB:</strong> Data structure storing process state and control info.<br><strong>Dispatcher:</strong> Component performing the actual CPU handoff.<br><strong>Preemption:</strong> Forced CPU removal from a running process.<br><strong>Quantum:</strong> Fixed CPU slice in Round Robin.<br><strong>Zombie Process:</strong> terminated child awaiting wait() cleanup.<br><strong>Orphan Process:</strong> child whose parent exits first.<br><strong>Daemon:</strong> long-running background service process.</p></details>
+        <details open><summary>IPC and concurrency terms</summary><p><strong>Shared Memory:</strong> Zero-copy IPC — processes map the same physical RAM into their virtual address spaces and read/write directly. Fast but needs synchronization.<br><strong>Message Passing:</strong> IPC through OS-managed channels (pipes, sockets, queues). Safe and network-capable but incurs copy overhead.<br><strong>Mutex:</strong> Mutual exclusion lock — allows only one process/thread into a critical section at a time.<br><strong>Semaphore:</strong> Counter-based synchronization primitive; wait() decrements (blocks if 0), signal() increments.<br><strong>Race Condition:</strong> Outcome depends on non-deterministic timing of concurrent access to shared data.</p></details>
+        <details open><summary>Scheduling and performance terms</summary><p><strong>Turnaround Time:</strong> Finish time minus arrival time.<br><strong>Waiting Time:</strong> Time spent waiting in ready queue (= Turnaround − Burst).<br><strong>Response Time:</strong> Time until first CPU service.<br><strong>Convoy Effect:</strong> Short jobs wait behind a long job in FCFS — like a slow truck blocking a highway.<br><strong>Starvation:</strong> A process waits indefinitely because higher-priority processes always take the CPU first.<br><strong>Aging:</strong> Gradually increasing the priority of waiting processes over time to prevent starvation.<br><strong>Scheduler:</strong> OS component that decides which READY process gets the CPU next.<br><strong>Time Quantum:</strong> Fixed maximum CPU slice per process in Round Robin scheduling.<br><strong>Context:</strong> Complete CPU state of a process: all registers, program counter, stack pointer, page table pointer.<br><strong>Context Switch:</strong> Saving outgoing process context to its PCB; loading incoming process context from its PCB.<br><strong>TLB:</strong> Translation Lookaside Buffer — CPU hardware cache for virtual→physical address translation. Flushed on context switch.</p></details>
+        <details open><summary>Ch1 hardware and environment terms</summary><p><strong>Bootstrap / Firmware:</strong> ROM-based program (BIOS/UEFI) that initialises hardware and loads the OS kernel on power-on.<br><strong>ISR:</strong> Interrupt Service Routine — OS kernel code that handles a specific interrupt type.<br><strong>DMA:</strong> Direct Memory Access — device controller transfers data directly to/from RAM without per-byte CPU involvement; CPU receives one completion interrupt.<br><strong>Storage Hierarchy:</strong> Registers → Cache → RAM → SSD → HDD → Tape. Speed falls, capacity rises at each level.<br><strong>Multiprogramming:</strong> Multiple jobs in memory simultaneously; CPU switches to another when one waits for I/O. Goal: utilisation.<br><strong>Multitasking:</strong> CPU switches rapidly among jobs (every 10–100 ms) so all appear simultaneous. Goal: responsiveness.<br><strong>Dual Mode:</strong> Hardware-enforced split between User Mode (restricted) and Kernel Mode (full privilege).<br><strong>Hypervisor:</strong> Software that creates and manages virtual machines. Type 1 = bare-metal (VMware ESXi, Xen). Type 2 = hosted (VirtualBox).</p></details>
+        <details open><summary>Ch2 design and execution terms</summary><p><strong>System Call:</strong> Programmatic interface for user programs to request OS kernel services; causes a trap into kernel mode.<br><strong>API:</strong> High-level library wrapper around system calls; portable and programmer-friendly (POSIX, Win32).<br><strong>Static Linking:</strong> Library code copied into the executable at link time — self-contained binary, no external dependencies at runtime.<br><strong>Dynamic Linking:</strong> Libraries (.so / .dll) loaded at runtime and shared in memory across processes — smaller binary.<br><strong>Policy:</strong> The WHAT/WHEN decision — e.g., which scheduling algorithm to use. Changeable.<br><strong>Mechanism:</strong> The HOW implementation — e.g., context-switch hardware. Fixed; independent of policy.<br><strong>Process State:</strong> Current condition of a process: New, Ready, Running, Waiting, or Terminated.<br><strong>fork():</strong> System call creating a child process as an exact copy of the parent process.<br><strong>exec():</strong> System call replacing the current process image with a new program binary.</p></details>
+      </div>
+    </section>
+
+    <section class="section searchable" id="quiz">
+      <h2>Self-Test Quiz</h2>
+      <p class="lead">Click an option to check your answer. All questions are drawn from Unit 1 core concepts.</p>
+
+      <div class="quiz-question" data-answer="1" data-explain="The timer forces a return to kernel mode. The scheduler then decides whether to preempt the current process and dispatch another from the ready queue.">
+        <strong>Q1. What does a hardware timer interrupt do when a user process is running?</strong>
+        <div class="quiz-options">
+          <button>It terminates the running process immediately.</button>
+          <button>It transfers CPU control back to the OS, which may preempt the process and schedule another.</button>
+          <button>It saves the process image to disk.</button>
+          <button>It increases the process priority in the ready queue.</button>
+        </div>
+        <div class="quiz-feedback"></div>
+      </div>
+
+      <div class="quiz-question" data-answer="2" data-explain="Both processes map the same physical RAM region. After initial setup, reads and writes go directly to shared memory with no kernel involvement or data copying per access.">
+        <strong>Q2. Why is Shared Memory faster than Message Passing for IPC?</strong>
+        <div class="quiz-options">
+          <button>It uses a dedicated CPU core to copy data.</button>
+          <button>The OS pre-allocates the buffer before the process runs.</button>
+          <button>It is zero-copy — both processes map the same physical RAM and access it directly without kernel involvement per read/write.</button>
+          <button>It compresses data before transferring.</button>
+        </div>
+        <div class="quiz-feedback"></div>
+      </div>
+
+      <div class="quiz-question" data-answer="0" data-explain="In FCFS, a long-running process at the front forces all shorter processes behind it to wait — like a slow truck blocking a highway. This inflates average waiting time.">
+        <strong>Q3. In FCFS scheduling, what is the Convoy Effect?</strong>
+        <div class="quiz-options">
+          <button>Short processes are forced to wait behind a long-running process, causing high average waiting time for all.</button>
+          <button>Processes form a queue ordered by shortest burst time first.</button>
+          <button>High-priority processes permanently starve low-priority ones.</button>
+          <button>The OS context-switches repeatedly without doing useful work.</button>
+        </div>
+        <div class="quiz-feedback"></div>
+      </div>
+
+      <div class="quiz-question" data-answer="3" data-explain="A mode switch only changes privilege level (user ↔ kernel) for the SAME process — no PCB save/restore needed. A context switch saves one process's entire CPU state and loads another's, which is much more expensive.">
+        <strong>Q4. What is the key difference between a mode switch and a context switch?</strong>
+        <div class="quiz-options">
+          <button>A context switch changes the CPU privilege level; a mode switch changes the running process.</button>
+          <button>Both require saving and restoring the full PCB.</button>
+          <button>A mode switch takes longer because it flushes the TLB.</button>
+          <button>A mode switch changes privilege level for the same process; a context switch changes which process is running and involves full PCB save/restore.</button>
+        </div>
+        <div class="quiz-feedback"></div>
+      </div>
+
+      <div class="quiz-question" data-answer="1" data-explain="In a microkernel, only IPC, basic scheduling, and basic memory management stay in kernel space. File systems, device drivers, and networking all run as user-space servers communicating via IPC. Examples: Mach, QNX, L4.">
+        <strong>Q5. Which OS structure model runs most services (file system, drivers, networking) as user-space servers and uses IPC for all kernel communication?</strong>
+        <div class="quiz-options">
+          <button>Monolithic</button>
+          <button>Microkernel</button>
+          <button>Modular (LKM)</button>
+          <button>Layered</button>
+        </div>
+        <div class="quiz-feedback"></div>
+      </div>
+    </section>
+
+    <section class="section searchable" id="practice">
+      <h2>Practice and Discussion Bank</h2>
+      <div class="grid-2">
+        <div class="card">
+          <h3>Short-answer prompts</h3>
+          <ol class="muted-list">
+            <li>Explain the difference between a program and a process.</li>
+            <li>How is the mode bit changed, and why can a user program not set it directly?</li>
+            <li>Why does the OS need a hardware timer?</li>
+            <li>Differentiate interrupt, trap, and exception.</li>
+            <li>Why are system calls necessary?</li>
+            <li>Why is DMA better than programmed I/O for large transfers?</li>
+            <li>What is the convoy effect?</li>
+            <li>How does aging solve starvation?</li>
+            <li>Why does dynamic linking save RAM?</li>
+            <li>Why are applications OS-specific?</li>
+          </ol>
+        </div>
+        <div class="card">
+          <h3>Calculation and discussion prompts</h3>
+          <ul class="muted-list">
+            <li>Draw Gantt charts for FCFS, SJF, Round Robin, and Priority scheduling for a given process set.</li>
+            <li>Calculate turnaround time, waiting time, and response time.</li>
+            <li><strong>Interrupt sequence exercise:</strong> A disk read is issued at t=0ms; the disk completes after 15ms. A keyboard interrupt arrives at t=8ms. Trace the full event sequence, mode switches, and context switches from t=0 to t=15+.</li>
+            <li>Argue whether microkernels are always better than monolithic kernels.</li>
+            <li>Explain why cloud computing relies so heavily on virtualization.</li>
+            <li>Trace exactly what happens when a program enters an infinite loop and the OS regains control.</li>
+            <li>Explain policy vs mechanism using a new example not based on scheduling.</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <button class="back-top" id="backTop" title="Back to top" onclick="window.scrollTo({top:0,behavior:'smooth'})">↑</button>
+
+    <section class="footer searchable">
+      <p style="margin:0 0 8px; text-align:center; font-weight:700; letter-spacing:.2px;">Architect U'r Career | Krishna Mohan Parsha</p>
+      <p style="margin:0; text-align:center; font-size:13px; color:rgba(255,255,255,.75);">Operating Systems &nbsp;|&nbsp; Unit 1 &nbsp;|&nbsp; Silberschatz, Galvin &amp; Gagne, 10th Edition.</p>
+    </section>
+  </div>
+
+  <script>
+    const topicButtons = document.querySelectorAll('.topic-btn');
+    const topicPanels = document.querySelectorAll('.topic-panel');
+    topicButtons.forEach(btn => {
+      btn.addEventListener('click', () => {
+        topicButtons.forEach(b => b.classList.remove('active'));
+        topicPanels.forEach(p => p.classList.remove('active'));
+        btn.classList.add('active');
+        document.getElementById('topic-' + btn.dataset.topic).classList.add('active');
+      });
+    });
+
+    const tabButtons = document.querySelectorAll('.tab-btn');
+    const tabPanels = document.querySelectorAll('.tab-panel');
+    tabButtons.forEach(btn => {
+      btn.addEventListener('click', () => {
+        tabButtons.forEach(b => b.classList.remove('active'));
+        tabPanels.forEach(p => p.classList.remove('active'));
+        btn.classList.add('active');
+        document.getElementById(btn.dataset.tab).classList.add('active');
+      });
+    });
+
+    const searchInput = document.getElementById('searchInput');
+    const searchable = Array.from(document.querySelectorAll('.searchable, .card, details, .topic-btn, .quiz-question'));
+    function removeMarks(node) {
+      node.querySelectorAll('mark.search-hit').forEach(mark => {
+        const parent = mark.parentNode;
+        parent.replaceChild(document.createTextNode(mark.textContent), mark);
+        parent.normalize();
+      });
+    }
+    function highlight(node, term) {
+      if (!term) return;
+      const walker = document.createTreeWalker(node, NodeFilter.SHOW_TEXT, null);
+      const texts = [];
+      while (walker.nextNode()) texts.push(walker.currentNode);
+      texts.forEach(textNode => {
+        const text = textNode.nodeValue;
+        const idx = text.toLowerCase().indexOf(term);
+        if (idx > -1 && text.trim()) {
+          const span = document.createElement('span');
+          span.innerHTML = text.substring(0, idx) + '<mark class="search-hit">' + text.substring(idx, idx + term.length) + '</mark>' + text.substring(idx + term.length);
+          textNode.parentNode.replaceChild(span, textNode);
+        }
+      });
+    }
+    searchInput.addEventListener('input', e => {
+      const term = e.target.value.trim().toLowerCase();
+      searchable.forEach(node => {
+        removeMarks(node);
+        if (!term) {
+          node.classList.remove('hidden-by-search');
+          return;
+        }
+        const text = node.textContent.toLowerCase();
+        const match = text.includes(term);
+        node.classList.toggle('hidden-by-search', !match);
+        if (match) highlight(node, term);
+      });
+    });
+
+    document.querySelectorAll('.quiz-question').forEach(q => {
+      const answer = Number(q.dataset.answer);
+      const explain = q.dataset.explain || '';
+      const buttons = q.querySelectorAll('.quiz-options button');
+      const feedback = q.querySelector('.quiz-feedback');
+      buttons.forEach((btn, idx) => {
+        btn.addEventListener('click', () => {
+          buttons.forEach(b => { b.classList.remove('correct', 'wrong'); b.disabled = true; });
+          if (idx === answer) {
+            btn.classList.add('correct');
+            feedback.textContent = 'Correct. ' + explain;
+          } else {
+            btn.classList.add('wrong');
+            buttons[answer].classList.add('correct');
+            feedback.textContent = 'Not quite. ' + explain;
+          }
+        });
+      });
+    });
+
+    const backTop = document.getElementById('backTop');
+    window.addEventListener('scroll', () => {
+      backTop.classList.toggle('visible', window.scrollY > 600);
+    });
+  </script>
+  <script data-goatcounter="https://km-auc.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
+</body>
+</html>
