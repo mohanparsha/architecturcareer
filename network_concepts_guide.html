@@ -915,7 +915,7 @@
         <a class="nav-link" href="#devices">Devices</a>
         <a class="nav-link" href="#security">Threats &amp; Controls</a>
         <a class="nav-link" href="#controls">Stateful vs Stateless</a>
-        <a class="nav-link" href="#engineering">Security Engineering</a>
+        <a class="nav-link" href="#engineering">Layered Defence</a>
         <a class="nav-link" href="#troubleshooting">Troubleshooting</a>
         <a class="nav-link" href="#frameworks">Frameworks</a>
         <a class="nav-link" href="#quickref">Quick Reference</a>
@@ -1910,89 +1910,125 @@
     </section>
 
     <!-- ═══════════════════════════════════════════ -->
-    <!-- SECURITY ENGINEERING                        -->
+    <!-- DEFENCE IN DEPTH & ZERO TRUST               -->
     <!-- ═══════════════════════════════════════════ -->
     <section id="engineering">
       <div class="section-head">
         <div>
-          <h2>Shift Left Security, Start Left Security and Defence in Depth</h2>
-          <p class="sub">Network security is not only about firewalls and monitoring. Mature organizations embed security early in design and sustain it across every layer of the environment.</p>
+          <h2>Defence in Depth — Layered Security Architecture</h2>
+          <p class="sub">No single control can protect an entire network. Defence in depth is a strategy that layers multiple, overlapping security controls so that if one layer fails, the next layer catches the threat. It is the foundational principle behind every mature security architecture.</p>
         </div>
       </div>
 
-      <div class="grid-3">
+      <div class="card note">
+        <strong>Core principle:</strong> Assume every individual control can be bypassed. Defence in depth means an attacker must defeat multiple independent barriers — across identity, endpoint, network, application, data, and physical layers — before achieving their objective. Each layer buys time, generates alerts, and limits blast radius.
+      </div>
+
+      <!-- The 7 layers of defence -->
+      <div class="grid-3" style="margin-top:18px;">
         <div class="mini">
-          <span class="kicker">Shift Left Security</span>
-          <h3>Move security checks earlier into build and delivery</h3>
-          <p class="muted">Shift left means bringing security activities earlier into development and delivery. Teams scan dependencies early, validate configurations in CI/CD, review code, and test security before deployment.</p>
-          <ul class="checklist">
-            <li>SAST, SCA, secret scanning</li>
-            <li>Secure code review and standards</li>
-            <li>Infrastructure as code and container checks</li>
-            <li>Security gates in pipelines</li>
-          </ul>
+          <span class="kicker">Layer 1 — Physical Security</span>
+          <h3>Protect the hardware and facilities</h3>
+          <p class="muted">The first line of defence is preventing unauthorised physical access to servers, networking equipment, cabling, and data centres. If an attacker can touch your hardware, all other controls can be bypassed.</p>
+          <div class="pill-row"><span class="pill control">Locks &amp; Biometrics</span><span class="pill control">CCTV</span><span class="pill control">Guards</span><span class="pill control">Visitor Logs</span><span class="pill control">Cable Shielding</span></div>
         </div>
         <div class="mini">
-          <span class="kicker">Start Left Security</span>
-          <h3>Begin security at requirements, architecture and design</h3>
-          <p class="muted">Start left goes one step earlier than shift left. It means security starts before code exists. It includes asset identification, trust boundary mapping, threat modeling, protocol choice, segmentation design, and control selection at architecture stage.</p>
-          <ul class="checklist">
-            <li>Threat modeling</li>
-            <li>Secure network architecture</li>
-            <li>Zero trust and segmentation design</li>
-            <li>Protocol and encryption decisions</li>
-          </ul>
+          <span class="kicker">Layer 2 — Perimeter Security</span>
+          <h3>Control what enters and exits the network boundary</h3>
+          <p class="muted">The network perimeter is where internal meets external. Firewalls, DMZs, and border routers filter inbound and outbound traffic. While perimeters alone are insufficient (hence Zero Trust), they remain essential for reducing attack surface.</p>
+          <div class="pill-row"><span class="pill control">Firewall</span><span class="pill control">DMZ</span><span class="pill control">IDS/IPS</span><span class="pill control">DDoS Mitigation</span><span class="pill control">Border ACLs</span></div>
         </div>
         <div class="mini">
-          <span class="kicker">Defence in Depth</span>
-          <h3>Layer controls so one failure does not become total compromise</h3>
-          <p class="muted">No single control is enough. Defence in depth means combining multiple overlapping safeguards across identity, endpoint, network, application, data, monitoring, backup, and physical layers.</p>
-          <ul class="checklist">
-            <li>Perimeter and internal segmentation</li>
-            <li>Identity, endpoint, network, and data controls</li>
-            <li>Detection, response, and recovery</li>
-            <li>Resilience against control failure</li>
+          <span class="kicker">Layer 3 — Network Security</span>
+          <h3>Segment and monitor internal traffic</h3>
+          <p class="muted">Once inside the perimeter, internal segmentation limits lateral movement. VLANs, micro-segmentation, internal firewalls, and network monitoring ensure that a compromised host cannot freely reach all other systems.</p>
+          <div class="pill-row"><span class="pill control">VLAN Segmentation</span><span class="pill control">Micro-segmentation</span><span class="pill control">NAC (802.1X)</span><span class="pill control">Network Monitoring</span></div>
+        </div>
+        <div class="mini">
+          <span class="kicker">Layer 4 — Endpoint Security</span>
+          <h3>Protect every device that connects to the network</h3>
+          <p class="muted">Laptops, servers, phones, and IoT devices are all attack targets. Endpoint protection includes antivirus, EDR, host firewalls, patch management, full-disk encryption, and device hardening.</p>
+          <div class="pill-row"><span class="pill control">EDR/XDR</span><span class="pill control">Patch Management</span><span class="pill control">Host Firewall</span><span class="pill control">Disk Encryption</span><span class="pill control">Hardening</span></div>
+        </div>
+        <div class="mini">
+          <span class="kicker">Layer 5 — Application Security</span>
+          <h3>Secure the software that processes data</h3>
+          <p class="muted">Applications are the primary interface users and attackers interact with. Secure coding practices, input validation, WAFs, API gateways, and regular vulnerability scanning protect this layer.</p>
+          <div class="pill-row"><span class="pill control">WAF</span><span class="pill control">Input Validation</span><span class="pill control">Secure SDLC</span><span class="pill control">API Gateway</span><span class="pill control">Vulnerability Scanning</span></div>
+        </div>
+        <div class="mini">
+          <span class="kicker">Layer 6 — Data Security</span>
+          <h3>Protect the ultimate target — the data itself</h3>
+          <p class="muted">If all other layers fail, data-level controls are the last barrier. Encryption at rest and in transit, access controls, DLP, data classification, and backup strategies protect information even if systems are compromised.</p>
+          <div class="pill-row"><span class="pill control">Encryption (rest + transit)</span><span class="pill control">DLP</span><span class="pill control">Data Classification</span><span class="pill control">Backup &amp; Recovery</span></div>
+        </div>
+        <div class="mini">
+          <span class="kicker">Layer 7 — Identity &amp; Access</span>
+          <h3>Verify who is accessing what, and enforce least privilege</h3>
+          <p class="muted">Identity is the modern security perimeter. Strong authentication, multi-factor authentication, role-based access control, privileged access management, and continuous verification are critical at every layer.</p>
+          <div class="pill-row"><span class="pill control">MFA</span><span class="pill control">RBAC</span><span class="pill control">PAM</span><span class="pill control">SSO</span><span class="pill control">Conditional Access</span></div>
+        </div>
+        <div class="mini">
+          <span class="kicker">Cross-cutting — Detection &amp; Response</span>
+          <h3>Monitor everything, respond fast, recover faster</h3>
+          <p class="muted">Detection and response spans all layers. SIEM aggregates logs, SOC teams investigate alerts, incident response playbooks guide action, and disaster recovery ensures business continuity after a breach.</p>
+          <div class="pill-row"><span class="pill control">SIEM</span><span class="pill control">SOC</span><span class="pill control">Incident Response</span><span class="pill control">Threat Intelligence</span><span class="pill control">DR/BCP</span></div>
+        </div>
+      </div>
+
+      <!-- OSI-mapped defence -->
+      <div class="grid-2" style="margin-top:18px;">
+        <div class="card">
+          <span class="kicker">OSI-mapped controls</span>
+          <h3 style="margin-top:0;">Defence in Depth mapped to OSI layers</h3>
+          <p class="muted" style="margin-bottom:12px;">Each OSI layer has specific controls designed to protect it. This mapping helps engineers select the right control for the right layer during architecture and incident response.</p>
+          <div class="pill-row">
+            <span class="pill control">L7: WAF, Input Validation, App Hardening</span>
+          </div>
+          <div class="pill-row">
+            <span class="pill control">L6: TLS Enforcement, Strong Ciphers</span>
+          </div>
+          <div class="pill-row">
+            <span class="pill control">L5: Session Tokens, Timeouts, Re-auth</span>
+          </div>
+          <div class="pill-row">
+            <span class="pill control">L4: Stateful Firewall, Rate Limiting</span>
+          </div>
+          <div class="pill-row">
+            <span class="pill control">L3: ACLs, Routing Policy, uRPF, IPsec</span>
+          </div>
+          <div class="pill-row">
+            <span class="pill control">L2: 802.1X, DAI, Port Security, VLANs</span>
+          </div>
+          <div class="pill-row">
+            <span class="pill control">L1: Locks, CCTV, Cable Shielding, Guards</span>
+          </div>
+        </div>
+        <div class="card">
+          <span class="kicker">Why layering matters</span>
+          <h3 style="margin-top:0;">Single control failure ≠ total compromise</h3>
+          <p class="muted">Consider a real-world attack path: an attacker sends a phishing email (bypasses perimeter), a user clicks (endpoint compromised), the malware moves laterally (network segmentation blocks it), or exfiltrates data (DLP detects and blocks). Each layer independently resists the attack even if the previous one fails.</p>
+          <ul class="checklist" style="margin-top:12px;">
+            <li><strong>Preventive controls</strong> — stop attacks before they succeed (firewalls, MFA, encryption)</li>
+            <li><strong>Detective controls</strong> — identify attacks in progress (SIEM, IDS, log monitoring)</li>
+            <li><strong>Corrective controls</strong> — limit damage and restore operations (incident response, backups, patching)</li>
+            <li><strong>Deterrent controls</strong> — discourage attackers from attempting (security policies, legal warnings, visible cameras)</li>
+            <li><strong>Compensating controls</strong> — alternative safeguards when primary controls are not feasible</li>
           </ul>
         </div>
       </div>
 
-      <!-- Fix #12: Zero Trust Architecture -->
+      <!-- Zero Trust Architecture -->
       <div class="card note" style="margin-top:18px;">
         <span class="kicker">Zero Trust Architecture (NIST SP 800-207)</span>
         <h3 style="margin-top:4px;">Never trust, always verify — regardless of network location</h3>
-        <p class="muted">Zero Trust assumes no implicit trust based on network perimeter or location. Every access request is verified continuously based on identity, device health, context, and policy. Core principles: verify explicitly, enforce least privilege access, and assume breach at all times.</p>
+        <p class="muted">Zero Trust assumes no implicit trust based on network perimeter or location. Every access request is verified continuously based on identity, device health, context, and policy. Zero Trust complements Defence in Depth — while layered defence provides multiple barriers, Zero Trust ensures that no entity is automatically trusted even within those barriers.</p>
         <div class="pill-row">
           <span class="pill control">Verify Explicitly</span>
           <span class="pill control">Least Privilege</span>
           <span class="pill control">Assume Breach</span>
           <span class="pill control">Micro-segmentation</span>
           <span class="pill control">Continuous Monitoring</span>
-        </div>
-      </div>
-
-      <div class="grid-2" style="margin-top:18px;">
-        <div class="card">
-          <span class="kicker">Security timing</span>
-          <h3 style="margin-top:0;">Start Left vs Shift Left</h3>
-          <div class="pill-row">
-            <span class="pill">Design</span>
-            <span class="pill">Code</span>
-            <span class="pill">Build</span>
-            <span class="pill">Test</span>
-            <span class="pill">Deploy</span>
-          </div>
-          <p class="muted" style="margin-top:12px;">Start left begins at design. Shift left moves security checks earlier into code, build, and test. Together they reduce expensive late-stage remediation.</p>
-        </div>
-        <div class="card">
-          <span class="kicker">Layered mapping</span>
-          <h3 style="margin-top:0;">Defence in Depth by Layer</h3>
-          <div class="pill-row">
-            <span class="pill control">L7: WAF</span>
-            <span class="pill control">L4: Stateful Firewall</span>
-            <span class="pill control">L3: ACL</span>
-            <span class="pill control">L2: 802.1X</span>
-            <span class="pill control">L1: Physical Security</span>
-          </div>
         </div>
       </div>
     </section>
