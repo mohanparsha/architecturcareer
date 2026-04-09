@@ -1732,10 +1732,13 @@
           <h3>Action used to reduce likelihood or impact</h3>
           <p class="muted">Mitigations are practical risk-reduction measures such as patching, segmentation, secure configuration, rate limiting, user awareness, backups, and incident playbooks.</p>
         </div>
-        <div class="card">
-          <span class="kicker">Example chain</span>
-          <h3 style="margin-top:0;">Threat → Vulnerability → Actor → Vector → Attack → Control → Mitigation</h3>
-          <p class="muted">Example: The threat is a data breach. The vulnerability is an unpatched web framework. The threat actor is an external attacker. The attack vector is a vulnerable web form. The attack is SQL injection. The control is a WAF plus input validation. The mitigation includes patching, monitoring, and incident response.</p>
+        <div class="card" style="padding:14px;">
+          <img src="attack-lifecycle-lens.jpg" alt="Attack Lifecycle Lens — Actor → Vector → Vulnerability → Exploit/Attack → Business Impact → Control → Mitigation. A practical visual showing how attacks unfold from threat actor through to defensive response and recovery." style="width:100%; height:auto; border-radius:12px; display:block;" loading="lazy" />
+          <div style="padding:10px 8px 0;">
+            <span class="kicker">Example chain</span>
+            <h3 style="margin-top:0;">Threat → Vulnerability → Actor → Vector → Attack → Control → Mitigation</h3>
+            <p class="muted">Example: The threat is a data breach. The vulnerability is an unpatched web framework. The threat actor is an external attacker. The attack vector is a vulnerable web form. The attack is SQL injection. The control is a WAF plus input validation. The mitigation includes patching, monitoring, and incident response.</p>
+          </div>
         </div>
       </div>
     </section>
@@ -1833,31 +1836,9 @@
 
       <!-- OSI-mapped defence -->
       <div class="grid-2" style="margin-top:18px;">
-        <div class="card">
-          <span class="kicker">OSI-mapped controls</span>
-          <h3 style="margin-top:0;">Defence in Depth mapped to OSI layers</h3>
-          <p class="muted" style="margin-bottom:12px;">Each OSI layer has specific controls designed to protect it. This mapping helps engineers select the right control for the right layer during architecture and incident response.</p>
-          <div class="pill-row">
-            <span class="pill control">L7: WAF, Input Validation, App Hardening</span>
-          </div>
-          <div class="pill-row">
-            <span class="pill control">L6: TLS Enforcement, Strong Ciphers</span>
-          </div>
-          <div class="pill-row">
-            <span class="pill control">L5: Session Tokens, Timeouts, Re-auth</span>
-          </div>
-          <div class="pill-row">
-            <span class="pill control">L4: Stateful Firewall, Rate Limiting</span>
-          </div>
-          <div class="pill-row">
-            <span class="pill control">L3: ACLs, Routing Policy, uRPF, IPsec</span>
-          </div>
-          <div class="pill-row">
-            <span class="pill control">L2: 802.1X, DAI, Port Security, VLANs</span>
-          </div>
-          <div class="pill-row">
-            <span class="pill control">L1: Locks, CCTV, Cable Shielding, Guards</span>
-          </div>
+        <div class="card" style="padding:14px;">
+          <img src="defence-in-depth-osi.jpg" alt="Defence in Depth Architecture mapped across OSI Layers — L7 Application (WAF, Input Validation, App Hardening), L6 Presentation (TLS Enforcement, Strong Ciphers), L5 Session (Session Tokens, Timeouts, Re-auth), L4 Transport (Stateful Firewall, Rate Limiting), L3 Network (ACLs, Routing Policy, uRPF, IPsec), L2 Data Link (802.1X, DAI, Port Security, VLANs), L1 Physical (Locks, CCTV, Cable Shielding, Guards). Each layer enforces independent security controls. Key principle: Security is not a single control — it is a coordinated system of controls across layers." style="width:100%; height:auto; border-radius:12px; display:block;" loading="lazy" />
+          <p class="muted" style="margin:12px 4px 0; font-size:0.86rem;">Each OSI layer has specific controls designed to protect it. This mapping helps engineers select the right control for the right layer during architecture and incident response.</p>
         </div>
         <div class="card">
           <span class="kicker">Why layering matters</span>
