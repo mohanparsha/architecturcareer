@@ -3,11 +3,11 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>7 Layers. 30+ Protocols. 1 Page. Zero Confusion — Architect U'r Career</title>
+  <title>Enterprise Network Architecture &amp; Security Controls — Ready Reference | Architect U'r Career</title>
   <!-- Fix #23: Open Graph & description meta -->
-  <meta name="description" content="7 Layers. 30+ Protocols. 1 Page. Zero Confusion. The complete network reference — OSI, TCP/IP, encapsulation, packet flow, ports, threats, controls, and defence architecture — built for students and professionals." />
-  <meta property="og:title" content="7 Layers. 30+ Protocols. 1 Page. Zero Confusion." />
-  <meta property="og:description" content="The complete network reference — from physical bits to application security — built for students who want clarity and professionals who need speed." />
+  <meta name="description" content="Enterprise Network Architecture &amp; Security Controls — Ready Reference. OSI and TCP/IP layer-by-layer control mapping with compliance references to NIST CSF 2.0, ISO 27001, and CIS v8. Built for Security Architects, GRC Analysts, SOC Engineers, and Network Engineers." />
+  <meta property="og:title" content="Enterprise Network Architecture &amp; Security Controls — Ready Reference" />
+  <meta property="og:description" content="OSI and TCP/IP layer-by-layer control mapping with compliance references to NIST CSF 2.0, ISO 27001, and CIS v8." />
   <meta property="og:type" content="article" />
   <meta property="og:image" content="https://mohanparsha.github.io/architecturcareer/end-to-end-packet-flow.jpg" />
   <meta property="og:url" content="https://mohanparsha.github.io/architecturcareer/network-concepts-guide" />
@@ -32,9 +32,9 @@
       --danger: #b91c1c;
       --warn: #b45309;
       --success: #047857;
-      --shadow: 0 18px 50px rgba(15, 23, 42, 0.08);
-      --radius: 18px;
-      --radius-sm: 12px;
+      --shadow: 0 2px 8px rgba(15, 23, 42, 0.06);
+      --radius: 8px;
+      --radius-sm: 6px;
       --max: 1320px;
     }
 
@@ -44,10 +44,7 @@
       margin: 0;
       font-family: 'Inter', ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
       color: var(--ink);
-      background:
-        radial-gradient(circle at top right, rgba(20, 184, 166, 0.10), transparent 26%),
-        radial-gradient(circle at top left, rgba(11, 58, 111, 0.12), transparent 28%),
-        var(--bg);
+      background: var(--bg);
       line-height: 1.6;
     }
 
@@ -60,24 +57,13 @@
     .hero { padding: 34px 0 20px; }
 
     .hero-card {
-      background: linear-gradient(135deg, #07162b 0%, #0a2a52 55%, #0d4f73 100%);
+      background: linear-gradient(135deg, #0a2a52 0%, #0b3a6f 100%);
       color: #fff;
-      border-radius: 28px;
-      box-shadow: 0 25px 70px rgba(2, 6, 23, 0.28);
+      border-radius: 8px;
+      box-shadow: 0 4px 16px rgba(2, 6, 23, 0.15);
       padding: 34px;
       position: relative;
       overflow: hidden;
-    }
-
-    .hero-card::after {
-      content: "";
-      position: absolute;
-      inset: auto -120px -120px auto;
-      width: 300px;
-      height: 300px;
-      border-radius: 999px;
-      background: radial-gradient(circle, rgba(20,184,166,.22), transparent 60%);
-      pointer-events: none;
     }
 
     .eyebrow {
@@ -85,12 +71,12 @@
       align-items: center;
       gap: 8px;
       font-size: 12px;
-      font-weight: 700;
+      font-weight: 600;
       letter-spacing: 0.16em;
       text-transform: uppercase;
       padding: 8px 14px;
       border: 1px solid rgba(255,255,255,0.18);
-      border-radius: 999px;
+      border-radius: 4px;
       background: rgba(255,255,255,0.06);
       color: #bfe8ff;
     }
@@ -124,17 +110,19 @@
     .stat {
       background: rgba(255,255,255,0.08);
       border: 1px solid rgba(255,255,255,0.10);
-      border-radius: 18px;
+      border-radius: 8px;
       padding: 18px;
       min-height: 110px;
     }
 
     .stat strong {
       display: block;
-      font-size: 2rem;
+      font-size: 0.82rem;
       color: #99f6e4;
       line-height: 1;
       margin-bottom: 8px;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
     }
 
     /* Fix #20: Better stat label contrast */
@@ -151,9 +139,9 @@
       position: sticky;
       top: 0;
       z-index: 20;
-      backdrop-filter: blur(10px);
-      background: rgba(244,247,251,0.82);
-      border-bottom: 1px solid rgba(15, 23, 42, 0.07);
+      backdrop-filter: blur(12px);
+      background: rgba(244,247,251,0.95);
+      border-bottom: 1px solid var(--line);
     }
 
     /* Fix #18: Nav scroll container with fade indicators */
@@ -172,9 +160,9 @@
 
     .nav-inner {
       display: flex;
-      gap: 8px;
+      gap: 2px;
       overflow-x: auto;
-      padding: 12px 0;
+      padding: 0;
       scrollbar-width: thin;
       -webkit-overflow-scrolling: touch;
     }
@@ -183,21 +171,23 @@
     .nav-link {
       white-space: nowrap;
       text-decoration: none;
-      color: var(--brand);
-      font-size: 0.88rem;
-      font-weight: 700;
-      padding: 12px 16px;
-      border: 1px solid #c7d7eb;
-      border-radius: 999px;
-      background: #fff;
-      transition: background 0.2s, color 0.2s;
+      color: var(--muted);
+      font-size: 0.84rem;
+      font-weight: 600;
+      padding: 10px 12px;
+      border: none;
+      border-bottom: 2px solid transparent;
+      border-radius: 0;
+      background: transparent;
+      transition: color 0.2s, border-color 0.2s;
       min-height: 44px;
       display: inline-flex;
       align-items: center;
     }
     .nav-link:hover, .nav-link:focus {
-      background: var(--brand);
-      color: #fff;
+      color: var(--brand);
+      border-bottom-color: var(--brand);
+      background: transparent;
       outline: none;
     }
 
@@ -236,7 +226,7 @@
 
     .note {
       border-left: 4px solid var(--accent);
-      background: linear-gradient(180deg, #faffff, #f3fbfb);
+      background: #f8fbfb;
     }
 
     .grid-2 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
@@ -262,34 +252,34 @@
       background: #f8fbff;
     }
 
-    .pill.attack { color: #8a1220; border-color: #efc6cb; background: #fff4f5; }
-    .pill.control { color: #0f766e; border-color: #b8ede6; background: #f0fdfa; }
-    .pill.warn { color: #92400e; border-color: #f1d3a3; background: #fff8eb; }
-    .pill.framework { color: #5b21b6; border-color: #ddd6fe; background: #f5f3ff; }
+    .pill.attack { color: #7f1120; border-color: #efc6cb; background: #fff4f5; }
+    .pill.control { color: #0a6359; border-color: #b8ede6; background: #f0fdfa; }
+    .pill.warn { color: #7c3509; border-color: #f1d3a3; background: #fff8eb; }
+    .pill.framework { color: #4c1d95; border-color: #ddd6fe; background: #f5f3ff; }
 
     /* ── OSI Layer Cards ── */
     .osi-layer {
       display: grid;
-      grid-template-columns: 94px 1.2fr 1fr 1fr 1fr;
+      grid-template-columns: 94px 1.2fr 1fr 1fr 1fr 1fr;
       gap: 14px;
       align-items: start;
       padding: 16px;
       border: 1px solid var(--line);
-      border-radius: 16px;
-      background: linear-gradient(180deg, #ffffff, #fbfdff);
+      border-radius: 8px;
+      background: #fff;
     }
 
     .osi-stack { display: grid; gap: 14px; }
 
     .layer-no {
-      border-radius: 14px;
+      border-radius: 6px;
       color: white;
       min-height: 100%;
       display: grid;
       place-items: center;
       padding: 14px;
       text-align: center;
-      font-weight: 800;
+      font-weight: 700;
       line-height: 1.05;
       font-size: 1.1rem;
     }
@@ -314,7 +304,7 @@
       letter-spacing: 0.14em;
       text-transform: uppercase;
       color: #64748b;
-      font-weight: 800;
+      font-weight: 600;
       margin-bottom: 6px;
     }
 
@@ -325,9 +315,9 @@
 
     .tcp-row {
       border: 1px solid var(--line);
-      border-radius: 16px;
+      border-radius: 8px;
       padding: 16px;
-      background: linear-gradient(180deg, #fdfefe, #f8fbff);
+      background: #fff;
     }
     .tcp-row h3 { margin: 0 0 6px; color: var(--brand); }
 
@@ -336,7 +326,7 @@
       width: 100%;
       border-collapse: collapse;
       overflow: hidden;
-      border-radius: 16px;
+      border-radius: 8px;
       font-size: 0.96rem;
     }
 
@@ -359,7 +349,7 @@
     /* ── Accordions ── */
     details {
       border: 1px solid var(--line);
-      border-radius: 14px;
+      border-radius: 6px;
       background: #fff;
       overflow: hidden;
     }
@@ -369,7 +359,7 @@
       list-style: none;
       cursor: pointer;
       padding: 16px 18px;
-      font-weight: 800;
+      font-weight: 700;
       color: var(--brand);
       display: flex;
       justify-content: space-between;
@@ -389,9 +379,9 @@
     /* ── Mini Cards ── */
     .mini {
       border: 1px solid var(--line);
-      border-radius: 16px;
+      border-radius: 8px;
       padding: 18px;
-      background: linear-gradient(180deg, #ffffff, #fbfdff);
+      background: #fff;
     }
 
     .checklist { margin: 0; padding-left: 18px; }
@@ -407,18 +397,18 @@
 
     /* Fix #32: ARIA tab accessibility */
     .tab-btn {
-      border: 1px solid #c7d7eb;
+      border: 1px solid var(--line);
       background: #fff;
-      color: var(--brand);
-      border-radius: 999px;
+      color: var(--muted);
+      border-radius: 4px;
       padding: 10px 14px;
-      font-weight: 800;
+      font-weight: 600;
       cursor: pointer;
-      font-size: 0.92rem;
+      font-size: 0.88rem;
       font-family: inherit;
       transition: background 0.2s, color 0.2s;
     }
-    .tab-btn:hover { background: #edf4fb; }
+    .tab-btn:hover { background: #edf4fb; color: var(--brand); }
     .tab-btn:focus-visible { outline: 2px solid var(--brand-2); outline-offset: 2px; }
     .tab-btn.active {
       background: var(--brand);
@@ -433,7 +423,7 @@
     .ref-box {
       background: linear-gradient(135deg, #08203d, #0b3a6f 60%, #0c6077);
       color: #fff;
-      border-radius: 22px;
+      border-radius: 8px;
       padding: 24px;
       border: 1px solid rgba(255,255,255,.12);
     }
@@ -451,7 +441,7 @@
       text-align: center;
       color: var(--brand);
       font-size: 1.1rem;
-      font-weight: 800;
+      font-weight: 700;
       letter-spacing: -0.01em;
       border-top: 1px solid var(--line);
       padding-top: 22px;
@@ -481,7 +471,7 @@
       background: var(--surface);
       color: var(--brand);
       font-size: 1.3rem;
-      font-weight: 900;
+      font-weight: 700;
       cursor: pointer;
       box-shadow: 0 6px 24px rgba(0,0,0,0.12);
       display: none;
@@ -498,7 +488,7 @@
       display: grid;
       grid-template-columns: 1fr 1fr;
       gap: 0;
-      border-radius: 16px;
+      border-radius: 8px;
       overflow: hidden;
       border: 1px solid var(--line);
       background: #fff;
@@ -508,7 +498,7 @@
       display: flex;
       flex-direction: column;
       gap: 0;
-      background: linear-gradient(180deg, #f8fbff, #f1f5fb);
+      background: #f6f8fb;
     }
 
     .layer-map-osi-item {
@@ -528,7 +518,7 @@
       height: 32px;
       border-radius: 8px;
       color: #fff;
-      font-weight: 900;
+      font-weight: 700;
       font-size: 0.82rem;
       display: grid;
       place-items: center;
@@ -570,7 +560,7 @@
       content: "→";
       margin-left: auto;
       color: var(--brand-2);
-      font-weight: 900;
+      font-weight: 700;
       font-size: 1rem;
       opacity: 0.5;
     }
@@ -582,11 +572,11 @@
       padding: 14px 10px;
       border-radius: 12px;
       border: 1px solid var(--line);
-      background: linear-gradient(180deg, #fff, #fafcff);
+      background: #fff;
     }
     .header-detail .hd-layer {
       font-size: 0.72rem;
-      font-weight: 800;
+      font-weight: 600;
       text-transform: uppercase;
       letter-spacing: 0.1em;
       margin-bottom: 6px;
@@ -614,7 +604,7 @@
     }
 
     @media (max-width: 720px) {
-      .hero-card { padding: 22px; border-radius: 22px; }
+      .hero-card { padding: 22px; border-radius: 8px; }
       .stats { grid-template-columns: 1fr 1fr; }
       .osi-layer { grid-template-columns: 1fr; }
       .osi-layer > div:nth-child(n+2) { grid-column: auto; }
@@ -646,7 +636,7 @@
       .compare-table tr {
         margin-bottom: 14px;
         border: 1px solid var(--line);
-        border-radius: 14px;
+        border-radius: 6px;
         overflow: hidden;
       }
       .compare-table td {
@@ -658,7 +648,7 @@
       }
       .compare-table td::before {
         content: attr(data-label);
-        font-weight: 800;
+        font-weight: 700;
         color: var(--brand);
         font-size: 0.82rem;
         text-transform: uppercase;
@@ -680,16 +670,51 @@
       .header-detail:last-child { grid-column: auto; }
     }
 
-    /* Fix #25: Print stylesheet */
+    /* ── Print Stylesheet ── */
     @media print {
-      .sticky-nav, .back-to-top, .nav-scroll-container { display: none !important; }
-      body { background: #fff !important; }
-      .hero-card { box-shadow: none; border: 2px solid #0b3a6f; }
-      .card, .mini { box-shadow: none; break-inside: avoid; }
-      .osi-layer { break-inside: avoid; }
-      section { break-before: auto; }
-      .ref-box { break-inside: avoid; }
-      a { color: var(--brand) !important; }
+      /* Hide interactive/nav elements */
+      .sticky-nav, .back-to-top, .nav-scroll-container, #backToTop, .no-print { display: none !important; }
+
+      /* Reset backgrounds and colours */
+      body { background: #fff !important; color: #000 !important; font-size: 10pt; line-height: 1.5; }
+      .hero-card { background: #0b3a6f !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; box-shadow: none; border-radius: 4px; }
+      .card, .mini, .ref-box { box-shadow: none; border: 1px solid #ccc; }
+      .layer-no { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+      .pill, .pill.attack, .pill.control, .pill.warn, .pill.framework { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+
+      /* Force single column */
+      .grid-2, .grid-3, .grid-4, .stats { grid-template-columns: 1fr !important; }
+      .osi-layer { grid-template-columns: 60px 1fr !important; }
+      .osi-layer > div:nth-child(n+3) { grid-column: 2 / -1; }
+      .header-detail-grid { grid-template-columns: repeat(3, 1fr) !important; }
+      .layer-map-group { grid-template-columns: 1fr !important; }
+
+      /* Expand all accordions and tab panels */
+      details { break-inside: avoid; }
+      details > .detail-body { display: block !important; }
+      details[open] > .detail-body { display: block !important; }
+      .tab-panel { display: block !important; }
+      .tabs { display: none !important; }
+
+      /* Page break control */
+      .card, .mini, .osi-layer, details, .ref-box, table { break-inside: avoid; }
+      section { break-before: auto; page-break-before: auto; }
+      h2, h3 { break-after: avoid; }
+
+      /* Links */
+      a { color: #0b3a6f !important; text-decoration: underline; }
+      a[href^="http"]::after { content: " (" attr(href) ")"; font-size: 8pt; color: #666; }
+      .nav-link::after, .pill a::after { content: none !important; }
+
+      /* Images */
+      img { max-width: 100% !important; break-inside: avoid; }
+
+      /* Page margins */
+      @page { margin: 1.5cm 1.5cm 2cm 1.5cm; }
+      @page :first { margin-top: 1cm; }
+
+      /* Footer */
+      footer { break-before: auto; }
     }
   </style>
 </head>
@@ -698,16 +723,24 @@
   <header class="hero">
     <div class="wrap">
       <div class="hero-card">
-        <!-- Fix #27: Version badge -->
-        <div class="eyebrow">Network Concepts Interactive Guide &nbsp;·&nbsp; v2.0 &nbsp;·&nbsp; April 2026</div>
-        <h1>7 Layers. 30+ Protocols. 1 Page. Zero Confusion.</h1>
-        <p class="lead">The complete network reference — from physical bits to application security — built for students who want clarity and professionals who need speed. OSI, TCP/IP, encapsulation, packet flow, ports, threats, controls, and defence architecture — all in one interactive scroll. This guide uses British English conventions throughout.</p>
-        <!-- Fix #8: Updated protocol count -->
+        <div class="eyebrow">Ready Reference &nbsp;·&nbsp; v2.0 &nbsp;·&nbsp; April 2026</div>
+        <h1>Enterprise Network Architecture &amp; Security Controls</h1>
+        <p class="lead">OSI and TCP/IP layer-by-layer reference with protocols, devices, threats, controls, and compliance mapping to NIST CSF 2.0, ISO 27001, and CIS Controls v8.</p>
         <div class="stats">
-          <div class="stat"><strong>19</strong><span>Sections</span></div>
-          <div class="stat"><strong>30+</strong><span>Protocols Mapped</span></div>
-          <div class="stat"><strong>105</strong><span>Glossary Terms</span></div>
-          <div class="stat"><strong>4</strong><span>Visual Infographics</span></div>
+          <div class="stat"><strong>Scope</strong><span>OSI 7-layer &amp; TCP/IP 4-layer architecture with security control mapping</span></div>
+          <div class="stat"><strong>Audience</strong><span>Security Architects · GRC Analysts · SOC Engineers · Network Engineers</span></div>
+          <div class="stat"><strong>Use</strong><span>Incident triage · Architecture review · Compliance evidence · Design reference</span></div>
+          <div class="stat"><strong>Frameworks</strong><span>NIST CSF 2.0 · ISO 27001:2022 · CIS v8 · MITRE ATT&amp;CK</span></div>
+        </div>
+        <!-- Document Control -->
+        <div style="margin-top:22px; padding:14px 18px; background:rgba(255,255,255,0.07); border:1px solid rgba(255,255,255,0.12); border-radius:6px; font-size:0.84rem; color:rgba(255,255,255,0.82); display:grid; grid-template-columns:repeat(4,1fr); gap:10px;">
+          <div><strong style="color:#99f6e4;">Version</strong><br/>2.0</div>
+          <div><strong style="color:#99f6e4;">Date</strong><br/>April 2026</div>
+          <div><strong style="color:#99f6e4;">Classification</strong><br/>Public Reference</div>
+          <div><strong style="color:#99f6e4;">Author</strong><br/>Krishna Mohan Parsha</div>
+        </div>
+        <div style="margin-top:14px; text-align:right;" class="no-print">
+          <button onclick="window.print()" style="padding:10px 20px; background:rgba(255,255,255,0.12); border:1px solid rgba(255,255,255,0.25); border-radius:4px; color:#fff; font-family:inherit; font-size:0.84rem; font-weight:600; cursor:pointer; transition:background 0.2s;" onmouseover="this.style.background='rgba(255,255,255,0.22)'" onmouseout="this.style.background='rgba(255,255,255,0.12)'">↓ Download as PDF</button>
         </div>
       </div>
     </div>
@@ -717,30 +750,29 @@
   <div class="sticky-nav">
     <div class="wrap nav-scroll-container">
       <nav class="nav-inner" aria-label="Section navigation">
-        <a class="nav-link" href="#osi" title="7-layer conceptual framework with protocols, attacks, and controls per layer">OSI Architecture</a>
+        <a class="nav-link" href="#osi" title="7-layer framework with protocols, attacks, controls, and compliance mapping">OSI Architecture</a>
         <a class="nav-link" href="#tcpip" title="4-layer practical model — OSI-to-TCP/IP mapping and layer details">TCP/IP Architecture</a>
         <a class="nav-link" href="#compare" title="Side-by-side comparison table: OSI vs TCP/IP">OSI vs TCP/IP</a>
         <a class="nav-link" href="#encapsulation" title="How data is wrapped layer by layer with headers and trailers">Encapsulation</a>
         <a class="nav-link" href="#packetflow" title="12-step journey from URL to response — client, network transit, server">Packet Flow</a>
         <a class="nav-link" href="#protocols" title="HTTP, DNS, TCP, UDP, IP, ARP and more — grouped by TCP/IP layer">Core Protocols</a>
         <a class="nav-link" href="#ports" title="19 protocols with default ports, layers, and primary use">Ports</a>
-        <a class="nav-link" href="#transportcompare" title="9-row comparison: reliability, ordering, speed, headers, flow control">TCP vs UDP</a>
-        <a class="nav-link" href="#ipcompare" title="Address size, format, IPsec, NAT, autoconfiguration, and adoption">IPv4 vs IPv6</a>
+        <a class="nav-link" href="#keycomparisons" title="TCP vs UDP, IPv4 vs IPv6, connection types, stateful vs stateless">Key Comparisons</a>
         <a class="nav-link" href="#subnetting" title="CIDR notation, common subnet masks, and RFC 1918 private ranges">Subnetting</a>
         <a class="nav-link" href="#devices" title="Router, switch, firewall, WAF, load balancer, IDS/IPS, SIEM, and more">Devices</a>
-        <a class="nav-link" href="#connectiontypes" title="TCP vs UDP fundamentals: session setup, reliability, analogies">Connected vs Connectionless</a>
-        <a class="nav-link" href="#controls" title="How stateful and stateless controls inspect traffic differently">Stateful vs Stateless</a>
         <a class="nav-link" href="#security" title="Threats, actors, vulnerabilities, vectors, attacks, controls, mitigations">Threats &amp; Controls</a>
         <a class="nav-link" href="#engineering" title="7 defence layers, OSI-mapped controls, Zero Trust, control types">Layered Defence</a>
         <a class="nav-link" href="#troubleshooting" title="Layer-by-layer fault isolation methodology">Troubleshooting</a>
-        <a class="nav-link" href="#frameworks" title="NIST CSF, ISO 27001, MITRE ATT&CK, CIS Controls">Frameworks</a>
-        <a class="nav-link" href="#glossary" title="105 A–Z networking and security terms with searchable filter">Glossary</a>
-        <a class="nav-link" href="#quickref" title="Compact revision block covering all major concepts">Quick Reference</a>
+        <a class="nav-link" href="#frameworks" title="NIST CSF 2.0, ISO 27001, MITRE ATT&CK, CIS Controls with control IDs">Frameworks</a>
       </nav>
     </div>
   </div>
 
   <main class="wrap">
+
+    <div class="card note" style="margin-top:16px; margin-bottom:0; font-size:0.88rem;">
+      <strong>How to use:</strong> OSI stack → incident triage layer identification. Control + compliance columns → audit evidence collection. Key Comparisons → architecture decision support. Red flags → assessment checklist.
+    </div>
 
     <!-- ═══════════════════════════════════════════ -->
     <!-- OSI LAYERS ARCHITECTURE                     -->
@@ -749,12 +781,8 @@
       <div class="section-head">
         <div>
           <h2>OSI Layers Architecture</h2>
-          <p class="sub">The OSI model is a conceptual framework that explains network communication as seven logical layers. Each layer has a specific responsibility. The model is not a protocol suite by itself; it is a reference architecture that helps you design, troubleshoot, secure, and explain network behaviour.</p>
+          <p class="sub">Seven-layer conceptual reference architecture for network communication, security control placement, incident triage, and compliance mapping.</p>
         </div>
-      </div>
-
-      <div class="card note">
-        <strong>Why OSI still matters:</strong> In real enterprises, incidents are diagnosed and controlled faster when teams know <em>which layer failed</em>, <em>which protocol is involved</em>, <em>which device is operating there</em>, and <em>which security control belongs at that layer</em>.
       </div>
 
       <div class="osi-stack" style="margin-top:16px;">
@@ -765,15 +793,15 @@
           <div>
             <span class="kicker">Application</span>
             <h3>Provides network services directly to user-facing applications</h3>
-            <p class="muted">This is where business applications and user interactions meet the network. The layer defines how software such as browsers, email clients, remote access tools, and APIs use network services.</p>
+            <p class="muted">User-facing protocols and services for browsers, email, APIs, and remote access.</p>
             <div class="pill-row"><span class="pill">PDU: Data</span></div>
           </div>
           <div>
             <span class="kicker">Common Protocols</span>
             <!-- Fix #5: Added missing L7 protocols -->
-            <div class="pill-row"><span class="pill">HTTP</span><span class="pill">HTTPS</span><span class="pill">DNS</span><span class="pill">SMTP</span><span class="pill">IMAP</span><span class="pill">SSH</span><span class="pill">FTP/SFTP</span><span class="pill">DHCP</span><span class="pill">SNMP</span><span class="pill">LDAP</span></div>
+            <p class="muted" style="margin:0;">HTTP, HTTPS, DNS, SMTP, IMAP, SSH, FTP/SFTP, DHCP, SNMP, LDAP</p>
             <span class="kicker" style="margin-top:12px; display:block;">Core Devices / Systems</span>
-            <div class="pill-row"><span class="pill">Web Server</span><span class="pill">Mail Server</span><span class="pill">Proxy</span><span class="pill">WAF</span><span class="pill">DNS Server</span><span class="pill">API Gateway</span></div>
+            <p class="muted" style="margin:0;">Web Server, Mail Server, Proxy, WAF, DNS Server, API Gateway</p>
           </div>
           <div>
             <span class="kicker">Typical Attacks</span>
@@ -783,6 +811,13 @@
             <span class="kicker">Controls</span>
             <div class="pill-row"><span class="pill control">WAF</span><span class="pill control">Input Validation</span><span class="pill control">App Hardening</span><span class="pill control">Email Security</span></div>
           </div>
+          <div>
+            <span class="kicker">Compliance Mapping</span>
+            <div class="pill-row"><span class="pill framework">NIST PR.PS</span><span class="pill framework">NIST DE.CM</span></div>
+            <div class="pill-row" style="margin-top:6px;"><span class="pill framework">ISO A.8.25</span><span class="pill framework">ISO A.8.26</span></div>
+            <div class="pill-row" style="margin-top:6px;"><span class="pill framework">CIS 9</span><span class="pill framework">CIS 16</span></div>
+            <p class="muted" style="margin:10px 0 0; font-size:0.82rem; border-top:1px solid #eee; padding-top:8px;"><strong style="color:var(--danger);">⚠ Red Flags:</strong> HTTP without HTTPS redirect, missing CSP headers, verbose error pages exposing stack traces, no WAF on public-facing apps</p>
+          </div>
         </article>
 
         <!-- Layer 6 — Presentation -->
@@ -791,14 +826,14 @@
           <div>
             <span class="kicker">Presentation</span>
             <h3>Handles translation, formatting, encryption and encoding</h3>
-            <p class="muted">This layer ensures that data from one system can be understood by another. It covers character encoding, compression, and cryptographic representation.</p>
+            <p class="muted">Data translation, encoding, compression, and cryptographic formatting between systems.</p>
             <div class="pill-row"><span class="pill">PDU: Data</span></div>
           </div>
           <div>
             <span class="kicker">Common Protocols / Formats</span>
-            <div class="pill-row"><span class="pill">SSL/TLS</span><span class="pill">JPEG</span><span class="pill">MPEG</span><span class="pill">ASCII</span><span class="pill">UTF-8</span></div>
+            <p class="muted" style="margin:0;">SSL/TLS, JPEG, MPEG, ASCII, UTF-8</p>
             <span class="kicker" style="margin-top:12px; display:block;">Core Devices / Systems</span>
-            <div class="pill-row"><span class="pill">SSL Offloader</span><span class="pill">Load Balancer</span><span class="pill">Encryption Gateway</span><span class="pill">Content Transformer</span></div>
+            <p class="muted" style="margin:0;">SSL Offloader, Load Balancer, Encryption Gateway, Content Transformer</p>
           </div>
           <div>
             <span class="kicker">Typical Attacks</span>
@@ -808,6 +843,13 @@
             <span class="kicker">Controls</span>
             <div class="pill-row"><span class="pill control">TLS Enforcement</span><span class="pill control">Certificate Pinning</span><span class="pill control">Strong Cipher Policy</span></div>
           </div>
+          <div>
+            <span class="kicker">Compliance Mapping</span>
+            <div class="pill-row"><span class="pill framework">NIST PR.DS</span><span class="pill framework">NIST PR.PS</span></div>
+            <div class="pill-row" style="margin-top:6px;"><span class="pill framework">ISO A.8.24</span></div>
+            <div class="pill-row" style="margin-top:6px;"><span class="pill framework">CIS 3</span></div>
+            <p class="muted" style="margin:10px 0 0; font-size:0.82rem; border-top:1px solid #eee; padding-top:8px;"><strong style="color:var(--danger);">⚠ Red Flags:</strong> TLS 1.0/1.1 still enabled, weak cipher suites (RC4, DES), expired or self-signed certificates in production, no HSTS header</p>
+          </div>
         </article>
 
         <!-- Layer 5 — Session -->
@@ -816,14 +858,14 @@
           <div>
             <span class="kicker">Session</span>
             <h3>Creates, maintains and terminates communication sessions</h3>
-            <p class="muted">This layer manages dialogue control between systems, including session establishment, checkpointing, and reconnection logic.</p>
+            <p class="muted">Session establishment, maintenance, checkpointing, and teardown between endpoints.</p>
             <div class="pill-row"><span class="pill">PDU: Data</span></div>
           </div>
           <div>
             <span class="kicker">Common Protocols</span>
-            <div class="pill-row"><span class="pill">NetBIOS</span><span class="pill">RPC</span><span class="pill">PPTP</span></div>
+            <p class="muted" style="margin:0;">NetBIOS, RPC, PPTP</p>
             <span class="kicker" style="margin-top:12px; display:block;">Core Devices / Systems</span>
-            <div class="pill-row"><span class="pill">Session Border Controller</span><span class="pill">VPN Gateway</span><span class="pill">Remote Access Server</span></div>
+            <p class="muted" style="margin:0;">Session Border Controller, VPN Gateway, Remote Access Server</p>
           </div>
           <div>
             <span class="kicker">Typical Attacks</span>
@@ -833,6 +875,13 @@
             <span class="kicker">Controls</span>
             <div class="pill-row"><span class="pill control">Session Tokens</span><span class="pill control">Re-authentication</span><span class="pill control">Timeouts</span></div>
           </div>
+          <div>
+            <span class="kicker">Compliance Mapping</span>
+            <div class="pill-row"><span class="pill framework">NIST PR.AA</span></div>
+            <div class="pill-row" style="margin-top:6px;"><span class="pill framework">ISO A.8.5</span></div>
+            <div class="pill-row" style="margin-top:6px;"><span class="pill framework">CIS 6</span></div>
+            <p class="muted" style="margin:10px 0 0; font-size:0.82rem; border-top:1px solid #eee; padding-top:8px;"><strong style="color:var(--danger);">⚠ Red Flags:</strong> No session timeout policy, tokens stored in URL parameters, sessions not invalidated on logout, missing re-authentication for privilege escalation</p>
+          </div>
         </article>
 
         <!-- Layer 4 — Transport -->
@@ -841,14 +890,14 @@
           <div>
             <span class="kicker">Transport</span>
             <h3>Provides end-to-end delivery, segmentation, reliability and flow control</h3>
-            <p class="muted">This layer breaks data into segments, tracks delivery, performs retransmission when needed, and differentiates services using port numbers.</p>
+            <p class="muted">Segmentation, port-based service identification, reliable delivery, and flow control.</p>
             <div class="pill-row"><span class="pill">PDU: Segment</span></div>
           </div>
           <div>
             <span class="kicker">Common Protocols</span>
-            <div class="pill-row"><span class="pill">TCP</span><span class="pill">UDP</span></div>
+            <p class="muted" style="margin:0;">TCP, UDP</p>
             <span class="kicker" style="margin-top:12px; display:block;">Core Devices / Systems</span>
-            <div class="pill-row"><span class="pill">Stateful Firewall</span><span class="pill">Load Balancer</span><span class="pill">L4 ADC</span><span class="pill">IDS/IPS</span></div>
+            <p class="muted" style="margin:0;">Stateful Firewall, Load Balancer, L4 ADC, IDS/IPS</p>
           </div>
           <div>
             <span class="kicker">Typical Attacks</span>
@@ -858,6 +907,13 @@
             <span class="kicker">Controls</span>
             <div class="pill-row"><span class="pill control">Stateful Firewall</span><span class="pill control">Rate Limiting</span><span class="pill control">L4 Filtering</span></div>
           </div>
+          <div>
+            <span class="kicker">Compliance Mapping</span>
+            <div class="pill-row"><span class="pill framework">NIST PR.PS</span><span class="pill framework">NIST DE.CM</span></div>
+            <div class="pill-row" style="margin-top:6px;"><span class="pill framework">ISO A.8.20</span><span class="pill framework">ISO A.8.21</span></div>
+            <div class="pill-row" style="margin-top:6px;"><span class="pill framework">CIS 4</span><span class="pill framework">CIS 13</span></div>
+            <p class="muted" style="margin:10px 0 0; font-size:0.82rem; border-top:1px solid #eee; padding-top:8px;"><strong style="color:var(--danger);">⚠ Red Flags:</strong> No rate limiting on public endpoints, firewall in stateless mode when stateful is required, all ports open outbound, no IDS/IPS on critical segments</p>
+          </div>
         </article>
 
         <!-- Layer 3 — Network -->
@@ -866,15 +922,15 @@
           <div>
             <span class="kicker">Network</span>
             <h3>Performs logical addressing and routing between networks</h3>
-            <p class="muted">This is where IP addressing, path selection, and packet forwarding happen. Routers primarily operate here.</p>
+            <p class="muted">IP addressing, path selection, and packet forwarding across interconnected networks.</p>
             <div class="pill-row"><span class="pill">PDU: Packet</span></div>
           </div>
           <div>
             <span class="kicker">Common Protocols</span>
             <!-- Fix #6: Added EIGRP -->
-            <div class="pill-row"><span class="pill">IP</span><span class="pill">ICMP</span><span class="pill">OSPF</span><span class="pill">BGP</span><span class="pill">EIGRP</span><span class="pill">IPsec</span></div>
+            <p class="muted" style="margin:0;">IP, ICMP, OSPF, BGP, EIGRP, IPsec</p>
             <span class="kicker" style="margin-top:12px; display:block;">Core Devices / Systems</span>
-            <div class="pill-row"><span class="pill">Router</span><span class="pill">Layer 3 Switch</span><span class="pill">Packet Filter Firewall</span><span class="pill">VPN Concentrator</span></div>
+            <p class="muted" style="margin:0;">Router, Layer 3 Switch, Packet Filter Firewall, VPN Concentrator</p>
           </div>
           <div>
             <span class="kicker">Typical Attacks</span>
@@ -884,6 +940,13 @@
             <span class="kicker">Controls</span>
             <div class="pill-row"><span class="pill control">ACLs</span><span class="pill control">Packet Filter Firewall</span><span class="pill control">Routing Policy</span><span class="pill control">uRPF</span></div>
           </div>
+          <div>
+            <span class="kicker">Compliance Mapping</span>
+            <div class="pill-row"><span class="pill framework">NIST PR.IR</span><span class="pill framework">NIST PR.PS</span></div>
+            <div class="pill-row" style="margin-top:6px;"><span class="pill framework">ISO A.8.20</span><span class="pill framework">ISO A.8.22</span></div>
+            <div class="pill-row" style="margin-top:6px;"><span class="pill framework">CIS 12</span><span class="pill framework">CIS 13</span></div>
+            <p class="muted" style="margin:10px 0 0; font-size:0.82rem; border-top:1px solid #eee; padding-top:8px;"><strong style="color:var(--danger);">⚠ Red Flags:</strong> Default routes without ACLs, no uRPF on edge routers, OSPF/BGP without authentication, flat network with no segmentation</p>
+          </div>
         </article>
 
         <!-- Layer 2 — Data Link -->
@@ -892,14 +955,14 @@
           <div>
             <span class="kicker">Data Link</span>
             <h3>Controls node-to-node transfer on the same network segment</h3>
-            <p class="muted">This layer frames data, handles MAC addressing, and detects some transmission errors. Switches primarily operate here. ARP is often discussed here in practice because it links IP addressing to MAC resolution inside local networks.</p>
+            <p class="muted">Framing, MAC addressing, error detection, and ARP resolution on local segments.</p>
             <div class="pill-row"><span class="pill">PDU: Frame</span></div>
           </div>
           <div>
             <span class="kicker">Common Protocols</span>
-            <div class="pill-row"><span class="pill">Ethernet</span><span class="pill">ARP</span><span class="pill">PPP</span><span class="pill">802.1Q</span></div>
+            <p class="muted" style="margin:0;">Ethernet, ARP, PPP, 802.1Q</p>
             <span class="kicker" style="margin-top:12px; display:block;">Core Devices / Systems</span>
-            <div class="pill-row"><span class="pill">Switch</span><span class="pill">Bridge</span><span class="pill">Wireless AP</span><span class="pill">NIC</span></div>
+            <p class="muted" style="margin:0;">Switch, Bridge, Wireless AP, NIC</p>
           </div>
           <div>
             <span class="kicker">Typical Attacks</span>
@@ -909,6 +972,13 @@
             <span class="kicker">Controls</span>
             <div class="pill-row"><span class="pill control">802.1X</span><span class="pill control">DAI</span><span class="pill control">Port Security</span><span class="pill control">VLAN Segmentation</span></div>
           </div>
+          <div>
+            <span class="kicker">Compliance Mapping</span>
+            <div class="pill-row"><span class="pill framework">NIST PR.AA</span><span class="pill framework">NIST PR.PS</span></div>
+            <div class="pill-row" style="margin-top:6px;"><span class="pill framework">ISO A.8.20</span></div>
+            <div class="pill-row" style="margin-top:6px;"><span class="pill framework">CIS 1</span><span class="pill framework">CIS 12</span></div>
+            <p class="muted" style="margin:10px 0 0; font-size:0.82rem; border-top:1px solid #eee; padding-top:8px;"><strong style="color:var(--danger);">⚠ Red Flags:</strong> No 802.1X on switch ports, DAI not enabled, default VLAN in use for production traffic, unused ports not disabled, no MAC limiting</p>
+          </div>
         </article>
 
         <!-- Layer 1 — Physical -->
@@ -917,14 +987,14 @@
           <div>
             <span class="kicker">Physical</span>
             <h3>Moves raw bits over physical media</h3>
-            <p class="muted">This layer deals with electrical, optical, wireless, and mechanical characteristics of transmission media and connectors.</p>
+            <p class="muted">Electrical, optical, and wireless signal transmission over physical media.</p>
             <div class="pill-row"><span class="pill">PDU: Bit</span></div>
           </div>
           <div>
             <span class="kicker">Common Media / Tech</span>
-            <div class="pill-row"><span class="pill">Cables</span><span class="pill">Wi-Fi Radio</span><span class="pill">Fiber</span><span class="pill">Connectors</span></div>
+            <p class="muted" style="margin:0;">Cables, Wi-Fi Radio, Fiber, Connectors</p>
             <span class="kicker" style="margin-top:12px; display:block;">Core Devices / Systems</span>
-            <div class="pill-row"><span class="pill">Repeater</span><span class="pill">Hub</span><span class="pill">Patch Panel</span><span class="pill">Transceiver</span></div>
+            <p class="muted" style="margin:0;">Repeater, Hub, Patch Panel, Transceiver</p>
           </div>
           <div>
             <span class="kicker">Typical Attacks</span>
@@ -933,6 +1003,13 @@
           <div>
             <span class="kicker">Controls</span>
             <div class="pill-row"><span class="pill control">Locks</span><span class="pill control">Guards</span><span class="pill control">Cable Shielding</span><span class="pill control">CCTV</span></div>
+          </div>
+          <div>
+            <span class="kicker">Compliance Mapping</span>
+            <div class="pill-row"><span class="pill framework">NIST PR.IR</span></div>
+            <div class="pill-row" style="margin-top:6px;"><span class="pill framework">ISO A.7.1</span><span class="pill framework">ISO A.7.2</span><span class="pill framework">ISO A.7.3</span></div>
+            <div class="pill-row" style="margin-top:6px;"><span class="pill framework">CIS 1</span></div>
+            <p class="muted" style="margin:10px 0 0; font-size:0.82rem; border-top:1px solid #eee; padding-top:8px;"><strong style="color:var(--danger);">⚠ Red Flags:</strong> No physical access controls on wiring closets, unlabelled patch panels, no cable shielding in shared spaces, missing asset inventory for network hardware</p>
           </div>
         </article>
       </div>
@@ -967,7 +1044,7 @@
             <div class="layer-map-tcp">
               <h3>TCP/IP Application</h3>
               <p class="muted">Maps OSI Layers 7 + 6 + 5 — user-facing services, encoding, session management</p>
-              <div class="pill-row"><span class="pill">HTTP</span><span class="pill">DNS</span><span class="pill">SMTP</span><span class="pill">SSH</span><span class="pill">TLS</span></div>
+              <p class="muted" style="margin:0;">HTTP, DNS, SMTP, SSH, TLS</p>
             </div>
           </div>
 
@@ -979,7 +1056,7 @@
             <div class="layer-map-tcp">
               <h3>TCP/IP Transport</h3>
               <p class="muted">Maps OSI Layer 4 — end-to-end delivery, segmentation, flow control</p>
-              <div class="pill-row"><span class="pill">TCP</span><span class="pill">UDP</span></div>
+              <p class="muted" style="margin:0;">TCP, UDP</p>
             </div>
           </div>
 
@@ -991,7 +1068,7 @@
             <div class="layer-map-tcp">
               <h3>TCP/IP Internet</h3>
               <p class="muted">Maps OSI Layer 3 — logical addressing, routing, packet forwarding</p>
-              <div class="pill-row"><span class="pill">IPv4</span><span class="pill">IPv6</span><span class="pill">ICMP</span><span class="pill">IPsec</span></div>
+              <p class="muted" style="margin:0;">IPv4, IPv6, ICMP, IPsec</p>
             </div>
           </div>
 
@@ -1004,7 +1081,7 @@
             <div class="layer-map-tcp">
               <h3>TCP/IP Network Access</h3>
               <p class="muted">Maps OSI Layers 2 + 1 — framing, MAC addressing, physical media</p>
-              <div class="pill-row"><span class="pill">Ethernet</span><span class="pill">Wi-Fi</span><span class="pill">ARP</span></div>
+              <p class="muted" style="margin:0;">Ethernet, Wi-Fi, ARP</p>
             </div>
           </div>
 
@@ -1015,22 +1092,22 @@
         <div class="tcp-row">
           <h3>Application Layer</h3>
           <p class="muted">Combines OSI Application, Presentation, and Session functions. It supports user-facing services such as web access, name resolution, file transfer, remote administration, email, and application APIs.</p>
-          <div class="pill-row"><span class="pill">HTTP/HTTPS</span><span class="pill">DNS</span><span class="pill">SMTP</span><span class="pill">IMAP</span><span class="pill">FTP/SFTP</span><span class="pill">SSH</span><span class="pill">DHCP</span><span class="pill">SNMP</span></div>
+          <p class="muted" style="margin:0;">HTTP/HTTPS, DNS, SMTP, IMAP, FTP/SFTP, SSH, DHCP, SNMP</p>
         </div>
         <div class="tcp-row">
           <h3>Transport Layer</h3>
           <p class="muted">Provides end-to-end communication between hosts. TCP gives reliable, connection-oriented delivery. UDP gives lightweight, connectionless delivery where speed matters more than guaranteed delivery.</p>
-          <div class="pill-row"><span class="pill">TCP</span><span class="pill">UDP</span></div>
+          <p class="muted" style="margin:0;">TCP, UDP</p>
         </div>
         <div class="tcp-row">
           <h3>Internet Layer</h3>
           <p class="muted">Responsible for logical addressing and routing packets across interconnected networks. It determines where packets go and how they traverse networks.</p>
-          <div class="pill-row"><span class="pill">IPv4</span><span class="pill">IPv6</span><span class="pill">ICMP</span><span class="pill">IPsec</span></div>
+          <p class="muted" style="margin:0;">IPv4, IPv6, ICMP, IPsec</p>
         </div>
         <div class="tcp-row">
           <h3>Network Access Layer</h3>
           <p class="muted">Covers how devices physically access the network medium and exchange frames on local segments. It blends the OSI Data Link and Physical responsibilities.</p>
-          <div class="pill-row"><span class="pill">Ethernet</span><span class="pill">Wi-Fi</span><span class="pill">ARP</span><span class="pill">MAC</span></div>
+          <p class="muted" style="margin:0;">Ethernet, Wi-Fi, ARP, MAC</p>
         </div>
       </div>
     </section>
@@ -1081,7 +1158,7 @@
       </div>
 
       <div class="card" style="padding:12px; margin-top:18px; overflow:hidden;">
-        <img src="encapsulation-decapsulation-osi.jpg" alt="Encapsulation and Decapsulation in the OSI Model — Sender side (top to down): L7 Application Data (PDU: Data), L6 Presentation formatting/encryption, L5 Session management, L4 Transport TCP/UDP Header + Data (PDU: Segment), L3 Network IP Header + Segment (PDU: Packet), L2 Data Link Frame Header + Packet + FCS Trailer (PDU: Frame), L1 Physical electrical/optical/radio signal (PDU: Bits). Receiver side (bottom to up): each layer reads its header, acts on it, strips it, and passes payload upward. Network transmission occurs between sender and receiver through the physical medium." style="width:100%; height:auto; border-radius:12px; display:block;" loading="lazy" />
+        <img src="encapsulation-decapsulation-osi.jpg" alt="Encapsulation and Decapsulation in the OSI Model — Sender side (top to down): L7 Application Data (PDU: Data), L6 Presentation formatting/encryption, L5 Session management, L4 Transport TCP/UDP Header + Data (PDU: Segment), L3 Network IP Header + Segment (PDU: Packet), L2 Data Link Frame Header + Packet + FCS Trailer (PDU: Frame), L1 Physical electrical/optical/radio signal (PDU: Bits). Receiver side (bottom to up): each layer reads its header, acts on it, strips it, and passes payload upward. Network transmission occurs between sender and receiver through the physical medium." width="1320" height="742" style="width:100%; height:auto; aspect-ratio:16/9; border-radius:6px; display:block;" loading="lazy" />
       </div>
 
       <!-- What each layer adds -->
@@ -1130,7 +1207,7 @@
       </div>
 
       <div class="card" style="padding:12px; overflow:hidden;">
-        <img src="end-to-end-packet-flow.jpg" alt="End-to-End Packet Flow Infographic — From URL to Response. Shows the 12-step journey: Client side (Steps 1-6: URL entry, DNS resolution, TCP handshake, TLS handshake, HTTP encapsulation, ARP resolution), Network Transit (router L3 forwarding, switch L2 forwarding, L3 packet and L4 segment remain intact across hops), Server side (Steps 7-12: frame received at NIC, decapsulation, application processing, response encapsulation, reverse routing, client decapsulation and browser rendering). Includes 5-layer view, key takeaways, legend, and protocol-port reference." style="width:100%; height:auto; border-radius:12px; display:block;" loading="lazy" />
+        <img src="end-to-end-packet-flow.jpg" alt="End-to-End Packet Flow Infographic — From URL to Response. Shows the 12-step journey: Client side (Steps 1-6: URL entry, DNS resolution, TCP handshake, TLS handshake, HTTP encapsulation, ARP resolution), Network Transit (router L3 forwarding, switch L2 forwarding, L3 packet and L4 segment remain intact across hops), Server side (Steps 7-12: frame received at NIC, decapsulation, application processing, response encapsulation, reverse routing, client decapsulation and browser rendering). Includes 5-layer view, key takeaways, legend, and protocol-port reference." width="1320" height="742" style="width:100%; height:auto; aspect-ratio:16/9; border-radius:6px; display:block;" loading="lazy" />
       </div>
 
       <div class="card note" style="margin-top:18px;">
@@ -1167,7 +1244,7 @@
           <div class="detail-body">
             The Domain Name System resolves names such as example.com into IP addresses. Without DNS, users would need to remember numeric IP addresses. It is critical, and therefore a common target for abuse, poisoning, tunneling, and redirection.
             <!-- Fix #11: DNS record types -->
-            <div class="pill-row" style="margin-top:10px;"><span class="pill">A</span><span class="pill">AAAA</span><span class="pill">CNAME</span><span class="pill">MX</span><span class="pill">NS</span><span class="pill">TXT</span><span class="pill">PTR</span><span class="pill">SOA</span></div>
+            <p class="muted" style="margin-top:10px;">Record types: A, AAAA, CNAME, MX, NS, TXT, PTR, SOA</p>
           </div>
         </details>
         <details>
@@ -1290,15 +1367,18 @@
     <!-- ═══════════════════════════════════════════ -->
     <!-- TCP vs UDP                                  -->
     <!-- ═══════════════════════════════════════════ -->
-    <section id="transportcompare">
+    <section id="keycomparisons">
       <div class="section-head">
         <div>
-          <h2>TCP vs UDP</h2>
-          <p class="sub">Both sit at the transport layer, but they solve different problems. Choosing the right one depends on reliability, speed, and application need.</p>
+          <h2>Key Comparisons</h2>
+          <p class="sub">Essential protocol and control comparisons for architecture decisions, incident triage, and design reviews.</p>
         </div>
       </div>
-      <!-- Fix #4: Added missing rows -->
-      <div class="card">
+
+      <!-- TCP vs UDP -->
+      <div class="card" style="margin-bottom:18px;">
+        <span class="kicker">Transport Layer</span>
+        <h3 style="margin-top:0;">TCP vs UDP</h3>
         <table class="compare-table">
           <thead>
             <tr><th>Feature</th><th>TCP</th><th>UDP</th></tr>
@@ -1316,20 +1396,11 @@
           </tbody>
         </table>
       </div>
-    </section>
 
-    <!-- ═══════════════════════════════════════════ -->
-    <!-- IPv4 vs IPv6                                -->
-    <!-- ═══════════════════════════════════════════ -->
-    <!-- Fix #9: New IPv4 vs IPv6 section -->
-    <section id="ipcompare">
-      <div class="section-head">
-        <div>
-          <h2>IPv4 vs IPv6</h2>
-          <p class="sub">IPv6 is not just a bigger address space — it changes how addressing, routing, and autoconfiguration work at a fundamental level.</p>
-        </div>
-      </div>
-      <div class="card">
+      <!-- IPv4 vs IPv6 -->
+      <div class="card" style="margin-bottom:18px;">
+        <span class="kicker">Network Layer</span>
+        <h3 style="margin-top:0;">IPv4 vs IPv6</h3>
         <table class="compare-table">
           <thead>
             <tr><th>Feature</th><th>IPv4</th><th>IPv6</th></tr>
@@ -1339,12 +1410,59 @@
             <tr><td data-label="Feature">Address Format</td><td data-label="IPv4">Dotted decimal (192.168.1.1)</td><td data-label="IPv6">Hexadecimal colon notation (2001:db8::1)</td></tr>
             <tr><td data-label="Feature">Header</td><td data-label="IPv4">Variable length, 12+ fields</td><td data-label="IPv6">Fixed 40 bytes, 8 fields — simpler and faster</td></tr>
             <tr><td data-label="Feature">IPsec</td><td data-label="IPv4">Optional</td><td data-label="IPv6">Built into the protocol specification</td></tr>
-            <tr><td data-label="Feature">Autoconfiguration</td><td data-label="IPv4">Relies on DHCP</td><td data-label="IPv6">SLAAC (Stateless Address Autoconfiguration) + optional DHCPv6</td></tr>
+            <tr><td data-label="Feature">Autoconfiguration</td><td data-label="IPv4">Relies on DHCP</td><td data-label="IPv6">SLAAC + optional DHCPv6</td></tr>
             <tr><td data-label="Feature">Broadcast</td><td data-label="IPv4">Uses broadcast (255.255.255.255)</td><td data-label="IPv6">No broadcast — uses multicast and anycast</td></tr>
             <tr><td data-label="Feature">NAT</td><td data-label="IPv4">Common due to address scarcity</td><td data-label="IPv6">Generally unnecessary — end-to-end addressing</td></tr>
-            <tr><td data-label="Feature">Adoption</td><td data-label="IPv4">Still dominant in most enterprise networks</td><td data-label="IPv6">Growing — required for modern mobile and IoT networks</td></tr>
+            <tr><td data-label="Feature">Adoption</td><td data-label="IPv4">Still dominant in most enterprise networks</td><td data-label="IPv6">Growing — required for modern mobile and IoT</td></tr>
           </tbody>
         </table>
+      </div>
+
+      <!-- Connection-Oriented vs Connectionless -->
+      <div class="card" style="margin-bottom:18px;">
+        <span class="kicker">Communication Model</span>
+        <h3 style="margin-top:0;">Connection-Oriented vs Connectionless</h3>
+        <div class="grid-2" style="margin-bottom:14px;">
+          <div>
+            <strong style="color:var(--brand);">Connection-Oriented (TCP, SCTP)</strong>
+            <p class="muted" style="margin:6px 0 0;">Session setup via three-way handshake. Guarantees delivery, ordering, and error correction. Flow control via sliding window. Graceful teardown via FIN/ACK. Use: web, email, file transfer, APIs.</p>
+          </div>
+          <div>
+            <strong style="color:var(--brand);">Connectionless (UDP, ICMP)</strong>
+            <p class="muted" style="margin:6px 0 0;">No session setup — data sent immediately. No delivery guarantee, ordering, or retransmission. Minimal 8-byte header overhead. Use: DNS, VoIP, streaming, gaming, NTP.</p>
+          </div>
+        </div>
+        <table class="compare-table" style="font-size:0.9rem;">
+          <thead>
+            <tr><th>Feature</th><th>Connection-Oriented (TCP)</th><th>Connectionless (UDP)</th></tr>
+          </thead>
+          <tbody>
+            <tr><td data-label="Feature">Session setup</td><td data-label="Connection-Oriented">Yes — three-way handshake</td><td data-label="Connectionless">No — fire and forget</td></tr>
+            <tr><td data-label="Feature">Reliability</td><td data-label="Connection-Oriented">Guaranteed delivery</td><td data-label="Connectionless">Best effort only</td></tr>
+            <tr><td data-label="Feature">Ordering</td><td data-label="Connection-Oriented">Maintained</td><td data-label="Connectionless">Not guaranteed</td></tr>
+            <tr><td data-label="Feature">Speed</td><td data-label="Connection-Oriented">Slower (overhead)</td><td data-label="Connectionless">Faster (minimal overhead)</td></tr>
+            <tr><td data-label="Feature">Error recovery</td><td data-label="Connection-Oriented">Retransmission</td><td data-label="Connectionless">Application must handle</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- Stateful vs Stateless -->
+      <div class="card">
+        <span class="kicker">Security Control Model</span>
+        <h3 style="margin-top:0;">Stateful vs Stateless Controls</h3>
+        <div class="grid-2" style="margin-bottom:14px;">
+          <div>
+            <strong style="color:var(--brand);">Stateless</strong>
+            <p class="muted" style="margin:6px 0 0;">Evaluates each packet independently against rules. No memory of prior traffic. Examples: simple packet-filter ACLs on routers. Faster processing but cannot distinguish legitimate replies from unsolicited inbound traffic.</p>
+          </div>
+          <div>
+            <strong style="color:var(--brand);">Stateful</strong>
+            <p class="muted" style="margin:6px 0 0;">Maintains a connection state table tracking active sessions. Understands whether a packet belongs to an established session or is unexpected. Examples: stateful firewalls, NGFWs. Allows return traffic automatically; detects out-of-state packets.</p>
+          </div>
+        </div>
+        <div class="card note" style="margin-top:0;">
+          <strong>How they connect:</strong> Connection-oriented protocols (TCP) work naturally with stateful controls because both track session state. Connectionless protocols (UDP) are harder for stateful devices to inspect — they typically use timeouts and heuristics to create pseudo-state entries.
+        </div>
       </div>
     </section>
 
@@ -1370,9 +1488,11 @@
             <tbody>
               <tr><td data-label="CIDR">/8</td><td data-label="Mask">255.0.0.0</td><td data-label="Hosts">~16.7 million</td></tr>
               <tr><td data-label="CIDR">/16</td><td data-label="Mask">255.255.0.0</td><td data-label="Hosts">65,534</td></tr>
+              <tr><td data-label="CIDR">/22</td><td data-label="Mask">255.255.252.0</td><td data-label="Hosts">1,022 (common enterprise VLAN)</td></tr>
               <tr><td data-label="CIDR">/24</td><td data-label="Mask">255.255.255.0</td><td data-label="Hosts">254</td></tr>
               <tr><td data-label="CIDR">/28</td><td data-label="Mask">255.255.255.240</td><td data-label="Hosts">14</td></tr>
-              <tr><td data-label="CIDR">/30</td><td data-label="Mask">255.255.255.252</td><td data-label="Hosts">2 (point-to-point)</td></tr>
+              <tr><td data-label="CIDR">/30</td><td data-label="Mask">255.255.255.252</td><td data-label="Hosts">2 (legacy point-to-point)</td></tr>
+              <tr><td data-label="CIDR">/31</td><td data-label="Mask">255.255.255.254</td><td data-label="Hosts">2 (point-to-point per RFC 3021)</td></tr>
               <tr><td data-label="CIDR">/32</td><td data-label="Mask">255.255.255.255</td><td data-label="Hosts">1 (host route)</td></tr>
             </tbody>
           </table>
@@ -1397,7 +1517,7 @@
       <div class="section-head">
         <div>
           <h2>Core Networking Devices by Function</h2>
-          <p class="sub">Beginners often memorize device names without understanding purpose. This block connects device type to operational role.</p>
+          <p class="sub">Device type mapped to operational role and primary OSI layer.</p>
         </div>
       </div>
       <!-- Fix #14: Added Proxy, WAF, SIEM, VPN Gateway -->
@@ -1418,100 +1538,6 @@
     <!-- ═══════════════════════════════════════════ -->
     <!-- CONNECTION-ORIENTED vs CONNECTIONLESS        -->
     <!-- ═══════════════════════════════════════════ -->
-    <section id="connectiontypes">
-      <div class="section-head">
-        <div>
-          <h2>Connection-Oriented vs Connectionless Communication</h2>
-          <p class="sub">This is one of the most fundamental distinctions in networking. It determines whether a session is established before data flows or whether packets are sent independently with no prior arrangement.</p>
-        </div>
-      </div>
-
-      <div class="grid-2">
-        <div class="card">
-          <span class="kicker">Connection-Oriented</span>
-          <h3 style="margin-top:0;">Establishes a session before data transfer</h3>
-          <p class="muted">A connection-oriented protocol sets up a dedicated logical path between sender and receiver before any data is exchanged. It guarantees delivery, ordering, and error correction. If packets are lost, they are retransmitted. The connection is explicitly closed when communication ends.</p>
-          <ul class="checklist" style="margin-top:10px;">
-            <li><strong>Setup:</strong> Three-way handshake (SYN → SYN-ACK → ACK)</li>
-            <li><strong>Reliability:</strong> Acknowledgements, sequence numbers, retransmission</li>
-            <li><strong>Ordering:</strong> Packets reassembled in correct order at receiver</li>
-            <li><strong>Flow control:</strong> Sliding window prevents receiver overload</li>
-            <li><strong>Teardown:</strong> Graceful close (FIN → ACK)</li>
-          </ul>
-          <div class="pill-row"><span class="pill">TCP</span><span class="pill">SCTP</span></div>
-          <p class="muted" style="margin-top:10px;"><strong>Use cases:</strong> Web browsing, email, file transfer, database queries, API calls — anywhere correctness matters more than speed.</p>
-        </div>
-        <div class="card">
-          <span class="kicker">Connectionless</span>
-          <h3 style="margin-top:0;">Sends packets independently — no session setup</h3>
-          <p class="muted">A connectionless protocol sends each packet (datagram) independently with no prior handshake, no acknowledgement, and no guarantee of delivery or ordering. Each packet is routed individually and may arrive out of order, be duplicated, or be lost entirely.</p>
-          <ul class="checklist" style="margin-top:10px;">
-            <li><strong>Setup:</strong> None — data is sent immediately</li>
-            <li><strong>Reliability:</strong> No acknowledgements, no retransmission</li>
-            <li><strong>Ordering:</strong> Not guaranteed — application must handle if needed</li>
-            <li><strong>Overhead:</strong> Minimal — 8-byte UDP header vs 20-byte TCP header</li>
-            <li><strong>Speed:</strong> Faster due to no handshake or control overhead</li>
-          </ul>
-          <div class="pill-row"><span class="pill">UDP</span><span class="pill">ICMP</span><span class="pill">IP (Layer 3)</span></div>
-          <p class="muted" style="margin-top:10px;"><strong>Use cases:</strong> DNS queries, VoIP, video streaming, gaming, NTP, SNMP — anywhere speed and low latency matter more than guaranteed delivery.</p>
-        </div>
-      </div>
-
-      <div class="card" style="margin-top:18px;">
-        <span class="kicker">Key comparison</span>
-        <h3 style="margin-top:0;">When to use which</h3>
-        <table class="compare-table" style="font-size:0.9rem;">
-          <thead>
-            <tr><th>Feature</th><th>Connection-Oriented (TCP)</th><th>Connectionless (UDP)</th></tr>
-          </thead>
-          <tbody>
-            <tr><td data-label="Feature">Session setup</td><td data-label="Connection-Oriented">Yes — three-way handshake</td><td data-label="Connectionless">No — fire and forget</td></tr>
-            <tr><td data-label="Feature">Reliability</td><td data-label="Connection-Oriented">Guaranteed delivery</td><td data-label="Connectionless">Best effort only</td></tr>
-            <tr><td data-label="Feature">Ordering</td><td data-label="Connection-Oriented">Maintained</td><td data-label="Connectionless">Not guaranteed</td></tr>
-            <tr><td data-label="Feature">Speed</td><td data-label="Connection-Oriented">Slower (overhead)</td><td data-label="Connectionless">Faster (minimal overhead)</td></tr>
-            <tr><td data-label="Feature">Error recovery</td><td data-label="Connection-Oriented">Retransmission</td><td data-label="Connectionless">Application must handle</td></tr>
-            <tr><td data-label="Feature">Analogy</td><td data-label="Connection-Oriented">Phone call — dial, talk, hang up</td><td data-label="Connectionless">Postcard — write, send, hope it arrives</td></tr>
-          </tbody>
-        </table>
-      </div>
-    </section>
-
-    <!-- ═══════════════════════════════════════════ -->
-    <!-- STATEFUL vs STATELESS CONTROLS              -->
-    <!-- ═══════════════════════════════════════════ -->
-    <section id="controls">
-      <div class="section-head">
-        <div>
-          <h2>Stateful vs Stateless Controls</h2>
-          <p class="sub">This distinction matters because not all filters understand connection context. Some only inspect individual packets; others track session state. Understanding this helps you choose the right security control for the right situation.</p>
-        </div>
-      </div>
-      <div class="grid-2">
-        <div class="card">
-          <span class="kicker">Stateless</span>
-          <h3 style="margin-top:0;">Evaluates packets independently</h3>
-          <p class="muted">A stateless control looks at individual packets without remembering earlier traffic. Each packet is evaluated against rules in isolation — the device has no knowledge of whether the packet belongs to an existing session or is part of a new connection.</p>
-          <ul class="checklist" style="margin-top:10px;">
-            <li>Simple packet-filter ACLs on routers</li>
-            <li>Faster processing — no state table overhead</li>
-            <li>Cannot distinguish between legitimate replies and unsolicited inbound traffic</li>
-          </ul>
-        </div>
-        <div class="card">
-          <span class="kicker">Stateful</span>
-          <h3 style="margin-top:0;">Tracks connection context</h3>
-          <p class="muted">A stateful control maintains a connection state table that tracks active sessions. It understands whether a packet is part of an established session, a new connection attempt, or an invalid/unexpected packet — enabling smarter, context-aware decisions.</p>
-          <ul class="checklist" style="margin-top:10px;">
-            <li>Stateful firewalls, next-gen firewalls (NGFW)</li>
-            <li>Allows return traffic automatically for established sessions</li>
-            <li>Detects and blocks out-of-state or malformed packets</li>
-          </ul>
-        </div>
-      </div>
-      <div class="card note" style="margin-top:18px;">
-        <strong>How they connect:</strong> Connection-oriented protocols (TCP) work naturally with stateful controls because both track session state. Connectionless protocols (UDP) are harder for stateful devices to inspect — they typically use timeouts and heuristics to create pseudo-state entries for UDP flows.
-      </div>
-    </section>
 
     <!-- ═══════════════════════════════════════════ -->
     <!-- THREATS, ACTORS, ATTACKS, CONTROLS          -->
@@ -1573,11 +1599,32 @@
           <p class="muted">Mitigations are practical risk-reduction measures such as patching, segmentation, secure configuration, rate limiting, user awareness, backups, and incident playbooks.</p>
         </div>
         <div class="card" style="padding:14px;">
-          <img src="attack-lifecycle-lens.jpg" alt="Attack Lifecycle Lens — Actor → Vector → Vulnerability → Exploit/Attack → Business Impact → Control → Mitigation. A practical visual showing how attacks unfold from threat actor through to defensive response and recovery." style="width:100%; height:auto; border-radius:12px; display:block;" loading="lazy" />
+          <img src="attack-lifecycle-lens.jpg" alt="Attack Lifecycle Lens — Actor → Vector → Vulnerability → Exploit/Attack → Business Impact → Control → Mitigation. A practical visual showing how attacks unfold from threat actor through to defensive response and recovery." width="1320" height="742" style="width:100%; height:auto; aspect-ratio:16/9; border-radius:6px; display:block;" loading="lazy" />
           <div style="padding:10px 8px 0;">
-            <span class="kicker">Example chain</span>
+            <span class="kicker">Example attack chains</span>
             <h3 style="margin-top:0;">Threat → Vulnerability → Actor → Vector → Attack → Control → Mitigation</h3>
-            <p class="muted">Example: The threat is a data breach. The vulnerability is an unpatched web framework. The threat actor is an external attacker. The attack vector is a vulnerable web form. The attack is SQL injection. The control is a WAF plus input validation. The mitigation includes patching, monitoring, and incident response.</p>
+            <table class="compare-table" style="font-size:0.82rem;">
+              <thead>
+                <tr><th>Scenario</th><th>Layer</th><th>Chain</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td data-label="Scenario"><strong>Web Application Breach</strong></td>
+                  <td data-label="Layer">L7</td>
+                  <td data-label="Chain">Threat: data breach → Vuln: unpatched web framework → Actor: external attacker → Vector: vulnerable web form → Attack: SQL injection → Control: WAF + input validation → Mitigation: patching, monitoring, incident response</td>
+                </tr>
+                <tr>
+                  <td data-label="Scenario"><strong>Network-Layer Route Hijack</strong></td>
+                  <td data-label="Layer">L3</td>
+                  <td data-label="Chain">Threat: traffic interception → Vuln: BGP without authentication → Actor: nation-state APT → Vector: peering session → Attack: BGP prefix hijack → Control: RPKI, route filtering, BGP authentication → Mitigation: route monitoring, peering policy enforcement, incident playbook</td>
+                </tr>
+                <tr>
+                  <td data-label="Scenario"><strong>Insider Credential Abuse</strong></td>
+                  <td data-label="Layer">L5/L7</td>
+                  <td data-label="Chain">Threat: privilege escalation → Vuln: no PAM, shared admin credentials → Actor: malicious insider → Vector: legitimate VPN access → Attack: lateral movement using stolen service account → Control: MFA, PAM, session monitoring → Mitigation: least privilege, credential rotation, SIEM alerting</td>
+                </tr>
+              </tbody>
+            </table>
           </div>
         </div>
       </div>
@@ -1609,55 +1656,63 @@
           <h3>Protect the hardware and facilities</h3>
           <p class="muted">The first line of defence is preventing unauthorised physical access to servers, networking equipment, cabling, and data centres. If an attacker can touch your hardware, all other controls can be bypassed.</p>
           <div class="pill-row"><span class="pill control">Locks &amp; Biometrics</span><span class="pill control">CCTV</span><span class="pill control">Guards</span><span class="pill control">Visitor Logs</span><span class="pill control">Cable Shielding</span></div>
+          <p class="muted" style="margin:8px 0 0; font-size:0.78rem;"><strong>800-53:</strong> PE (Physical and Environmental Protection)</p>
         </div>
         <div class="mini">
           <span class="kicker">Layer 2 — Perimeter Security</span>
           <h3>Control what enters and exits the network boundary</h3>
           <p class="muted">The network perimeter is where internal meets external. Firewalls, DMZs, and border routers filter inbound and outbound traffic. While perimeters alone are insufficient (hence Zero Trust), they remain essential for reducing attack surface.</p>
           <div class="pill-row"><span class="pill control">Firewall</span><span class="pill control">DMZ</span><span class="pill control">IDS/IPS</span><span class="pill control">DDoS Mitigation</span><span class="pill control">Border ACLs</span></div>
+          <p class="muted" style="margin:8px 0 0; font-size:0.78rem;"><strong>800-53:</strong> SC (System and Communications Protection), SI (System and Information Integrity)</p>
         </div>
         <div class="mini">
           <span class="kicker">Layer 3 — Network Security</span>
           <h3>Segment and monitor internal traffic</h3>
           <p class="muted">Once inside the perimeter, internal segmentation limits lateral movement. VLANs, micro-segmentation, internal firewalls, and network monitoring ensure that a compromised host cannot freely reach all other systems.</p>
           <div class="pill-row"><span class="pill control">VLAN Segmentation</span><span class="pill control">Micro-segmentation</span><span class="pill control">NAC (802.1X)</span><span class="pill control">Network Monitoring</span></div>
+          <p class="muted" style="margin:8px 0 0; font-size:0.78rem;"><strong>800-53:</strong> SC (System and Communications Protection), CA (Assessment and Authorisation)</p>
         </div>
         <div class="mini">
           <span class="kicker">Layer 4 — Endpoint Security</span>
           <h3>Protect every device that connects to the network</h3>
           <p class="muted">Laptops, servers, phones, and IoT devices are all attack targets. Endpoint protection includes antivirus, EDR, host firewalls, patch management, full-disk encryption, and device hardening.</p>
           <div class="pill-row"><span class="pill control">EDR/XDR</span><span class="pill control">Patch Management</span><span class="pill control">Host Firewall</span><span class="pill control">Disk Encryption</span><span class="pill control">Hardening</span></div>
+          <p class="muted" style="margin:8px 0 0; font-size:0.78rem;"><strong>800-53:</strong> CM (Configuration Management), SI (System and Information Integrity), MP (Media Protection)</p>
         </div>
         <div class="mini">
           <span class="kicker">Layer 5 — Application Security</span>
           <h3>Secure the software that processes data</h3>
           <p class="muted">Applications are the primary interface users and attackers interact with. Secure coding practices, input validation, WAFs, API gateways, and regular vulnerability scanning protect this layer.</p>
           <div class="pill-row"><span class="pill control">WAF</span><span class="pill control">Input Validation</span><span class="pill control">Secure SDLC</span><span class="pill control">API Gateway</span><span class="pill control">Vulnerability Scanning</span></div>
+          <p class="muted" style="margin:8px 0 0; font-size:0.78rem;"><strong>800-53:</strong> SA (System and Services Acquisition), RA (Risk Assessment)</p>
         </div>
         <div class="mini">
           <span class="kicker">Layer 6 — Data Security</span>
           <h3>Protect the ultimate target — the data itself</h3>
           <p class="muted">If all other layers fail, data-level controls are the last barrier. Encryption at rest and in transit, access controls, DLP, data classification, and backup strategies protect information even if systems are compromised.</p>
           <div class="pill-row"><span class="pill control">Encryption (rest + transit)</span><span class="pill control">DLP</span><span class="pill control">Data Classification</span><span class="pill control">Backup &amp; Recovery</span></div>
+          <p class="muted" style="margin:8px 0 0; font-size:0.78rem;"><strong>800-53:</strong> SC (System and Communications Protection), CP (Contingency Planning), MP (Media Protection)</p>
         </div>
         <div class="mini">
           <span class="kicker">Layer 7 — Identity &amp; Access</span>
           <h3>Verify who is accessing what, and enforce least privilege</h3>
           <p class="muted">Identity is the modern security perimeter. Strong authentication, multi-factor authentication, role-based access control, privileged access management, and continuous verification are critical at every layer.</p>
           <div class="pill-row"><span class="pill control">MFA</span><span class="pill control">RBAC</span><span class="pill control">PAM</span><span class="pill control">SSO</span><span class="pill control">Conditional Access</span></div>
+          <p class="muted" style="margin:8px 0 0; font-size:0.78rem;"><strong>800-53:</strong> AC (Access Control), IA (Identification and Authentication)</p>
         </div>
         <div class="mini">
           <span class="kicker">Cross-cutting — Detection &amp; Response</span>
           <h3>Monitor everything, respond fast, recover faster</h3>
           <p class="muted">Detection and response spans all layers. SIEM aggregates logs, SOC teams investigate alerts, incident response playbooks guide action, and disaster recovery ensures business continuity after a breach.</p>
           <div class="pill-row"><span class="pill control">SIEM</span><span class="pill control">SOC</span><span class="pill control">Incident Response</span><span class="pill control">Threat Intelligence</span><span class="pill control">DR/BCP</span></div>
+          <p class="muted" style="margin:8px 0 0; font-size:0.78rem;"><strong>800-53:</strong> AU (Audit and Accountability), IR (Incident Response), CP (Contingency Planning)</p>
         </div>
       </div>
 
       <!-- OSI-mapped defence -->
       <div class="grid-2" style="margin-top:18px;">
         <div class="card" style="padding:14px;">
-          <img src="defence-in-depth-osi.jpg" alt="Defence in Depth Architecture mapped across OSI Layers — L7 Application (WAF, Input Validation, App Hardening), L6 Presentation (TLS Enforcement, Strong Ciphers), L5 Session (Session Tokens, Timeouts, Re-auth), L4 Transport (Stateful Firewall, Rate Limiting), L3 Network (ACLs, Routing Policy, uRPF, IPsec), L2 Data Link (802.1X, DAI, Port Security, VLANs), L1 Physical (Locks, CCTV, Cable Shielding, Guards). Each layer enforces independent security controls. Key principle: Security is not a single control — it is a coordinated system of controls across layers." style="width:100%; height:auto; border-radius:12px; display:block;" loading="lazy" />
+          <img src="defence-in-depth-osi.jpg" alt="Defence in Depth Architecture mapped across OSI Layers — L7 Application (WAF, Input Validation, App Hardening), L6 Presentation (TLS Enforcement, Strong Ciphers), L5 Session (Session Tokens, Timeouts, Re-auth), L4 Transport (Stateful Firewall, Rate Limiting), L3 Network (ACLs, Routing Policy, uRPF, IPsec), L2 Data Link (802.1X, DAI, Port Security, VLANs), L1 Physical (Locks, CCTV, Cable Shielding, Guards). Each layer enforces independent security controls. Key principle: Security is not a single control — it is a coordinated system of controls across layers." width="1320" height="742" style="width:100%; height:auto; aspect-ratio:16/9; border-radius:6px; display:block;" loading="lazy" />
           <p class="muted" style="margin:12px 4px 0; font-size:0.86rem;">Each OSI layer has specific controls designed to protect it. This mapping helps engineers select the right control for the right layer during architecture and incident response.</p>
         </div>
         <div class="card">
@@ -1719,208 +1774,87 @@
       <div class="section-head">
         <div>
           <h2>Industry Frameworks and Standards</h2>
-          <p class="sub">The concepts in this guide — threats, controls, layers, and defence strategies — map directly to industry frameworks that organisations use for governance, compliance, and operations.</p>
+          <p class="sub">Control IDs referenced throughout this guide mapped to their source frameworks.</p>
         </div>
       </div>
       <div class="grid-2">
         <div class="mini">
-          <h3>NIST Cybersecurity Framework (CSF)</h3>
-          <p class="muted">A voluntary framework organised around six functions: Govern, Identify, Protect, Detect, Respond, and Recover. Widely adopted across industries as the baseline for cybersecurity programmes.</p>
-          <div class="pill-row"><span class="pill framework">NIST CSF 2.0</span></div>
+          <h3>NIST Cybersecurity Framework 2.0</h3>
+          <p class="muted">Six functions: Govern, Identify, Protect, Detect, Respond, Recover. Controls referenced in this guide:</p>
+          <table class="compare-table" style="font-size:0.82rem; margin-top:10px;">
+            <thead><tr><th>Category</th><th>Mapping in This Guide</th></tr></thead>
+            <tbody>
+              <tr><td data-label="Category"><strong>PR.AA</strong> — Identity &amp; Access</td><td data-label="Mapping">L5 Session controls, L2 802.1X / NAC</td></tr>
+              <tr><td data-label="Category"><strong>PR.DS</strong> — Data Security</td><td data-label="Mapping">L6 TLS enforcement, encryption at rest/transit</td></tr>
+              <tr><td data-label="Category"><strong>PR.PS</strong> — Platform Security</td><td data-label="Mapping">L7 WAF/app hardening, L4 stateful firewall, L3 ACLs, L2 port security, L1 physical controls</td></tr>
+              <tr><td data-label="Category"><strong>PR.IR</strong> — Resilience</td><td data-label="Mapping">L3 routing policy/uRPF, L1 cable shielding, backup/DR</td></tr>
+              <tr><td data-label="Category"><strong>DE.CM</strong> — Continuous Monitoring</td><td data-label="Mapping">L7 app monitoring, L4 IDS/IPS, SIEM, SOC</td></tr>
+            </tbody>
+          </table>
         </div>
         <div class="mini">
-          <h3>ISO/IEC 27001 &amp; 27002</h3>
-          <p class="muted">International standards for information security management systems (ISMS). ISO 27001 defines requirements; ISO 27002 provides implementation guidance with 93 controls across organisational, people, physical, and technological domains.</p>
-          <div class="pill-row"><span class="pill framework">ISO 27001</span><span class="pill framework">ISO 27002</span></div>
+          <h3>ISO/IEC 27001:2022 — Annex A</h3>
+          <p class="muted">93 controls across organisational, people, physical, and technological domains. Controls referenced:</p>
+          <table class="compare-table" style="font-size:0.82rem; margin-top:10px;">
+            <thead><tr><th>Control</th><th>Mapping in This Guide</th></tr></thead>
+            <tbody>
+              <tr><td data-label="Control"><strong>A.7.1–7.3</strong> — Physical</td><td data-label="Mapping">L1 locks, guards, CCTV, cable shielding</td></tr>
+              <tr><td data-label="Control"><strong>A.8.5</strong> — Secure Authentication</td><td data-label="Mapping">L5 session tokens, re-auth, MFA</td></tr>
+              <tr><td data-label="Control"><strong>A.8.20</strong> — Network Security</td><td data-label="Mapping">L4 firewalls, L3 ACLs, L2 VLAN segmentation</td></tr>
+              <tr><td data-label="Control"><strong>A.8.21</strong> — Web Filtering</td><td data-label="Mapping">L4 rate limiting, proxy, content filtering</td></tr>
+              <tr><td data-label="Control"><strong>A.8.22</strong> — Network Segmentation</td><td data-label="Mapping">L3 routing policy, L2 VLANs, micro-segmentation</td></tr>
+              <tr><td data-label="Control"><strong>A.8.24</strong> — Cryptography</td><td data-label="Mapping">L6 TLS/cipher policy, IPsec</td></tr>
+              <tr><td data-label="Control"><strong>A.8.25–8.26</strong> — Secure SDLC</td><td data-label="Mapping">L7 input validation, WAF, secure coding</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="mini">
+          <h3>CIS Controls v8</h3>
+          <p class="muted">18 prioritised safeguards mapped to implementation groups (IG1–IG3). Controls referenced:</p>
+          <table class="compare-table" style="font-size:0.82rem; margin-top:10px;">
+            <thead><tr><th>Control</th><th>Mapping in This Guide</th></tr></thead>
+            <tbody>
+              <tr><td data-label="Control"><strong>1</strong> — Enterprise Asset Inventory</td><td data-label="Mapping">L1 physical inventory, L2 MAC/NAC</td></tr>
+              <tr><td data-label="Control"><strong>3</strong> — Data Protection</td><td data-label="Mapping">L6 encryption, DLP, data classification</td></tr>
+              <tr><td data-label="Control"><strong>4</strong> — Secure Configuration</td><td data-label="Mapping">L4 firewall policy, endpoint hardening</td></tr>
+              <tr><td data-label="Control"><strong>6</strong> — Access Management</td><td data-label="Mapping">L5 session management, MFA, RBAC, PAM</td></tr>
+              <tr><td data-label="Control"><strong>9</strong> — Email &amp; Browser Protection</td><td data-label="Mapping">L7 email security, phishing controls</td></tr>
+              <tr><td data-label="Control"><strong>12</strong> — Network Infrastructure</td><td data-label="Mapping">L3 routing, L2 segmentation, 802.1X</td></tr>
+              <tr><td data-label="Control"><strong>13</strong> — Network Monitoring</td><td data-label="Mapping">L4 IDS/IPS, L3 flow analysis, SIEM</td></tr>
+              <tr><td data-label="Control"><strong>16</strong> — App Software Security</td><td data-label="Mapping">L7 WAF, input validation, secure SDLC</td></tr>
+            </tbody>
+          </table>
         </div>
         <div class="mini">
           <h3>MITRE ATT&amp;CK</h3>
-          <p class="muted">A knowledge base of adversary tactics, techniques, and procedures (TTPs) based on real-world observations. Used for threat modelling, red teaming, detection engineering, and SOC maturity assessments.</p>
-          <div class="pill-row"><span class="pill framework">ATT&amp;CK Matrix</span></div>
-        </div>
-        <div class="mini">
-          <h3>CIS Controls</h3>
-          <p class="muted">A prioritised set of 18 security controls (v8) that map safeguards to implementation groups (IG1, IG2, IG3) based on organisational maturity. Highly actionable and often used alongside NIST CSF.</p>
-          <div class="pill-row"><span class="pill framework">CIS v8</span></div>
+          <p class="muted">Adversary TTPs based on real-world observations. Techniques mapped in this guide:</p>
+          <table class="compare-table" style="font-size:0.82rem; margin-top:10px;">
+            <thead><tr><th>Tactic</th><th>Techniques in This Guide</th></tr></thead>
+            <tbody>
+              <tr><td data-label="Tactic"><strong>Initial Access</strong></td><td data-label="Techniques">Phishing (T1566), exploit public-facing app (T1190)</td></tr>
+              <tr><td data-label="Tactic"><strong>Execution</strong></td><td data-label="Techniques">SQL injection, XSS, malware delivery</td></tr>
+              <tr><td data-label="Tactic"><strong>Lateral Movement</strong></td><td data-label="Techniques">ARP poisoning (T1557), exploitation of remote services</td></tr>
+              <tr><td data-label="Tactic"><strong>Discovery</strong></td><td data-label="Techniques">Port scanning, ICMP sweep, route manipulation</td></tr>
+              <tr><td data-label="Tactic"><strong>Exfiltration</strong></td><td data-label="Techniques">DNS tunnelling, data over encrypted channel</td></tr>
+            </tbody>
+          </table>
         </div>
       </div>
     </section>
 
     <!-- ═══════════════════════════════════════════ -->
-    <!-- NETWORKING TERMS GLOSSARY                   -->
+    <!-- GLOSSARY (external)                         -->
     <!-- ═══════════════════════════════════════════ -->
     <section id="glossary">
-      <div class="section-head">
+      <div class="card" style="padding:22px; display:flex; justify-content:space-between; align-items:center; gap:16px; flex-wrap:wrap;">
         <div>
-          <h2>Networking Terms Glossary</h2>
-          <p class="sub">A compact A–Z reference of essential networking and security terms used throughout this guide and commonly tested in exams, certifications, and interviews.</p>
+          <h2 style="font-size:1.3rem; margin:0;">Networking &amp; Security Glossary</h2>
+          <p class="muted" style="margin:6px 0 0;">105 A–Z terms in a searchable companion reference.</p>
         </div>
-      </div>
-
-      <div style="margin-bottom:14px;">
-        <input type="text" id="glossarySearch" placeholder="Search 105 terms… (e.g. TCP, firewall, VLAN)" style="width:100%; padding:14px 18px; border:1px solid var(--line); border-radius:12px; font-size:1rem; font-family:inherit; background:var(--surface); color:var(--ink); outline:none; box-shadow:var(--shadow);" />
-      </div>
-
-      <div class="card" style="padding:0; overflow:hidden;">
-        <table class="compare-table" style="font-size:0.9rem;">
-          <thead>
-            <tr><th style="width:22%;">Term</th><th>Definition</th></tr>
-          </thead>
-          <tbody>
-            <tr><td data-label="Term"><strong>ACL</strong></td><td data-label="Definition">Access Control List — a set of rules on a router or firewall that permits or denies traffic based on IP addresses, ports, or protocols.</td></tr>
-            <tr><td data-label="Term"><strong>ARP</strong></td><td data-label="Definition">Address Resolution Protocol — resolves IPv4 addresses to MAC addresses on a local network segment. Operates at Layer 2.</td></tr>
-            <tr><td data-label="Term"><strong>Anycast</strong></td><td data-label="Definition">A routing method where a single IP address is assigned to multiple servers. Traffic is routed to the nearest or best-performing instance. Used by DNS root servers and CDNs.</td></tr>
-            <tr><td data-label="Term"><strong>API Gateway</strong></td><td data-label="Definition">A Layer 7 device or service that acts as a single entry point for API traffic. Handles authentication, rate limiting, routing, and request transformation between clients and backend services.</td></tr>
-            <tr><td data-label="Term"><strong>Bandwidth</strong></td><td data-label="Definition">The maximum data transfer capacity of a network link, typically measured in Mbps or Gbps.</td></tr>
-            <tr><td data-label="Term"><strong>BGP</strong></td><td data-label="Definition">Border Gateway Protocol — the primary routing protocol used to exchange routes between autonomous systems on the internet.</td></tr>
-            <tr><td data-label="Term"><strong>Broadcast</strong></td><td data-label="Definition">A transmission sent to all devices on a network segment. IPv4 uses broadcast addresses; IPv6 replaces broadcast with multicast.</td></tr>
-            <tr><td data-label="Term"><strong>Bridge</strong></td><td data-label="Definition">A Layer 2 device that connects two network segments and forwards frames based on MAC addresses. Largely replaced by switches in modern networks.</td></tr>
-            <tr><td data-label="Term"><strong>CIDR</strong></td><td data-label="Definition">Classless Inter-Domain Routing — a notation system (e.g. /24) that specifies how many bits form the network portion of an IP address.</td></tr>
-            <tr><td data-label="Term"><strong>CSRF</strong></td><td data-label="Definition">Cross-Site Request Forgery — an attack that tricks a user's browser into performing unwanted actions on a trusted site where they are authenticated. Mitigated with anti-CSRF tokens and SameSite cookies.</td></tr>
-            <tr><td data-label="Term"><strong>DAI</strong></td><td data-label="Definition">Dynamic ARP Inspection — a switch security feature that validates ARP packets against a trusted binding table to prevent ARP poisoning.</td></tr>
-            <tr><td data-label="Term"><strong>Decapsulation</strong></td><td data-label="Definition">The reverse of encapsulation — the receiving host reads and strips headers layer by layer (L1→L2→L3→L4→L7) until the original application data is delivered.</td></tr>
-            <tr><td data-label="Term"><strong>Default Gateway</strong></td><td data-label="Definition">The router address a device uses to reach destinations outside its local subnet.</td></tr>
-            <tr><td data-label="Term"><strong>DHCP</strong></td><td data-label="Definition">Dynamic Host Configuration Protocol — automatically assigns IP addresses, subnet masks, gateways, and DNS servers to devices joining a network.</td></tr>
-            <tr><td data-label="Term"><strong>DDoS</strong></td><td data-label="Definition">Distributed Denial of Service — an attack that floods a target with traffic from many sources simultaneously, overwhelming its capacity and making it unavailable to legitimate users. Mitigated with rate limiting, CDNs, and scrubbing services.</td></tr>
-            <tr><td data-label="Term"><strong>DLP</strong></td><td data-label="Definition">Data Loss Prevention — tools and policies that detect and prevent unauthorised transmission of sensitive data outside the organisation.</td></tr>
-            <tr><td data-label="Term"><strong>DMZ</strong></td><td data-label="Definition">Demilitarised Zone — a network segment between the internal network and the internet that hosts public-facing services while isolating them from internal systems.</td></tr>
-            <tr><td data-label="Term"><strong>DNS</strong></td><td data-label="Definition">Domain Name System — translates human-readable domain names (example.com) into IP addresses. Uses UDP port 53 by default.</td></tr>
-            <tr><td data-label="Term"><strong>DNS Server</strong></td><td data-label="Definition">A server that resolves domain names to IP addresses. Types include recursive resolvers (that query on behalf of clients), authoritative servers (that hold zone records), and forwarding servers.</td></tr>
-            <tr><td data-label="Term"><strong>EDR / XDR</strong></td><td data-label="Definition">Endpoint Detection and Response / Extended Detection and Response — tools that monitor endpoints (or multiple telemetry sources) for threats and enable rapid investigation and containment.</td></tr>
-            <tr><td data-label="Term"><strong>EIGRP</strong></td><td data-label="Definition">Enhanced Interior Gateway Routing Protocol — a Cisco-developed advanced distance-vector routing protocol widely used in enterprise networks. Supports fast convergence and unequal-cost load balancing.</td></tr>
-            <tr><td data-label="Term"><strong>802.1X</strong></td><td data-label="Definition">An IEEE standard for port-based Network Access Control (NAC). Authenticates devices before granting network access using RADIUS and EAP. Used on both wired and wireless networks.</td></tr>
-            <tr><td data-label="Term"><strong>Encapsulation</strong></td><td data-label="Definition">The process where each protocol layer wraps the previous layer's output with its own header (and at Layer 2, a trailer) before transmission.</td></tr>
-            <tr><td data-label="Term"><strong>Ethernet</strong></td><td data-label="Definition">The dominant wired LAN technology that defines frame format, MAC addressing, and media access at Layer 2.</td></tr>
-            <tr><td data-label="Term"><strong>FCS</strong></td><td data-label="Definition">Frame Check Sequence — a 4-byte error-detection trailer appended to Ethernet frames at Layer 2 to verify data integrity.</td></tr>
-            <tr><td data-label="Term"><strong>Firewall</strong></td><td data-label="Definition">A network security device that filters traffic based on rules. May operate at Layer 3 (packet filter), Layer 4 (stateful), or Layer 7 (application/WAF).</td></tr>
-            <tr><td data-label="Term"><strong>Frame</strong></td><td data-label="Definition">The Protocol Data Unit (PDU) at Layer 2. Contains a header (source/destination MAC), payload, and FCS trailer.</td></tr>
-            <tr><td data-label="Term"><strong>FTP / SFTP</strong></td><td data-label="Definition">File Transfer Protocol (plaintext, port 21) / Secure File Transfer Protocol (encrypted over SSH). Used for transferring files between systems.</td></tr>
-            <tr><td data-label="Term"><strong>Full Duplex</strong></td><td data-label="Definition">A communication mode where data can be sent and received simultaneously on the same link, doubling effective throughput.</td></tr>
-            <tr><td data-label="Term"><strong>Gateway</strong></td><td data-label="Definition">A device or system that connects two different networks or protocol domains. The default gateway is typically a router.</td></tr>
-            <tr><td data-label="Term"><strong>Half Duplex</strong></td><td data-label="Definition">A communication mode where data can be sent or received, but not simultaneously. Devices must take turns. Used in older Ethernet hubs and some wireless links.</td></tr>
-            <tr><td data-label="Term"><strong>Hub</strong></td><td data-label="Definition">A Layer 1 device that broadcasts incoming signals to all connected ports. No intelligence — does not read MAC addresses. Replaced by switches in modern networks.</td></tr>
-            <tr><td data-label="Term"><strong>HTTP / HTTPS</strong></td><td data-label="Definition">HyperText Transfer Protocol / HTTPS (HTTP over TLS). The foundation of web communication. HTTPS adds encryption, integrity, and authentication.</td></tr>
-            <tr><td data-label="Term"><strong>ICMP</strong></td><td data-label="Definition">Internet Control Message Protocol — used for diagnostics (ping, traceroute) and error reporting at Layer 3. Can be abused for scanning and floods.</td></tr>
-            <tr><td data-label="Term"><strong>IDS / IPS</strong></td><td data-label="Definition">Intrusion Detection System / Intrusion Prevention System — IDS monitors and alerts on suspicious traffic; IPS actively blocks it.</td></tr>
-            <tr><td data-label="Term"><strong>IMAP</strong></td><td data-label="Definition">Internet Message Access Protocol — retrieves email from a server while keeping messages synchronised across multiple devices. Ports 143 (plain) / 993 (TLS).</td></tr>
-            <tr><td data-label="Term"><strong>IP Address</strong></td><td data-label="Definition">A logical address assigned to a device at Layer 3. IPv4 uses 32-bit addresses; IPv6 uses 128-bit addresses.</td></tr>
-            <tr><td data-label="Term"><strong>IPsec</strong></td><td data-label="Definition">Internet Protocol Security — a suite of protocols that encrypts and authenticates IP traffic. Commonly used in VPNs for site-to-site and remote access tunnels.</td></tr>
-            <tr><td data-label="Term"><strong>Jitter</strong></td><td data-label="Definition">Variation in packet arrival times. High jitter degrades real-time applications like VoIP and video conferencing.</td></tr>
-            <tr><td data-label="Term"><strong>Latency</strong></td><td data-label="Definition">The time delay between sending a packet and receiving a response. Measured in milliseconds (ms). Lower latency = faster response.</td></tr>
-            <tr><td data-label="Term"><strong>Load Balancer</strong></td><td data-label="Definition">A device or service that distributes incoming traffic across multiple servers to improve performance, availability, and fault tolerance. May operate at Layer 4 or Layer 7.</td></tr>
-            <tr><td data-label="Term"><strong>LDAP / LDAPS</strong></td><td data-label="Definition">Lightweight Directory Access Protocol — queries directory services such as Active Directory. LDAPS adds TLS encryption. Ports 389 / 636.</td></tr>
-            <tr><td data-label="Term"><strong>MAC Address</strong></td><td data-label="Definition">Media Access Control address — a 48-bit hardware identifier burned into a network interface, used for local network communication at Layer 2.</td></tr>
-            <tr><td data-label="Term"><strong>Malware</strong></td><td data-label="Definition">Malicious software designed to damage, disrupt, or gain unauthorised access to systems. Includes viruses, worms, trojans, ransomware, spyware, and rootkits.</td></tr>
-            <tr><td data-label="Term"><strong>MFA</strong></td><td data-label="Definition">Multi-Factor Authentication — requires two or more verification factors (something you know, have, or are) to grant access.</td></tr>
-            <tr><td data-label="Term"><strong>MTU</strong></td><td data-label="Definition">Maximum Transmission Unit — the largest packet size (in bytes) that a network link can carry without fragmentation. Ethernet default is 1500 bytes.</td></tr>
-            <tr><td data-label="Term"><strong>Multicast</strong></td><td data-label="Definition">A transmission sent to a specific group of interested receivers rather than all devices (broadcast) or a single device (unicast). Used for streaming, routing updates, and IPv6 neighbour discovery.</td></tr>
-            <tr><td data-label="Term"><strong>NAC</strong></td><td data-label="Definition">Network Access Control — enforces security policies on devices before granting them access to the network. Often uses 802.1X.</td></tr>
-            <tr><td data-label="Term"><strong>NAT</strong></td><td data-label="Definition">Network Address Translation — maps private IP addresses to public IP addresses, allowing multiple internal devices to share a single public IP.</td></tr>
-            <tr><td data-label="Term"><strong>NetBIOS</strong></td><td data-label="Definition">Network Basic Input/Output System — a legacy Layer 5 API and naming service used for file sharing and name resolution in Windows networks. Largely replaced by DNS and SMB over TCP/IP.</td></tr>
-            <tr><td data-label="Term"><strong>NIC</strong></td><td data-label="Definition">Network Interface Card — the hardware component that connects a device to a network. Operates at Layer 1 (physical signals) and Layer 2 (MAC addressing).</td></tr>
-            <tr><td data-label="Term"><strong>NTP</strong></td><td data-label="Definition">Network Time Protocol — synchronises clocks across networked devices. Critical for log correlation and security forensics. UDP port 123.</td></tr>
-            <tr><td data-label="Term"><strong>OSI Model</strong></td><td data-label="Definition">Open Systems Interconnection — a 7-layer conceptual framework for understanding network communication: Physical, Data Link, Network, Transport, Session, Presentation, Application.</td></tr>
-            <tr><td data-label="Term"><strong>OSPF</strong></td><td data-label="Definition">Open Shortest Path First — a link-state interior routing protocol that calculates the shortest path using Dijkstra's algorithm.</td></tr>
-            <tr><td data-label="Term"><strong>Packet</strong></td><td data-label="Definition">The Protocol Data Unit (PDU) at Layer 3. Contains an IP header (source/destination IP, TTL) and the transport segment as payload.</td></tr>
-            <tr><td data-label="Term"><strong>PAM</strong></td><td data-label="Definition">Privileged Access Management — tools and policies that control, monitor, and audit elevated access to critical systems and accounts.</td></tr>
-            <tr><td data-label="Term"><strong>PDU</strong></td><td data-label="Definition">Protocol Data Unit — the name for a unit of data at each OSI layer: Data (L7–5), Segment (L4), Packet (L3), Frame (L2), Bits (L1).</td></tr>
-            <tr><td data-label="Term"><strong>Patch Panel</strong></td><td data-label="Definition">A Layer 1 passive device that provides a central termination point for network cables, allowing organised cross-connections between structured cabling and active equipment.</td></tr>
-            <tr><td data-label="Term"><strong>Phishing</strong></td><td data-label="Definition">A social engineering attack that uses deceptive emails, messages, or websites to trick users into revealing credentials, clicking malicious links, or downloading malware. Variants include spear phishing (targeted) and whaling (executive-targeted).</td></tr>
-            <tr><td data-label="Term"><strong>Ping</strong></td><td data-label="Definition">A diagnostic tool that sends ICMP Echo Request packets to a target and measures round-trip time. Used to verify reachability and measure latency.</td></tr>
-            <tr><td data-label="Term"><strong>POP3</strong></td><td data-label="Definition">Post Office Protocol version 3 — retrieves email by downloading messages from the server to a single device. Ports 110 (plain) / 995 (TLS). Less flexible than IMAP.</td></tr>
-            <tr><td data-label="Term"><strong>Port</strong></td><td data-label="Definition">A logical number (0–65535) at Layer 4 that identifies a specific service or application on a host. Well-known ports: 0–1023.</td></tr>
-            <tr><td data-label="Term"><strong>PPTP</strong></td><td data-label="Definition">Point-to-Point Tunneling Protocol — a legacy VPN protocol operating at Layer 5. Considered insecure due to weak encryption; replaced by L2TP/IPsec, IKEv2, and WireGuard.</td></tr>
-            <tr><td data-label="Term"><strong>Proxy Server</strong></td><td data-label="Definition">An intermediary that handles requests between clients and servers, providing caching, filtering, access control, and anonymity.</td></tr>
-            <tr><td data-label="Term"><strong>QoS</strong></td><td data-label="Definition">Quality of Service — techniques that prioritise certain traffic types (e.g. voice, video) over others to ensure performance.</td></tr>
-            <tr><td data-label="Term"><strong>RBAC</strong></td><td data-label="Definition">Role-Based Access Control — grants permissions based on a user's organisational role rather than individual identity.</td></tr>
-            <tr><td data-label="Term"><strong>RDP</strong></td><td data-label="Definition">Remote Desktop Protocol — provides graphical remote access to Windows systems. TCP port 3389. A frequent attack target if exposed.</td></tr>
-            <tr><td data-label="Term"><strong>Repeater</strong></td><td data-label="Definition">A Layer 1 device that regenerates and amplifies electrical or optical signals to extend the range of a network segment. No intelligence — does not inspect data.</td></tr>
-            <tr><td data-label="Term"><strong>Router</strong></td><td data-label="Definition">A Layer 3 device that forwards packets between different networks based on IP addressing and routing tables.</td></tr>
-            <tr><td data-label="Term"><strong>RPC</strong></td><td data-label="Definition">Remote Procedure Call — a Layer 5 protocol that allows a program to execute a procedure on a remote system as if it were local. Used in distributed systems and Windows environments.</td></tr>
-            <tr><td data-label="Term"><strong>Segment</strong></td><td data-label="Definition">The PDU at Layer 4. Contains transport header (source/destination port, sequence number, flags) and application data as payload.</td></tr>
-            <tr><td data-label="Term"><strong>SCTP</strong></td><td data-label="Definition">Stream Control Transmission Protocol — a connection-oriented Layer 4 protocol that supports multi-streaming and multi-homing. Combines TCP's reliability with message-boundary preservation. Used in telecom signalling (SS7 over IP) and some WebRTC implementations.</td></tr>
-            <tr><td data-label="Term"><strong>SIEM</strong></td><td data-label="Definition">Security Information and Event Management — a platform that aggregates logs from multiple sources, correlates events, and generates security alerts.</td></tr>
-            <tr><td data-label="Term"><strong>SIP</strong></td><td data-label="Definition">Session Initiation Protocol — sets up, manages, and tears down voice and video communication sessions. Ports 5060 (plain) / 5061 (TLS). Foundation of modern VoIP systems.</td></tr>
-            <tr><td data-label="Term"><strong>SMTP</strong></td><td data-label="Definition">Simple Mail Transfer Protocol — sends email between mail servers. Port 25 (relay) / 587 (submission with TLS).</td></tr>
-            <tr><td data-label="Term"><strong>SNMP</strong></td><td data-label="Definition">Simple Network Management Protocol — monitors and manages network devices. SNMPv3 adds encryption and authentication. Ports 161/162.</td></tr>
-            <tr><td data-label="Term"><strong>Socket</strong></td><td data-label="Definition">A communication endpoint defined by the combination of an IP address + port number + protocol (e.g. TCP 192.168.1.1:443).</td></tr>
-            <tr><td data-label="Term"><strong>SSH</strong></td><td data-label="Definition">Secure Shell — provides encrypted remote command-line access and secure file transfer (SFTP/SCP). TCP port 22.</td></tr>
-            <tr><td data-label="Term"><strong>SSL / TLS</strong></td><td data-label="Definition">Secure Sockets Layer / Transport Layer Security — cryptographic protocols that provide encryption, integrity, and authentication for network communication. TLS has replaced SSL.</td></tr>
-            <tr><td data-label="Term"><strong>STP</strong></td><td data-label="Definition">Spanning Tree Protocol — a Layer 2 protocol that prevents broadcast loops in switched networks by blocking redundant paths and maintaining a loop-free topology. Variants include RSTP and MSTP.</td></tr>
-            <tr><td data-label="Term"><strong>SQL Injection</strong></td><td data-label="Definition">An application-layer attack where malicious SQL statements are inserted into input fields to manipulate or extract data from a backend database. Mitigated with parameterised queries, input validation, and WAFs.</td></tr>
-            <tr><td data-label="Term"><strong>Subnet</strong></td><td data-label="Definition">A logical subdivision of an IP network. Defined by a subnet mask that separates the network portion from the host portion of an address.</td></tr>
-            <tr><td data-label="Term"><strong>Switch</strong></td><td data-label="Definition">A Layer 2 device that forwards frames within a local network using MAC address tables. Layer 3 switches can also route.</td></tr>
-            <tr><td data-label="Term"><strong>Syslog</strong></td><td data-label="Definition">A standard protocol for sending log messages to a centralised server for storage, analysis, and alerting. UDP port 514.</td></tr>
-            <tr><td data-label="Term"><strong>TCP</strong></td><td data-label="Definition">Transmission Control Protocol — connection-oriented, reliable Layer 4 protocol. Uses sequence numbers, acknowledgements, and retransmission. 20-byte minimum header.</td></tr>
-            <tr><td data-label="Term"><strong>TCP/IP Model</strong></td><td data-label="Definition">A 4-layer practical protocol model (Application, Transport, Internet, Network Access) that powers modern networks and the internet.</td></tr>
-            <tr><td data-label="Term"><strong>Telnet</strong></td><td data-label="Definition">A legacy protocol for unencrypted remote command-line access. TCP port 23. Insecure — transmits credentials in plaintext. Replaced by SSH in all modern environments.</td></tr>
-            <tr><td data-label="Term"><strong>TFTP</strong></td><td data-label="Definition">Trivial File Transfer Protocol — a simplified file transfer protocol with no authentication or encryption. UDP port 69. Used for PXE boot, firmware updates, and network device configuration.</td></tr>
-            <tr><td data-label="Term"><strong>Threat</strong></td><td data-label="Definition">Any potential cause of harm to a system or network — may be human, technical, environmental, or operational.</td></tr>
-            <tr><td data-label="Term"><strong>Throughput</strong></td><td data-label="Definition">The actual amount of data successfully transferred over a network in a given time period. Unlike bandwidth (theoretical maximum), throughput reflects real-world performance after accounting for latency, packet loss, protocol overhead, and congestion.</td></tr>
-            <tr><td data-label="Term"><strong>TLS Handshake</strong></td><td data-label="Definition">The process where client and server negotiate cipher suites, exchange certificates, and derive session keys before encrypted communication begins.</td></tr>
-            <tr><td data-label="Term"><strong>Traceroute</strong></td><td data-label="Definition">A diagnostic tool that traces the path packets take across a network by sending probes with incrementing TTL values. Shows each intermediate hop and round-trip time. Uses ICMP or UDP.</td></tr>
-            <tr><td data-label="Term"><strong>Transceiver</strong></td><td data-label="Definition">A Layer 1 device that both transmits and receives data signals. In networking, typically refers to SFP/SFP+ modules that convert electrical signals to optical (fibre) signals and vice versa.</td></tr>
-            <tr><td data-label="Term"><strong>TTL</strong></td><td data-label="Definition">Time to Live — a field in the IP header that limits a packet's lifespan by decrementing at each router hop. Prevents infinite routing loops.</td></tr>
-            <tr><td data-label="Term"><strong>UDP</strong></td><td data-label="Definition">User Datagram Protocol — connectionless, lightweight Layer 4 protocol. No reliability guarantees. 8-byte fixed header. Used for DNS, VoIP, streaming.</td></tr>
-            <tr><td data-label="Term"><strong>uRPF</strong></td><td data-label="Definition">Unicast Reverse Path Forwarding — a router feature that drops packets with spoofed source IP addresses by verifying the return path.</td></tr>
-            <tr><td data-label="Term"><strong>Unicast</strong></td><td data-label="Definition">A one-to-one transmission from a single source to a single destination. The most common communication type on IP networks. Contrast with broadcast (one-to-all), multicast (one-to-group), and anycast (one-to-nearest).</td></tr>
-            <tr><td data-label="Term"><strong>VLAN</strong></td><td data-label="Definition">Virtual LAN — logically segments a physical switch into separate broadcast domains, improving security and performance.</td></tr>
-            <tr><td data-label="Term"><strong>VPN</strong></td><td data-label="Definition">Virtual Private Network — creates an encrypted tunnel over an untrusted network (usually the internet) for secure remote access or site-to-site connectivity.</td></tr>
-            <tr><td data-label="Term"><strong>Vulnerability</strong></td><td data-label="Definition">A weakness in software, configuration, or process that can be exploited by a threat actor. Threat + Vulnerability = Risk.</td></tr>
-            <tr><td data-label="Term"><strong>WAF</strong></td><td data-label="Definition">Web Application Firewall — inspects HTTP/HTTPS traffic at Layer 7 to block application-layer attacks such as SQL injection, XSS, and CSRF.</td></tr>
-            <tr><td data-label="Term"><strong>Wi-Fi</strong></td><td data-label="Definition">Wireless networking technology based on IEEE 802.11 standards. Provides LAN connectivity without physical cables. Security depends on WPA3/WPA2 encryption, authentication (802.1X or PSK), and network segmentation.</td></tr>
-            <tr><td data-label="Term"><strong>Wireless AP</strong></td><td data-label="Definition">Wireless Access Point — a Layer 2 device that bridges wireless clients to a wired network. Broadcasts SSIDs, handles authentication, and manages radio channels and power levels.</td></tr>
-            <tr><td data-label="Term"><strong>XSS</strong></td><td data-label="Definition">Cross-Site Scripting — an application-layer attack where malicious scripts are injected into web pages viewed by other users. Types include stored XSS, reflected XSS, and DOM-based XSS. Mitigated with output encoding, CSP headers, and input validation.</td></tr>
-            <tr><td data-label="Term"><strong>Zero Trust</strong></td><td data-label="Definition">A security architecture that assumes no implicit trust. Every access request is verified based on identity, device, context, and policy — regardless of network location (NIST SP 800-207).</td></tr>
-          </tbody>
-        </table>
+        <a href="network_glossary.html" style="display:inline-flex; align-items:center; gap:8px; padding:12px 20px; background:var(--brand); color:#fff; border-radius:10px; text-decoration:none; font-weight:700; font-size:0.92rem; white-space:nowrap;">Open Glossary →</a>
       </div>
     </section>
 
-    <!-- ═══════════════════════════════════════════ -->
-    <!-- QUICK REFERENCE                             -->
-    <!-- ═══════════════════════════════════════════ -->
-    <section id="quickref">
-      <div class="section-head">
-        <div>
-          <h2>Quick Reference Guide</h2>
-          <p class="sub">A compact revision block for students, engineers, analysts, and security practitioners.</p>
-        </div>
-      </div>
-
-      <div class="ref-box">
-        <h3>Ready-reference summary</h3>
-        <div class="grid-2">
-          <div>
-            <p><strong>OSI model:</strong> 7-layer conceptual framework for understanding communication and security boundaries.</p>
-            <p><strong>TCP/IP model:</strong> 4-layer practical model used by modern networks and the internet.</p>
-            <p><strong>Encapsulation:</strong> Data → Segment (+ port header) → Packet (+ IP header) → Frame (+ MAC header + FCS trailer) → Bits.</p>
-            <p><strong>TCP:</strong> reliable, connection-oriented, slower but safer for ordered delivery.</p>
-            <p><strong>UDP:</strong> lightweight, connectionless, faster but without reliability guarantees.</p>
-            <p><strong>IPv4:</strong> 32-bit addresses, still dominant; <strong>IPv6:</strong> 128-bit, built-in IPsec, growing adoption.</p>
-            <p><strong>Subnetting:</strong> divides networks into smaller segments; CIDR notation (/24 = 254 hosts). Private ranges: 10.0.0.0/8, 172.16.0.0/12, 192.168.0.0/16.</p>
-          </div>
-          <div>
-            <p><strong>Threat:</strong> possible cause of harm. <strong>Vulnerability:</strong> exploitable weakness. Together: Risk.</p>
-            <p><strong>Threat actor:</strong> entity that can exploit weakness.</p>
-            <p><strong>Attack vector:</strong> path used to reach the target.</p>
-            <p><strong>Control / Mitigation:</strong> safeguard or action used to reduce risk and impact.</p>
-            <p><strong>Defence in Depth:</strong> layer multiple controls (physical, network, endpoint, application, data, identity, detection) so one failure ≠ total compromise.</p>
-            <p><strong>Connection-oriented (TCP):</strong> session setup → reliable delivery → teardown. <strong>Connectionless (UDP):</strong> fire and forget, best effort.</p>
-            <p><strong>Stateful controls</strong> track session context; <strong>stateless controls</strong> evaluate each packet independently.</p>
-            <p><strong>Zero Trust:</strong> never trust, always verify — regardless of network location.</p>
-            <p><strong>Best study method:</strong> think by layer, map by protocol, verify by device, secure by control.</p>
-          </div>
-        </div>
-        <div class="pill-row" style="margin-top:16px;">
-          <span class="pill">Think by Layer</span>
-          <span class="pill">Map Protocols to Function</span>
-          <span class="pill">Map Threats to Vectors</span>
-          <span class="pill">Map Controls to Layers</span>
-          <span class="pill">Design for Defence in Depth</span>
-        </div>
-      </div>
-    </section>
   </main>
 
   <!-- Fix #29: Enhanced footer -->
@@ -1992,19 +1926,6 @@
       window.scrollTo({ top: 0, behavior: 'smooth' });
     });
 
-    // ── Glossary Search Filter ──
-    const glossaryInput = document.getElementById('glossarySearch');
-    if (glossaryInput) {
-      const glossaryTable = glossaryInput.closest('section').querySelector('tbody');
-      const glossaryRows = glossaryTable ? Array.from(glossaryTable.querySelectorAll('tr')) : [];
-      glossaryInput.addEventListener('input', () => {
-        const q = glossaryInput.value.toLowerCase().trim();
-        glossaryRows.forEach(row => {
-          const text = row.textContent.toLowerCase();
-          row.style.display = q === '' || text.includes(q) ? '' : 'none';
-        });
-      });
-    }
   </script>
 
   <!-- Fix #26: GoatCounter analytics -->
