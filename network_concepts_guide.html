@@ -915,8 +915,9 @@
         <a class="nav-link" href="#ipcompare">IPv4 vs IPv6</a>
         <a class="nav-link" href="#subnetting">Subnetting</a>
         <a class="nav-link" href="#devices">Devices</a>
-        <a class="nav-link" href="#security">Threats &amp; Controls</a>
+        <a class="nav-link" href="#connectiontypes">Connection Types</a>
         <a class="nav-link" href="#controls">Stateful vs Stateless</a>
+        <a class="nav-link" href="#security">Threats &amp; Controls</a>
         <a class="nav-link" href="#engineering">Layered Defence</a>
         <a class="nav-link" href="#troubleshooting">Troubleshooting</a>
         <a class="nav-link" href="#frameworks">Frameworks</a>
@@ -1674,6 +1675,104 @@
     </section>
 
     <!-- ═══════════════════════════════════════════ -->
+    <!-- CONNECTION-ORIENTED vs CONNECTIONLESS        -->
+    <!-- ═══════════════════════════════════════════ -->
+    <section id="connectiontypes">
+      <div class="section-head">
+        <div>
+          <h2>Connection-Oriented vs Connectionless Communication</h2>
+          <p class="sub">This is one of the most fundamental distinctions in networking. It determines whether a session is established before data flows or whether packets are sent independently with no prior arrangement.</p>
+        </div>
+      </div>
+
+      <div class="grid-2">
+        <div class="card">
+          <span class="kicker">Connection-Oriented</span>
+          <h3 style="margin-top:0;">Establishes a session before data transfer</h3>
+          <p class="muted">A connection-oriented protocol sets up a dedicated logical path between sender and receiver before any data is exchanged. It guarantees delivery, ordering, and error correction. If packets are lost, they are retransmitted. The connection is explicitly closed when communication ends.</p>
+          <ul class="checklist" style="margin-top:10px;">
+            <li><strong>Setup:</strong> Three-way handshake (SYN → SYN-ACK → ACK)</li>
+            <li><strong>Reliability:</strong> Acknowledgements, sequence numbers, retransmission</li>
+            <li><strong>Ordering:</strong> Packets reassembled in correct order at receiver</li>
+            <li><strong>Flow control:</strong> Sliding window prevents receiver overload</li>
+            <li><strong>Teardown:</strong> Graceful close (FIN → ACK)</li>
+          </ul>
+          <div class="pill-row"><span class="pill">TCP</span><span class="pill">SCTP</span></div>
+          <p class="muted" style="margin-top:10px;"><strong>Use cases:</strong> Web browsing, email, file transfer, database queries, API calls — anywhere correctness matters more than speed.</p>
+        </div>
+        <div class="card">
+          <span class="kicker">Connectionless</span>
+          <h3 style="margin-top:0;">Sends packets independently — no session setup</h3>
+          <p class="muted">A connectionless protocol sends each packet (datagram) independently with no prior handshake, no acknowledgement, and no guarantee of delivery or ordering. Each packet is routed individually and may arrive out of order, be duplicated, or be lost entirely.</p>
+          <ul class="checklist" style="margin-top:10px;">
+            <li><strong>Setup:</strong> None — data is sent immediately</li>
+            <li><strong>Reliability:</strong> No acknowledgements, no retransmission</li>
+            <li><strong>Ordering:</strong> Not guaranteed — application must handle if needed</li>
+            <li><strong>Overhead:</strong> Minimal — 8-byte UDP header vs 20-byte TCP header</li>
+            <li><strong>Speed:</strong> Faster due to no handshake or control overhead</li>
+          </ul>
+          <div class="pill-row"><span class="pill">UDP</span><span class="pill">ICMP</span><span class="pill">IP (Layer 3)</span></div>
+          <p class="muted" style="margin-top:10px;"><strong>Use cases:</strong> DNS queries, VoIP, video streaming, gaming, NTP, SNMP — anywhere speed and low latency matter more than guaranteed delivery.</p>
+        </div>
+      </div>
+
+      <div class="card" style="margin-top:18px;">
+        <span class="kicker">Key comparison</span>
+        <h3 style="margin-top:0;">When to use which</h3>
+        <table class="compare-table" style="font-size:0.9rem;">
+          <thead>
+            <tr><th>Feature</th><th>Connection-Oriented (TCP)</th><th>Connectionless (UDP)</th></tr>
+          </thead>
+          <tbody>
+            <tr><td data-label="Feature">Session setup</td><td data-label="Connection-Oriented">Yes — three-way handshake</td><td data-label="Connectionless">No — fire and forget</td></tr>
+            <tr><td data-label="Feature">Reliability</td><td data-label="Connection-Oriented">Guaranteed delivery</td><td data-label="Connectionless">Best effort only</td></tr>
+            <tr><td data-label="Feature">Ordering</td><td data-label="Connection-Oriented">Maintained</td><td data-label="Connectionless">Not guaranteed</td></tr>
+            <tr><td data-label="Feature">Speed</td><td data-label="Connection-Oriented">Slower (overhead)</td><td data-label="Connectionless">Faster (minimal overhead)</td></tr>
+            <tr><td data-label="Feature">Error recovery</td><td data-label="Connection-Oriented">Retransmission</td><td data-label="Connectionless">Application must handle</td></tr>
+            <tr><td data-label="Feature">Analogy</td><td data-label="Connection-Oriented">Phone call — dial, talk, hang up</td><td data-label="Connectionless">Postcard — write, send, hope it arrives</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- ═══════════════════════════════════════════ -->
+    <!-- STATEFUL vs STATELESS CONTROLS              -->
+    <!-- ═══════════════════════════════════════════ -->
+    <section id="controls">
+      <div class="section-head">
+        <div>
+          <h2>Stateful vs Stateless Controls</h2>
+          <p class="sub">This distinction matters because not all filters understand connection context. Some only inspect individual packets; others track session state. Understanding this helps you choose the right security control for the right situation.</p>
+        </div>
+      </div>
+      <div class="grid-2">
+        <div class="card">
+          <span class="kicker">Stateless</span>
+          <h3 style="margin-top:0;">Evaluates packets independently</h3>
+          <p class="muted">A stateless control looks at individual packets without remembering earlier traffic. Each packet is evaluated against rules in isolation — the device has no knowledge of whether the packet belongs to an existing session or is part of a new connection.</p>
+          <ul class="checklist" style="margin-top:10px;">
+            <li>Simple packet-filter ACLs on routers</li>
+            <li>Faster processing — no state table overhead</li>
+            <li>Cannot distinguish between legitimate replies and unsolicited inbound traffic</li>
+          </ul>
+        </div>
+        <div class="card">
+          <span class="kicker">Stateful</span>
+          <h3 style="margin-top:0;">Tracks connection context</h3>
+          <p class="muted">A stateful control maintains a connection state table that tracks active sessions. It understands whether a packet is part of an established session, a new connection attempt, or an invalid/unexpected packet — enabling smarter, context-aware decisions.</p>
+          <ul class="checklist" style="margin-top:10px;">
+            <li>Stateful firewalls, next-gen firewalls (NGFW)</li>
+            <li>Allows return traffic automatically for established sessions</li>
+            <li>Detects and blocks out-of-state or malformed packets</li>
+          </ul>
+        </div>
+      </div>
+      <div class="card note" style="margin-top:18px;">
+        <strong>How they connect:</strong> Connection-oriented protocols (TCP) work naturally with stateful controls because both track session state. Connectionless protocols (UDP) are harder for stateful devices to inspect — they typically use timeouts and heuristics to create pseudo-state entries for UDP flows.
+      </div>
+    </section>
+
+    <!-- ═══════════════════════════════════════════ -->
     <!-- THREATS, ACTORS, ATTACKS, CONTROLS          -->
     <!-- ═══════════════════════════════════════════ -->
     <section id="security">
@@ -1746,26 +1845,6 @@
     <!-- ═══════════════════════════════════════════ -->
     <!-- STATEFUL vs STATELESS                       -->
     <!-- ═══════════════════════════════════════════ -->
-    <section id="controls">
-      <div class="section-head">
-        <div>
-          <h2>Stateful vs Stateless Controls</h2>
-          <p class="sub">This distinction matters because not all filters understand connection context. Some only inspect individual packets; others track session state.</p>
-        </div>
-      </div>
-      <div class="grid-2">
-        <div class="card">
-          <span class="kicker">Stateless</span>
-          <h3 style="margin-top:0;">Evaluates packets independently</h3>
-          <p class="muted">A stateless control looks at individual packets without remembering earlier traffic. Example: simple packet-filter ACLs.</p>
-        </div>
-        <div class="card">
-          <span class="kicker">Stateful</span>
-          <h3 style="margin-top:0;">Tracks connection context</h3>
-          <p class="muted">A stateful control understands established sessions and can make smarter decisions. Example: stateful firewalls and advanced inspection devices.</p>
-        </div>
-      </div>
-    </section>
 
     <!-- ═══════════════════════════════════════════ -->
     <!-- DEFENCE IN DEPTH & ZERO TRUST               -->
