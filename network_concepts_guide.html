@@ -892,8 +892,8 @@
         <!-- Fix #8: Updated protocol count -->
         <div class="stats">
           <div class="stat"><strong>7</strong><span>OSI Layers</span></div>
-          <div class="stat"><strong>4</strong><span>TCP/IP Layers</span></div>
           <div class="stat"><strong>30+</strong><span>Protocols Mapped</span></div>
+          <div class="stat"><strong>90+</strong><span>Glossary Terms</span></div>
           <div class="stat"><strong>Defence</strong><span>Threats → Controls → Mitigations</span></div>
         </div>
       </div>
@@ -912,12 +912,15 @@
         <a class="nav-link" href="#protocols">Core Protocols</a>
         <a class="nav-link" href="#ports">Ports</a>
         <a class="nav-link" href="#transportcompare">TCP vs UDP</a>
+        <a class="nav-link" href="#ipcompare">IPv4 vs IPv6</a>
+        <a class="nav-link" href="#subnetting">Subnetting</a>
         <a class="nav-link" href="#devices">Devices</a>
         <a class="nav-link" href="#security">Threats &amp; Controls</a>
         <a class="nav-link" href="#controls">Stateful vs Stateless</a>
         <a class="nav-link" href="#engineering">Layered Defence</a>
         <a class="nav-link" href="#troubleshooting">Troubleshooting</a>
         <a class="nav-link" href="#frameworks">Frameworks</a>
+        <a class="nav-link" href="#glossary">Glossary</a>
         <a class="nav-link" href="#quickref">Quick Reference</a>
       </nav>
     </div>
@@ -1380,164 +1383,16 @@
       <div class="section-head">
         <div>
           <h2>End-to-End Packet Flow</h2>
-          <p class="sub">A beginner truly understands networking only when they can explain how a request moves from a user device, through the network, to a remote server and back. This section traces that full journey step by step — including what happens at intermediate hops.</p>
+          <p class="sub">From URL to Response — the full network journey. This visual traces how a request moves from a user's browser, through network transit (routers and switches), to a remote server and back — layer by layer, hop by hop.</p>
         </div>
       </div>
 
-      <div class="card note" style="margin-bottom:18px;">
-        <strong>Key insight:</strong> At the endpoints (client and server), all layers are involved. But at intermediate hops (routers and switches), only the lower layers are processed. A switch operates at Layer 2. A router strips the L2 frame, makes an L3 routing decision, and builds a <em>new</em> L2 frame for the next hop. The original L3 packet and L4 segment stay intact across hops.
+      <div class="card" style="padding:12px; overflow:hidden;">
+        <img src="end-to-end-packet-flow.jpg" alt="End-to-End Packet Flow Infographic — From URL to Response. Shows the 12-step journey: Client side (Steps 1-6: URL entry, DNS resolution, TCP handshake, TLS handshake, HTTP encapsulation, ARP resolution), Network Transit (router L3 forwarding, switch L2 forwarding, L3 packet and L4 segment remain intact across hops), Server side (Steps 7-12: frame received at NIC, decapsulation, application processing, response encapsulation, reverse routing, client decapsulation and browser rendering). Includes 5-layer view, key takeaways, legend, and protocol-port reference." style="width:100%; height:auto; border-radius:12px; display:block;" loading="lazy" />
       </div>
 
-      <!-- Journey visual — Client → Network → Server -->
-      <div class="flow-journey">
-
-        <!-- CLIENT SIDE -->
-        <div class="flow-side">
-          <div class="flow-side-label client-label">Client (Sender)</div>
-          <div class="flow-step">
-            <div class="flow-step-num">1</div>
-            <div class="flow-step-content">
-              <strong>User enters a URL</strong>
-              <p class="muted">Browser initiates application layer activity — e.g. requesting https://example.com</p>
-              <span class="flow-step-layer fl-app">L7 Application</span>
-            </div>
-          </div>
-          <div class="flow-step">
-            <div class="flow-step-num">2</div>
-            <div class="flow-step-content">
-              <strong>DNS resolves domain → IP</strong>
-              <p class="muted">System queries DNS (usually over UDP port 53) to convert example.com into an IP address</p>
-              <span class="flow-step-layer fl-app">L7 Application</span>
-            </div>
-          </div>
-          <div class="flow-step">
-            <div class="flow-step-num">3</div>
-            <div class="flow-step-content">
-              <strong>TCP three-way handshake</strong>
-              <p class="muted">Client sends SYN → server replies SYN-ACK → client confirms ACK. A reliable session is now established.</p>
-              <span class="flow-step-layer fl-trans">L4 Transport</span>
-            </div>
-          </div>
-          <div class="flow-step">
-            <div class="flow-step-num">4</div>
-            <div class="flow-step-content">
-              <strong>TLS handshake (HTTPS)</strong>
-              <p class="muted">Client and server exchange certificates, negotiate cipher suite, and derive session keys for encryption</p>
-              <span class="flow-step-layer fl-app">L6/L7 Presentation</span>
-            </div>
-          </div>
-          <div class="flow-step">
-            <div class="flow-step-num">5</div>
-            <div class="flow-step-content">
-              <strong>HTTP request encapsulated</strong>
-              <p class="muted">Application data wrapped through the stack: Data → Segment → Packet → Frame → Bits (see Encapsulation above)</p>
-              <span class="flow-step-layer fl-app">L7</span> <span class="flow-step-layer fl-trans">L4</span> <span class="flow-step-layer fl-net">L3</span> <span class="flow-step-layer fl-link">L2</span> <span class="flow-step-layer fl-phys">L1</span>
-            </div>
-          </div>
-          <div class="flow-step" style="border-radius:0 0 12px 12px;">
-            <div class="flow-step-num">6</div>
-            <div class="flow-step-content">
-              <strong>ARP resolves next-hop MAC</strong>
-              <p class="muted">Before the frame can leave, ARP maps the gateway's IP to its MAC address for local delivery</p>
-              <span class="flow-step-layer fl-link">L2 Data Link</span>
-            </div>
-          </div>
-        </div>
-
-        <!-- NETWORK TRANSIT -->
-        <div class="flow-network">
-          <div class="flow-net-arrow">→</div>
-          <div class="flow-network-cloud">
-            <div class="fn-title">Network Transit</div>
-            <div class="fn-detail" style="margin-bottom:10px;">Intermediate hops between client and server</div>
-            <div class="fn-detail"><strong style="color:var(--brand);">At each router:</strong></div>
-            <div class="fn-detail">1. Strip L2 frame header</div>
-            <div class="fn-detail">2. Read L3 IP destination</div>
-            <div class="fn-detail">3. Routing table lookup</div>
-            <div class="fn-detail">4. Build new L2 frame for next hop</div>
-            <div class="fn-detail">5. Forward on outbound interface</div>
-            <div class="fn-detail" style="margin-top:10px;"><strong style="color:var(--brand);">At each switch:</strong></div>
-            <div class="fn-detail">Read destination MAC → forward via MAC table at L2 only</div>
-            <div class="fn-detail" style="margin-top:10px; font-style:italic; color:var(--brand-2);">L3 packet and L4 segment remain intact across all hops</div>
-          </div>
-          <div class="flow-net-arrow">→</div>
-        </div>
-
-        <!-- SERVER SIDE -->
-        <div class="flow-side">
-          <div class="flow-side-label server-label">Server (Receiver)</div>
-          <div class="flow-step">
-            <div class="flow-step-num">7</div>
-            <div class="flow-step-content">
-              <strong>Frame received at NIC</strong>
-              <p class="muted">Physical signals converted to a frame. NIC checks destination MAC and FCS integrity.</p>
-              <span class="flow-step-layer fl-phys">L1</span> <span class="flow-step-layer fl-link">L2</span>
-            </div>
-          </div>
-          <div class="flow-step">
-            <div class="flow-step-num">8</div>
-            <div class="flow-step-content">
-              <strong>Decapsulation: frame → packet → segment</strong>
-              <p class="muted">L2 header stripped → IP destination verified at L3 → L3 header stripped → port identified at L4</p>
-              <span class="flow-step-layer fl-net">L3</span> <span class="flow-step-layer fl-trans">L4</span>
-            </div>
-          </div>
-          <div class="flow-step">
-            <div class="flow-step-num">9</div>
-            <div class="flow-step-content">
-              <strong>Application processes request</strong>
-              <p class="muted">Web server receives the HTTP request, processes it, and prepares a response (HTML, API JSON, etc.)</p>
-              <span class="flow-step-layer fl-app">L7 Application</span>
-            </div>
-          </div>
-          <div class="flow-step">
-            <div class="flow-step-num">10</div>
-            <div class="flow-step-content">
-              <strong>Response encapsulated</strong>
-              <p class="muted">Server's response is encapsulated through the same stack: Data → Segment → Packet → Frame → Bits</p>
-              <span class="flow-step-layer fl-app">L7</span> <span class="flow-step-layer fl-trans">L4</span> <span class="flow-step-layer fl-net">L3</span> <span class="flow-step-layer fl-link">L2</span> <span class="flow-step-layer fl-phys">L1</span>
-            </div>
-          </div>
-          <div class="flow-step">
-            <div class="flow-step-num">11</div>
-            <div class="flow-step-content">
-              <strong>Response traverses network back</strong>
-              <p class="muted">Same hop-by-hop routing in reverse — routers strip/rebuild L2 at each hop, L3 packet stays intact</p>
-              <span class="flow-step-layer fl-net">L3 Routing</span> <span class="flow-step-layer fl-link">L2 Hop</span>
-            </div>
-          </div>
-          <div class="flow-step" style="border-radius:0 0 12px 12px;">
-            <div class="flow-step-num">12</div>
-            <div class="flow-step-content">
-              <strong>Client decapsulates → browser renders</strong>
-              <p class="muted">Client NIC receives frame, decapsulates through all layers. Browser receives HTTP response and renders the page.</p>
-              <span class="flow-step-layer fl-phys">L1</span> <span class="flow-step-layer fl-link">L2</span> <span class="flow-step-layer fl-net">L3</span> <span class="flow-step-layer fl-trans">L4</span> <span class="flow-step-layer fl-app">L7</span>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- Layer mapping summary -->
-      <div class="card" style="margin-top:18px;">
-        <span class="kicker">Summary — Layer involvement at each stage</span>
-        <h3 style="margin-top:0;">Who does what and where</h3>
-        <div class="grid-3" style="margin-top:14px;">
-          <div class="mini">
-            <h3>At endpoints (client/server)</h3>
-            <p class="muted">All 7 OSI layers are involved. Data is fully encapsulated on the sending side and fully decapsulated on the receiving side.</p>
-            <div class="pill-row"><span class="pill">L7</span><span class="pill">L6</span><span class="pill">L5</span><span class="pill">L4</span><span class="pill">L3</span><span class="pill">L2</span><span class="pill">L1</span></div>
-          </div>
-          <div class="mini">
-            <h3>At routers (intermediate hops)</h3>
-            <p class="muted">Only L1, L2, and L3 are processed. The router strips the incoming L2 frame, reads the L3 IP destination, performs a routing lookup, and builds a new L2 frame for the next hop.</p>
-            <div class="pill-row"><span class="pill">L1</span><span class="pill">L2</span><span class="pill">L3</span></div>
-          </div>
-          <div class="mini">
-            <h3>At switches (same network)</h3>
-            <p class="muted">Only L1 and L2 are processed. The switch reads the destination MAC address and forwards the frame via its MAC address table. L3 and above are untouched.</p>
-            <div class="pill-row"><span class="pill">L1</span><span class="pill">L2</span></div>
-          </div>
-        </div>
+      <div class="card note" style="margin-top:18px;">
+        <strong>Key insight:</strong> At the endpoints (client and server), all 7 OSI layers are involved. At routers, only L1–L3 are processed — the router strips the L2 frame, reads the L3 IP destination, and builds a new L2 frame for the next hop. At switches, only L1–L2 are processed. The original L3 packet and L4 segment remain intact across all intermediate hops.
       </div>
     </section>
 
@@ -2091,6 +1946,119 @@
     </section>
 
     <!-- ═══════════════════════════════════════════ -->
+    <!-- NETWORKING TERMS GLOSSARY                   -->
+    <!-- ═══════════════════════════════════════════ -->
+    <section id="glossary">
+      <div class="section-head">
+        <div>
+          <h2>Networking Terms Glossary</h2>
+          <p class="sub">A compact A–Z reference of essential networking and security terms used throughout this guide and commonly tested in exams, certifications, and interviews.</p>
+        </div>
+      </div>
+
+      <div class="card" style="padding:0; overflow:hidden;">
+        <table class="compare-table" style="font-size:0.9rem;">
+          <thead>
+            <tr><th style="width:22%;">Term</th><th>Definition</th></tr>
+          </thead>
+          <tbody>
+            <tr><td data-label="Term"><strong>ACL</strong></td><td data-label="Definition">Access Control List — a set of rules on a router or firewall that permits or denies traffic based on IP addresses, ports, or protocols.</td></tr>
+            <tr><td data-label="Term"><strong>ARP</strong></td><td data-label="Definition">Address Resolution Protocol — resolves IPv4 addresses to MAC addresses on a local network segment. Operates at Layer 2.</td></tr>
+            <tr><td data-label="Term"><strong>Anycast</strong></td><td data-label="Definition">A routing method where a single IP address is assigned to multiple servers. Traffic is routed to the nearest or best-performing instance. Used by DNS root servers and CDNs.</td></tr>
+            <tr><td data-label="Term"><strong>Bandwidth</strong></td><td data-label="Definition">The maximum data transfer capacity of a network link, typically measured in Mbps or Gbps.</td></tr>
+            <tr><td data-label="Term"><strong>BGP</strong></td><td data-label="Definition">Border Gateway Protocol — the primary routing protocol used to exchange routes between autonomous systems on the internet.</td></tr>
+            <tr><td data-label="Term"><strong>Broadcast</strong></td><td data-label="Definition">A transmission sent to all devices on a network segment. IPv4 uses broadcast addresses; IPv6 replaces broadcast with multicast.</td></tr>
+            <tr><td data-label="Term"><strong>Bridge</strong></td><td data-label="Definition">A Layer 2 device that connects two network segments and forwards frames based on MAC addresses. Largely replaced by switches in modern networks.</td></tr>
+            <tr><td data-label="Term"><strong>CIDR</strong></td><td data-label="Definition">Classless Inter-Domain Routing — a notation system (e.g. /24) that specifies how many bits form the network portion of an IP address.</td></tr>
+            <tr><td data-label="Term"><strong>DAI</strong></td><td data-label="Definition">Dynamic ARP Inspection — a switch security feature that validates ARP packets against a trusted binding table to prevent ARP poisoning.</td></tr>
+            <tr><td data-label="Term"><strong>Decapsulation</strong></td><td data-label="Definition">The reverse of encapsulation — the receiving host reads and strips headers layer by layer (L1→L2→L3→L4→L7) until the original application data is delivered.</td></tr>
+            <tr><td data-label="Term"><strong>Default Gateway</strong></td><td data-label="Definition">The router address a device uses to reach destinations outside its local subnet.</td></tr>
+            <tr><td data-label="Term"><strong>DHCP</strong></td><td data-label="Definition">Dynamic Host Configuration Protocol — automatically assigns IP addresses, subnet masks, gateways, and DNS servers to devices joining a network.</td></tr>
+            <tr><td data-label="Term"><strong>DLP</strong></td><td data-label="Definition">Data Loss Prevention — tools and policies that detect and prevent unauthorised transmission of sensitive data outside the organisation.</td></tr>
+            <tr><td data-label="Term"><strong>DMZ</strong></td><td data-label="Definition">Demilitarised Zone — a network segment between the internal network and the internet that hosts public-facing services while isolating them from internal systems.</td></tr>
+            <tr><td data-label="Term"><strong>DNS</strong></td><td data-label="Definition">Domain Name System — translates human-readable domain names (example.com) into IP addresses. Uses UDP port 53 by default.</td></tr>
+            <tr><td data-label="Term"><strong>EDR / XDR</strong></td><td data-label="Definition">Endpoint Detection and Response / Extended Detection and Response — tools that monitor endpoints (or multiple telemetry sources) for threats and enable rapid investigation and containment.</td></tr>
+            <tr><td data-label="Term"><strong>EIGRP</strong></td><td data-label="Definition">Enhanced Interior Gateway Routing Protocol — a Cisco-developed advanced distance-vector routing protocol widely used in enterprise networks. Supports fast convergence and unequal-cost load balancing.</td></tr>
+            <tr><td data-label="Term"><strong>802.1X</strong></td><td data-label="Definition">An IEEE standard for port-based Network Access Control (NAC). Authenticates devices before granting network access using RADIUS and EAP. Used on both wired and wireless networks.</td></tr>
+            <tr><td data-label="Term"><strong>Encapsulation</strong></td><td data-label="Definition">The process where each protocol layer wraps the previous layer's output with its own header (and at Layer 2, a trailer) before transmission.</td></tr>
+            <tr><td data-label="Term"><strong>Ethernet</strong></td><td data-label="Definition">The dominant wired LAN technology that defines frame format, MAC addressing, and media access at Layer 2.</td></tr>
+            <tr><td data-label="Term"><strong>FCS</strong></td><td data-label="Definition">Frame Check Sequence — a 4-byte error-detection trailer appended to Ethernet frames at Layer 2 to verify data integrity.</td></tr>
+            <tr><td data-label="Term"><strong>Firewall</strong></td><td data-label="Definition">A network security device that filters traffic based on rules. May operate at Layer 3 (packet filter), Layer 4 (stateful), or Layer 7 (application/WAF).</td></tr>
+            <tr><td data-label="Term"><strong>Frame</strong></td><td data-label="Definition">The Protocol Data Unit (PDU) at Layer 2. Contains a header (source/destination MAC), payload, and FCS trailer.</td></tr>
+            <tr><td data-label="Term"><strong>FTP / SFTP</strong></td><td data-label="Definition">File Transfer Protocol (plaintext, port 21) / Secure File Transfer Protocol (encrypted over SSH). Used for transferring files between systems.</td></tr>
+            <tr><td data-label="Term"><strong>Full Duplex</strong></td><td data-label="Definition">A communication mode where data can be sent and received simultaneously on the same link, doubling effective throughput.</td></tr>
+            <tr><td data-label="Term"><strong>Gateway</strong></td><td data-label="Definition">A device or system that connects two different networks or protocol domains. The default gateway is typically a router.</td></tr>
+            <tr><td data-label="Term"><strong>Half Duplex</strong></td><td data-label="Definition">A communication mode where data can be sent or received, but not simultaneously. Devices must take turns. Used in older Ethernet hubs and some wireless links.</td></tr>
+            <tr><td data-label="Term"><strong>Hub</strong></td><td data-label="Definition">A Layer 1 device that broadcasts incoming signals to all connected ports. No intelligence — does not read MAC addresses. Replaced by switches in modern networks.</td></tr>
+            <tr><td data-label="Term"><strong>HTTP / HTTPS</strong></td><td data-label="Definition">HyperText Transfer Protocol / HTTPS (HTTP over TLS). The foundation of web communication. HTTPS adds encryption, integrity, and authentication.</td></tr>
+            <tr><td data-label="Term"><strong>ICMP</strong></td><td data-label="Definition">Internet Control Message Protocol — used for diagnostics (ping, traceroute) and error reporting at Layer 3. Can be abused for scanning and floods.</td></tr>
+            <tr><td data-label="Term"><strong>IDS / IPS</strong></td><td data-label="Definition">Intrusion Detection System / Intrusion Prevention System — IDS monitors and alerts on suspicious traffic; IPS actively blocks it.</td></tr>
+            <tr><td data-label="Term"><strong>IMAP</strong></td><td data-label="Definition">Internet Message Access Protocol — retrieves email from a server while keeping messages synchronised across multiple devices. Ports 143 (plain) / 993 (TLS).</td></tr>
+            <tr><td data-label="Term"><strong>IP Address</strong></td><td data-label="Definition">A logical address assigned to a device at Layer 3. IPv4 uses 32-bit addresses; IPv6 uses 128-bit addresses.</td></tr>
+            <tr><td data-label="Term"><strong>IPsec</strong></td><td data-label="Definition">Internet Protocol Security — a suite of protocols that encrypts and authenticates IP traffic. Commonly used in VPNs for site-to-site and remote access tunnels.</td></tr>
+            <tr><td data-label="Term"><strong>Jitter</strong></td><td data-label="Definition">Variation in packet arrival times. High jitter degrades real-time applications like VoIP and video conferencing.</td></tr>
+            <tr><td data-label="Term"><strong>Latency</strong></td><td data-label="Definition">The time delay between sending a packet and receiving a response. Measured in milliseconds (ms). Lower latency = faster response.</td></tr>
+            <tr><td data-label="Term"><strong>Load Balancer</strong></td><td data-label="Definition">A device or service that distributes incoming traffic across multiple servers to improve performance, availability, and fault tolerance. May operate at Layer 4 or Layer 7.</td></tr>
+            <tr><td data-label="Term"><strong>LDAP / LDAPS</strong></td><td data-label="Definition">Lightweight Directory Access Protocol — queries directory services such as Active Directory. LDAPS adds TLS encryption. Ports 389 / 636.</td></tr>
+            <tr><td data-label="Term"><strong>MAC Address</strong></td><td data-label="Definition">Media Access Control address — a 48-bit hardware identifier burned into a network interface, used for local network communication at Layer 2.</td></tr>
+            <tr><td data-label="Term"><strong>MFA</strong></td><td data-label="Definition">Multi-Factor Authentication — requires two or more verification factors (something you know, have, or are) to grant access.</td></tr>
+            <tr><td data-label="Term"><strong>MTU</strong></td><td data-label="Definition">Maximum Transmission Unit — the largest packet size (in bytes) that a network link can carry without fragmentation. Ethernet default is 1500 bytes.</td></tr>
+            <tr><td data-label="Term"><strong>Multicast</strong></td><td data-label="Definition">A transmission sent to a specific group of interested receivers rather than all devices (broadcast) or a single device (unicast). Used for streaming, routing updates, and IPv6 neighbour discovery.</td></tr>
+            <tr><td data-label="Term"><strong>NAC</strong></td><td data-label="Definition">Network Access Control — enforces security policies on devices before granting them access to the network. Often uses 802.1X.</td></tr>
+            <tr><td data-label="Term"><strong>NAT</strong></td><td data-label="Definition">Network Address Translation — maps private IP addresses to public IP addresses, allowing multiple internal devices to share a single public IP.</td></tr>
+            <tr><td data-label="Term"><strong>NetBIOS</strong></td><td data-label="Definition">Network Basic Input/Output System — a legacy Layer 5 API and naming service used for file sharing and name resolution in Windows networks. Largely replaced by DNS and SMB over TCP/IP.</td></tr>
+            <tr><td data-label="Term"><strong>NIC</strong></td><td data-label="Definition">Network Interface Card — the hardware component that connects a device to a network. Operates at Layer 1 (physical signals) and Layer 2 (MAC addressing).</td></tr>
+            <tr><td data-label="Term"><strong>NTP</strong></td><td data-label="Definition">Network Time Protocol — synchronises clocks across networked devices. Critical for log correlation and security forensics. UDP port 123.</td></tr>
+            <tr><td data-label="Term"><strong>OSI Model</strong></td><td data-label="Definition">Open Systems Interconnection — a 7-layer conceptual framework for understanding network communication: Physical, Data Link, Network, Transport, Session, Presentation, Application.</td></tr>
+            <tr><td data-label="Term"><strong>OSPF</strong></td><td data-label="Definition">Open Shortest Path First — a link-state interior routing protocol that calculates the shortest path using Dijkstra's algorithm.</td></tr>
+            <tr><td data-label="Term"><strong>Packet</strong></td><td data-label="Definition">The Protocol Data Unit (PDU) at Layer 3. Contains an IP header (source/destination IP, TTL) and the transport segment as payload.</td></tr>
+            <tr><td data-label="Term"><strong>PAM</strong></td><td data-label="Definition">Privileged Access Management — tools and policies that control, monitor, and audit elevated access to critical systems and accounts.</td></tr>
+            <tr><td data-label="Term"><strong>PDU</strong></td><td data-label="Definition">Protocol Data Unit — the name for a unit of data at each OSI layer: Data (L7–5), Segment (L4), Packet (L3), Frame (L2), Bits (L1).</td></tr>
+            <tr><td data-label="Term"><strong>Ping</strong></td><td data-label="Definition">A diagnostic tool that sends ICMP Echo Request packets to a target and measures round-trip time. Used to verify reachability and measure latency.</td></tr>
+            <tr><td data-label="Term"><strong>POP3</strong></td><td data-label="Definition">Post Office Protocol version 3 — retrieves email by downloading messages from the server to a single device. Ports 110 (plain) / 995 (TLS). Less flexible than IMAP.</td></tr>
+            <tr><td data-label="Term"><strong>Port</strong></td><td data-label="Definition">A logical number (0–65535) at Layer 4 that identifies a specific service or application on a host. Well-known ports: 0–1023.</td></tr>
+            <tr><td data-label="Term"><strong>PPTP</strong></td><td data-label="Definition">Point-to-Point Tunneling Protocol — a legacy VPN protocol operating at Layer 5. Considered insecure due to weak encryption; replaced by L2TP/IPsec, IKEv2, and WireGuard.</td></tr>
+            <tr><td data-label="Term"><strong>Proxy Server</strong></td><td data-label="Definition">An intermediary that handles requests between clients and servers, providing caching, filtering, access control, and anonymity.</td></tr>
+            <tr><td data-label="Term"><strong>QoS</strong></td><td data-label="Definition">Quality of Service — techniques that prioritise certain traffic types (e.g. voice, video) over others to ensure performance.</td></tr>
+            <tr><td data-label="Term"><strong>RBAC</strong></td><td data-label="Definition">Role-Based Access Control — grants permissions based on a user's organisational role rather than individual identity.</td></tr>
+            <tr><td data-label="Term"><strong>RDP</strong></td><td data-label="Definition">Remote Desktop Protocol — provides graphical remote access to Windows systems. TCP port 3389. A frequent attack target if exposed.</td></tr>
+            <tr><td data-label="Term"><strong>Repeater</strong></td><td data-label="Definition">A Layer 1 device that regenerates and amplifies electrical or optical signals to extend the range of a network segment. No intelligence — does not inspect data.</td></tr>
+            <tr><td data-label="Term"><strong>Router</strong></td><td data-label="Definition">A Layer 3 device that forwards packets between different networks based on IP addressing and routing tables.</td></tr>
+            <tr><td data-label="Term"><strong>RPC</strong></td><td data-label="Definition">Remote Procedure Call — a Layer 5 protocol that allows a program to execute a procedure on a remote system as if it were local. Used in distributed systems and Windows environments.</td></tr>
+            <tr><td data-label="Term"><strong>Segment</strong></td><td data-label="Definition">The PDU at Layer 4. Contains transport header (source/destination port, sequence number, flags) and application data as payload.</td></tr>
+            <tr><td data-label="Term"><strong>SIEM</strong></td><td data-label="Definition">Security Information and Event Management — a platform that aggregates logs from multiple sources, correlates events, and generates security alerts.</td></tr>
+            <tr><td data-label="Term"><strong>SIP</strong></td><td data-label="Definition">Session Initiation Protocol — sets up, manages, and tears down voice and video communication sessions. Ports 5060 (plain) / 5061 (TLS). Foundation of modern VoIP systems.</td></tr>
+            <tr><td data-label="Term"><strong>SMTP</strong></td><td data-label="Definition">Simple Mail Transfer Protocol — sends email between mail servers. Port 25 (relay) / 587 (submission with TLS).</td></tr>
+            <tr><td data-label="Term"><strong>SNMP</strong></td><td data-label="Definition">Simple Network Management Protocol — monitors and manages network devices. SNMPv3 adds encryption and authentication. Ports 161/162.</td></tr>
+            <tr><td data-label="Term"><strong>Socket</strong></td><td data-label="Definition">A communication endpoint defined by the combination of an IP address + port number + protocol (e.g. TCP 192.168.1.1:443).</td></tr>
+            <tr><td data-label="Term"><strong>SSH</strong></td><td data-label="Definition">Secure Shell — provides encrypted remote command-line access and secure file transfer (SFTP/SCP). TCP port 22.</td></tr>
+            <tr><td data-label="Term"><strong>SSL / TLS</strong></td><td data-label="Definition">Secure Sockets Layer / Transport Layer Security — cryptographic protocols that provide encryption, integrity, and authentication for network communication. TLS has replaced SSL.</td></tr>
+            <tr><td data-label="Term"><strong>STP</strong></td><td data-label="Definition">Spanning Tree Protocol — a Layer 2 protocol that prevents broadcast loops in switched networks by blocking redundant paths and maintaining a loop-free topology. Variants include RSTP and MSTP.</td></tr>
+            <tr><td data-label="Term"><strong>Subnet</strong></td><td data-label="Definition">A logical subdivision of an IP network. Defined by a subnet mask that separates the network portion from the host portion of an address.</td></tr>
+            <tr><td data-label="Term"><strong>Switch</strong></td><td data-label="Definition">A Layer 2 device that forwards frames within a local network using MAC address tables. Layer 3 switches can also route.</td></tr>
+            <tr><td data-label="Term"><strong>Syslog</strong></td><td data-label="Definition">A standard protocol for sending log messages to a centralised server for storage, analysis, and alerting. UDP port 514.</td></tr>
+            <tr><td data-label="Term"><strong>TCP</strong></td><td data-label="Definition">Transmission Control Protocol — connection-oriented, reliable Layer 4 protocol. Uses sequence numbers, acknowledgements, and retransmission. 20-byte minimum header.</td></tr>
+            <tr><td data-label="Term"><strong>TCP/IP Model</strong></td><td data-label="Definition">A 4-layer practical protocol model (Application, Transport, Internet, Network Access) that powers modern networks and the internet.</td></tr>
+            <tr><td data-label="Term"><strong>Telnet</strong></td><td data-label="Definition">A legacy protocol for unencrypted remote command-line access. TCP port 23. Insecure — transmits credentials in plaintext. Replaced by SSH in all modern environments.</td></tr>
+            <tr><td data-label="Term"><strong>TFTP</strong></td><td data-label="Definition">Trivial File Transfer Protocol — a simplified file transfer protocol with no authentication or encryption. UDP port 69. Used for PXE boot, firmware updates, and network device configuration.</td></tr>
+            <tr><td data-label="Term"><strong>Threat</strong></td><td data-label="Definition">Any potential cause of harm to a system or network — may be human, technical, environmental, or operational.</td></tr>
+            <tr><td data-label="Term"><strong>Throughput</strong></td><td data-label="Definition">The actual amount of data successfully transferred over a network in a given time period. Unlike bandwidth (theoretical maximum), throughput reflects real-world performance after accounting for latency, packet loss, protocol overhead, and congestion.</td></tr>
+            <tr><td data-label="Term"><strong>TLS Handshake</strong></td><td data-label="Definition">The process where client and server negotiate cipher suites, exchange certificates, and derive session keys before encrypted communication begins.</td></tr>
+            <tr><td data-label="Term"><strong>Traceroute</strong></td><td data-label="Definition">A diagnostic tool that traces the path packets take across a network by sending probes with incrementing TTL values. Shows each intermediate hop and round-trip time. Uses ICMP or UDP.</td></tr>
+            <tr><td data-label="Term"><strong>TTL</strong></td><td data-label="Definition">Time to Live — a field in the IP header that limits a packet's lifespan by decrementing at each router hop. Prevents infinite routing loops.</td></tr>
+            <tr><td data-label="Term"><strong>UDP</strong></td><td data-label="Definition">User Datagram Protocol — connectionless, lightweight Layer 4 protocol. No reliability guarantees. 8-byte fixed header. Used for DNS, VoIP, streaming.</td></tr>
+            <tr><td data-label="Term"><strong>uRPF</strong></td><td data-label="Definition">Unicast Reverse Path Forwarding — a router feature that drops packets with spoofed source IP addresses by verifying the return path.</td></tr>
+            <tr><td data-label="Term"><strong>VLAN</strong></td><td data-label="Definition">Virtual LAN — logically segments a physical switch into separate broadcast domains, improving security and performance.</td></tr>
+            <tr><td data-label="Term"><strong>VPN</strong></td><td data-label="Definition">Virtual Private Network — creates an encrypted tunnel over an untrusted network (usually the internet) for secure remote access or site-to-site connectivity.</td></tr>
+            <tr><td data-label="Term"><strong>Vulnerability</strong></td><td data-label="Definition">A weakness in software, configuration, or process that can be exploited by a threat actor. Threat + Vulnerability = Risk.</td></tr>
+            <tr><td data-label="Term"><strong>WAF</strong></td><td data-label="Definition">Web Application Firewall — inspects HTTP/HTTPS traffic at Layer 7 to block application-layer attacks such as SQL injection, XSS, and CSRF.</td></tr>
+            <tr><td data-label="Term"><strong>Zero Trust</strong></td><td data-label="Definition">A security architecture that assumes no implicit trust. Every access request is verified based on identity, device, context, and policy — regardless of network location (NIST SP 800-207).</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- ═══════════════════════════════════════════ -->
     <!-- QUICK REFERENCE                             -->
     <!-- ═══════════════════════════════════════════ -->
     <section id="quickref">
@@ -2111,13 +2079,14 @@
             <p><strong>TCP:</strong> reliable, connection-oriented, slower but safer for ordered delivery.</p>
             <p><strong>UDP:</strong> lightweight, connectionless, faster but without reliability guarantees.</p>
             <p><strong>IPv4:</strong> 32-bit addresses, still dominant; <strong>IPv6:</strong> 128-bit, built-in IPsec, growing adoption.</p>
+            <p><strong>Subnetting:</strong> divides networks into smaller segments; CIDR notation (/24 = 254 hosts). Private ranges: 10.0.0.0/8, 172.16.0.0/12, 192.168.0.0/16.</p>
           </div>
           <div>
-            <p><strong>Threat:</strong> possible cause of harm.</p>
-            <p><strong>Vulnerability:</strong> exploitable weakness.</p>
+            <p><strong>Threat:</strong> possible cause of harm. <strong>Vulnerability:</strong> exploitable weakness. Together: Risk.</p>
             <p><strong>Threat actor:</strong> entity that can exploit weakness.</p>
             <p><strong>Attack vector:</strong> path used to reach the target.</p>
             <p><strong>Control / Mitigation:</strong> safeguard or action used to reduce risk and impact.</p>
+            <p><strong>Defence in Depth:</strong> layer multiple controls (physical, network, endpoint, application, data, identity, detection) so one failure ≠ total compromise.</p>
             <p><strong>Zero Trust:</strong> never trust, always verify — regardless of network location.</p>
             <p><strong>Best study method:</strong> think by layer, map by protocol, verify by device, secure by control.</p>
           </div>
