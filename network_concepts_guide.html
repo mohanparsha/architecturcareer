@@ -1267,80 +1267,8 @@
         <strong>Postal analogy:</strong> Think of it like mailing a letter. The <em>data</em> is the letter. The Transport layer puts it in an <em>envelope</em> with port numbers. The Network layer adds a <em>shipping label</em> with IP addresses. The Data Link layer places it in a <em>delivery pouch</em> with MAC addresses and a seal (FCS). The Physical layer converts it to <em>electrical signals</em> on the wire. The receiver opens each layer in reverse.
       </div>
 
-      <!-- Encapsulation nested visual — Sender Side -->
-      <div class="grid-2" style="margin-top:18px;">
-        <div class="card" style="padding-bottom:18px;">
-          <span class="kicker">Sender Side — Encapsulation (top → down)</span>
-          <h3 style="margin-top:0;">Each layer wraps the previous output, adding its own header</h3>
-          <div class="encap-visual">
-            <div class="encap-ring encap-ring-core">
-              <span class="er-badge l7" style="background:#b91c52;">L7</span>
-              <span class="er-label">Application Data</span>
-              <span class="er-pdu encap-pdu-data">PDU: DATA</span>
-            </div>
-            <div class="encap-arrow-down">▼</div>
-            <div class="encap-ring encap-ring-l4">
-              <span class="er-badge l4">L4</span>
-              <span class="er-label">TCP/UDP Header + Data</span>
-              <span class="er-pdu encap-pdu-segment">SEGMENT</span>
-            </div>
-            <div class="encap-arrow-down">▼</div>
-            <div class="encap-ring encap-ring-l3">
-              <span class="er-badge l3">L3</span>
-              <span class="er-label">IP Header + Segment</span>
-              <span class="er-pdu encap-pdu-packet">PACKET</span>
-            </div>
-            <div class="encap-arrow-down">▼</div>
-            <div class="encap-ring encap-ring-l2">
-              <span class="er-badge l2">L2</span>
-              <span class="er-label">Frame Hdr + Packet + FCS Trailer</span>
-              <span class="er-pdu encap-pdu-frame">FRAME</span>
-            </div>
-            <div class="encap-arrow-down">▼</div>
-            <div class="encap-ring encap-ring-l1">
-              <span class="er-badge l1">L1</span>
-              <span class="er-label">Electrical / Optical / Radio Signal</span>
-              <span class="er-pdu encap-pdu-bits">BITS</span>
-            </div>
-          </div>
-        </div>
-
-        <!-- Decapsulation — Receiver Side -->
-        <div class="card" style="padding-bottom:18px;">
-          <span class="kicker">Receiver Side — Decapsulation (bottom → up)</span>
-          <h3 style="margin-top:0;">Each layer reads its header, acts on it, strips it, and passes payload up</h3>
-          <div class="encap-visual">
-            <div class="encap-ring encap-ring-l1">
-              <span class="er-badge l1">L1</span>
-              <span class="er-label">Receive signal → convert to frame</span>
-              <span class="er-pdu encap-pdu-bits">BITS</span>
-            </div>
-            <div class="encap-arrow-down">▲</div>
-            <div class="encap-ring encap-ring-l2">
-              <span class="er-badge l2">L2</span>
-              <span class="er-label">Check MAC + FCS → strip → pass packet up</span>
-              <span class="er-pdu encap-pdu-frame">FRAME</span>
-            </div>
-            <div class="encap-arrow-down">▲</div>
-            <div class="encap-ring encap-ring-l3">
-              <span class="er-badge l3">L3</span>
-              <span class="er-label">Check IP dest → strip → pass segment up</span>
-              <span class="er-pdu encap-pdu-packet">PACKET</span>
-            </div>
-            <div class="encap-arrow-down">▲</div>
-            <div class="encap-ring encap-ring-l4">
-              <span class="er-badge l4">L4</span>
-              <span class="er-label">Check port, reassemble → pass data up</span>
-              <span class="er-pdu encap-pdu-segment">SEGMENT</span>
-            </div>
-            <div class="encap-arrow-down">▲</div>
-            <div class="encap-ring encap-ring-core">
-              <span class="er-badge l7" style="background:#b91c52;">L7</span>
-              <span class="er-label">Application receives original data</span>
-              <span class="er-pdu encap-pdu-data">DATA</span>
-            </div>
-          </div>
-        </div>
+      <div class="card" style="padding:12px; margin-top:18px; overflow:hidden;">
+        <img src="encapsulation-decapsulation-osi.jpg" alt="Encapsulation and Decapsulation in the OSI Model — Sender side (top to down): L7 Application Data (PDU: Data), L6 Presentation formatting/encryption, L5 Session management, L4 Transport TCP/UDP Header + Data (PDU: Segment), L3 Network IP Header + Segment (PDU: Packet), L2 Data Link Frame Header + Packet + FCS Trailer (PDU: Frame), L1 Physical electrical/optical/radio signal (PDU: Bits). Receiver side (bottom to up): each layer reads its header, acts on it, strips it, and passes payload upward. Network transmission occurs between sender and receiver through the physical medium." style="width:100%; height:auto; border-radius:12px; display:block;" loading="lazy" />
       </div>
 
       <!-- What each layer adds -->
