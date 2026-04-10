@@ -711,27 +711,25 @@
 
       /* Page margins and footer */
       @page {
-        margin: 1.5cm 1.5cm 2.5cm 1.5cm;
+        margin: 1.5cm 1.5cm 2cm 1.5cm;
       }
       @page :first { margin-top: 1cm; }
 
       /* Print-only footer that repeats on every page */
       .print-footer {
-        display: block !important;
+        display: flex !important;
         position: fixed;
-        bottom: 0;
+        bottom: -0.5cm;
         left: 0;
         right: 0;
-        padding: 8px 1.5cm;
-        font-size: 8pt;
-        color: #666;
-        border-top: 1px solid #ccc;
-        display: flex !important;
-        justify-content: space-between;
+        padding: 6px 0;
+        font-size: 7.5pt;
+        color: #888;
+        border-top: 0.5px solid #ccc;
+        justify-content: center;
         align-items: center;
-      }
-      .print-footer::after {
-        content: "Page " counter(page);
+        background: #fff;
+        z-index: 9999;
       }
 
       /* Footer */
@@ -1946,9 +1944,7 @@
   <!-- Fix #26: GoatCounter analytics -->
   <script data-goatcounter="https://km-auc.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
   <!-- Print-only footer: branding + page number on every PDF page -->
-  <div class="print-footer">
-    <span>Architect U'r Career &nbsp;|&nbsp; Krishna Mohan Parsha</span>
-  </div>
+  <div class="print-footer">Architect U'r Career &nbsp;|&nbsp; Krishna Mohan Parsha</div>
 
 </body>
 </html>
