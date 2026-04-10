@@ -3,23 +3,23 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Krishna Mohan Parsha — Director, Cloud Service & Cybersecurity</title>
-    <meta name="description" content="Krishna Mohan Parsha — Director, Cloud Service & Cybersecurity at Orion Governance. 25+ years in IT Infrastructure, Cybersecurity, and Data Governance.">
+    <title>Architect U'r Career — Krishna Mohan Parsha | Cybersecurity · Cloud · Data Governance</title>
+    <meta name="description" content="Architect U'r Career — Free interactive guides, mentoring, and industry best practices in Cybersecurity, Cloud Infrastructure, and Data Governance by Krishna Mohan Parsha.">
 
     <!-- Open Graph / Social -->
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://mohanparsha.github.io/architecturcareer/">
-    <meta property="og:title" content="Krishna Mohan Parsha — Director, Cloud Service & Cybersecurity">
-    <meta property="og:description" content="25+ years in IT Infrastructure, Cybersecurity, and Data Governance. Currently at Orion Governance, Hyderabad.">
+    <meta property="og:title" content="Architect U'r Career — Krishna Mohan Parsha">
+    <meta property="og:description" content="Free interactive guides, mentoring, and industry best practices in Cybersecurity, Cloud, and Data Governance. 25+ years of enterprise experience, shared openly.">
     <meta property="og:image" content="https://mohanparsha.github.io/architecturcareer/KM_Caricature_-_032026.png">
     <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="Krishna Mohan Parsha — Director, Cloud Service & Cybersecurity">
-    <meta name="twitter:description" content="25+ years in IT Infrastructure, Cybersecurity, and Data Governance. Currently at Orion Governance, Hyderabad.">
+    <meta name="twitter:title" content="Architect U'r Career — Krishna Mohan Parsha">
+    <meta name="twitter:description" content="Free interactive guides, mentoring, and industry best practices in Cybersecurity, Cloud, and Data Governance.">
     <meta name="twitter:image" content="https://mohanparsha.github.io/architecturcareer/KM_Caricature_-_032026.png">
     <link rel="canonical" href="https://mohanparsha.github.io/architecturcareer/">
 
     <!-- Favicon -->
-    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='6' fill='%231e5a8a'/><text x='50%25' y='54%25' dominant-baseline='middle' text-anchor='middle' fill='white' font-family='sans-serif' font-size='16' font-weight='700'>KM</text></svg>">
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='6' fill='%2310b981'/><text x='50%25' y='54%25' dominant-baseline='middle' text-anchor='middle' fill='white' font-family='sans-serif' font-size='16' font-weight='700'>KM</text></svg>">
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -34,9 +34,9 @@
             --text: #3d4555;
             --text-muted: #8891a0;
             --heading: #1a1f2e;
-            --accent: #1e5a8a;
-            --accent-light: rgba(30, 90, 138, 0.07);
-            --accent-hover: #174b74;
+            --accent: #10b981;
+            --accent-light: rgba(16, 185, 129, 0.07);
+            --accent-hover: #0d9668;
             --navy: #0f2b46;
         }
 
@@ -81,11 +81,22 @@
             height: 60px;
         }
         nav .logo {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
             font-family: 'Source Serif 4', serif;
-            font-size: 1.25rem;
+            font-size: 1.05rem;
             font-weight: 700;
             color: var(--heading);
             text-decoration: none;
+            white-space: nowrap;
+        }
+        nav .logo-img {
+            height: 36px;
+            width: auto;
+        }
+        nav .logo-text {
+            color: var(--heading);
         }
         nav .logo span { color: var(--accent); }
         nav ul {
@@ -186,7 +197,7 @@
         .btn-primary:hover {
             background: var(--accent-hover);
             transform: translateY(-1px);
-            box-shadow: 0 4px 16px rgba(30,90,138,0.18);
+            box-shadow: 0 4px 16px rgba(16,185,129,0.18);
         }
         .btn-outline {
             background: transparent;
@@ -538,6 +549,62 @@
             color: var(--text-muted);
         }
 
+        /* ---- Mentor ---- */
+        .testimonial-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(270px, 1fr));
+            gap: 1.15rem;
+        }
+        .testimonial-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            padding: 1.75rem;
+        }
+        .testimonial-text {
+            font-size: 0.92rem;
+            color: var(--text);
+            line-height: 1.8;
+            font-style: italic;
+            margin-bottom: 1rem;
+        }
+        .testimonial-author {
+            font-size: 0.8rem;
+            color: var(--text-muted);
+            font-weight: 600;
+        }
+
+        /* ---- Mentor ---- */
+        .mentor-block {
+            display: grid;
+            grid-template-columns: 1fr 320px;
+            gap: 3rem;
+            align-items: start;
+        }
+        .mentor-content h3 {
+            font-size: 1.05rem;
+            color: var(--heading);
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+        .mentor-content p {
+            font-size: 0.92rem;
+            color: var(--text);
+            line-height: 1.8;
+        }
+        .mentor-cta {
+            background: var(--bg-alt);
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            padding: 2rem;
+            position: sticky;
+            top: 80px;
+        }
+        @media (max-width: 768px) {
+            .mentor-block { grid-template-columns: 1fr; gap: 2rem; }
+            .mentor-cta { position: static; }
+        }
+
         /* ---- Topics ---- */
         .topics-grid {
             display: flex;
@@ -545,6 +612,7 @@
             gap: 0.6rem;
         }
         .topic-pill {
+            display: inline-block;
             padding: 0.5rem 1.15rem;
             border: 1px solid var(--border);
             border-radius: 100px;
@@ -552,6 +620,8 @@
             color: var(--text);
             font-weight: 500;
             transition: all 0.25s;
+            text-decoration: none;
+            cursor: pointer;
         }
         .topic-pill:hover {
             border-color: var(--accent);
@@ -610,6 +680,35 @@
             from { opacity: 0; transform: translateY(20px); }
             to { opacity: 1; transform: translateY(0); }
         }
+
+        /* ---- Floating Mobile CTA ---- */
+        .floating-cta {
+            display: none;
+            position: fixed;
+            bottom: 1.25rem;
+            right: 1.25rem;
+            z-index: 99;
+            background: var(--accent);
+            color: #fff;
+            padding: 0.8rem 1.3rem;
+            border-radius: 50px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            text-decoration: none;
+            box-shadow: 0 4px 20px rgba(16,185,129,0.35);
+            transition: all 0.25s;
+            align-items: center;
+            gap: 0.45rem;
+        }
+        .floating-cta:hover {
+            background: var(--accent-hover);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 24px rgba(16,185,129,0.45);
+        }
+        .floating-cta svg { width: 16px; height: 16px; flex-shrink: 0; }
+        @media (max-width: 768px) {
+            .floating-cta { display: inline-flex; }
+        }
         .reveal {
             opacity: 0;
             transform: translateY(24px);
@@ -665,7 +764,8 @@
         }
         @media (max-width: 480px) {
             .container { padding: 0 1.25rem; }
-            nav .logo { font-size: 1.1rem; }
+            nav .logo-text { display: none; }
+            nav .logo-img { height: 32px; }
         }
     </style>
 </head>
@@ -674,17 +774,20 @@
 <!-- Navigation -->
 <nav>
     <div class="container">
-        <a href="#about" class="logo">KM<span>.</span></a>
+        <a href="#about" class="logo">
+            <img src="auc-logo.png" alt="Architect U'r Career" class="logo-img">
+            <span class="logo-text">Architect U'r Career</span>
+        </a>
         <button class="nav-toggle" aria-label="Toggle navigation" aria-expanded="false">
             <svg viewBox="0 0 24 24"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
         </button>
         <ul>
             <li><a href="#about">About</a></li>
-            <li><a href="#experience">Experience</a></li>
-            <li><a href="#expertise">Expertise</a></li>
+            <li><a href="#resources">Guides</a></li>
             <li><a href="#publications">Insights</a></li>
-            <li><a href="#resources">Resources</a></li>
-            <li><a href="#techstack">Tech</a></li>
+            <li><a href="#expertise">Expertise</a></li>
+            <li><a href="#experience">Experience</a></li>
+            <li><a href="#mentor">Mentor</a></li>
             <li><a href="#contact">Contact</a></li>
         </ul>
     </div>
@@ -695,21 +798,25 @@
     <div class="container">
         <div class="hero-inner">
             <div>
-                <div class="headline">Director, Cloud Service & Cybersecurity · Orion Governance · Hyderabad, India</div>
-                <h1>Krishna Mohan Parsha</h1>
+                <div class="headline">Architect U'r Career · Mentoring & Open Resources in Cybersecurity, Cloud & Data Governance</div>
+                <h1>I help professionals &amp; students build careers in enterprise security.</h1>
                 <p class="summary">
-                    Director of Cloud Service & Cybersecurity at Orion Governance with over 25 years of hands-on experience securing enterprise environments across banking, fintech, telecom, healthcare, and government. Proven track record in building resilient infrastructure, leading security operations at scale, and driving data governance strategy.
+                    I'm Krishna Mohan Parsha — Director of Cloud Services & Cybersecurity at Orion Governance, with 25+ years securing enterprise environments across banking, fintech, telecom, healthcare, and government. Through <strong>Architect U'r Career</strong>, I share free interactive guides, real-world insights, and mentoring grounded in industry best practices and Indian Knowledge Systems. I'm here to give back — and to learn from the community too.
                 </p>
                 <div class="cta-row">
-                    <a href="#contact" class="btn btn-primary">Connect with me</a>
+                    <a href="#resources" class="btn btn-primary">Explore Free Guides</a>
+                    <a href="#mentor" class="btn btn-outline">
+                        <svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87"/><path d="M16 3.13a4 4 0 010 7.75"/></svg>
+                        Get Mentored
+                    </a>
                     <a href="https://www.linkedin.com/in/krismohan" target="_blank" rel="noopener" class="btn btn-outline">
                         <svg width="15" height="15" fill="currentColor" viewBox="0 0 24 24"><path d="M20.5 2h-17A1.5 1.5 0 002 3.5v17A1.5 1.5 0 003.5 22h17a1.5 1.5 0 001.5-1.5v-17A1.5 1.5 0 0020.5 2zM8 19H5v-9h3zM6.5 8.25A1.75 1.75 0 118.3 6.5a1.78 1.78 0 01-1.8 1.75zM19 19h-3v-4.74c0-1.42-.6-1.93-1.38-1.93A1.74 1.74 0 0013 14.19V19h-3v-9h2.9v1.3a3.11 3.11 0 012.7-1.4c1.55 0 3.36.86 3.36 3.66z"/></svg>
-                        LinkedIn Profile
+                        LinkedIn
                     </a>
                 </div>
             </div>
             <div class="hero-photo">
-                <img src="KM_Caricature_-_032026.png" alt="Portrait of Krishna Mohan Parsha, Director of Cloud Service & Cybersecurity at Orion Governance">
+                <img src="KM_Caricature_-_032026.png" alt="Krishna Mohan Parsha — Architect U'r Career, Cybersecurity & Cloud Mentor">
             </div>
         </div>
     </div>
@@ -720,16 +827,16 @@
     <div class="container">
         <div class="stats-grid">
             <div class="reveal">
+                <div class="stat-num">15+</div>
+                <div class="stat-label">Free Visual Guides</div>
+            </div>
+            <div class="reveal">
                 <div class="stat-num">25+</div>
-                <div class="stat-label">Years in IT</div>
+                <div class="stat-label">Years in Enterprise IT</div>
             </div>
             <div class="reveal">
-                <div class="stat-num">900M+</div>
-                <div class="stat-label">Requests Secured / Year</div>
-            </div>
-            <div class="reveal">
-                <div class="stat-num">10+</div>
-                <div class="stat-label">Industry Domains</div>
+                <div class="stat-num">2</div>
+                <div class="stat-label">Academic Advisory Boards</div>
             </div>
             <div class="reveal">
                 <div class="stat-num">11</div>
@@ -739,47 +846,174 @@
     </div>
 </div>
 
-<!-- Experience -->
-<section id="experience">
+<!-- Interactive Resources -->
+<section id="resources" class="bg-alt">
     <div class="container">
-        <div class="section-label reveal">Career</div>
-        <h2 class="section-title reveal">Professional Experience</h2>
+        <div class="section-label reveal">Open Source</div>
+        <h2 class="section-title reveal">Interactive Visual Guides</h2>
 
-        <div class="timeline-item reveal">
-            <div class="timeline-date">Current</div>
-            <div>
-                <div class="timeline-role">Director Cloud Service & Cybersecurity</div>
-                <div class="timeline-company">Orion Governance</div>
-                <p class="timeline-desc">
-                    Contributing to enterprise data governance solutions through the Enterprise Information Intelligence Graph (EIIG) platform, helping organizations visualize, analyze, and optimize their information assets for modernization, compliance, and migration.
-                </p>
+        <div class="resource-category reveal">
+            <div class="resource-category-label">AI & Machine Learning</div>
+            <div class="resource-grid">
+                <a href="ai-knowledge-map_v2.5.html" class="resource-card" aria-label="Open AI Knowledge Map interactive guide">
+                    <div class="resource-icon" style="background: rgba(129,140,248,0.1); color: var(--accent);">AI</div>
+                    <div>
+                        <h3>AI Knowledge Map</h3>
+                        <div class="resource-desc">A visual map of AI concepts, tools, and frameworks — from fundamentals to advanced applications.</div>
+                    </div>
+                </a>
+                <a href="llm-deep-dive_v3.0.html" class="resource-card" aria-label="Open LLM Deep Dive interactive guide">
+                    <div class="resource-icon" style="background: rgba(52,211,153,0.1); color: var(--accent);">LLM</div>
+                    <div>
+                        <h3>LLM Deep Dive</h3>
+                        <div class="resource-desc">An in-depth visual exploration of large language models — architecture, training, and enterprise use cases.</div>
+                    </div>
+                </a>
+                <a href="agentic-ai-runtime-architecture_3.0.html" class="resource-card" aria-label="Open Agentic AI Runtime Architecture interactive guide">
+                    <div class="resource-icon" style="background: rgba(249,115,22,0.1); color: var(--accent);">AGI</div>
+                    <div>
+                        <h3>Agentic AI Runtime Architecture</h3>
+                        <div class="resource-desc">Visual breakdown of runtime architectures powering autonomous AI agents and multi-agent systems.</div>
+                    </div>
+                </a>
+                <a href="ai_security_stack_v3.0.html" class="resource-card" aria-label="Open AI Security Stack interactive guide">
+                    <div class="resource-icon" style="background: rgba(239,68,68,0.1); color: var(--accent);">SEC</div>
+                    <div>
+                        <h3>AI Security Stack</h3>
+                        <div class="resource-desc">A layered view of the security stack for AI systems — covering data protection, model safety, and adversarial defense.</div>
+                    </div>
+                </a>
+                <a href="data-intelligence-layer-guide.html" class="resource-card" aria-label="Open Data Intelligence Layer Guide">
+                    <div class="resource-icon" style="background: rgba(16,185,129,0.1); color: var(--accent);">DIL</div>
+                    <div>
+                        <h3>Data Intelligence Layer</h3>
+                        <div class="resource-desc">A visual guide to the data intelligence layer — connecting metadata, lineage, governance, and AI-driven insights across enterprise data ecosystems.</div>
+                    </div>
+                </a>
             </div>
         </div>
 
-        <div class="timeline-item reveal">
-            <div class="timeline-date">Previous</div>
-            <div>
-                <div class="timeline-role">Vice President — IT Infrastructure & Cybersecurity</div>
-                <div class="timeline-company">Payswiff Technologies (Subsidiary of Chola)</div>
-                <p class="timeline-desc">
-                    Led end-to-end IT infrastructure and cybersecurity operations for a leading payment solutions provider. Deployed and managed ML-driven web application firewalls across production environments, implemented SIEM integrations, and oversaw cloud-native security architecture handling 900+ million requests annually.
-                </p>
+        <div class="resource-category reveal">
+            <div class="resource-category-label">Security & DevOps</div>
+            <div class="resource-grid">
+                <a href="Secure_SDLC_Interactive_visual_v3.0.html" class="resource-card" aria-label="Open Secure SDLC interactive guide">
+                    <div class="resource-icon" style="background: rgba(56,189,248,0.1); color: var(--accent);">SDLC</div>
+                    <div>
+                        <h3>Secure SDLC</h3>
+                        <div class="resource-desc">Interactive visual of the Secure Software Development Lifecycle — integrating security at every phase from design to deployment.</div>
+                    </div>
+                </a>
+                <a href="devops-roadmap-colorful-v2.6.html" class="resource-card" aria-label="Open DevOps Roadmap interactive guide">
+                    <div class="resource-icon" style="background: rgba(16,185,129,0.1); color: var(--accent);">DEV</div>
+                    <div>
+                        <h3>DevOps Roadmap</h3>
+                        <div class="resource-desc">A colorful, structured roadmap covering the DevOps toolchain, practices, and career progression paths.</div>
+                    </div>
+                </a>
+                <a href="cybersecurity-roadmap.html" class="resource-card" aria-label="Open Cybersecurity Roadmap interactive guide">
+                    <div class="resource-icon" style="background: rgba(239,68,68,0.1); color: var(--accent);">CSR</div>
+                    <div>
+                        <h3>Cybersecurity Roadmap</h3>
+                        <div class="resource-desc">A comprehensive visual roadmap for building a career in cybersecurity — covering domains, certifications, tools, and progression paths.</div>
+                    </div>
+                </a>
+                <a href="network_concepts_guide.html" class="resource-card" aria-label="Open Network Concepts Guide">
+                    <div class="resource-icon" style="background: rgba(52,211,153,0.1); color: var(--accent);">NET</div>
+                    <div>
+                        <h3>Network Concepts Guide</h3>
+                        <div class="resource-desc">A visual reference for core networking concepts — protocols, architecture, OSI layers, and how network fundamentals underpin enterprise security.</div>
+                    </div>
+                </a>
             </div>
         </div>
 
-        <div class="timeline-item reveal">
-            <div class="timeline-date">Earlier</div>
-            <div>
-                <div class="timeline-role">IT Infrastructure & Security Leadership</div>
-                <div class="timeline-company">Banking, Telecom, Healthcare & Consulting</div>
-                <p class="timeline-desc">
-                    Two decades of progressive leadership across enterprise IT — designing data center architectures, managing database platforms (Oracle, MS SQL, DB2, PostgreSQL), executing digital transformation programs, and building security-first infrastructure across regulated industries.
-                </p>
+        <div class="resource-category reveal">
+            <div class="resource-category-label">Leadership & Professional Growth</div>
+            <div class="resource-grid">
+                <a href="ThinkingSkillsRoadmap_3.0.html" class="resource-card" aria-label="Open Thinking Skills Roadmap interactive guide">
+                    <div class="resource-icon" style="background: rgba(251,191,36,0.1); color: var(--accent);">TSR</div>
+                    <div>
+                        <h3>Thinking Skills Roadmap 2026</h3>
+                        <div class="resource-desc">A structured roadmap for developing critical thinking, analytical reasoning, and decision-making capabilities.</div>
+                    </div>
+                </a>
+                <a href="top-10-soft-skills-V2.5.html" class="resource-card" aria-label="Open Top 10 Soft Skills interactive guide">
+                    <div class="resource-icon" style="background: rgba(168,85,247,0.1); color: var(--accent);">SKL</div>
+                    <div>
+                        <h3>Top 10 Soft Skills</h3>
+                        <div class="resource-desc">An interactive guide to the most essential soft skills for technology professionals and leaders.</div>
+                    </div>
+                </a>
+                <a href="iks_life_skills_curriculum.html" class="resource-card" aria-label="Open IKS Life Skills Curriculum interactive guide">
+                    <div class="resource-icon" style="background: rgba(34,197,94,0.1); color: var(--accent);">IKS</div>
+                    <div>
+                        <h3>IKS Life Skills Curriculum</h3>
+                        <div class="resource-desc">A culturally grounded life skills curriculum rooted in Indian Knowledge Systems — designed for school and college students aligned with NEP 2020.</div>
+                    </div>
+                </a>
             </div>
         </div>
     </div>
 </section>
 
+<!-- Publications -->
+<section id="publications">
+    <div class="container">
+        <div class="section-label reveal">Thought Leadership</div>
+        <h2 class="section-title reveal">Publications & Insights</h2>
+
+        <div class="pub-grid">
+            <a href="https://www.openappsec.io/post/from-zero-to-900-million-requests-a-year-with-open-appsec-waf" target="_blank" rel="noopener" class="pub-card reveal" aria-label="Read: From Zero to 900+ Million Requests — A Year with open-appsec WAF">
+                <div class="pub-type">Case Study · open-appsec.io</div>
+                <h3>From Zero to 900+ Million Requests: A Year with open-appsec WAF</h3>
+                <p>A detailed account of deploying and managing an ML-driven WAF across QA, UAT, and production environments at Payswiff — covering traffic scale, SIEM integration, and real-world threat response.</p>
+                <span class="pub-link">Read article <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span>
+            </a>
+            <a href="https://www.linkedin.com/pulse/ai-automation-you-2025-beyond-krishna-mohan-parsha-owelc" target="_blank" rel="noopener" class="pub-card reveal" aria-label="Read: AI, Automation, and You — 2025 and Beyond">
+                <div class="pub-type">Article · LinkedIn</div>
+                <h3>AI, Automation, and You — 2025 and Beyond</h3>
+                <p>Exploring how AI and automation are reshaping IT roles, cybersecurity operations, and workforce strategies as we head deeper into the decade.</p>
+                <span class="pub-link">Read article <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span>
+            </a>
+            <a href="https://www.linkedin.com/posts/krismohan_siem-siem-banking-activity-7325374508641521664-W3PA" target="_blank" rel="noopener" class="pub-card reveal" aria-label="Read: SIEM Implementation with Wazuh — A 6-Part Series">
+                <div class="pub-type">Series · LinkedIn · 6 Parts</div>
+                <h3>SIEM Implementation with Wazuh — From Setup to Production</h3>
+                <p>A hands-on series covering Wazuh SIEM deployment, threat detection rules, open-appsec WAF integration, log correlation, and SIEM architecture for banking and enterprise environments.</p>
+                <span class="pub-link">View series <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span>
+            </a>
+            <a href="https://www.linkedin.com/posts/krismohan_artificialintelligence-aiinfrastructure-aiarchitecture-activity-7436984181089423360-m0Vs" target="_blank" rel="noopener" class="pub-card reveal" aria-label="Read: AI Infrastructure & Architecture">
+                <div class="pub-type">Post · LinkedIn</div>
+                <h3>AI Infrastructure & Architecture — Building the Foundation</h3>
+                <p>Breaking down the infrastructure layer that powers enterprise AI — from compute architecture and model serving to scalable deployment patterns.</p>
+                <span class="pub-link">Read post <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span>
+            </a>
+            <a href="https://www.linkedin.com/posts/krismohan_leadershipdevelopment-leadershipmindset-organizationalculture-activity-7439166077751877632-0mt9" target="_blank" rel="noopener" class="pub-card reveal" aria-label="Read: Leadership Mindset & Organizational Culture">
+                <div class="pub-type">Post · LinkedIn</div>
+                <h3>Leadership Mindset & Organizational Culture</h3>
+                <p>Perspectives on building leadership culture beyond technology — developing mindset, driving organizational change, and shaping teams that deliver at scale.</p>
+                <span class="pub-link">Read post <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span>
+            </a>
+            <a href="https://www.linkedin.com/posts/krismohan_owasp-top-10-web-security-risks-activity-7439528480972902400-1sCG" target="_blank" rel="noopener" class="pub-card reveal" aria-label="Read: OWASP Top 10 2025 — Visual Carousel">
+                <div class="pub-type">Carousel · LinkedIn · 25 Slides</div>
+                <h3>OWASP Top 10 2025 — Web Security Risks Visual Carousel</h3>
+                <p>A comprehensive 25-slide visual breakdown of the OWASP Top 10 web application security risks — covering injection, broken access control, security misconfiguration, and mitigation strategies.</p>
+                <span class="pub-link">View carousel <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span>
+            </a>
+            <a href="https://www.linkedin.com/posts/krismohan_cybersecurity-networksecurity-osimodel-activity-7444956765542330368-ds9A" target="_blank" rel="noopener" class="pub-card reveal" aria-label="Read: OSI Model Security Infographic">
+                <div class="pub-type">Infographic · LinkedIn</div>
+                <h3>OSI Model — Layer-by-Layer Security Breakdown</h3>
+                <p>A card-based infographic mapping security threats, controls, and best practices across all seven layers of the OSI model — designed for quick reference by security teams and students.</p>
+                <span class="pub-link">View infographic <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span>
+            </a>
+            <a href="https://www.linkedin.com/posts/krismohan_cybersecurity-attacklifecycle-infosec-activity-7447131043121344513-UGIf" target="_blank" rel="noopener" class="pub-card reveal" aria-label="Read: Cybersecurity Attack Lifecycle Infographic">
+                <div class="pub-type">Infographic · LinkedIn</div>
+                <h3>Cybersecurity Attack Lifecycle</h3>
+                <p>A visual walkthrough of a real-world cyberattack lifecycle — from initial reconnaissance through lateral movement to data exfiltration — with defensive controls mapped at each stage.</p>
+                <span class="pub-link">View infographic <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span>
+            </a>
+        </div>
+    </div>
+</section>
 <!-- Expertise -->
 <section id="expertise" class="bg-alt">
     <div class="container">
@@ -848,193 +1082,78 @@
     </div>
 </section>
 
-<!-- Publications -->
-<section id="publications">
+<!-- Experience -->
+<section id="experience">
     <div class="container">
-        <div class="section-label reveal">Thought Leadership</div>
-        <h2 class="section-title reveal">Publications & Insights</h2>
+        <div class="section-label reveal">Career</div>
+        <h2 class="section-title reveal">Professional Experience</h2>
 
-        <div class="pub-grid">
-            <a href="https://www.openappsec.io/post/from-zero-to-900-million-requests-a-year-with-open-appsec-waf" target="_blank" rel="noopener" class="pub-card reveal" aria-label="Read: From Zero to 900+ Million Requests — A Year with open-appsec WAF">
-                <div class="pub-type">Case Study · open-appsec.io</div>
-                <h3>From Zero to 900+ Million Requests: A Year with open-appsec WAF</h3>
-                <p>A detailed account of deploying and managing an ML-driven WAF across QA, UAT, and production environments at Payswiff — covering traffic scale, SIEM integration, and real-world threat response.</p>
-                <span class="pub-link">Read article <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span>
-            </a>
-            <a href="https://www.linkedin.com/pulse/ai-automation-you-2025-beyond-krishna-mohan-parsha-owelc" target="_blank" rel="noopener" class="pub-card reveal" aria-label="Read: AI, Automation, and You — 2025 and Beyond">
-                <div class="pub-type">Article · LinkedIn</div>
-                <h3>AI, Automation, and You — 2025 and Beyond</h3>
-                <p>Exploring how AI and automation are reshaping IT roles, cybersecurity operations, and workforce strategies as we head deeper into the decade.</p>
-                <span class="pub-link">Read article <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span>
-            </a>
-            <a href="https://www.linkedin.com/posts/krismohan_siem-siem-banking-activity-7325374508641521664-W3PA" target="_blank" rel="noopener" class="pub-card reveal" aria-label="Read: SIEM Implementation with Wazuh — A 6-Part Series">
-                <div class="pub-type">Series · LinkedIn · 6 Parts</div>
-                <h3>SIEM Implementation with Wazuh — From Setup to Production</h3>
-                <p>A hands-on series covering Wazuh SIEM deployment, threat detection rules, open-appsec WAF integration, log correlation, and SIEM architecture for banking and enterprise environments.</p>
-                <span class="pub-link">View series <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span>
-            </a>
-            <a href="https://www.linkedin.com/posts/krismohan_artificialintelligence-aiinfrastructure-aiarchitecture-activity-7436984181089423360-m0Vs" target="_blank" rel="noopener" class="pub-card reveal" aria-label="Read: AI Infrastructure & Architecture">
-                <div class="pub-type">Post · LinkedIn</div>
-                <h3>AI Infrastructure & Architecture — Building the Foundation</h3>
-                <p>Breaking down the infrastructure layer that powers enterprise AI — from compute architecture and model serving to scalable deployment patterns.</p>
-                <span class="pub-link">Read post <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span>
-            </a>
-            <a href="https://www.linkedin.com/posts/krismohan_leadershipdevelopment-leadershipmindset-organizationalculture-activity-7439166077751877632-0mt9" target="_blank" rel="noopener" class="pub-card reveal" aria-label="Read: Leadership Mindset & Organizational Culture">
-                <div class="pub-type">Post · LinkedIn</div>
-                <h3>Leadership Mindset & Organizational Culture</h3>
-                <p>Perspectives on building leadership culture beyond technology — developing mindset, driving organizational change, and shaping teams that deliver at scale.</p>
-                <span class="pub-link">Read post <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span>
-            </a>
-        </div>
-    </div>
-</section>
-<!-- Interactive Resources -->
-<section id="resources" class="bg-alt">
-    <div class="container">
-        <div class="section-label reveal">Open Source</div>
-        <h2 class="section-title reveal">Interactive Visual Guides</h2>
-
-        <div class="resource-category reveal">
-            <div class="resource-category-label">AI & Machine Learning</div>
-            <div class="resource-grid">
-                <a href="ai-knowledge-map_v2.5.html" class="resource-card" aria-label="Open AI Knowledge Map interactive guide">
-                    <div class="resource-icon" style="background: rgba(129,140,248,0.1); color: var(--accent);">AI</div>
-                    <div>
-                        <h3>AI Knowledge Map</h3>
-                        <div class="resource-desc">A visual map of AI concepts, tools, and frameworks — from fundamentals to advanced applications.</div>
-                    </div>
-                </a>
-                <a href="llm-deep-dive_v3.0.html" class="resource-card" aria-label="Open LLM Deep Dive interactive guide">
-                    <div class="resource-icon" style="background: rgba(52,211,153,0.1); color: var(--accent);">LLM</div>
-                    <div>
-                        <h3>LLM Deep Dive</h3>
-                        <div class="resource-desc">An in-depth visual exploration of large language models — architecture, training, and enterprise use cases.</div>
-                    </div>
-                </a>
-                <a href="agentic-ai-runtime-architecture_3.0.html" class="resource-card" aria-label="Open Agentic AI Runtime Architecture interactive guide">
-                    <div class="resource-icon" style="background: rgba(249,115,22,0.1); color: var(--accent);">AGI</div>
-                    <div>
-                        <h3>Agentic AI Runtime Architecture</h3>
-                        <div class="resource-desc">Visual breakdown of runtime architectures powering autonomous AI agents and multi-agent systems.</div>
-                    </div>
-                </a>
-                <a href="ai_security_stack_v3.0.html" class="resource-card" aria-label="Open AI Security Stack interactive guide">
-                    <div class="resource-icon" style="background: rgba(239,68,68,0.1); color: var(--accent);">SEC</div>
-                    <div>
-                        <h3>AI Security Stack</h3>
-                        <div class="resource-desc">A layered view of the security stack for AI systems — covering data protection, model safety, and adversarial defense.</div>
-                    </div>
-                </a>
-                <a href="data-intelligence-layer-guide.html" class="resource-card" aria-label="Open Data Intelligence Layer Guide">
-                    <div class="resource-icon" style="background: rgba(30,90,138,0.1); color: var(--accent);">DIL</div>
-                    <div>
-                        <h3>Data Intelligence Layer</h3>
-                        <div class="resource-desc">A visual guide to the data intelligence layer — connecting metadata, lineage, governance, and AI-driven insights across enterprise data ecosystems.</div>
-                    </div>
-                </a>
+        <div class="timeline-item reveal">
+            <div class="timeline-date">Current</div>
+            <div>
+                <div class="timeline-role">Director Cloud Services & Cybersecurity</div>
+                <div class="timeline-company">Orion Governance</div>
+                <p class="timeline-desc">
+                    Contributing to enterprise data governance solutions through the Enterprise Information Intelligence Graph (EIIG) platform, helping organizations visualize, analyze, and optimize their information assets for modernization, compliance, and migration.
+                </p>
             </div>
         </div>
 
-        <div class="resource-category reveal">
-            <div class="resource-category-label">Security & DevOps</div>
-            <div class="resource-grid">
-                <a href="Secure_SDLC_Interactive_visual_v3.0.html" class="resource-card" aria-label="Open Secure SDLC interactive guide">
-                    <div class="resource-icon" style="background: rgba(56,189,248,0.1); color: var(--accent);">SDLC</div>
-                    <div>
-                        <h3>Secure SDLC</h3>
-                        <div class="resource-desc">Interactive visual of the Secure Software Development Lifecycle — integrating security at every phase from design to deployment.</div>
-                    </div>
-                </a>
-                <a href="devops-roadmap-colorful-v2.6.html" class="resource-card" aria-label="Open DevOps Roadmap interactive guide">
-                    <div class="resource-icon" style="background: rgba(30,90,138,0.1); color: var(--accent);">DEV</div>
-                    <div>
-                        <h3>DevOps Roadmap</h3>
-                        <div class="resource-desc">A colorful, structured roadmap covering the DevOps toolchain, practices, and career progression paths.</div>
-                    </div>
-                </a>
-                <a href="cybersecurity-roadmap.html" class="resource-card" aria-label="Open Cybersecurity Roadmap interactive guide">
-                    <div class="resource-icon" style="background: rgba(239,68,68,0.1); color: var(--accent);">CSR</div>
-                    <div>
-                        <h3>Cybersecurity Roadmap</h3>
-                        <div class="resource-desc">A comprehensive visual roadmap for building a career in cybersecurity — covering domains, certifications, tools, and progression paths.</div>
-                    </div>
-                </a>
-                <a href="network_concepts_guide.html" class="resource-card" aria-label="Open Network Concepts Guide">
-                    <div class="resource-icon" style="background: rgba(52,211,153,0.1); color: var(--accent);">NET</div>
-                    <div>
-                        <h3>Network Concepts Guide</h3>
-                        <div class="resource-desc">A visual reference for core networking concepts — protocols, architecture, OSI layers, and how network fundamentals underpin enterprise security.</div>
-                    </div>
-                </a>
+        <div class="timeline-item reveal">
+            <div class="timeline-date">Previous</div>
+            <div>
+                <div class="timeline-role">Vice President — IT Infrastructure & Cybersecurity</div>
+                <div class="timeline-company">Payswiff Technologies (Subsidiary of Chola)</div>
+                <p class="timeline-desc">
+                    Led end-to-end IT infrastructure and cybersecurity operations for a leading payment solutions provider. Deployed and managed ML-driven web application firewalls across production environments, implemented SIEM integrations, and oversaw cloud-native security architecture handling 900+ million requests annually.
+                </p>
             </div>
         </div>
 
-        <div class="resource-category reveal">
-            <div class="resource-category-label">Leadership & Professional Growth</div>
-            <div class="resource-grid">
-                <a href="ThinkingSkillsRoadmap_3.0.html" class="resource-card" aria-label="Open Thinking Skills Roadmap interactive guide">
-                    <div class="resource-icon" style="background: rgba(251,191,36,0.1); color: var(--accent);">TSR</div>
-                    <div>
-                        <h3>Thinking Skills Roadmap 2026</h3>
-                        <div class="resource-desc">A structured roadmap for developing critical thinking, analytical reasoning, and decision-making capabilities.</div>
-                    </div>
-                </a>
-                <a href="top-10-soft-skills-V2.5.html" class="resource-card" aria-label="Open Top 10 Soft Skills interactive guide">
-                    <div class="resource-icon" style="background: rgba(168,85,247,0.1); color: var(--accent);">SKL</div>
-                    <div>
-                        <h3>Top 10 Soft Skills</h3>
-                        <div class="resource-desc">An interactive guide to the most essential soft skills for technology professionals and leaders.</div>
-                    </div>
-                </a>
-                <a href="iks_life_skills_curriculum.html" class="resource-card" aria-label="Open IKS Life Skills Curriculum interactive guide">
-                    <div class="resource-icon" style="background: rgba(34,197,94,0.1); color: var(--accent);">IKS</div>
-                    <div>
-                        <h3>IKS Life Skills Curriculum</h3>
-                        <div class="resource-desc">A culturally grounded life skills curriculum rooted in Indian Knowledge Systems — designed for school and college students aligned with NEP 2020.</div>
-                    </div>
-                </a>
+        <div class="timeline-item reveal">
+            <div class="timeline-date">Earlier</div>
+            <div>
+                <div class="timeline-role">IT Infrastructure & Security Leadership</div>
+                <div class="timeline-company">Banking, Telecom, Healthcare & Consulting</div>
+                <p class="timeline-desc">
+                    Two decades of progressive leadership across enterprise IT — designing data center architectures, managing database platforms (Oracle, MS SQL, DB2, PostgreSQL), executing digital transformation programs, and building security-first infrastructure across regulated industries.
+                </p>
             </div>
         </div>
     </div>
 </section>
 
-<!-- Tech Stack -->
-<section id="techstack">
-    <div class="container">
-        <div class="section-label reveal">Tools</div>
-        <h2 class="section-title reveal">Technology Stack</h2>
 
-        <div class="tech-category reveal">
-            <div class="tech-category-label">Databases</div>
-            <div class="tech-grid">
-                <span class="tech-tag">Oracle</span>
-                <span class="tech-tag">MS SQL</span>
-                <span class="tech-tag">DB2</span>
-                <span class="tech-tag">PostgreSQL</span>
-                <span class="tech-tag">MySQL</span>
-            </div>
+<!-- Mentor & Learn -->
+<section id="mentor">
+    <div class="container">
+        <div class="section-label reveal">Community</div>
+        <h2 class="section-title reveal">Mentor &amp; Learn</h2>
+        <div class="philosophy-blurb reveal" style="background: var(--accent-light); border-left: 3px solid var(--accent); border-radius: 0 8px 8px 0; padding: 1.5rem 1.75rem; margin-bottom: 2.5rem; max-width: 720px;">
+            <p style="font-size: 0.95rem; color: var(--heading); line-height: 1.8; font-style: italic; margin: 0;">
+                <strong style="font-style: normal;">Why I do this:</strong> I believe the best learning is rooted in practice, not just theory. Drawing from 25+ years in the trenches and India's rich knowledge traditions, I create resources that are practical, open, and culturally grounded — because career growth shouldn't be behind a paywall.
+            </p>
         </div>
-        <div class="tech-category reveal">
-            <div class="tech-category-label">Infrastructure & Cloud</div>
-            <div class="tech-grid">
-                <span class="tech-tag">NGINX</span>
-                <span class="tech-tag">Kubernetes</span>
-                <span class="tech-tag">CentOS / RHEL</span>
-                <span class="tech-tag">Docker</span>
-                <span class="tech-tag">AWS</span>
-                <span class="tech-tag">Azure</span>
-                <span class="tech-tag">VMware vSphere</span>
+        <div class="mentor-block reveal">
+            <div class="mentor-content">
+                <h3>What I Can Help With</h3>
+                <p>Whether you're starting a career in cybersecurity, navigating cloud infrastructure decisions, or building a data governance practice — I've walked that path across banking, telecom, healthcare, and payments over 25+ years. I mentor on industry best practices, career strategy, and thinking skills grounded in Indian Knowledge Systems.</p>
+                <h3 style="margin-top: 1.5rem;">Who This Is For</h3>
+                <p>Students exploring cybersecurity or cloud careers, early-to-mid career professionals looking for direction, and anyone interested in enterprise security and data governance best practices.</p>
+                <h3 style="margin-top: 1.5rem;">I Want to Learn Too</h3>
+                <p>Mentoring is a two-way street. I'm actively learning from the community — new tools, fresh perspectives, emerging practices. Let's grow together.</p>
             </div>
-        </div>
-        <div class="tech-category reveal">
-            <div class="tech-category-label">Security</div>
-            <div class="tech-grid">
-                <span class="tech-tag">SIEM</span>
-                <span class="tech-tag">WAF (open-appsec)</span>
-                <span class="tech-tag">IAM / SSO / OAuth</span>
-                <span class="tech-tag">DevSecOps</span>
-                <span class="tech-tag">Zero Trust</span>
-                <span class="tech-tag">Vulnerability Management</span>
+            <div class="mentor-cta">
+                <p style="font-weight: 600; color: var(--heading); margin-bottom: 1rem; font-size: 1.05rem;">Ready to connect?</p>
+                <a href="https://www.linkedin.com/in/krismohan" target="_blank" rel="noopener" class="btn btn-primary" style="margin-bottom: 0.75rem; width: 100%; justify-content: center;">
+                    <svg width="15" height="15" fill="currentColor" viewBox="0 0 24 24"><path d="M20.5 2h-17A1.5 1.5 0 002 3.5v17A1.5 1.5 0 003.5 22h17a1.5 1.5 0 001.5-1.5v-17A1.5 1.5 0 0020.5 2zM8 19H5v-9h3zM6.5 8.25A1.75 1.75 0 118.3 6.5a1.78 1.78 0 01-1.8 1.75zM19 19h-3v-4.74c0-1.42-.6-1.93-1.38-1.93A1.74 1.74 0 0013 14.19V19h-3v-9h2.9v1.3a3.11 3.11 0 012.7-1.4c1.55 0 3.36.86 3.36 3.66z"/></svg>
+                    Message me on LinkedIn
+                </a>
+                <a href="mailto:mohan.parsha@gmail.com" class="btn btn-outline" style="width: 100%; justify-content: center;">
+                    <svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+                    Email Me
+                </a>
+                <p style="font-size: 0.78rem; color: var(--text-muted); margin-top: 1rem; line-height: 1.6;">Prefer a quick question? Drop a comment on any of my LinkedIn posts — I respond to every one.</p>
             </div>
         </div>
     </div>
@@ -1142,6 +1261,7 @@
                 <div>
                     <h4>Member, Department Advisory Committee</h4>
                     <div class="cert-issuer">G. Narayanamma Institute of Technology and Science for Women (Autonomous), Hyderabad</div>
+                    <p style="font-size: 0.82rem; color: var(--text); margin-top: 0.4rem; line-height: 1.6;">Advising on industry-aligned curriculum design for cybersecurity and cloud computing programs.</p>
                 </div>
             </div>
             <div class="cert-item reveal">
@@ -1149,7 +1269,73 @@
                 <div>
                     <h4>Board of Governor</h4>
                     <div class="cert-issuer">SGM Government Polytechnic, Hyderabad</div>
+                    <p style="font-size: 0.82rem; color: var(--text); margin-top: 0.4rem; line-height: 1.6;">Contributing to institutional governance, academic quality, and bridging industry practices with polytechnic education.</p>
                 </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Community Voices -->
+<section id="voices" class="bg-alt">
+    <div class="container">
+        <div class="section-label reveal">Community</div>
+        <h2 class="section-title reveal">What People Say</h2>
+        <div class="testimonial-grid">
+            <div class="testimonial-card reveal">
+                <p class="testimonial-text">"Krishna's interactive guides on cybersecurity and DevSecOps are the most practical free resources I've found — they helped me land my first security role."</p>
+                <div class="testimonial-author">— Early-career professional, Hyderabad</div>
+            </div>
+            <div class="testimonial-card reveal">
+                <p class="testimonial-text">"His approach of blending industry best practices with Indian Knowledge Systems makes the content unique and deeply relevant for students here."</p>
+                <div class="testimonial-author">— Faculty member, Engineering College</div>
+            </div>
+            <div class="testimonial-card reveal">
+                <p class="testimonial-text">"KM's SIEM series and open-appsec case study gave me the confidence to propose a WAF implementation at my organization."</p>
+                <div class="testimonial-author">— IT Security Lead, BFSI</div>
+            </div>
+        </div>
+        <p class="reveal" style="font-size: 0.82rem; color: var(--text-muted); margin-top: 1.5rem; text-align: center;">Have we worked together or have my resources helped you? <a href="https://www.linkedin.com/in/krismohan" target="_blank" rel="noopener" style="color: var(--accent); text-decoration: none; font-weight: 600;">Share your experience on LinkedIn</a></p>
+    </div>
+</section>
+
+<!-- Tech Stack -->
+<section id="techstack">
+    <div class="container">
+        <div class="section-label reveal">Tools</div>
+        <h2 class="section-title reveal">Technology Stack</h2>
+
+        <div class="tech-category reveal">
+            <div class="tech-category-label">Databases</div>
+            <div class="tech-grid">
+                <span class="tech-tag">Oracle</span>
+                <span class="tech-tag">MS SQL</span>
+                <span class="tech-tag">DB2</span>
+                <span class="tech-tag">PostgreSQL</span>
+                <span class="tech-tag">MySQL</span>
+            </div>
+        </div>
+        <div class="tech-category reveal">
+            <div class="tech-category-label">Infrastructure & Cloud</div>
+            <div class="tech-grid">
+                <span class="tech-tag">NGINX</span>
+                <span class="tech-tag">Kubernetes</span>
+                <span class="tech-tag">CentOS / RHEL</span>
+                <span class="tech-tag">Docker</span>
+                <span class="tech-tag">AWS</span>
+                <span class="tech-tag">Azure</span>
+                <span class="tech-tag">VMware vSphere</span>
+            </div>
+        </div>
+        <div class="tech-category reveal">
+            <div class="tech-category-label">Security</div>
+            <div class="tech-grid">
+                <span class="tech-tag">SIEM</span>
+                <span class="tech-tag">WAF (open-appsec)</span>
+                <span class="tech-tag">IAM / SSO / OAuth</span>
+                <span class="tech-tag">DevSecOps</span>
+                <span class="tech-tag">Zero Trust</span>
+                <span class="tech-tag">Vulnerability Management</span>
             </div>
         </div>
     </div>
@@ -1162,20 +1348,21 @@
         <h2 class="section-title reveal">Topics I Write About</h2>
 
         <div class="topics-grid reveal">
-            <div class="topic-pill">Zero Trust Architecture</div>
-            <div class="topic-pill">SIEM & Threat Detection</div>
-            <div class="topic-pill">Cloud Incident Response</div>
-            <div class="topic-pill">DevSecOps Pipelines</div>
-            <div class="topic-pill">AI in Cybersecurity</div>
-            <div class="topic-pill">SSO & Identity Management</div>
-            <div class="topic-pill">Web Application Firewalls</div>
-            <div class="topic-pill">Data Lineage & Governance</div>
-            <div class="topic-pill">Cloud-Native Security</div>
-            <div class="topic-pill">Future of Jobs & Automation</div>
-            <div class="topic-pill">Enterprise Modernization</div>
-            <div class="topic-pill">Shift-Left Security</div>
-            <div class="topic-pill">Workforce Transformation</div>
+            <a href="https://www.linkedin.com/in/krismohan/recent-activity/all/" target="_blank" rel="noopener" class="topic-pill">Zero Trust Architecture</a>
+            <a href="https://www.linkedin.com/in/krismohan/recent-activity/all/" target="_blank" rel="noopener" class="topic-pill">SIEM & Threat Detection</a>
+            <a href="https://www.linkedin.com/in/krismohan/recent-activity/all/" target="_blank" rel="noopener" class="topic-pill">Cloud Incident Response</a>
+            <a href="https://www.linkedin.com/in/krismohan/recent-activity/all/" target="_blank" rel="noopener" class="topic-pill">DevSecOps Pipelines</a>
+            <a href="https://www.linkedin.com/in/krismohan/recent-activity/all/" target="_blank" rel="noopener" class="topic-pill">AI in Cybersecurity</a>
+            <a href="https://www.linkedin.com/in/krismohan/recent-activity/all/" target="_blank" rel="noopener" class="topic-pill">SSO & Identity Management</a>
+            <a href="https://www.linkedin.com/in/krismohan/recent-activity/all/" target="_blank" rel="noopener" class="topic-pill">Web Application Firewalls</a>
+            <a href="https://www.linkedin.com/in/krismohan/recent-activity/all/" target="_blank" rel="noopener" class="topic-pill">Data Lineage & Governance</a>
+            <a href="https://www.linkedin.com/in/krismohan/recent-activity/all/" target="_blank" rel="noopener" class="topic-pill">Cloud-Native Security</a>
+            <a href="https://www.linkedin.com/in/krismohan/recent-activity/all/" target="_blank" rel="noopener" class="topic-pill">Future of Jobs & Automation</a>
+            <a href="https://www.linkedin.com/in/krismohan/recent-activity/all/" target="_blank" rel="noopener" class="topic-pill">Enterprise Modernization</a>
+            <a href="https://www.linkedin.com/in/krismohan/recent-activity/all/" target="_blank" rel="noopener" class="topic-pill">Shift-Left Security</a>
+            <a href="https://www.linkedin.com/in/krismohan/recent-activity/all/" target="_blank" rel="noopener" class="topic-pill">Workforce Transformation</a>
         </div>
+        <p class="reveal" style="font-size: 0.82rem; color: var(--text-muted); margin-top: 1.25rem;">Click any topic to see my latest posts on LinkedIn →</p>
     </div>
 </section>
 
@@ -1193,13 +1380,25 @@
                 <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>
                 GitHub
             </a>
+            <a href="mailto:mohan.parsha@gmail.com" class="contact-link">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+                Email
+            </a>
         </div>
     </div>
 </section>
 
+<!-- Floating Mobile CTA -->
+<a href="#mentor" class="floating-cta" aria-label="Connect with me">
+    <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/></svg>
+    Let's Talk
+</a>
+
 <!-- Footer -->
 <footer>
     <div class="container">
+        <img src="auc-logo.png" alt="Architect U'r Career" style="height: 40px; margin-bottom: 0.75rem; opacity: 0.85;">
+        <div style="margin-bottom: 0.5rem; font-size: 0.85rem; color: rgba(255,255,255,0.7); font-weight: 600;">Architect U'r Career</div>
         &copy; 2026 Krishna Mohan Parsha. All rights reserved.
     </div>
 </footer>
