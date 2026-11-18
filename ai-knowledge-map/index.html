@@ -1,0 +1,1327 @@
+<!DOCTYPE html>
+<html lang="en-GB" class="no-js">
+<head>
+<meta charset="UTF-8">
+<title>The AI Knowledge Map | Architect U'r Career</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="Eleven core AI terms, from machine learning to MCP and agentic AI, as an interactive map with a reading order, labelled relationships and a plain list view.">
+<link rel="canonical" href="https://mohanparsha.github.io/architecturcareer/ai-knowledge-map/">
+<meta property="og:type" content="article">
+<meta property="og:title" content="The AI Knowledge Map | Architect U'r Career">
+<meta property="og:description" content="Eleven core AI terms, from machine learning to MCP and agentic AI, as an interactive map with a reading order, labelled relationships and a plain list view.">
+<meta property="og:url" content="https://mohanparsha.github.io/architecturcareer/ai-knowledge-map/">
+<meta property="og:image" content="https://mohanparsha.github.io/architecturcareer/auc-logo.png">
+<meta name="twitter:card" content="summary">
+<link rel="license" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400;1,500&family=Outfit:wght@400;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../assets/auc-guide.css">
+<style>
+:root {
+  --bg-primary: #070a0f;
+  --bg-secondary: #0d1117;
+  --bg-card: rgba(255,255,255,0.025);
+  --border: rgba(255,255,255,0.09);
+  --text-primary: #e2e8f0;
+  --text-body: #cbd5e1;
+  --text-secondary: #94a3b8;
+  --link: #7dd3fc;
+  --map-h: clamp(460px, calc(100vh - 110px), 720px);
+}
+*, *::before, *::after { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body {
+  margin: 0;
+  font-family: 'DM Sans', system-ui, -apple-system, 'Segoe UI', sans-serif;
+  font-size: 16px;
+  line-height: 1.6;
+  background: var(--bg-primary);
+  color: var(--text-primary);
+}
+h1, h2, h3, h4, p, ul, ol { margin: 0; padding: 0; }
+main a { color: var(--link); }
+main a:hover { color: #ffffff; }
+.sr-only {
+  position: absolute; width: 1px; height: 1px; margin: -1px; padding: 0;
+  overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; border: 0;
+}
+
+/* ── HEADER ── */
+.header {
+  padding: 18px 24px;
+  border-bottom: 1px solid var(--border);
+  background: rgba(0,0,0,0.4);
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 6px 24px;
+}
+.header-title {
+  font-family: 'Outfit', sans-serif;
+  font-size: 26px;
+  font-weight: 800;
+  line-height: 1.2;
+  letter-spacing: -0.5px;
+  color: #06B6D4;
+  background: linear-gradient(135deg, #00D4AA, #06B6D4, #8B5CF6, #EC4899);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  display: inline-block;
+}
+.header-sub { font-size: 15px; color: var(--text-secondary); margin-top: 2px; max-width: 60ch; }
+.header-ver { font-size: 13px; color: var(--text-secondary); white-space: nowrap; }
+
+.wrap { max-width: 1280px; margin: 0 auto; padding: 0 24px; }
+.section-title {
+  font-family: 'Outfit', sans-serif;
+  font-size: 20px;
+  font-weight: 700;
+  color: #f1f5f9;
+  line-height: 1.3;
+}
+
+/* ── START HERE: THE READING ORDER ── */
+.intro { padding: 22px 0 8px; }
+.intro p { color: var(--text-body); max-width: 78ch; margin-top: 6px; }
+.path {
+  list-style: none;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 14px;
+}
+.path a {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 5px 12px 5px 5px;
+  border-radius: 999px;
+  border: 1.5px solid color-mix(in srgb, var(--c) 45%, transparent);
+  background: color-mix(in srgb, var(--c) 9%, transparent);
+  color: var(--text-primary);
+  font-size: 14px;
+  font-weight: 600;
+  text-decoration: none;
+  white-space: nowrap;
+  transition: background 0.2s, border-color 0.2s;
+}
+.path a:hover { background: color-mix(in srgb, var(--c) 20%, transparent); color: #ffffff; }
+.path a[aria-current="step"] { border-color: var(--c); background: color-mix(in srgb, var(--c) 26%, transparent); color: #ffffff; }
+.path .n, .c-step-n {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  background: var(--c);
+  color: #070a0f;
+  font-size: 12.5px;
+  font-weight: 800;
+  flex-shrink: 0;
+}
+
+/* ── MAP ── */
+.no-js .map-section, .no-js .js-only { display: none; }
+.js .no-js-only { display: none; }
+.map-section { padding: 18px 0 6px; }
+.map-head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px 16px;
+  margin-bottom: 10px;
+}
+.map-head h2 { margin-right: 6px; }
+.map-controls { display: flex; flex-wrap: wrap; align-items: center; gap: 6px; margin-left: auto; }
+.map-controls .gap { width: 8px; }
+.map-btn {
+  min-width: 38px;
+  height: 38px;
+  padding: 0 10px;
+  border-radius: 9px;
+  border: 1px solid rgba(255,255,255,0.16);
+  background: rgba(255,255,255,0.05);
+  color: var(--text-primary);
+  font: 600 15px/1 'DM Sans', system-ui, sans-serif;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+.map-btn:hover { background: rgba(255,255,255,0.13); }
+a.map-btn { display: inline-flex; align-items: center; text-decoration: none; color: var(--text-primary); font-size: 14px; }
+
+.map-shell {
+  display: flex;
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  overflow: hidden;
+  background: var(--bg-primary);
+}
+.diagram-area {
+  flex: 1;
+  min-width: 0;
+  position: relative;
+  overflow: hidden;
+  height: var(--map-h);
+}
+.diagram-canvas {
+  display: block;
+  width: 100%;
+  height: 100%;
+  position: relative;
+  z-index: 2;
+  cursor: grab;
+  touch-action: pan-x pan-y;
+  -webkit-user-select: none;
+  user-select: none;
+}
+.diagram-area.dragging .diagram-canvas { cursor: grabbing; }
+
+/* background grid effect */
+.diagram-area::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image: radial-gradient(circle at 1px 1px, rgba(255,255,255,0.04) 1px, transparent 0);
+  background-size: 40px 40px;
+  z-index: 0;
+  pointer-events: none;
+}
+.diagram-area::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(ellipse at center, transparent 45%, var(--bg-primary) 100%);
+  pointer-events: none;
+  z-index: 1;
+}
+.map-toast {
+  position: absolute;
+  left: 50%;
+  bottom: 14px;
+  transform: translateX(-50%);
+  z-index: 5;
+  max-width: calc(100% - 24px);
+  background: rgba(0,0,0,0.82);
+  border: 1px solid rgba(255,255,255,0.18);
+  border-radius: 10px;
+  padding: 7px 14px;
+  font-size: 13.5px;
+  color: #f1f5f9;
+  text-align: center;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+.map-toast.show { opacity: 1; }
+
+/* ── SVG ── */
+.region { fill-opacity: 0.045; stroke-opacity: 0.4; stroke-width: 1.3; transition: fill-opacity 0.3s, stroke-opacity 0.3s; }
+.region.on { fill-opacity: 0.11; stroke-opacity: 0.95; }
+.region-built { fill: rgba(255,255,255,0.012); stroke: rgba(255,255,255,0.2); stroke-width: 1.2; stroke-dasharray: 5 6; }
+.map-caption { fill: #94a3b8; font-family: 'DM Sans', system-ui, sans-serif; font-weight: 600; letter-spacing: 0.3px; }
+
+.edge-line { stroke: rgba(255,255,255,0.3); stroke-width: 1.4; fill: none; transition: stroke 0.3s, stroke-width 0.3s; }
+.edge-head { fill: rgba(255,255,255,0.45); transition: fill 0.3s; }
+.edge-label-bg { fill: #0d1117; stroke: rgba(255,255,255,0.14); stroke-width: 1; }
+.edge-label { fill: #cbd5e1; font-family: 'DM Sans', system-ui, sans-serif; font-style: italic; font-weight: 500; }
+.has-active .edge { opacity: 0.4; transition: opacity 0.3s; }
+.has-active .edge.on { opacity: 1; }
+.edge.on .edge-line { stroke: var(--ec); stroke-width: 2.2; }
+.edge.on .edge-head { fill: var(--ec); }
+.edge.on .edge-label { fill: #ffffff; }
+.edge.on .edge-label-bg { stroke: var(--ec); }
+
+.node-group { cursor: pointer; outline: none; }
+.node-glow { opacity: 0.28; transition: opacity 0.3s; }
+.node-ring { fill: none; stroke-width: 1; stroke-dasharray: 3 4; opacity: 0.5; transition: opacity 0.3s; }
+.node-circle { fill: rgba(13,17,23,0.94); stroke-width: 1.6; transition: stroke-width 0.2s; }
+.node-label { fill: #cbd5e1; font-family: 'Outfit', sans-serif; font-weight: 700; pointer-events: none; }
+.node-icon { pointer-events: none; }
+.node-badge-text { fill: #070a0f; font-family: 'DM Sans', system-ui, sans-serif; font-weight: 800; pointer-events: none; }
+.node-pulse { fill: none; stroke-width: 1.5; opacity: 0; }
+.node-focus { fill: none; stroke: #f59e0b; stroke-width: 3; opacity: 0; }
+.node-group:hover .node-glow { opacity: 0.6; }
+.node-group:hover .node-circle { stroke-width: 2.6; }
+.node-group:focus-visible .node-focus { opacity: 1; }
+.node-group.active .node-glow { opacity: 0.85; }
+.node-group.active .node-ring { opacity: 1; stroke-dasharray: none; stroke-width: 2; }
+.node-group.active .node-circle { stroke-width: 2.6; fill: var(--nf); }
+.node-group.active .node-label { fill: var(--nc); }
+.node-group.active .node-pulse { animation: pulse-ring 2s ease-out infinite; }
+@keyframes pulse-ring {
+  0% { opacity: 0.5; transform: scale(1); }
+  100% { opacity: 0; transform: scale(1.6); }
+}
+.node-pulse { transform-box: fill-box; transform-origin: center; }
+@keyframes nodeAppear { from { opacity: 0; } to { opacity: 1; } }
+.node-group, .edge, .region { animation: nodeAppear 0.5s ease both; }
+
+/* ── DETAIL PANEL ── */
+.detail-panel {
+  width: min(430px, 40%);
+  flex-shrink: 0;
+  max-height: var(--map-h);
+  overflow-y: auto;
+  background: linear-gradient(180deg, rgba(13,17,23,0.98) 0%, rgba(7,10,15,0.99) 100%);
+  border-left: 1px solid var(--border);
+  scrollbar-width: thin;
+  scrollbar-color: rgba(255,255,255,0.2) transparent;
+}
+.detail-panel[hidden] { display: none; }
+.panel-close {
+  position: sticky;
+  top: 0;
+  z-index: 5;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  padding: 10px 14px 10px 20px;
+  background: rgba(13,17,23,0.97);
+  border-bottom: 1px solid var(--border);
+}
+.panel-step { font-size: 13px; font-weight: 600; color: var(--text-secondary); }
+.close-btn {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  border: 1px solid rgba(255,255,255,0.16);
+  background: rgba(255,255,255,0.05);
+  color: var(--text-primary);
+  cursor: pointer;
+  font-size: 15px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.2s;
+}
+.close-btn:hover { background: rgba(255,255,255,0.14); }
+.panel-content { padding: 16px 20px 6px; outline: none; }
+.panel-nav { display: flex; justify-content: space-between; gap: 10px; padding: 8px 20px 20px; }
+.panel-nav button {
+  padding: 9px 14px;
+  background: rgba(255,255,255,0.05);
+  border: 1px solid rgba(255,255,255,0.16);
+  border-radius: 9px;
+  color: var(--text-primary);
+  cursor: pointer;
+  font: 600 13.5px/1.2 'DM Sans', system-ui, sans-serif;
+}
+.panel-nav button:hover { background: rgba(255,255,255,0.13); }
+.panel-nav button[hidden] { display: block; visibility: hidden; }
+
+.map-key { list-style: none; display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 6px 24px; margin-top: 12px; font-size: 14px; color: var(--text-secondary); }
+.map-key strong { color: var(--text-body); font-weight: 600; }
+kbd { font: 600 13px/1 ui-monospace, Consolas, monospace; padding: 2px 6px; border: 1px solid rgba(255,255,255,0.25); border-radius: 5px; color: var(--text-body); }
+code { font: 500 0.92em/1.4 ui-monospace, Consolas, monospace; color: #f1f5f9; overflow-wrap: anywhere; }
+
+/* ── CONCEPT CONTENT (list view and panel share it) ── */
+.list-view { padding: 30px 0 10px; }
+.list-view > p { color: var(--text-body); max-width: 78ch; margin-top: 6px; }
+.concept-list { list-style: none; margin-top: 16px; display: grid; gap: 16px; }
+.concept {
+  border: 1px solid var(--border);
+  border-left: 4px solid var(--c);
+  border-radius: 12px;
+  background: var(--bg-card);
+  padding: 18px 20px 16px;
+  scroll-margin-top: 12px;
+}
+.panel-content .concept-body, .concept { color: var(--text-body); }
+.concept h3, .panel-content h3 {
+  font-family: 'Outfit', sans-serif;
+  font-size: 21px;
+  font-weight: 800;
+  line-height: 1.25;
+  color: var(--c);
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  outline: none;
+}
+.c-step-n { width: 28px; height: 28px; font-size: 14px; }
+.c-icon { font-size: 22px; }
+.c-tag { font-style: italic; color: var(--text-secondary); margin-top: 4px; }
+.c-def {
+  margin-top: 12px;
+  padding: 14px 16px;
+  border-radius: 12px;
+  background: color-mix(in srgb, var(--c) 6%, transparent);
+  border: 1px solid color-mix(in srgb, var(--c) 18%, transparent);
+  font-size: 15.5px;
+  line-height: 1.7;
+}
+.concept h4, .panel-content h4 {
+  margin-top: 16px;
+  margin-bottom: 6px;
+  font-size: 12px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1.2px;
+  color: var(--text-secondary);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.concept h4::after, .panel-content h4::after { content: ''; flex: 1; height: 1px; background: var(--border); }
+.c-points { padding-left: 22px; font-size: 15px; line-height: 1.65; }
+.c-points li { margin-bottom: 6px; padding-left: 2px; }
+.c-points li::marker { color: var(--c); font-weight: 700; }
+.c-examples { list-style: none; display: grid; gap: 8px; font-size: 15px; }
+.c-examples li { padding: 10px 14px; background: rgba(0,0,0,0.35); border-radius: 10px; border-left: 3px solid var(--c); line-height: 1.55; }
+.c-examples strong { display: block; color: #f1f5f9; }
+.c-rels { list-style: none; display: grid; gap: 5px; font-size: 15px; }
+.c-rels li { padding: 7px 12px; border-radius: 9px; background: rgba(139,92,246,0.08); border: 1px solid rgba(139,92,246,0.2); color: #ddd6fe; }
+.c-rels em { color: #ffffff; font-weight: 600; }
+.c-rels a { color: #ddd6fe; font-weight: 600; }
+.c-note { margin-top: 8px; font-size: 15px; }
+.c-src { margin-top: 14px; font-size: 13.5px; color: var(--text-secondary); line-height: 1.6; }
+.c-asof { color: #fcd34d; font-weight: 600; }
+.panel-content .concept-body > h3 { font-size: 20px; }
+
+/* ── CHECK YOURSELF, RELATED GUIDES ── */
+.extra { padding: 26px 0 10px; }
+.extra > p { color: var(--text-body); max-width: 78ch; margin-top: 6px; }
+.quiz { margin-top: 12px; display: grid; gap: 8px; max-width: 900px; }
+.quiz details { border: 1px solid var(--border); border-radius: 10px; background: var(--bg-card); padding: 10px 14px; }
+.quiz summary { cursor: pointer; font-weight: 600; color: var(--text-primary); }
+.quiz details p { margin-top: 8px; color: var(--text-body); font-size: 15px; }
+.related { list-style: none; margin-top: 12px; display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 12px; }
+.related a {
+  display: block;
+  height: 100%;
+  padding: 14px 16px;
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  background: var(--bg-card);
+  text-decoration: none;
+  color: var(--text-body);
+  font-size: 14.5px;
+  line-height: 1.5;
+}
+.related a:hover { border-color: rgba(255,255,255,0.3); color: var(--text-body); }
+.related strong { display: block; font-family: 'Outfit', sans-serif; font-size: 16px; color: var(--link); margin-bottom: 2px; }
+.page-end { padding-bottom: 36px; }
+
+@media (max-width: 900px) {
+  .map-shell { flex-direction: column; }
+  .diagram-area { height: auto; aspect-ratio: 1240 / 720; flex: none; }
+  .detail-panel { width: 100%; max-height: none; overflow: visible; border-left: 0; border-top: 1px solid var(--border); }
+  .panel-close { position: static; }
+}
+@media (max-width: 640px) {
+  .wrap { padding: 0 16px; }
+  .header { padding: 14px 16px; }
+  .header-title { font-size: 22px; }
+  .diagram-area { aspect-ratio: 540 / 1060; max-height: 88vh; }
+  .concept { padding: 16px 14px 14px; }
+  .concept h3 { font-size: 19px; }
+  .map-btn { min-width: 38px; height: 38px; padding: 0 8px; }
+  .map-head h2 { flex: 1; }
+  .map-controls { width: 100%; margin-left: 0; }
+}
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  .node-group, .edge, .region { animation: none; }
+  .node-group.active .node-pulse { animation: none; opacity: 0.5; }
+  * { transition: none !important; }
+}
+@media print {
+  :root { --text-primary: #111827; --text-body: #1f2937; --text-secondary: #374151; --link: #1d4ed8; --border: #9ca3af; --bg-card: #ffffff; }
+  body { background: #ffffff; }
+  .map-section, .path { display: none; }
+  .header { background: #ffffff; }
+  .header-title { -webkit-text-fill-color: #111827; background: none; color: #111827; }
+  .concept { break-inside: avoid; }
+  .concept h3 { color: #111827; }
+  .c-examples li, .c-rels li, .c-def { background: #ffffff; color: #111827; }
+  .c-examples strong, .c-rels em, .c-rels a { color: #111827; }
+}
+</style>
+</head>
+<body>
+<!-- auc:bar -->
+<a class="auc-skip" href="#auc-main">Skip to content</a>
+<nav class="auc-bar" aria-label="Architect U'r Career">
+  <a class="auc-bar-home" href="../">Architect U'r Career</a>
+  <span class="auc-bar-sep" aria-hidden="true">/</span>
+  <span class="auc-bar-here">AI Knowledge Map</span>
+  <span class="auc-bar-right">
+    <span class="auc-bar-rev">Last reviewed: November 2026</span>
+    <a href="../#guides">All guides</a>
+    <a href="../about/">How this site is maintained</a>
+  </span>
+</nav>
+<!-- /auc:bar -->
+
+<!-- HEADER -->
+<header class="header">
+  <div>
+    <h1 class="header-title">The AI Knowledge Map</h1>
+    <p class="header-sub">Eleven ideas, from artificial intelligence to agentic AI, and how they fit together.</p>
+  </div>
+  <p class="header-ver">Version 3.0 &middot; November 2026</p>
+</header>
+
+<main id="auc-main">
+<div class="wrap">
+
+<!-- START HERE -->
+<section class="intro" aria-labelledby="start-h">
+  <h2 class="section-title" id="start-h">Start here: read the eleven ideas in this order</h2>
+  <p>Each step builds on the one before. Steps 1 to 6 zoom inwards, from the whole field of AI down to the large language model. Steps 7 to 11 are what people build around that model. <span class="js-only">Choose a step to open it on the map.</span><span class="no-js-only">Choose a step to jump to it in the list.</span></p>
+  <ol class="path" id="path" aria-label="Reading order">
+    <li><a href="#c-ai" data-id="ai" style="--c:#00D4AA"><span class="n" aria-hidden="true">1</span><span class="sr-only">Step 1: </span>AI</a></li>
+    <li><a href="#c-ml" data-id="ml" style="--c:#FF6B6B"><span class="n" aria-hidden="true">2</span><span class="sr-only">Step 2: </span>Machine learning</a></li>
+    <li><a href="#c-nn" data-id="nn" style="--c:#A78BFA"><span class="n" aria-hidden="true">3</span><span class="sr-only">Step 3: </span>Neural networks</a></li>
+    <li><a href="#c-nlp" data-id="nlp" style="--c:#F59E0B"><span class="n" aria-hidden="true">4</span><span class="sr-only">Step 4: </span>NLP</a></li>
+    <li><a href="#c-genai" data-id="genai" style="--c:#EC4899"><span class="n" aria-hidden="true">5</span><span class="sr-only">Step 5: </span>Generative AI</a></li>
+    <li><a href="#c-llm" data-id="llm" style="--c:#06B6D4"><span class="n" aria-hidden="true">6</span><span class="sr-only">Step 6: </span>LLM</a></li>
+    <li><a href="#c-rag" data-id="rag" style="--c:#10B981"><span class="n" aria-hidden="true">7</span><span class="sr-only">Step 7: </span>RAG</a></li>
+    <li><a href="#c-agent" data-id="agent" style="--c:#EF4444"><span class="n" aria-hidden="true">8</span><span class="sr-only">Step 8: </span>AI agent</a></li>
+    <li><a href="#c-mcp" data-id="mcp" style="--c:#F97316"><span class="n" aria-hidden="true">9</span><span class="sr-only">Step 9: </span>MCP</a></li>
+    <li><a href="#c-a2a" data-id="a2a" style="--c:#8B5CF6"><span class="n" aria-hidden="true">10</span><span class="sr-only">Step 10: </span>A2A</a></li>
+    <li><a href="#c-agentic" data-id="agentic" style="--c:#D946EF"><span class="n" aria-hidden="true">11</span><span class="sr-only">Step 11: </span>Agentic AI</a></li>
+  </ol>
+</section>
+
+<!-- MAP -->
+<section class="map-section" id="map" aria-labelledby="map-h">
+  <div class="map-head">
+    <h2 class="section-title" id="map-h">The map</h2>
+    <a class="map-btn" href="#list">List view</a>
+    <div class="map-controls" role="group" aria-label="Map view">
+      <button type="button" class="map-btn" data-map="zoom-out" aria-label="Zoom out" title="Zoom out">&minus;</button>
+      <button type="button" class="map-btn" data-map="zoom-in" aria-label="Zoom in" title="Zoom in">+</button>
+      <button type="button" class="map-btn" data-map="reset" aria-label="Reset the map view" title="Fit the whole map in view">Reset</button>
+      <span class="gap" aria-hidden="true"></span>
+      <button type="button" class="map-btn" data-map="left" aria-label="Move the map left" title="Move left">&larr;</button>
+      <button type="button" class="map-btn" data-map="up" aria-label="Move the map up" title="Move up">&uarr;</button>
+      <button type="button" class="map-btn" data-map="down" aria-label="Move the map down" title="Move down">&darr;</button>
+      <button type="button" class="map-btn" data-map="right" aria-label="Move the map right" title="Move right">&rarr;</button>
+    </div>
+  </div>
+  <div class="map-shell">
+    <div class="diagram-area" id="diagramArea">
+      <svg class="diagram-canvas" id="canvas" role="group" aria-label="Map of eleven AI ideas. Each numbered circle is a button that opens its explanation. The list view below has the same content."></svg>
+      <p class="map-toast" id="mapToast" aria-hidden="true"></p>
+      <p class="sr-only" id="mapStatus" role="status" aria-live="polite"></p>
+    </div>
+    <aside class="detail-panel" id="detailPanel" aria-label="Explanation of the selected idea" hidden>
+      <div class="panel-close">
+        <span class="panel-step" id="panelStep"></span>
+        <button type="button" class="close-btn" id="panelClose" aria-label="Close the explanation">&#10005;</button>
+      </div>
+      <div class="panel-content" id="panelContent"></div>
+      <div class="panel-nav">
+        <button type="button" id="panelPrev"></button>
+        <button type="button" id="panelNext"></button>
+      </div>
+    </aside>
+  </div>
+  <ul class="map-key">
+    <li><strong>Numbers</strong> give the reading order. Select a circle to read about it.</li>
+    <li><strong>A box inside a box</strong> means the inner idea is a branch of, a kind of, or built on the outer one.</li>
+    <li><strong>An arrow</strong> reads from its start, through its label, to its end: "RAG supplies facts to LLM".</li>
+    <li><strong>Move and zoom.</strong> Mouse: drag the map; hold Ctrl (Cmd on a Mac) and scroll to zoom. Touch screen or trackpad: two fingers move it, a pinch zooms it, and one finger scrolls the page. Keyboard: the buttons above the map, or the keys <kbd>+</kbd> and <kbd>-</kbd> to zoom and <kbd>0</kbd> to reset while the focus is in the map.</li>
+  </ul>
+</section>
+
+<!-- LIST VIEW: the content of the map, and the page for readers without JavaScript.
+     The map is drawn from these articles, so edit the content here and nowhere else.
+     - One <article class="concept"> is one circle; the order of the articles is the reading order.
+     - One <li data-to="..."> is one relationship, read as "this idea, data-rel, that idea".
+       data-kind="nest" is drawn as a box inside a box; the others are drawn as labelled arrows
+       (data-short is the shorter wording used on the arrow). The matching sentence in the other
+       article (the <li> without data-to) is plain text: change both together.
+     - Positions of the circles and boxes are in LAYOUTS in the script at the end of the page. -->
+<section class="list-view" id="list" aria-labelledby="list-h">
+  <h2 class="section-title" id="list-h">List view: the same eleven ideas, in reading order</h2>
+  <p>Everything on the map is written out here. Use it on a small screen, with a screen reader, or to print. <a class="js-only" href="#map">Back to the map</a></p>
+  <ol class="concept-list">
+<li>
+<article class="concept" id="c-ai" data-id="ai" data-label="AI" data-color="#00D4AA" data-icon="🧠" style="--c:#00D4AA">
+  <h3><span class="c-step-n" aria-hidden="true">1</span><span class="sr-only">Step 1: </span><span class="c-icon" aria-hidden="true">🧠</span> <span class="c-title">Artificial intelligence (AI)</span></h3>
+  <p class="c-tag">The widest box: getting machines to do things that seem to need intelligence</p>
+  <p class="c-def">Artificial intelligence is the field of building computer systems that carry out tasks we normally associate with human intelligence: learning from experience, understanding language, recognising patterns, planning and making decisions. It is a field of study with many branches, not one technology. It runs from the hand-written rules of 1980s expert systems to today's machine learning and agents.</p>
+  <h4>Key points</h4>
+  <ol class="c-points">
+    <li>The name comes from the Dartmouth Summer Research Project on Artificial Intelligence, a workshop organised by John McCarthy in 1956.</li>
+    <li>Its branches include machine learning, natural language processing, computer vision, robotics, planning and search, and rule-based (knowledge) systems.</li>
+    <li>Narrow AI does one kind of task, such as filtering spam or recognising speech. General AI would match people across most tasks. Nearly everything in use today is narrow. Whether the newest general-purpose models count as general intelligence is argued over, and there is no agreed test.</li>
+    <li>Not all AI learns. A route planner or a chess program can be built from search and rules alone. The kind that learns is machine learning, the next step.</li>
+  </ol>
+  <h4>Examples</h4>
+  <ul class="c-examples">
+    <li><strong>Route planning in a maps app</strong> Search algorithms find a path, and predictions from past and live traffic estimate the journey time.</li>
+    <li><strong>Email spam filters</strong> Sort incoming mail into wanted and unwanted by its patterns. An early everyday use of machine learning.</li>
+    <li><strong>Driver assistance in cars</strong> Combines computer vision with planning to hold a lane and keep a safe distance. The driver remains responsible.</li>
+  </ul>
+  <h4>How it connects</h4>
+  <ul class="c-rels">
+    <li><a href="#c-ml">Machine learning</a> <em>is a branch of</em> <strong>AI</strong>.</li>
+    <li><a href="#c-nlp">NLP</a> <em>is a branch of</em> <strong>AI</strong>.</li>
+  </ul>
+  <p class="c-note">Everything else on this map sits inside AI or is built from parts of it. Read the next steps as a zoom inwards: machine learning, then deep learning, then generative AI, then large language models.</p>
+  <p class="c-src"><strong>Sources, checked in November 2026:</strong> <a href="https://home.dartmouth.edu/about/artificial-intelligence-ai-coined-dartmouth" target="_blank" rel="noopener">Dartmouth College on the 1956 workshop</a>.</p>
+</article>
+</li>
+<li>
+<article class="concept" id="c-ml" data-id="ml" data-label="Machine learning" data-color="#FF6B6B" data-icon="📊" style="--c:#FF6B6B">
+  <h3><span class="c-step-n" aria-hidden="true">2</span><span class="sr-only">Step 2: </span><span class="c-icon" aria-hidden="true">📊</span> <span class="c-title">Machine learning (ML)</span></h3>
+  <p class="c-tag">Learning the rules from data, where a programmer would otherwise write them</p>
+  <p class="c-def">Machine learning is the branch of AI in which a system gets better at a task by finding patterns in data. You do not write the rule 'if the temperature is above 30 degrees, switch on the cooling'. You give the system many past examples and it works out the thresholds itself. Most of the AI in the news today is machine learning.</p>
+  <h4>Key points</h4>
+  <ol class="c-points">
+    <li><strong>Supervised learning:</strong> you supply examples with the right answer attached (photos labelled 'cat' or 'dog') and the model learns to predict the answer for new cases.</li>
+    <li><strong>Unsupervised learning:</strong> no answers are supplied. The model finds structure by itself, such as groups of similar customers in purchase records.</li>
+    <li><strong>Reinforcement learning:</strong> the system acts, receives a reward or a penalty, and adjusts. A program can learn a board game this way by playing against itself.</li>
+    <li><strong>Self-supervised learning:</strong> the labels come from the data itself, for example by hiding the next word of a sentence and asking the model to predict it. This is how large language models are pre-trained.</li>
+    <li>Common model families: linear and logistic regression, decision trees and random forests, gradient boosting, support vector machines, k-means clustering and neural networks.</li>
+    <li>A model is only as good as its data. Gaps and bias in the examples become gaps and bias in the predictions.</li>
+  </ol>
+  <h4>Examples</h4>
+  <ul class="c-examples">
+    <li><strong>Recommendations</strong> Streaming and shopping services suggest what to watch or buy next, from your history and from people with similar tastes.</li>
+    <li><strong>Card fraud detection</strong> Models trained on past transactions flag a payment that does not fit the customer's usual pattern, while the payment is being made.</li>
+    <li><strong>Predictive maintenance</strong> Sensor readings from machines are used to predict a failure before it happens, so that the repair can be planned.</li>
+  </ul>
+  <h4>How it connects</h4>
+  <ul class="c-rels">
+    <li data-to="ai" data-rel="is a branch of" data-kind="nest"><strong>Machine learning</strong> <em>is a branch of</em> <a href="#c-ai">AI</a>.</li>
+    <li><a href="#c-nn">Deep learning</a> <em>is a kind of</em> <strong>machine learning</strong>.</li>
+  </ul>
+  <p class="c-note">Deep learning, the next step, is the part of machine learning that uses neural networks with many layers.</p>
+</article>
+</li>
+<li>
+<article class="concept" id="c-nn" data-id="nn" data-label="Neural networks" data-color="#A78BFA" data-icon="🔗" style="--c:#A78BFA">
+  <h3><span class="c-step-n" aria-hidden="true">3</span><span class="sr-only">Step 3: </span><span class="c-icon" aria-hidden="true">🔗</span> <span class="c-title">Neural networks and deep learning</span></h3>
+  <p class="c-tag">Layers of simple units that learn their own features</p>
+  <p class="c-def">A neural network is a model made of layers of simple connected units, loosely inspired by the neurons of the brain. Each connection has a weight, a number that training adjusts. Deep learning means neural networks with many layers. The early layers pick up simple features, such as edges in a photograph, and the later layers combine them into complex ones, such as a face.</p>
+  <h4>Key points</h4>
+  <ol class="c-points">
+    <li><strong>Shape:</strong> an input layer, one or more hidden layers and an output layer. Each layer transforms what the previous one produced.</li>
+    <li><strong>Training:</strong> the network makes a prediction and the error is measured. Backpropagation works out how much each weight contributed to the error, and gradient descent nudges every weight to reduce it. This is repeated over a very large number of examples.</li>
+    <li><strong>Main architectures:</strong> convolutional networks (CNNs) for images, recurrent networks (RNNs and LSTMs) for sequences, and Transformers, which now lead in language and are widely used for images and audio too.</li>
+    <li>The Transformer was introduced in the 2017 paper 'Attention Is All You Need' by Ashish Vaswani and colleagues. Its self-attention mechanism lets every part of the input be weighed against every other part.</li>
+    <li>Deep learning needs a great deal of data and computing power, usually graphics processors (GPUs) or other specialised chips.</li>
+  </ol>
+  <h4>Examples</h4>
+  <ul class="c-examples">
+    <li><strong>Medical imaging</strong> Convolutional networks highlight possible tumours in X-rays and scans for a radiologist to review.</li>
+    <li><strong>Speech recognition</strong> Voice assistants and dictation tools use neural networks to turn speech into text.</li>
+    <li><strong>AlphaFold</strong> DeepMind's network predicts the three-dimensional shape of proteins. In July 2022 its public database grew to over 200 million predicted structures.</li>
+  </ul>
+  <h4>How it connects</h4>
+  <ul class="c-rels">
+    <li data-to="ml" data-rel="is a kind of" data-kind="nest"><strong>Deep learning</strong> <em>is a kind of</em> <a href="#c-ml">machine learning</a>.</li>
+    <li><a href="#c-genai">Generative AI</a> <em>is built on</em> <strong>deep learning (neural networks)</strong>.</li>
+  </ul>
+  <p class="c-note">The Transformer is the architecture behind the large language models in step 6.</p>
+  <p class="c-src"><strong>Sources, checked in November 2026:</strong> <a href="https://arxiv.org/abs/1706.03762" target="_blank" rel="noopener">Vaswani and others, 'Attention Is All You Need' (2017)</a>; <a href="https://deepmind.google/discover/blog/alphafold-reveals-the-structure-of-the-protein-universe/" target="_blank" rel="noopener">Google DeepMind on the AlphaFold database (July 2022)</a>.</p>
+</article>
+</li>
+<li>
+<article class="concept" id="c-nlp" data-id="nlp" data-label="NLP" data-color="#F59E0B" data-icon="💬" style="--c:#F59E0B">
+  <h3><span class="c-step-n" aria-hidden="true">4</span><span class="sr-only">Step 4: </span><span class="c-icon" aria-hidden="true">💬</span> <span class="c-title">Natural language processing (NLP)</span></h3>
+  <p class="c-tag">Getting computers to work with human language</p>
+  <p class="c-def">Natural language processing is the branch of AI concerned with human language, written and spoken: understanding it, producing it and translating it. Language is hard for machines because it is ambiguous and depends on context. People use sarcasm and idiom, and often mean more than they say. NLP is defined by the problem and not by a technique, which is why the map places it inside AI but outside machine learning: the earliest systems were hand-written rules.</p>
+  <h4>Key points</h4>
+  <ol class="c-points">
+    <li><strong>Typical tasks:</strong> splitting text into tokens, tagging parts of speech, finding the names of people and places (named entity recognition), judging sentiment, translating, summarising and answering questions.</li>
+    <li><strong>Four stages:</strong> hand-written rules (1950s to 1980s), statistical methods (1990s and 2000s), neural networks (2010s) and Transformers (2017 onwards).</li>
+    <li>Word embeddings such as Word2Vec and GloVe represent each word as a list of numbers, placed so that words with similar meanings sit close together.</li>
+    <li>Transformers read all the words of a passage together, using self-attention. Earlier networks read one word at a time.</li>
+    <li>Large language models now handle most of these tasks with one general model, where each task once needed a model of its own.</li>
+  </ol>
+  <h4>Examples</h4>
+  <ul class="c-examples">
+    <li><strong>Machine translation</strong> In June 2024 Google Translate added 110 languages in a single release, using a large language model.</li>
+    <li><strong>Sentiment analysis</strong> Companies sort large volumes of reviews and social media posts into positive, negative and neutral.</li>
+    <li><strong>Contract review</strong> Tools pull clauses, obligations and dates out of long legal documents for a lawyer to check.</li>
+  </ul>
+  <h4>How it connects</h4>
+  <ul class="c-rels">
+    <li data-to="ai" data-rel="is a branch of" data-kind="nest"><strong>NLP</strong> <em>is a branch of</em> <a href="#c-ai">AI</a>.</li>
+    <li><a href="#c-llm">An LLM</a> <em>is used for</em> <strong>NLP</strong>.</li>
+  </ul>
+  <p class="c-note">Almost all NLP today is done with machine learning, and most of it with the large language models of step 6.</p>
+  <p class="c-src"><strong>Sources, checked in November 2026:</strong> <a href="https://blog.google/products/translate/google-translate-new-languages-2024/" target="_blank" rel="noopener">Google, '110 new languages are coming to Google Translate' (June 2024)</a>.</p>
+</article>
+</li>
+<li>
+<article class="concept" id="c-genai" data-id="genai" data-label="Generative AI" data-color="#EC4899" data-icon="✨" style="--c:#EC4899">
+  <h3><span class="c-step-n" aria-hidden="true">5</span><span class="sr-only">Step 5: </span><span class="c-icon" aria-hidden="true">✨</span> <span class="c-title">Generative AI</span></h3>
+  <p class="c-tag">Models that produce new content: text, images, audio, video and code</p>
+  <p class="c-def">Generative AI is the name for models that produce new content, where earlier systems mostly sorted or scored existing data. A generative model learns the patterns in a very large collection of text, images, audio or video. It then produces new output that follows those patterns without copying any single example. Today's generative models are deep neural networks, which is why this box sits inside deep learning on the map.</p>
+  <h4>Key points</h4>
+  <ol class="c-points">
+    <li><strong>Main families:</strong> large language models for text and code; diffusion models, the technique behind many image and video generators (Stable Diffusion is a published example); and the earlier GANs and VAEs.</li>
+    <li>A foundation model is a large model trained once on broad data and then adapted to many tasks.</li>
+    <li>Many current models are multimodal: one model accepts or produces more than one kind of content, such as text and images.</li>
+    <li>Generative AI became widely known when ChatGPT was released in November 2022. A UBS study reported by Reuters estimated that it reached 100 million monthly users two months later.</li>
+    <li>A generative model produces what is likely, not what is true. Its output needs checking, and it raises questions of copyright, consent and deepfakes.</li>
+  </ol>
+  <h4>Examples</h4>
+  <ul class="c-examples">
+    <li><strong>Chat assistants</strong> ChatGPT, Claude and Gemini write, summarise, explain and translate text in conversation.</li>
+    <li><strong>Image generation</strong> A description such as 'a lighthouse at dawn, in watercolour' is turned into a picture.</li>
+    <li><strong>Coding assistants</strong> Tools such as GitHub Copilot suggest code, explain it and make changes across a project.</li>
+  </ul>
+  <h4>How it connects</h4>
+  <ul class="c-rels">
+    <li data-to="nn" data-rel="is built on" data-kind="nest"><strong>Generative AI</strong> <em>is built on</em> <a href="#c-nn">deep learning (neural networks)</a>.</li>
+    <li><a href="#c-llm">An LLM</a> <em>is one kind of</em> <strong>generative AI</strong>.</li>
+  </ul>
+  <p class="c-note">Agentic AI (step 11) takes generative models one stage further: from producing content when asked, to carrying out tasks.</p>
+  <p class="c-src"><strong>Sources, checked in November 2026:</strong> <a href="https://arxiv.org/abs/2112.10752" target="_blank" rel="noopener">Rombach and others, the latent diffusion paper behind Stable Diffusion (2021)</a>; <a href="https://www.euronews.com/next/2023/02/02/openai-chatgpt" target="_blank" rel="noopener">Reuters report of the UBS estimate, carried by Euronews (2 February 2023)</a>.</p>
+</article>
+</li>
+<li>
+<article class="concept" id="c-llm" data-id="llm" data-label="LLM" data-color="#06B6D4" data-icon="📝" style="--c:#06B6D4">
+  <h3><span class="c-step-n" aria-hidden="true">6</span><span class="sr-only">Step 6: </span><span class="c-icon" aria-hidden="true">📝</span> <span class="c-title">Large language models (LLMs)</span></h3>
+  <p class="c-tag">Trained to predict the next token, and far more capable than that sounds</p>
+  <p class="c-def">A large language model is a very large Transformer network trained on a very large amount of text. Its basic job is simple: given the text so far, predict the next token (a word or part of a word). Repeating that step produces whole answers. Done at sufficient scale, this one skill yields abilities that nobody programmed in directly: answering questions, writing code, translating, summarising and working through a problem step by step.</p>
+  <h4>Key points</h4>
+  <ol class="c-points">
+    <li><strong>Tokens:</strong> text is cut into tokens before the model sees it. Length limits and prices are counted in tokens, not words.</li>
+    <li><strong>Size</strong> is counted in parameters, the learned weights. 'Large' has no fixed threshold, and many vendors do not publish the figure for their models.</li>
+    <li><strong>Training order:</strong> first, pre-training on raw text by next-token prediction. Second, supervised fine-tuning on example instructions with good answers. Third, further tuning from human feedback on the model's own answers (RLHF and related methods). The InstructGPT paper describes the second and third stages.</li>
+    <li><strong>Context window:</strong> the amount of text the model can take in at one time, counted in tokens. Early generative models handled about 8,000 tokens. Several current models accept a million or more. Check the documentation of the model you use.</li>
+    <li><strong>Limits:</strong> a model can state something false with complete fluency (hallucination). It knows nothing after its training cut-off date. It cannot look anything up or take any action unless it is connected to tools. Steps 7 to 10 deal with those limits.</li>
+    <li>Models are released in families and replaced often. Learn the ideas, and look up the current version when you need it.</li>
+  </ol>
+  <h4>Examples</h4>
+  <ul class="c-examples">
+    <li><strong>Hosted model families</strong> GPT (OpenAI), Claude (Anthropic) and Gemini (Google) are offered through chat applications and through programming interfaces (APIs). Each family comes in several sizes that trade capability against speed and cost.</li>
+    <li><strong>Open-weight models</strong> Some developers publish the trained weights, so that a model can be downloaded and run on your own hardware. Hubs such as Hugging Face list them.</li>
+    <li><strong>Small language models</strong> Cut-down models that run on a laptop or a phone, trading some ability for privacy, speed and cost.</li>
+  </ul>
+  <h4>How it connects</h4>
+  <ul class="c-rels">
+    <li data-to="genai" data-rel="is one kind of" data-kind="nest"><strong>An LLM</strong> <em>is one kind of</em> <a href="#c-genai">generative AI</a>.</li>
+    <li data-to="nlp" data-rel="is used for"><strong>An LLM</strong> <em>is used for</em> <a href="#c-nlp">NLP</a>.</li>
+    <li><a href="#c-rag">RAG</a> <em>supplies facts to</em> <strong>an LLM</strong>.</li>
+    <li><a href="#c-agent">An AI agent</a> <em>is built on</em> <strong>an LLM</strong>.</li>
+  </ul>
+  <p class="c-note">Technically an LLM is a neural network (step 3) of the Transformer type. It is the reasoning engine inside every later item on this map.</p>
+  <p class="c-src"><strong>Sources, checked in November 2026:</strong> <a href="https://arxiv.org/abs/2203.02155" target="_blank" rel="noopener">Ouyang and others, the InstructGPT paper (2022)</a>; <a href="https://aistudio.google.com/docs/long-context" target="_blank" rel="noopener">Google, long context in the Gemini API</a>; <a href="https://platform.claude.com/docs/en/about-claude/models/overview" target="_blank" rel="noopener">Anthropic, Claude models overview</a>; <a href="https://developers.openai.com/api/docs/models" target="_blank" rel="noopener">OpenAI, models</a>.</p>
+</article>
+</li>
+<li>
+<article class="concept" id="c-rag" data-id="rag" data-label="RAG" data-color="#10B981" data-icon="🔍" style="--c:#10B981">
+  <h3><span class="c-step-n" aria-hidden="true">7</span><span class="sr-only">Step 7: </span><span class="c-icon" aria-hidden="true">🔍</span> <span class="c-title">Retrieval-augmented generation (RAG)</span></h3>
+  <p class="c-tag">Look it up first, then answer</p>
+  <p class="c-def">Retrieval-augmented generation is a design pattern, not a model. Before the LLM answers, the system searches a store of documents for passages relevant to the question and places them in the prompt, so that the model answers from that material. The name comes from a 2020 paper by Patrick Lewis and colleagues. RAG reduces three weaknesses of an LLM used alone: invented facts, out-of-date knowledge and ignorance of your organisation's own documents. It reduces them. It does not remove them.</p>
+  <h4>Key points</h4>
+  <ol class="c-points">
+    <li><strong>Three steps:</strong> retrieve (search the document store), augment (add what was found to the prompt), generate (the LLM writes an answer from it).</li>
+    <li><strong>Embeddings:</strong> an embedding model turns each passage into a list of numbers, so that passages with similar meaning sit close together. This allows search by meaning, not only by matching words.</li>
+    <li>The passages are kept in a vector index, either in a dedicated vector database or as a feature of an ordinary database. Good systems combine meaning-based search with keyword search and then re-rank the results.</li>
+    <li>Preparation matters as much as the model. How the documents are split into chunks, cleaned and labelled decides what can be found.</li>
+    <li>The knowledge can be updated without retraining the model: change the documents and the next answer uses them.</li>
+    <li>Retrieval must respect permissions. A user should only receive answers drawn from documents that user is allowed to read.</li>
+  </ol>
+  <h4>Examples</h4>
+  <ul class="c-examples">
+    <li><strong>Staff policy assistant</strong> Answers HR questions from the organisation's own policy documents and shows which document each answer came from.</li>
+    <li><strong>Legal research</strong> Finds the relevant cases and statutes first, then drafts an analysis that cites them, for a lawyer to verify.</li>
+    <li><strong>Product support</strong> Pulls the current documentation and known issues, so that troubleshooting advice matches the latest release.</li>
+  </ul>
+  <h4>How it connects</h4>
+  <ul class="c-rels">
+    <li data-to="llm" data-rel="supplies facts to"><strong>RAG</strong> <em>supplies facts to</em> <a href="#c-llm">an LLM</a>.</li>
+    <li><a href="#c-agent">An AI agent</a> <em>uses</em> <strong>RAG</strong>.</li>
+  </ul>
+  <p class="c-note">Retrieval relies on embedding models, which are neural networks (step 3). Two variants you will meet: GraphRAG retrieves from a knowledge graph, and in agentic RAG an agent decides what to search for and when. A document store can also be offered to an assistant as an MCP server (step 9). For the data foundations, see the <a href="../data-intelligence-layer/">Data Intelligence Layer</a> guide.</p>
+  <p class="c-src"><strong>Sources, checked in November 2026:</strong> <a href="https://arxiv.org/abs/2005.11401" target="_blank" rel="noopener">Lewis and others, 'Retrieval-Augmented Generation for Knowledge-Intensive NLP Tasks' (2020)</a>.</p>
+</article>
+</li>
+<li>
+<article class="concept" id="c-agent" data-id="agent" data-label="AI agent" data-color="#EF4444" data-icon="🤖" style="--c:#EF4444">
+  <h3><span class="c-step-n" aria-hidden="true">8</span><span class="sr-only">Step 8: </span><span class="c-icon" aria-hidden="true">🤖</span> <span class="c-title">AI agent</span></h3>
+  <p class="c-tag">An LLM that can act, not only answer</p>
+  <p class="c-def">An AI agent is a software system built around an LLM that works towards a goal by taking actions. A chatbot answers one prompt at a time. An agent breaks a task into steps, chooses a tool for each step, looks at the result and decides what to do next, until the goal is met or it reaches a limit. The LLM does the reasoning. The program around it, often called the runtime or harness, runs the tools and enforces the limits.</p>
+  <h4>Key points</h4>
+  <ol class="c-points">
+    <li><strong>The loop:</strong> perceive (take in the goal and the context), plan, act (call a tool), observe the result and adapt. Repeat until the goal is met or the budget of steps, time or money runs out.</li>
+    <li><strong>Tools</strong> turn text into action: calling an API, querying a database, running code, searching the web, reading and writing files.</li>
+    <li><strong>Memory:</strong> working memory is whatever is in the context window now. Longer-term stores keep facts, past episodes and learned procedures between sessions.</li>
+    <li><strong>Limits are part of the design:</strong> which tools the agent may use, what it must ask a person to approve, and a record of everything it did.</li>
+    <li><strong>Frameworks</strong> change quickly. Three in use in November 2026: <a href="https://www.langchain.com/langgraph" target="_blank" rel="noopener">LangGraph</a>, Google's <a href="https://adk.dev/" target="_blank" rel="noopener">Agent Development Kit</a> and <a href="https://learn.microsoft.com/en-us/agent-framework/overview/agent-framework-overview" target="_blank" rel="noopener">Microsoft Agent Framework</a>, the successor to AutoGen, which is now in maintenance mode.</li>
+    <li>An agent can be attacked through what it reads: a web page or a document can carry instructions aimed at the agent (prompt injection). See the <a href="../ai-security/">Securing AI Systems and Agents</a> guide.</li>
+  </ol>
+  <h4>Examples</h4>
+  <ul class="c-examples">
+    <li><strong>Coding agent</strong> Given a task, it reads the repository, edits several files, runs the tests, fixes what failed and proposes the change for review.</li>
+    <li><strong>Customer support agent</strong> Looks up the order, applies the refund policy, takes the permitted action and hands over to a person when the case is outside its limits.</li>
+    <li><strong>Research agent</strong> Searches for sources, reads them, compares what they say and writes a report with citations.</li>
+  </ul>
+  <h4>How it connects</h4>
+  <ul class="c-rels">
+    <li data-to="llm" data-rel="is built on"><strong>An AI agent</strong> <em>is built on</em> <a href="#c-llm">an LLM</a>.</li>
+    <li data-to="rag" data-rel="uses"><strong>An AI agent</strong> <em>uses</em> <a href="#c-rag">RAG</a>.</li>
+    <li data-to="mcp" data-rel="reaches tools and data through" data-short="reaches tools via"><strong>An AI agent</strong> <em>reaches tools and data through</em> <a href="#c-mcp">MCP</a>.</li>
+    <li data-to="a2a" data-rel="talks to other agents through" data-short="talks to agents via"><strong>An AI agent</strong> <em>talks to other agents through</em> <a href="#c-a2a">A2A</a>.</li>
+    <li><a href="#c-agentic">Agentic AI</a> <em>is built from</em> <strong>AI agents</strong>.</li>
+  </ul>
+  <p class="c-note">For how an agent runtime is put together, see the <a href="../agentic-ai-runtime/">Agentic AI Runtime Architecture</a> guide.</p>
+  <p class="c-src"><strong>Sources, checked in November 2026:</strong> <a href="https://github.com/microsoft/autogen" target="_blank" rel="noopener">AutoGen repository notice on maintenance mode</a>.</p>
+</article>
+</li>
+<li>
+<article class="concept" id="c-mcp" data-id="mcp" data-label="MCP" data-color="#F97316" data-icon="🔌" style="--c:#F97316">
+  <h3><span class="c-step-n" aria-hidden="true">9</span><span class="sr-only">Step 9: </span><span class="c-icon" aria-hidden="true">🔌</span> <span class="c-title">Model Context Protocol (MCP)</span></h3>
+  <p class="c-tag">One standard way to plug tools and data into an AI application</p>
+  <p class="c-def">The Model Context Protocol is an open protocol for connecting LLM applications to external data sources and tools. Anthropic published it in November 2024. Before it, every pairing of an AI application and a tool needed its own connector. With a shared protocol, a tool is wrapped once as an MCP server and any compatible application can use it. The project's own documentation compares it to a USB-C port for AI applications. Since December 2025 MCP has been an open project of the Agentic AI Foundation, part of the Linux Foundation.</p>
+  <h4>Key points <span class="c-asof">(as of november 2026)</span></h4>
+  <ol class="c-points">
+    <li><strong>Three roles.</strong> The host is the AI application the user sees. The host runs one client for each connection, and each client talks to exactly one server. A server exposes one focused set of data or tools.</li>
+    <li><strong>A server can offer three things:</strong> resources (data to read), prompts (reusable templates) and tools (functions the model can call).</li>
+    <li><strong>Wire format:</strong> messages are JSON-RPC 2.0. There are two standard transports: stdio for a server running on the same machine, and Streamable HTTP for a remote one. Authorisation for HTTP servers is optional and based on OAuth 2.1.</li>
+    <li><strong>Current revision: 2026-07-28.</strong> It made the protocol stateless. The opening 'initialize' handshake and protocol-level sessions were removed, and every request now carries its own protocol version and capabilities. Long-running Tasks moved into an official extension, and the Roots, Sampling and Logging features are deprecated. Anything written before mid-2026 describes the older, session-based design.</li>
+    <li><strong>Adoption:</strong> in December 2025 Anthropic reported more than 10,000 active public MCP servers, and support in ChatGPT, Cursor, Gemini, Microsoft Copilot and Visual Studio Code.</li>
+    <li><strong>Security:</strong> a tool is code that runs on the model's say-so. The specification tells hosts to obtain the user's consent before a tool is invoked, and to treat a tool's description of itself as untrusted unless it comes from a trusted server.</li>
+  </ol>
+  <h4>Examples</h4>
+  <ul class="c-examples">
+    <li><strong>A chat assistant with connectors</strong> The assistant reads a code repository, searches a team chat and queries a shared drive, each through its own MCP server.</li>
+    <li><strong>A coding assistant in an editor</strong> MCP servers give the assistant access to project files, documentation and a database, under the user's control.</li>
+    <li><strong>Enterprise data</strong> A company wraps its customer system or data warehouse as an MCP server once, and every approved AI application can use it.</li>
+  </ul>
+  <h4>How it connects</h4>
+  <ul class="c-rels">
+    <li data-to="a2a" data-rel="works alongside" data-both><strong>MCP</strong> <em>works alongside</em> <a href="#c-a2a">A2A</a>.</li>
+    <li><a href="#c-agent">An AI agent</a> <em>reaches tools and data through</em> <strong>MCP</strong>.</li>
+  </ul>
+  <p class="c-note">MCP connects one agent to its tools and data. A2A (step 10) connects one agent to another agent. They are designed to be used together. Read the <a href="https://modelcontextprotocol.io/specification/2026-07-28" target="_blank" rel="noopener">MCP specification, revision 2026-07-28</a>.</p>
+  <p class="c-src"><strong>Sources, checked in November 2026:</strong> <a href="https://modelcontextprotocol.io/specification/versioning" target="_blank" rel="noopener">MCP versioning page (current revision)</a>; <a href="https://modelcontextprotocol.io/specification/2026-07-28/changelog" target="_blank" rel="noopener">MCP changelog for 2026-07-28</a>; <a href="https://modelcontextprotocol.io/docs/getting-started/intro" target="_blank" rel="noopener">MCP documentation, introduction</a>; <a href="https://www.anthropic.com/news/model-context-protocol" target="_blank" rel="noopener">Anthropic, 'Introducing the Model Context Protocol' (25 November 2024)</a>; <a href="https://www.anthropic.com/news/donating-the-model-context-protocol-and-establishing-of-the-agentic-ai-foundation" target="_blank" rel="noopener">Anthropic on donating MCP to the Agentic AI Foundation (9 December 2025)</a>.</p>
+</article>
+</li>
+<li>
+<article class="concept" id="c-a2a" data-id="a2a" data-label="A2A" data-color="#8B5CF6" data-icon="🤝" style="--c:#8B5CF6">
+  <h3><span class="c-step-n" aria-hidden="true">10</span><span class="sr-only">Step 10: </span><span class="c-icon" aria-hidden="true">🤝</span> <span class="c-title">Agent2Agent Protocol (A2A)</span></h3>
+  <p class="c-tag">A standard way for one agent to hand work to another</p>
+  <p class="c-def">The Agent2Agent (A2A) Protocol is an open protocol that lets AI agents built by different teams, on different frameworks, find each other and work on tasks together. Google introduced it in April 2025 and the Linux Foundation became its home in June 2025. Version 1.0, the first stable specification, was released in March 2026. In August 2026 the project joined the Agentic AI Foundation, alongside MCP.</p>
+  <h4>Key points <span class="c-asof">(as of november 2026)</span></h4>
+  <ol class="c-points">
+    <li><strong>Two roles.</strong> A client agent asks for work and a remote agent (the A2A server) does it. The client sees the remote agent only from the outside: how it works, what it remembers and which tools it uses are not exposed.</li>
+    <li><strong>Agent Card:</strong> a JSON document in which an agent states its identity, skills, endpoint and authentication requirements. By convention it is published at <code>/.well-known/agent-card.json</code>. Before version 0.3 the file was called <code>agent.json</code>, which older tutorials still show.</li>
+    <li><strong>Task:</strong> the unit of work, with a defined life cycle. A task is submitted, then working, and it ends as completed, failed, cancelled or rejected.</li>
+    <li><strong>Two states pause a task:</strong> input-required (the remote agent needs more information) and auth-required (it needs further authorisation). Being able to stop and ask is what separates delegating to an agent from calling a function.</li>
+    <li><strong>Three ways to get the result:</strong> ask and poll, receive a stream of updates, or register a webhook and be notified, which suits long-running tasks.</li>
+    <li><strong>Three protocol bindings</strong> that must behave the same: JSON-RPC, gRPC and HTTP with JSON.</li>
+  </ol>
+  <h4>Examples</h4>
+  <ul class="c-examples">
+    <li><strong>Hiring</strong> A hiring agent delegates to specialists: one sources candidates, another schedules interviews, a third requests background checks.</li>
+    <li><strong>Supply chain</strong> A stock agent notices a shortage and asks suppliers' agents for quotes. A person approves the order.</li>
+    <li><strong>Across vendors' platforms</strong> Agents inside a customer system, a service desk and a finance system each handle their own part of one customer escalation.</li>
+  </ul>
+  <h4>How it connects</h4>
+  <ul class="c-rels">
+    <li><a href="#c-agent">An AI agent</a> <em>talks to other agents through</em> <strong>A2A</strong>.</li>
+    <li><a href="#c-mcp">MCP</a> <em>works alongside</em> <strong>A2A</strong>.</li>
+  </ul>
+  <p class="c-note">The A2A project describes the split this way: MCP connects each agent to its own tools, and A2A connects the agents to each other. Read the <a href="https://a2a-protocol.org/latest/specification/" target="_blank" rel="noopener">A2A specification, version 1.0</a>.</p>
+  <p class="c-src"><strong>Sources, checked in November 2026:</strong> <a href="https://github.com/a2aproject/A2A/releases" target="_blank" rel="noopener">A2A releases (v1.0.0, 12 March 2026)</a>; <a href="https://a2a-protocol.org/latest/topics/key-concepts/" target="_blank" rel="noopener">A2A key concepts</a>; <a href="https://a2a-protocol.org/latest/topics/a2a-and-mcp/" target="_blank" rel="noopener">A2A and MCP</a>; <a href="https://www.linuxfoundation.org/press/linux-foundation-launches-the-agent2agent-protocol-project-to-enable-secure-intelligent-communication-between-ai-agents" target="_blank" rel="noopener">Linux Foundation announcement (23 June 2025)</a>; <a href="https://aaif.io/blog/a2a-joins-aaif" target="_blank" rel="noopener">Agentic AI Foundation, 'A2A joins AAIF' (17 August 2026)</a>.</p>
+</article>
+</li>
+<li>
+<article class="concept" id="c-agentic" data-id="agentic" data-label="Agentic AI" data-color="#D946EF" data-icon="⚡" style="--c:#D946EF">
+  <h3><span class="c-step-n" aria-hidden="true">11</span><span class="sr-only">Step 11: </span><span class="c-icon" aria-hidden="true">⚡</span> <span class="c-title">Agentic AI</span></h3>
+  <p class="c-tag">From AI that answers to AI that carries out work</p>
+  <p class="c-def">Agentic AI is an approach, not a product: building systems in which AI agents pursue goals with a degree of independence, inside limits that people set. 'AI agent' names one worker. 'Agentic AI' names the whole arrangement: several agents, the orchestration that coordinates them, the protocols that connect them and the governance that keeps them within bounds.</p>
+  <h4>Key points</h4>
+  <ol class="c-points">
+    <li><strong>What makes a system agentic:</strong> it works towards a goal, plans its own steps, uses tools to act, adapts when a step fails, and needs less step-by-step instruction than a chatbot.</li>
+    <li><strong>Difference from generative AI:</strong> a generative model produces content when asked. An agentic system decides what to do next and does it.</li>
+    <li><strong>Common shapes:</strong> one orchestrating agent directing specialists; peer agents passing work between themselves; agent features built into existing software.</li>
+    <li>Autonomy is a dial, not a switch. Sensible deployments keep a person approving the steps that matter.</li>
+    <li><strong>Shared standards have a common home.</strong> The Agentic AI Foundation, part of the Linux Foundation, was founded in December 2025 by Anthropic, Block and OpenAI. In November 2026 its projects include MCP, A2A and AGENTS.md.</li>
+    <li><strong>Adoption:</strong> in a survey of 2,102 people run in spring 2025 by MIT Sloan Management Review and BCG, 35% said their organisation had adopted agentic AI and a further 44% planned to deploy it.</li>
+    <li>Action brings new risk. An agent that can be tricked can do damage, not only say something wrong, so identity, permissions, approval and audit matter as much as the quality of the model.</li>
+  </ol>
+  <h4>Examples</h4>
+  <ul class="c-examples">
+    <li><strong>IT operations</strong> Agents watch the systems, diagnose a fault, propose or apply a fix within agreed limits, confirm that it worked and write the incident report.</li>
+    <li><strong>Procurement</strong> Agents spot a need from stock levels, compare suppliers, request quotes from suppliers' agents over A2A and prepare the purchase order for approval.</li>
+    <li><strong>Clinical decision support</strong> Agents gather a patient's records and current research and draft options for the clinician, who decides.</li>
+  </ul>
+  <h4>How it connects</h4>
+  <ul class="c-rels">
+    <li data-to="agent" data-rel="is built from"><strong>Agentic AI</strong> <em>is built from</em> <a href="#c-agent">AI agents</a>.</li>
+  </ul>
+  <p class="c-note">Agentic AI is where the whole map comes together: LLMs reason, RAG supplies knowledge, MCP connects tools, A2A connects agents, and agents do the work. It extends generative AI (step 5) from producing content to taking action.</p>
+  <p class="c-src"><strong>Sources, checked in November 2026:</strong> <a href="https://www.anthropic.com/news/donating-the-model-context-protocol-and-establishing-of-the-agentic-ai-foundation" target="_blank" rel="noopener">Anthropic on the founding of the Agentic AI Foundation (9 December 2025)</a>; <a href="https://aaif.io/projects/" target="_blank" rel="noopener">Agentic AI Foundation, projects</a>; <a href="https://sloanreview.mit.edu/projects/the-emerging-agentic-enterprise-how-leaders-must-navigate-a-new-age-of-ai/" target="_blank" rel="noopener">MIT Sloan Management Review and BCG, 'The Emerging Agentic Enterprise' (18 November 2025)</a>.</p>
+</article>
+</li>
+  </ol>
+</section>
+
+<!-- CHECK YOURSELF -->
+<section class="extra" aria-labelledby="quiz-h">
+  <h2 class="section-title" id="quiz-h">Check yourself</h2>
+  <p>Answer each question in your head, then open it.</p>
+  <div class="quiz">
+    <details><summary>Is every AI system a machine learning system?</summary><p>No. Machine learning is one branch of AI. A route planner built from search and rules is AI without any learning.</p></details>
+    <details><summary>Starting from an LLM, which boxes do you pass through on the way out to AI?</summary><p>Generative AI, then deep learning (neural networks), then machine learning, then AI.</p></details>
+    <details><summary>Does RAG change the model or the prompt?</summary><p>The prompt. The model is untouched. The passages that were retrieved are added to the prompt, and the model answers from them.</p></details>
+    <details><summary>An agent needs to query a database, and to hand a task to another team's agent. Which protocol serves each?</summary><p>MCP for the database, because it connects an agent to tools and data. A2A for the other agent, because it connects agents to each other.</p></details>
+    <details><summary>What is the difference between an AI agent and agentic AI?</summary><p>An AI agent is one worker: an LLM with tools, working towards a goal. Agentic AI is the whole approach: several agents, their orchestration, the protocols between them and the limits that people set.</p></details>
+  </div>
+</section>
+
+<!-- RELATED GUIDES -->
+<section class="extra page-end" aria-labelledby="next-h">
+  <h2 class="section-title" id="next-h">Where to go next on this site</h2>
+  <p>This map gives you the vocabulary. These three guides use it.</p>
+  <ul class="related">
+    <li><a href="../agentic-ai-runtime/"><strong>Agentic AI Runtime Architecture</strong>How an agent runs: the loop, the runtime stack, orchestration, and the controls that bound what an agent can do.</a></li>
+    <li><a href="../ai-security/"><strong>Securing AI Systems and Agents</strong>Where AI systems break and how to contain the damage, layer by layer.</a></li>
+    <li><a href="../data-intelligence-layer/"><strong>Data Intelligence Layer</strong>Metadata, lineage and governance across a data estate: the foundation that RAG and agents depend on.</a></li>
+  </ul>
+</section>
+
+</div>
+</main>
+
+<!-- auc:foot -->
+<footer class="auc-foot">
+  <p><strong>The AI Knowledge Map</strong>, version 3.0, last reviewed November 2026. Written by <a href="../">Krishna Mohan Parsha</a> as part of Architect U'r Career, a personal initiative. The views are my own and not those of my employer.</p>
+  <p>Free to use, share and adapt for non-commercial teaching and learning, with credit, under <a rel="license noopener" target="_blank" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a>. <a target="_blank" rel="noopener" href="https://github.com/mohanparsha/architecturcareer/issues/new?title=Correction%3A%20ai-knowledge-map">Found an error? Tell me.</a> <a href="../about/#changelog">What changed</a>. <a href="../about/">How this site is maintained</a>.</p>
+</footer>
+<!-- /auc:foot -->
+<script>
+// ══════════════════════════════════════════
+//  The map is drawn from the list view below it. The articles in the list are the
+//  single source of the content: each <article class="concept"> becomes a node,
+//  and each <li data-to> inside it becomes a relationship. Without JavaScript the
+//  list is the whole page.
+// ══════════════════════════════════════════
+(function () {
+  'use strict';
+  const root = document.documentElement;
+  root.classList.remove('no-js');
+  root.classList.add('js');
+
+  const NS = 'http://www.w3.org/2000/svg';
+  const $ = (id) => document.getElementById(id);
+  const svg = $('canvas'), area = $('diagramArea'), section = $('map');
+  const panel = $('detailPanel'), panelContent = $('panelContent'), panelStep = $('panelStep');
+  const prevBtn = $('panelPrev'), nextBtn = $('panelNext');
+  const toast = $('mapToast'), statusEl = $('mapStatus');
+  const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const narrow = window.matchMedia('(max-width: 640px)');
+  const stacked = window.matchMedia('(max-width: 900px)');
+
+  // ── Data, read from the list view ──
+  const articles = Array.from(document.querySelectorAll('article.concept'));
+  const concepts = articles.map((a, i) => ({
+    id: a.dataset.id, label: a.dataset.label, color: a.dataset.color, icon: a.dataset.icon,
+    title: a.querySelector('.c-title').textContent, step: i + 1, el: a
+  }));
+  const byId = {};
+  concepts.forEach((c) => { byId[c.id] = c; });
+  const edges = [];
+  articles.forEach((a) => {
+    a.querySelectorAll('li[data-to]').forEach((li) => {
+      edges.push({
+        from: a.dataset.id, to: li.dataset.to, label: li.dataset.short || li.dataset.rel,
+        nest: li.dataset.kind === 'nest', both: li.hasAttribute('data-both')
+      });
+    });
+  });
+
+  // ── Two layouts in "world" units: wide for desktop, tall for a phone ──
+  // regions: x, y, width, height. nodes: centre x, y. t: where along a line its label sits.
+  const LAYOUTS = {
+    wide: {
+      w: 1240, h: 720, r: 28, font: 13.5, efont: 12, cap: 12.5,
+      regions: { ai: [20, 36, 760, 664], ml: [160, 80, 600, 486], nn: [300, 144, 440, 402], genai: [440, 228, 280, 298] },
+      built: [800, 36, 420, 664],
+      captions: [[30, 24, 'start', 'Fields of study: each box sits inside the field it belongs to'], [810, 24, 'start', 'Built around an LLM: one pattern, two systems, two protocols']],
+      nodes: { ai: [90, 140], nlp: [330, 630], ml: [230, 186], nn: [370, 262], genai: [520, 318], llm: [640, 440], rag: [890, 160], agent: [985, 380], mcp: [1150, 210], a2a: [1150, 550], agentic: [890, 610] },
+      t: { 'llm>nlp': 0.74, 'rag>llm': 0.36 }
+    },
+    tall: {
+      w: 540, h: 1060, r: 30, font: 18, efont: 15, cap: 14.5,
+      regions: { ai: [10, 40, 520, 600], ml: [28, 162, 484, 462], nn: [46, 284, 448, 324], genai: [64, 406, 412, 186] },
+      built: [10, 690, 520, 360],
+      captions: [[14, 26, 'start', 'Fields of study: each box sits inside its parent'], [526, 680, 'end', 'Built around an LLM']],
+      nodes: { ai: [70, 100], nlp: [460, 100], ml: [104, 222], nn: [126, 344], genai: [150, 474], llm: [380, 474], rag: [100, 750], mcp: [440, 750], agent: [270, 860], agentic: [100, 985], a2a: [440, 985] },
+      t: { 'llm>nlp': 0.45, 'rag>llm': 0.35, 'agent>llm': 0.5, 'agent>a2a': 0.62 }
+    }
+  };
+
+  let L = null, layoutName = '';
+  let view = { k: 1, x: 0, y: 0 }, fitK = 1, userMoved = false;
+  let active = null;
+  const vp = document.createElementNS(NS, 'g');
+  svg.appendChild(vp);
+
+  function el(name, attrs, parent, text) {
+    const n = document.createElementNS(NS, name);
+    for (const k in attrs) { n.setAttribute(k, attrs[k]); }
+    if (text != null) { n.textContent = text; }
+    if (parent) { parent.appendChild(n); }
+    return n;
+  }
+
+  // ── Draw ──
+  function build(name) {
+    layoutName = name;
+    L = LAYOUTS[name];
+    vp.textContent = '';
+    const defs = el('defs', {}, vp);
+    const f = el('filter', { id: 'blur', x: '-80%', y: '-80%', width: '260%', height: '260%' }, defs);
+    el('feGaussianBlur', { stdDeviation: 16 }, f);
+
+    L.captions.forEach((c) => {
+      el('text', { class: 'map-caption', x: c[0], y: c[1], 'text-anchor': c[2], 'font-size': L.cap }, vp, c[3]);
+    });
+    el('rect', { class: 'region-built', x: L.built[0], y: L.built[1], width: L.built[2], height: L.built[3], rx: 20 }, vp);
+    ['ai', 'ml', 'nn', 'genai'].forEach((id) => {
+      const r = L.regions[id];
+      el('rect', { class: 'region', 'data-id': id, x: r[0], y: r[1], width: r[2], height: r[3], rx: 20, fill: byId[id].color, stroke: byId[id].color }, vp);
+    });
+
+    // Relationships drawn as labelled arrows (the nested ones are shown by the boxes)
+    const edgeLayer = el('g', {}, vp), labelLayer = el('g', {}, vp);
+    edges.filter((e) => !e.nest).forEach((e) => {
+      const a = L.nodes[e.from], b = L.nodes[e.to];
+      const dx = b[0] - a[0], dy = b[1] - a[1], len = Math.hypot(dx, dy), ux = dx / len, uy = dy / len;
+      const gap = L.r + 9, head = e.both ? 0 : 9;
+      const x1 = a[0] + ux * gap, y1 = a[1] + uy * gap;
+      const x2 = b[0] - ux * (gap + head), y2 = b[1] - uy * (gap + head);
+      const g = el('g', { class: 'edge', 'data-from': e.from, 'data-to': e.to, style: '--ec:' + byId[e.from].color }, edgeLayer);
+      el('line', { class: 'edge-line', x1: x1, y1: y1, x2: x2, y2: y2 }, g);
+      if (!e.both) {
+        const tx = b[0] - ux * gap, ty = b[1] - uy * gap, px = -uy * 5, py = ux * 5;
+        el('polygon', { class: 'edge-head', points: [tx, ty, x2 + px, y2 + py, x2 - px, y2 - py].join(' ') }, g);
+      }
+      const t = L.t[e.from + '>' + e.to] || 0.5;
+      const lx = a[0] + dx * t, ly = a[1] + dy * t;
+      const lg = el('g', { class: 'edge', 'data-from': e.from, 'data-to': e.to, style: '--ec:' + byId[e.from].color }, labelLayer);
+      const bg = el('rect', { class: 'edge-label-bg', rx: 6 }, lg);
+      const txt = el('text', { class: 'edge-label', x: lx, y: ly, 'text-anchor': 'middle', 'dominant-baseline': 'central', 'font-size': L.efont }, lg, e.label);
+      lg._fit = function () {
+        let w = e.label.length * L.efont * 0.5;
+        try { w = txt.getComputedTextLength() || w; } catch (err) { /* not rendered yet */ }
+        const hgt = L.efont + 9;
+        bg.setAttribute('x', lx - w / 2 - 7); bg.setAttribute('y', ly - hgt / 2);
+        bg.setAttribute('width', w + 14); bg.setAttribute('height', hgt);
+      };
+      lg._fit();
+    });
+
+    // Nodes, in reading order so the Tab key follows the path
+    concepts.forEach((c) => {
+      const p = L.nodes[c.id], r = L.r;
+      const g = el('g', {
+        class: 'node-group', 'data-id': c.id, tabindex: 0, role: 'button',
+        'aria-label': 'Step ' + c.step + ' of ' + concepts.length + ': ' + c.title + '. Show the explanation.',
+        style: '--nc:' + c.color + ';--nf:' + c.color + '33'
+      }, vp);
+      el('circle', { class: 'node-glow', cx: p[0], cy: p[1], r: r * 1.9, fill: c.color, filter: 'url(#blur)' }, g);
+      el('circle', { class: 'node-pulse', cx: p[0], cy: p[1], r: r, stroke: c.color }, g);
+      el('circle', { class: 'node-ring', cx: p[0], cy: p[1], r: r + 4, stroke: c.color }, g);
+      el('circle', { class: 'node-circle', cx: p[0], cy: p[1], r: r, stroke: c.color }, g);
+      el('circle', { class: 'node-focus', cx: p[0], cy: p[1], r: r + 9 }, g);
+      el('text', { class: 'node-icon', x: p[0], y: p[1] + 1, 'text-anchor': 'middle', 'dominant-baseline': 'central', 'font-size': r * 0.78 }, g, c.icon);
+      el('text', { class: 'node-label', x: p[0], y: p[1] + r + L.font * 1.35, 'text-anchor': 'middle', 'font-size': L.font }, g, c.label);
+      const bx = p[0] + r * 0.74, by = p[1] - r * 0.74, br = L.font * 0.72;
+      el('circle', { cx: bx, cy: by, r: br, fill: c.color }, g);
+      el('text', { class: 'node-badge-text', x: bx, y: by + 0.5, 'text-anchor': 'middle', 'dominant-baseline': 'central', 'font-size': L.font * 0.86 }, g, String(c.step));
+    });
+    paintActive();
+  }
+
+  function refitLabels() {
+    vp.querySelectorAll('g.edge').forEach((g) => { if (g._fit) { g._fit(); } });
+  }
+
+  // ── Pan and zoom ──
+  function apply() {
+    const cw = area.clientWidth, ch = area.clientHeight, keep = 90;
+    view.x = Math.min(cw - keep, Math.max(keep - L.w * view.k, view.x));
+    view.y = Math.min(ch - keep, Math.max(keep - L.h * view.k, view.y));
+    vp.setAttribute('transform', 'translate(' + view.x + ' ' + view.y + ') scale(' + view.k + ')');
+  }
+  function fit() {
+    const cw = area.clientWidth, ch = area.clientHeight;
+    if (!cw || !ch) { return; }
+    fitK = Math.min(cw / L.w, ch / L.h);
+    view.k = fitK;
+    view.x = (cw - L.w * fitK) / 2;
+    view.y = (ch - L.h * fitK) / 2;
+    userMoved = false;
+    apply();
+  }
+  function zoomAt(cx, cy, factor) {
+    const k = Math.min(Math.max(fitK * 5, 3), Math.max(fitK * 0.5, view.k * factor));
+    view.x = cx - (cx - view.x) * (k / view.k);
+    view.y = cy - (cy - view.y) * (k / view.k);
+    view.k = k;
+    userMoved = true;
+    apply();
+  }
+  function say(msg) { statusEl.textContent = msg; }
+  function zoomStep(factor) {
+    zoomAt(area.clientWidth / 2, area.clientHeight / 2, factor);
+    say('Zoom ' + Math.round(view.k / fitK * 100) + ' per cent');
+  }
+  function panStep(dx, dy) {
+    view.x += dx * area.clientWidth * 0.2;
+    view.y += dy * area.clientHeight * 0.2;
+    userMoved = true;
+    apply();
+  }
+  function resetView() { fit(); say('Map view reset'); }
+  function ensureVisible(id) {
+    const p = L.nodes[id], m = 60;
+    const sx = view.x + p[0] * view.k, sy = view.y + p[1] * view.k;
+    const cw = area.clientWidth, ch = area.clientHeight;
+    if (sx < m) { view.x += m - sx; } else if (sx > cw - m) { view.x -= sx - (cw - m); }
+    if (sy < m) { view.y += m - sy; } else if (sy > ch - m) { view.y -= sy - (ch - m); }
+    apply();
+  }
+  let toastTimer = 0;
+  function showToast(msg) {
+    toast.textContent = msg;
+    toast.classList.add('show');
+    clearTimeout(toastTimer);
+    toastTimer = setTimeout(() => toast.classList.remove('show'), 1800);
+  }
+
+  // Mouse and pen: drag to pan
+  let drag = null, lastDragEnd = 0;
+  svg.addEventListener('pointerdown', (e) => {
+    if (e.pointerType === 'touch' || e.button !== 0) { return; }
+    drag = { id: e.pointerId, x: e.clientX, y: e.clientY, vx: view.x, vy: view.y, moved: false };
+  });
+  svg.addEventListener('pointermove', (e) => {
+    if (!drag || e.pointerId !== drag.id) { return; }
+    const dx = e.clientX - drag.x, dy = e.clientY - drag.y;
+    if (!drag.moved) {
+      if (Math.hypot(dx, dy) < 5) { return; }
+      drag.moved = true;
+      try { svg.setPointerCapture(e.pointerId); } catch (err) { /* pointer already gone */ }
+      area.classList.add('dragging');
+    }
+    view.x = drag.vx + dx;
+    view.y = drag.vy + dy;
+    userMoved = true;
+    apply();
+  });
+  function endDrag(e) {
+    if (!drag || e.pointerId !== drag.id) { return; }
+    if (drag.moved) { lastDragEnd = performance.now(); }
+    drag = null;
+    area.classList.remove('dragging');
+  }
+  svg.addEventListener('pointerup', endDrag);
+  svg.addEventListener('pointercancel', endDrag);
+
+  // Wheel: zoom only with Ctrl or Cmd held (a trackpad pinch arrives that way too),
+  // so that an ordinary scroll still scrolls the page.
+  area.addEventListener('wheel', (e) => {
+    if (!(e.ctrlKey || e.metaKey)) { showToast('Hold Ctrl and scroll to zoom the map'); return; }
+    e.preventDefault();
+    const rect = area.getBoundingClientRect();
+    const d = Math.max(-60, Math.min(60, e.deltaY));
+    zoomAt(e.clientX - rect.left, e.clientY - rect.top, Math.exp(-d * 0.006));
+  }, { passive: false });
+
+  // Touch: one finger scrolls the page as usual, two fingers pan and zoom the map
+  let pinch = null, oneStart = null;
+  function pinchState(e) {
+    const rect = area.getBoundingClientRect(), a = e.touches[0], b = e.touches[1];
+    return {
+      d: Math.hypot(a.clientX - b.clientX, a.clientY - b.clientY) || 1,
+      cx: (a.clientX + b.clientX) / 2 - rect.left, cy: (a.clientY + b.clientY) / 2 - rect.top
+    };
+  }
+  area.addEventListener('touchstart', (e) => {
+    if (e.touches.length === 2) {
+      pinch = pinchState(e);
+      if (e.cancelable) { e.preventDefault(); }
+    } else if (e.touches.length === 1) {
+      oneStart = { x: e.touches[0].clientX, y: e.touches[0].clientY };
+    }
+  }, { passive: false });
+  area.addEventListener('touchmove', (e) => {
+    if (e.touches.length === 2 && pinch) {
+      if (e.cancelable) { e.preventDefault(); }
+      const p = pinchState(e);
+      zoomAt(p.cx, p.cy, p.d / pinch.d);
+      view.x += p.cx - pinch.cx;
+      view.y += p.cy - pinch.cy;
+      pinch = p;
+      apply();
+    } else if (e.touches.length === 1 && oneStart) {
+      const t = e.touches[0];
+      if (Math.hypot(t.clientX - oneStart.x, t.clientY - oneStart.y) > 24) {
+        showToast('Use two fingers to move and zoom the map');
+        oneStart = null;
+      }
+    }
+  }, { passive: false });
+  function touchEnd(e) { if (e.touches.length < 2) { pinch = null; } if (e.touches.length === 0) { oneStart = null; } }
+  area.addEventListener('touchend', touchEnd);
+  area.addEventListener('touchcancel', touchEnd);
+
+  // Buttons, and + - 0 while the focus is in the map. Arrow keys and Space are left alone
+  // so they keep scrolling the page.
+  const ACTIONS = {
+    'zoom-in': () => zoomStep(1.3), 'zoom-out': () => zoomStep(1 / 1.3), reset: resetView,
+    left: () => panStep(1, 0), right: () => panStep(-1, 0), up: () => panStep(0, 1), down: () => panStep(0, -1)
+  };
+  document.querySelectorAll('[data-map]').forEach((b) => {
+    b.addEventListener('click', () => ACTIONS[b.dataset.map]());
+  });
+  section.addEventListener('keydown', (e) => {
+    if (e.ctrlKey || e.metaKey || e.altKey) { return; }
+    if (e.key === '+' || e.key === '=') { zoomStep(1.3); e.preventDefault(); }
+    else if (e.key === '-' || e.key === '_') { zoomStep(1 / 1.3); e.preventDefault(); }
+    else if (e.key === '0') { resetView(); e.preventDefault(); }
+    else if (e.key === 'Escape' && active) { closePanel(true); }
+  });
+
+  // ── Selecting an idea ──
+  function paintActive() {
+    svg.classList.toggle('has-active', !!active);
+    vp.querySelectorAll('.node-group').forEach((g) => {
+      const on = g.dataset.id === active;
+      g.classList.toggle('active', on);
+      g.setAttribute('aria-pressed', on ? 'true' : 'false');
+    });
+    vp.querySelectorAll('g.edge').forEach((g) => {
+      g.classList.toggle('on', !!active && (g.dataset.from === active || g.dataset.to === active));
+    });
+    // light up the box of the selected idea and of the field it sits inside
+    const lit = {};
+    if (active) {
+      lit[active] = true;
+      edges.forEach((e) => { if (e.nest && e.from === active) { lit[e.to] = true; } });
+    }
+    vp.querySelectorAll('.region').forEach((r) => r.classList.toggle('on', !!lit[r.dataset.id]));
+    document.querySelectorAll('#path a').forEach((a) => {
+      if (a.dataset.id === active) { a.setAttribute('aria-current', 'step'); } else { a.removeAttribute('aria-current'); }
+    });
+  }
+
+  function select(id, moveFocus) {
+    const c = byId[id];
+    if (!c) { return; }
+    active = id;
+    panelStep.textContent = 'Step ' + c.step + ' of ' + concepts.length;
+    panel.style.setProperty('--c', c.color);
+    const body = document.createElement('div');
+    body.className = 'concept-body';
+    Array.from(c.el.children).forEach((child) => body.appendChild(child.cloneNode(true)));
+    panelContent.textContent = '';
+    panelContent.appendChild(body);
+    const prev = concepts[c.step - 2], next = concepts[c.step];
+    prevBtn.hidden = !prev;
+    nextBtn.hidden = !next;
+    if (prev) { prevBtn.textContent = '← ' + prev.step + '. ' + prev.label; prevBtn.dataset.id = prev.id; }
+    if (next) { nextBtn.textContent = next.step + '. ' + next.label + ' →'; nextBtn.dataset.id = next.id; }
+    panel.hidden = false;
+    panel.scrollTop = 0;
+    paintActive();
+    syncSize();
+    ensureVisible(id);
+    if (moveFocus) {
+      const h = panelContent.querySelector('h3');
+      h.setAttribute('tabindex', '-1');
+      const below = stacked.matches;
+      h.focus({ preventScroll: true });
+      (below ? panel : section).scrollIntoView({ behavior: reduceMotion ? 'auto' : 'smooth', block: below ? 'start' : 'nearest' });
+    }
+  }
+
+  function closePanel(returnFocus) {
+    const id = active;
+    active = null;
+    panel.hidden = true;
+    panelContent.textContent = '';
+    paintActive();
+    syncSize();
+    if (returnFocus && id) {
+      const g = vp.querySelector('.node-group[data-id="' + id + '"]');
+      if (g) { g.focus({ preventScroll: true }); }
+      section.scrollIntoView({ behavior: reduceMotion ? 'auto' : 'smooth', block: 'nearest' });
+    }
+  }
+
+  svg.addEventListener('click', (e) => {
+    const g = e.target.closest ? e.target.closest('.node-group') : null;
+    if (!g || performance.now() - lastDragEnd < 250) { return; }
+    select(g.dataset.id, true);
+  });
+  svg.addEventListener('keydown', (e) => {
+    if (e.key !== 'Enter' && e.key !== ' ' && e.key !== 'Spacebar') { return; }
+    const g = e.target.closest ? e.target.closest('.node-group') : null;
+    if (!g) { return; }
+    e.preventDefault();
+    select(g.dataset.id, true);
+  });
+  // (on the wrapper, not the svg: a focus listener on an svg element makes Chromium treat it as a Tab stop)
+  area.addEventListener('focusin', (e) => {
+    const g = e.target.closest ? e.target.closest('.node-group') : null;
+    if (g) { ensureVisible(g.dataset.id); }
+  });
+  $('panelClose').addEventListener('click', () => closePanel(true));
+  prevBtn.addEventListener('click', () => select(prevBtn.dataset.id, true));
+  nextBtn.addEventListener('click', () => select(nextBtn.dataset.id, true));
+  // Inside the panel, a link to another idea opens that idea on the map
+  panelContent.addEventListener('click', (e) => {
+    const a = e.target.closest('a[href^="#c-"]');
+    if (!a) { return; }
+    e.preventDefault();
+    select(a.getAttribute('href').slice(3), true);
+  });
+  // The numbered path above the map opens the step on the map
+  document.querySelectorAll('#path a').forEach((a) => {
+    a.addEventListener('click', (e) => {
+      e.preventDefault();
+      select(a.dataset.id, true);
+    });
+  });
+
+  // ── Size and layout ──
+  let lastW = 0, lastH = 0;
+  function syncSize() {
+    const want = narrow.matches ? 'tall' : 'wide';
+    const cw = area.clientWidth, ch = area.clientHeight;
+    if (want !== layoutName) {
+      build(want);
+      fit();
+    } else if (cw !== lastW || ch !== lastH) {
+      if (userMoved) {
+        fitK = Math.min(cw / L.w, ch / L.h);
+        apply();
+      } else {
+        fit();
+      }
+    }
+    lastW = cw; lastH = ch;
+  }
+  if ('ResizeObserver' in window) {
+    new ResizeObserver(syncSize).observe(area);
+  } else {
+    window.addEventListener('resize', syncSize);
+  }
+  syncSize();
+  if (document.fonts && document.fonts.ready) { document.fonts.ready.then(refitLabels); }
+})();
+</script>
+<script src="../assets/auc-guide.js" defer></script>
+<script data-goatcounter="https://km-auc.goatcounter.com/count" async src="https://gc.zgo.at/count.js"></script>
+</body>
+</html>
