@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 2778" width="720" height="2778" role="img" aria-labelledby="attack-lifecycle-title attack-lifecycle-desc" font-family='system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif'>
+<title id="attack-lifecycle-title">Attack lifecycle: from threat actor to business impact</title>
+<desc id="attack-lifecycle-desc">Portrait diagram of the attack lifecycle as a chain of six links, read top to bottom, with one worked example: a phishing email leads to the takeover of a finance clerk's mailbox and then to payment fraud. Link 1, Threat actor: The individual or group posing the threat. Example: A fraud gang that targets the finance teams of mid-sized firms. Link 1 poses link 2. Link 2, Threat: Any circumstance or event with the potential to harm an organisation, its assets or its people. Example: A finance mailbox could be taken over and used for payment fraud. Link 2 targets link 3. Link 3, Vulnerability: A weakness in a system, procedure or control that a threat could exploit. Example: Sign-in needs only a password (no MFA), and staff cannot spot a phishing email. Link 3 is used by link 4. Link 4, Exploit: The technique or code that takes advantage of a vulnerability. Example: A phishing email and a fake sign-in page capture the clerk's password. Link 4 enables link 5. Link 5, Attack or incident: The malicious act itself, which jeopardises confidentiality, integrity or availability. Example: The attacker signs in as the clerk and emails customers new bank details. Link 5 results in link 6. Link 6, Impact: The harm to operations, assets and people that results: the business consequence. Example: A customer pays ₹18 lakh into the fraudster's account. Money and trust are lost. A column beside the chain shows where controls act. Links 1 and 2, the threat actor and the threat, are largely outside your control. Prevent acts on links 3 and 4. Close the weakness and block the method: phishing-resistant MFA, email filtering, staff training. Detect acts on link 5. Notice the attack as it happens: alerts on unusual sign-ins and on new mailbox forwarding rules. Respond acts on link 5. Contain it: revoke the sessions, reset the password, warn customers and the bank. Recover acts on link 6. Restore and make good: recall the payment through the bank, restore the mailbox, fix the gap that was used. A control is a safeguard or countermeasure. The earlier it breaks the chain, the smaller the impact. Definitions follow the NIST glossary (csrc.nist.gov/glossary). Exploit follows the CISA NICCS glossary. Architect U'r Career, Krishna Mohan Parsha. CC BY-NC-SA 4.0. Reviewed November 2026.</desc>
+<rect id="bg" x="0" y="0" width="720" height="2778" fill="#f8fafc"/>
+<rect x="0" y="0" width="720" height="146" fill="#0b1220"/>
+<rect x="24" y="26" width="56" height="6" fill="#047857" rx="3"/>
+<text x="24" y="78" font-size="40" fill="#ffffff" font-weight="700">Attack lifecycle</text>
+<text x="24" y="114" font-size="21" fill="#e2e8f0" xml:space="preserve">From threat actor to business impact, and where controls act.</text>
+<rect x="24" y="168" width="672" height="90" fill="#ffffff" rx="12" stroke="#cbd5e1" stroke-width="1.5"/>
+<rect x="34" y="180" width="6" height="66" fill="#047857" rx="3"/>
+<text x="54" y="202" font-size="20" fill="#1e293b" xml:space="preserve"><tspan font-weight="700" fill="#047857">Worked</tspan><tspan font-weight="700" fill="#047857"> </tspan><tspan font-weight="700" fill="#047857">example.</tspan> A phishing email leads to the takeover of a</text>
+<text x="54" y="230" font-size="20" fill="#1e293b" xml:space="preserve">finance clerk's mailbox, and then to payment fraud.</text>
+<circle cx="34" cy="283" r="9" fill="#b45309"/>
+<text x="52" y="290" font-size="20" fill="#475569">In place before the attack</text>
+<circle cx="325.81" cy="283" r="9" fill="#b91c1c"/>
+<text x="343.81" y="290" font-size="20" fill="#475569">The attack and after</text>
+<text x="24" y="336" font-size="20" fill="#475569" font-weight="700" letter-spacing="1.5">THE CHAIN</text>
+<text x="622" y="336" font-size="20" fill="#047857" font-weight="700" text-anchor="middle" letter-spacing="1.5">CONTROLS</text>
+<rect x="24" y="352" width="508" height="190" fill="#ffffff" rx="12" stroke="#cbd5e1" stroke-width="1.5"/>
+<circle cx="63" cy="390" r="19" fill="#b45309"/>
+<text x="63" y="397" font-size="20" fill="#ffffff" font-weight="700" text-anchor="middle">1</text>
+<text x="94" y="399" font-size="25" fill="#0b1220" font-weight="700">Threat actor</text>
+<text x="44" y="436" font-size="20" fill="#1e293b" xml:space="preserve">The individual or group posing the threat.</text>
+<rect x="44" y="452" width="468" height="72" fill="#f8fafc" rx="8"/>
+<text x="58" y="481" font-size="20" fill="#475569" xml:space="preserve"><tspan font-weight="700" fill="#1e293b">Example:</tspan> A fraud gang that targets the finance</text>
+<text x="58" y="509" font-size="20" fill="#475569" xml:space="preserve">teams of mid-sized firms.</text>
+<line x1="278" y1="547" x2="278" y2="573" stroke="#475569" stroke-width="2.5" stroke-linecap="butt"/>
+<polygon points="271.18,572 284.82,572 278,583" fill="#475569"/>
+<text x="296" y="572" font-size="20" fill="#475569">poses</text>
+<rect x="24" y="588" width="508" height="218" fill="#ffffff" rx="12" stroke="#cbd5e1" stroke-width="1.5"/>
+<circle cx="63" cy="626" r="19" fill="#b45309"/>
+<text x="63" y="633" font-size="20" fill="#ffffff" font-weight="700" text-anchor="middle">2</text>
+<text x="94" y="635" font-size="25" fill="#0b1220" font-weight="700">Threat</text>
+<text x="44" y="672" font-size="20" fill="#1e293b" xml:space="preserve">Any circumstance or event with the potential to</text>
+<text x="44" y="700" font-size="20" fill="#1e293b" xml:space="preserve">harm an organisation, its assets or its people.</text>
+<rect x="44" y="716" width="468" height="72" fill="#f8fafc" rx="8"/>
+<text x="58" y="745" font-size="20" fill="#475569" xml:space="preserve"><tspan font-weight="700" fill="#1e293b">Example:</tspan> A finance mailbox could be taken</text>
+<text x="58" y="773" font-size="20" fill="#475569" xml:space="preserve">over and used for payment fraud.</text>
+<line x1="278" y1="811" x2="278" y2="837" stroke="#475569" stroke-width="2.5" stroke-linecap="butt"/>
+<polygon points="271.18,836 284.82,836 278,847" fill="#475569"/>
+<text x="296" y="836" font-size="20" fill="#475569">targets</text>
+<rect x="24" y="852" width="508" height="218" fill="#ffffff" rx="12" stroke="#cbd5e1" stroke-width="1.5"/>
+<circle cx="63" cy="890" r="19" fill="#b45309"/>
+<text x="63" y="897" font-size="20" fill="#ffffff" font-weight="700" text-anchor="middle">3</text>
+<text x="94" y="899" font-size="25" fill="#0b1220" font-weight="700">Vulnerability</text>
+<text x="44" y="936" font-size="20" fill="#1e293b" xml:space="preserve">A weakness in a system, procedure or control that</text>
+<text x="44" y="964" font-size="20" fill="#1e293b" xml:space="preserve">a threat could exploit.</text>
+<rect x="44" y="980" width="468" height="72" fill="#f8fafc" rx="8"/>
+<text x="58" y="1009" font-size="20" fill="#475569" xml:space="preserve"><tspan font-weight="700" fill="#1e293b">Example:</tspan> Sign-in needs only a password (no</text>
+<text x="58" y="1037" font-size="20" fill="#475569" xml:space="preserve">MFA), and staff cannot spot a phishing email.</text>
+<line x1="278" y1="1075" x2="278" y2="1101" stroke="#475569" stroke-width="2.5" stroke-linecap="butt"/>
+<polygon points="271.18,1100 284.82,1100 278,1111" fill="#475569"/>
+<text x="296" y="1100" font-size="20" fill="#475569">is used by</text>
+<rect x="24" y="1116" width="508" height="218" fill="#ffffff" rx="12" stroke="#cbd5e1" stroke-width="1.5"/>
+<circle cx="63" cy="1154" r="19" fill="#b91c1c"/>
+<text x="63" y="1161" font-size="20" fill="#ffffff" font-weight="700" text-anchor="middle">4</text>
+<text x="94" y="1163" font-size="25" fill="#0b1220" font-weight="700">Exploit</text>
+<text x="44" y="1200" font-size="20" fill="#1e293b" xml:space="preserve">The technique or code that takes advantage of a</text>
+<text x="44" y="1228" font-size="20" fill="#1e293b" xml:space="preserve">vulnerability.</text>
+<rect x="44" y="1244" width="468" height="72" fill="#f8fafc" rx="8"/>
+<text x="58" y="1273" font-size="20" fill="#475569" xml:space="preserve"><tspan font-weight="700" fill="#1e293b">Example:</tspan> A phishing email and a fake sign-in</text>
+<text x="58" y="1301" font-size="20" fill="#475569" xml:space="preserve">page capture the clerk's password.</text>
+<line x1="278" y1="1339" x2="278" y2="1365" stroke="#475569" stroke-width="2.5" stroke-linecap="butt"/>
+<polygon points="271.18,1364 284.82,1364 278,1375" fill="#475569"/>
+<text x="296" y="1364" font-size="20" fill="#475569">enables</text>
+<rect x="24" y="1380" width="508" height="218" fill="#ffffff" rx="12" stroke="#cbd5e1" stroke-width="1.5"/>
+<circle cx="63" cy="1418" r="19" fill="#b91c1c"/>
+<text x="63" y="1425" font-size="20" fill="#ffffff" font-weight="700" text-anchor="middle">5</text>
+<text x="94" y="1427" font-size="25" fill="#0b1220" font-weight="700">Attack or incident</text>
+<text x="44" y="1464" font-size="20" fill="#1e293b" xml:space="preserve">The malicious act itself, which jeopardises</text>
+<text x="44" y="1492" font-size="20" fill="#1e293b" xml:space="preserve">confidentiality, integrity or availability.</text>
+<rect x="44" y="1508" width="468" height="72" fill="#f8fafc" rx="8"/>
+<text x="58" y="1537" font-size="20" fill="#475569" xml:space="preserve"><tspan font-weight="700" fill="#1e293b">Example:</tspan> The attacker signs in as the clerk</text>
+<text x="58" y="1565" font-size="20" fill="#475569" xml:space="preserve">and emails customers new bank details.</text>
+<line x1="278" y1="1603" x2="278" y2="1629" stroke="#475569" stroke-width="2.5" stroke-linecap="butt"/>
+<polygon points="271.18,1628 284.82,1628 278,1639" fill="#475569"/>
+<text x="296" y="1628" font-size="20" fill="#475569">results in</text>
+<rect x="24" y="1644" width="508" height="218" fill="#ffffff" rx="12" stroke="#cbd5e1" stroke-width="1.5"/>
+<circle cx="63" cy="1682" r="19" fill="#b91c1c"/>
+<text x="63" y="1689" font-size="20" fill="#ffffff" font-weight="700" text-anchor="middle">6</text>
+<text x="94" y="1691" font-size="25" fill="#0b1220" font-weight="700">Impact</text>
+<text x="44" y="1728" font-size="20" fill="#1e293b" xml:space="preserve">The harm to operations, assets and people that</text>
+<text x="44" y="1756" font-size="20" fill="#1e293b" xml:space="preserve">results: the business consequence.</text>
+<rect x="44" y="1772" width="468" height="72" fill="#f8fafc" rx="8"/>
+<text x="58" y="1801" font-size="20" fill="#475569" xml:space="preserve"><tspan font-weight="700" fill="#1e293b">Example:</tspan> A customer pays ₹18 lakh into the</text>
+<text x="58" y="1829" font-size="20" fill="#475569" xml:space="preserve">fraudster's account. Money and trust are lost.</text>
+<rect x="549" y="353" width="146" height="452" fill="#f8fafc" rx="12" stroke="#94a3b8" stroke-width="1.5" stroke-dasharray="6 5"/>
+<text x="622" y="558" font-size="20" fill="#475569" text-anchor="middle">Largely</text>
+<text x="622" y="586" font-size="20" fill="#475569" text-anchor="middle">outside</text>
+<text x="622" y="614" font-size="20" fill="#475569" text-anchor="middle">your control</text>
+<rect x="548" y="852" width="148" height="482" fill="#047857" rx="12"/>
+<text x="622" y="1044" font-size="21" fill="#ffffff" font-weight="700" text-anchor="middle" letter-spacing="1">PREVENT</text>
+<text x="622" y="1072" font-size="20" fill="#ffffff" text-anchor="middle">Close the</text>
+<text x="622" y="1100" font-size="20" fill="#ffffff" text-anchor="middle">weakness,</text>
+<text x="622" y="1128" font-size="20" fill="#ffffff" text-anchor="middle">block the</text>
+<text x="622" y="1156" font-size="20" fill="#ffffff" text-anchor="middle">method</text>
+<rect x="548" y="1380" width="148" height="105" fill="#047857" rx="12"/>
+<text x="622" y="1425.5" font-size="21" fill="#ffffff" font-weight="700" text-anchor="middle" letter-spacing="1">DETECT</text>
+<text x="622" y="1453.5" font-size="20" fill="#ffffff" text-anchor="middle">Spot it</text>
+<rect x="548" y="1493" width="148" height="105" fill="#047857" rx="12"/>
+<text x="622" y="1538.5" font-size="21" fill="#ffffff" font-weight="700" text-anchor="middle" letter-spacing="1">RESPOND</text>
+<text x="622" y="1566.5" font-size="20" fill="#ffffff" text-anchor="middle">Contain it</text>
+<rect x="548" y="1644" width="148" height="218" fill="#047857" rx="12"/>
+<text x="622" y="1732" font-size="21" fill="#ffffff" font-weight="700" text-anchor="middle" letter-spacing="1">RECOVER</text>
+<text x="622" y="1760" font-size="20" fill="#ffffff" text-anchor="middle">Restore,</text>
+<text x="622" y="1788" font-size="20" fill="#ffffff" text-anchor="middle">make good</text>
+<text x="24" y="1918" font-size="20" fill="#475569" font-weight="700" letter-spacing="1.5">CONTROLS IN THE WORKED EXAMPLE</text>
+<rect x="24" y="1934" width="672" height="536" fill="#ffffff" rx="12" stroke="#cbd5e1" stroke-width="1.5"/>
+<rect x="44" y="1954" width="132" height="34" fill="#047857" rx="17"/>
+<text x="110" y="1978" font-size="20" fill="#ffffff" font-weight="700" text-anchor="middle" letter-spacing="1">PREVENT</text>
+<text x="190" y="1978" font-size="20" fill="#475569">acts on links 3 and 4</text>
+<text x="44" y="2022" font-size="20" fill="#1e293b" xml:space="preserve">Close the weakness and block the method: phishing-resistant MFA,</text>
+<text x="44" y="2050" font-size="20" fill="#1e293b" xml:space="preserve">email filtering, staff training.</text>
+<line x1="44" y1="2072" x2="676" y2="2072" stroke="#e2e8f0" stroke-width="1.5" stroke-linecap="butt"/>
+<rect x="44" y="2084" width="132" height="34" fill="#047857" rx="17"/>
+<text x="110" y="2108" font-size="20" fill="#ffffff" font-weight="700" text-anchor="middle" letter-spacing="1">DETECT</text>
+<text x="190" y="2108" font-size="20" fill="#475569">acts on link 5</text>
+<text x="44" y="2152" font-size="20" fill="#1e293b" xml:space="preserve">Notice the attack as it happens: alerts on unusual sign-ins and on</text>
+<text x="44" y="2180" font-size="20" fill="#1e293b" xml:space="preserve">new mailbox forwarding rules.</text>
+<line x1="44" y1="2202" x2="676" y2="2202" stroke="#e2e8f0" stroke-width="1.5" stroke-linecap="butt"/>
+<rect x="44" y="2214" width="132" height="34" fill="#047857" rx="17"/>
+<text x="110" y="2238" font-size="20" fill="#ffffff" font-weight="700" text-anchor="middle" letter-spacing="1">RESPOND</text>
+<text x="190" y="2238" font-size="20" fill="#475569">acts on link 5</text>
+<text x="44" y="2282" font-size="20" fill="#1e293b" xml:space="preserve">Contain it: revoke the sessions, reset the password, warn customers</text>
+<text x="44" y="2310" font-size="20" fill="#1e293b" xml:space="preserve">and the bank.</text>
+<line x1="44" y1="2332" x2="676" y2="2332" stroke="#e2e8f0" stroke-width="1.5" stroke-linecap="butt"/>
+<rect x="44" y="2344" width="132" height="34" fill="#047857" rx="17"/>
+<text x="110" y="2368" font-size="20" fill="#ffffff" font-weight="700" text-anchor="middle" letter-spacing="1">RECOVER</text>
+<text x="190" y="2368" font-size="20" fill="#475569">acts on link 6</text>
+<text x="44" y="2412" font-size="20" fill="#1e293b" xml:space="preserve">Restore and make good: recall the payment through the bank,</text>
+<text x="44" y="2440" font-size="20" fill="#1e293b" xml:space="preserve">restore the mailbox, fix the gap that was used.</text>
+<rect x="24" y="2494" width="672" height="94" fill="#ecfdf5" rx="12" stroke="#047857" stroke-width="1.5"/>
+<text x="46" y="2532" font-size="21" fill="#0b1220" xml:space="preserve"><tspan font-weight="700">A</tspan><tspan font-weight="700"> </tspan><tspan font-weight="700">control</tspan> is a safeguard or countermeasure. The earlier it</text>
+<text x="46" y="2562" font-size="21" fill="#0b1220" xml:space="preserve">breaks the chain, the smaller the impact.</text>
+<text x="360" y="2630" font-size="20" fill="#475569" text-anchor="middle">Definitions follow the NIST glossary (csrc.nist.gov/glossary).</text>
+<text x="360" y="2658" font-size="20" fill="#475569" text-anchor="middle">Exploit follows the CISA NICCS glossary.</text>
+<line x1="24" y1="2684" x2="696" y2="2684" stroke="#cbd5e1" stroke-width="1.5" stroke-linecap="butt"/>
+<text x="360" y="2720" font-size="20" fill="#1e293b" font-weight="700" text-anchor="middle">Architect U'r Career, Krishna Mohan Parsha.</text>
+<text x="360" y="2748" font-size="20" fill="#475569" text-anchor="middle">CC BY-NC-SA 4.0. Reviewed November 2026.</text>
+</svg>

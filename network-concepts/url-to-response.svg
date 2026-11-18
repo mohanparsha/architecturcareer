@@ -1,0 +1,285 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 4293" width="720" height="4293" role="img" aria-labelledby="url-to-response-title url-to-response-desc" font-family='system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif'>
+<title id="url-to-response-title">From URL to rendered page: the network journey in order</title>
+<desc id="url-to-response-desc">Portrait diagram of the eight steps from typing a URL to seeing the page, in order, each marked with its OSI layer. Scenario: a laptop on a home or office network opens https://example.com/ for the first time, using IPv4 behind NAT and TLS 1.3 over TCP. Step 1, layer 7, URL parsed and caches checked: The browser splits the URL into scheme (https), host (example.com) and path, then checks its caches. A cached DNS answer or an open connection lets it skip steps below. Step 2, DNS, name to IP address. First, at layer 2, the next hop's MAC address: No packet can leave without a frame, and a frame needs the MAC address of the next hop: the DNS resolver if it is on this subnet, otherwise the default gateway. ARP (IPv6: Neighbour Discovery) finds it. The answer is cached, so this repeats only when the cache has no entry. The host broadcasts an ARP request asking who has 192.168.1.1 and receives an ARP reply with the MAC address. Then, at layer 7, the DNS query: The host asks its recursive resolver for the address of example.com, usually over UDP port 53. The resolver returns an A record (IPv4) or an AAAA record (IPv6). The query asks for example.com type A and the answer is 198.51.100.20. Step 3, layer 4, TCP three-way handshake: The host opens a TCP connection to port 443 on the server. Ports are layer 4 addresses: they identify the service, not the machine. One round trip. The messages are SYN, SYN-ACK, ACK. Step 4, layer 6, TLS 1.3 handshake: One round trip. The server proves its identity with a certificate and both sides derive the session keys. Everything after ServerHello is encrypted. The messages are ClientHello with key share; ServerHello with key share, certificate and Finished; then the client's Finished. Step 5, layer 7, HTTP request: the browser sends GET / for example.com inside the TLS session. Each layer below wraps it, so one frame on the wire is, in order: Ethernet header (layer 2), IP header (layer 3), TCP header (layer 4), the TLS record carrying the encrypted HTTP request (layers 6 and 7), and the frame check sequence (layer 2), sent as bits at layer 1. Step 6, layers 3 and 2, every packet is routed hop by hop: this is true of every packet in the steps above, in both directions. One packet is followed across three links: your host to the home router with NAT (link 1), on to the internet routers (link 2), and on to the server (link 3). New frame on every link: each router removes the frame and builds a new one, so the source and destination MAC addresses change (MAC pair A on link 1, B on link 2, C on link 3). TTL drops by 1 at each router and the IPv4 header checksum is recomputed (TTL 64 on link 1, 63 on link 2, 62 and falling on link 3); in IPv6 the Hop Limit drops and there is no header checksum. NAT at the network edge rewrites the source address and source port, private to public: 192.168.1.10 port 51000 on link 1 becomes 203.0.113.5 port 40001 on links 2 and 3. Not changed by routers: the TCP payload; the TLS-encrypted HTTP data arrives exactly as it was sent. Step 7, layer 7, server responds: The server (often a load balancer or CDN edge in front of it) decrypts the request and returns status 200 with headers and the HTML. The reply is routed back hop by hop, and the NAT table maps it to your host. Step 8, layer 7, browser renders the page: The browser parses the HTML into the DOM, fetches the CSS, scripts and images it names (reusing the connection where it can), then runs style, layout and paint. Note, common alternative HTTP/3: HTTP/3 runs over QUIC, which uses UDP (usually port 443) instead of TCP. QUIC builds TLS 1.3 into its own handshake, so steps 3 and 4 become a single round trip. Every other step is the same. Checked against RFC 791, 826, 1035, 3022, 4861, 8200, 8446, 9000, 9114 and 9293, and MDN Web Docs. Architect U'r Career, Krishna Mohan Parsha. CC BY-NC-SA 4.0. Reviewed November 2026.</desc>
+<rect x="0" y="0" width="720" height="4293" fill="#f8fafc"/>
+<rect x="0" y="0" width="720" height="146" fill="#0b1220"/>
+<rect x="24" y="26" width="56" height="6" fill="#047857" rx="3"/>
+<text x="24" y="78" font-size="40" fill="#ffffff" font-weight="700">From URL to rendered page</text>
+<text x="24" y="114" font-size="21" fill="#e2e8f0" xml:space="preserve">What happens on the network, in order, and at which layer.</text>
+<rect x="24" y="168" width="672" height="118" fill="#ffffff" rx="12" stroke="#cbd5e1" stroke-width="1.5"/>
+<rect x="34" y="180" width="6" height="94" fill="#047857" rx="3"/>
+<text x="54" y="202" font-size="20" fill="#1e293b" xml:space="preserve"><tspan font-weight="700" fill="#047857">Scenario.</tspan> A laptop on a home or office network opens</text>
+<text x="54" y="230" font-size="20" fill="#1e293b" xml:space="preserve">https://example.com/ for the first time, using IPv4 behind NAT and</text>
+<text x="54" y="258" font-size="20" fill="#1e293b" xml:space="preserve">TLS 1.3 over TCP.</text>
+<text x="24" y="324" font-size="20" fill="#475569" font-weight="700" letter-spacing="1.5">OSI LAYERS MARKED ON EACH STEP</text>
+<rect x="24" y="342" width="52" height="32" fill="#1e293b" rx="8"/>
+<text x="50" y="365" font-size="20" fill="#ffffff" font-weight="700" text-anchor="middle">L7</text>
+<text x="86" y="365" font-size="20" fill="#1e293b">Application</text>
+<rect x="248" y="342" width="52" height="32" fill="#1e293b" rx="8"/>
+<text x="274" y="365" font-size="20" fill="#ffffff" font-weight="700" text-anchor="middle">L6</text>
+<text x="310" y="365" font-size="20" fill="#1e293b">Presentation</text>
+<rect x="472" y="342" width="52" height="32" fill="#1e293b" rx="8"/>
+<text x="498" y="365" font-size="20" fill="#ffffff" font-weight="700" text-anchor="middle">L4</text>
+<text x="534" y="365" font-size="20" fill="#1e293b">Transport</text>
+<rect x="24" y="386" width="52" height="32" fill="#1e293b" rx="8"/>
+<text x="50" y="409" font-size="20" fill="#ffffff" font-weight="700" text-anchor="middle">L3</text>
+<text x="86" y="409" font-size="20" fill="#1e293b">Network</text>
+<rect x="248" y="386" width="52" height="32" fill="#1e293b" rx="8"/>
+<text x="274" y="409" font-size="20" fill="#ffffff" font-weight="700" text-anchor="middle">L2</text>
+<text x="310" y="409" font-size="20" fill="#1e293b">Data link</text>
+<rect x="472" y="386" width="52" height="32" fill="#1e293b" rx="8"/>
+<text x="498" y="409" font-size="20" fill="#ffffff" font-weight="700" text-anchor="middle">L1</text>
+<text x="534" y="409" font-size="20" fill="#1e293b">Physical</text>
+<rect x="24" y="448" width="672" height="166" fill="#ffffff" rx="12" stroke="#cbd5e1" stroke-width="1.5"/>
+<circle cx="63" cy="488" r="19" fill="#047857"/>
+<text x="63" y="495" font-size="20" fill="#ffffff" font-weight="700" text-anchor="middle">1</text>
+<rect x="624" y="472" width="52" height="32" fill="#1e293b" rx="8"/>
+<text x="650" y="495" font-size="20" fill="#ffffff" font-weight="700" text-anchor="middle">L7</text>
+<text x="94" y="497" font-size="24" fill="#0b1220" font-weight="700">URL parsed, caches checked</text>
+<text x="44" y="532" font-size="20" fill="#1e293b" xml:space="preserve">The browser splits the URL into scheme (https), host (example.com)</text>
+<text x="44" y="560" font-size="20" fill="#1e293b" xml:space="preserve">and path, then checks its caches. A cached DNS answer or an open</text>
+<text x="44" y="588" font-size="20" fill="#1e293b" xml:space="preserve">connection lets it skip steps below.</text>
+<line x1="360" y1="619" x2="360" y2="633" stroke="#475569" stroke-width="2.5" stroke-linecap="butt"/>
+<polygon points="353.18,632 366.82,632 360,643" fill="#475569"/>
+<rect x="24" y="648" width="672" height="728" fill="#ffffff" rx="12" stroke="#cbd5e1" stroke-width="1.5"/>
+<circle cx="63" cy="688" r="19" fill="#047857"/>
+<text x="63" y="695" font-size="20" fill="#ffffff" font-weight="700" text-anchor="middle">2</text>
+<text x="94" y="697" font-size="24" fill="#0b1220" font-weight="700">DNS: name to IP address</text>
+<rect x="44" y="720" width="632" height="350" fill="#fffbeb" rx="10" stroke="#b45309" stroke-width="1.5"/>
+<rect x="610" y="734" width="52" height="32" fill="#b45309" rx="8"/>
+<text x="636" y="757" font-size="20" fill="#ffffff" font-weight="700" text-anchor="middle">L2</text>
+<text x="60" y="758" font-size="21" fill="#b45309" font-weight="700">First, the next hop's MAC address</text>
+<text x="60" y="794" font-size="20" fill="#1e293b" xml:space="preserve">No packet can leave without a frame, and a frame needs the</text>
+<text x="60" y="822" font-size="20" fill="#1e293b" xml:space="preserve">MAC address of the next hop: the DNS resolver if it is on this</text>
+<text x="60" y="850" font-size="20" fill="#1e293b" xml:space="preserve">subnet, otherwise the default gateway. ARP (IPv6: Neighbour</text>
+<text x="60" y="878" font-size="20" fill="#1e293b" xml:space="preserve">Discovery) finds it. The answer is cached, so this repeats only</text>
+<text x="60" y="906" font-size="20" fill="#1e293b" xml:space="preserve">when the cache has no entry.</text>
+<text x="60" y="940" font-size="20" fill="#475569" font-weight="700">Your host</text>
+<text x="660" y="940" font-size="20" fill="#475569" font-weight="700" text-anchor="end">Next hop</text>
+<line x1="74" y1="952" x2="74" y2="1054" stroke="#cbd5e1" stroke-width="2" stroke-linecap="butt"/>
+<line x1="646" y1="952" x2="646" y2="1054" stroke="#cbd5e1" stroke-width="2" stroke-linecap="butt"/>
+<text x="360" y="978" font-size="20" fill="#1e293b" text-anchor="middle">ARP request (broadcast): who has 192.168.1.1?</text>
+<line x1="74" y1="992" x2="634" y2="992" stroke="#1e293b" stroke-width="2.5" stroke-linecap="butt"/>
+<polygon points="633,985.04 633,998.96 645,992" fill="#1e293b"/>
+<circle cx="74" cy="992" r="4.5" fill="#1e293b"/>
+<text x="360" y="1026" font-size="20" fill="#1e293b" text-anchor="middle">ARP reply: 192.168.1.1 is at this MAC address</text>
+<line x1="646" y1="1040" x2="86" y2="1040" stroke="#047857" stroke-width="2.5" stroke-linecap="butt"/>
+<polygon points="87,1033.04 87,1046.96 75,1040" fill="#047857"/>
+<circle cx="646" cy="1040" r="4.5" fill="#047857"/>
+<rect x="624" y="1092" width="52" height="32" fill="#1e293b" rx="8"/>
+<text x="650" y="1115" font-size="20" fill="#ffffff" font-weight="700" text-anchor="middle">L7</text>
+<text x="44" y="1116" font-size="21" fill="#0b1220" font-weight="700">Then the DNS query</text>
+<text x="44" y="1152" font-size="20" fill="#1e293b" xml:space="preserve">The host asks its recursive resolver for the address of example.com,</text>
+<text x="44" y="1180" font-size="20" fill="#1e293b" xml:space="preserve">usually over UDP port 53. The resolver returns an A record (IPv4) or</text>
+<text x="44" y="1208" font-size="20" fill="#1e293b" xml:space="preserve">an AAAA record (IPv6).</text>
+<text x="44" y="1242" font-size="20" fill="#475569" font-weight="700">Your host</text>
+<text x="676" y="1242" font-size="20" fill="#475569" font-weight="700" text-anchor="end">DNS resolver</text>
+<line x1="58" y1="1254" x2="58" y2="1356" stroke="#cbd5e1" stroke-width="2" stroke-linecap="butt"/>
+<line x1="662" y1="1254" x2="662" y2="1356" stroke="#cbd5e1" stroke-width="2" stroke-linecap="butt"/>
+<text x="360" y="1280" font-size="20" fill="#1e293b" text-anchor="middle">Query: example.com, type A</text>
+<line x1="58" y1="1294" x2="650" y2="1294" stroke="#1e293b" stroke-width="2.5" stroke-linecap="butt"/>
+<polygon points="649,1287.04 649,1300.96 661,1294" fill="#1e293b"/>
+<circle cx="58" cy="1294" r="4.5" fill="#1e293b"/>
+<text x="360" y="1328" font-size="20" fill="#1e293b" text-anchor="middle">Answer: 198.51.100.20</text>
+<line x1="662" y1="1342" x2="70" y2="1342" stroke="#047857" stroke-width="2.5" stroke-linecap="butt"/>
+<polygon points="71,1335.04 71,1348.96 59,1342" fill="#047857"/>
+<circle cx="662" cy="1342" r="4.5" fill="#047857"/>
+<line x1="360" y1="1381" x2="360" y2="1395" stroke="#475569" stroke-width="2.5" stroke-linecap="butt"/>
+<polygon points="353.18,1394 366.82,1394 360,1405" fill="#475569"/>
+<rect x="24" y="1410" width="672" height="356" fill="#ffffff" rx="12" stroke="#cbd5e1" stroke-width="1.5"/>
+<circle cx="63" cy="1450" r="19" fill="#047857"/>
+<text x="63" y="1457" font-size="20" fill="#ffffff" font-weight="700" text-anchor="middle">3</text>
+<rect x="624" y="1434" width="52" height="32" fill="#1e293b" rx="8"/>
+<text x="650" y="1457" font-size="20" fill="#ffffff" font-weight="700" text-anchor="middle">L4</text>
+<text x="94" y="1459" font-size="24" fill="#0b1220" font-weight="700">TCP three-way handshake</text>
+<text x="44" y="1494" font-size="20" fill="#1e293b" xml:space="preserve">The host opens a TCP connection to port 443 on the server. Ports</text>
+<text x="44" y="1522" font-size="20" fill="#1e293b" xml:space="preserve">are layer 4 addresses: they identify the service, not the machine.</text>
+<text x="44" y="1550" font-size="20" fill="#1e293b" xml:space="preserve">One round trip.</text>
+<text x="44" y="1584" font-size="20" fill="#475569" font-weight="700">Your host</text>
+<text x="676" y="1584" font-size="20" fill="#475569" font-weight="700" text-anchor="end">Server, port 443</text>
+<line x1="58" y1="1596" x2="58" y2="1746" stroke="#cbd5e1" stroke-width="2" stroke-linecap="butt"/>
+<line x1="662" y1="1596" x2="662" y2="1746" stroke="#cbd5e1" stroke-width="2" stroke-linecap="butt"/>
+<text x="360" y="1622" font-size="20" fill="#1e293b" text-anchor="middle">SYN</text>
+<line x1="58" y1="1636" x2="650" y2="1636" stroke="#1e293b" stroke-width="2.5" stroke-linecap="butt"/>
+<polygon points="649,1629.04 649,1642.96 661,1636" fill="#1e293b"/>
+<circle cx="58" cy="1636" r="4.5" fill="#1e293b"/>
+<text x="360" y="1670" font-size="20" fill="#1e293b" text-anchor="middle">SYN-ACK</text>
+<line x1="662" y1="1684" x2="70" y2="1684" stroke="#047857" stroke-width="2.5" stroke-linecap="butt"/>
+<polygon points="71,1677.04 71,1690.96 59,1684" fill="#047857"/>
+<circle cx="662" cy="1684" r="4.5" fill="#047857"/>
+<text x="360" y="1718" font-size="20" fill="#1e293b" text-anchor="middle">ACK</text>
+<line x1="58" y1="1732" x2="650" y2="1732" stroke="#1e293b" stroke-width="2.5" stroke-linecap="butt"/>
+<polygon points="649,1725.04 649,1738.96 661,1732" fill="#1e293b"/>
+<circle cx="58" cy="1732" r="4.5" fill="#1e293b"/>
+<line x1="360" y1="1771" x2="360" y2="1785" stroke="#475569" stroke-width="2.5" stroke-linecap="butt"/>
+<polygon points="353.18,1784 366.82,1784 360,1795" fill="#475569"/>
+<rect x="24" y="1800" width="672" height="356" fill="#ffffff" rx="12" stroke="#cbd5e1" stroke-width="1.5"/>
+<circle cx="63" cy="1840" r="19" fill="#047857"/>
+<text x="63" y="1847" font-size="20" fill="#ffffff" font-weight="700" text-anchor="middle">4</text>
+<rect x="624" y="1824" width="52" height="32" fill="#1e293b" rx="8"/>
+<text x="650" y="1847" font-size="20" fill="#ffffff" font-weight="700" text-anchor="middle">L6</text>
+<text x="94" y="1849" font-size="24" fill="#0b1220" font-weight="700">TLS 1.3 handshake</text>
+<text x="44" y="1884" font-size="20" fill="#1e293b" xml:space="preserve">One round trip. The server proves its identity with a certificate and</text>
+<text x="44" y="1912" font-size="20" fill="#1e293b" xml:space="preserve">both sides derive the session keys. Everything after ServerHello is</text>
+<text x="44" y="1940" font-size="20" fill="#1e293b" xml:space="preserve">encrypted.</text>
+<text x="44" y="1974" font-size="20" fill="#475569" font-weight="700">Your host</text>
+<text x="676" y="1974" font-size="20" fill="#475569" font-weight="700" text-anchor="end">Server, port 443</text>
+<line x1="58" y1="1986" x2="58" y2="2136" stroke="#cbd5e1" stroke-width="2" stroke-linecap="butt"/>
+<line x1="662" y1="1986" x2="662" y2="2136" stroke="#cbd5e1" stroke-width="2" stroke-linecap="butt"/>
+<text x="360" y="2012" font-size="20" fill="#1e293b" text-anchor="middle">ClientHello + key share</text>
+<line x1="58" y1="2026" x2="650" y2="2026" stroke="#1e293b" stroke-width="2.5" stroke-linecap="butt"/>
+<polygon points="649,2019.04 649,2032.96 661,2026" fill="#1e293b"/>
+<circle cx="58" cy="2026" r="4.5" fill="#1e293b"/>
+<text x="360" y="2060" font-size="20" fill="#1e293b" text-anchor="middle">ServerHello + key share, certificate, Finished</text>
+<line x1="662" y1="2074" x2="70" y2="2074" stroke="#047857" stroke-width="2.5" stroke-linecap="butt"/>
+<polygon points="71,2067.04 71,2080.96 59,2074" fill="#047857"/>
+<circle cx="662" cy="2074" r="4.5" fill="#047857"/>
+<text x="360" y="2108" font-size="20" fill="#1e293b" text-anchor="middle">Finished</text>
+<line x1="58" y1="2122" x2="650" y2="2122" stroke="#1e293b" stroke-width="2.5" stroke-linecap="butt"/>
+<polygon points="649,2115.04 649,2128.96 661,2122" fill="#1e293b"/>
+<circle cx="58" cy="2122" r="4.5" fill="#1e293b"/>
+<line x1="360" y1="2161" x2="360" y2="2175" stroke="#475569" stroke-width="2.5" stroke-linecap="butt"/>
+<polygon points="353.18,2174 366.82,2174 360,2185" fill="#475569"/>
+<rect x="24" y="2190" width="672" height="272" fill="#ffffff" rx="12" stroke="#cbd5e1" stroke-width="1.5"/>
+<circle cx="63" cy="2230" r="19" fill="#047857"/>
+<text x="63" y="2237" font-size="20" fill="#ffffff" font-weight="700" text-anchor="middle">5</text>
+<rect x="624" y="2214" width="52" height="32" fill="#1e293b" rx="8"/>
+<text x="650" y="2237" font-size="20" fill="#ffffff" font-weight="700" text-anchor="middle">L7</text>
+<text x="94" y="2239" font-size="24" fill="#0b1220" font-weight="700">HTTP request</text>
+<text x="44" y="2274" font-size="20" fill="#1e293b" xml:space="preserve">The browser sends GET / for example.com inside the TLS session.</text>
+<text x="44" y="2302" font-size="20" fill="#1e293b" xml:space="preserve">Each layer below wraps it, so one frame on the wire looks like this:</text>
+<rect x="45" y="2322" width="116" height="48" fill="#e2e8f0" rx="6" stroke="#94a3b8" stroke-width="1.5"/>
+<text x="103" y="2353" font-size="20" fill="#0b1220" font-weight="700" text-anchor="middle">Ethernet</text>
+<text x="103" y="2398" font-size="20" fill="#475569" text-anchor="middle">L2</text>
+<rect x="163" y="2322" width="68" height="48" fill="#e2e8f0" rx="6" stroke="#94a3b8" stroke-width="1.5"/>
+<text x="197" y="2353" font-size="20" fill="#0b1220" font-weight="700" text-anchor="middle">IP</text>
+<text x="197" y="2398" font-size="20" fill="#475569" text-anchor="middle">L3</text>
+<rect x="233" y="2322" width="78" height="48" fill="#e2e8f0" rx="6" stroke="#94a3b8" stroke-width="1.5"/>
+<text x="272" y="2353" font-size="20" fill="#0b1220" font-weight="700" text-anchor="middle">TCP</text>
+<text x="272" y="2398" font-size="20" fill="#475569" text-anchor="middle">L4</text>
+<rect x="313" y="2322" width="292" height="48" fill="#ecfdf5" rx="6" stroke="#047857" stroke-width="1.5"/>
+<text x="459" y="2353" font-size="20" fill="#0b1220" font-weight="700" text-anchor="middle">TLS record: HTTP request</text>
+<text x="459" y="2398" font-size="20" fill="#475569" text-anchor="middle">L6 + L7, encrypted</text>
+<rect x="607" y="2322" width="68" height="48" fill="#e2e8f0" rx="6" stroke="#94a3b8" stroke-width="1.5"/>
+<text x="641" y="2353" font-size="20" fill="#0b1220" font-weight="700" text-anchor="middle">FCS</text>
+<text x="641" y="2398" font-size="20" fill="#475569" text-anchor="middle">L2</text>
+<text x="44" y="2436" font-size="20" fill="#475569" xml:space="preserve">The frame leaves as bits on the cable or radio link (L1).</text>
+<line x1="360" y1="2467" x2="360" y2="2481" stroke="#475569" stroke-width="2.5" stroke-linecap="butt"/>
+<polygon points="353.18,2480 366.82,2480 360,2491" fill="#475569"/>
+<rect x="24" y="2496" width="672" height="1003" fill="#ffffff" rx="12" stroke="#cbd5e1" stroke-width="1.5"/>
+<circle cx="63" cy="2536" r="19" fill="#047857"/>
+<text x="63" y="2543" font-size="20" fill="#ffffff" font-weight="700" text-anchor="middle">6</text>
+<rect x="624" y="2520" width="52" height="32" fill="#1e293b" rx="8"/>
+<text x="650" y="2543" font-size="20" fill="#ffffff" font-weight="700" text-anchor="middle">L2</text>
+<rect x="564" y="2520" width="52" height="32" fill="#1e293b" rx="8"/>
+<text x="590" y="2543" font-size="20" fill="#ffffff" font-weight="700" text-anchor="middle">L3</text>
+<text x="94" y="2545" font-size="24" fill="#0b1220" font-weight="700">Every packet is routed hop by hop</text>
+<text x="44" y="2580" font-size="20" fill="#1e293b" xml:space="preserve">This is true of every packet in the steps above, in both directions.</text>
+<text x="44" y="2608" font-size="20" fill="#1e293b" xml:space="preserve">Follow one packet across three links:</text>
+<rect x="44" y="2630" width="140" height="72" fill="#0b1220" rx="10"/>
+<text x="114" y="2673" font-size="20" fill="#ffffff" font-weight="700" text-anchor="middle">Your host</text>
+<line x1="187" y1="2666" x2="196" y2="2666" stroke="#475569" stroke-width="2.5" stroke-linecap="butt"/>
+<polygon points="195,2660.2 195,2671.8 205,2666" fill="#475569"/>
+<line x1="196" y1="2676" x2="196" y2="2716" stroke="#475569" stroke-width="2" stroke-linecap="butt" stroke-dasharray="3 4"/>
+<text x="196" y="2740" font-size="20" fill="#475569" font-weight="700" text-anchor="middle">Link 1</text>
+<rect x="208" y="2630" width="140" height="72" fill="#1e293b" rx="10"/>
+<text x="278" y="2660" font-size="20" fill="#ffffff" font-weight="700" text-anchor="middle">Home router</text>
+<text x="278" y="2686" font-size="20" fill="#ffffff" font-weight="700" text-anchor="middle">with NAT</text>
+<line x1="351" y1="2666" x2="360" y2="2666" stroke="#475569" stroke-width="2.5" stroke-linecap="butt"/>
+<polygon points="359,2660.2 359,2671.8 369,2666" fill="#475569"/>
+<line x1="360" y1="2676" x2="360" y2="2716" stroke="#475569" stroke-width="2" stroke-linecap="butt" stroke-dasharray="3 4"/>
+<text x="360" y="2740" font-size="20" fill="#475569" font-weight="700" text-anchor="middle">Link 2</text>
+<rect x="372" y="2630" width="140" height="72" fill="#1e293b" rx="10"/>
+<text x="442" y="2660" font-size="20" fill="#ffffff" font-weight="700" text-anchor="middle">Internet</text>
+<text x="442" y="2686" font-size="20" fill="#ffffff" font-weight="700" text-anchor="middle">routers</text>
+<line x1="515" y1="2666" x2="524" y2="2666" stroke="#475569" stroke-width="2.5" stroke-linecap="butt"/>
+<polygon points="523,2660.2 523,2671.8 533,2666" fill="#475569"/>
+<line x1="524" y1="2676" x2="524" y2="2716" stroke="#475569" stroke-width="2" stroke-linecap="butt" stroke-dasharray="3 4"/>
+<text x="524" y="2740" font-size="20" fill="#475569" font-weight="700" text-anchor="middle">Link 3</text>
+<rect x="536" y="2630" width="140" height="72" fill="#0b1220" rx="10"/>
+<text x="606" y="2673" font-size="20" fill="#ffffff" font-weight="700" text-anchor="middle">Server</text>
+<line x1="44" y1="2762" x2="676" y2="2762" stroke="#e2e8f0" stroke-width="1.5" stroke-linecap="butt"/>
+<rect x="44" y="2784" width="52" height="32" fill="#1e293b" rx="8"/>
+<text x="70" y="2807" font-size="20" fill="#ffffff" font-weight="700" text-anchor="middle">L2</text>
+<text x="110" y="2807" font-size="20" fill="#1e293b" xml:space="preserve"><tspan font-weight="700">New</tspan><tspan font-weight="700"> </tspan><tspan font-weight="700">frame</tspan><tspan font-weight="700"> </tspan><tspan font-weight="700">on</tspan><tspan font-weight="700"> </tspan><tspan font-weight="700">every</tspan><tspan font-weight="700"> </tspan><tspan font-weight="700">link.</tspan> Each router removes the frame</text>
+<text x="110" y="2835" font-size="20" fill="#1e293b" xml:space="preserve">and builds a new one, so the source and destination MAC</text>
+<text x="110" y="2863" font-size="20" fill="#1e293b" xml:space="preserve">addresses change.</text>
+<rect x="120" y="2881" width="152" height="70" fill="#f8fafc" rx="8" stroke="#cbd5e1" stroke-width="1.5"/>
+<text x="196" y="2910" font-size="20" fill="#475569" font-weight="700" text-anchor="middle">Link 1</text>
+<text x="196" y="2936" font-size="20" fill="#0b1220" text-anchor="middle">MAC pair A</text>
+<rect x="284" y="2881" width="152" height="70" fill="#f8fafc" rx="8" stroke="#cbd5e1" stroke-width="1.5"/>
+<text x="360" y="2910" font-size="20" fill="#475569" font-weight="700" text-anchor="middle">Link 2</text>
+<text x="360" y="2936" font-size="20" fill="#0b1220" text-anchor="middle">MAC pair B</text>
+<rect x="448" y="2881" width="152" height="70" fill="#f8fafc" rx="8" stroke="#cbd5e1" stroke-width="1.5"/>
+<text x="524" y="2910" font-size="20" fill="#475569" font-weight="700" text-anchor="middle">Link 3</text>
+<text x="524" y="2936" font-size="20" fill="#0b1220" text-anchor="middle">MAC pair C</text>
+<line x1="44" y1="2973" x2="676" y2="2973" stroke="#e2e8f0" stroke-width="1.5" stroke-linecap="butt"/>
+<rect x="44" y="2995" width="52" height="32" fill="#1e293b" rx="8"/>
+<text x="70" y="3018" font-size="20" fill="#ffffff" font-weight="700" text-anchor="middle">L3</text>
+<text x="110" y="3018" font-size="20" fill="#1e293b" xml:space="preserve"><tspan font-weight="700">TTL</tspan><tspan font-weight="700"> </tspan><tspan font-weight="700">drops</tspan><tspan font-weight="700"> </tspan><tspan font-weight="700">by</tspan><tspan font-weight="700"> </tspan><tspan font-weight="700">1</tspan><tspan font-weight="700"> </tspan><tspan font-weight="700">at</tspan><tspan font-weight="700"> </tspan><tspan font-weight="700">each</tspan><tspan font-weight="700"> </tspan><tspan font-weight="700">router</tspan>, and the IPv4 header</text>
+<text x="110" y="3046" font-size="20" fill="#1e293b" xml:space="preserve">checksum is recomputed. (IPv6: the Hop Limit drops; there is</text>
+<text x="110" y="3074" font-size="20" fill="#1e293b" xml:space="preserve">no header checksum.)</text>
+<rect x="120" y="3092" width="152" height="70" fill="#f8fafc" rx="8" stroke="#cbd5e1" stroke-width="1.5"/>
+<text x="196" y="3121" font-size="20" fill="#475569" font-weight="700" text-anchor="middle">Link 1</text>
+<text x="196" y="3147" font-size="20" fill="#0b1220" text-anchor="middle">TTL 64</text>
+<rect x="284" y="3092" width="152" height="70" fill="#f8fafc" rx="8" stroke="#cbd5e1" stroke-width="1.5"/>
+<text x="360" y="3121" font-size="20" fill="#475569" font-weight="700" text-anchor="middle">Link 2</text>
+<text x="360" y="3147" font-size="20" fill="#0b1220" text-anchor="middle">TTL 63</text>
+<rect x="448" y="3092" width="152" height="70" fill="#f8fafc" rx="8" stroke="#cbd5e1" stroke-width="1.5"/>
+<text x="524" y="3121" font-size="20" fill="#475569" font-weight="700" text-anchor="middle">Link 3</text>
+<text x="524" y="3147" font-size="20" fill="#0b1220" text-anchor="middle">TTL 62, 61 ...</text>
+<line x1="44" y1="3184" x2="676" y2="3184" stroke="#e2e8f0" stroke-width="1.5" stroke-linecap="butt"/>
+<rect x="44" y="3206" width="94.1" height="32" fill="#1e293b" rx="8"/>
+<text x="91.05" y="3229" font-size="20" fill="#ffffff" font-weight="700" text-anchor="middle">L3 + L4</text>
+<text x="152.1" y="3229" font-size="20" fill="#1e293b" xml:space="preserve"><tspan font-weight="700">NAT</tspan><tspan font-weight="700"> </tspan><tspan font-weight="700">at</tspan><tspan font-weight="700"> </tspan><tspan font-weight="700">the</tspan><tspan font-weight="700"> </tspan><tspan font-weight="700">network</tspan><tspan font-weight="700"> </tspan><tspan font-weight="700">edge</tspan> rewrites the source address</text>
+<text x="152.1" y="3257" font-size="20" fill="#1e293b" xml:space="preserve">and source port, private to public.</text>
+<rect x="120" y="3275" width="152" height="96" fill="#f8fafc" rx="8" stroke="#cbd5e1" stroke-width="1.5"/>
+<text x="196" y="3304" font-size="20" fill="#475569" font-weight="700" text-anchor="middle">Link 1</text>
+<text x="196" y="3330" font-size="20" fill="#0b1220" text-anchor="middle">192.168.1.10</text>
+<text x="196" y="3356" font-size="20" fill="#0b1220" text-anchor="middle">port 51000</text>
+<rect x="284" y="3275" width="152" height="96" fill="#f8fafc" rx="8" stroke="#cbd5e1" stroke-width="1.5"/>
+<text x="360" y="3304" font-size="20" fill="#475569" font-weight="700" text-anchor="middle">Link 2</text>
+<text x="360" y="3330" font-size="20" fill="#0b1220" text-anchor="middle">203.0.113.5</text>
+<text x="360" y="3356" font-size="20" fill="#0b1220" text-anchor="middle">port 40001</text>
+<rect x="448" y="3275" width="152" height="96" fill="#f8fafc" rx="8" stroke="#cbd5e1" stroke-width="1.5"/>
+<text x="524" y="3304" font-size="20" fill="#475569" font-weight="700" text-anchor="middle">Link 3</text>
+<text x="524" y="3330" font-size="20" fill="#0b1220" text-anchor="middle">203.0.113.5</text>
+<text x="524" y="3356" font-size="20" fill="#0b1220" text-anchor="middle">port 40001</text>
+<rect x="44" y="3393" width="632" height="84" fill="#ecfdf5" rx="10" stroke="#047857" stroke-width="1.5"/>
+<text x="60" y="3425" font-size="20" fill="#0b1220" xml:space="preserve"><tspan font-weight="700">Not</tspan><tspan font-weight="700"> </tspan><tspan font-weight="700">changed</tspan><tspan font-weight="700"> </tspan><tspan font-weight="700">by</tspan><tspan font-weight="700"> </tspan><tspan font-weight="700">routers:</tspan> the TCP payload. The TLS-encrypted</text>
+<text x="60" y="3453" font-size="20" fill="#0b1220" xml:space="preserve">HTTP data arrives exactly as it was sent.</text>
+<line x1="360" y1="3504" x2="360" y2="3518" stroke="#475569" stroke-width="2.5" stroke-linecap="butt"/>
+<polygon points="353.18,3517 366.82,3517 360,3528" fill="#475569"/>
+<rect x="24" y="3533" width="672" height="194" fill="#ffffff" rx="12" stroke="#cbd5e1" stroke-width="1.5"/>
+<circle cx="63" cy="3573" r="19" fill="#047857"/>
+<text x="63" y="3580" font-size="20" fill="#ffffff" font-weight="700" text-anchor="middle">7</text>
+<rect x="624" y="3557" width="52" height="32" fill="#1e293b" rx="8"/>
+<text x="650" y="3580" font-size="20" fill="#ffffff" font-weight="700" text-anchor="middle">L7</text>
+<text x="94" y="3582" font-size="24" fill="#0b1220" font-weight="700">Server responds</text>
+<text x="44" y="3617" font-size="20" fill="#1e293b" xml:space="preserve">The server (often a load balancer or CDN edge in front of it)</text>
+<text x="44" y="3645" font-size="20" fill="#1e293b" xml:space="preserve">decrypts the request and returns status 200 with headers and the</text>
+<text x="44" y="3673" font-size="20" fill="#1e293b" xml:space="preserve">HTML. The reply is routed back hop by hop, and the NAT table</text>
+<text x="44" y="3701" font-size="20" fill="#1e293b" xml:space="preserve">maps it to your host.</text>
+<line x1="360" y1="3732" x2="360" y2="3746" stroke="#475569" stroke-width="2.5" stroke-linecap="butt"/>
+<polygon points="353.18,3745 366.82,3745 360,3756" fill="#475569"/>
+<rect x="24" y="3761" width="672" height="166" fill="#ffffff" rx="12" stroke="#cbd5e1" stroke-width="1.5"/>
+<circle cx="63" cy="3801" r="19" fill="#047857"/>
+<text x="63" y="3808" font-size="20" fill="#ffffff" font-weight="700" text-anchor="middle">8</text>
+<rect x="624" y="3785" width="52" height="32" fill="#1e293b" rx="8"/>
+<text x="650" y="3808" font-size="20" fill="#ffffff" font-weight="700" text-anchor="middle">L7</text>
+<text x="94" y="3810" font-size="24" fill="#0b1220" font-weight="700">Browser renders the page</text>
+<text x="44" y="3845" font-size="20" fill="#1e293b" xml:space="preserve">The browser parses the HTML into the DOM, fetches the CSS,</text>
+<text x="44" y="3873" font-size="20" fill="#1e293b" xml:space="preserve">scripts and images it names (reusing the connection where it can),</text>
+<text x="44" y="3901" font-size="20" fill="#1e293b" xml:space="preserve">then runs style, layout and paint.</text>
+<rect x="25" y="3957" width="670" height="146" fill="#ffffff" rx="12" stroke="#475569" stroke-width="1.5" stroke-dasharray="7 5"/>
+<text x="46" y="3995" font-size="21" fill="#0b1220" font-weight="700">Common alternative: HTTP/3</text>
+<text x="46" y="4029" font-size="20" fill="#1e293b" xml:space="preserve">HTTP/3 runs over QUIC, which uses UDP (usually port 443) instead</text>
+<text x="46" y="4057" font-size="20" fill="#1e293b" xml:space="preserve">of TCP. QUIC builds TLS 1.3 into its own handshake, so steps 3</text>
+<text x="46" y="4085" font-size="20" fill="#1e293b" xml:space="preserve">and 4 become a single round trip. Every other step is the same.</text>
+<text x="360" y="4145" font-size="20" fill="#475569" text-anchor="middle" xml:space="preserve">Checked against RFC 791, 826, 1035, 3022, 4861, 8200, 8446, 9000,</text>
+<text x="360" y="4173" font-size="20" fill="#475569" text-anchor="middle" xml:space="preserve">9114 and 9293, and MDN Web Docs.</text>
+<line x1="24" y1="4199" x2="696" y2="4199" stroke="#cbd5e1" stroke-width="1.5" stroke-linecap="butt"/>
+<text x="360" y="4235" font-size="20" fill="#1e293b" font-weight="700" text-anchor="middle">Architect U'r Career, Krishna Mohan Parsha.</text>
+<text x="360" y="4263" font-size="20" fill="#475569" text-anchor="middle">CC BY-NC-SA 4.0. Reviewed November 2026.</text>
+</svg>
