@@ -1,0 +1,1450 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+<meta charset="UTF-8">
+<title>Agentic AI Runtime Architecture | Architect U'r Career</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="An interactive diagram of an AI agent runtime: the execution loop, seven layers, security controls and orchestration patterns, each with a code sample.">
+<link rel="canonical" href="https://mohanparsha.github.io/architecturcareer/agentic-ai-runtime/">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Agentic AI Runtime Architecture | Architect U'r Career">
+<meta property="og:description" content="An interactive diagram of an AI agent runtime: the execution loop, seven layers, security controls and orchestration patterns, each with a code sample.">
+<meta property="og:url" content="https://mohanparsha.github.io/architecturcareer/agentic-ai-runtime/">
+<meta property="og:image" content="https://mohanparsha.github.io/architecturcareer/auc-logo.png">
+<meta name="twitter:card" content="summary">
+<link rel="license" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">
+<link rel="stylesheet" href="../assets/auc-guide.css">
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
+<script>document.documentElement.className += ' js';</script>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --bg:#0a0b0f;--bg2:#12131a;--bg3:#1a1b24;--bg4:#22232e;
+  --text:#e8e6e1;--text2:#a9a7b1;--text3:#8f8d9a;
+  --purple:#8b7cf6;--purple-dim:#6b5ce7;--purple-glow:rgba(139,124,246,0.15);--purple-bg:rgba(139,124,246,0.08);
+  --teal:#5eead4;--teal-dim:#38bfa7;--teal-glow:rgba(94,234,212,0.12);--teal-bg:rgba(94,234,212,0.06);
+  --coral:#fb7f6a;--coral-dim:#e8614a;--coral-glow:rgba(251,127,106,0.12);--coral-bg:rgba(251,127,106,0.06);
+  --amber:#fbbf24;--amber-dim:#e5a812;--amber-glow:rgba(251,191,36,0.12);--amber-bg:rgba(251,191,36,0.06);
+  --blue:#60a5fa;--blue-dim:#3b82f6;--blue-glow:rgba(96,165,250,0.12);--blue-bg:rgba(96,165,250,0.06);
+  --green:#4ade80;--green-dim:#22c55e;
+  --border:rgba(255,255,255,0.06);--border2:rgba(255,255,255,0.1);
+  --radius:10px;--radius-lg:16px;
+}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--text);font-family:'DM Sans',sans-serif;overflow-x:hidden;min-height:100vh}
+
+.noise{position:fixed;inset:0;pointer-events:none;opacity:0.03;z-index:9999;
+  background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")}
+
+header.hero{text-align:center;padding:48px 24px 20px;position:relative}
+header.hero::after{content:'';position:absolute;bottom:0;left:50%;transform:translateX(-50%);width:120px;height:1px;background:linear-gradient(90deg,transparent,var(--purple),transparent)}
+.hero-tag{font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:3px;text-transform:uppercase;color:var(--purple);margin-bottom:12px;opacity:0;animation:fadeUp .6s .2s forwards}
+.hero-title{font-family:'Instrument Serif',serif;font-size:clamp(28px,5vw,44px);font-weight:400;color:var(--text);line-height:1.15;margin-bottom:8px;opacity:0;animation:fadeUp .6s .35s forwards}
+.hero-title em{font-style:italic;color:var(--purple)}
+.hero-sub{font-size:14px;color:var(--text2);max-width:560px;margin:0 auto;line-height:1.6;opacity:0;animation:fadeUp .6s .5s forwards}
+.version-stamp{font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--text3);margin-top:12px;letter-spacing:1px;opacity:0;animation:fadeUp .6s .55s forwards}
+
+@keyframes fadeUp{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:translateY(0)}}
+@keyframes flowDown{0%{transform:translateY(-8px);opacity:0}50%{opacity:1}100%{transform:translateY(8px);opacity:0}}
+@keyframes spin{to{transform:rotate(360deg)}}
+
+.container{display:block;max-width:1100px;margin:0 auto;padding:0 20px 60px}
+
+/* === CORE LOOP SECTION === */
+.loop-section{margin:36px 0 44px;opacity:0;animation:fadeUp .6s .65s forwards}
+.section-label{font-family:'JetBrains Mono',monospace;font-size:11px;font-weight:400;letter-spacing:2.5px;text-transform:uppercase;color:var(--text3);margin-bottom:16px;display:flex;align-items:center;gap:10px}
+.section-label::before{content:'';width:20px;height:1px;background:var(--text3);flex-shrink:0}
+.section-note{font-size:12px;color:var(--text3);line-height:1.6;margin:-6px 0 4px;max-width:720px}
+
+.loop-track{display:flex;align-items:center;gap:0;justify-content:center;flex-wrap:wrap;position:relative;padding:20px 0}
+.loop-node{display:block;text-decoration:none;color:inherit;position:relative;cursor:pointer;padding:14px 20px;border-radius:var(--radius);border:1px solid var(--border2);background:var(--bg2);text-align:center;min-width:110px;transition:all .25s;z-index:2}
+.loop-node:hover{transform:translateY(-3px);border-color:var(--node-color,var(--purple));background:var(--node-bg,var(--purple-bg))}
+.loop-node.active{border-color:var(--node-color,var(--purple));background:var(--node-bg,var(--purple-bg));box-shadow:0 0 30px var(--node-glow,var(--purple-glow))}
+.loop-node .ln-num,.loop-node .ln-name,.loop-node .ln-sub{display:block}
+.loop-node .ln-num{font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--node-color,var(--purple));letter-spacing:1px;margin-bottom:3px}
+.loop-node .ln-name{font-size:14px;font-weight:600;color:var(--text)}
+.loop-node .ln-sub{font-size:11px;color:var(--text3);margin-top:2px}
+.loop-connector{width:32px;height:2px;background:linear-gradient(90deg,var(--border2),var(--purple-dim),var(--border2));position:relative;flex-shrink:0}
+.loop-connector::after{content:'▸';position:absolute;right:-4px;top:50%;transform:translateY(-52%);color:var(--purple-dim);font-size:10px}
+.loop-return{position:absolute;bottom:-18px;left:50%;transform:translateX(-50%);font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--purple);display:flex;align-items:center;gap:4px;white-space:nowrap}
+.loop-return .spin-icon{display:inline-block;animation:spin 3s linear infinite}
+
+/* === LAYER ARCHITECTURE === */
+.arch-layers{display:flex;flex-direction:column;gap:10px;margin-top:16px}
+.layer{opacity:0;animation:fadeUp .5s forwards;border-radius:var(--radius-lg);overflow:hidden;border:1px solid var(--border);transition:border-color .3s}
+.layer:hover{border-color:var(--layer-accent,var(--border2))}
+.layer:nth-child(1){animation-delay:.7s}
+.layer:nth-child(3){animation-delay:.8s}
+.layer:nth-child(5){animation-delay:.9s}
+.layer:nth-child(7){animation-delay:1s}
+.layer:nth-child(9){animation-delay:1.1s}
+.layer:nth-child(11){animation-delay:1.2s}
+.layer:nth-child(13){animation-delay:1.3s}
+
+.layer-header{display:flex;align-items:center;gap:12px;width:100%;padding:14px 18px;border:0;background:var(--bg2);color:inherit;font:inherit;text-align:left;cursor:pointer;user-select:none;transition:background .2s}
+.layer-header:hover{background:var(--bg3)}
+.layer-badge{font-family:'JetBrains Mono',monospace;font-size:11px;font-weight:600;padding:4px 10px;border-radius:6px;letter-spacing:1px;flex-shrink:0}
+.layer-info{display:block;flex:1;min-width:0}
+.layer-name{display:block;font-size:15px;font-weight:600;color:var(--text)}
+.layer-desc{display:block;font-size:12px;color:var(--text3);margin-top:1px}
+.layer-toggle{display:none;width:24px;height:24px;border-radius:50%;border:1px solid var(--border2);align-items:center;justify-content:center;font-size:12px;color:var(--text3);transition:all .25s;flex-shrink:0}
+.js .layer-toggle{display:flex}
+.layer.open .layer-toggle{transform:rotate(180deg);border-color:var(--layer-accent,var(--purple));color:var(--layer-accent,var(--purple))}
+
+/* Without JavaScript every layer is open. With it, a layer is collapsed until opened. */
+.layer-body{overflow:hidden}
+.js .layer-body{max-height:0;visibility:hidden;transition:max-height .4s cubic-bezier(.4,0,.2,1),visibility 0s .4s}
+.js .layer.open .layer-body{max-height:2400px;visibility:visible;transition:max-height .4s cubic-bezier(.4,0,.2,1),visibility 0s}
+.layer-inner{padding:0 18px 18px}
+
+.nodes-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:8px;margin-top:12px}
+.node-card{display:block;text-decoration:none;color:inherit;background:var(--bg3);border:1px solid var(--border);border-radius:var(--radius);padding:14px 16px;cursor:pointer;transition:all .25s;position:relative;overflow:hidden}
+.node-card::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:var(--node-accent,var(--purple));opacity:0;transition:opacity .25s}
+.node-card:hover{border-color:var(--node-accent,var(--purple));transform:translateY(-2px)}
+.node-card:hover::before{opacity:1}
+.nc-head{display:flex;align-items:center;justify-content:space-between;gap:8px;margin-bottom:6px}
+.nc-name{font-size:13px;font-weight:600;color:var(--text)}
+.nc-tag{font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:1px;padding:2px 8px;border-radius:4px;text-transform:uppercase;font-weight:500;white-space:nowrap;flex-shrink:0}
+.nc-desc{display:block;font-size:12px;color:var(--text3);line-height:1.5}
+.nc-techs{display:flex;flex-wrap:wrap;gap:4px;margin-top:8px}
+.nc-tech{font-family:'JetBrains Mono',monospace;font-size:10px;padding:2px 7px;border-radius:4px;background:rgba(255,255,255,0.04);color:var(--text2);border:1px solid var(--border)}
+
+/* === DETAIL PANEL === */
+.detail-panel{position:fixed;top:0;right:-520px;width:min(500px,90vw);height:100vh;height:100dvh;background:var(--bg2);border-left:1px solid var(--border2);z-index:1000;visibility:hidden;transition:right .35s cubic-bezier(.4,0,.2,1),visibility 0s .35s;overflow-y:auto;padding:0}
+.detail-panel.open{right:0;visibility:visible;transition:right .35s cubic-bezier(.4,0,.2,1),visibility 0s}
+.detail-overlay{position:fixed;inset:0;background:rgba(0,0,0,0.5);z-index:999;opacity:0;pointer-events:none;transition:opacity .3s}
+.detail-overlay.open{opacity:1;pointer-events:auto}
+.dp-header{padding:24px 64px 16px 24px;border-bottom:1px solid var(--border);position:sticky;top:0;background:var(--bg2);z-index:2}
+.dp-close{position:absolute;top:20px;right:20px;width:36px;height:36px;border-radius:50%;border:1px solid var(--border2);background:transparent;color:var(--text2);cursor:pointer;font-size:16px;display:flex;align-items:center;justify-content:center;transition:border-color .2s,color .2s,background-color .2s}
+.dp-close:hover{border-color:var(--coral);color:var(--coral);background:var(--coral-bg)}
+.dp-tag{font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:2px;text-transform:uppercase;margin-bottom:6px}
+.dp-title{font-family:'Instrument Serif',serif;font-size:22px;font-weight:400;color:var(--text)}
+.dp-body{padding:20px 24px 40px}
+.dp-section{margin-bottom:20px}
+.dp-section h4{font-size:12px;font-weight:600;text-transform:uppercase;letter-spacing:1px;color:var(--text2);margin-bottom:8px}
+.dp-text{font-size:13px;color:var(--text2);line-height:1.7}
+.dp-text + .dp-text{margin-top:8px}
+.dp-text strong,.dp-list strong{color:var(--text);font-weight:600}
+.dp-text a,.dp-list a,.dp-control a{color:var(--teal);text-decoration:underline;text-underline-offset:2px}
+.dp-text code,.dp-list code{font-family:'JetBrains Mono',monospace;font-size:12px;color:var(--text);background:var(--bg);border:1px solid var(--border);border-radius:4px;padding:0 4px}
+.dp-status{border-left:2px solid var(--blue);padding-left:10px}
+.dp-list{list-style:none;font-size:13px;color:var(--text2);line-height:1.7}
+.dp-list li{position:relative;padding-left:16px;margin-top:8px}
+.dp-list li::before{content:'';position:absolute;left:0;top:10px;width:6px;height:6px;border-radius:50%;background:var(--purple)}
+.dp-control{border:1px solid var(--border);border-left:3px solid var(--coral);border-radius:var(--radius);padding:10px 12px;margin-top:8px;background:var(--bg)}
+.dp-control strong{display:block;font-size:13px;font-weight:600;color:var(--text);margin-bottom:3px}
+.dp-control p{font-size:12.5px;color:var(--text2);line-height:1.6}
+.dp-control .not{color:var(--coral);font-weight:600}
+.dp-note{font-family:'JetBrains Mono',monospace;font-size:11px;line-height:1.5;color:var(--amber);margin-top:8px}
+.dp-code{font-family:'JetBrains Mono',monospace;font-size:11px;line-height:1.7;background:var(--bg);border:1px solid var(--border);border-radius:var(--radius);padding:16px;overflow-x:auto;color:var(--text2);margin-top:8px;margin-bottom:10px;white-space:pre;font-variant-ligatures:none}
+.dp-code .kw{color:var(--purple)}
+.dp-code .fn{color:var(--teal)}
+.dp-code .str{color:var(--green)}
+.dp-code .cm{color:var(--text3);font-style:italic}
+.dp-pills{display:flex;flex-wrap:wrap;gap:6px;margin-top:8px;margin-bottom:10px}
+.dp-pill{font-family:'JetBrains Mono',monospace;font-size:11px;padding:4px 10px;border-radius:6px;border:1px solid var(--border2);color:var(--text2)}
+
+/* === CROSS-CUTTING === */
+.cross-section{margin-top:32px;opacity:0;animation:fadeUp .5s 1.4s forwards}
+.cross-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:8px;margin-top:12px}
+.cross-card{display:block;text-decoration:none;color:inherit;background:var(--bg2);border:1px solid var(--border);border-radius:var(--radius);padding:14px 16px;cursor:pointer;transition:all .25s;border-left:3px solid var(--cc-accent,var(--amber))}
+.cross-card:hover{border-color:var(--cc-accent,var(--amber));background:var(--bg3);transform:translateY(-2px)}
+.cc-name{display:block;font-size:13px;font-weight:600;color:var(--text);margin-bottom:4px}
+.cc-desc{display:block;font-size:12px;color:var(--text3);line-height:1.4}
+
+/* === ORCHESTRATION PATTERNS === */
+.orch-section{margin-top:36px;opacity:0;animation:fadeUp .5s 1.55s forwards}
+.orch-cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:8px;margin-top:12px}
+.orch-card{display:block;text-decoration:none;color:inherit;background:var(--bg2);border:1px solid var(--border);border-radius:var(--radius);padding:16px;cursor:pointer;transition:all .25s;text-align:center;position:relative;overflow:hidden}
+.orch-card:hover{border-color:var(--oc-accent,var(--purple));transform:translateY(-2px)}
+.orch-card::after{content:'';position:absolute;bottom:0;left:0;right:0;height:2px;background:var(--oc-accent,var(--purple));opacity:0;transition:opacity .25s}
+.orch-card:hover::after{opacity:1}
+.oc-icon{display:block;font-size:24px;margin-bottom:8px;opacity:0.7}
+.oc-name{display:block;font-size:13px;font-weight:600;color:var(--text);margin-bottom:4px}
+.oc-desc{display:block;font-size:12px;color:var(--text3);line-height:1.4}
+
+/* === FLOW CONNECTORS === */
+.flow-connector{display:flex;justify-content:center;padding:6px 0;position:relative}
+.flow-line{width:2px;height:20px;background:linear-gradient(180deg,var(--border2),var(--purple-dim),var(--border2));position:relative}
+.flow-dot{width:6px;height:6px;border-radius:50%;background:var(--purple-dim);position:absolute;left:50%;transform:translateX(-50%);animation:flowDown 1.5s infinite}
+.flow-dot:nth-child(1){top:-2px;animation-delay:0s}
+.flow-dot:nth-child(2){top:-2px;animation-delay:.5s}
+
+/* === FURTHER READING === */
+.reading-section{margin-top:40px}
+.reading-list{list-style:none;display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:8px;margin-top:12px}
+.reading-list li{background:var(--bg2);border:1px solid var(--border);border-left:3px solid var(--teal);border-radius:var(--radius);padding:14px 16px}
+.reading-list a{display:block;font-size:13px;font-weight:600;color:var(--teal);text-decoration:underline;text-underline-offset:2px;margin-bottom:4px}
+.reading-list span{display:block;font-size:12px;color:var(--text3);line-height:1.5}
+
+/* === DETAILS AS PLAIN PAGE CONTENT (shown only when JavaScript is off) === */
+.noscript-note{max-width:1100px;margin:16px auto 0;padding:12px 20px;font-size:13px;line-height:1.6;color:var(--text);background:var(--bg3);border:1px solid var(--amber);border-radius:var(--radius)}
+.detail-store{margin-top:44px}
+.js .detail-store{display:none}
+.ds-item{background:var(--bg2);border:1px solid var(--border);border-radius:var(--radius-lg);padding:20px;margin-top:12px;overflow:hidden}
+.ds-item .dp-tag{color:var(--amber)}
+.ds-item .dp-title{margin-bottom:14px}
+
+/* === HINT === */
+.hint-bar{display:none;position:fixed;bottom:24px;left:50%;transform:translateX(-50%);z-index:900;align-items:center;gap:10px;background:var(--bg3);border:1px solid var(--purple);border-radius:40px;padding:10px 20px 10px 16px;box-shadow:0 4px 30px rgba(139,124,246,0.2);opacity:0;animation:hintIn .5s 2s forwards;cursor:pointer;transition:opacity .3s,transform .3s;max-width:calc(100vw - 40px);font:inherit;color:inherit}
+.js .hint-bar{display:flex}
+.hint-bar.dismissed{opacity:0 !important;pointer-events:none;visibility:hidden;transform:translateX(-50%) translateY(20px)}
+@keyframes hintIn{from{opacity:0;transform:translateX(-50%) translateY(12px)}to{opacity:1;transform:translateX(-50%) translateY(0)}}
+.hint-pulse{width:10px;height:10px;border-radius:50%;background:var(--purple);flex-shrink:0;animation:hintPulse 1.5s ease-in-out infinite}
+@keyframes hintPulse{0%,100%{box-shadow:0 0 0 0 rgba(139,124,246,0.5)}50%{box-shadow:0 0 0 8px rgba(139,124,246,0)}}
+.hint-text{font-size:12px;color:var(--text2);white-space:nowrap}
+.hint-text b{color:var(--purple);font-weight:600}
+.hint-dismiss{font-size:14px;color:var(--text3);margin-left:4px;transition:color .2s;flex-shrink:0}
+.hint-bar:hover .hint-dismiss{color:var(--text)}
+
+/* === RESPONSIVE === */
+@media(max-width:640px){
+  .nodes-grid{grid-template-columns:1fr}
+  .loop-track{gap:4px;flex-direction:column}
+  .loop-connector{width:2px;height:20px;background:linear-gradient(180deg,var(--border2),var(--purple-dim),var(--border2))}
+  .loop-connector::after{content:'▾';right:auto;left:50%;top:auto;bottom:-6px;transform:translateX(-50%)}
+  .loop-return{white-space:normal;width:100%;justify-content:center;text-align:center}
+  .cross-grid,.orch-cards,.reading-list{grid-template-columns:1fr}
+  .detail-panel{width:100vw;right:-100vw}
+}
+@media(prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  *,*::before,*::after{animation-duration:.01ms !important;animation-delay:0s !important;animation-iteration-count:1 !important;transition-duration:.01ms !important}
+}
+</style>
+</head>
+<body>
+<!-- auc:bar -->
+<a class="auc-skip" href="#auc-main">Skip to content</a>
+<nav class="auc-bar" aria-label="Architect U'r Career">
+  <a class="auc-bar-home" href="../">Architect U'r Career</a>
+  <span class="auc-bar-sep" aria-hidden="true">/</span>
+  <span class="auc-bar-here">Agentic AI Runtime</span>
+  <span class="auc-bar-right">
+    <span class="auc-bar-rev">Last reviewed: November 2026</span>
+    <a href="../#guides">All guides</a>
+    <a href="../about/">How this site is maintained</a>
+  </span>
+</nav>
+<!-- /auc:bar -->
+<div class="noise" aria-hidden="true"></div>
+
+<header class="hero">
+  <p class="hero-tag">Interactive Architecture Blueprint</p>
+  <h1 class="hero-title">Agentic AI <em>Runtime</em> Architecture</h1>
+  <p class="hero-sub">A developer's map of an agent runtime: its layers, components and orchestration patterns. Select any card for how it works, a code sample, and what it does not cover.</p>
+  <p class="version-stamp">Version 3.1 · November 2026 · 37 interactive components</p>
+</header>
+
+<noscript><p class="noscript-note">JavaScript is off, so the detail panels cannot slide in. Nothing is lost: every card links to its details, which are set out in full further down this page.</p></noscript>
+
+<main class="container" id="auc-main">
+
+<!-- CORE AGENT LOOP -->
+<section class="loop-section" aria-labelledby="h-loop">
+  <h2 class="section-label" id="h-loop">Core execution loop</h2>
+  <div class="loop-track">
+    <a class="loop-node" style="--node-color:var(--purple);--node-bg:var(--purple-bg);--node-glow:var(--purple-glow)" href="#d-perceive" onclick="return openDetail('perceive', this)">
+      <span class="ln-num">01</span><span class="ln-name">Perceive</span><span class="ln-sub">Goal + context</span>
+    </a>
+    <div class="loop-connector" aria-hidden="true"></div>
+    <a class="loop-node" style="--node-color:var(--teal);--node-bg:var(--teal-bg);--node-glow:var(--teal-glow)" href="#d-plan" onclick="return openDetail('plan', this)">
+      <span class="ln-num">02</span><span class="ln-name">Plan</span><span class="ln-sub">Decompose + reason</span>
+    </a>
+    <div class="loop-connector" aria-hidden="true"></div>
+    <a class="loop-node" style="--node-color:var(--coral);--node-bg:var(--coral-bg);--node-glow:var(--coral-glow)" href="#d-act" onclick="return openDetail('act', this)">
+      <span class="ln-num">03</span><span class="ln-name">Act</span><span class="ln-sub">Execute tool call</span>
+    </a>
+    <div class="loop-connector" aria-hidden="true"></div>
+    <a class="loop-node" style="--node-color:var(--blue);--node-bg:var(--blue-bg);--node-glow:var(--blue-glow)" href="#d-observe" onclick="return openDetail('observe', this)">
+      <span class="ln-num">04</span><span class="ln-name">Observe</span><span class="ln-sub">Evaluate result</span>
+    </a>
+    <div class="loop-connector" aria-hidden="true"></div>
+    <a class="loop-node" style="--node-color:var(--amber);--node-bg:var(--amber-bg);--node-glow:var(--amber-glow)" href="#d-adapt" onclick="return openDetail('adapt', this)">
+      <span class="ln-num">05</span><span class="ln-name">Adapt</span><span class="ln-sub">Update or replan</span>
+    </a>
+    <div class="loop-return"><span class="spin-icon" aria-hidden="true">&#x21BB;</span> Loop until goal met or budget exhausted</div>
+  </div>
+</section>
+
+<!-- FLOW CONNECTOR -->
+<div class="flow-connector" aria-hidden="true"><div class="flow-line"><div class="flow-dot"></div><div class="flow-dot"></div></div></div>
+
+<!-- LAYER ARCHITECTURE -->
+<h2 class="section-label" id="h-layers" style="margin-top:20px">Layered runtime stack</h2>
+<p class="section-note">The L7 to L1 numbering is my own way of organising an agent runtime. It is not an industry standard and it does not map to the OSI model.</p>
+<div class="arch-layers">
+
+  <!-- L7 -->
+  <div class="layer" style="--layer-accent:var(--purple)" data-layer="l7">
+    <button type="button" class="layer-header" aria-expanded="true" aria-controls="lb-l7" onclick="toggleLayer(this)">
+      <span class="layer-badge" style="background:var(--purple-bg);color:var(--purple);border:1px solid rgba(139,124,246,0.2)">L7</span>
+      <span class="layer-info"><span class="layer-name">Application &amp; agent interface</span><span class="layer-desc">API gateway, goal interpretation, human-in-the-loop controls</span></span>
+      <span class="layer-toggle" aria-hidden="true">▾</span>
+    </button>
+    <div class="layer-body" id="lb-l7"><div class="layer-inner">
+      <div class="nodes-grid">
+        <a class="node-card" style="--node-accent:var(--purple)" href="#d-api_gateway" onclick="return openDetail('api_gateway', this)">
+          <span class="nc-head"><span class="nc-name">Agent API gateway</span><span class="nc-tag" style="background:var(--purple-bg);color:var(--purple)">Entry</span></span>
+          <span class="nc-desc">REST/gRPC endpoints, auth, rate limiting, request validation and routing</span>
+          <span class="nc-techs"><span class="nc-tech">FastAPI</span><span class="nc-tech">gRPC</span><span class="nc-tech">OAuth2</span></span>
+        </a>
+        <a class="node-card" style="--node-accent:var(--purple)" href="#d-goal_interpreter" onclick="return openDetail('goal_interpreter', this)">
+          <span class="nc-head"><span class="nc-name">Goal interpreter</span><span class="nc-tag" style="background:var(--purple-bg);color:var(--purple)">NLU</span></span>
+          <span class="nc-desc">Natural language to structured goal decomposition and task graph generation</span>
+          <span class="nc-techs"><span class="nc-tech">Pydantic</span><span class="nc-tech">JSON Schema</span></span>
+        </a>
+        <a class="node-card" style="--node-accent:var(--amber)" href="#d-hitl" onclick="return openDetail('hitl', this)">
+          <span class="nc-head"><span class="nc-name">Human-in-the-loop</span><span class="nc-tag" style="background:var(--amber-bg);color:var(--amber)">Safety</span></span>
+          <span class="nc-desc">Approval gates for side-effecting actions, pause and resume, escalation policies</span>
+          <span class="nc-techs"><span class="nc-tech">Webhooks</span><span class="nc-tech">Chat approvals</span></span>
+        </a>
+      </div>
+    </div></div>
+  </div>
+
+  <div class="flow-connector" aria-hidden="true"><div class="flow-line"><div class="flow-dot"></div></div></div>
+
+  <!-- L6 -->
+  <div class="layer" style="--layer-accent:var(--purple)" data-layer="l6">
+    <button type="button" class="layer-header" aria-expanded="true" aria-controls="lb-l6" onclick="toggleLayer(this)">
+      <span class="layer-badge" style="background:var(--purple-bg);color:var(--purple);border:1px solid rgba(139,124,246,0.2)">L6</span>
+      <span class="layer-info"><span class="layer-name">Orchestration &amp; planning engine</span><span class="layer-desc">Core execution loop, task scheduling, routing &amp; model selection</span></span>
+      <span class="layer-toggle" aria-hidden="true">▾</span>
+    </button>
+    <div class="layer-body" id="lb-l6"><div class="layer-inner">
+      <div class="nodes-grid">
+        <a class="node-card" style="--node-accent:var(--purple)" href="#d-agent_controller" onclick="return openDetail('agent_controller', this)">
+          <span class="nc-head"><span class="nc-name">Agent controller</span><span class="nc-tag" style="background:var(--purple-bg);color:var(--purple)">Core</span></span>
+          <span class="nc-desc">The heartbeat: runs the bounded perceive, plan, act, observe, adapt loop</span>
+          <span class="nc-techs"><span class="nc-tech">asyncio</span><span class="nc-tech">State machine</span></span>
+        </a>
+        <a class="node-card" style="--node-accent:var(--teal)" href="#d-task_scheduler" onclick="return openDetail('task_scheduler', this)">
+          <span class="nc-head"><span class="nc-name">Task scheduler</span><span class="nc-tag" style="background:var(--teal-bg);color:var(--teal)">DAG</span></span>
+          <span class="nc-desc">DAG execution with parallel branches, dependency resolution, checkpointing</span>
+          <span class="nc-techs"><span class="nc-tech">Temporal</span><span class="nc-tech">Inngest</span></span>
+        </a>
+        <a class="node-card" style="--node-accent:var(--blue)" href="#d-router" onclick="return openDetail('router', this)">
+          <span class="nc-head"><span class="nc-name">Router / dispatcher</span><span class="nc-tag" style="background:var(--blue-bg);color:var(--blue)">Routing</span></span>
+          <span class="nc-desc">Model selection, agent delegation, sub-agent spawning, fallback chains</span>
+          <span class="nc-techs"><span class="nc-tech">Cost routing</span><span class="nc-tech">Fallbacks</span></span>
+        </a>
+      </div>
+    </div></div>
+  </div>
+
+  <div class="flow-connector" aria-hidden="true"><div class="flow-line"><div class="flow-dot"></div></div></div>
+
+  <!-- L5 -->
+  <div class="layer" style="--layer-accent:var(--teal)" data-layer="l5">
+    <button type="button" class="layer-header" aria-expanded="true" aria-controls="lb-l5" onclick="toggleLayer(this)">
+      <span class="layer-badge" style="background:var(--teal-bg);color:var(--teal);border:1px solid rgba(94,234,212,0.2)">L5</span>
+      <span class="layer-info"><span class="layer-name">Cognition &amp; reasoning</span><span class="layer-desc">LLM reasoning, self-reflection, structured output enforcement</span></span>
+      <span class="layer-toggle" aria-hidden="true">▾</span>
+    </button>
+    <div class="layer-body" id="lb-l5"><div class="layer-inner">
+      <div class="nodes-grid">
+        <a class="node-card" style="--node-accent:var(--teal)" href="#d-reasoning" onclick="return openDetail('reasoning', this)">
+          <span class="nc-head"><span class="nc-name">LLM reasoning engine</span><span class="nc-tag" style="background:var(--teal-bg);color:var(--teal)">AI Core</span></span>
+          <span class="nc-desc">Native tool calling in a reason-and-act loop, with planning strategies on top</span>
+          <span class="nc-techs"><span class="nc-tech">Tool calling</span><span class="nc-tech">ReAct</span><span class="nc-tech">Planning</span></span>
+        </a>
+        <a class="node-card" style="--node-accent:var(--amber)" href="#d-reflection" onclick="return openDetail('reflection', this)">
+          <span class="nc-head"><span class="nc-name">Self-reflection</span><span class="nc-tag" style="background:var(--amber-bg);color:var(--amber)">QA</span></span>
+          <span class="nc-desc">Checks each result against the goal: deterministic checks first, an evaluator model second</span>
+          <span class="nc-techs"><span class="nc-tech">Deterministic checks</span><span class="nc-tech">Evaluator LLM</span></span>
+        </a>
+        <a class="node-card" style="--node-accent:var(--teal)" href="#d-structured_output" onclick="return openDetail('structured_output', this)">
+          <span class="nc-head"><span class="nc-name">Structured output</span><span class="nc-tag" style="background:var(--teal-bg);color:var(--teal)">Schema</span></span>
+          <span class="nc-desc">JSON schema enforcement, tool call formatting via Pydantic models</span>
+          <span class="nc-techs"><span class="nc-tech">Pydantic</span><span class="nc-tech">JSON Schema</span></span>
+        </a>
+      </div>
+    </div></div>
+  </div>
+
+  <div class="flow-connector" aria-hidden="true"><div class="flow-line"><div class="flow-dot"></div></div></div>
+
+  <!-- L4 -->
+  <div class="layer" style="--layer-accent:var(--coral)" data-layer="l4">
+    <button type="button" class="layer-header" aria-expanded="true" aria-controls="lb-l4" onclick="toggleLayer(this)">
+      <span class="layer-badge" style="background:var(--coral-bg);color:var(--coral);border:1px solid rgba(251,127,106,0.2)">L4</span>
+      <span class="layer-info"><span class="layer-name">Context &amp; memory systems</span><span class="layer-desc">Working, episodic and semantic memory, plus context window management</span></span>
+      <span class="layer-toggle" aria-hidden="true">▾</span>
+    </button>
+    <div class="layer-body" id="lb-l4"><div class="layer-inner">
+      <div class="nodes-grid">
+        <a class="node-card" style="--node-accent:var(--coral)" href="#d-working_mem" onclick="return openDetail('working_mem', this)">
+          <span class="nc-head"><span class="nc-name">Working memory</span><span class="nc-tag" style="background:var(--coral-bg);color:var(--coral)">Live</span></span>
+          <span class="nc-desc">Current execution state, scratchpad, intermediate results. Resets per task.</span>
+          <span class="nc-techs"><span class="nc-tech">State object</span><span class="nc-tech">KV cache</span></span>
+        </a>
+        <a class="node-card" style="--node-accent:var(--purple)" href="#d-episodic_mem" onclick="return openDetail('episodic_mem', this)">
+          <span class="nc-head"><span class="nc-name">Episodic memory</span><span class="nc-tag" style="background:var(--purple-bg);color:var(--purple)">Learn</span></span>
+          <span class="nc-desc">Past execution traces, successful strategies. Persists across sessions.</span>
+          <span class="nc-techs"><span class="nc-tech">Vector DB</span><span class="nc-tech">Mem0</span></span>
+        </a>
+        <a class="node-card" style="--node-accent:var(--blue)" href="#d-semantic_mem" onclick="return openDetail('semantic_mem', this)">
+          <span class="nc-head"><span class="nc-name">Semantic memory (RAG)</span><span class="nc-tag" style="background:var(--blue-bg);color:var(--blue)">Know</span></span>
+          <span class="nc-desc">Domain knowledge, documents, company data via agentic retrieval</span>
+          <span class="nc-techs"><span class="nc-tech">Pinecone</span><span class="nc-tech">Weaviate</span></span>
+        </a>
+        <a class="node-card" style="--node-accent:var(--amber)" href="#d-ctx_mgmt" onclick="return openDetail('ctx_mgmt', this)">
+          <span class="nc-head"><span class="nc-name">Context window mgmt</span><span class="nc-tag" style="background:var(--amber-bg);color:var(--amber)">Optim</span></span>
+          <span class="nc-desc">Token budgeting, progressive summarisation, priority-based packing</span>
+          <span class="nc-techs"><span class="nc-tech">Token counter</span><span class="nc-tech">Summariser</span></span>
+        </a>
+      </div>
+    </div></div>
+  </div>
+
+  <div class="flow-connector" aria-hidden="true"><div class="flow-line"><div class="flow-dot"></div></div></div>
+
+  <!-- L3 -->
+  <div class="layer" style="--layer-accent:var(--teal)" data-layer="l3">
+    <button type="button" class="layer-header" aria-expanded="true" aria-controls="lb-l3" onclick="toggleLayer(this)">
+      <span class="layer-badge" style="background:var(--teal-bg);color:var(--teal);border:1px solid rgba(94,234,212,0.2)">L3</span>
+      <span class="layer-info"><span class="layer-name">Tool &amp; action interface</span><span class="layer-desc">Tool registry, sandboxed execution, MCP/A2A protocol connectors</span></span>
+      <span class="layer-toggle" aria-hidden="true">▾</span>
+    </button>
+    <div class="layer-body" id="lb-l3"><div class="layer-inner">
+      <div class="nodes-grid">
+        <a class="node-card" style="--node-accent:var(--teal)" href="#d-tool_registry" onclick="return openDetail('tool_registry', this)">
+          <span class="nc-head"><span class="nc-name">Tool registry</span><span class="nc-tag" style="background:var(--teal-bg);color:var(--teal)">Catalogue</span></span>
+          <span class="nc-desc">Schema definitions, capability discovery, permission mapping</span>
+          <span class="nc-techs"><span class="nc-tech">JSON-RPC</span><span class="nc-tech">OpenAPI</span></span>
+        </a>
+        <a class="node-card" style="--node-accent:var(--teal)" href="#d-fn_executor" onclick="return openDetail('fn_executor', this)">
+          <span class="nc-head"><span class="nc-name">Function executor</span><span class="nc-tag" style="background:var(--teal-bg);color:var(--teal)">Sandbox</span></span>
+          <span class="nc-desc">Sandboxed execution, timeout, idempotency, audit logging</span>
+          <span class="nc-techs"><span class="nc-tech">microVM</span><span class="nc-tech">gVisor</span><span class="nc-tech">Container</span></span>
+        </a>
+        <a class="node-card" style="--node-accent:var(--blue)" href="#d-protocols" onclick="return openDetail('protocols', this)">
+          <span class="nc-head"><span class="nc-name">MCP / A2A connector</span><span class="nc-tag" style="background:var(--blue-bg);color:var(--blue)">Proto</span></span>
+          <span class="nc-desc">Open protocols for tool access and agent-to-agent interoperability</span>
+          <span class="nc-techs"><span class="nc-tech">MCP</span><span class="nc-tech">A2A</span><span class="nc-tech">AGENTS.md</span></span>
+        </a>
+      </div>
+    </div></div>
+  </div>
+
+  <div class="flow-connector" aria-hidden="true"><div class="flow-line"><div class="flow-dot"></div></div></div>
+
+  <!-- L2 -->
+  <div class="layer" style="--layer-accent:var(--blue)" data-layer="l2">
+    <button type="button" class="layer-header" aria-expanded="true" aria-controls="lb-l2" onclick="toggleLayer(this)">
+      <span class="layer-badge" style="background:var(--blue-bg);color:var(--blue);border:1px solid rgba(96,165,250,0.2)">L2</span>
+      <span class="layer-info"><span class="layer-name">Durable execution &amp; state</span><span class="layer-desc">Crash recovery, state persistence, event-driven messaging</span></span>
+      <span class="layer-toggle" aria-hidden="true">▾</span>
+    </button>
+    <div class="layer-body" id="lb-l2"><div class="layer-inner">
+      <div class="nodes-grid">
+        <a class="node-card" style="--node-accent:var(--blue)" href="#d-workflow_engine" onclick="return openDetail('workflow_engine', this)">
+          <span class="nc-head"><span class="nc-name">Workflow engine</span><span class="nc-tag" style="background:var(--blue-bg);color:var(--blue)">Durable</span></span>
+          <span class="nc-desc">Crash recovery, at-least-once steps made safe by idempotency, long-running resilience</span>
+          <span class="nc-techs"><span class="nc-tech">Temporal</span><span class="nc-tech">Inngest</span><span class="nc-tech">Step Functions</span></span>
+        </a>
+        <a class="node-card" style="--node-accent:var(--blue)" href="#d-state_persistence" onclick="return openDetail('state_persistence', this)">
+          <span class="nc-head"><span class="nc-name">State persistence</span><span class="nc-tag" style="background:var(--blue-bg);color:var(--blue)">Snapshot</span></span>
+          <span class="nc-desc">Checkpoints, time-travel debugging, event sourcing, fork/resume</span>
+          <span class="nc-techs"><span class="nc-tech">Event store</span><span class="nc-tech">Redis</span></span>
+        </a>
+        <a class="node-card" style="--node-accent:var(--purple)" href="#d-event_bus" onclick="return openDetail('event_bus', this)">
+          <span class="nc-head"><span class="nc-name">Event bus</span><span class="nc-tag" style="background:var(--purple-bg);color:var(--purple)">Async</span></span>
+          <span class="nc-desc">Pub/sub messaging, agent-to-agent signals, decoupled coordination</span>
+          <span class="nc-techs"><span class="nc-tech">Kafka</span><span class="nc-tech">NATS</span><span class="nc-tech">Redis Streams</span></span>
+        </a>
+      </div>
+    </div></div>
+  </div>
+
+  <div class="flow-connector" aria-hidden="true"><div class="flow-line"><div class="flow-dot"></div></div></div>
+
+  <!-- L1 -->
+  <div class="layer" style="--layer-accent:var(--blue)" data-layer="l1">
+    <button type="button" class="layer-header" aria-expanded="true" aria-controls="lb-l1" onclick="toggleLayer(this)">
+      <span class="layer-badge" style="background:var(--blue-bg);color:var(--blue);border:1px solid rgba(96,165,250,0.2)">L1</span>
+      <span class="layer-info"><span class="layer-name">Foundation model infrastructure</span><span class="layer-desc">Multi-provider model gateway, embedding services, vector storage</span></span>
+      <span class="layer-toggle" aria-hidden="true">▾</span>
+    </button>
+    <div class="layer-body" id="lb-l1"><div class="layer-inner">
+      <div class="nodes-grid">
+        <a class="node-card" style="--node-accent:var(--blue)" href="#d-model_gw" onclick="return openDetail('model_gw', this)">
+          <span class="nc-head"><span class="nc-name">Model gateway</span><span class="nc-tag" style="background:var(--blue-bg);color:var(--blue)">Infer</span></span>
+          <span class="nc-desc">Multi-provider routing, load balancing, fallback chains, cost optimisation</span>
+          <span class="nc-techs"><span class="nc-tech">Anthropic</span><span class="nc-tech">OpenAI</span><span class="nc-tech">vLLM</span></span>
+        </a>
+        <a class="node-card" style="--node-accent:var(--coral)" href="#d-embeddings" onclick="return openDetail('embeddings', this)">
+          <span class="nc-head"><span class="nc-name">Embedding service</span><span class="nc-tag" style="background:var(--coral-bg);color:var(--coral)">Vector</span></span>
+          <span class="nc-desc">Text/code/image embeddings with batching and caching</span>
+          <span class="nc-techs"><span class="nc-tech">Hosted models</span><span class="nc-tech">Open models</span></span>
+        </a>
+        <a class="node-card" style="--node-accent:var(--coral)" href="#d-vector_db" onclick="return openDetail('vector_db', this)">
+          <span class="nc-head"><span class="nc-name">Vector database</span><span class="nc-tag" style="background:var(--coral-bg);color:var(--coral)">Store</span></span>
+          <span class="nc-desc">Indexed similarity search, filtered queries, hybrid retrieval</span>
+          <span class="nc-techs"><span class="nc-tech">Pinecone</span><span class="nc-tech">Weaviate</span><span class="nc-tech">pgvector</span></span>
+        </a>
+      </div>
+    </div></div>
+  </div>
+</div>
+
+<!-- CROSS-CUTTING -->
+<section class="cross-section" aria-labelledby="h-cross">
+  <h2 class="section-label" id="h-cross">Cross-cutting concerns: span all layers</h2>
+  <div class="cross-grid">
+    <a class="cross-card" style="--cc-accent:var(--amber)" href="#d-observability" onclick="return openDetail('observability', this)">
+      <span class="cc-name">Observability</span>
+      <span class="cc-desc">OpenTelemetry tracing, per-step metrics, token and cost dashboards</span>
+    </a>
+    <a class="cross-card" style="--cc-accent:var(--coral)" href="#d-guardrails" onclick="return openDetail('guardrails', this)">
+      <span class="cc-name">Guardrails &amp; safety</span>
+      <span class="cc-desc">Assume the model can be steered: policy at the tool boundary, budgets, human approval, containment</span>
+    </a>
+    <a class="cross-card" style="--cc-accent:var(--purple)" href="#d-identity" onclick="return openDetail('identity', this)">
+      <span class="cc-name">Identity &amp; authorisation</span>
+      <span class="cc-desc">An identity for every agent and tool call, short-lived scoped tokens, explicit delegation, evidence</span>
+    </a>
+    <a class="cross-card" style="--cc-accent:var(--teal)" href="#d-cost_gov" onclick="return openDetail('cost_gov', this)">
+      <span class="cc-name">Cost governance</span>
+      <span class="cc-desc">Per-step tracking, budget caps, kill switches, cost/value ratio monitoring</span>
+    </a>
+    <a class="cross-card" style="--cc-accent:var(--blue)" href="#d-eval_testing" onclick="return openDetail('eval_testing', this)">
+      <span class="cc-name">Evaluation &amp; testing</span>
+      <span class="cc-desc">Agent evals, regression testing, benchmark suites, A/B testing of prompts</span>
+    </a>
+  </div>
+</section>
+
+<!-- ORCHESTRATION PATTERNS -->
+<section class="orch-section" aria-labelledby="h-orch">
+  <h2 class="section-label" id="h-orch">Orchestration patterns</h2>
+  <div class="orch-cards">
+    <a class="orch-card" style="--oc-accent:var(--purple)" href="#d-pat_sequential" onclick="return openDetail('pat_sequential', this)">
+      <span class="oc-icon" aria-hidden="true">→→→</span>
+      <span class="oc-name">Sequential pipeline</span>
+      <span class="oc-desc">A → B → C. Linear, deterministic flow</span>
+    </a>
+    <a class="orch-card" style="--oc-accent:var(--teal)" href="#d-pat_hierarchical" onclick="return openDetail('pat_hierarchical', this)">
+      <span class="oc-icon" aria-hidden="true">⊿</span>
+      <span class="oc-name">Hierarchical delegation</span>
+      <span class="oc-desc">Orchestrator decomposes to specialist agents</span>
+    </a>
+    <a class="orch-card" style="--oc-accent:var(--coral)" href="#d-pat_parallel" onclick="return openDetail('pat_parallel', this)">
+      <span class="oc-icon" aria-hidden="true">⋔</span>
+      <span class="oc-name">Parallel fan-out/in</span>
+      <span class="oc-desc">N agents in parallel, gather + synthesise</span>
+    </a>
+    <a class="orch-card" style="--oc-accent:var(--blue)" href="#d-pat_debate" onclick="return openDetail('pat_debate', this)">
+      <span class="oc-icon" aria-hidden="true">⇄</span>
+      <span class="oc-name">Debate / consensus</span>
+      <span class="oc-desc">Multi-agent critique and convergence</span>
+    </a>
+    <a class="orch-card" style="--oc-accent:var(--amber)" href="#d-pat_reactive" onclick="return openDetail('pat_reactive', this)">
+      <span class="oc-icon" aria-hidden="true">⚡</span>
+      <span class="oc-name">Event-driven reactive</span>
+      <span class="oc-desc">Agents subscribe to events, no central controller</span>
+    </a>
+  </div>
+</section>
+
+<!-- FURTHER READING -->
+<section class="reading-section" aria-labelledby="h-reading">
+  <h2 class="section-label" id="h-reading">Further reading</h2>
+  <ul class="reading-list">
+    <li><a href="https://genai.owasp.org/resource/owasp-genai-llm-top-10-2026/" target="_blank" rel="noopener">OWASP Top 10 for LLM Applications 2026</a><span>Ten risks, with Prompt Injection first. Excessive Agency, now LLM03:2026 (it was LLM06 in the 2025 edition), is the one this page's tool boundary is built around.</span></li>
+    <li><a href="https://genai.owasp.org/resource/owasp-top-10-for-agentic-applications-for-2026/" target="_blank" rel="noopener">OWASP Top 10 for Agentic Applications for 2026</a><span>Published 9 December 2025. The risks specific to agents, including goal hijack, tool misuse, and identity and privilege abuse.</span></li>
+    <li><a href="https://atlas.mitre.org/" target="_blank" rel="noopener">MITRE ATLAS</a><span>A knowledge base of adversary tactics and techniques against AI-enabled systems, organised in the manner of ATT&amp;CK.</span></li>
+    <li><a href="../ai-security/">Securing AI systems and agents: a practitioner's reference</a><span>The companion guide on this site. It takes the security material on this page further.</span></li>
+  </ul>
+</section>
+
+<!-- DETAILS: the content of every panel. Read by the script below; shown in full when JavaScript is off. -->
+<section class="detail-store" id="detailStore" aria-labelledby="h-store">
+  <h2 class="section-label" id="h-store">Component details</h2>
+<article class="ds-item" id="d-perceive" data-tag="LOOP · STEP 01" data-title="Perceive">
+<p class="dp-tag">LOOP · STEP 01</p>
+<h3 class="dp-title">Perceive</h3>
+<div class="ds-body"><div class="dp-section"><h4>What happens</h4><p class="dp-text">The agent ingests the goal, retrieves relevant context from all memory tiers (working + episodic + semantic), and constructs the initial perception frame. Context window management is critical here: you must fit the goal, history, tool schemas and retrieved knowledge into the token budget. Everything retrieved is data, not instruction: a recalled episode or a retrieved document may carry text written to steer the agent.</p></div><div class="dp-section"><h4>Implementation</h4><p class="dp-note">Sketch in Python style, not runnable as written: the objects it calls stand for components you supply.</p><div class="dp-code" tabindex="0"><span class="kw">async def</span> <span class="fn">perceive</span>(self, goal, memory):
+    context = <span class="kw">await</span> memory.working.<span class="fn">get_state</span>()
+    episodes = <span class="kw">await</span> memory.episodic.<span class="fn">recall</span>(goal)
+    knowledge = <span class="kw">await</span> memory.semantic.<span class="fn">retrieve</span>(goal)
+    <span class="kw">return</span> PerceptionFrame(
+        goal=goal,
+        current_state=context,
+        past_experience=episodes,
+        domain_knowledge=knowledge,
+        tools=self.tool_registry.<span class="fn">schemas</span>()
+    )</div></div></div>
+</article>
+<article class="ds-item" id="d-plan" data-tag="LOOP · STEP 02" data-title="Plan">
+<p class="dp-tag">LOOP · STEP 02</p>
+<h3 class="dp-title">Plan</h3>
+<div class="ds-body"><div class="dp-section"><h4>What happens</h4><p class="dp-text">The LLM reasons about the perception frame and generates an action plan. For simple tasks, this is a single next-action. For complex goals, it produces a multi-step task graph with dependencies. Planning strategies include ReAct, Tree-of-Thought, and Plan-and-Solve.</p></div><div class="dp-section"><h4>Implementation</h4><p class="dp-note">Sketch in Python style, not runnable as written: the objects it calls stand for components you supply.</p><div class="dp-code" tabindex="0"><span class="kw">async def</span> <span class="fn">plan</span>(self, frame):
+    response = <span class="kw">await</span> self.llm.<span class="fn">structured_output</span>(
+        system=PLANNER_PROMPT,
+        messages=[{<span class="str">"role"</span>: <span class="str">"user"</span>,
+                   <span class="str">"content"</span>: frame.<span class="fn">render</span>()}],
+        schema=ActionPlan
+    )
+    <span class="cm"># Validate against budget</span>
+    <span class="kw">if</span> response.estimated_cost &gt; self.budget:
+        <span class="kw">return</span> self.<span class="fn">replan_with_constraints</span>(response)
+    <span class="kw">return</span> response</div></div></div>
+</article>
+<article class="ds-item" id="d-act" data-tag="LOOP · STEP 03" data-title="Act">
+<p class="dp-tag">LOOP · STEP 03</p>
+<h3 class="dp-title">Act</h3>
+<div class="ds-body"><div class="dp-section"><h4>What happens</h4><p class="dp-text">Execute the planned action through the sandboxed function executor. Actions include tool calls (APIs, databases, code), LLM generations (drafting, analysis), or delegation to sub-agents. Every action goes through a permission check, a human-approval gate where the policy requires one, and audit logging. All three run outside the model.</p></div><div class="dp-section"><h4>Implementation</h4><p class="dp-note">Sketch in Python style, not runnable as written: the objects it calls stand for components you supply.</p><div class="dp-code" tabindex="0"><span class="kw">async def</span> <span class="fn">act</span>(self, plan):
+    action = plan.next_action
+    <span class="cm"># Permission + HITL checks</span>
+    <span class="kw">if not</span> self.authz.<span class="fn">can_execute</span>(action):
+        <span class="kw">return</span> ActionResult(error=<span class="str">"Denied"</span>)
+    <span class="kw">if</span> self.hitl.<span class="fn">should_pause</span>(action):
+        <span class="kw">await</span> self.hitl.<span class="fn">wait_approval</span>(action)
+    result = <span class="kw">await</span> self.executor.<span class="fn">run</span>(action)
+    self.audit.<span class="fn">log</span>(action, result)
+    <span class="kw">return</span> result</div></div></div>
+</article>
+<article class="ds-item" id="d-observe" data-tag="LOOP · STEP 04" data-title="Observe">
+<p class="dp-tag">LOOP · STEP 04</p>
+<h3 class="dp-title">Observe</h3>
+<div class="ds-body"><div class="dp-section"><h4>What happens</h4><p class="dp-text">Evaluate the action result using the self-reflection module. Did it succeed? Did it advance the goal? Deterministic checks come first (error codes, schema, tests). An evaluator model's score is a weak, uncalibrated signal, and the thresholds below are placeholders. Every tool result is untrusted data: a web page, a document, an email or another agent's reply can carry text written to steer the agent (indirect prompt injection), so a result is checked and recorded, never obeyed.</p></div><div class="dp-section"><h4>Implementation</h4><p class="dp-note">Sketch in Python style, not runnable as written: the objects it calls stand for components you supply.</p><div class="dp-code" tabindex="0"><span class="kw">async def</span> <span class="fn">observe</span>(self, action, result):
+    evaluation = <span class="kw">await</span> self.reflection.<span class="fn">evaluate</span>(
+        action, result, self.goal
+    )
+    <span class="kw">if</span> evaluation.score &lt; 5:
+        <span class="kw">return</span> Decision.REPLAN
+    <span class="kw">elif</span> evaluation.score &lt; 7:
+        <span class="kw">return</span> Decision.RETRY
+    <span class="kw">return</span> Decision.PROCEED</div></div></div>
+</article>
+<article class="ds-item" id="d-adapt" data-tag="LOOP · STEP 05" data-title="Adapt">
+<p class="dp-tag">LOOP · STEP 05</p>
+<h3 class="dp-title">Adapt</h3>
+<div class="ds-body"><div class="dp-section"><h4>What happens</h4><p class="dp-text">Based on the observation, update working memory, check budget constraints, and decide: continue current plan, adjust approach, or replan entirely. If the goal is achieved or budget exhausted, compile the final result and exit the loop.</p></div><div class="dp-section"><h4>Implementation</h4><p class="dp-note">Sketch in Python style, not runnable as written: the objects it calls stand for components you supply.</p><div class="dp-code" tabindex="0"><span class="kw">async def</span> <span class="fn">adapt</span>(self, observation):
+    self.memory.<span class="fn">add</span>(observation)
+    self.budget -= observation.token_cost
+    <span class="kw">if</span> observation.goal_achieved:
+        <span class="kw">return</span> COMPLETE
+    <span class="kw">if</span> self.budget &lt;= 0:
+        <span class="kw">return</span> BUDGET_EXCEEDED
+    <span class="kw">if</span> observation.should_replan:
+        <span class="kw">await</span> self.planner.<span class="fn">replan</span>()
+    <span class="kw">return</span> CONTINUE</div></div></div>
+</article>
+<article class="ds-item" id="d-api_gateway" data-tag="L7 · APPLICATION" data-title="Agent API Gateway">
+<p class="dp-tag">L7 · APPLICATION</p>
+<h3 class="dp-title">Agent API Gateway</h3>
+<div class="ds-body"><div class="dp-section"><h4>Purpose</h4><p class="dp-text">The single entry point for all agent invocations. Handles authentication (OAuth2/JWT), rate limiting per agent and request validation, and routes each request to the appropriate orchestrator. Authenticating the caller here does not authorise what the agent later does: each tool call is authorised separately, at the tool boundary.</p></div><div class="dp-section"><h4>API contract</h4><p class="dp-note">Example request, not a live endpoint.</p><div class="dp-code" tabindex="0">POST /v1/agents/{agent_id}/goals
+Authorization: Bearer {token}
+{
+  <span class="str">"goal"</span>: <span class="str">"Analyse Q3 revenue"</span>,
+  <span class="str">"constraints"</span>: {
+    <span class="str">"max_steps"</span>: 20,
+    <span class="str">"budget_usd"</span>: 0.50
+  },
+  <span class="str">"callback_url"</span>: <span class="str">"https://..."</span>
+}</div></div><div class="dp-section"><h4>Key technologies</h4><div class="dp-pills"><span class="dp-pill">FastAPI</span><span class="dp-pill">Express</span><span class="dp-pill">gRPC</span><span class="dp-pill">OAuth2 / JWT</span></div></div></div>
+</article>
+<article class="ds-item" id="d-goal_interpreter" data-tag="L7 · APPLICATION" data-title="Goal Interpreter">
+<p class="dp-tag">L7 · APPLICATION</p>
+<h3 class="dp-title">Goal Interpreter</h3>
+<div class="ds-body"><div class="dp-section"><h4>Purpose</h4><p class="dp-text">Converts natural language goals into a structured task graph. The first LLM call is a planning call that outputs a JSON task tree with dependencies, estimated costs, and required tools.</p></div><div class="dp-section"><h4>Implementation</h4><p class="dp-note">Sketch in Python style, not runnable as written: the objects it calls stand for components you supply.</p><div class="dp-code" tabindex="0"><span class="kw">class</span> GoalInterpreter:
+    <span class="kw">def</span> <span class="fn">decompose</span>(self, goal: str):
+        plan = self.llm.<span class="fn">structured_output</span>(
+            prompt=DECOMPOSE.format(goal=goal),
+            schema=TaskGraph
+        )
+        plan.<span class="fn">validate_dependencies</span>()
+        plan.<span class="fn">estimate_costs</span>(self.cost_model)
+        <span class="kw">return</span> plan</div></div></div>
+</article>
+<article class="ds-item" id="d-hitl" data-tag="L7 · SAFETY" data-title="Human-in-the-Loop">
+<p class="dp-tag">L7 · SAFETY</p>
+<h3 class="dp-title">Human-in-the-Loop</h3>
+<div class="ds-body"><div class="dp-section"><h4>Purpose</h4><p class="dp-text">Approval points where the agent pauses and a person confirms the exact action before it runs. Gate on properties of the action that the runtime can check for itself: does it have a side effect, can it be undone, what does it cost, how sensitive is its target. Read-only, low-cost steps run without a pause, so that people are asked rarely enough to keep reading what they approve.</p></div>
+<div class="dp-section"><h4>Implementation</h4>
+<p class="dp-note">Runnable as written: Python 3.10 or later, standard library only. Run for this page in November 2026.</p><div class="dp-code" tabindex="0"><span class="kw">from</span> dataclasses <span class="kw">import</span> dataclass
+
+@dataclass
+<span class="kw">class</span> Action:
+    tool: str
+    side_effects: bool = False
+    reversible: bool = True
+    cost_usd: float = 0.0
+    risk: str = <span class="str">"LOW"</span>    <span class="cm"># set by policy, not by the model</span>
+
+<span class="kw">class</span> HITLGate:
+    <span class="kw">def</span> <span class="fn">__init__</span>(self, cost_limit_usd=1.00):
+        self.cost_limit_usd = cost_limit_usd
+
+    <span class="kw">def</span> <span class="fn">should_pause</span>(self, action: Action) -&gt; bool:
+        <span class="kw">if</span> action.risk == <span class="str">"HIGH"</span>:
+            <span class="kw">return</span> True
+        <span class="kw">if</span> action.side_effects <span class="kw">and</span> <span class="kw">not</span> action.reversible:
+            <span class="kw">return</span> True
+        <span class="kw">if</span> action.cost_usd &gt; self.cost_limit_usd:
+            <span class="kw">return</span> True
+        <span class="kw">return</span> False
+
+gate = <span class="fn">HITLGate</span>()
+search = <span class="fn">Action</span>(<span class="str">"search_database"</span>)
+email = <span class="fn">Action</span>(<span class="str">"send_email"</span>, side_effects=True,
+               reversible=False)
+<span class="fn">print</span>(gate.<span class="fn">should_pause</span>(search))   <span class="cm"># False</span>
+<span class="fn">print</span>(gate.<span class="fn">should_pause</span>(email))    <span class="cm"># True</span></div></div>
+<div class="dp-section"><h4>What it does not stop</h4><p class="dp-text">The model's own confidence is deliberately not an input. A confidence figure that a model reports about itself is not a calibrated probability, and text injected into the context can raise it, so log it if you wish but do not let it open or close a gate. An approval is only as good as what the approver sees: show the real tool name and arguments, not the model's summary of them. Too many prompts produce approval fatigue, and a tired approver is not a control.</p></div></div>
+</article>
+<article class="ds-item" id="d-agent_controller" data-tag="L6 · ORCHESTRATION" data-title="Agent Controller">
+<p class="dp-tag">L6 · ORCHESTRATION</p>
+<h3 class="dp-title">Agent Controller</h3>
+<div class="ds-body"><div class="dp-section"><h4>Purpose</h4><p class="dp-text">The heartbeat of every agent. Runs a bounded loop: receive goal → plan steps → execute step → observe result → decide next action. Continues until goal met, budget exhausted, or stop condition triggers.</p></div><div class="dp-section"><h4>Full runtime</h4><p class="dp-note">Sketch in Python style, not runnable as written: the objects it calls stand for components you supply.</p><div class="dp-code" tabindex="0"><span class="kw">class</span> AgentController:
+    <span class="kw">async def</span> <span class="fn">run</span>(self, goal, state):
+        <span class="kw">while not</span> state.is_terminal():
+            plan = <span class="kw">await</span> self.planner.<span class="fn">next_step</span>(goal, state)
+            <span class="kw">if</span> plan.requires_approval:
+                <span class="kw">await</span> self.hitl.<span class="fn">request_approval</span>(plan)
+            result = <span class="kw">await</span> self.executor.<span class="fn">execute</span>(plan.action)
+            obs = self.observer.<span class="fn">evaluate</span>(result)
+            state = self.state_mgr.<span class="fn">update</span>(state, obs)
+            <span class="kw">if</span> state.steps &gt; goal.max_steps:
+                state.<span class="fn">set_terminal</span>(<span class="str">"budget_exceeded"</span>)
+        <span class="kw">return</span> state.final_result</div></div></div>
+</article>
+<article class="ds-item" id="d-task_scheduler" data-tag="L6 · ORCHESTRATION" data-title="Task Scheduler">
+<p class="dp-tag">L6 · ORCHESTRATION</p>
+<h3 class="dp-title">Task Scheduler</h3>
+<div class="ds-body"><div class="dp-section"><h4>Purpose</h4><p class="dp-text">Manages a directed acyclic graph (DAG) of tasks. Independent tasks run in parallel; dependent tasks wait. Built on durable execution engines for crash recovery.</p></div><div class="dp-section"><h4>Implementation</h4><p class="dp-note">Sketch in Python style, not runnable as written: the objects it calls stand for components you supply.</p><div class="dp-code" tabindex="0"><span class="kw">async def</span> <span class="fn">execute_dag</span>(self, graph):
+    ready = graph.<span class="fn">get_ready_tasks</span>()
+    <span class="kw">while</span> ready:
+        results = <span class="kw">await</span> asyncio.<span class="fn">gather</span>(
+            *[self.<span class="fn">execute_task</span>(t) <span class="kw">for</span> t <span class="kw">in</span> ready]
+        )
+        <span class="kw">for</span> task, result <span class="kw">in</span> zip(ready, results):
+            graph.<span class="fn">mark_complete</span>(task, result)
+            self.<span class="fn">checkpoint</span>(graph)
+        ready = graph.<span class="fn">get_ready_tasks</span>()</div></div></div>
+</article>
+<article class="ds-item" id="d-router" data-tag="L6 · ORCHESTRATION" data-title="Router / Dispatcher">
+<p class="dp-tag">L6 · ORCHESTRATION</p>
+<h3 class="dp-title">Router / Dispatcher</h3>
+<div class="ds-body"><div class="dp-section"><h4>Purpose</h4><p class="dp-text">Selects the right model (cost vs capability), delegates to specialist sub-agents, manages handoffs. Implements model fallback chains: try fast model first, escalate on failure.</p></div><div class="dp-section"><h4>Model selection</h4><p class="dp-note">Sketch in Python style, not runnable as written: the objects it calls stand for components you supply.</p><div class="dp-code" tabindex="0"><span class="kw">def</span> <span class="fn">select_model</span>(self, task):
+    <span class="kw">if</span> task.complexity == <span class="str">"simple"</span>:
+        <span class="kw">return</span> ModelConfig(<span class="str">"small-fast"</span>, max_tokens=1000)
+    <span class="kw">elif</span> task.requires_reasoning:
+        <span class="kw">return</span> ModelConfig(<span class="str">"balanced"</span>, max_tokens=4000)
+    <span class="kw">else</span>:
+        <span class="kw">return</span> ModelConfig(<span class="str">"most-capable"</span>, max_tokens=8000)</div></div></div>
+</article>
+<article class="ds-item" id="d-reasoning" data-tag="L5 · COGNITION" data-title="LLM Reasoning Engine">
+<p class="dp-tag">L5 · COGNITION</p>
+<h3 class="dp-title">LLM Reasoning Engine</h3>
+<div class="ds-body"><div class="dp-section"><h4>Purpose</h4><p class="dp-text">The cognitive core. Current practice is native tool calling: the runtime sends the tool schemas with each request, the model replies with a structured tool call instead of free text, the runtime runs the call and returns the result as a tool message, and the loop repeats until the model answers without asking for a tool.</p><p class="dp-text">This reason-then-act cycle is the ReAct pattern. Earlier agents built it by asking the model to print "Thought", "Action" and "Action Input" lines as text and then parsing that text. That form is fragile, and native tool calling has replaced it. Chain-of-thought and tree-of-thought describe how a model reasons before it chooses an action; many current models do that reasoning internally before they answer.</p></div>
+<div class="dp-section"><h4>Tool-calling loop</h4>
+<p class="dp-note">Pseudocode in Python style. Message and field names differ between model providers: check your provider's tool-calling documentation.</p><div class="dp-code" tabindex="0"><span class="kw">async</span> <span class="kw">def</span> <span class="fn">reason_and_act</span>(self, goal, max_steps=20):
+    messages = [{<span class="str">"role"</span>: <span class="str">"user"</span>, <span class="str">"content"</span>: goal}]
+    <span class="kw">for</span> _ <span class="kw">in</span> <span class="fn">range</span>(max_steps):
+        reply = <span class="kw">await</span> self.llm.<span class="fn">chat</span>(
+            messages=messages,
+            tools=self.tool_registry.<span class="fn">schemas</span>(),
+        )
+        messages.<span class="fn">append</span>(reply.<span class="fn">as_message</span>())
+        <span class="kw">if</span> <span class="kw">not</span> reply.tool_calls:
+            <span class="kw">return</span> reply.text                  <span class="cm"># final answer</span>
+        <span class="kw">for</span> call <span class="kw">in</span> reply.tool_calls:
+            <span class="cm"># The policy check runs outside the model</span>
+            decision = self.policy.<span class="fn">check</span>(call)
+            <span class="kw">if</span> decision.allowed:
+                result = <span class="kw">await</span> self.executor.<span class="fn">execute</span>(call)
+            <span class="kw">else</span>:
+                result = <span class="str">f"Denied: {decision.reason}"</span>
+            messages.<span class="fn">append</span>({
+                <span class="str">"role"</span>: <span class="str">"tool"</span>,
+                <span class="str">"tool_call_id"</span>: call.id,
+                <span class="str">"content"</span>: <span class="fn">str</span>(result),   <span class="cm"># untrusted data</span>
+            })
+    <span class="kw">raise</span> <span class="fn">StepBudgetExceeded</span>(goal)</div></div>
+<div class="dp-section"><h4>What to remember</h4><p class="dp-text">The model proposes a call; the runtime decides whether it runs. Every tool result goes back into the context as data that the model will read, which is exactly how indirect prompt injection gets in. See <a href="#d-guardrails" onclick="return openDetail('guardrails', this)">Guardrails &amp; Safety</a>.</p></div></div>
+</article>
+<article class="ds-item" id="d-reflection" data-tag="L5 · COGNITION" data-title="Self-Reflection">
+<p class="dp-tag">L5 · COGNITION</p>
+<h3 class="dp-title">Self-Reflection</h3>
+<div class="ds-body"><div class="dp-section"><h4>Purpose</h4><p class="dp-text">After each action the runtime checks the result before it decides to proceed, retry or replan. Use deterministic checks first: did the tool return an error, does the output match its schema, do the tests pass, is the row count plausible. An evaluator model, often a cheaper one, can then judge whether the step advanced the goal.</p><p class="dp-text">Treat that judgement as a weak signal. A 1 to 10 score from a model is not calibrated, the thresholds below are placeholders to tune against labelled examples, and an evaluator that reads tool output can be steered by text injected into that output.</p></div>
+<div class="dp-section"><h4>Scoring logic</h4>
+<p class="dp-note">Sketch in Python style, not runnable as written: the objects it calls stand for components you supply.</p><div class="dp-code" tabindex="0"><span class="kw">async</span> <span class="kw">def</span> <span class="fn">evaluate</span>(self, action, result, goal):
+    <span class="cm"># Deterministic checks first</span>
+    <span class="kw">if</span> result.error <span class="kw">or</span> <span class="kw">not</span> result.<span class="fn">matches_schema</span>():
+        <span class="kw">return</span> Decision.RETRY
+    score = <span class="kw">await</span> self.evaluator.<span class="fn">score</span>(
+        <span class="str">f"Did this advance the goal?\n"</span>
+        <span class="str">f"Goal: {goal} Result: {result}\n"</span>
+        <span class="str">f"Score 1-10:"</span>
+    )
+    <span class="cm"># Placeholder thresholds: tune on labelled examples</span>
+    <span class="kw">if</span> score &lt; 5: <span class="kw">return</span> Decision.REPLAN
+    <span class="kw">elif</span> score &lt; 7: <span class="kw">return</span> Decision.RETRY
+    <span class="kw">return</span> Decision.PROCEED</div></div></div>
+</article>
+<article class="ds-item" id="d-structured_output" data-tag="L5 · COGNITION" data-title="Structured Output">
+<p class="dp-tag">L5 · COGNITION</p>
+<h3 class="dp-title">Structured Output</h3>
+<div class="ds-body"><div class="dp-section"><h4>Purpose</h4><p class="dp-text">Forces the LLM to output valid JSON matching predefined schemas. This stops malformed tool calls. A schema checks the shape of a call, not whether the call is safe to run. Pydantic models define the contract; the LLM is constrained to match. Retries on schema violation.</p></div><div class="dp-section"><h4>Schema enforcement</h4><p class="dp-note">Sketch in Python style, not runnable as written: the objects it calls stand for components you supply.</p><div class="dp-code" tabindex="0"><span class="kw">from</span> pydantic <span class="kw">import</span> BaseModel
+
+<span class="kw">class</span> ToolCall(BaseModel):
+    tool_name: str
+    arguments: dict
+    reasoning: str
+    confidence: float  <span class="cm"># self-reported: never gate on it</span>
+
+result = <span class="kw">await</span> llm.<span class="fn">structured_output</span>(
+    prompt=react_prompt,
+    schema=ToolCall,
+    max_retries=3
+)</div></div></div>
+</article>
+<article class="ds-item" id="d-working_mem" data-tag="L4 · MEMORY" data-title="Working Memory">
+<p class="dp-tag">L4 · MEMORY</p>
+<h3 class="dp-title">Working Memory</h3>
+<div class="ds-body"><div class="dp-section"><h4>Purpose</h4><p class="dp-text">Tracks everything relevant to the current execution: the goal, the current plan, tool outputs, partial results and a scratchpad. Implemented as a typed state object. This is what makes an agent stateful. When the state outgrows its token budget, the oldest observations are summarised into the scratchpad.</p></div>
+<div class="dp-section"><h4>Data structure</h4>
+<p class="dp-note">Runnable as written: Python 3.10 or later, standard library only. Run for this page in November 2026.</p><div class="dp-code" tabindex="0"><span class="kw">from</span> collections <span class="kw">import</span> deque
+<span class="kw">from</span> dataclasses <span class="kw">import</span> dataclass, field
+
+<span class="kw">def</span> <span class="fn">count_tokens</span>(text: str) -&gt; int:
+    <span class="cm"># Stand-in for a real tokeniser</span>
+    <span class="kw">return</span> <span class="fn">max</span>(1, <span class="fn">len</span>(text) // 4)
+
+<span class="kw">def</span> <span class="fn">summarise</span>(text: str, limit: int = 80) -&gt; str:
+    <span class="cm"># Stand-in for a call to a summariser model</span>
+    <span class="kw">return</span> text[:limit]
+
+@dataclass
+<span class="kw">class</span> WorkingMemory:
+    goal: str
+    <span class="cm"># Oldest observation first</span>
+    observations: deque = <span class="fn">field</span>(default_factory=deque)
+    scratchpad: str = <span class="str">""</span>
+
+    @property
+    <span class="kw">def</span> <span class="fn">token_count</span>(self) -&gt; int:
+        parts = [self.goal, self.scratchpad]
+        parts.<span class="fn">extend</span>(self.observations)
+        <span class="kw">return</span> <span class="fn">sum</span>(<span class="fn">count_tokens</span>(p) <span class="kw">for</span> p <span class="kw">in</span> parts)
+
+    <span class="kw">def</span> <span class="fn">compress_if_needed</span>(self, max_tokens: int) -&gt; None:
+        <span class="cm"># Stop when within budget, or when nothing is left.</span>
+        <span class="kw">while</span> (self.token_count &gt; max_tokens
+               <span class="kw">and</span> self.observations):
+            oldest = self.observations.<span class="fn">popleft</span>()
+            self.scratchpad += <span class="fn">summarise</span>(oldest) + <span class="str">"\n"</span>
+
+memory = <span class="fn">WorkingMemory</span>(goal=<span class="str">"Analyse Q3 revenue"</span>)
+<span class="kw">for</span> step <span class="kw">in</span> <span class="fn">range</span>(6):
+    memory.observations.<span class="fn">append</span>(<span class="str">f"step {step}: "</span> + <span class="str">"x"</span> * 1000)
+<span class="fn">print</span>(memory.token_count)             <span class="cm"># 1517: over budget</span>
+memory.<span class="fn">compress_if_needed</span>(max_tokens=400)
+<span class="fn">print</span>(<span class="fn">len</span>(memory.observations), memory.token_count)   <span class="cm"># 1 357</span></div><p class="dp-text">The token count is recomputed from the contents, so it falls as observations are compressed and the loop ends. If the scratchpad alone is over budget the loop still ends, and the caller has to summarise the scratchpad itself.</p></div></div>
+</article>
+<article class="ds-item" id="d-episodic_mem" data-tag="L4 · MEMORY" data-title="Episodic Memory">
+<p class="dp-tag">L4 · MEMORY</p>
+<h3 class="dp-title">Episodic Memory</h3>
+<div class="ds-body"><div class="dp-section"><h4>Purpose</h4><p class="dp-text">Stores past execution traces across sessions. When encountering a similar goal, retrieves relevant past episodes to inform planning. It can save the agent from working out again an approach it has already found. A stored trace is untrusted input when it is recalled: an episode poisoned in one session persists into the next. Record where each memory came from, and let a memory inform a plan, never authorise an action.</p></div><div class="dp-section"><h4>Store & recall</h4><p class="dp-note">Sketch in Python style, not runnable as written: the objects it calls stand for components you supply.</p><div class="dp-code" tabindex="0"><span class="kw">class</span> EpisodicStore:
+    <span class="kw">async def</span> <span class="fn">store</span>(self, trace):
+        summary = <span class="kw">await</span> self.llm.<span class="fn">summarize</span>(trace)
+        embedding = <span class="kw">await</span> self.<span class="fn">embed</span>(summary)
+        <span class="kw">await</span> self.vector_db.<span class="fn">upsert</span>(
+            vector=embedding,
+            metadata={<span class="str">"outcome"</span>: trace.outcome}
+        )
+
+    <span class="kw">async def</span> <span class="fn">recall</span>(self, goal, k=5):
+        <span class="kw">return await</span> self.vector_db.<span class="fn">search</span>(
+            query=goal, k=k,
+            filter={<span class="str">"outcome"</span>: <span class="str">"success"</span>}
+        )</div></div></div>
+</article>
+<article class="ds-item" id="d-semantic_mem" data-tag="L4 · MEMORY" data-title="Semantic Memory (Agentic RAG)">
+<p class="dp-tag">L4 · MEMORY</p>
+<h3 class="dp-title">Semantic Memory (Agentic RAG)</h3>
+<div class="ds-body"><div class="dp-section"><h4>Purpose</h4><p class="dp-text">Goes beyond basic RAG. The agent actively reasons about retrieval: formulates queries, evaluates relevance, reformulates if results are poor, and cross-references multiple sources. Filter by what the requesting user is entitled to see before ranking, and treat retrieved text as data: a retrieved document is an obvious carrier of indirect prompt injection.</p></div><div class="dp-section"><h4>Multi-round retrieval</h4><p class="dp-note">Sketch in Python style, not runnable as written: the objects it calls stand for components you supply.</p><div class="dp-code" tabindex="0"><span class="kw">async def</span> <span class="fn">retrieve</span>(self, question, rounds=3):
+    query = question
+    <span class="kw">for</span> i <span class="kw">in</span> range(rounds):
+        docs = <span class="kw">await</span> self.vector_db.<span class="fn">search</span>(query, k=5)
+        verdict = <span class="kw">await</span> self.llm.<span class="fn">evaluate_relevance</span>(
+            question, docs
+        )
+        <span class="kw">if</span> verdict.sufficient: <span class="kw">break</span>
+        query = verdict.refined_query  <span class="cm"># Reformulate</span>
+    <span class="kw">return</span> docs</div></div></div>
+</article>
+<article class="ds-item" id="d-ctx_mgmt" data-tag="L4 · MEMORY" data-title="Context Window Management">
+<p class="dp-tag">L4 · MEMORY</p>
+<h3 class="dp-title">Context Window Management</h3>
+<div class="ds-body"><div class="dp-section"><h4>Purpose</h4><p class="dp-text">A central optimisation. An agent sends its context again on every step, so token use grows with the length of the run. This component implements token counting, progressive summarisation and priority-based context packing.</p></div><div class="dp-section"><h4>Budget packing</h4><p class="dp-note">Sketch in Python style, not runnable as written: the objects it calls stand for components you supply.</p><div class="dp-code" tabindex="0"><span class="kw">def</span> <span class="fn">pack</span>(self, memory):
+    budget = self.max_tokens - 4000  <span class="cm"># Reserve output</span>
+    sections = [
+        (CRITICAL, memory.goal, 500),
+        (HIGH, memory.current_plan, 2000),
+        (HIGH, memory.recent_obs(3), 3000),
+        (MEDIUM, memory.tool_schemas, 2000),
+        (LOW, memory.older_obs, budget),
+    ]
+    <span class="kw">return</span> self.<span class="fn">fit_to_budget</span>(sections, budget)</div></div></div>
+</article>
+<article class="ds-item" id="d-tool_registry" data-tag="L3 · TOOLS" data-title="Tool Registry">
+<p class="dp-tag">L3 · TOOLS</p>
+<h3 class="dp-title">Tool Registry</h3>
+<div class="ds-body"><div class="dp-section"><h4>Purpose</h4><p class="dp-text">A catalogue of all tools the agent can invoke. Each tool has a JSON schema describing inputs, outputs, side effects, and permissions. The LLM sees these schemas to decide which tool to call. The side-effect and permission fields are for the runtime, which enforces them whatever the model asks for.</p></div><div class="dp-section"><h4>Registration</h4><p class="dp-note">Sketch in Python style, not runnable as written: the objects it calls stand for components you supply.</p><div class="dp-code" tabindex="0">registry = ToolRegistry([
+    Tool(
+        name=<span class="str">"search_database"</span>,
+        parameters={<span class="str">"query"</span>: <span class="str">"string"</span>},
+        side_effects=False,
+        permissions=[<span class="str">"db:read"</span>],
+    ),
+    Tool(
+        name=<span class="str">"send_email"</span>,
+        side_effects=True,  <span class="cm"># Requires HITL</span>
+        permissions=[<span class="str">"email:send"</span>],
+    ),
+])</div></div></div>
+</article>
+<article class="ds-item" id="d-fn_executor" data-tag="L3 · TOOLS" data-title="Function Executor">
+<p class="dp-tag">L3 · TOOLS</p>
+<h3 class="dp-title">Function Executor</h3>
+<div class="ds-body"><div class="dp-section"><h4>Purpose</h4><p class="dp-text">Runs each tool call with a timeout and an idempotency key, and writes an audit record whether the call succeeds, fails or turns out to be a repeat. Permission and argument checks happen before this point (see <a href="#d-guardrails" onclick="return openDetail('guardrails', this)">Guardrails &amp; Safety</a>). The sandbox is not in this code: it is where the tool's process runs.</p></div>
+<div class="dp-section"><h4>Timeout, idempotency and audit</h4>
+<p class="dp-note">Runnable as written: Python 3.10 or later, standard library only. Run for this page in November 2026.</p><div class="dp-code" tabindex="0"><span class="kw">import</span> asyncio
+
+<span class="kw">class</span> ToolExecutor:
+    <span class="kw">def</span> <span class="fn">__init__</span>(self, tools, audit_log):
+        <span class="cm"># tools: name -&gt; {"fn", "timeout_s", "side_effects"}</span>
+        self.tools = tools
+        self.audit_log = audit_log  <span class="cm"># append-only in real use</span>
+        self.completed = {}         <span class="cm"># idempotency key -&gt; result</span>
+
+    <span class="kw">async</span> <span class="kw">def</span> <span class="fn">execute</span>(self, name, args, key):
+        tool = self.tools[name]     <span class="cm"># KeyError: not registered</span>
+        <span class="kw">if</span> tool[<span class="str">"side_effects"</span>] <span class="kw">and</span> key <span class="kw">in</span> self.completed:
+            <span class="cm"># A retry: return the stored result, do not repeat</span>
+            self.audit_log.<span class="fn">append</span>((name, key, <span class="str">"duplicate"</span>))
+            <span class="kw">return</span> self.completed[key]
+        <span class="kw">try</span>:
+            result = <span class="kw">await</span> asyncio.<span class="fn">wait_for</span>(
+                tool[<span class="str">"fn"</span>](**args), tool[<span class="str">"timeout_s"</span>])
+        <span class="kw">except</span> Exception <span class="kw">as</span> exc:
+            entry = (name, key, <span class="str">"error"</span>, <span class="fn">repr</span>(exc))
+            self.audit_log.<span class="fn">append</span>(entry)
+            <span class="kw">raise</span>
+        <span class="kw">if</span> tool[<span class="str">"side_effects"</span>]:
+            self.completed[key] = result
+        self.audit_log.<span class="fn">append</span>((name, key, <span class="str">"ok"</span>))
+        <span class="kw">return</span> result
+
+<span class="kw">async</span> <span class="kw">def</span> <span class="fn">send_email</span>(to, subject):
+    <span class="kw">return</span> <span class="str">f"sent to {to}"</span>
+
+<span class="kw">async</span> <span class="kw">def</span> <span class="fn">main</span>():
+    audit = []
+    tools = {<span class="str">"send_email"</span>: {<span class="str">"fn"</span>: send_email, <span class="str">"timeout_s"</span>: 5,
+                            <span class="str">"side_effects"</span>: True}}
+    run = <span class="fn">ToolExecutor</span>(tools, audit).execute
+    args = {<span class="str">"to"</span>: <span class="str">"finance@example.com"</span>, <span class="str">"subject"</span>: <span class="str">"Q3"</span>}
+    <span class="fn">print</span>(<span class="kw">await</span> <span class="fn">run</span>(<span class="str">"send_email"</span>, args, <span class="str">"run-42/step-3"</span>))
+    <span class="fn">print</span>(<span class="kw">await</span> <span class="fn">run</span>(<span class="str">"send_email"</span>, args, <span class="str">"run-42/step-3"</span>))
+    <span class="fn">print</span>(<span class="kw">await</span> <span class="fn">run</span>(<span class="str">"send_email"</span>, args, <span class="str">"run-42/step-7"</span>))
+    <span class="fn">print</span>([entry[2] <span class="kw">for</span> entry <span class="kw">in</span> audit])
+    <span class="cm"># ['ok', 'duplicate', 'ok']</span>
+
+asyncio.<span class="fn">run</span>(<span class="fn">main</span>())</div><p class="dp-text">The key identifies the step (run ID plus step ID), not the arguments. A retry of step 3 returns the stored result, while step 7 sends a second, legitimate email with the same arguments. Keying on a hash of the arguments would silently drop that second email. The in-memory dictionary is for illustration only: in production the store of completed keys must be durable and shared, and it is better still if the downstream API accepts the idempotency key itself.</p></div>
+<div class="dp-section"><h4>Where the sandbox is</h4><p class="dp-text">Run any tool that executes code or touches files in a separate process with no ambient credentials, a scratch filesystem, and network egress limited to named destinations. A container shares the host's kernel, so on its own it is a weak boundary for code you do not trust. A microVM (Firecracker is one example) or a user-space kernel (gVisor is one example) is a stronger one.</p><p class="dp-text"><strong>What it does not stop:</strong> a sandbox limits what code can reach. It does not stop a tool from misusing access it was legitimately given, and it does not stop data leaving through a destination you allowed.</p></div></div>
+</article>
+<article class="ds-item" id="d-protocols" data-tag="L3 · TOOLS" data-title="Agent Protocols: MCP, A2A and Others">
+<p class="dp-tag">L3 · TOOLS</p>
+<h3 class="dp-title">Agent Protocols: MCP, A2A and Others</h3>
+<div class="ds-body"><div class="dp-section"><h4>Purpose</h4><p class="dp-text">Open protocols mean a tool or an agent is integrated once, not once per framework. MCP connects an LLM application to tools and data. A2A connects one agent to another. Neither makes the thing at the other end trustworthy: a protocol standardises how you connect, and what arrives over the connection is still untrusted input.</p><p class="dp-text">Every status line below was checked against the project's own site in November 2026. This field moves quickly, so follow the links before you rely on a version.</p></div>
+
+<div class="dp-section"><h4>MCP (Model Context Protocol)</h4>
+<p class="dp-text">JSON-RPC 2.0 messages between a host application, its clients and MCP servers. Servers offer tools, resources and prompts. The transports are stdio and Streamable HTTP.</p>
+<p class="dp-text dp-status"><strong>Status as of November 2026:</strong> the current specification revision is 2026-07-28. Anthropic created MCP and donated it in December 2025 to the Agentic AI Foundation (AAIF), a directed fund under the Linux Foundation. The 2026-07-28 revision made the protocol stateless (no <code>initialize</code> handshake and no protocol-level sessions, with a mandatory <code>server/discover</code> call), moved tasks into an extension, and deprecated Roots, Sampling and Logging. The old HTTP+SSE transport, deprecated since the 2025-03-26 revision, stays deprecated in favour of Streamable HTTP.</p>
+<p class="dp-text"><strong>Authorisation model:</strong> optional, and defined for HTTP transports only (a stdio server takes its credentials from its environment). It is built on the OAuth 2.1 draft. The MCP server is an OAuth resource server: it must publish Protected Resource Metadata (RFC 9728) and must check that each access token was issued for it. A client must name the target server with a resource indicator (RFC 8707). A server must not accept or pass on tokens meant for anything else. Client ID Metadata Documents are the preferred way to register a client, and Dynamic Client Registration is deprecated.</p>
+<p class="dp-text"><strong>What it does not cover:</strong> OAuth decides who may call a server, not whether a particular tool call is safe. The specification says the protocol cannot itself enforce its consent and tool-safety principles, and that tool descriptions from a server you do not trust are themselves untrusted. A tool description or a tool result can carry injected instructions.</p>
+<p class="dp-text"><a href="https://modelcontextprotocol.io/specification/2026-07-28" target="_blank" rel="noopener">MCP specification, revision 2026-07-28</a> · <a href="https://modelcontextprotocol.io/specification/2026-07-28/basic/authorization" target="_blank" rel="noopener">authorisation</a> · <a href="https://modelcontextprotocol.io/specification/2026-07-28/changelog" target="_blank" rel="noopener">what changed</a></p></div>
+
+<div class="dp-section"><h4>A2A (Agent2Agent)</h4>
+<p class="dp-text">Lets one agent discover another, hand it a task and receive the result. An agent describes itself in an Agent Card, a JSON document served at <code>/.well-known/agent-card.json</code>. The bindings are JSON-RPC, gRPC and HTTP+JSON.</p>
+<p class="dp-text dp-status"><strong>Status as of November 2026:</strong> version 1.0. Release 1.0.0 was published on 12 March 2026, and the latest patch release is 1.0.1 (28 May 2026). Google launched A2A in April 2025 and donated it to the Linux Foundation. In August 2026 it was announced as a hosted project of the Agentic AI Foundation, alongside MCP. IBM's Agent Communication Protocol (ACP) merged into A2A in August 2025.</p>
+<p class="dp-text"><strong>Security model:</strong> a server must authenticate every request, using a scheme it declares in its Agent Card (API key, HTTP authentication, OAuth 2.0, OpenID Connect or mutual TLS). Credentials are obtained outside the protocol. An Agent Card can be signed (JWS), but signing is optional.</p>
+<p class="dp-text"><strong>What it does not cover:</strong> an unsigned Agent Card is a claim an agent makes about itself, not proof of who runs it or what it will do. Whatever a remote agent returns is untrusted input to yours: another agent is one of the routes by which injected instructions arrive.</p>
+<p class="dp-text"><a href="https://a2a-protocol.org/latest/specification/" target="_blank" rel="noopener">A2A specification</a> · <a href="https://github.com/a2aproject/A2A/releases" target="_blank" rel="noopener">releases</a> · <a href="https://aaif.io/blog/a2a-joins-aaif" target="_blank" rel="noopener">A2A joins AAIF</a></p></div>
+
+<div class="dp-section"><h4>AGENTS.md</h4>
+<p class="dp-text">Not a protocol. It is a Markdown file in a repository that gives coding agents their instructions for that codebase: how to build it, test it and follow its conventions. The project calls it "a README for agents". It does not describe an agent's capabilities.</p>
+<p class="dp-text dp-status"><strong>Status as of November 2026:</strong> the project site reports use by over 60,000 open-source projects, and the format is stewarded by the Agentic AI Foundation under the Linux Foundation.</p>
+<p class="dp-text"><strong>What to watch:</strong> the file is instruction text that an agent reads and follows. In a repository you do not control, treat it like any other untrusted content.</p>
+<p class="dp-text"><a href="https://agents.md/" target="_blank" rel="noopener">agents.md</a></p></div>
+
+<div class="dp-section"><h4>Also named in the literature</h4>
+<p class="dp-text"><strong>ANP (Agent Network Protocol):</strong> an open protocol stack for agent identity, discovery and messaging, built on decentralised identifiers (its own <code>did:wba</code> method). <strong>Status as of November 2026:</strong> the project site lists version 1.2 as the latest, with some parts still marked as draft, and names no foundation as its governing body. <a href="https://agent-network-protocol.com/specs/1.2/white-paper" target="_blank" rel="noopener">ANP 1.2 white paper</a></p>
+<p class="dp-text"><strong>ACP (Agent Communication Protocol, IBM):</strong> <strong>status as of November 2026:</strong> retired as a separate protocol. Its team announced on 29 August 2025 that ACP was merging into A2A and winding down its own development. It appears here only because older articles still name it. <a href="https://lfaidata.foundation/?p=7689" target="_blank" rel="noopener">ACP joins forces with A2A</a></p>
+<p class="dp-text"><strong>Agora:</strong> a research proposal for a "meta protocol" through which agents agree how they will talk to each other. <strong>Status as of November 2026:</strong> an academic paper from October 2024, not a governed standard. I found no versioned specification to link, so the link is to the paper. <a href="https://arxiv.org/abs/2410.11905" target="_blank" rel="noopener">arXiv:2410.11905</a></p>
+<p class="dp-text">For a side-by-side comparison of MCP, ACP, A2A and ANP, see the survey by <a href="https://arxiv.org/abs/2505.02279" target="_blank" rel="noopener">Ehtesham and colleagues (arXiv:2505.02279, May 2025)</a>. It was written before ACP merged into A2A.</p></div></div>
+</article>
+<article class="ds-item" id="d-workflow_engine" data-tag="L2 · EXECUTION" data-title="Workflow Engine">
+<p class="dp-tag">L2 · EXECUTION</p>
+<h3 class="dp-title">Workflow Engine</h3>
+<div class="ds-body"><div class="dp-section"><h4>Purpose</h4><p class="dp-text">An agent can run for hours or days, and over that time some step will fail. A durable execution engine records the result of every completed step, so that after a crash the workflow resumes from the last recorded step instead of starting again.</p><p class="dp-text">The steps that call models and tools (activities, in Temporal's terms) run at least once, not exactly once. An activity that succeeded, but whose worker crashed before it could report success, is run again. Every side-effecting activity therefore needs an idempotency key: Temporal's own guidance is to build one from the workflow run ID and the activity ID. <a href="https://docs.temporal.io/develop/python/best-practices/error-handling" target="_blank" rel="noopener">Temporal: error handling in the Python SDK</a></p></div>
+<div class="dp-section"><h4>Temporal workflow</h4>
+<p class="dp-note">Temporal Python SDK. Argument names were checked against the Temporal documentation in November 2026. Not executed for this page: it needs a Temporal service, a worker and the two activities.</p><div class="dp-code" tabindex="0"><span class="kw">from</span> datetime <span class="kw">import</span> timedelta
+
+<span class="kw">from</span> temporalio <span class="kw">import</span> workflow
+<span class="kw">from</span> temporalio.common <span class="kw">import</span> RetryPolicy
+
+<span class="cm"># decompose_goal and execute_tool are activities, defined</span>
+<span class="cm"># elsewhere with @activity.defn and registered on a worker.</span>
+
+@workflow.defn
+<span class="kw">class</span> AgentWorkflow:
+    @workflow.run
+    <span class="kw">async</span> <span class="kw">def</span> <span class="fn">run</span>(self, goal: str) -&gt; list:
+        tasks = <span class="kw">await</span> workflow.<span class="fn">execute_activity</span>(
+            decompose_goal, goal,
+            start_to_close_timeout=<span class="fn">timedelta</span>(seconds=30),
+        )
+        results = []
+        <span class="kw">for</span> task <span class="kw">in</span> tasks:
+            result = <span class="kw">await</span> workflow.<span class="fn">execute_activity</span>(
+                execute_tool, task,
+                start_to_close_timeout=<span class="fn">timedelta</span>(minutes=2),
+                retry_policy=<span class="fn">RetryPolicy</span>(maximum_attempts=3),
+            )
+            results.<span class="fn">append</span>(result)
+        <span class="kw">return</span> results</div></div></div>
+</article>
+<article class="ds-item" id="d-state_persistence" data-tag="L2 · EXECUTION" data-title="State Persistence">
+<p class="dp-tag">L2 · EXECUTION</p>
+<h3 class="dp-title">State Persistence</h3>
+<div class="ds-body"><div class="dp-section"><h4>Purpose</h4><p class="dp-text">Every state transition is checkpointed. Enables time-travel debugging (replay any past state), forking (branch from any checkpoint), and complete audit trails via append-only event sourcing.</p></div><div class="dp-section"><h4>Event sourcing</h4><p class="dp-note">Sketch in Python style, not runnable as written: the objects it calls stand for components you supply.</p><div class="dp-code" tabindex="0"><span class="kw">def</span> <span class="fn">checkpoint</span>(self, state):
+    event = StateEvent(
+        timestamp=<span class="fn">now</span>(),
+        snapshot=state.<span class="fn">serialize</span>(),
+        step=state.step_count,
+    )
+    self.event_store.<span class="fn">append</span>(event)
+
+<span class="kw">def</span> <span class="fn">restore</span>(self, step_number):
+    event = self.event_store.<span class="fn">get</span>(step_number)
+    <span class="kw">return</span> AgentState.<span class="fn">deserialize</span>(event.snapshot)</div></div></div>
+</article>
+<article class="ds-item" id="d-event_bus" data-tag="L2 · EXECUTION" data-title="Event Bus">
+<p class="dp-tag">L2 · EXECUTION</p>
+<h3 class="dp-title">Event Bus</h3>
+<div class="ds-body"><div class="dp-section"><h4>Purpose</h4><p class="dp-text">Async communication for multi-agent systems. Agents publish results, subscribe to triggers, and coordinate without tight coupling. Redis Streams, Kafka, or NATS are common choices.</p></div><div class="dp-section"><h4>Pub/Sub pattern</h4><p class="dp-note">Sketch in Python style, not runnable as written: the objects it calls stand for components you supply.</p><div class="dp-code" tabindex="0"><span class="cm"># Analyst publishes results</span>
+<span class="kw">await</span> bus.<span class="fn">publish</span>(<span class="str">"analysis.complete"</span>, result)
+
+<span class="cm"># Report agent subscribes</span>
+<span class="kw">await</span> bus.<span class="fn">subscribe</span>(
+    <span class="str">"analysis.complete"</span>,
+    generate_report
+)</div></div></div>
+</article>
+<article class="ds-item" id="d-model_gw" data-tag="L1 · INFRASTRUCTURE" data-title="Model Gateway">
+<p class="dp-tag">L1 · INFRASTRUCTURE</p>
+<h3 class="dp-title">Model Gateway</h3>
+<div class="ds-body"><div class="dp-section"><h4>Purpose</h4><p class="dp-text">Abstracts away provider-specific APIs. Routes to the most suitable model based on task complexity, cost, and latency. Implements fallback chains: if primary times out, retries with alternative.</p></div><div class="dp-section"><h4>Multi-provider routing</h4><p class="dp-note">Sketch in Python style, not runnable as written: the objects it calls stand for components you supply.</p><div class="dp-code" tabindex="0"><span class="kw">async def</span> <span class="fn">complete</span>(self, request):
+    <span class="kw">for</span> model <span class="kw">in</span> request.fallback_chain:
+        <span class="kw">try</span>:
+            provider = self.providers[model.provider]
+            <span class="kw">return await</span> provider.<span class="fn">complete</span>(
+                model=model.name,
+                messages=request.messages,
+            )
+        <span class="kw">except</span> (TimeoutError, RateLimitError):
+            <span class="kw">continue</span>  <span class="cm"># Next in chain</span>
+    <span class="kw">raise</span> AllProvidersFailed(request)</div></div></div>
+</article>
+<article class="ds-item" id="d-embeddings" data-tag="L1 · INFRASTRUCTURE" data-title="Embedding Service">
+<p class="dp-tag">L1 · INFRASTRUCTURE</p>
+<h3 class="dp-title">Embedding Service</h3>
+<div class="ds-body"><div class="dp-section"><h4>Purpose</h4><p class="dp-text">Converts text, code, and images into dense vector representations for semantic search. Used by RAG and episodic memory. Batched processing with caching to minimise API calls.</p></div><div class="dp-section"><h4>Key technologies</h4><div class="dp-pills"><span class="dp-pill">OpenAI embedding models</span><span class="dp-pill">Cohere Embed</span><span class="dp-pill">BGE-M3 (open)</span><span class="dp-pill">CLIP (multimodal)</span></div><p class="dp-text">Model names and versions in this area change every few months. Check the provider's current model list before you choose one, and plan for re-embedding: vectors from two different models cannot be compared.</p></div></div>
+</article>
+<article class="ds-item" id="d-vector_db" data-tag="L1 · INFRASTRUCTURE" data-title="Vector Database">
+<p class="dp-tag">L1 · INFRASTRUCTURE</p>
+<h3 class="dp-title">Vector Database</h3>
+<div class="ds-body"><div class="dp-section"><h4>Purpose</h4><p class="dp-text">Stores and indexes embeddings for fast similarity search. Supports filtered queries (metadata, timestamp), hybrid search (keyword + semantic). Critical for grounding agents in domain-specific knowledge.</p></div><div class="dp-section"><h4>Key technologies</h4><div class="dp-pills"><span class="dp-pill">Pinecone</span><span class="dp-pill">Weaviate</span><span class="dp-pill">pgvector</span><span class="dp-pill">Qdrant</span><span class="dp-pill">Chroma</span></div></div></div>
+</article>
+<article class="ds-item" id="d-observability" data-tag="CROSS-CUTTING" data-title="Observability">
+<p class="dp-tag">CROSS-CUTTING</p>
+<h3 class="dp-title">Observability</h3>
+<div class="ds-body"><div class="dp-section"><h4>Purpose</h4><p class="dp-text">Every agent step must be traceable. Implement OpenTelemetry spans for each LLM call, tool invocation, and state transition. Track token usage, latency and success rate per step. Traces are for debugging: they may be sampled or dropped. The evidence record described under Identity is a separate thing, complete and tamper-evident.</p></div><div class="dp-section"><h4>Tracing</h4><p class="dp-note">Sketch in Python style, not runnable as written: the objects it calls stand for components you supply.</p><div class="dp-code" tabindex="0"><span class="kw">def</span> <span class="fn">trace_step</span>(self, step):
+    span = self.tracer.<span class="fn">start_span</span>(f<span class="str">"agent.{step.type}"</span>)
+    span.<span class="fn">set_attribute</span>(<span class="str">"tokens.in"</span>, step.input_tokens)
+    span.<span class="fn">set_attribute</span>(<span class="str">"tokens.out"</span>, step.output_tokens)
+    span.<span class="fn">set_attribute</span>(<span class="str">"cost.usd"</span>, step.cost)
+    span.<span class="fn">set_attribute</span>(<span class="str">"tool"</span>, step.tool_name)
+    <span class="kw">return</span> span</div></div><div class="dp-section"><h4>Tools</h4><div class="dp-pills"><span class="dp-pill">LangSmith</span><span class="dp-pill">Arize</span><span class="dp-pill">OpenTelemetry</span><span class="dp-pill">Prometheus</span></div></div></div>
+</article>
+<article class="ds-item" id="d-guardrails" data-tag="CROSS-CUTTING" data-title="Guardrails &amp; Safety">
+<p class="dp-tag">CROSS-CUTTING</p>
+<h3 class="dp-title">Guardrails &amp; Safety</h3>
+<div class="ds-body"><div class="dp-section"><h4>The design assumption</h4>
+<p class="dp-text">Prompt injection cannot be reliably prevented. It can be made less likely, and its effects can be contained. A model reads instructions and data through the same channel, so any text it reads may steer it. OWASP ranks prompt injection first in its Top 10 for LLM Applications, in the 2025 edition (<a href="https://genai.owasp.org/llmrisk/llm01-prompt-injection/" target="_blank" rel="noopener">LLM01:2025</a>) and again in the 2026 edition, and the 2025 entry says it is unclear whether fool-proof prevention exists.</p>
+<p class="dp-text">So design as if the model can be steered. Safety then comes from what surrounds the model, not from the model behaving well:</p>
+<ul class="dp-list">
+<li><strong>Identity.</strong> Every agent and every tool call has its own identity and least-privilege credentials. See <a href="#d-identity" onclick="return openDetail('identity', this)">Identity &amp; Authorisation</a>.</li>
+<li><strong>Policy outside the model.</strong> Rules are enforced in code at the tool boundary, where text in the context window cannot argue with them.</li>
+<li><strong>Evidence.</strong> Every decision and action leaves a record that can be reviewed and proven afterwards.</li>
+</ul></div>
+
+<div class="dp-section"><h4>Where injected instructions come from</h4>
+<p class="dp-text"><strong>Direct injection</strong> arrives in the user's own prompt. <strong>Indirect injection</strong> arrives in content the agent reads while it works, written by someone else: tool results, retrieved documents, web pages, emails, files, memory saved in an earlier session, and messages from other agents. For an agent the indirect route matters more, because the agent reads content that nobody on your side wrote, and it holds tools it can act with.</p></div>
+
+<div class="dp-section"><h4>Controls, and what each does not stop</h4>
+<div class="dp-control"><strong>Input and content filtering</strong><p>Injection classifiers, marking untrusted content as data, stripping hidden text. Lowers the success rate of known attack patterns.</p><p><span class="not">Does not stop:</span> new phrasings, encodings, or an attack split across several sources. A filter that passes content has not proved it safe.</p></div>
+<div class="dp-control"><strong>Output schema validation</strong><p>Rejects malformed tool calls and calls to tools that do not exist.</p><p><span class="not">Does not stop:</span> a well-formed call that does the wrong thing. Valid JSON can still send the wrong file to the wrong address.</p></div>
+<div class="dp-control"><strong>Tool allow-list per task</strong><p>The agent can call only the tools this task needs.</p><p><span class="not">Does not stop:</span> misuse of an allowed tool, or a chain of allowed tools: read a record, then send an email, is exfiltration built from two permitted steps.</p></div>
+<div class="dp-control"><strong>Argument checks at the tool boundary</strong><p>Recipient domains, path prefixes, read-only queries, amount limits, checked in code the model cannot change.</p><p><span class="not">Does not stop:</span> harm inside the permitted range, or data hidden in a field that looks legitimate.</p></div>
+<div class="dp-control"><strong>Budgets and rate limits</strong><p>Caps on steps, tokens, spend and calls per tool. They bound loops and the size of any one failure.</p><p><span class="not">Does not stop:</span> a single damaging action that fits inside the budget.</p></div>
+<div class="dp-control"><strong>Human approval for side-effecting or irreversible actions</strong><p>A person sees the exact tool and arguments before the action runs.</p><p><span class="not">Does not stop:</span> approval fatigue, or an approver shown the model's summary instead of the real arguments. People can be persuaded too.</p></div>
+<div class="dp-control"><strong>Sandboxing and egress control</strong><p>Limits what executed code can touch and where data can be sent.</p><p><span class="not">Does not stop:</span> data leaving through a destination you allowed.</p></div>
+<div class="dp-control"><strong>PII and secret filtering</strong><p>Reduces accidental disclosure in prompts, outputs and logs.</p><p><span class="not">Does not stop:</span> deliberate exfiltration in an encoded or paraphrased form. Pattern matching finds only the patterns it knows.</p></div>
+<div class="dp-control"><strong>Evidence of every decision and action</strong><p>Makes what happened reviewable and provable: who or what acted, on whose behalf, with which inputs, under which policy.</p><p><span class="not">Does not stop:</span> anything at the moment it happens. It is a detective control, and worth little unless someone reviews it and it cannot be altered.</p></div>
+</div>
+
+<div class="dp-section"><h4>Policy at the tool boundary</h4>
+<p class="dp-note">Runnable as written: Python 3.10 or later, standard library only. Run for this page in November 2026.</p><div class="dp-code" tabindex="0"><span class="kw">from</span> dataclasses <span class="kw">import</span> dataclass, field
+
+@dataclass
+<span class="kw">class</span> Policy:
+    version: str
+    allowed_tools: set
+    allowed_email_domains: set
+    max_calls: int
+    needs_approval: set = <span class="fn">field</span>(default_factory=set)
+
+<span class="kw">def</span> <span class="fn">check</span>(policy, tool, args, calls_so_far, approved_by=None):
+    <span class="str">"""Runs outside the model. Returns (decision, reason)."""</span>
+    <span class="kw">if</span> tool <span class="kw">not</span> <span class="kw">in</span> policy.allowed_tools:
+        <span class="kw">return</span> <span class="str">"deny"</span>, <span class="str">"tool is not on the allow-list"</span>
+    <span class="kw">if</span> calls_so_far &gt;= policy.max_calls:
+        <span class="kw">return</span> <span class="str">"deny"</span>, <span class="str">"call budget for this task is spent"</span>
+    <span class="kw">if</span> tool == <span class="str">"send_email"</span>:
+        domain = args[<span class="str">"to"</span>].<span class="fn">rsplit</span>(<span class="str">"@"</span>, 1)[-1].<span class="fn">lower</span>()
+        <span class="kw">if</span> domain <span class="kw">not</span> <span class="kw">in</span> policy.allowed_email_domains:
+            <span class="kw">return</span> <span class="str">"deny"</span>, <span class="str">"recipient domain is not allowed"</span>
+    <span class="kw">if</span> tool <span class="kw">in</span> policy.needs_approval <span class="kw">and</span> approved_by <span class="kw">is</span> None:
+        <span class="kw">return</span> <span class="str">"hold"</span>, <span class="str">"waiting for a person to approve"</span>
+    <span class="kw">return</span> <span class="str">"allow"</span>, <span class="str">"within policy "</span> + policy.version
+
+policy = <span class="fn">Policy</span>(<span class="str">"2026-11-a"</span>, {<span class="str">"search_docs"</span>, <span class="str">"send_email"</span>},
+                {<span class="str">"example.com"</span>}, max_calls=20,
+                needs_approval={<span class="str">"send_email"</span>})
+ok = {<span class="str">"to"</span>: <span class="str">"cfo@example.com"</span>}
+bad = {<span class="str">"to"</span>: <span class="str">"x@attacker.test"</span>}
+
+<span class="cm"># Prints: deny (tool), deny (recipient), hold, allow</span>
+<span class="fn">print</span>(<span class="fn">check</span>(policy, <span class="str">"delete_records"</span>, {}, 0))
+<span class="fn">print</span>(<span class="fn">check</span>(policy, <span class="str">"send_email"</span>, bad, 3))
+<span class="fn">print</span>(<span class="fn">check</span>(policy, <span class="str">"send_email"</span>, ok, 3))
+<span class="fn">print</span>(<span class="fn">check</span>(policy, <span class="str">"send_email"</span>, ok, 3, <span class="str">"approver-17"</span>))</div><p class="dp-text">The check is ordinary code with no model in it. Whatever an injected instruction persuades the model to ask for, the answer is computed from the policy, the arguments and the budget. The decision, the reason and the policy version go into the evidence record.</p></div>
+
+<div class="dp-section"><h4>Further reading</h4>
+<p class="dp-text"><a href="https://genai.owasp.org/resource/owasp-genai-llm-top-10-2026/" target="_blank" rel="noopener">OWASP Top 10 for LLM Applications 2026</a> · <a href="https://genai.owasp.org/resource/owasp-top-10-for-agentic-applications-for-2026/" target="_blank" rel="noopener">OWASP Top 10 for Agentic Applications for 2026</a> · <a href="https://atlas.mitre.org/" target="_blank" rel="noopener">MITRE ATLAS</a> · <a href="../ai-security/">Securing AI systems and agents: a practitioner's reference</a> (on this site)</p></div></div>
+</article>
+<article class="ds-item" id="d-identity" data-tag="CROSS-CUTTING" data-title="Identity &amp; Authorisation">
+<p class="dp-tag">CROSS-CUTTING</p>
+<h3 class="dp-title">Identity &amp; Authorisation</h3>
+<div class="ds-body"><div class="dp-section"><h4>Purpose</h4>
+<p class="dp-text">Every agent, and every tool call it makes, acts under an identity of its own with the least privilege the task needs. If the model is steered, identity and scope decide how far the damage can go, and the record of who acted decides whether you can prove what happened.</p></div>
+
+<div class="dp-section"><h4>Rules</h4>
+<ul class="dp-list">
+<li><strong>One identity per agent, never a shared service account.</strong> A shared account makes every agent as powerful as the most privileged one, and makes actions impossible to attribute.</li>
+<li><strong>Short-lived, scoped tokens.</strong> Issue a credential for one task and one audience (a single tool or server), with a life of minutes. No standing keys.</li>
+<li><strong>The user's authority is not silently inherited.</strong> When an agent acts for a person, that is an explicit delegation. The token names both the person and the agent acting for them, and its scope is narrowed to the task, never the person's whole session. OAuth 2.0 Token Exchange (RFC 8693) defines this kind of delegation, including an actor claim that records who is acting.</li>
+<li><strong>Authorise each tool call, outside the model.</strong> The runtime checks the call against the agent's identity, the person it acts for and the scope of the task. The model asks. It does not decide.</li>
+<li><strong>No token pass-through.</strong> A tool server accepts only tokens issued for it and never forwards a caller's token downstream. The MCP specification requires this of MCP servers.</li>
+<li><strong>Keep credentials out of the context window.</strong> The runtime attaches them at the tool boundary. A secret the model can read is a secret an injected instruction can ask for.</li>
+</ul></div>
+
+<div class="dp-section"><h4>Evidence</h4>
+<p class="dp-text">Every decision and action leaves a record: who or what acted (the agent's identity, the model and its version), on whose behalf, with which inputs (the arguments, and which tool results and documents were in context), under which policy (its version, and whether the action was allowed, denied, or approved and by whom), and the outcome. Records are append-only. Each carries the hash of the one before it, so that an edited or removed record is detectable, and they are stored where the agent's own credentials cannot change them.</p>
+<p class="dp-note">Runnable as written: Python 3.10 or later, standard library only. Run for this page in November 2026.</p><div class="dp-code" tabindex="0"><span class="kw">import</span> hashlib, json
+
+<span class="kw">def</span> <span class="fn">digest</span>(record):
+    body = {k: v <span class="kw">for</span> k, v <span class="kw">in</span> record.<span class="fn">items</span>() <span class="kw">if</span> k != <span class="str">"hash"</span>}
+    data = json.<span class="fn">dumps</span>(body, sort_keys=True).<span class="fn">encode</span>()
+    <span class="kw">return</span> hashlib.<span class="fn">sha256</span>(data).<span class="fn">hexdigest</span>()
+
+<span class="kw">def</span> <span class="fn">append_record</span>(chain, record):
+    record = <span class="fn">dict</span>(record)
+    record[<span class="str">"prev"</span>] = chain[-1][<span class="str">"hash"</span>] <span class="kw">if</span> chain <span class="kw">else</span> <span class="str">"genesis"</span>
+    record[<span class="str">"hash"</span>] = <span class="fn">digest</span>(record)
+    chain.<span class="fn">append</span>(record)
+
+<span class="kw">def</span> <span class="fn">verify</span>(chain):
+    prev = <span class="str">"genesis"</span>
+    <span class="kw">for</span> record <span class="kw">in</span> chain:
+        <span class="kw">if</span> record[<span class="str">"prev"</span>] != prev:
+            <span class="kw">return</span> False
+        <span class="kw">if</span> record[<span class="str">"hash"</span>] != <span class="fn">digest</span>(record):
+            <span class="kw">return</span> False
+        prev = record[<span class="str">"hash"</span>]
+    <span class="kw">return</span> True
+
+chain = []
+<span class="fn">append_record</span>(chain, {
+    <span class="str">"actor"</span>: <span class="str">"agent:invoice-reader"</span>,
+    <span class="str">"on_behalf_of"</span>: <span class="str">"user:4821"</span>,
+    <span class="str">"tool"</span>: <span class="str">"send_email"</span>,
+    <span class="str">"args"</span>: {<span class="str">"to"</span>: <span class="str">"cfo@example.com"</span>},
+    <span class="str">"context"</span>: [<span class="str">"doc:inv-0093.pdf"</span>, <span class="str">"tool:search_docs#2"</span>],
+    <span class="str">"policy"</span>: <span class="str">"2026-11-a"</span>,
+    <span class="str">"decision"</span>: <span class="str">"allow"</span>,
+    <span class="str">"approved_by"</span>: <span class="str">"approver-17"</span>,
+})
+<span class="fn">print</span>(<span class="fn">verify</span>(chain))               <span class="cm"># True</span>
+chain[0][<span class="str">"args"</span>][<span class="str">"to"</span>] = <span class="str">"x@attacker.test"</span>
+<span class="fn">print</span>(<span class="fn">verify</span>(chain))               <span class="cm"># False: the edit shows</span></div></div>
+
+<div class="dp-section"><h4>What this does not stop</h4>
+<p class="dp-text">An agent that is correctly authenticated, and has been steered, will misuse the privileges it legitimately holds. This is the confused deputy problem. Identity and scope limit how much it can do and make the action attributable. They do not make the action right.</p>
+<p class="dp-text">A scope is only as narrow as it is defined: "send email" still means email to anyone unless the tool boundary checks the recipient. And evidence is a detective control. It stops nothing at the time, and it proves little unless someone reviews it and the latest hash of the chain is kept somewhere the agent cannot reach, since a chain rewritten from the start still verifies.</p></div>
+
+<div class="dp-section"><h4>How it is done today</h4>
+<div class="dp-pills"><span class="dp-pill">OAuth 2.x client credentials</span><span class="dp-pill">OAuth token exchange (RFC 8693)</span><span class="dp-pill">Workload identity (SPIFFE)</span><span class="dp-pill">Mutual TLS</span><span class="dp-pill">Policy check at the tool boundary</span></div>
+<p class="dp-text"><strong>Still emerging:</strong> W3C Decentralized Identifiers (DIDs) and Verifiable Credentials for agent identity across organisations (ANP builds on them), and several IETF Internet-Drafts on agent identity. None of these is yet a settled standard for agents. Watch them; do not build on them unexamined.</p>
+<p class="dp-text"><a href="https://datatracker.ietf.org/doc/html/rfc8693" target="_blank" rel="noopener">RFC 8693: OAuth 2.0 Token Exchange</a> · <a href="https://spiffe.io/" target="_blank" rel="noopener">SPIFFE</a> · <a href="https://modelcontextprotocol.io/specification/2026-07-28/basic/authorization" target="_blank" rel="noopener">MCP authorisation</a></p></div></div>
+</article>
+<article class="ds-item" id="d-cost_gov" data-tag="CROSS-CUTTING" data-title="Cost Governance">
+<p class="dp-tag">CROSS-CUTTING</p>
+<h3 class="dp-title">Cost Governance</h3>
+<div class="ds-body"><div class="dp-section"><h4>Purpose</h4><p class="dp-text">Cost is one of the main reasons agent projects are stopped. In June 2025 Gartner predicted that over 40% of agentic AI projects will be cancelled by the end of 2027, naming escalating costs alongside unclear business value and inadequate risk controls (<a href="https://www.gartner.com/en/newsroom/press-releases/2025-06-25-gartner-predicts-over-40-percent-of-agentic-ai-projects-will-be-canceled-by-end-of-2027" target="_blank" rel="noopener">Gartner press release, 25 June 2025</a>).</p><p class="dp-text">Implement per-step cost tracking, a budget cap per goal and an automatic kill switch. Monitor the ratio of value to cost: if the agent has spent more than the task is worth, stop and escalate. A budget cap is also a security control, because it bounds what a steered or looping agent can burn.</p></div>
+<div class="dp-section"><h4>Budget enforcement</h4>
+<p class="dp-note">Sketch in Python style, not runnable as written: the objects it calls stand for components you supply.</p><div class="dp-code" tabindex="0"><span class="kw">class</span> CostGovernor:
+    <span class="kw">def</span> <span class="fn">check</span>(self, state):
+        <span class="kw">if</span> state.total_cost &gt; self.budget:
+            state.<span class="fn">kill</span>(<span class="str">"budget_exceeded"</span>)
+        <span class="kw">if</span> state.cost_per_step &gt; self.per_step_limit:
+            self.<span class="fn">alert</span>(<span class="str">"cost_anomaly"</span>)
+        <span class="kw">if</span> state.total_cost &gt; 0:
+            ratio = state.value_delivered / state.total_cost
+            <span class="kw">if</span> ratio &lt; self.min_ratio:
+                self.<span class="fn">escalate_to_human</span>()</div></div></div>
+</article>
+<article class="ds-item" id="d-eval_testing" data-tag="CROSS-CUTTING" data-title="Evaluation &amp; Testing">
+<p class="dp-tag">CROSS-CUTTING</p>
+<h3 class="dp-title">Evaluation &amp; Testing</h3>
+<div class="ds-body"><div class="dp-section"><h4>Purpose</h4><p class="dp-text">Production agents need rigorous evaluation. Unlike traditional software, agent behaviour is non-deterministic. You need benchmark suites that test end-to-end goal completion, prompt regression tests that catch quality drift, and A/B testing infrastructure for prompt and model changes. Include adversarial cases: documents and tool results that carry injected instructions, where a pass is defined by what the agent did, not by what it said.</p></div><div class="dp-section"><h4>Implementation</h4><p class="dp-note">Sketch in Python style, not runnable as written: the objects it calls stand for components you supply.</p><div class="dp-code" tabindex="0"><span class="kw">class</span> AgentEvaluator:
+    <span class="kw">async def</span> <span class="fn">run_suite</span>(self, agent, test_cases):
+        results = []
+        <span class="kw">for</span> case <span class="kw">in</span> test_cases:
+            output = <span class="kw">await</span> agent.<span class="fn">run</span>(case.goal)
+            score = self.scorer.<span class="fn">evaluate</span>(
+                output, case.expected,
+                metrics=[<span class="str">"accuracy"</span>, <span class="str">"cost"</span>, <span class="str">"latency"</span>]
+            )
+            results.<span class="fn">append</span>(score)
+        <span class="kw">return</span> EvalReport(results)</div></div><div class="dp-section"><h4>Tools</h4><div class="dp-pills"><span class="dp-pill">LangSmith</span><span class="dp-pill">Braintrust</span><span class="dp-pill">Ragas</span><span class="dp-pill">DeepEval</span><span class="dp-pill">Custom harness</span></div></div></div>
+</article>
+<article class="ds-item" id="d-pat_sequential" data-tag="PATTERN" data-title="Sequential Pipeline">
+<p class="dp-tag">PATTERN</p>
+<h3 class="dp-title">Sequential Pipeline</h3>
+<div class="ds-body"><div class="dp-section"><h4>When to use</h4><p class="dp-text">Tasks with clear linear dependencies where each stage builds on the previous. Error handling is simple: if any stage fails, retry or halt.</p></div><div class="dp-section"><h4>Implementation</h4><p class="dp-note">Sketch in Python style, not runnable as written: the objects it calls stand for components you supply.</p><div class="dp-code" tabindex="0"><span class="kw">class</span> SequentialPipeline:
+    <span class="kw">async def</span> <span class="fn">run</span>(self, input_data):
+        result = input_data
+        <span class="kw">for</span> agent <span class="kw">in</span> self.agents:
+            result = <span class="kw">await</span> agent.<span class="fn">execute</span>(result)
+            <span class="kw">if</span> result.is_error:
+                <span class="kw">return</span> self.<span class="fn">handle_error</span>(result)
+        <span class="kw">return</span> result
+
+<span class="cm"># Research → Analyse → Draft → Review</span>
+pipeline = SequentialPipeline([
+    ResearchAgent(), AnalysisAgent(),
+    DraftingAgent(), ReviewAgent()
+])</div></div></div>
+</article>
+<article class="ds-item" id="d-pat_hierarchical" data-tag="PATTERN" data-title="Hierarchical Delegation">
+<p class="dp-tag">PATTERN</p>
+<h3 class="dp-title">Hierarchical Delegation</h3>
+<div class="ds-body"><div class="dp-section"><h4>When to use</h4><p class="dp-text">Complex goals that need decomposition. An orchestrator agent breaks the goal into sub-tasks and delegates to specialist agents. Mirrors real team structures. Each specialist gets its own, narrower identity and scope, not the orchestrator's.</p></div><div class="dp-section"><h4>Implementation</h4><p class="dp-note">Sketch in Python style, not runnable as written: the objects it calls stand for components you supply.</p><div class="dp-code" tabindex="0"><span class="kw">class</span> OrchestratorAgent:
+    <span class="kw">async def</span> <span class="fn">run</span>(self, goal):
+        tasks = <span class="kw">await</span> self.<span class="fn">decompose</span>(goal)
+        results = {}
+        <span class="kw">for</span> task <span class="kw">in</span> tasks.<span class="fn">topological_order</span>():
+            agent = self.registry.<span class="fn">find_specialist</span>(task)
+            deps = {d: results[d] <span class="kw">for</span> d <span class="kw">in</span> task.deps}
+            results[task.id] = <span class="kw">await</span> agent.<span class="fn">execute</span>(
+                task, context=deps
+            )
+        <span class="kw">return await</span> self.<span class="fn">synthesize</span>(results)</div></div></div>
+</article>
+<article class="ds-item" id="d-pat_parallel" data-tag="PATTERN" data-title="Parallel Fan-out / Fan-in">
+<p class="dp-tag">PATTERN</p>
+<h3 class="dp-title">Parallel Fan-out / Fan-in</h3>
+<div class="ds-body"><div class="dp-section"><h4>When to use</h4><p class="dp-text">Independent sub-tasks that can run simultaneously. Maximises throughput. Collect all results, then synthesise. Use with durable execution for fault tolerance on partial failures.</p></div><div class="dp-section"><h4>Implementation</h4><p class="dp-note">Sketch in Python style, not runnable as written: the objects it calls stand for components you supply.</p><div class="dp-code" tabindex="0"><span class="kw">async def</span> <span class="fn">run</span>(self, sub_tasks):
+    <span class="cm"># Fan-out</span>
+    futures = [self.<span class="fn">spawn</span>(t) <span class="kw">for</span> t <span class="kw">in</span> sub_tasks]
+    <span class="cm"># Fan-in</span>
+    results = <span class="kw">await</span> asyncio.<span class="fn">gather</span>(
+        *futures, return_exceptions=True
+    )
+    successes = [r <span class="kw">for</span> r <span class="kw">in</span> results
+                 <span class="kw">if not</span> isinstance(r, Exception)]
+    <span class="kw">return await</span> self.<span class="fn">synthesize</span>(successes)</div></div></div>
+</article>
+<article class="ds-item" id="d-pat_debate" data-tag="PATTERN" data-title="Debate / Consensus">
+<p class="dp-tag">PATTERN</p>
+<h3 class="dp-title">Debate / Consensus</h3>
+<div class="ds-body"><div class="dp-section"><h4>When to use</h4><p class="dp-text">Complex, ambiguous problems that benefit from multiple perspectives. Agents with different viewpoints debate, a moderator tracks arguments and determines consensus. It multiplies cost (agents times rounds) and does not guarantee a better answer: measure it against a single-agent baseline on your own evaluation set.</p></div><div class="dp-section"><h4>Implementation</h4><p class="dp-note">Sketch in Python style, not runnable as written: the objects it calls stand for components you supply.</p><div class="dp-code" tabindex="0"><span class="kw">async def</span> <span class="fn">run</span>(self, question, agents, rounds=5):
+    thread = ChatThread()
+    <span class="kw">for</span> round_no <span class="kw">in</span> range(rounds):
+        <span class="kw">for</span> agent <span class="kw">in</span> agents:
+            resp = <span class="kw">await</span> agent.<span class="fn">respond</span>(
+                question=question, thread=thread
+            )
+            thread.<span class="fn">add</span>(agent.name, resp)
+        verdict = <span class="kw">await</span> self.moderator.<span class="fn">evaluate</span>(thread)
+        <span class="kw">if</span> verdict.consensus:
+            <span class="kw">return</span> verdict.decision
+    <span class="kw">return</span> self.moderator.<span class="fn">best_effort</span>(thread)</div></div></div>
+</article>
+<article class="ds-item" id="d-pat_reactive" data-tag="PATTERN" data-title="Event-driven Reactive">
+<p class="dp-tag">PATTERN</p>
+<h3 class="dp-title">Event-driven Reactive</h3>
+<div class="ds-body"><div class="dp-section"><h4>When to use</h4><p class="dp-text">No central orchestrator. Agents subscribe to event topics and react autonomously. Decoupled and scalable, best for monitoring, alerting, and continuous operations. Harder to debug.</p></div><div class="dp-section"><h4>Implementation</h4><p class="dp-note">Sketch in Python style, not runnable as written: the objects it calls stand for components you supply.</p><div class="dp-code" tabindex="0"><span class="kw">class</span> ReactiveAgent:
+    <span class="kw">def</span> <span class="fn">__init__</span>(self, bus, topics):
+        <span class="kw">for</span> topic <span class="kw">in</span> topics:
+            bus.<span class="fn">subscribe</span>(topic, self.handle)
+
+    <span class="kw">async def</span> <span class="fn">handle</span>(self, event):
+        <span class="kw">if</span> self.<span class="fn">should_act</span>(event):
+            result = <span class="kw">await</span> self.<span class="fn">process</span>(event)
+            <span class="kw">await</span> self.bus.<span class="fn">publish</span>(
+                f<span class="str">"{self.domain}.result"</span>, result
+            )
+
+<span class="cm"># Agents chain via events</span>
+monitor  = ReactiveAgent(bus, [<span class="str">"metrics.anomaly"</span>])
+analyzer = ReactiveAgent(bus, [<span class="str">"monitor.alert"</span>])
+fixer    = ReactiveAgent(bus, [<span class="str">"analyzer.diagnosis"</span>])</div></div></div>
+</article>
+</section>
+
+</main>
+
+<!-- HINT -->
+<button type="button" class="hint-bar" id="hintBar" onclick="dismissHint()" aria-label="Dismiss hint: select any card to open its details">
+  <span class="hint-pulse" aria-hidden="true"></span>
+  <span class="hint-text"><b>Click or tap any card</b> to open its details</span>
+  <span class="hint-dismiss" aria-hidden="true">✕</span>
+</button>
+
+<!-- DETAIL PANEL -->
+<div class="detail-overlay" id="detailOverlay"></div>
+<aside class="detail-panel" id="detailPanel" role="dialog" aria-modal="true" aria-labelledby="dpTitle">
+  <div class="dp-header">
+    <button type="button" class="dp-close" id="dpClose" onclick="closeDetail()" aria-label="Close details">✕</button>
+    <div class="dp-tag" id="dpTag"></div>
+    <h3 class="dp-title" id="dpTitle"></h3>
+  </div>
+  <div class="dp-body" id="dpBody"></div>
+</aside>
+
+<script>
+function toggleLayer(header) {
+  var layer = header.closest('.layer');
+  var open = layer.classList.toggle('open');
+  header.setAttribute('aria-expanded', open ? 'true' : 'false');
+}
+
+// With JavaScript the layers start collapsed, so say so to assistive technology.
+document.querySelectorAll('.layer-header').forEach(function (h) { h.setAttribute('aria-expanded', 'false'); });
+
+// === DETAIL PANEL ===
+var panel = document.getElementById('detailPanel');
+var overlay = document.getElementById('detailOverlay');
+var lastTrigger = null;
+
+function tagColour(tag) {
+  if (tag.indexOf('L7') === 0 || tag.indexOf('L6') === 0) return 'var(--purple)';
+  if (tag.indexOf('L5') === 0 || tag.indexOf('L3') === 0) return 'var(--teal)';
+  if (tag.indexOf('L4') === 0) return 'var(--coral)';
+  if (tag.indexOf('L2') === 0 || tag.indexOf('L1') === 0) return 'var(--blue)';
+  if (tag.indexOf('LOOP') === 0) return 'var(--purple)';
+  return 'var(--amber)';
+}
+
+function openDetail(key, trigger) {
+  var src = document.getElementById('d-' + key);
+  if (!src) return true;
+  dismissHint();
+  if (trigger && !panel.contains(trigger)) lastTrigger = trigger;
+  var tag = src.getAttribute('data-tag');
+  document.getElementById('dpTag').textContent = tag;
+  document.getElementById('dpTag').style.color = tagColour(tag);
+  document.getElementById('dpTitle').textContent = src.getAttribute('data-title');
+  document.getElementById('dpBody').innerHTML = src.querySelector('.ds-body').innerHTML;
+  panel.classList.add('open');
+  overlay.classList.add('open');
+  panel.scrollTop = 0;
+  document.getElementById('dpClose').focus();
+  return false;
+}
+
+function closeDetail() {
+  if (!panel.classList.contains('open')) return;
+  panel.classList.remove('open');
+  overlay.classList.remove('open');
+  if (lastTrigger && document.body.contains(lastTrigger)) lastTrigger.focus();
+  lastTrigger = null;
+}
+
+overlay.addEventListener('click', closeDetail);
+
+document.addEventListener('keydown', function (e) {
+  if (!panel.classList.contains('open')) return;
+  if (e.key === 'Escape') { closeDetail(); return; }
+  if (e.key !== 'Tab') return;
+  // Keep the Tab key inside the open panel.
+  var items = panel.querySelectorAll('a[href], button, [tabindex]:not([tabindex="-1"])');
+  if (!items.length) return;
+  var first = items[0], last = items[items.length - 1];
+  if (e.shiftKey && document.activeElement === first) { e.preventDefault(); last.focus(); }
+  else if (!e.shiftKey && document.activeElement === last) { e.preventDefault(); first.focus(); }
+});
+
+// === HINT ===
+var hintDismissed = false;
+function dismissHint() {
+  if (hintDismissed) return;
+  hintDismissed = true;
+  var hint = document.getElementById('hintBar');
+  if (hint) hint.classList.add('dismissed');
+}
+setTimeout(dismissHint, 8000);
+
+// Open the first layer shortly after load, as a cue that layers expand.
+setTimeout(function () {
+  var first = document.querySelector('.layer');
+  if (first && !first.classList.contains('open')) toggleLayer(first.querySelector('.layer-header'));
+}, 1200);
+
+// A link straight to one component (for example #d-guardrails) opens its panel.
+if (location.hash.indexOf('#d-') === 0) {
+  var linked = document.getElementById(location.hash.slice(1));
+  if (linked) openDetail(location.hash.slice(3), null);
+}
+</script>
+
+<!-- auc:foot -->
+<footer class="auc-foot">
+  <p><strong>Agentic AI Runtime Architecture</strong>, version 3.1, last reviewed November 2026. Written by <a href="../">Krishna Mohan Parsha</a> as part of Architect U'r Career, a personal initiative. The views are my own and not those of my employer.</p>
+  <p>Free to use, share and adapt for non-commercial teaching and learning, with credit, under <a rel="license noopener" target="_blank" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a>. <a target="_blank" rel="noopener" href="https://github.com/mohanparsha/architecturcareer/issues/new?title=Correction%3A%20agentic-ai-runtime">Found an error? Tell me.</a> <a href="../about/#changelog">What changed</a>. <a href="../about/">How this site is maintained</a>.</p>
+</footer>
+<!-- /auc:foot -->
+<script src="../assets/auc-guide.js" defer></script>
+<script data-goatcounter="https://km-auc.goatcounter.com/count" async src="https://gc.zgo.at/count.js"></script>
+</body>
+</html>
