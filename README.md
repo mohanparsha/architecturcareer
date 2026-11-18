@@ -37,3 +37,10 @@ Folders that start with `_` are not published by GitHub Pages.
 - `python _tools/shot.py <slug>/index.html <folder>`: renders a page at desktop and phone width.
 - `python _tools/build_about.py`: rebuilds `about/index.html` from `_tools/changes/*.md`.
 - `python _tools/make_stubs.py`: rewrites the redirects at the old addresses.
+- `_tools/site_meta.py`: one record per guide (address, search title, description, version, path, one-page summary).
+  The three builders below read it, so a guide's search title or version is changed there, never in the page.
+- `python _tools/seo.py`: writes each guide's title, description and structured data from `site_meta.py`.
+- `python _tools/build_sitemap.py`: writes `sitemap.xml` (submit it in Google Search Console).
+- `python _tools/build_onepagers.py`: writes the A4 one-page summaries in `print/` and proves every QR code decodes.
+
+There is no `robots.txt` on purpose: crawlers read it only at the root of the host, which this repository does not serve.

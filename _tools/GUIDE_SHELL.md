@@ -24,6 +24,10 @@ Published by GitHub Pages from this repository. Each guide lives at `<slug>/inde
 Replace any existing title, description, canonical, og and twitter tags: do not leave two of anything.
 `<html>` carries `lang="en-GB"` (or the page's real language).
 
+Do not hand-edit a guide's `<title>`, description, `og:`/`twitter:` title and description, or its
+`<!-- auc:ld -->` structured-data block. They are generated from `_tools/site_meta.py` by `python _tools/seo.py`.
+Change the record there and run the script.
+
 ## 2. First thing inside `<body>`
 
 ```html

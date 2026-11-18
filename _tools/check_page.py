@@ -6,7 +6,7 @@ Usage (from the repository root):  python _tools/check_page.py <slug> [<slug> ..
 Exit code 0 means every listed page passed. The checks read the file only; use
 _tools/shot.py to prove the page renders.
 """
-import io, os, re, sys
+import io, json, os, re, sys
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 GUIDES = ["cybersecurity-roadmap", "devops-devsecops-roadmap", "secure-sdlc", "network-concepts", "os-unit-1",
@@ -46,6 +46,15 @@ def check(slug):
     need("All rights reserved" not in s and "All Rights Reserved" not in s, "still says All rights reserved")
     need("Architecting U'r Career" not in s, "old brand wording \"Architecting U'r Career\"")
     need("Last reviewed" in s, "missing \"Last reviewed\" date")
+    blocks = re.findall(r'<script type="application/ld\+json">(.*?)</script>', s, re.S)
+    need(len(blocks) == 1, "needs exactly one JSON-LD block (run _tools/seo.py)")
+    if len(blocks) == 1:
+        try:
+            ld = json.loads(blocks[0])
+            need(ld.get("@type") == "LearningResource", "JSON-LD @type must be LearningResource")
+            need(ld.get("url") == "https://mohanparsha.github.io/architecturcareer/%s/" % slug, "JSON-LD url must equal the canonical address")
+        except ValueError as ex:
+            fails.append("JSON-LD does not parse: %s" % ex)
     need(re.search(r"<html[^>]*\blang=", s) is not None, "missing lang attribute on <html>")
     for old in ("network_glossary.html", "network_concepts_guide.html", "_v3.0.html", "_v2.5.html", "v2.6.html", "_3.0.html"):
         need(old not in s, "links to an old file name (%s)" % old)
