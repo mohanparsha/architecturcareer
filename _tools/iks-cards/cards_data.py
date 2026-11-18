@@ -1,0 +1,758 @@
+# -*- coding: utf-8 -*-
+"""Content for the IKS Life Skills scenario card pack, version 1.0.
+
+Every card: title, optional tag, body, q (the closing question or questions).
+Speech inside cards uses single quotes; build.py turns them into typographic quotes.
+"""
+
+DISCLOSE = ("If a student discloses something worrying, listen, do not ask for details in front of others and do not "
+            "promise secrecy. Follow the school's child protection policy and tell its designated person the same "
+            "day. Child Helpline: 1098.")
+
+T1 = "Tier 1 (Class 9)"
+T2 = "Tier 2 (Class 10)"
+
+WEEKS = [
+    # ------------------------------------------------------------------ WEEK 1
+    {
+        "n": 1,
+        "theme": "Intelligence over force",
+        "sets": [
+            {
+                "tier": T1, "name": "Escape the Problem: locked scenarios",
+                "cards": [
+                    {"title": "The only tap", "tag": "Level 1",
+                     "body": "At a government school in Madurai, one drinking-water tap works. Every lunch break it is crowded, the bigger students reach it first, and Senthil and his Class 9 friends often go back to class thirsty. They complained once; the answer was 'form a queue', and the queue lasted a day. Locked: no pushing, no going back to the office, no second tap this term, and nobody gives way just because they are asked. The break lasts thirty minutes.",
+                     "q": "What could they change about the situation, other than the older students' behaviour?"},
+                    {"title": "The last bus", "tag": "Level 2",
+                     "body": "Pallabi and eleven other students travel from their village near Jorhat to school in town. The 4.40 pm bus is the last one home. For a week the conductor has refused their student passes and demanded full fare; those who cannot pay walk six kilometres. Arguing with him only made him stop the bus short of the village. Locked: there is no other bus, the depot office is in another town, and nobody wants a shouting match on the road.",
+                     "q": "Who else has a reason to want this solved, and how could the students reach them?"},
+                    {"title": "The nickname", "tag": "Level 3",
+                     "body": "In a Class 10 group chat in Lucknow, someone gave Joel a mocking nickname. Now thirty classmates use it, and stickers made from his photo are going round. Insha thinks it has gone too far. The admin, a popular student, removes anyone who objects, and Joel has told her, 'Leave it, you'll make it worse.' Locked: Insha will not shame anyone in public, cannot leave the group because class notices arrive there, and will not act against Joel's wishes without talking to him.",
+                     "q": "What are her options, and which would you try first?"},
+                    {"title": "The photocopy shop", "tag": "Level 4",
+                     "body": "In a small town in Bundelkhand there is one photocopy shop near the senior secondary school. A week before the practical exams, the owner doubles the price of printing project files and says, 'Go elsewhere if you like.' The next shop is nine kilometres away. Manisha's class of forty needs about sixty pages each. Locked: no threats, no damage, no running the shop down online, and the school office printer is for staff only. The owner is breaking no rule.",
+                     "q": "What does he want, what does the class have, and what deal could leave both sides better off?"},
+                ],
+            },
+            {
+                "tier": T2, "name": "Negotiation Under Asymmetry: scene, private briefs and outcomes",
+                "cards": [
+                    {"title": "The scene", "tag": "Read aloud to the whole team",
+                     "body": "This dispute is made up, at a made-up school. The senior sports team has used the school's only playing field every afternoon for years, and by custom its captain decides who else may use it. A junior club, started this term by younger students, wants three afternoons a week to prepare for its first tournament. The captain has said no: the seniors have a trophy to defend. No written rule says who controls the field. A mediator has agreed to chair a meeting, and a reporter from the school magazine will sit in.",
+                     "q": "How might this end, and who really decides?"},
+                    {"title": "Role: the senior team", "tag": "Private brief",
+                     "body": "You speak for the senior sports team, and you want the field kept as it is. What the others do not know: half your team leaves school in March, so next year's side will have to come from the junior classes. Two of your players have also been missing practice, and on Fridays the field is often half empty. You do not want the seniors to lose face in front of the school. Keep this brief to yourself until the debrief.",
+                     "q": "What could you accept that still leaves your team better off than it is today?"},
+                    {"title": "Role: the junior club", "tag": "Private brief",
+                     "body": "You speak for the junior club. Custom is against you, and nobody is obliged to listen. What the others do not know: your members have kept a three-week log showing that the field stands empty on most Friday afternoons and for the first half hour on other days. Forty students have signed up, and the sports teacher has said a slot would follow if the two groups agreed. You would settle for two afternoons. Keep this brief to yourself until the debrief.",
+                     "q": "How do you use what you hold without making an enemy of the seniors?"},
+                    {"title": "Role: the mediator", "tag": "Private brief",
+                     "body": "You are the mediator. Both sides accept you, and you have no power to order anything. What the others do not know: you have decided to stop the meeting if either side is bullied, and you believe a deal exists in which the juniors use hours the seniors do not need. You may ask questions, repeat back what each side has said and suggest a pause. You may not take sides or pass on anything told to you in private. Keep this brief to yourself until the debrief.",
+                     "q": "Which question, asked at the right moment, could change what this argument is about?"},
+                    {"title": "Role: the magazine reporter", "tag": "Private brief",
+                     "body": "You are the reporter for the school magazine. You need a piece by Friday, and 'seniors shut juniors out of the field' would be widely read. What the others do not know: the teacher adviser will print it only if both sides are quoted fairly, and you can see that a piece published now might harden both sides and end any chance of a deal. You may watch, ask each side one question, and decide whether to publish now, later or not at all. Keep this brief to yourself until the debrief.",
+                     "q": "When does public attention help the weaker side, and when does it make things worse for everyone?"},
+                    {"title": "The four endings", "tag": "Outcomes card for the note-taker",
+                     "body": "Your negotiation must finish in one of four ways. Exclusion: the junior club gets no time on the field. Compromise: both sides give something up and both agree. Reversal: the side that looked weaker ends up setting the terms. Public escalation: the dispute goes to the magazine or the whole school, and the people in the room lose control of it. No ending is the correct one. When time is called, mark where your team finished and note the moment the talk turned.",
+                     "q": "Which ending did each role want at the start, and which could each one live with?"},
+                ],
+            },
+        ],
+        "note": {
+            "aim": "Students practise changing the shape of a problem before reaching for force, complaint or giving up: who else is involved, what each side wants, what is truly fixed and what is only assumed.",
+            "asks": [
+                "<b>Tier 1.</b> The curriculum asks for 3 to 4 locked-scenario cards at different difficulty levels, one per team of four. Cards 1 to 4 are these, easiest first.",
+                "<b>Tier 2.</b> It asks for a private brief card for each of four roles in a made-up school dispute over the only playing field: the senior sports team, a junior club, a mediator and a school-magazine reporter. Cards 5 to 10 are the scene, the four briefs and a card setting out the four endings.",
+                "<b>Tier 3.</b> Students write their own scenario card in the teach-back lab, so none is supplied. Let them use cards 1 to 4 as a model.",
+            ],
+            "slot": 15, "slot_label": "Tier 1, the 15-minute simulation slot, teams of four",
+            "run": [
+                (1, "Hand one card to each team. Give the higher levels to teams that want a harder problem."),
+                (2, "Teams read silently and underline everything that is locked."),
+                (7, "Each team lists at least three ways forward that respect every lock, then chooses one."),
+                (4, "Three teams report in about a minute each: the idea, and which lock it works around."),
+                (1, "Name the move each team made, for example 'you changed who was at the table'."),
+            ],
+            "copies": "One copy of the Tier 1 sheet for every four teams. Tier 2: one copy of both sheets per team of four.",
+            "followups": [
+                "Which lock did your team most want to break, and why that one?",
+                "Who in the scenario has influence that nobody has asked for yet?",
+                "What could go wrong with your idea, and what would you do then?",
+            ],
+            "thoughtful": [
+                "Separates what is fixed from what is only assumed.",
+                "Asks what the other side wants or fears, and offers something.",
+                "Brings in a third person, or changes the time or place, instead of escalating.",
+                "On card 3, puts the wishes of the student being mocked first.",
+            ],
+            "extra": [
+                ("Tier 2: running the negotiation",
+                 "Tell the class openly that each role holds a private brief the others have not read, and that every brief will be read out at the end. That is a rule of the game, not a trick. Read card 5 aloud (1 minute), hand out cards 6 to 9 and give card 10 to whoever keeps notes (2 minutes), negotiate (15 minutes), then debrief (10 minutes): each role reads its brief aloud and the team says what would have changed had they known it earlier."),
+            ],
+            "link": "Like this week's story, each card rewards the team that changes the problem rather than the team that pushes hardest against it.",
+            "safeguarding": "Card 3 is about mockery in a group chat: keep it about the people on the card, and do not ask whether anything similar has happened to anyone present. The Tier 2 dispute is invented; do not recast it with the school's real teams or captains. A Tier 3 teach-back with younger students runs with a teacher present. " + DISCLOSE,
+        },
+    },
+    # ------------------------------------------------------------------ WEEK 2
+    {
+        "n": 2,
+        "theme": "Empathy as decision intelligence",
+        "sets": [
+            {
+                "tier": T1, "name": "Leader's Choice: one story in three rounds",
+                "cards": [
+                    {"title": "The lab slot", "tag": "Round 1",
+                     "body": "Tanvi leads a team of five from her school in Nashik that is building a model for the district science exhibition. The only free lab slot this week is Thursday after school, which is also the one evening she has the dance class she loves. Two teammates can come only on Thursday. Nobody has asked her to give anything up, and she could simply announce a Saturday slot that suits her. As leader, the timetable is hers to set.",
+                     "q": "What should count most when she decides, and should the team even know what it cost her?"},
+                    {"title": "Four seats", "tag": "Round 2",
+                     "body": "The exhibition is in the district town, and the school can pay the bus fare and entry for only four of the five team members. Tanvi, as leader, is expected to present. Yusuf built most of the working model. Sneha wrote the report. Bhavna and Omkar did less, but neither has ever been on a school trip. The teacher says, 'You are the leader. Give me four names by tomorrow.' Tanvi could ask the team, decide alone, or leave herself out.",
+                     "q": "Which way of deciding is fairest, and would leaving herself out be wise or simply easier?"},
+                    {"title": "The same Saturday", "tag": "Round 3",
+                     "body": "Two days before the exhibition, Tanvi learns she has been picked for a state-level quiz final on the same Saturday. It is an individual event, the certificate would help her, and her family is proud. Without her, nobody on the team has practised the presentation, and the model has a fault that only she knows how to explain. Her teammates say, 'Go, we will manage,' but she can see they are worried. Whatever she chooses, someone loses something.",
+                     "q": "What does she owe the team, what does she owe herself, and how should she decide?"},
+                ],
+            },
+        ],
+        "note": {
+            "aim": "Students weigh personal benefit against the good of a group, and notice that the way a leader decides matters as much as the decision.",
+            "asks": [
+                "<b>Tier 1.</b> The curriculum asks for 3 progressively harder dilemma cards for Leader's Choice, played in three rounds by groups of five. Cards 1 to 3 follow one student leader through three rounds, each costing her more than the last.",
+                "<b>Tiers 2 and 3.</b> The Tier 2 simulation uses stakeholder briefs rather than cards, and Tier 3 students design their own materials. Neither is covered in this version.",
+            ],
+            "slot": 14, "slot_label": "Tier 1, the 14-minute simulation slot, groups of five",
+            "run": [
+                (4, "Round 1. Hand out card 1 only. Read (1 minute), discuss (2), each group states its decision in one line (1)."),
+                (4, "Round 2. Hand out card 2 and repeat. Groups add to their consequence map: who gains, who loses."),
+                (5, "Round 3. Hand out card 3. Allow an extra minute: this round has no comfortable answer."),
+                (1, "Each group names the round it found hardest and says why in one sentence."),
+            ],
+            "copies": "One copy of the sheet per group, cut, so that the cards can be handed out one round at a time.",
+            "followups": [
+                "Did your group's answer change as the cost to Tanvi rose? At which round?",
+                "Is a sacrifice still generous if nobody knows about it?",
+                "When is saying no the responsible choice for a leader?",
+            ],
+            "thoughtful": [
+                "Names everyone affected, not only the obvious people.",
+                "Separates giving something up from deciding fairly.",
+                "Sees that asking the team is itself a decision.",
+                "Does not treat self-sacrifice as automatically right, or pretend round 3 has a costless answer.",
+            ],
+            "extra": [],
+            "link": "This week's story puts the question at its most extreme; the cards bring it down to the size of a school team so that students can argue about where the line falls.",
+            "safeguarding": "Card 2 mentions students who have never been on a school trip. Keep it about Bhavna and Omkar: do not ask who in the class can or cannot afford trips, or what students themselves have given up for others.",
+        },
+    },
+    # ------------------------------------------------------------------ WEEK 3
+    {
+        "n": 3,
+        "theme": "Know when not to interfere",
+        "sets": [
+            {
+                "tier": T1, "name": "Cause and Effect Mapping Lab: cascading scenarios",
+                "cards": [
+                    {"title": "The forwarded voice note", "tag": "Scenario A",
+                     "body": "Arnab, in Class 9 in Siliguri, receives a voice note about Rhea, a student at another school whom he knows from tuition: she was seen leaving her principal's office in tears, 'so she must have been caught copying'. He does not know whether it is true. He forwards it to his class group with the words 'Is this real??' By evening it has reached Rhea's school and her cousin. The next day Rhea misses tuition. It turns out she had been called to the office to be told her grandmother was unwell.",
+                     "q": "Trace the chain. What did each forward add, and at which points could one person have stopped it?"},
+                    {"title": "Taking sides in the corridor", "tag": "Scenario B",
+                     "body": "Gurleen and Zoya, best friends in Class 10 in Ludhiana, have stopped talking. Kuldeep, who sits behind them, has heard only Gurleen's side. Wanting to help, he tells Zoya, 'She says you never keep secrets.' Zoya is furious and says something sharp about Gurleen, which Kuldeep carries back. By Friday the whole row has taken sides and a group project is stuck. Kuldeep meant well at every step. Map what followed each thing he said.",
+                     "q": "What did he not know when he stepped in, and what could helping have looked like instead?"},
+                    {"title": "The shared project file", "tag": "Scenario C",
+                     "body": "A school near Koraput has one computer room. The Class 11 commerce group keeps its project accounts in a shared spreadsheet that Subhashree built. Pratyush, waiting for his turn, opens it out of curiosity, finds the layout untidy and 'cleans it up': he merges columns and deletes rows that look empty. He saves and logs off. The totals now read zero, the group presents on Monday, and Subhashree is away at a wedding. Nobody had told him not to touch it.",
+                     "q": "Trace the consequences for three different people. What should he have checked first, and what should he do now?"},
+                ],
+            },
+        ],
+        "note": {
+            "aim": "Students trace how one small, unconsidered action multiplies, and find the point in the chain where a pause or a question would have changed everything.",
+            "asks": [
+                "<b>Tier 1.</b> The curriculum asks for 3 cascading scenario prompts with invented names for the Mapping Lab, and gives a rumour forwarded about someone in another school as an example. Cards 1 to 3 are three such prompts; card 1 is the rumour. It also lists risk alert cards and pledge cards: those are blank slips that students fill in themselves, so plain paper cut to size is enough.",
+                "<b>Tiers 2 and 3.</b> The Tier 2 simulation works from a policy proposal rather than cards, and Tier 3 students design their own workshop. Neither is covered in this version.",
+            ],
+            "slot": 15, "slot_label": "Tier 1, the 15-minute mapping lab, groups of four",
+            "run": [
+                (4, "Card 1. Read (1 minute), then draw the chain: the first action, at least three knock-on effects, and who is affected at each link."),
+                (4, "Card 2, the same way. Ask groups to mark the link where stopping would have been cheapest."),
+                (4, "Card 3, the same way. This one also asks what to do after the damage is done."),
+                (3, "Each group shares one chain and the single question the character should have asked first."),
+            ],
+            "copies": "One copy of the sheet per group. If time is short, give each group one card and let three groups report.",
+            "followups": [
+                "What did the person not know at the moment they acted?",
+                "Which link in the chain was the cheapest place to stop?",
+                "Is staying out always the safe choice? When is stepping in right?",
+            ],
+            "thoughtful": [
+                "Shows at least three links, each with a person affected.",
+                "Separates what was intended from what happened.",
+                "Finds the question that was skipped: is it true, whose is it, do I understand how it works?",
+                "Suggests repair as well as prevention, and does not conclude 'never get involved'.",
+            ],
+            "extra": [],
+            "link": "Each card is this week's story in modern dress: someone acts on a thing they do not understand, and the cost lands further away than they expected.",
+            "safeguarding": "Card 1 is about a rumour, and every name on the cards is invented. Stop the discussion if it turns to a real rumour or a real classmate. The curriculum's personal reflection this week is written privately and is not read out. " + DISCLOSE,
+        },
+    },
+    # ------------------------------------------------------------------ WEEK 4
+    {
+        "n": 4,
+        "theme": "Reason beats appearance",
+        "sets": [
+            {
+                "tier": T1, "name": "Mock Courtroom: three case briefs",
+                "cards": [
+                    {"title": "The class fund", "tag": "Case brief 1",
+                     "body": "Class 9B in Vadodara collected ₹1,840 for its science-fair model. On Friday the tin held ₹1,340. Jignesh, the class treasurer, keeps the key. Put before the court: (1) the register shows ₹500 paid out on Wednesday, with no signature; (2) a stationery bill for ₹480, dated Wednesday, is in the tin; (3) Jignesh was seen with a new cricket bat on Thursday; (4) Hetal, who bought the materials, says she gave Jignesh ₹20 in change; (5) Jignesh scored lowest in maths last term.",
+                     "q": "Is Jignesh at fault, and if so, for what exactly?"},
+                    {"title": "The cracked lens", "tag": "Case brief 2",
+                     "body": "At a school in Kohima, a microscope in the biology lab is found with a cracked lens on Tuesday morning. Temjen was the last student to sign the lab register on Monday. Put before the court: (1) the register shows that Temjen signed out at 3.10 pm; (2) the lab attendant says he locked up at 3.00 pm and saw nothing wrong; (3) Temjen was scolded last month for talking in class; (4) the lens cap was found in a cupboard used only by staff; (5) a classmate says Temjen 'looked nervous' on Tuesday.",
+                     "q": "Who, if anyone, should be held responsible, and what would be fair?"},
+                    {"title": "Two essays", "tag": "Case brief 3",
+                     "body": "In a Class 11 section in Kochi, Aswathy and Nikhil hand in essays on river pollution with three paragraphs that are almost identical. The teacher asks the class court who copied. Put before the court: (1) Aswathy's notebook draft is dated four days before the deadline; (2) Nikhil handed in his essay a day before Aswathy did; (3) both borrowed the same library book, and the three paragraphs closely follow its page 42; (4) Nikhil usually scores higher in English; (5) the two argued last week.",
+                     "q": "Did either copy from the other, and what should the teacher treat as the real problem?"},
+                ],
+            },
+        ],
+        "note": {
+            "aim": "Students separate what is shown from what is merely suggested, and build a verdict on evidence rather than on how a person seems.",
+            "asks": [
+                "<b>Tier 1.</b> The curriculum asks for a simple case brief with 3 pieces of evidence and 2 red herrings, one copy per team, for a courtroom of two teams, with the case and every name in it invented. Cards 1 to 3 are three such briefs of rising difficulty: use one per session.",
+                "<b>Teacher's key.</b> Card 1: items 1, 2 and 4 bear on the question; 3 and 5 are red herrings. Card 2: items 1, 2 and 4; red herrings 3 and 5. Card 3: items 1, 2 and 3; red herrings 4 and 5. Do not tell the teams how many red herrings there are.",
+                "<b>Tiers 2 and 3.</b> The Tier 2 trial needs a longer case file than a card can carry, and Tier 3 students design their own process. Neither is covered in this version.",
+            ],
+            "slot": 16, "slot_label": "Tier 1, the 16-minute courtroom, two teams and three judges",
+            "run": [
+                (1, "Choose one case. Give the same card to both sides and name a judge, or a bench of three. Anyone who plays the accused or a witness uses the name on the card."),
+                (4, "Each side sorts the five items into 'bears on the question' and 'does not', using the claim versus evidence sheet."),
+                (3, "The prosecution argues."),
+                (3, "The defence argues."),
+                (2, "The judges ask one question of each side."),
+                (3, "The judges give a verdict with reasons. 'Not shown' is an allowed verdict."),
+            ],
+            "copies": "Two copies of the chosen card for each side and one for the judges.",
+            "followups": [
+                "Which item felt convincing but proved nothing? Why did it feel convincing?",
+                "What one further fact would you ask for before deciding?",
+                "Is 'we cannot tell yet' a fair verdict, or a way of avoiding one?",
+            ],
+            "thoughtful": [
+                "Sorts the items before arguing.",
+                "Sees that a person's marks, mood or past scolding are not evidence.",
+                "Notices when two items contradict each other (card 2) or point to a third explanation (card 3).",
+                "Separates carelessness from dishonesty.",
+            ],
+            "extra": [],
+            "link": "As in this week's story, the fair answer comes from testing the claim rather than trusting how things look.",
+            "safeguarding": "The cases and names are invented. Never rerun the court on a real incident, and let no student play an accused person under their own name. The verdict is about the argument, not about a student.",
+        },
+    },
+    # ------------------------------------------------------------------ WEEK 5
+    {
+        "n": 5,
+        "theme": "Unusual solutions create advantage",
+        "sets": [
+            {
+                "tier": T1, "name": "Unusual Solutions Challenge: school problems",
+                "cards": [
+                    {"title": "The noisy library", "tag": "Problem 1",
+                     "body": "The library at a school in Bhopal is the only quiet place to study, and it is never quiet. Students come in groups during free periods, whisper, laugh and share earphones. The librarian has tried 'Silence' posters, scolding and sending people out; the noise is back within ten minutes. Deepthi's team has been asked for a new idea. Rules of the challenge: no money, no punishments, nothing that needs an adult standing guard, and it must be ready to try within a week.",
+                     "q": "What unusual idea might make quiet the easy choice, and how would the team know it had worked?"},
+                    {"title": "The unread notice board", "tag": "Problem 2",
+                     "body": "At a government school in a village near Warangal, important notices go on a board beside the staff room: scholarship dates, bus changes, exam timetables. Hardly anyone reads it. Last month eleven students missed the date for a scholarship form. Many families share one phone, so a group chat would not reach everyone. Sai Teja's team must fix this. Rules of the challenge: no money, no new technology, and nothing that depends on one teacher remembering. The team may use people, places, routines and anything already in the school.",
+                     "q": "What unusual idea could make a notice impossible to miss?"},
+                    {"title": "The empty assembly", "tag": "Problem 3",
+                     "body": "At a large school in Guwahati, about a third of the senior students skip morning assembly. They wait at the gate, linger in the washrooms or arrive 'late'. Fines and attendance marks have changed nothing, and the prefects are tired of chasing people. Students say assembly is the same every day and nobody would miss them. Rimjhim's team is asked for an idea. Rules of the challenge: assembly must still happen, it cannot run longer than fifteen minutes, and nobody may be punished or rewarded with marks.",
+                     "q": "What would have to change for students to choose to come?"},
+                ],
+            },
+        ],
+        "note": {
+            "aim": "Students produce many unusual options before judging any of them, and then make one of them workable.",
+            "asks": [
+                "<b>Tier 1.</b> The curriculum asks for problem cards carrying 3 school-based problems, and suggests a noisy library, an unread notice board and skipped assembly. Cards 1 to 3 are those three, each with rules that close off the obvious answers.",
+                "<b>Tiers 2 and 3.</b> The Tier 2 simulation uses a design brief with contradictory constraints rather than cards, and Tier 3 students design their own workshop. Neither is covered in this version.",
+            ],
+            "slot": 16, "slot_label": "Tier 1, the 16-minute challenge, teams of four",
+            "run": [
+                (1, "Hand one card to each team. Several teams can work on the same problem."),
+                (2, "Teams restate the problem in their own words without using the phrase 'students should'."),
+                (5, "At least ten ideas, no criticism yet, and at least one that sounds absurd."),
+                (5, "Choose one idea, bend it until it fits every rule of the challenge, and sketch it."),
+                (3, "Rehearse a 30-second pitch for the curriculum's pitch and vote slot that follows."),
+            ],
+            "copies": "One copy of the sheet for every three teams.",
+            "followups": [
+                "Which rule of the challenge turned out to help rather than hinder?",
+                "What did your idea assume about why people behave as they do?",
+                "What is the smallest version you could test next week?",
+            ],
+            "thoughtful": [
+                "Asks why people are noisy, do not read or stay away, instead of enforcing harder.",
+                "Uses what the school already has.",
+                "Turns one of the rules into the idea itself.",
+                "Says how the team would know it had worked, and is funny without mocking anyone.",
+            ],
+            "extra": [],
+            "link": "This week's story turns on an answer nobody expected, and the cards ask for the same habit: change the problem before you solve it.",
+            "safeguarding": "Voting is on ideas, by team name only. Rule out any idea that names, ranks or embarrasses students or staff, such as a 'wall of shame', and do not swap in a problem that points at one student or one family.",
+        },
+    },
+    # ------------------------------------------------------------------ WEEK 6
+    {
+        "n": 6,
+        "theme": "Clarity, listening, and presence",
+        "sets": [
+            {
+                "tier": T1, "name": "Role-play stations",
+                "cards": [
+                    {"title": "The apology", "tag": "Station 1",
+                     "body": "Role-play in threes: speaker, listener, observer. Chethan, in Class 9 in Mysuru, answered back rudely when his maths teacher asked for homework he had not done. The class laughed and the teacher said nothing more. It is now the lunch break, and Chethan has come to the staff room door to apologise. The speaker plays Chethan. The listener plays the teacher, who is hurt but willing to listen. The observer notes what is said and done, using the checklist.",
+                     "q": "What makes an apology believable, and what makes one sound like an excuse?"},
+                    {"title": "The group project", "tag": "Station 2",
+                     "body": "Role-play in threes: speaker, listener, observer. A Class 10 group in Patna has a history project due on Monday. Shivani has done the research and the chart. Aman promised the write-up and has sent nothing for a week. Shivani is angry and is thinking of removing his name. They meet at the cycle stand after school. The speaker plays Shivani. The listener plays Aman, who has a reason he has not yet given. The observer notes who listens and who only waits to talk.",
+                     "q": "How can Shivani be honest about the problem and still get the project finished?"},
+                    {"title": "The career conversation", "tag": "Station 3",
+                     "body": "Role-play in threes: speaker, listener, observer. Kavya, in Class 11 in Jaipur, wants to study design after school. Her mother, who works in a bank, has always pictured her as an engineer and fears that design 'has no secure future'. They are talking after dinner. The speaker plays Kavya. The listener plays her mother, who loves her daughter and is afraid of a mistake. The observer watches for the moment each one feels heard. Play these characters, not yourselves.",
+                     "q": "How does someone disagree with a person they respect without turning it into a fight?"},
+                ],
+            },
+            {
+                "tier": T2, "name": "Difficult Conversation Lab: listener cards",
+                "cards": [
+                    {"title": "Feedback to a friend", "tag": "Listener card",
+                     "body": "Read this part aloud: 'You are Tanmoy. Your friend, the speaker, has come to tell you that your jokes about classmates in the group chat are hurting people.' Keep this part to yourself until the debrief: you think of yourself as the funny one. It is how you made friends after changing schools, and you fear that without the jokes nobody will notice you. You become defensive when you feel attacked, and you listen when you feel liked.",
+                     "q": "What would the speaker have to say or do for you to hear this?"},
+                    {"title": "The answer on the board", "tag": "Listener card",
+                     "body": "Read this part aloud: 'You are a physics teacher. The speaker is a student who believes you made a mistake while solving a problem on the board yesterday.' Keep this part to yourself until the debrief: you have taught this chapter for fifteen years. Last term a student corrected you rudely in front of the class, and you are braced for the same again. You are, in fact, not sure about yesterday's answer. You respond well to a question and badly to a challenge.",
+                     "q": "What allows a person with authority to admit a mistake without losing face?"},
+                    {"title": "The loose railing", "tag": "Listener card",
+                     "body": "Read this part aloud: 'You work in the school office. The speaker is a student who says the railing on the second-floor corridor is loose.' Keep this part to yourself until the debrief: students bring you complaints every day and most come to nothing. A repair needs a form signed by someone who is on leave until next week. You would like the student to go away, but you would act at once if you believed someone could really be hurt.",
+                     "q": "What turns a complaint you can ignore into a warning you cannot?"},
+                    {"title": "The school trip", "tag": "Listener card",
+                     "body": "Read this part aloud: 'You are the father of the speaker, a Class 11 student who wants to go on a three-day school trip to another state.' Keep this part to yourself until the debrief: you have said no. Your real reasons are that the fee is hard to manage this month and that you once heard of a school trip that went badly, but all you have said is 'because I said so'. You do not want to discuss money with your child. You soften when you feel respected, not cornered.",
+                     "q": "What is the speaker not being told, and how could they find out gently?"},
+                ],
+            },
+        ],
+        "note": {
+            "aim": "Students practise listening, wording and body language in short conversations, and learn to give feedback that is specific and kind.",
+            "asks": [
+                "<b>Tier 1.</b> The curriculum asks for 3 printed role-play scenarios: a student apologising to a teacher, a group project disagreement, and convincing a parent about a career choice. Cards 1 to 3 are these, one per station.",
+                "<b>Tier 2.</b> It asks for a private resistance card for the listener in four invented conversations: feedback to a friend, telling a teacher about an error, reporting a safety concern, and persuading a parent. Cards 4 to 7 are the four listener cards.",
+                "<b>Tier 3.</b> Students design their own workshop, so none is supplied.",
+            ],
+            "slot": 15, "slot_label": "Tier 1, the 15-minute station round, groups of three",
+            "run": [
+                (5, "Station 1. Read and choose roles (1 minute), play the conversation (3), observer gives one thing that helped and one thing to try (1)."),
+                (5, "Station 2. Groups move on and swap roles."),
+                (5, "Station 3. Swap again, so that everyone has been speaker, listener and observer once."),
+            ],
+            "copies": "One Tier 1 sheet per three groups, one card at each station. Tier 2: one listener card per pair.",
+            "followups": [
+                "What did the listener do that made the speaker say more?",
+                "What changed when the speaker began with the other person's worry?",
+                "Which mattered more in the end: what was said, or how well the other person was listened to?",
+            ],
+            "thoughtful": [
+                "Names the problem plainly without blaming.",
+                "Acknowledges the other person's view before giving its own.",
+                "Asks at least one real question, and the listener repeats back what was heard.",
+                "Observer feedback is about what was said and done in the role; nobody is said to have 'won'.",
+            ],
+            "extra": [
+                ("Tier 2: running the listener cards",
+                 "Tell the class openly that each listener holds a private reason for resisting, which is read out after the conversation. That is a rule of the exercise, not a trick. In the curriculum's 16-minute role-play slot, each pair holds two conversations of 8 minutes: the listener reads the first part of the card aloud (1 minute), they talk (5), then the listener reads out the private part and both say what would have helped (2). Swap speaker and listener for the second card."),
+            ],
+            "link": "Like this week's story, the cards ask why a true message, well meant, can still fail to land, and what the speaker and the listener each owe the other.",
+            "safeguarding": "Students play made-up characters, never themselves or their own families, and anyone may observe instead of acting. Feedback is on what was said and done in the role, never on a student's body, voice, accent or appearance, and nobody is marked down over eye contact. Cards 3 and 7 involve a parent: do not ask students about their own homes. " + DISCLOSE,
+        },
+    },
+    # ------------------------------------------------------------------ WEEK 7
+    {
+        "n": 7,
+        "theme": "Clarity in confusion",
+        "sets": [
+            {
+                "tier": T1, "name": "Exam pressure scenarios",
+                "cards": [
+                    {"title": "The whispered request", "tag": "Scenario 1",
+                     "body": "It is the half-yearly maths exam at a school in Coimbatore. Twenty minutes in, Anbu's closest friend, Karthik, whispers from the next desk, 'Just show me question six. I'll fail otherwise.' Karthik helped Anbu through a bad term last year, and Anbu knows there is tension at Karthik's home over marks. The invigilator is at the far end of the hall. Anbu has perhaps ten seconds to respond, and no response is also an answer.",
+                     "q": "What is Anbu weighing in those ten seconds, and what could he do after the exam, whatever he chooses now?"},
+                    {"title": "Ninety-five per cent", "tag": "Scenario 2",
+                     "body": "Harika, in Class 10 in Vijayawada, scored 71 per cent in her pre-board exams. At home, everyone speaks of 95 as if it were already settled; a cousin scored 96 last year. She studies until 1 am, has given up badminton, and has begun telling her parents that tests 'went fine'. Her class teacher has noticed how tired she looks. Tonight the report card must be signed. Harika is sure of one thing only: she cannot keep going like this.",
+                     "q": "Who could she talk to first, what could she say, and what would a realistic plan for the next two months look like?"},
+                    {"title": "The viva", "tag": "Scenario 3",
+                     "body": "Stanzin, in Class 12 in Leh, knows his physics practical thoroughly. In the viva, the external examiner asks a simple question about his own experiment and his mind goes blank. His hands shake. The examiner waits and glances at the clock. Stanzin knows that if he says nothing he loses the marks, and fears that if he says, 'I need a moment,' he will look unprepared. Four more students are waiting outside.",
+                     "q": "What could he do in the next thirty seconds, and what could he practise beforehand so that a blank moment does not become a lost viva?"},
+                ],
+            },
+        ],
+        "note": {
+            "aim": "Students slow a pressured moment down: pause, name what is at stake, choose, and act, instead of freezing or reacting.",
+            "asks": [
+                "<b>Tier 1.</b> The curriculum asks for 3 exam-pressure scenarios and suggests a friend asking you to cheat, a student who is expected to score 95 per cent and is struggling, and freezing in a viva. Cards 1 to 3 are those three, written about fictional students.",
+                "<b>Tiers 2 and 3.</b> The Tier 2 simulation is a chain of four timed decisions rather than a card set, and Tier 3 students design their own programme. Neither is covered in this version.",
+            ],
+            "slot": 14, "slot_label": "Tier 1, the 14-minute simulation slot, groups of four",
+            "run": [
+                (4, "Card 1. Read (1 minute); one silent, timed minute in which each student writes what the character should do; the group compares answers using the curriculum's Pause, Identify, Choose, Act steps (2)."),
+                (4, "Card 2, the same way."),
+                (4, "Card 3, the same way."),
+                (2, "Whole class: what changed between the timed minute and the discussion?"),
+            ],
+            "copies": "One copy of the sheet per group, cut, and handed out one card at a time.",
+            "followups": [
+                "What did the one-minute limit do to your first answer?",
+                "What is the character afraid of, and is that fear accurate?",
+                "Who could the character ask for help, and what is stopping them?",
+            ],
+            "thoughtful": [
+                "Takes the feeling seriously and still separates it from the decision.",
+                "Finds an option beyond yes or no: Anbu can refuse now and help Karthik later.",
+                "On card 2, treats telling a trusted adult as strength, not failure.",
+                "Offers something practical to rehearse for card 3, and does not lecture.",
+            ],
+            "extra": [],
+            "link": "This week's story is about someone capable who cannot act when the stakes feel unbearable; the cards put that moment into an exam hall.",
+            "safeguarding": "Exam pressure is real for many students in the room. Keep the discussion on the characters, and do not ask anyone to share their own marks or what is said at home. If a student seems distressed, or says anything that worries you about pressure at home or about hurting themselves, speak to them privately the same day, do not promise secrecy, follow the school's child protection policy and tell its designated person. Child Helpline: 1098.",
+        },
+    },
+    # ------------------------------------------------------------------ WEEK 8
+    {
+        "n": 8,
+        "theme": "Values-based leadership",
+        "sets": [
+            {
+                "tier": T1, "name": "Charter tests",
+                "cards": [
+                    {"title": "The prefect's friend", "tag": "Charter test 1",
+                     "body": "Lalrinpuii is a prefect at her school in Aizawl. Her duty this week is the late-comers' register at the gate. On Wednesday her best friend arrives fifteen minutes late for the third time this month; a fourth entry means a note home. Her friend whispers, 'Please, just this once.' Two younger students who were entered yesterday are watching. Nobody would ever check the register against the gate.",
+                     "q": "Test your charter: what does it tell Lalrinpuii to do, and does a rule mean the same thing when it lands on someone you care about?"},
+                    {"title": "The fourth speaker", "tag": "Charter test 2",
+                     "body": "Manpreet, a house captain at a school in Chandigarh, must name four speakers for the inter-house debate. Three choices are obvious. For the fourth place there are two candidates: Aditi, who is capable and reliable and has never been given a chance, and Rohan, who is brilliant, missed half the practices and is Manpreet's close friend. The house badly wants to win this year. Whatever Manpreet decides, the whole house will know by evening.",
+                     "q": "Test your charter: what does it say about winning, fairness and friendship, and which should a leader put first here?"},
+                    {"title": "Credit at the assembly", "tag": "Charter test 3",
+                     "body": "The eco-club at a school in Panaji has halved the plastic waste in the school's bins in one term. The idea and most of the work came from two quiet Class 9 members, Alisha and Savio. At assembly, the principal praises the club president, Tanishq, by name and asks him to say a few words. Nobody has told him what to say. Correcting the principal in public feels awkward; saying nothing is easy, and nobody would blame him.",
+                     "q": "Test your charter: what does it ask of a leader when praise arrives that belongs to someone else?"},
+                ],
+            },
+        ],
+        "note": {
+            "aim": "Students test the class leadership charter they are writing against situations in which acting on a value costs the leader something.",
+            "asks": [
+                "<b>Tier 1.</b> The curriculum does not ask for scenario cards this week: it asks for a trait comparison starter sheet and examples of school leadership codes. Cards 1 to 3 are an addition, three 'charter tests' for the charter-writing slot.",
+                "<b>Tiers 2 and 3.</b> The Tier 2 experiment sets one planning task for two teams, with one team's leader chosen by lot, and needs no cards. Tier 3 students design their own programme.",
+            ],
+            "slot": 10, "slot_label": "Tier 1, the 10-minute charter slot, groups of five",
+            "run": [
+                (5, "Each group drafts four or five charter lines."),
+                (1, "Each group draws one card."),
+                (3, "The group checks whether its charter gives the leader on the card a clear answer."),
+                (1, "The group adds or rewrites one line so that it does."),
+            ],
+            "copies": "One copy of the sheet for every three groups. Ten minutes is tight: if it runs over, use the cards to open the next session.",
+            "followups": [
+                "Did your charter give a clear answer, or did you have to add a line?",
+                "Would the leader choose differently if nobody were watching?",
+                "What would the people affected say was fair?",
+            ],
+            "thoughtful": [
+                "Applies the same rule to a friend as to anyone else.",
+                "Notices who is watching and what they will learn from the choice.",
+                "Gives credit accurately and in public.",
+                "Writes charter lines specific enough to act on, not slogans, and accepts that acting rightly may cost the leader.",
+            ],
+            "extra": [],
+            "link": "This week's story contrasts two ways of leading; the cards ask which of the two your own charter would produce on a day when a rule becomes inconvenient.",
+            "safeguarding": "Keep the discussion on the characters and on leadership behaviour. Do not let it become a verdict on the school's real prefects or captains, or on any student who played a leader.",
+        },
+    },
+    # ------------------------------------------------------------------ WEEK 9
+    {
+        "n": 9,
+        "theme": "Grey zones and consequences",
+        "sets": [
+            {
+                "tier": T1, "name": "Difficult Choices Workshop: dilemma stations",
+                "cards": [
+                    {"title": "Asked to keep quiet", "tag": "Station 1",
+                     "body": "During a unit test at a school in Indore, Nisha sees her friend Pooja copying from a slip of paper. Afterwards Pooja says, 'Please don't tell anyone. My scholarship depends on this test.' The teacher has announced that the top three scorers will be put forward for a district award, and Pooja has come third, one mark above a classmate who studied for weeks. Nobody else noticed. Nisha could stay silent, talk to Pooja again, tell the teacher, or tell someone else.",
+                     "q": "What does each choice cost, and who pays?"},
+                    {"title": "The unlocked phone", "tag": "Station 2",
+                     "body": "On the 7.15 morning bus in Mangaluru, Fathima finds a phone left on a seat. It is unlocked, and the screen shows a chat: personal messages belonging to a student from the senior section of her own school, someone she knows only by sight. Her friend leans over and says, 'Scroll up, let's see.' The phone will lock if it is left alone for a minute. Its owner may be frantic by now.",
+                     "q": "What should Fathima do with the phone, with what she has already seen, and with her friend's suggestion?"},
+                    {"title": "The group's credit", "tag": "Station 3",
+                     "body": "A Class 10 group in Ranchi wins first prize for a model of a rainwater system. Bikash designed and built almost all of it at home over three weekends; the other three joined in for the last two days. At the prize-giving, the group leader tells the judges, 'We all worked on it equally,' and the others nod. The teacher will now write a certificate line for each member. The others are Bikash's friends, and until now they have always shared credit.",
+                     "q": "If he speaks up, what does he gain and what does he risk? If he stays silent, what is he agreeing to?"},
+                ],
+            },
+            {
+                "tier": T2, "name": "Announced bystander role-play: scene, roles and observer card",
+                "cards": [
+                    {"title": "The scene", "tag": "Read aloud to everyone first",
+                     "body": "This is a role-play. Nobody is being tested or tricked, nobody in this room is really copying, and the names are made up. Anyone may watch instead of act, or step out at any time. The scene: in a made-up school, a class is doing a group task. One student, Kabir, copies from the work of his partner, Mitali. A few classmates can see it. The teacher looks away. We will act it twice, for about three minutes each: once with the bystanders silent, and once with them trying something.",
+                     "q": "As you watch, what makes speaking up harder or easier for each character?"},
+                    {"title": "Role: Kabir, who copies", "tag": "Volunteer role",
+                     "body": "You play Kabir, a made-up student. You fell behind after missing two weeks of school, this task counts towards your term grade, and you have told yourself that copying once harms nobody. You copy openly because you assume no one will say anything; no one ever does. Kabir is not a villain, so do not play him as one. In the second run, if someone speaks to you, respond as he honestly would. When the teacher ends the scene, step out of role.",
+                     "q": "What would Kabir need to hear, and from whom, to put his pen down?"},
+                    {"title": "Role: Mitali, the partner", "tag": "Volunteer role",
+                     "body": "You play Mitali, a made-up student and Kabir's partner in the task. You worked hard on these answers. You can see him copying and you are angry, but he sits with your friends at lunch and you do not want to be called a tell-tale. You keep writing and move your arm a little, hoping he will stop. In the second run, if a classmate supports you, respond as Mitali honestly would. When the teacher ends the scene, step out of role.",
+                     "q": "What does Mitali want to happen, and why might she find it hard to ask for it?"},
+                    {"title": "Role: the teacher who looks away", "tag": "Volunteer role",
+                     "body": "You play a made-up teacher. You are behind with paperwork, and you fill in the register while the class works. In the first run you look away and notice nothing. In the second run, if a student comes to you, you are distracted at first and say, 'In a minute.' If they stay calm and persist, you give them your full attention. When the scene is ended, step out of role.",
+                     "q": "What makes it easier, or harder, for a student to bring something to an adult who seems busy?"},
+                    {"title": "Role: Dev, Kabir's friend", "tag": "Volunteer role: bystander",
+                     "body": "You play Dev, a made-up student who has been Kabir's friend since Class 6. You can see exactly what he is doing, and you know he has had a hard month. Part of you thinks it is none of your business. Part of you knows that being caught would be far worse for him than a quiet word from you. First run: stay silent, and let it show what holds Dev back. Second run: speak to Kabir, quietly and as a friend. Then step out of role.",
+                     "q": "Is loyalty to a friend the same thing as silence?"},
+                    {"title": "Role: Sana, the new student", "tag": "Volunteer role: bystander",
+                     "body": "You play Sana, a made-up student who joined this school three weeks ago. You have seen the copying. At your old school, a student who reported cheating was left out by the class for months, and you want to be liked here. First run: stay silent, and glance at the others to see whether anyone will react. Second run: support Mitali, with a word, a look or by moving to sit beside her. Then step out of role.",
+                     "q": "What would make it safe enough for someone in Sana's position to act?"},
+                    {"title": "Role: Ritu, at the next desk", "tag": "Volunteer role: bystander",
+                     "body": "You play Ritu, a made-up student at the next desk. You studied for this task and you think the copying is unfair to everyone who did the work. You also know that speaking up in front of the class would embarrass both Kabir and Mitali. First run: stay silent, and let it show that you are torn. Second run: go to the teacher and report what you saw, calmly and without an audience. Then step out of role.",
+                     "q": "Is there a way to act that is honest without being public?"},
+                    {"title": "Observer card", "tag": "For everyone who is not acting",
+                     "body": "You are an observer. Nobody is being tested, and there is no correct reaction. Watch the characters, not your classmates. In the first run, note what seems to hold each bystander back. In the second run, note what each one tries (speaking to Kabir, supporting Mitali, telling the teacher) and what it changes. Afterwards, talk only about the characters and the situation, never about what a real person did or would do.",
+                     "q": "What made speaking up harder or easier in that room, and what would lower the cost?"},
+                ],
+            },
+        ],
+        "note": {
+            "aim": "Students reason through situations in which every option costs something, and rehearse, safely, what speaking up can look like.",
+            "asks": [
+                "<b>Tier 1.</b> The curriculum asks for 3 sets of dilemma cards for three stations and suggests a friend who cheats, a lost phone that is unlocked, and a group taking credit. Cards 1 to 3 are those three.",
+                "<b>Tier 2.</b> The curriculum's openly announced Bystander Role-Play gives each volunteer a written brief and an invented name. Cards 4 to 11 are the scene, those six briefs and an observer card.",
+                "<b>Tier 3.</b> Students design their own programme. Hold it to every rule in this note, with a teacher present.",
+            ],
+            "slot": 15, "slot_label": "Tier 1, the 15-minute workshop, groups of four at three stations",
+            "run": [
+                (5, "Station 1. Read (1 minute), fill in the consequence ladder for at least two options (3), choose one and note its cost (1)."),
+                (5, "Station 2, the same way."),
+                (5, "Station 3, the same way. Volunteers may share one response in the ethics circle that follows."),
+            ],
+            "copies": "One Tier 1 sheet per three groups. Tier 2: both sheets once, plus card 11 for each observing group.",
+            "followups": [
+                "Who pays if the character stays silent?",
+                "Is there an option between telling everyone and telling no one?",
+                "What would make the right thing easier to do?",
+            ],
+            "thoughtful": [
+                "Lists the cost of every option, silence included.",
+                "Thinks of people not in the room: the classmate one mark behind, the phone's owner.",
+                "Tries a private step before a public one.",
+                "On card 2, looks no further, treats what was seen as private and returns the phone through an adult.",
+            ],
+            "extra": [
+                ("Tier 2: running the announced role-play",
+                 "Follow the curriculum's session flow. Briefing (3 minutes): read card 4 aloud and say in your own words that the scene is made up. Ask for volunteers: pick nobody, never cast a student in a part that echoes something known about them, and let anyone decline, observe or step out at any time without giving a reason. Hand cards 5 to 10 to the volunteers and card 11 to each observing group. Role-play (6 minutes): run the scene twice, about three minutes each, first with the bystanders silent, then with each trying the step on their card. Out of role (3 minutes): thank the volunteers by their real names, say plainly that they were acting, and let observers note their reactions. Groups then design an intervention plan (12 minutes) and the class debriefs (10 minutes), about the characters and the situation, never about what a real student did or would do."),
+                ("Limits",
+                 "Never stage the scene as if it were real, brief anyone in secret, or allow it to be recorded."),
+            ],
+            "link": "This week's story asks why so few of those who knew better spoke up; the cards let students examine that silence in situations small enough to act on.",
+            "safeguarding": "Cheating, exclusion and private messages may be close to real events. If the discussion turns to a real person or experience, stop it there; do not explore it in front of the class. " + DISCLOSE,
+        },
+    },
+    # ------------------------------------------------------------------ WEEK 10
+    {
+        "n": 10,
+        "theme": "Think in systems, not impulses",
+        "sets": [
+            {
+                "tier": T1, "name": "Business War Game: three rounds at the school fete",
+                "cards": [
+                    {"title": "The fete stalls", "tag": "Round 1",
+                     "body": "Your team runs one of the snack stalls at the annual fete of a school in Hubballi. Every stall has the same budget of 20 tokens, the same two hours and the same customers: about 300 students, parents and teachers. Decide three things and write them down: what you sell, what you charge, and where you set up (by the gate, by the stage, or in the shade near the classrooms). The other teams are deciding at this moment, and you cannot see their sheets.",
+                     "q": "What do you expect the others to do, and how does that change your own plan?"},
+                    {"title": "An alliance is allowed", "tag": "Round 2",
+                     "body": "The fete committee announces a change: any two stalls may now join forces. Partners may share a counter, sell a combined plate, agree prices or divide the ground between them, and they must put in writing how the tokens they earn will be shared. You have four minutes to talk to other teams. An offer can be refused, and a stall left without a partner still competes. Look at what the other stalls chose in Round 1.",
+                     "q": "Whom would you approach, what would you offer, and what would make you refuse an offer that looks good?"},
+                    {"title": "The weather turns", "tag": "Round 3",
+                     "body": "Twenty minutes before the gates open, it begins to rain. The principal moves the fete indoors. The corridor has room for only three counters, the stage is cancelled, and half the expected parents may not come. Stalls in an alliance may share one counter; a stall with no counter may sell from trays. Any agreement made in Round 2 can be kept, changed or broken, but everyone will remember what you did when next year's fete comes round.",
+                     "q": "What do you do in the next five minutes, and what is your word worth when conditions change?"},
+                ],
+            },
+            {
+                "tier": T2, "name": "The Alliance Game: event cards (the game's imaginary kingdoms)",
+                "cards": [
+                    {"title": "The rains fail", "tag": "Event, round 1",
+                     "body": "Read aloud at the start of the round. The rains have failed across the middle of the map. Every kingdom that touches the river loses a third of its treasury tokens this round, because grain must be bought from outside. Kingdoms on the coast lose nothing and have grain to spare. Nothing obliges anyone to help anyone. A kingdom that is given grain now may or may not remember it later.",
+                     "q": "If you have a surplus, what do you ask for in return? If you are in need, what are you willing to promise?"},
+                    {"title": "Unrest at home", "tag": "Event, round 2",
+                     "body": "Read aloud at the start of the round. The teacher names the kingdom with the largest army. Its people are tired of paying for soldiers, and there is unrest in its towns. This round it must set aside half its army tokens to keep order at home, where they cannot be used against anyone. Its neighbours know this, and so do its allies. A weakened neighbour is an opportunity, and also a warning about what a large army costs.",
+                     "q": "If you are a neighbour, do you press your advantage, offer help or wait, and what does each choice tell the others about you?"},
+                    {"title": "The trade road closes", "tag": "Event, round 3",
+                     "body": "Read aloud at the start of the round. A landslide has closed the mountain road that carries trade between the northern and southern kingdoms. Any alliance that depends on moving resources along that road cannot deliver this round. The only other route runs through one kingdom in the middle of the map, which may charge what it likes or refuse altogether. Promises made in earlier rounds are now hard, or impossible, to keep.",
+                     "q": "If you cannot deliver what you promised, what do you tell your ally? If you control the only route, how much is it fair to ask?"},
+                    {"title": "A messenger's report", "tag": "Event, round 4",
+                     "body": "Read aloud at the start of the round. A messenger reaches every court with the same report: one kingdom has been holding secret talks with its ally's rival. The report does not say which kingdom, and it may not be true. This is the last round, and the alliances standing at the end are the ones that count. Each team has two minutes to decide whether to question its allies, quietly protect itself, or carry on as agreed.",
+                     "q": "How do you act on information you cannot check, and what does suspicion itself do to an alliance?"},
+                ],
+            },
+        ],
+        "note": {
+            "aim": "Students plan with the other players in mind: they anticipate, choose partners on purpose, and adapt when conditions change.",
+            "asks": [
+                "<b>Tier 1.</b> The curriculum asks for War Game instruction cards for 3 rounds: basic competition, then an alliance option, then a surprise disruption. Cards 1 to 3 are those rounds, set at a school fete.",
+                "<b>Tier 2.</b> It asks for hidden event cards that disrupt each of the four rounds of the Alliance Game, and suggests drought, rebellion and a trade route closure. Cards 4 to 7 are four event cards. Unlike the rest of the pack they are set in the game's imaginary kingdoms, not in present-day life.",
+                "<b>Tier 3.</b> Students design their own simulation, so none is supplied.",
+            ],
+            "slot": 16, "slot_label": "Tier 1, the 16-minute war game, four or five teams",
+            "run": [
+                (4, "Round 1. Read card 1 (1 minute); teams decide and write down their three choices (3)."),
+                (1, "Put every team's choices on the board."),
+                (5, "Round 2. Read card 2 (1 minute); teams negotiate (4). Agreements must be written."),
+                (4, "Round 3. Read card 3 and let teams respond."),
+                (2, "Each team says whether it kept its agreement, and why."),
+            ],
+            "copies": "One Tier 1 sheet per team, cut, with one card handed out per round. Tier 2: one copy for the teacher only.",
+            "followups": [
+                "What did you assume the other teams would do, and were you right?",
+                "Why that partner, and on those terms?",
+                "When conditions changed, what was your promise worth?",
+            ],
+            "thoughtful": [
+                "Thinks about the other teams' likely moves before choosing its own.",
+                "Does something different from its rivals instead of copying them.",
+                "Makes alliance terms explicit, and fair enough to last.",
+                "Weighs the gain from breaking a promise against being remembered for it.",
+            ],
+            "extra": [
+                ("Scoring",
+                 "The curriculum lists play tokens. The cards work without them: if you do score, reward reasoning that took the other teams into account, not the loudest stall."),
+                ("Tier 2: running the event cards",
+                 "Tell the teams at the start that an event will be read out before every round, then keep cards 4 to 7 face down and read one per round. The curriculum's 18 minutes allows about four and a half minutes a round. Its rules allow an alliance to be broken inside the game: say so beforehand, and make clear in the debrief that what happens in the game stays in the game."),
+            ],
+            "link": "This week's text is about reading the whole field of rivals, neighbours and allies before moving; the cards make students read that field for a stall or a kingdom, and then test it.",
+            "safeguarding": "Allies and rivals are always groups (stalls, kingdoms, houses, clubs, teams), never named classmates. Watch that alliances do not become a way of leaving the same students out every round, and change the teams if they do.",
+        },
+    },
+    # ------------------------------------------------------------------ WEEK 11
+    {
+        "n": 11,
+        "theme": "Build systems that work",
+        "sets": [
+            {
+                "tier": T1, "name": "Build a Mini Nation or Mini Company: seven role cards",
+                "cards": [
+                    {"title": "The leader", "tag": "Pillar 1: the King (leader)",
+                     "body": "Your team of seven is building a small student-run organisation of its own choice, such as a stationery co-operative or a weekend reading room. You are its leader. You set its purpose and have the final say when the others disagree. You may not do any other pillar's job yourself. Decide and note down: what the organisation is for, how decisions are taken when time is short, and who takes over if you are away for a month.",
+                     "q": "Which decisions should a leader keep, and which should be given away?"},
+                    {"title": "The adviser", "tag": "Pillar 2: the Minister (counsel)",
+                     "body": "Your team of seven is building a small student-run organisation of its own choice. You are its adviser. You plan, you counsel the leader and you keep the other pillars working together. You hold no money and give no orders. Decide and note down: how the seven of you will share information each week, how a poor idea from the leader gets challenged, and what must always be written down.",
+                     "q": "When should an adviser insist, and when should they accept the leader's decision?"},
+                    {"title": "People and place", "tag": "Pillar 3: the Country (territory and people)",
+                     "body": "Your team of seven is building a small student-run organisation of its own choice. You speak for the people it serves and the place it works in: who they are, what they need, and where and when they can be reached. Decide and note down: who your users are, the one thing they need most, and how you will hear from them when something is going wrong.",
+                     "q": "If the leader's plan and the users' needs pull apart, whose side are you on?"},
+                    {"title": "Safeguards", "tag": "Pillar 4: the Fort (defence)",
+                     "body": "Your team of seven is building a small student-run organisation of its own choice. You protect whatever it cannot afford to lose: its records, its stock, its cash box and its good name. Decide and note down: the three things that must be kept safe, who holds the keys or passwords, and what the back-up is if one of them is lost.",
+                     "q": "How much protection is enough, and at what point does it start getting in the way of the work?"},
+                    {"title": "The treasurer", "tag": "Pillar 5: the Treasury (finance)",
+                     "body": "Your team of seven is building a small student-run organisation of its own choice. You look after the money: what comes in, what goes out and what is held in reserve. Decide and note down: where the starting money comes from, the three largest costs, how much is set aside for a bad month, and who else checks the accounts.",
+                     "q": "If you say there is no money for something the leader wants, who decides?"},
+                    {"title": "The working team", "tag": "Pillar 6: the Army (execution)",
+                     "body": "Your team of seven is building a small student-run organisation of its own choice. You lead the people who do the daily work and who step in when there is trouble: opening up, serving users, putting things right. Decide and note down: the jobs that must happen every week, who does each one, and who covers when two people are absent on the same day.",
+                     "q": "How do you keep people turning up when the work is dull and nobody is watching?"},
+                    {"title": "Partnerships", "tag": "Pillar 7: the Friend or Ally (partnerships)",
+                     "body": "Your team of seven is building a small student-run organisation of its own choice. You make and keep its friends outside the team: a teacher who advises, a shop that gives credit, another club that shares a room. Decide and note down: the two partners you need most, what each of them gets in return, and what you would do if one of them withdrew.",
+                     "q": "What is the difference between an ally and someone you merely depend on?"},
+                ],
+            },
+            {
+                "tier": T1, "name": "Stress tests",
+                "cards": [
+                    {"title": "A partner pulls out", "tag": "Stress test 1",
+                     "body": "Read aloud once the system map is finished. Your most important outside partner has pulled out without warning and is now helping a rival group. Whatever that partner supplied, whether a room, credit, advice or customers, stops today. Nobody on your team did anything wrong. Trace it through your map: which pillar feels it first, which pillars can cover for it, and what fails within a month if nothing changes?",
+                     "q": "Do you replace the partner, change the plan or learn to do without, and what does that say about how you chose partners in the first place?"},
+                    {"title": "The money runs out", "tag": "Stress test 2",
+                     "body": "Read aloud once the system map is finished. The treasurer reports that the cash is gone. A large order was paid for in advance, the goods arrived damaged, and the reserve was smaller than everyone had assumed. There is enough to run for one more week. Trace it through your map: which pillars stop first, which can carry on without money, and who should have seen this coming? Then decide what is cut, what is protected and who tells the people you serve.",
+                     "q": "Was this the failure of one pillar, or of the way the pillars checked one another?"},
+                    {"title": "A key person leaves", "tag": "Stress test 3",
+                     "body": "Read aloud once the system map is finished. The teacher draws one of the seven role cards at random. Whoever holds that role is moving to another city and leaves the organisation tomorrow. Nothing that person knew is written down unless your design said it should be. Trace it through your map: what did only that role know or do, which pillar picks it up, and how long before your users notice? Then decide what you would change in the design.",
+                     "q": "How much should any organisation depend on one person, however good they are?"},
+                ],
+            },
+        ],
+        "note": {
+            "aim": "Students design an organisation as parts that depend on one another, and watch how a failure in one part travels to the rest.",
+            "asks": [
+                "<b>Tier 1.</b> The curriculum asks for 7 role cards per team, one for each pillar of the model, and 2 stress-test scenarios ('your ally betrays you', 'your treasury runs out'). Cards 1 to 7 are the role cards. Cards 8 and 9 are those two stress tests, and card 10 adds a third (a key person leaves) from the Tier 2 list of crises.",
+                "<b>Names of the pillars.</b> The tag on each role card gives the curriculum's name for the pillar and its plain gloss. The curriculum page, which also calls them elements or limbs, explains the model and gives its source.",
+                "<b>Tiers 2 and 3.</b> Tier 2 teams can use the same role cards and all three stress tests. Tier 3 students design their own workshop.",
+            ],
+            "slot": 18, "slot_label": "Tier 1, the 18-minute build, teams of seven, then a 4-minute stress test",
+            "run": [
+                (1, "Each team chooses the organisation it will build."),
+                (1, "Deal cards 1 to 7, one to each member."),
+                (6, "Each role-holder answers the 'decide and note down' items on their own card."),
+                (8, "The team draws its system map on chart paper: seven pillars, with arrows showing who depends on whom."),
+                (2, "Check that every pillar has at least one arrow in and one arrow out."),
+            ],
+            "copies": "One copy of the two role-card sheets (cards 1 to 7) per team, and one copy of the stress-test sheet for the teacher. For the stress test, read out one of cards 8 to 10 and give teams four minutes to trace it and answer.",
+            "followups": [
+                "Which pillar did every other pillar depend on?",
+                "Which pillar had nobody checking it?",
+                "What did the stress test show that the map did not?",
+            ],
+            "thoughtful": [
+                "Gives every role a clear job and a back-up.",
+                "Draws dependence in both directions.",
+                "Puts a check on the leader and on the treasury, and writes things down.",
+                "After the stress test, changes the design instead of blaming a person.",
+            ],
+            "extra": [],
+            "link": "This week's text treats an organisation as parts that stand or fall together; the cards ask students to build one small enough to see whole.",
+            "safeguarding": "Card 10 removes a role chosen at random. Present it as the role leaving, never as a comment on the student who holds it. When students talk about their own school or club, the weak pillar is a function or an office, never a named teacher or student.",
+        },
+    },
+    # ------------------------------------------------------------------ WEEK 12
+    {
+        "n": 12,
+        "theme": "Apply the full stack",
+        "sets": [
+            {
+                "tier": T1, "name": "Capstone starter problems",
+                "cards": [
+                    {"title": "Phones after midnight", "tag": "Starter 1",
+                     "body": "Teachers at a school in Thiruvananthapuram notice that many students in Classes 9 to 12 are half asleep in the first period. An anonymous slip survey suggests that most are on their phones past midnight: short videos, games and group chats that nobody wants to be the first to leave. Lectures about 'addiction' have changed nothing, and what happens at home is not the school's to decide. Your team is asked for a proposal the student council could actually run.",
+                     "q": "Which story from Weeks 1 to 11 helps you see this problem differently, and what would you try first?"},
+                    {"title": "The new students", "tag": "Starter 2",
+                     "body": "Every June about forty students join Class 11 at a school in Dehradun from other schools, many of them from villages some distance away. By August most still sit together at the back, few have joined a club, and some have stopped asking questions in class. Nobody is being unkind to them; nobody is doing anything at all. The school has no money for a new programme. Your team is asked to design something that students themselves could run.",
+                     "q": "Which story from Weeks 1 to 11 speaks to this, and how would you know in three months whether your idea had worked?"},
+                    {"title": "Annual day, again", "tag": "Starter 3",
+                     "body": "Each year the annual day at a school in Raipur ends the same way: three students and one teacher do most of the work, costumes arrive late, two items are cut at the last minute, and everyone promises that next year will be different. This year's event is ten weeks away and the same people have been asked again. Your team is asked to redesign how the event is run, not just to help out.",
+                     "q": "Which story or model from Weeks 1 to 11 would you use to find the weak point, and what would you change first?"},
+                    {"title": "Nobody tells", "tag": "Starter 4",
+                     "body": "In an anonymous survey at a school in Shillong, many students say they have seen classmates left out or mocked, in corridors and in group chats, and almost none say they told an adult. Their reasons: 'it wasn't my business', 'nothing would happen', 'I'd be next'. The school has a complaint box that nobody uses. Your team is asked to propose one change that would make speaking up easier and safer, without naming or shaming anyone.",
+                     "q": "Which story from Weeks 1 to 11 fits this problem, and what would have to be true for a student to trust your idea?"},
+                ],
+            },
+        ],
+        "note": {
+            "aim": "Students bring a story, a principle and a workable proposal together on a real problem.",
+            "asks": [
+                "<b>All tiers.</b> The curriculum does not ask for scenario cards this week. It asks the teacher to prepare a list of 10 suggested capstone topics for teams that struggle to choose, and the curriculum page lists its own capstone options. Cards 1 to 4 are four starter problems for such teams: four, not ten. A team that already has its own topic does not need a card.",
+            ],
+            "slot": 8, "slot_label": "Period 1, the 8 minutes for team formation and topic selection",
+            "run": [
+                (2, "Teams with a topic begin. Teams without one read the four cards and choose."),
+                (3, "The team agrees which earlier week's story fits the problem, and why that one."),
+                (3, "The team writes the problem in one sentence, in its own words, then carries on with the curriculum's Period 1 plan."),
+            ],
+            "copies": "One copy of the sheet for every two or three teams.",
+            "followups": [
+                "Why this story and not another?",
+                "Who has to agree before your proposal can happen?",
+                "What would you measure after a month?",
+            ],
+            "thoughtful": [
+                "Chooses the story for its principle, not for a surface likeness.",
+                "Proposes something students could run themselves.",
+                "Names who is affected and who decides.",
+                "Includes a small first step and a way to check it, and punishes or exposes nobody.",
+            ],
+            "extra": [],
+            "link": "The capstone has no single story of its own: each card asks the team to decide which of the earlier weeks' stories earns its place.",
+            "safeguarding": "Card 4 is about exclusion and mockery. Topics are about the school or community in general, never a named person. No proposal may involve identifying or exposing individual students, and no team should survey classmates about personal matters without the school's permission. " + DISCLOSE,
+        },
+    },
+]
