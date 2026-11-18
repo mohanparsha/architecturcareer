@@ -1,429 +1,53 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en-GB">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>LLM Deep Dive — Interactive Technical Reference | Architect U'r Career</title>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/react/18.2.0/umd/react.production.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/react-dom/18.2.0/umd/react-dom.production.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-standalone/7.23.9/babel.min.js"></script>
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
-  <style>
-    * { box-sizing: border-box; margin: 0; padding: 0; }
-    html, body, #root { height: 100%; }
-    @keyframes fadeSlideUp { from { opacity: 0; transform: translateY(12px); } to { opacity: 1; transform: translateY(0); } }
-    ::-webkit-scrollbar { width: 6px; }
-    ::-webkit-scrollbar-track { background: #0a0e17; }
-    ::-webkit-scrollbar-thumb { background: #1e2d4a; border-radius: 3px; }
-    @media (max-width: 768px) {
-      .desktop-nav { display: none !important; }
-      .mobile-nav-toggle { display: flex !important; }
-      .mobile-nav-open { display: flex !important; }
-      .main-content { padding: 24px 16px 64px !important; }
-    }
-    @media (min-width: 769px) {
-      .desktop-nav { display: flex !important; }
-      .mobile-nav-toggle { display: none !important; }
-    }
-  </style>
-  <script data-goatcounter="https://km-auc.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>LLM Deep Dive (retired) | Architect U'r Career</title>
+<meta name="description" content="The LLM Deep Dive guide was retired in November 2026. This page says why and points to better places to learn how large language models work.">
+<meta name="robots" content="noindex">
+<link rel="stylesheet" href="assets/auc-guide.css">
+<style>
+  body { margin: 0; background: #f8fafc; color: #1f2937; font: 17px/1.7 system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif; }
+  main { max-width: 42rem; margin: 0 auto; padding: 3rem 1rem 4rem; }
+  h1 { font-size: 1.9rem; line-height: 1.25; color: #0b1220; margin: 0 0 1rem; }
+  h2 { font-size: 1.15rem; color: #0b1220; margin: 2rem 0 0.5rem; }
+  a { color: #047857; }
+  li { margin-bottom: 0.5rem; }
+</style>
 </head>
 <body>
-  <div id="root"></div>
-  <script type="text/babel">
-    const { useState, useEffect, useRef, useCallback } = React;
-
-    const SECTIONS = [
-      { id: "overview", label: "Overview", key: "1" },
-      { id: "tokenization", label: "Tokenization", key: "2" },
-      { id: "embedding", label: "Embeddings", key: "3" },
-      { id: "transformer", label: "Transformer", key: "4" },
-      { id: "attention", label: "Attention", key: "5" },
-      { id: "training", label: "Training", key: "6" },
-      { id: "inference", label: "Inference", key: "7" },
-    ];
-
-    const C = {
-      bg: "#0a0e17", surface: "#111827", surfaceAlt: "#1a2235", border: "#1e2d4a",
-      accent: "#00e5a0", accentAlt: "#6366f1", warn: "#f59e0b",
-      text: "#e2e8f0", textDim: "#64748b", code: "#c084fc",
-    };
-
-    function AnimatedCounter({ end, duration = 1200, suffix = "" }) {
-      const [val, setVal] = useState(0);
-      const ref = useRef(null);
-      useEffect(() => {
-        const obs = new IntersectionObserver(([e]) => {
-          if (e.isIntersecting) {
-            let s = 0; const step = end / (duration / 16);
-            const iv = setInterval(() => { s += step; if (s >= end) { setVal(end); clearInterval(iv); } else setVal(Math.floor(s)); }, 16);
-            obs.disconnect();
-          }
-        }, { threshold: 0.3 });
-        if (ref.current) obs.observe(ref.current);
-        return () => obs.disconnect();
-      }, [end, duration]);
-      return <span ref={ref}>{val.toLocaleString()}{suffix}</span>;
-    }
-
-    function TokenDemo() {
-      const [input, setInput] = useState("Large Language Models are transforming AI.");
-      const tokenize = (text) => {
-        const patterns = []; let remaining = text;
-        while (remaining.length > 0) {
-          let matched = false;
-          const prefixes = ["transform","Large","Language","Model","are","ing","AI","the","is","of","to","in","for","and"];
-          for (const p of prefixes) { if (remaining.startsWith(p)) { patterns.push({ text: p, type: "word" }); remaining = remaining.slice(p.length); matched = true; break; } }
-          if (!matched) { if (remaining[0]===" ") patterns.push({text:"\u2423",type:"space"}); else if (remaining[0]===".") patterns.push({text:".",type:"punct"}); else patterns.push({text:remaining[0],type:"char"}); remaining = remaining.slice(1); }
-        }
-        return patterns;
-      };
-      const tokens = tokenize(input);
-      const pal = ["#00e5a0","#6366f1","#f59e0b","#ec4899","#06b6d4","#a78bfa","#34d399","#f472b6"];
-      return (
-        <div>
-          <div style={{marginBottom:16}}>
-            <label style={{color:C.textDim,fontSize:12,fontFamily:"'JetBrains Mono', monospace",textTransform:"uppercase",letterSpacing:2}}>Input Text</label>
-            <input value={input} onChange={(e)=>setInput(e.target.value)} style={{width:"100%",padding:"12px 16px",marginTop:8,background:C.bg,border:"1px solid "+C.border,borderRadius:8,color:C.text,fontSize:15,fontFamily:"'JetBrains Mono', monospace",outline:"none"}} />
-          </div>
-          <div style={{display:"flex",alignItems:"center",gap:8,marginBottom:16}}>
-            <span style={{color:C.textDim,fontSize:13}}>Simplified Tokenization →</span>
-            <span style={{color:C.accent,fontSize:13,fontWeight:600}}>{tokens.length} tokens</span>
-          </div>
-          <div style={{display:"flex",flexWrap:"wrap",gap:6}}>
-            {tokens.map((t,i) => (
-              <div key={i} style={{padding:"6px 12px",borderRadius:6,background:pal[i%pal.length]+"18",border:"1px solid "+pal[i%pal.length]+"44",fontFamily:"'JetBrains Mono', monospace",fontSize:14,color:pal[i%pal.length],animation:"fadeSlideUp 0.3s ease "+(i*0.04)+"s both"}}>
-                <span>{t.text}</span><span style={{fontSize:10,opacity:0.5,marginLeft:6}}>{i}</span>
-              </div>
-            ))}
-          </div>
-          <div style={{marginTop:16,padding:"10px 14px",borderRadius:8,background:C.warn+"0a",border:"1px solid "+C.warn+"22"}}>
-            <span style={{fontSize:11,color:C.warn,fontFamily:"'JetBrains Mono', monospace"}}>⚠ Simplified demo — real BPE iteratively merges frequent byte pairs from a trained vocabulary of ~50K–100K tokens (e.g., GPT: cl100k_base, LLaMA: SentencePiece).</span>
-          </div>
-        </div>
-      );
-    }
-
-    function EmbeddingViz() {
-      const dims = [
-        {label:"king",values:[0.82,-0.21,0.65,0.91,-0.34,0.12,0.55,-0.78]},
-        {label:"queen",values:[0.79,-0.18,0.68,0.44,-0.31,0.15,0.88,-0.72]},
-        {label:"man",values:[0.45,-0.62,0.22,0.87,-0.55,0.33,0.11,-0.41]},
-        {label:"woman",values:[0.42,-0.58,0.25,0.39,-0.51,0.36,0.44,-0.35]},
-      ];
-      return (
-        <div>
-          <div style={{fontSize:13,color:C.textDim,marginBottom:16,fontFamily:"'JetBrains Mono', monospace"}}>king − man + woman ≈ queen</div>
-          <div style={{display:"flex",flexDirection:"column",gap:12}}>
-            {dims.map((d,di) => (
-              <div key={di} style={{display:"flex",alignItems:"center",gap:12}}>
-                <span style={{width:60,textAlign:"right",color:C.code,fontSize:13,fontFamily:"'JetBrains Mono', monospace",fontWeight:600}}>{d.label}</span>
-                <div style={{display:"flex",gap:3,flex:1}}>
-                  {d.values.map((v,vi) => {
-                    const absV = Math.abs(v); const col = v > 0 ? C.accent : C.accentAlt;
-                    return (<div key={vi} style={{flex:1,height:32,borderRadius:4,background:col+Math.round(absV*200).toString(16).padStart(2,"0"),border:"1px solid "+col+"33",display:"flex",alignItems:"center",justifyContent:"center",fontSize:10,color:absV>0.5?"#fff":C.textDim,fontFamily:"'JetBrains Mono', monospace",animation:"fadeSlideUp 0.3s ease "+((di*8+vi)*0.02)+"s both"}}>{v.toFixed(2)}</div>);
-                  })}
-                </div>
-              </div>
-            ))}
-          </div>
-          <div style={{marginTop:12,fontSize:11,color:C.textDim,fontFamily:"'JetBrains Mono', monospace"}}>↑ 8 of d_model=4096 dimensions shown · Actual: ℝ^4096 dense vector per token</div>
-        </div>
-      );
-    }
-
-    function TransformerBlock() {
-      const [activeLayer, setActiveLayer] = useState(null);
-      const layers = [
-        {id:"input",label:"Token Embeddings + RoPE",desc:"Token IDs → dense vectors ∈ ℝ^d_model. Rotary Position Embeddings (RoPE) encode relative positions by rotating Q and K vectors, enabling length extrapolation. Replaces sinusoidal/learned encodings from the original Transformer.",color:C.accent,detail:"q_rot = q · cos(mθ) + rotate(q) · sin(mθ)  // applied to Q, K only"},
-        {id:"ln1",label:"RMSNorm (Pre-Norm)",desc:"Root Mean Square Normalization — simpler and faster than LayerNorm. Omits mean-centering; normalizes by RMS of activations. Used by LLaMA, Mistral, Gemma, and most modern LLMs.",color:C.textDim,detail:"RMSNorm(x) = x / √(mean(x²) + ε) · γ"},
-        {id:"mha",label:"Multi-Head Self-Attention",desc:"h parallel attention heads with Q, K, V projections. Scaled dot-product with causal mask (lower-triangular). Modern variant: GQA (Grouped-Query Attention) shares K/V heads to reduce KV cache size.",color:C.accentAlt,detail:"Attn(Q,K,V) = softmax(QKᵀ/√d_k + causal_mask) · V"},
-        {id:"res1",label:"Residual Connection",desc:"Skip connection adds original input back. Critical for gradient flow in deep networks (96+ layers).",color:C.warn,detail:"output = x + MultiHeadAttn(RMSNorm(x))"},
-        {id:"ln2",label:"RMSNorm (Pre-Norm)",desc:"Second normalization before the feed-forward network. Same RMSNorm applied independently.",color:C.textDim,detail:"RMSNorm(x_residual)"},
-        {id:"ffn",label:"SwiGLU Feed-Forward Network",desc:"Gated FFN with three weight matrices. SwiGLU uses SiLU (Swish) as a gate, element-wise multiplied with the up-projection. Expansion ratio ~8/3× (to match 4× standard FFN FLOPs). No bias terms.",color:"#ec4899",detail:"FFN(x) = (SiLU(xW_gate) ⊙ xW_up) · W_down"},
-        {id:"res2",label:"Residual Connection",desc:"Second skip connection for FFN output.",color:C.warn,detail:"output = x_residual + FFN(RMSNorm(x_residual))"},
-      ];
-      return (
-        <div>
-          <div style={{display:"flex",gap:24,flexWrap:"wrap"}}>
-            <div style={{flex:"0 0 280px",minWidth:240,display:"flex",flexDirection:"column",gap:4}}>
-              {layers.map((l,i) => (
-                <div key={l.id} onMouseEnter={()=>setActiveLayer(l.id)} onMouseLeave={()=>setActiveLayer(null)} onClick={()=>setActiveLayer(activeLayer===l.id?null:l.id)}
-                  style={{padding:"10px 14px",borderRadius:8,cursor:"pointer",background:activeLayer===l.id?l.color+"18":"transparent",border:"1px solid "+(activeLayer===l.id?l.color+"55":C.border),transition:"all 0.2s ease"}}>
-                  <div style={{display:"flex",alignItems:"center",gap:8}}>
-                    <div style={{width:8,height:8,borderRadius:"50%",background:l.color,flexShrink:0}} />
-                    <span style={{fontSize:12,color:C.text,fontFamily:"'JetBrains Mono', monospace",fontWeight:500}}>{l.label}</span>
-                  </div>
-                  {i < layers.length - 1 && <div style={{width:1,height:8,background:C.border,marginLeft:3.5,marginTop:4}} />}
-                </div>
-              ))}
-              <div style={{marginTop:8,padding:"8px 14px",borderRadius:8,border:"1px dashed "+C.border,textAlign:"center"}}>
-                <span style={{fontSize:11,color:C.textDim,fontFamily:"'JetBrains Mono', monospace"}}>× N layers (e.g., 80–96 for frontier models)</span>
-              </div>
-            </div>
-            <div style={{flex:1,minWidth:280,padding:20,background:C.bg,borderRadius:12,border:"1px solid "+C.border,minHeight:200,display:"flex",flexDirection:"column",justifyContent:"center"}}>
-              {activeLayer ? (()=>{const l=layers.find(x=>x.id===activeLayer); return (
-                <div style={{animation:"fadeSlideUp 0.2s ease"}}>
-                  <div style={{fontSize:16,fontWeight:700,color:l.color,marginBottom:8,fontFamily:"'Space Grotesk', sans-serif"}}>{l.label}</div>
-                  <p style={{fontSize:14,color:C.text,lineHeight:1.7,marginBottom:16}}>{l.desc}</p>
-                  <div style={{padding:"12px 16px",background:l.color+"0a",borderRadius:8,border:"1px solid "+l.color+"22",fontFamily:"'JetBrains Mono', monospace",fontSize:13,color:l.color,overflowX:"auto"}}>{l.detail}</div>
-                </div>);})() : (
-                <div style={{textAlign:"center",color:C.textDim,fontSize:14}}><div style={{fontSize:32,marginBottom:8}}>⬅</div>Hover or click a layer to inspect it</div>
-              )}
-            </div>
-          </div>
-          <div style={{marginTop:20,padding:"14px 18px",borderRadius:10,background:C.accentAlt+"08",border:"1px solid "+C.accentAlt+"22"}}>
-            <div style={{fontSize:12,fontWeight:700,color:C.accentAlt,fontFamily:"'JetBrains Mono', monospace",marginBottom:6}}>🧩 VARIANT: MIXTURE OF EXPERTS (MoE)</div>
-            <p style={{fontSize:13,color:C.textDim,lineHeight:1.7}}>In MoE architectures (Mixtral, DeepSeek-V2/V3, DBRX), the FFN is replaced by N expert FFNs + a router. Only top-k experts (typically 2 of 8–16) activate per token, enabling larger total params with constant per-token FLOPs. E.g., Mixtral 8×7B has 47B total params but ~13B active per token.</p>
-          </div>
-        </div>
-      );
-    }
-
-    function AttentionViz() {
-      const [hoveredToken, setHoveredToken] = useState(null);
-      const tokens = ["The","cat","sat","on","the","mat"];
-      const rawWeights = [
-        [1.0,0,0,0,0,0],[0.3,0.7,0,0,0,0],[0.15,0.55,0.3,0,0,0],
-        [0.1,0.15,0.25,0.5,0,0],[0.35,0.1,0.05,0.1,0.4,0],[0.05,0.2,0.15,0.25,0.05,0.3],
-      ];
-      return (
-        <div>
-          <div style={{fontSize:13,color:C.textDim,marginBottom:8,fontFamily:"'JetBrains Mono', monospace"}}>Causal Self-Attention: softmax((QKᵀ + M)/√d_k) · V — M is −∞ for future positions</div>
-          <div style={{fontSize:12,color:C.warn,marginBottom:16,fontFamily:"'JetBrains Mono', monospace"}}>⚠ Decoder-only: each token can only attend to itself and prior tokens (causal mask)</div>
-          <div style={{display:"flex",justifyContent:"center",gap:8,marginBottom:24,flexWrap:"wrap"}}>
-            {tokens.map((t,i) => (
-              <div key={i} onMouseEnter={()=>setHoveredToken(i)} onMouseLeave={()=>setHoveredToken(null)} role="button" tabIndex={0} aria-label={"Query token: "+t+", position "+i}
-                style={{padding:"10px 18px",borderRadius:8,cursor:"pointer",background:hoveredToken===i?C.accentAlt:C.surfaceAlt,border:"1px solid "+(hoveredToken===i?C.accentAlt:C.border),color:hoveredToken===i?"#fff":C.text,fontFamily:"'JetBrains Mono', monospace",fontSize:14,fontWeight:600,transition:"all 0.2s ease",transform:hoveredToken===i?"scale(1.08)":"scale(1)"}}>
-                {t}<span style={{fontSize:9,opacity:0.4,marginLeft:4}}>t{i}</span>
-              </div>
-            ))}
-          </div>
-          {hoveredToken !== null && (
-            <div style={{animation:"fadeSlideUp 0.2s ease"}}>
-              <div style={{display:"flex",justifyContent:"center",gap:8,marginBottom:12,flexWrap:"wrap"}}>
-                {tokens.map((t,i) => {
-                  const w = rawWeights[hoveredToken][i]; const isMasked = i > hoveredToken;
-                  return (
-                    <div key={i} style={{textAlign:"center",width:70}}>
-                      <div style={{height:100,display:"flex",alignItems:"flex-end",justifyContent:"center",marginBottom:6}}>
-                        {isMasked ? <div style={{width:40,height:4,borderRadius:2,background:"#ef4444",opacity:0.5}} /> :
-                          <div style={{width:40,height:(w*250)+"px",borderRadius:"6px 6px 0 0",background:"linear-gradient(to top, "+C.accentAlt+", "+C.accent+")",opacity:0.3+w*2,transition:"height 0.3s ease"}} />}
-                      </div>
-                      <div style={{fontSize:12,color:isMasked?"#ef444488":C.text,fontFamily:"'JetBrains Mono', monospace",textDecoration:isMasked?"line-through":"none"}}>{t}</div>
-                      <div style={{fontSize:11,color:isMasked?"#ef4444":C.accent,fontFamily:"'JetBrains Mono', monospace"}}>{isMasked?"−∞":(w*100).toFixed(0)+"%"}</div>
-                    </div>);
-                })}
-              </div>
-              <div style={{textAlign:"center",fontSize:12,color:C.textDim,fontFamily:"'JetBrains Mono', monospace"}}>
-                Query: "{tokens[hoveredToken]}" (t{hoveredToken}) — attends to t0..t{hoveredToken} only | {hoveredToken+1} visible position{hoveredToken>0?"s":""}
-              </div>
-            </div>
-          )}
-        </div>
-      );
-    }
-
-    function TrainingPipeline() {
-      const [activePhase, setActivePhase] = useState(0);
-      const phases = [
-        {title:"Pre-training",icon:"📚",color:C.accent,stats:[{label:"Tokens",value:"~15T"},{label:"Compute",value:"~10²⁵ FLOPs"},{label:"Duration",value:"~90 days"}],details:"Next-token prediction on massive corpora (web, books, code). Causal language modeling: minimize cross-entropy loss. Trained on clusters of thousands of GPUs/TPUs with 3D parallelism (data + tensor + pipeline). Chinchilla-optimal or over-trained depending on inference budget.",formula:"L_pretrain = −Σ log P(xₜ | x<ₜ ; θ)"},
-        {title:"Supervised Fine-Tuning",icon:"🎯",color:C.accentAlt,stats:[{label:"Examples",value:"~100K"},{label:"Epochs",value:"2–5"},{label:"LR",value:"1e-5"}],details:"Instruction-response pairs curated by human annotators. Model learns to follow instructions, produce structured outputs, and align with desired behavior. Methods: full fine-tune or parameter-efficient (LoRA, QLoRA).",formula:"L_SFT = −Σ log P(response | instruction ; θ)"},
-        {title:"RLHF / DPO",icon:"🏆",color:C.warn,stats:[{label:"Pref. Pairs",value:"~500K"},{label:"Method",value:"DPO/PPO"},{label:"β (KL)",value:"0.1–0.5"}],details:"Alignment via human preferences. PPO: trains a separate reward model, optimizes policy with clipped surrogate + KL penalty. DPO (Direct Preference Optimization): eliminates the reward model — directly optimizes from preference pairs. DPO is now the dominant method (2024+).",formula:"L_DPO = −𝔼 log σ(β · [log π(y_w|x)/π_ref(y_w|x) − log π(y_l|x)/π_ref(y_l|x)])"},
-      ];
-      const p = phases[activePhase];
-      return (
-        <div>
-          <div style={{display:"flex",gap:8,marginBottom:24,flexWrap:"wrap"}}>
-            {phases.map((ph,i) => (
-              <button key={i} onClick={()=>setActivePhase(i)} aria-label={"Training phase: "+ph.title}
-                style={{flex:1,minWidth:140,padding:"14px 16px",borderRadius:10,cursor:"pointer",background:activePhase===i?ph.color+"18":C.bg,border:"2px solid "+(activePhase===i?ph.color:C.border),color:activePhase===i?ph.color:C.textDim,fontFamily:"'Space Grotesk', sans-serif",fontSize:14,fontWeight:600,transition:"all 0.2s ease",display:"flex",alignItems:"center",justifyContent:"center",gap:8}}>
-                <span style={{fontSize:20}}>{ph.icon}</span>{ph.title}
-              </button>
-            ))}
-          </div>
-          <div style={{animation:"fadeSlideUp 0.25s ease",padding:24,background:C.bg,borderRadius:12,border:"1px solid "+p.color+"33"}}>
-            <div style={{display:"flex",gap:16,marginBottom:20,flexWrap:"wrap"}}>
-              {p.stats.map((s,i) => (
-                <div key={i} style={{flex:1,minWidth:100,padding:"12px 16px",borderRadius:8,background:p.color+"0a",border:"1px solid "+p.color+"22",textAlign:"center"}}>
-                  <div style={{fontSize:22,fontWeight:800,color:p.color,fontFamily:"'Space Grotesk', sans-serif"}}>{s.value}</div>
-                  <div style={{fontSize:11,color:C.textDim,fontFamily:"'JetBrains Mono', monospace",marginTop:4,textTransform:"uppercase",letterSpacing:1}}>{s.label}</div>
-                </div>
-              ))}
-            </div>
-            <p style={{fontSize:14,color:C.text,lineHeight:1.8,marginBottom:16}}>{p.details}</p>
-            <div style={{padding:"12px 16px",background:C.surfaceAlt,borderRadius:8,fontFamily:"'JetBrains Mono', monospace",fontSize:13,color:p.color,borderLeft:"3px solid "+p.color,overflowX:"auto"}}>{p.formula}</div>
-          </div>
-          <div style={{display:"flex",alignItems:"center",justifyContent:"center",gap:6,marginTop:16}}>
-            {phases.map((_,i) => (
-              <React.Fragment key={i}>
-                <div style={{width:10,height:10,borderRadius:"50%",background:i<=activePhase?phases[i].color:C.border,transition:"background 0.3s"}} />
-                {i<phases.length-1 && <div style={{width:40,height:2,background:i<activePhase?phases[i].color:C.border,transition:"background 0.3s"}} />}
-              </React.Fragment>
-            ))}
-          </div>
-        </div>
-      );
-    }
-
-    function InferenceFlow() {
-      const steps = [
-        {label:"Prompt",icon:"⌨️",desc:"User input tokenized via BPE into token IDs",tech:"encode(text) → [token_ids]"},
-        {label:"Prefill",icon:"⚡",desc:"Full prompt processed in parallel. KV cache populated for all positions. Uses Flash Attention for O(N) memory.",tech:"KV_cache = FlashAttn(Q, K, V) for all t"},
-        {label:"Decode",icon:"🔄",desc:"Autoregressive generation: one token per forward pass. KV cache avoids recomputation. PagedAttention (vLLM) manages memory in blocks.",tech:"for t in range(max_len): logits = model(x_t, KV_cache)"},
-        {label:"Sample",icon:"🎲",desc:"Logits → probability distribution. Top-p (nucleus), top-k, temperature scaling, repetition penalty.",tech:"token = sample(softmax(logits / T), top_p, top_k)"},
-        {label:"Detokenize",icon:"📝",desc:"Token IDs decoded back to text. Streaming: chunks sent as generated via SSE or WebSocket.",tech:"decode([token_ids]) → text"},
-      ];
-      const opts = [
-        {label:"Quantization",desc:"INT8/INT4 (GPTQ, AWQ, GGUF) — 2–4× memory savings"},
-        {label:"Flash Attention",desc:"Fused CUDA kernel — O(N) memory, 2–4× faster"},
-        {label:"Speculative Decoding",desc:"Small draft model proposes, large model verifies in parallel"},
-        {label:"Continuous Batching",desc:"Dynamic batching (vLLM, TGI) — maximizes GPU utilization"},
-      ];
-      return (
-        <div>
-          <div style={{display:"flex",flexDirection:"column",gap:12}}>
-            {steps.map((s,i) => (
-              <div key={i} style={{display:"flex",gap:16,padding:"16px 20px",borderRadius:10,background:C.bg,border:"1px solid "+C.border,animation:"fadeSlideUp 0.3s ease "+(i*0.08)+"s both",alignItems:"flex-start"}}>
-                <div style={{width:44,height:44,borderRadius:10,display:"flex",alignItems:"center",justifyContent:"center",background:C.accent+"15",border:"1px solid "+C.accent+"33",fontSize:20,flexShrink:0}}>{s.icon}</div>
-                <div style={{flex:1}}>
-                  <div style={{display:"flex",alignItems:"center",gap:8,marginBottom:4}}>
-                    <span style={{fontSize:11,color:C.accent,fontFamily:"'JetBrains Mono', monospace",fontWeight:700}}>STEP {i+1}</span>
-                    <span style={{fontSize:15,fontWeight:700,color:C.text,fontFamily:"'Space Grotesk', sans-serif"}}>{s.label}</span>
-                  </div>
-                  <p style={{fontSize:13,color:C.textDim,lineHeight:1.6,margin:"4px 0 8px"}}>{s.desc}</p>
-                  <code style={{fontSize:12,color:C.code,fontFamily:"'JetBrains Mono', monospace",background:C.code+"0a",padding:"4px 8px",borderRadius:4}}>{s.tech}</code>
-                </div>
-              </div>
-            ))}
-          </div>
-          <div style={{marginTop:20,padding:"16px 18px",borderRadius:10,background:C.accent+"08",border:"1px solid "+C.accent+"22"}}>
-            <div style={{fontSize:12,fontWeight:700,color:C.accent,fontFamily:"'JetBrains Mono', monospace",marginBottom:8}}>⚙ PRODUCTION OPTIMIZATIONS</div>
-            <div style={{display:"grid",gridTemplateColumns:"repeat(auto-fit, minmax(200px, 1fr))",gap:10}}>
-              {opts.map((o,i) => (
-                <div key={i} style={{padding:"10px 12px",borderRadius:8,background:C.surfaceAlt,border:"1px solid "+C.border}}>
-                  <div style={{fontSize:12,fontWeight:700,color:C.accent,fontFamily:"'JetBrains Mono', monospace",marginBottom:3}}>{o.label}</div>
-                  <div style={{fontSize:11,color:C.textDim,lineHeight:1.5}}>{o.desc}</div>
-                </div>
-              ))}
-            </div>
-          </div>
-        </div>
-      );
-    }
-
-    function SectionHeader({title,sub}) {
-      return (<div style={{marginBottom:28}}><h2 style={{fontSize:28,fontWeight:800,color:C.text,fontFamily:"'Space Grotesk', sans-serif",marginBottom:6}}>{title}</h2><p style={{fontSize:14,color:C.textDim,fontFamily:"'JetBrains Mono', monospace"}}>{sub}</p></div>);
-    }
-
-    function LLMExplainer() {
-      const [activeSection, setActiveSection] = useState("overview");
-      const [mobileNavOpen, setMobileNavOpen] = useState(false);
-
-      const handleKeyNav = useCallback((e) => {
-        if (e.target.tagName==="INPUT"||e.target.tagName==="TEXTAREA") return;
-        const idx = SECTIONS.findIndex(s=>s.id===activeSection);
-        if (e.key==="ArrowRight"||e.key==="ArrowDown") { e.preventDefault(); if(idx<SECTIONS.length-1) setActiveSection(SECTIONS[idx+1].id); }
-        else if (e.key==="ArrowLeft"||e.key==="ArrowUp") { e.preventDefault(); if(idx>0) setActiveSection(SECTIONS[idx-1].id); }
-        else { const n=parseInt(e.key); if(n>=1&&n<=SECTIONS.length){e.preventDefault();setActiveSection(SECTIONS[n-1].id);} }
-      }, [activeSection]);
-
-      useEffect(() => { window.addEventListener("keydown",handleKeyNav); return ()=>window.removeEventListener("keydown",handleKeyNav); }, [handleKeyNav]);
-
-      const renderSection = () => {
-        switch(activeSection) {
-          case "overview": return (
-            <div>
-              <h2 style={{fontSize:28,fontWeight:800,color:C.text,marginBottom:8,fontFamily:"'Space Grotesk', sans-serif"}}>What is a Large Language Model?</h2>
-              <p style={{fontSize:15,color:C.textDim,lineHeight:1.8,marginBottom:28,maxWidth:680}}>A decoder-only Transformer neural network trained on massive text corpora via next-token prediction. The model learns a compressed representation of language structure, facts, and reasoning patterns as parameter weights.</p>
-              <div style={{display:"grid",gridTemplateColumns:"repeat(auto-fit, minmax(160px, 1fr))",gap:16,marginBottom:28}}>
-                {[
-                  {label:"Parameters",value:React.createElement(AnimatedCounter,{end:1800,suffix:"B"}),sub:"frontier class (est.)",color:C.accent},
-                  {label:"Context Window",value:React.createElement(AnimatedCounter,{end:128,suffix:"K"}),sub:"tokens (RoPE scaled)",color:C.accentAlt},
-                  {label:"Training Data",value:React.createElement(AnimatedCounter,{end:15,suffix:"T"}),sub:"tokens",color:C.warn},
-                ].map((s,i) => (
-                  <div key={i} style={{padding:24,borderRadius:12,background:C.bg,border:"1px solid "+s.color+"33",textAlign:"center",animation:"fadeSlideUp 0.4s ease "+(i*0.1)+"s both"}}>
-                    <div style={{fontSize:36,fontWeight:900,color:s.color,fontFamily:"'Space Grotesk', sans-serif"}}>{s.value}</div>
-                    <div style={{fontSize:13,color:C.text,fontWeight:600,marginTop:4}}>{s.label}</div>
-                    <div style={{fontSize:11,color:C.textDim,fontFamily:"'JetBrains Mono', monospace",marginTop:2}}>{s.sub}</div>
-                  </div>
-                ))}
-              </div>
-              <div style={{padding:20,borderRadius:12,background:C.bg,border:"1px solid "+C.border,overflowX:"auto"}}>
-                <div style={{fontSize:12,color:C.accent,fontFamily:"'JetBrains Mono', monospace",textTransform:"uppercase",letterSpacing:2,marginBottom:12}}>Architecture Stack</div>
-                <div style={{display:"flex",gap:8,minWidth:600}}>
-                  {["Tokenizer (BPE)","Embedding + RoPE","N × Transformer Blocks","LM Head (Unembedding)","Softmax → Logits"].map((l,i) => (
-                    <div key={i} style={{flex:1,padding:"12px 8px",borderRadius:8,textAlign:"center",background:C.accentAlt+(10+i*5).toString(16),border:"1px solid "+C.accentAlt+"33",fontSize:11,color:C.text,fontFamily:"'JetBrains Mono', monospace",animation:"fadeSlideUp 0.3s ease "+(i*0.08)+"s both"}}>
-                      {l}{i<4 && <span style={{position:"relative",right:-4,color:C.textDim}}> →</span>}
-                    </div>
-                  ))}
-                </div>
-              </div>
-              <div style={{marginTop:12,fontSize:11,color:C.textDim,fontFamily:"'JetBrains Mono', monospace",fontStyle:"italic"}}>Note: Parameter counts for frontier models are estimated — exact figures have not been officially disclosed.</div>
-            </div>
-          );
-          case "tokenization": return <div><SectionHeader title="Tokenization" sub="Text → Token IDs via Byte-Pair Encoding (BPE)" /><TokenDemo /></div>;
-          case "embedding": return <div><SectionHeader title="Embeddings" sub="Token IDs → Dense Vectors in ℝ^d_model" /><EmbeddingViz /></div>;
-          case "transformer": return <div><SectionHeader title="Transformer Block" sub="The core repeating unit — stacked N times" /><TransformerBlock /></div>;
-          case "attention": return <div><SectionHeader title="Causal Self-Attention" sub="How tokens attend to past context — the heart of the decoder-only Transformer" /><AttentionViz /></div>;
-          case "training": return <div><SectionHeader title="Training Pipeline" sub="From raw compute to aligned assistant" /><TrainingPipeline /></div>;
-          case "inference": return <div><SectionHeader title="Inference Flow" sub="Prompt → Response: what happens at runtime" /><InferenceFlow /></div>;
-          default: return null;
-        }
-      };
-
-      return (
-        <div style={{minHeight:"100vh",background:C.bg,color:C.text,fontFamily:"'Inter', system-ui, sans-serif"}}>
-          <div style={{display:"flex",minHeight:"100vh",flexDirection:"column"}}>
-            <div className="mobile-nav-toggle" style={{display:"none",padding:"12px 16px",background:C.surface,borderBottom:"1px solid "+C.border,alignItems:"center",justifyContent:"space-between"}}>
-              <div style={{display:"flex",alignItems:"center",gap:8}}>
-                <span style={{fontSize:16,fontWeight:800,color:C.accent,fontFamily:"'Space Grotesk', sans-serif"}}>LLM</span>
-                <span style={{fontSize:11,color:C.textDim,fontFamily:"'JetBrains Mono', monospace"}}>Deep Dive</span>
-              </div>
-              <button onClick={()=>setMobileNavOpen(!mobileNavOpen)} style={{background:"none",border:"1px solid "+C.border,borderRadius:6,padding:"6px 12px",color:C.text,cursor:"pointer",fontFamily:"'JetBrains Mono', monospace",fontSize:12}}>{mobileNavOpen?"✕ Close":"☰ Sections"}</button>
-            </div>
-            {mobileNavOpen && (
-              <div className="mobile-nav-open" style={{display:"none",flexWrap:"wrap",gap:6,padding:"12px 16px",background:C.surface,borderBottom:"1px solid "+C.border}}>
-                {SECTIONS.map(s => (
-                  <button key={s.id} onClick={()=>{setActiveSection(s.id);setMobileNavOpen(false);}} style={{padding:"8px 14px",borderRadius:6,cursor:"pointer",border:"none",background:activeSection===s.id?C.accent+"15":C.surfaceAlt,color:activeSection===s.id?C.accent:C.textDim,fontFamily:"'Space Grotesk', sans-serif",fontSize:12,fontWeight:600}}>{s.label}</button>
-                ))}
-              </div>
-            )}
-            <div style={{display:"flex",flex:1}}>
-              <nav className="desktop-nav" style={{width:220,padding:"24px 12px",borderRight:"1px solid "+C.border,background:C.surface,flexDirection:"column",gap:4,position:"sticky",top:0,height:"100vh",flexShrink:0}}>
-                <div style={{padding:"8px 12px",marginBottom:16}}>
-                  <div style={{fontSize:18,fontWeight:800,color:C.accent,fontFamily:"'Space Grotesk', sans-serif",letterSpacing:-0.5}}>LLM</div>
-                  <div style={{fontSize:11,color:C.textDim,fontFamily:"'JetBrains Mono', monospace",marginTop:2}}>Deep Dive</div>
-                </div>
-                {SECTIONS.map(s => (
-                  <button key={s.id} onClick={()=>setActiveSection(s.id)} aria-label={"Navigate to "+s.label+" section"} aria-current={activeSection===s.id?"page":undefined}
-                    style={{padding:"10px 14px",borderRadius:8,cursor:"pointer",border:"none",textAlign:"left",background:activeSection===s.id?C.accent+"15":"transparent",color:activeSection===s.id?C.accent:C.textDim,fontFamily:"'Space Grotesk', sans-serif",fontSize:13,fontWeight:activeSection===s.id?700:500,transition:"all 0.15s ease",borderLeft:activeSection===s.id?"2px solid "+C.accent:"2px solid transparent"}}>
-                    <span style={{fontSize:10,opacity:0.4,marginRight:6}}>{s.key}</span>{s.label}
-                  </button>
-                ))}
-                <div style={{marginTop:"auto",padding:"12px",borderTop:"1px solid "+C.border}}>
-                  <div style={{fontSize:10,color:C.textDim,fontFamily:"'JetBrains Mono', monospace",lineHeight:1.6}}>← → navigate sections<br/>1–7 jump to section</div>
-                </div>
-              </nav>
-              <div style={{position:"fixed",bottom:0,left:0,right:0,zIndex:100,background:"linear-gradient(135deg, #0a0e17ee 0%, #111827ee 100%)",backdropFilter:"blur(12px)",WebkitBackdropFilter:"blur(12px)",borderTop:"1px solid "+C.accent+"33",padding:"12px 32px",display:"flex",alignItems:"center",justifyContent:"center",gap:12}}>
-                <span style={{fontSize:13,fontWeight:700,color:C.accent,fontFamily:"'Space Grotesk', sans-serif",letterSpacing:0.5}}>Architect U'r Career</span>
-                <span style={{color:"#ffffff",fontSize:16}}>|</span>
-                <span style={{fontSize:13,fontWeight:500,color:C.text,fontFamily:"'Space Grotesk', sans-serif"}}>Krishna Mohan Parsha</span>
-                <span style={{color:"#ffffff",fontSize:16}}>|</span>
-                <span style={{fontSize:13,fontWeight:600,color:C.accentAlt,fontFamily:"'JetBrains Mono', monospace"}}>How LLM Works</span>
-              </div>
-              <main className="main-content" style={{flex:1,padding:"40px 48px 64px",maxWidth:860,animation:"fadeSlideUp 0.3s ease"}}>
-                {renderSection()}
-              </main>
-            </div>
-          </div>
-        </div>
-      );
-    }
-
-    ReactDOM.createRoot(document.getElementById("root")).render(<LLMExplainer />);
-  </script>
+<a class="auc-skip" href="#auc-main">Skip to content</a>
+<nav class="auc-bar" aria-label="Architect U'r Career">
+  <a class="auc-bar-home" href="./">Architect U'r Career</a>
+  <span class="auc-bar-sep" aria-hidden="true">/</span>
+  <span class="auc-bar-here">LLM Deep Dive (retired)</span>
+  <span class="auc-bar-right">
+    <a href="./#guides">All guides</a>
+    <a href="about/">How this site is maintained</a>
+  </span>
+</nav>
+<main id="auc-main">
+  <h1>The LLM Deep Dive guide has been retired</h1>
+  <p>I took this guide down in November 2026. A review found errors in it that I would rather remove than patch: the layer diagram ended with softmax before logits, which is backwards; the tokeniser demonstration taught a wrong idea of how tokens are counted; and its headline figures for model sizes were unconfirmed numbers from 2023.</p>
+  <p>How language models work inside is also not where I have the most to offer. Others teach it better, and for free.</p>
+  <h2>Where to learn it instead</h2>
+  <ul>
+    <li><a href="https://www.3blue1brown.com/topics/neural-networks" target="_blank" rel="noopener">3Blue1Brown: Neural networks</a>. A visual series that builds from a single neuron to attention and transformers.</li>
+    <li><a href="https://jalammar.github.io/illustrated-transformer/" target="_blank" rel="noopener">Jay Alammar: The Illustrated Transformer</a>. The transformer architecture, one diagram at a time.</li>
+    <li><a href="https://www.youtube.com/watch?v=kCc8FmEb1nY" target="_blank" rel="noopener">Andrej Karpathy: Let's build GPT, from scratch, in code</a>. For readers who learn by writing the code.</li>
+  </ul>
+  <h2>What I do cover</h2>
+  <ul>
+    <li><a href="ai-knowledge-map/">The AI Knowledge Map</a>: the core terms and how they relate.</li>
+    <li><a href="agentic-ai-runtime/">Agentic AI Runtime Architecture</a>: how an agent runs and what bounds it.</li>
+    <li><a href="ai-security/">Securing AI Systems and Agents</a>: where these systems break and how to contain it.</li>
+  </ul>
+  <p>The retired page remains in the <a href="https://github.com/mohanparsha/architecturcareer/commits/main" target="_blank" rel="noopener">repository history</a>. The record of what changed on this site, and why, is on <a href="about/#changelog">How this site is maintained</a>.</p>
+</main>
+<footer class="auc-foot">
+  <p><a href="./">Architect U'r Career</a>, a personal initiative by Krishna Mohan Parsha. The views are my own and not those of my employer.</p>
+</footer>
+<script data-goatcounter="https://km-auc.goatcounter.com/count" async src="https://gc.zgo.at/count.js"></script>
 </body>
 </html>

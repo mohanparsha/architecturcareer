@@ -1,0 +1,69 @@
+/* Architect U'r Career: shared header strip and footer for every guide.
+   One file, so the site name, licence line and focus style are the same everywhere.
+   Everything is namespaced "auc-" and sets its own colours and font, so it reads
+   the same on a dark guide and on a light one. */
+
+.auc-skip {
+  position: absolute; left: -9999px; top: 0; z-index: 100000;
+  background: #ffffff; color: #0b1220; padding: 10px 16px; border-radius: 0 0 8px 0;
+  font: 600 14px/1.2 system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif;
+  text-decoration: underline;
+}
+.auc-skip:focus { left: 0; }
+
+.auc-bar {
+  position: relative; z-index: 50; box-sizing: border-box; width: 100%;
+  display: flex; flex-wrap: wrap; align-items: center; gap: 4px 10px;
+  margin: 0; padding: 8px 16px; min-height: 40px;
+  background: #0b1220; color: #cbd5e1; border-bottom: 2px solid #047857;
+  font: 400 13px/1.4 system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif;
+  letter-spacing: 0; text-transform: none; text-align: left;
+}
+.auc-bar a, .auc-bar a:visited { color: #ffffff; text-decoration: none; border: 0; background: none; padding: 0; }
+.auc-bar a:hover { text-decoration: underline; }
+.auc-bar .auc-bar-home { font-weight: 700; }
+.auc-bar .auc-bar-sep { color: #64748b; }
+.auc-bar .auc-bar-here { color: #cbd5e1; }
+.auc-bar .auc-bar-right { margin-left: auto; display: flex; flex-wrap: wrap; align-items: center; gap: 4px 14px; }
+.auc-bar .auc-bar-rev { color: #94a3b8; }
+
+.auc-foot {
+  box-sizing: border-box; width: 100%; margin: 0; padding: 22px 16px 26px;
+  background: #0b1220; color: #cbd5e1; border-top: 2px solid #047857;
+  font: 400 13px/1.6 system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif;
+  letter-spacing: 0; text-transform: none; text-align: center;
+}
+.auc-foot p { max-width: 860px; margin: 0 auto 6px; padding: 0; color: #cbd5e1; font: inherit; }
+.auc-foot p:last-child { margin-bottom: 0; }
+.auc-foot strong { color: #ffffff; font-weight: 600; }
+.auc-foot a, .auc-foot a:visited { color: #6ee7b7; text-decoration: underline; background: none; border: 0; padding: 0; }
+.auc-foot a:hover { color: #ffffff; }
+
+/* A notice a guide can use for "what this page is and is not", disclosures and stale-page banners. */
+.auc-note {
+  box-sizing: border-box; max-width: 980px; margin: 14px auto; padding: 12px 16px;
+  background: #fffbeb; color: #1f2937; border: 1px solid #f59e0b; border-left-width: 5px; border-radius: 6px;
+  font: 400 14px/1.55 system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif; text-align: left;
+}
+.auc-note a, .auc-note a:visited { color: #065f46; text-decoration: underline; }
+.auc-note strong { color: #111827; }
+
+/* Keyboard focus that is visible on any background. */
+a:focus-visible, button:focus-visible, summary:focus-visible, input:focus-visible, select:focus-visible,
+textarea:focus-visible, [tabindex]:focus-visible, [role="button"]:focus-visible, [role="tab"]:focus-visible {
+  outline: 3px solid #f59e0b !important; outline-offset: 2px !important;
+}
+
+@media (max-width: 560px) {
+  .auc-bar { padding: 8px 12px; font-size: 12.5px; }
+  .auc-bar .auc-bar-right { margin-left: 0; width: 100%; }
+  /* On a phone the strip stays to two lines; the maintenance page is linked from every footer. */
+  .auc-bar .auc-bar-right a[href$="about/"] { display: none; }
+}
+
+@media print {
+  .auc-skip, .auc-bar { display: none !important; }
+  .auc-foot { background: #ffffff; color: #111827; border-top: 1px solid #111827; }
+  .auc-foot p, .auc-foot strong { color: #111827; }
+  .auc-foot a, .auc-foot a:visited { color: #111827; }
+}
