@@ -1,0 +1,1261 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+<meta charset="UTF-8">
+<title>DevOps and DevSecOps Roadmap | Architect U'r Career</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="A 12-month DevOps and DevSecOps roadmap for students: monthly plan, 20 projects with cloud cost warnings, free labs, tools, certifications and a glossary.">
+<link rel="canonical" href="https://mohanparsha.github.io/architecturcareer/devops-devsecops-roadmap/">
+<meta property="og:type" content="article">
+<meta property="og:title" content="DevOps and DevSecOps Roadmap | Architect U'r Career">
+<meta property="og:description" content="A 12-month DevOps and DevSecOps roadmap for students: monthly plan, 20 projects with cloud cost warnings, free labs, tools, certifications and a glossary.">
+<meta property="og:url" content="https://mohanparsha.github.io/architecturcareer/devops-devsecops-roadmap/">
+<meta property="og:image" content="https://mohanparsha.github.io/architecturcareer/auc-logo.png">
+<meta name="twitter:card" content="summary">
+<link rel="license" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%231a1a2e'/%3E%3Cpath d='M32 24c-5.5 0-9.8 3-12.5 8 2.7 5 7 8 12.5 8s9.8-3 12.5-8c-2.7-5-7-8-12.5-8z' fill='none' stroke='%2310b981' stroke-width='3.5' stroke-linecap='round'/%3E%3Cpath d='M32 24c5.5 0 9.8 3 12.5 8-2.7 5-7 8-12.5 8s-9.8-3-12.5-8c2.7-5 7-8 12.5-8z' fill='none' stroke='%2322d3ee' stroke-width='3.5' stroke-linecap='round'/%3E%3Ccircle cx='32' cy='32' r='3' fill='%2310b981'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800;900&family=Nunito:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../assets/auc-guide.css">
+<style>
+:root{
+  --bg:#1a1a2e;--bg2:#16213e;--bg3:#0f3460;--card:#1e2747;
+  --border:#2a3560;--border2:#354070;
+  --w:#ffffff;--w2:#c8d6e5;--w3:#8892b0;
+  --g:#10b981;--g2:#34d399;--gl:#064e3b;
+  --cy:#22d3ee;--cy2:#06b6d4;
+  --am:#fbbf24;--am2:#f59e0b;
+  --pk:#f472b6;--pk2:#ec4899;
+  --or:#fb923c;--or2:#f97316;
+  --pr:#a78bfa;--pr2:#8b5cf6;
+  --rd:#f87171;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--w);font-family:'Nunito',sans-serif;line-height:1.6;font-size:15px}
+
+/* LAYOUT */
+/* The shared site strip sits above this layout and scrolls away; the sidebar then sticks to the top. */
+.layout{display:flex;align-items:flex-start}
+.sidebar{position:sticky;top:0;flex:0 0 240px;width:240px;height:100vh;background:var(--bg2);border-right:1px solid var(--border);overflow-y:auto;z-index:100;padding:20px 0;transition:transform .3s,visibility .3s}
+.main{flex:1;min-width:0;max-width:1100px;padding:0 40px 60px}
+.main a{color:var(--g2)}
+.main code{color:var(--g);background:var(--gl);padding:1px 6px;border-radius:3px;font-size:.75rem}
+
+/* SIDEBAR */
+.sb-brand{padding:12px 20px 16px;border-bottom:1px solid var(--border);margin-bottom:8px}
+.sb-brand .sb-title{font-family:'Outfit',sans-serif;font-size:.95rem;font-weight:800;color:var(--g);letter-spacing:-.3px}
+.sb-brand span{font-size:.6rem;color:var(--w3);letter-spacing:1.5px;text-transform:uppercase;font-weight:600}
+.sb-section{padding:4px 0}
+.sb-label{font-size:.58rem;color:var(--w3);text-transform:uppercase;letter-spacing:1.5px;font-weight:700;padding:12px 20px 4px}
+.sb-link{display:block;padding:6px 20px;font-size:.76rem;color:var(--w2);text-decoration:none;font-weight:600;border-left:2px solid transparent;transition:all .15s}
+.sb-link:hover,.sb-link.active{color:var(--g);background:rgba(16,185,129,.06);border-left-color:var(--g)}
+.sb-link .num{color:var(--w3);font-size:.65rem;margin-right:4px;font-weight:700}
+
+/* MOBILE NAV */
+.mob-nav{display:none;position:sticky;top:0;height:52px;background:var(--bg2);border-bottom:1px solid var(--border);z-index:200;align-items:center;padding:0 16px}
+.mob-nav .mob-title{font-family:'Outfit',sans-serif;font-size:.88rem;font-weight:800;color:var(--g);flex:1}
+.ham{background:none;border:none;color:var(--w);font-size:1.4rem;cursor:pointer;padding:4px}
+.overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,.5);z-index:250}
+
+/* HERO */
+.hero{padding:48px 0 32px;border-bottom:1px solid var(--border)}
+.hero h1{font-family:'Outfit',sans-serif;font-size:2.4rem;font-weight:900;letter-spacing:-1.5px;line-height:1.1;color:var(--w)}
+.hero h1 em{font-style:normal;color:var(--g)}
+.hero p{color:var(--w2);margin-top:8px;font-size:.92rem;max-width:680px}
+.hero .hero-by{font-size:.78rem;color:var(--w3)}
+.hero-tags{display:flex;gap:8px;margin-top:14px;flex-wrap:wrap}
+.hero-tag{font-size:.62rem;font-weight:700;padding:4px 14px;border-radius:100px;letter-spacing:.3px}
+.ht1{color:var(--g);background:var(--gl)}
+.ht2{color:var(--cy);background:rgba(34,211,238,.1)}
+.ht3{color:var(--am);background:rgba(251,191,36,.1)}
+.ht4{color:var(--pk);background:rgba(244,114,182,.1)}
+
+/* SECTIONS */
+.section{padding:40px 0 8px;border-bottom:1px solid var(--border)}
+.section:last-of-type{border-bottom:none}
+.sh{font-family:'Outfit',sans-serif;font-size:1.5rem;font-weight:800;letter-spacing:-.5px;margin-bottom:4px;display:flex;align-items:center;gap:10px}
+.sh .ico{font-size:1.2rem}
+.sh-sub{color:var(--w3);font-size:.78rem;margin-bottom:20px}
+.sh-green{color:var(--g)}
+
+/* CARDS */
+.card{background:var(--card);border:1px solid var(--border);border-radius:10px;padding:18px;margin-bottom:12px}
+.card-h{font-family:'Outfit',sans-serif;font-size:.92rem;font-weight:700;color:var(--w);margin-bottom:6px;display:flex;align-items:center;gap:8px}
+.card-h .badge{font-size:.55rem;font-weight:800;padding:2px 8px;border-radius:4px;letter-spacing:.3px}
+.card p,.card li{color:var(--w2);font-size:.82rem}
+.card ul{padding-left:18px;display:flex;flex-direction:column;gap:3px}
+.card li::marker{color:var(--g)}
+
+/* PHASE CARDS */
+.phase-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:14px}
+.pc{background:var(--card);border:1px solid var(--border);border-radius:10px;padding:16px;position:relative;overflow:hidden;transition:border-color .2s}
+.pc::before{content:'';position:absolute;top:0;left:0;right:0;height:3px}
+.pc:hover{border-color:var(--c)}
+.pc[data-c="g"]{--c:var(--g)}.pc[data-c="cy"]{--c:var(--cy)}.pc[data-c="pr"]{--c:var(--pr)}.pc[data-c="or"]{--c:var(--or)}.pc[data-c="pk"]{--c:var(--pk)}.pc[data-c="am"]{--c:var(--am)}
+.pc::before{background:var(--c)}
+.pc-num{font-family:'Outfit',sans-serif;font-size:.65rem;font-weight:900;color:var(--bg);background:var(--c);width:24px;height:24px;border-radius:7px;display:inline-flex;align-items:center;justify-content:center}
+.pc-title{font-family:'Outfit',sans-serif;font-size:.88rem;font-weight:800;color:var(--w)}
+.pc-time{font-size:.62rem;font-weight:700;color:var(--c)}
+.pc-topics{margin-top:10px;display:flex;flex-direction:column;gap:4px}
+.pc-t{display:flex;gap:6px;font-size:.72rem;align-items:flex-start}
+.pc-t::before{content:'';width:5px;height:5px;border-radius:50%;background:var(--c);flex-shrink:0;margin-top:6px}
+.pc-t b{color:var(--w);font-weight:700}
+.pc-t span{color:var(--w3)}
+.pc-mile{margin-top:10px;padding:6px 10px;background:rgba(16,185,129,.08);border:1px solid rgba(16,185,129,.2);border-radius:6px;font-size:.64rem;color:var(--g);font-weight:700}
+
+/* MONTH GRID */
+.month-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:12px}
+.mc{background:var(--card);border:1px solid var(--border);border-radius:10px;padding:14px 16px;position:relative;overflow:hidden}
+.mc::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:var(--c)}
+.mc[data-c="g"]{--c:var(--g)}.mc[data-c="cy"]{--c:var(--cy)}.mc[data-c="pr"]{--c:var(--pr)}.mc[data-c="or"]{--c:var(--or)}.mc[data-c="pk"]{--c:var(--pk)}.mc[data-c="am"]{--c:var(--am)}
+.mc-h{display:flex;align-items:center;gap:8px;margin-bottom:8px}
+.mc-num{font-family:'Outfit',sans-serif;font-size:.9rem;font-weight:900;color:var(--c)}
+.mc-label{font-family:'Outfit',sans-serif;font-size:.78rem;font-weight:700;color:var(--w)}
+.mc-phase{font-size:.55rem;color:var(--c);font-weight:700;letter-spacing:.5px;text-transform:uppercase}
+.mc ul{padding-left:16px;display:flex;flex-direction:column;gap:2px}
+.mc li{font-size:.72rem;color:var(--w2)}
+.mc li::marker{color:var(--c)}
+.mc-goal{margin-top:8px;font-size:.65rem;font-weight:700;color:var(--c);padding-top:6px;border-top:1px dashed var(--border)}
+
+/* RESOURCE CARDS */
+.res-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(340px,1fr));gap:12px}
+.rc{background:var(--card);border:1px solid var(--border);border-radius:10px;padding:14px 16px;transition:border-color .2s}
+.rc:hover{border-color:var(--g)}
+.rc-title{font-family:'Outfit',sans-serif;font-size:.82rem;font-weight:700;color:var(--w);margin-bottom:4px}
+.rc-title a{color:var(--g);text-decoration:none;font-weight:800}
+.rc-title a:hover{text-decoration:underline;color:var(--g2)}
+.rc-desc{font-size:.72rem;color:var(--w3)}
+.rc-tag{display:inline-block;font-size:.52rem;font-weight:700;padding:2px 8px;border-radius:4px;margin-top:6px;letter-spacing:.3px}
+.tag-free{color:var(--g);background:rgba(16,185,129,.1)}
+.tag-github{color:var(--pr);background:rgba(167,139,250,.1)}
+.tag-yt{color:var(--rd);background:rgba(248,113,113,.1)}
+.tag-doc{color:var(--cy);background:rgba(34,211,238,.1)}
+.tag-course{color:var(--am);background:rgba(251,191,36,.1)}
+.tag-practice{color:var(--or);background:rgba(251,146,60,.1)}
+.tag-book{color:var(--pk);background:rgba(244,114,182,.1)}
+.tag-community{color:var(--g2);background:rgba(52,211,153,.1)}
+
+/* CERT TABLE */
+.cert-tbl{width:100%;border-collapse:collapse;margin-top:8px;font-size:.78rem}
+.cert-tbl th{text-align:left;padding:8px 12px;background:var(--bg3);color:var(--g);font-family:'Outfit',sans-serif;font-weight:700;font-size:.68rem;letter-spacing:.5px;text-transform:uppercase;border-bottom:2px solid var(--border)}
+.cert-tbl td{padding:8px 12px;border-bottom:1px solid var(--border);color:var(--w2)}
+.cert-tbl tr:hover td{background:rgba(16,185,129,.04)}
+
+/* CAREER TABLE */
+.career-tbl{width:100%;border-collapse:collapse;font-size:.78rem;margin-top:8px}
+.career-tbl th{text-align:left;padding:8px 12px;background:var(--bg3);color:var(--cy);font-family:'Outfit',sans-serif;font-weight:700;font-size:.68rem;letter-spacing:.5px;text-transform:uppercase;border-bottom:2px solid var(--border)}
+.career-tbl td{padding:8px 12px;border-bottom:1px solid var(--border);color:var(--w2)}
+
+/* INFO BOX */
+.info{background:rgba(16,185,129,.06);border:1px solid rgba(16,185,129,.2);border-radius:8px;padding:14px 16px;margin:12px 0;font-size:.8rem;color:var(--w2)}
+.info strong{color:var(--g)}
+.info.warn{background:rgba(251,191,36,.06);border-color:rgba(251,191,36,.2)}
+.info.warn strong{color:var(--am)}
+.info.warn a{color:var(--am)}
+.info ul{padding-left:18px;margin-top:8px;display:flex;flex-direction:column;gap:5px}
+.info li::marker{color:var(--g)}
+.info.warn li::marker{color:var(--am)}
+.tbl-wrap{overflow-x:auto}
+
+
+/* PIPELINE */
+.pipe-wrap{overflow-x:auto;padding-bottom:8px;margin-top:12px}
+.pipe{display:flex;align-items:stretch;gap:0;min-width:800px}
+.pipe-stage{flex:1;position:relative;text-align:center}
+.pipe-bar{height:40px;display:flex;align-items:center;justify-content:center;font-family:'Outfit',sans-serif;font-size:.7rem;font-weight:800;color:var(--bg);letter-spacing:.3px;position:relative}
+.pipe-stage:first-child .pipe-bar{border-radius:8px 0 0 8px}
+.pipe-stage:last-child .pipe-bar{border-radius:0 8px 8px 0}
+.pipe-arrow{position:absolute;right:-8px;top:50%;transform:translateY(-50%);width:0;height:0;border-top:10px solid transparent;border-bottom:10px solid transparent;z-index:2}
+.pipe-tools{margin-top:10px;display:flex;flex-direction:column;gap:3px;align-items:center}
+.pipe-tool{font-size:.62rem;font-weight:700;padding:2px 10px;border-radius:4px;display:inline-block;white-space:nowrap}
+
+/* MISTAKES */
+.mistake-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:10px}
+
+/* PROJECTS */
+.proj-tier{margin-bottom:20px}
+.tier-label{display:inline-flex;align-items:center;gap:6px;font-family:'Outfit',sans-serif;font-size:.88rem;font-weight:800;padding:4px 16px;border-radius:6px;margin-bottom:10px}
+.tier-phase{font-size:.6rem;font-weight:700;color:var(--w3);margin-left:4px;letter-spacing:.3px}
+.proj-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(340px,1fr));gap:10px}
+.pj{background:var(--card);border:1px solid var(--border);border-radius:10px;padding:16px;border-left:3px solid var(--tc);transition:border-color .2s}
+.pj:hover{border-color:var(--tc)}
+.pj-title{font-family:'Outfit',sans-serif;font-size:.84rem;font-weight:800;color:var(--w);margin-bottom:4px;display:flex;align-items:center;gap:6px}
+.pj-title .pj-num{font-size:.6rem;font-weight:900;color:var(--bg);background:var(--tc);width:20px;height:20px;border-radius:5px;display:inline-flex;align-items:center;justify-content:center;flex-shrink:0}
+.pj p{font-size:.76rem;color:var(--w2);margin-bottom:6px}
+.pj-tools{display:flex;flex-wrap:wrap;gap:4px;margin-top:6px}
+.pj-tool{font-size:.55rem;font-weight:700;padding:2px 8px;border-radius:4px;letter-spacing:.3px;background:rgba(255,255,255,.05);color:var(--w3)}
+.pj-cost{margin-top:8px;font-size:.68rem;line-height:1.5;padding:6px 9px;border-radius:6px;color:var(--w2)}
+.pj-cost b{font-weight:800}
+.pj-cost.free{background:rgba(16,185,129,.07);border:1px solid rgba(16,185,129,.2)}
+.pj-cost.free b{color:var(--g)}
+.pj-cost.paid{background:rgba(251,191,36,.07);border:1px solid rgba(251,191,36,.3)}
+.pj-cost.paid b{color:var(--am)}
+.pj-outcome{margin-top:8px;font-size:.68rem;color:var(--tc);font-weight:700;padding-top:6px;border-top:1px dashed var(--border);display:flex;align-items:flex-start;gap:4px}
+.mk{background:var(--card);border:1px solid var(--border);border-radius:10px;padding:14px 16px;border-left:3px solid var(--rd)}
+.mk-h{font-family:'Outfit',sans-serif;font-size:.82rem;font-weight:700;color:var(--rd);margin-bottom:4px;display:flex;align-items:center;gap:6px}
+.mk-fix{font-size:.75rem;color:var(--g);font-weight:700;margin-top:6px;display:flex;align-items:flex-start;gap:5px}
+.mk p{font-size:.78rem;color:var(--w2)}
+
+/* GLOSSARY */
+.gloss-cat{margin-bottom:16px}
+.gloss-cat-h{font-family:'Outfit',sans-serif;font-size:.85rem;font-weight:800;padding:6px 14px;border-radius:6px;display:inline-block;margin-bottom:8px}
+.gloss-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(340px,1fr));gap:6px}
+.gl{display:flex;gap:8px;padding:6px 10px;border-radius:6px;font-size:.74rem;transition:background .15s}
+.gl:hover{background:rgba(255,255,255,.03)}
+.gl-term{font-family:'Outfit',sans-serif;font-weight:700;color:var(--w);white-space:nowrap;min-width:100px;flex-shrink:0}
+.gl-def{color:var(--w3)}
+
+/* RESPONSIVE */
+@media(max-width:860px){
+  .layout{display:block}
+  .sidebar{position:fixed;left:0;z-index:300;transform:translateX(-100%);visibility:hidden}
+  .sidebar.open{transform:translateX(0);visibility:visible}
+  .mob-nav{display:flex}
+  .overlay.open{display:block}
+  .main{padding:8px 20px 48px}
+  .section,.hero,#cost{scroll-margin-top:60px}
+  .hero{padding-top:16px}
+  .hero h1{font-size:1.7rem}
+  .phase-grid,.month-grid,.res-grid,.proj-grid,.gloss-grid{grid-template-columns:1fr}
+}
+@media print{
+  .sidebar,.mob-nav,.overlay{display:none!important}
+  .layout{display:block}
+  body{background:#fff;color:#1a1a1a}
+  .pj-cost{color:#333;background:#fff;border:1px solid #bbb}
+  .card,.pc,.mc,.rc,.pj,.mk{border:1px solid #ddd;background:#f9f9f9}
+  .sh,.card-h,.pc-title,.mc-label,.rc-title,.pj-title,.mk-h{color:#1a1a1a}
+  .pj-outcome,.mk-fix,.pc-mile{color:#333}
+  .tier-label{color:#333!important;background:#eee!important}
+}
+</style>
+</head>
+<body>
+<!-- auc:bar -->
+<a class="auc-skip" href="#auc-main">Skip to content</a>
+<nav class="auc-bar" aria-label="Architect U'r Career">
+  <a class="auc-bar-home" href="../">Architect U'r Career</a>
+  <span class="auc-bar-sep" aria-hidden="true">/</span>
+  <span class="auc-bar-here">DevOps and DevSecOps Roadmap</span>
+  <span class="auc-bar-right">
+    <span class="auc-bar-rev">Last reviewed: November 2026</span>
+    <a href="../#guides">All guides</a>
+    <a href="../about/">How this site is maintained</a>
+  </span>
+</nav>
+<!-- /auc:bar -->
+
+<!-- MOBILE NAV -->
+<div class="mob-nav">
+  <div class="mob-title">DevOps Roadmap</div>
+  <button class="ham" id="ham" type="button" onclick="toggleSidebar()" aria-label="Open or close the section menu" aria-controls="sidebar" aria-expanded="false">☰</button>
+</div>
+<div class="overlay" id="overlay" onclick="toggleSidebar()" aria-label="Close the section menu"></div>
+
+<div class="layout">
+<!-- SIDEBAR -->
+<nav class="sidebar" id="sidebar" aria-label="Sections of this guide">
+  <div class="sb-brand">
+    <div class="sb-title">DevOps & DevSecOps</div>
+    <span>Roadmap · version 3.0</span>
+  </div>
+  <div class="sb-section">
+    <div class="sb-label">Foundation</div>
+    <a href="#what-is-devops" class="sb-link" onclick="closeSB()"><span class="num">01</span> What is DevOps?</a>
+    <a href="#what-is-devsecops" class="sb-link" onclick="closeSB()"><span class="num">02</span> What is DevSecOps?</a>
+    <a href="#pipeline" class="sb-link" onclick="closeSB()"><span class="num">03</span> Pipeline & Toolchain</a>
+    <a href="#prerequisites" class="sb-link" onclick="closeSB()"><span class="num">04</span> Prerequisites & Setup</a>
+  </div>
+  <div class="sb-section">
+    <div class="sb-label">Roadmap</div>
+    <a href="#roadmap" class="sb-link" onclick="closeSB()"><span class="num">05</span> 6-Phase Roadmap</a>
+    <a href="#monthly" class="sb-link" onclick="closeSB()"><span class="num">06</span> Monthly Plan</a>
+    <a href="#projects" class="sb-link" onclick="closeSB()"><span class="num">07</span> Projects Lab</a>
+    <a href="#cost" class="sb-link" onclick="closeSB()"><span class="num">!</span> How not to get billed</a>
+  </div>
+  <div class="sb-section">
+    <div class="sb-label">Resources</div>
+    <a href="#resources" class="sb-link" onclick="closeSB()"><span class="num">08</span> Learning Resources</a>
+    <a href="#github" class="sb-link" onclick="closeSB()"><span class="num">09</span> GitHub Repos</a>
+    <a href="#tools" class="sb-link" onclick="closeSB()"><span class="num">10</span> DevSecOps Tools</a>
+  </div>
+  <div class="sb-section">
+    <div class="sb-label">Career</div>
+    <a href="#certs" class="sb-link" onclick="closeSB()"><span class="num">11</span> Certifications</a>
+    <a href="#careers" class="sb-link" onclick="closeSB()"><span class="num">12</span> Career Paths</a>
+    <a href="#communities" class="sb-link" onclick="closeSB()"><span class="num">13</span> Communities</a>
+    <a href="#mistakes" class="sb-link" onclick="closeSB()"><span class="num">14</span> Beginner Mistakes</a>
+    <a href="#interview" class="sb-link" onclick="closeSB()"><span class="num">15</span> Interview Prep</a>
+    <a href="#glossary" class="sb-link" onclick="closeSB()"><span class="num">16</span> Glossary</a>
+  </div>
+  <div class="sb-section">
+    <div class="sb-label">Related guides</div>
+    <a href="../secure-sdlc/" class="sb-link">Secure SDLC</a>
+    <a href="../cybersecurity-roadmap/" class="sb-link">Cybersecurity Roadmap</a>
+    <a href="../network-concepts/" class="sb-link">Network Concepts</a>
+  </div>
+</nav>
+
+<!-- MAIN CONTENT -->
+<main class="main" id="auc-main">
+
+<!-- HERO -->
+<div class="hero" id="top">
+  <h1>DevOps & <em>DevSecOps</em><br>Roadmap</h1>
+  <p>A 12-month roadmap for students and early-career engineers who want to work in DevOps or DevSecOps: a month-by-month plan, 20 hands-on projects with their cloud costs marked, free learning resources, career guidance and a glossary of 91 terms.</p>
+  <p class="hero-by">Written by <a href="../">Krishna Mohan Parsha</a>. Version 3.0, last reviewed November 2026.</p>
+  <div class="hero-tags">
+    <span class="hero-tag ht1">12-Month Roadmap</span>
+    <span class="hero-tag ht2">6 Phases · 8–12 hrs/week</span>
+    <span class="hero-tag ht3">20 Projects · 38 Resources</span>
+    <span class="hero-tag ht4">Version 3.0 · November 2026</span>
+  </div>
+</div>
+
+<!-- WHAT CHANGED -->
+<div class="info" id="whats-new" style="margin-top:20px">
+  <strong>What changed in version 3.0.</strong> The AWS free-tier terms, the free labs, every outbound link and each change listed here were checked against the official source on 18 November 2026. The changes that affect what you do:
+  <ul>
+    <li><strong>AWS Free Tier:</strong> accounts created from 15 July 2025 get credits and a six-month free plan, not 12 months of free use. Read <a href="#cost">How not to get billed</a> before you open a cloud account (<a href="https://aws.amazon.com/free/" target="_blank" rel="noopener">AWS Free Tier</a>).</li>
+    <li><strong>Browser labs:</strong> Play with Docker and Play with Kubernetes are removed. Docker's notice on both sites says they are unavailable from 1 March 2026. Killercoda and iximiuz Labs are the free labs listed now.</li>
+    <li><strong>Logs:</strong> Promtail reached end of life on 2 March 2026; Grafana Alloy replaces it (<a href="https://grafana.com/docs/loki/latest/send-data/promtail/" target="_blank" rel="noopener">Grafana notice</a>).</li>
+    <li><strong>Terraform state locking:</strong> the DynamoDB lock table is deprecated. Use the S3 backend's own lock file (<code>use_lockfile = true</code>), generally available since Terraform 1.11 (<a href="https://developer.hashicorp.com/terraform/language/backend/s3" target="_blank" rel="noopener">S3 backend documentation</a>).</li>
+    <li><strong>Kubernetes traffic routing:</strong> the ingress-nginx controller was retired in March 2026 and the Ingress API is frozen. Kubernetes recommends Gateway API for new work (<a href="https://kubernetes.io/blog/2025/11/11/ingress-nginx-retirement/" target="_blank" rel="noopener">retirement notice</a>, <a href="https://kubernetes.io/docs/concepts/services-networking/ingress/" target="_blank" rel="noopener">Ingress documentation</a>).</li>
+    <li><strong>Licences and names:</strong> Vault and Terraform are under the Business Source License, which HashiCorp announced on 10 August 2023, so they are no longer open source (<a href="https://www.hashicorp.com/en/blog/hashicorp-adopts-business-source-license" target="_blank" rel="noopener">announcement</a>). ZAP has been "ZAP by Checkmarx" since September 2024 and no longer carries the OWASP name (<a href="https://www.zaproxy.org/blog/2024-09-24-zap-has-joined-forces-with-checkmarx/" target="_blank" rel="noopener">ZAP blog</a>).</li>
+    <li><strong>Supply chain:</strong> in March 2026 attackers replaced the version tags of the Trivy GitHub Actions with malicious code. Pin every third-party action to a full commit SHA (<a href="https://github.com/aquasecurity/trivy/security/advisories/GHSA-69fq-xp46-6x23" target="_blank" rel="noopener">Trivy advisory</a>).</li>
+  </ul>
+</div>
+
+<!-- ===================== SECTION 1: WHAT IS DEVOPS ===================== -->
+<div class="section" id="what-is-devops">
+  <h2 class="sh"><span class="ico">⚡</span> What is DevOps?</h2>
+  <p class="sh-sub">The culture, practices, and tools that unite Development and Operations</p>
+  <div class="card">
+    <p>DevOps is a set of cultural philosophies, practices, and tools that combines software development (Dev) and IT operations (Ops). The goal is to shorten the software development lifecycle and deliver high-quality software continuously. It is not a job title, a single tool, or a technology. It is a <strong style="color:var(--g)">mindset and a way of working</strong>.</p>
+    <p style="margin-top:10px">Traditionally, developers would write code and hand it off to a separate operations team to deploy. This created silos, communication gaps, and slow release cycles. DevOps eliminates these silos by encouraging teams to work together throughout the entire lifecycle, from planning and coding to testing, deployment, and monitoring.</p>
+  </div>
+  <h3 style="font-family:'Outfit',sans-serif;font-size:.95rem;font-weight:700;color:var(--g);margin:16px 0 8px">Core Principles</h3>
+  <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:10px">
+    <div class="card"><div class="card-h">🤝 Collaboration</div><p>Breaking down silos between development and operations teams.</p></div>
+    <div class="card"><div class="card-h">🤖 Automation</div><p>Automating testing, deployment, and infrastructure provisioning to reduce human error.</p></div>
+    <div class="card"><div class="card-h">🔄 CI/CD</div><p>Continuous Integration merges code frequently; Continuous Delivery/Deployment automates releases.</p></div>
+    <div class="card"><div class="card-h">📊 Monitoring & Feedback</div><p>Continuously monitoring production systems and using feedback loops to improve.</p></div>
+    <div class="card"><div class="card-h">📝 Infrastructure as Code</div><p>Managing infrastructure through code rather than manual processes.</p></div>
+    <div class="card"><div class="card-h">🛡️ Security Integration</div><p>Embedding security checks throughout the pipeline, not just at the end.</p></div>
+  </div>
+</div>
+
+<!-- ===================== SECTION 2: WHAT IS DEVSECOPS ===================== -->
+<div class="section" id="what-is-devsecops">
+  <h2 class="sh"><span class="ico">🛡️</span> What is DevSecOps?</h2>
+  <p class="sh-sub">Security integrated into every phase of the software development lifecycle</p>
+  <div class="card">
+    <p>DevSecOps extends the DevOps philosophy by integrating security practices into every phase of the development lifecycle, rather than treating security as a separate, final step. The traditional "security gate" model, where vulnerabilities discovered late were expensive to fix, is replaced by <strong style="color:var(--g)">"shifting security left"</strong>.</p>
+  </div>
+  <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:10px;margin-top:12px">
+    <div class="card"><div class="card-h"><span class="badge" style="background:var(--gl);color:var(--g)">SAST</span> Static Analysis</div><p>Scan source code for vulnerabilities before deployment (Semgrep, SonarQube)</p></div>
+    <div class="card"><div class="card-h"><span class="badge" style="background:rgba(34,211,238,.1);color:var(--cy)">DAST</span> Dynamic Testing</div><p>Test running applications for vulnerabilities at runtime (ZAP, Nuclei)</p></div>
+    <div class="card"><div class="card-h"><span class="badge" style="background:rgba(167,139,250,.1);color:var(--pr)">SCA</span> Composition Analysis</div><p>Scan dependencies and container images for known CVEs (Trivy, Grype)</p></div>
+    <div class="card"><div class="card-h"><span class="badge" style="background:rgba(251,191,36,.1);color:var(--am)">IaC Scan</span> Infra Security</div><p>Detect IaC misconfigurations before deployment (Checkov, Trivy)</p></div>
+    <div class="card"><div class="card-h"><span class="badge" style="background:rgba(244,114,182,.1);color:var(--pk)">Secrets</span> Detection</div><p>Prevent hardcoded secrets from reaching repos (Gitleaks, TruffleHog)</p></div>
+    <div class="card"><div class="card-h"><span class="badge" style="background:rgba(251,146,60,.1);color:var(--or)">IAM</span> Access Control</div><p>Manage secrets and access with HashiCorp Vault or OpenBao, and Kubernetes RBAC</p></div>
+  </div>
+  <div class="info" style="margin-top:12px"><strong>Related guide:</strong> the <a href="../secure-sdlc/">Secure SDLC guide</a> on this site goes through the security activities stage by stage. This page stays with the DevOps toolchain and the learning plan.</div>
+</div>
+
+<!-- ===================== SECTION 3: PIPELINE & TOOLCHAIN ===================== -->
+<div class="section" id="pipeline">
+  <h2 class="sh"><span class="ico">🔗</span> DevOps Pipeline & Toolchain</h2>
+  <p class="sh-sub">Where every tool fits: the 8-stage pipeline that defines modern DevOps</p>
+  <div class="pipe-wrap">
+    <div class="pipe">
+      <div class="pipe-stage">
+        <div class="pipe-bar" style="background:var(--g)">PLAN<span class="pipe-arrow" style="border-left:8px solid var(--g)"></span></div>
+        <div class="pipe-tools">
+          <span class="pipe-tool" style="color:var(--g);background:var(--gl)">Jira</span>
+          <span class="pipe-tool" style="color:var(--g);background:var(--gl)">Confluence</span>
+          <span class="pipe-tool" style="color:var(--g);background:var(--gl)">GitHub Issues</span>
+        </div>
+      </div>
+      <div class="pipe-stage">
+        <div class="pipe-bar" style="background:var(--cy)">CODE<span class="pipe-arrow" style="border-left:8px solid var(--cy)"></span></div>
+        <div class="pipe-tools">
+          <span class="pipe-tool" style="color:var(--cy);background:rgba(34,211,238,.1)">Git / GitHub</span>
+          <span class="pipe-tool" style="color:var(--cy);background:rgba(34,211,238,.1)">VS Code</span>
+          <span class="pipe-tool" style="color:var(--cy);background:rgba(34,211,238,.1)">Python / Bash</span>
+          <span class="pipe-tool" style="color:var(--cy);background:rgba(34,211,238,.1)">Gitleaks (pre-commit)</span>
+        </div>
+      </div>
+      <div class="pipe-stage">
+        <div class="pipe-bar" style="background:var(--pr)">BUILD<span class="pipe-arrow" style="border-left:8px solid var(--pr)"></span></div>
+        <div class="pipe-tools">
+          <span class="pipe-tool" style="color:var(--pr);background:rgba(167,139,250,.1)">Docker</span>
+          <span class="pipe-tool" style="color:var(--pr);background:rgba(167,139,250,.1)">Docker Compose</span>
+          <span class="pipe-tool" style="color:var(--pr);background:rgba(167,139,250,.1)">Helm</span>
+        </div>
+      </div>
+      <div class="pipe-stage">
+        <div class="pipe-bar" style="background:var(--or)">TEST<span class="pipe-arrow" style="border-left:8px solid var(--or)"></span></div>
+        <div class="pipe-tools">
+          <span class="pipe-tool" style="color:var(--or);background:rgba(251,146,60,.1)">Semgrep (SAST)</span>
+          <span class="pipe-tool" style="color:var(--or);background:rgba(251,146,60,.1)">Trivy (SCA)</span>
+          <span class="pipe-tool" style="color:var(--or);background:rgba(251,146,60,.1)">ZAP (DAST)</span>
+        </div>
+      </div>
+      <div class="pipe-stage">
+        <div class="pipe-bar" style="background:var(--pk)">RELEASE<span class="pipe-arrow" style="border-left:8px solid var(--pk)"></span></div>
+        <div class="pipe-tools">
+          <span class="pipe-tool" style="color:var(--pk);background:rgba(244,114,182,.1)">Jenkins</span>
+          <span class="pipe-tool" style="color:var(--pk);background:rgba(244,114,182,.1)">GitHub Actions</span>
+          <span class="pipe-tool" style="color:var(--pk);background:rgba(244,114,182,.1)">Container registry</span>
+        </div>
+      </div>
+      <div class="pipe-stage">
+        <div class="pipe-bar" style="background:var(--am)">DEPLOY<span class="pipe-arrow" style="border-left:8px solid var(--am)"></span></div>
+        <div class="pipe-tools">
+          <span class="pipe-tool" style="color:var(--am);background:rgba(251,191,36,.1)">Kubernetes</span>
+          <span class="pipe-tool" style="color:var(--am);background:rgba(251,191,36,.1)">ArgoCD / Flux</span>
+          <span class="pipe-tool" style="color:var(--am);background:rgba(251,191,36,.1)">Terraform</span>
+        </div>
+      </div>
+      <div class="pipe-stage">
+        <div class="pipe-bar" style="background:var(--cy2)">OPERATE<span class="pipe-arrow" style="border-left:8px solid var(--cy2)"></span></div>
+        <div class="pipe-tools">
+          <span class="pipe-tool" style="color:var(--cy);background:rgba(34,211,238,.1)">Ansible</span>
+          <span class="pipe-tool" style="color:var(--cy);background:rgba(34,211,238,.1)">Vault (Secrets)</span>
+          <span class="pipe-tool" style="color:var(--cy);background:rgba(34,211,238,.1)">AWS / Cloud</span>
+        </div>
+      </div>
+      <div class="pipe-stage">
+        <div class="pipe-bar" style="background:var(--g2)">MONITOR</div>
+        <div class="pipe-tools">
+          <span class="pipe-tool" style="color:var(--g);background:var(--gl)">Prometheus</span>
+          <span class="pipe-tool" style="color:var(--g);background:var(--gl)">Grafana</span>
+          <span class="pipe-tool" style="color:var(--g);background:var(--gl)">Loki + Alloy (Logs)</span>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="info" style="margin-top:14px"><strong>How to read this:</strong> Code flows left to right through the pipeline. Each stage has tools you will learn in this roadmap. Security starts before the pipeline: Gitleaks checks every commit for secrets on your own machine, and again in CI. Semgrep, Trivy and ZAP then run in the Test stage. This is what makes it DevSecOps, not just DevOps. The pipeline is a continuous loop: Monitor feeds back into Plan.</div>
+  <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:10px;margin-top:14px">
+    <div class="card"><div class="card-h" style="color:var(--g)">♻️ Continuous Integration (CI)</div><p>Code → Build → Test: Every code change is automatically built and tested. Catches bugs early before they reach production.</p></div>
+    <div class="card"><div class="card-h" style="color:var(--cy)">🚀 Continuous Delivery/Deployment (CD)</div><p>Release → Deploy: Automatically prepare releases (delivery) or deploy directly to production (deployment). Reduces manual handoffs.</p></div>
+    <div class="card"><div class="card-h" style="color:var(--or)">🛡️ Shift-Left Security</div><p>Code → Test: Security scanning runs automatically, as early as it can: secrets detection on every commit, SAST on code, SCA on dependencies, DAST on running apps.</p></div>
+    <div class="card"><div class="card-h" style="color:var(--am)">📊 Observability Loop</div><p>Monitor → Plan: Metrics, logs, and alerts from production feed back into planning. SLIs/SLOs track reliability. Incidents drive improvements.</p></div>
+  </div>
+</div>
+
+<!-- ===================== SECTION 4: PREREQUISITES ===================== -->
+<div class="section" id="prerequisites">
+  <h2 class="sh"><span class="ico">🧱</span> Prerequisites & Setup</h2>
+  <p class="sh-sub">What you need before starting your DevOps journey</p>
+
+  <h3 style="font-family:'Outfit',sans-serif;font-size:.95rem;font-weight:700;color:var(--g);margin:8px 0">Hardware Requirements</h3>
+  <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:10px">
+    <div class="card">
+      <div class="card-h">💻 Minimum Specs</div>
+      <ul><li>8 GB RAM</li><li>Intel i5 / AMD Ryzen 5</li><li>256 GB SSD (50 GB free)</li><li>Stable internet connection</li></ul>
+    </div>
+    <div class="card" style="border-color:var(--g)">
+      <div class="card-h" style="color:var(--g)">🚀 Recommended Specs</div>
+      <ul><li>16 GB RAM</li><li>Intel i7 / AMD Ryzen 7</li><li>512 GB SSD</li><li>Broadband connection</li></ul>
+    </div>
+  </div>
+  <div class="info warn" style="margin-top:12px">
+    <strong>Low-spec machines:</strong> If you have only 8 GB RAM, close unnecessary apps when running containers and use a free browser lab for heavier workloads: <a href="https://killercoda.com" target="_blank" rel="noopener">Killercoda</a> (free with registration; each scenario runs for up to one hour) or <a href="https://labs.iximiuz.com/" target="_blank" rel="noopener">iximiuz Labs</a> (free Basic plan: one playground at a time, one hour a day, no card needed). Limits as published by each site on 18 November 2026.
+  </div>
+
+  <h3 style="font-family:'Outfit',sans-serif;font-size:.95rem;font-weight:700;color:var(--g);margin:16px 0 8px">Foundation Knowledge (from your CSE Degree)</h3>
+  <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:10px">
+    <div class="card"><div class="card-h">🖥️ Operating Systems</div><p>Process management, memory, file systems → translates directly to Linux administration</p></div>
+    <div class="card"><div class="card-h">🌐 Computer Networks</div><p>OSI model, TCP/IP, DNS, HTTP → foundation for networking in DevOps. Revise with the <a href="../network-concepts/">Network Concepts guide</a>.</p></div>
+    <div class="card"><div class="card-h">💾 Databases</div><p>SQL, normalisation, backups → managing databases in production systems</p></div>
+    <div class="card"><div class="card-h">🐍 Programming (any language)</div><p>Logic, data structures, APIs → Python scripting & automation</p></div>
+    <div class="card"><div class="card-h">🔐 Basic Security</div><p>Encryption, authentication, access control → DevSecOps foundation</p></div>
+    <div class="card"><div class="card-h">📐 Software Engineering</div><p>SDLC, Agile, version control concepts → CI/CD pipeline design</p></div>
+  </div>
+
+  <h3 style="font-family:'Outfit',sans-serif;font-size:.95rem;font-weight:700;color:var(--g);margin:16px 0 8px">Software to Install Before Starting</h3>
+  <div class="card">
+    <ul>
+      <li><strong style="color:var(--w)">Ubuntu LTS</strong> (24.04 or 26.04), as dual-boot or inside VirtualBox/VMware</li>
+      <li><strong style="color:var(--w)">VS Code</strong>, with extensions for YAML, Docker, Kubernetes, Python</li>
+      <li><strong style="color:var(--w)">Git</strong>, and a free <a href="https://github.com" target="_blank" rel="noopener" style="color:var(--g)">GitHub</a> account</li>
+      <li><strong style="color:var(--w)">Python 3.x</strong>, pre-installed on Ubuntu; verify with <code style="color:var(--g);background:var(--gl);padding:1px 6px;border-radius:3px;font-size:.75rem">python3 --version</code></li>
+      <li><strong style="color:var(--w)">Docker Desktop</strong> (free for personal use and education), or Docker Engine on Linux</li>
+      <li><strong style="color:var(--w)">kind or minikube</strong>, later, to run Kubernetes on your own machine at no cost (minikube asks for 2 CPUs, 2 GB of free memory and 20 GB of disk)</li>
+    </ul>
+  </div>
+</div>
+
+<!-- ===================== SECTION 5: ROADMAP ===================== -->
+<div class="section" id="roadmap">
+  <h2 class="sh"><span class="ico">🗺️</span> The 6-Phase Roadmap</h2>
+  <p class="sh-sub">12 months · 6 phases · 2 months each · 8–12 hours per week</p>
+  <div class="phase-grid">
+    <div class="pc" data-c="g">
+      <div style="display:flex;align-items:center;gap:10px;margin-bottom:10px"><span class="pc-num">1</span><div><div class="pc-title">Foundation Building</div><div class="pc-time">Months 1–2</div></div></div>
+      <div class="pc-topics">
+        <div class="pc-t"><b>Linux OS:</b> <span>Ubuntu LTS, filesystem, permissions, processes, systemd, packages</span></div>
+        <div class="pc-t"><b>Shell Scripting:</b> <span>Bash, variables, loops, cron, grep/awk/sed</span></div>
+        <div class="pc-t"><b>Python (primary) + Go intro:</b> <span>Scripting, APIs, JSON/YAML parsing</span></div>
+        <div class="pc-t"><b>Git & GitHub:</b> <span>Branching, merging, PRs, conflict resolution, workflows</span></div>
+      </div>
+      <div class="pc-mile">◆ Automate server setup with Bash + push to GitHub</div>
+    </div>
+    <div class="pc" data-c="cy">
+      <div style="display:flex;align-items:center;gap:10px;margin-bottom:10px"><span class="pc-num">2</span><div><div class="pc-title">Core DevOps Skills</div><div class="pc-time">Months 3–4</div></div></div>
+      <div class="pc-topics">
+        <div class="pc-t"><b>Networking:</b> <span>OSI, TCP/IP, DNS, IPv4/IPv6, CIDR, load balancing, proxy</span></div>
+        <div class="pc-t"><b>Web Servers:</b> <span>Nginx & Apache config, virtual hosts, SSL/TLS</span></div>
+        <div class="pc-t"><b>Advanced Bash:</b> <span>Functions, arrays, trap, heredoc</span></div>
+        <div class="pc-t"><b>YAML & JSON:</b> <span>Syntax mastery, jq parsing, config fluency</span></div>
+      </div>
+      <div class="pc-mile">◆ Deploy static site on Nginx with SSL behind reverse proxy</div>
+    </div>
+    <div class="pc" data-c="pr">
+      <div style="display:flex;align-items:center;gap:10px;margin-bottom:10px"><span class="pc-num">3</span><div><div class="pc-title">Containerisation & Cloud</div><div class="pc-time">Months 5–6</div></div></div>
+      <div class="pc-topics">
+        <div class="pc-t"><b>Docker:</b> <span>Images, Dockerfiles, volumes, Compose, multi-stage builds</span></div>
+        <div class="pc-t"><b>Container Registries:</b> <span>Docker Hub, AWS ECR, GHCR</span></div>
+        <div class="pc-t"><b>Kubernetes:</b> <span>Pods, Deployments, Services, Gateway API and Ingress, RBAC, Helm</span></div>
+        <div class="pc-t"><b>Cloud (AWS):</b> <span>EC2, S3, VPC, IAM, RDS, Route 53, the free plan and its limits</span></div>
+      </div>
+      <div class="pc-mile">◆ Deploy multi-container app on Kubernetes with Helm</div>
+    </div>
+    <div class="pc" data-c="or">
+      <div style="display:flex;align-items:center;gap:10px;margin-bottom:10px"><span class="pc-num">4</span><div><div class="pc-title">CI/CD & Infrastructure as Code</div><div class="pc-time">Months 7–8</div></div></div>
+      <div class="pc-topics">
+        <div class="pc-t"><b>CI/CD Pipelines:</b> <span>Jenkins, GitHub Actions, build/test/deploy</span></div>
+        <div class="pc-t"><b>Terraform:</b> <span>HCL, state, modules, plan/apply (OpenTofu awareness)</span></div>
+        <div class="pc-t"><b>Ansible:</b> <span>Playbooks, roles, inventory, configuration management</span></div>
+        <div class="pc-t"><b>GitOps:</b> <span>ArgoCD / Flux, declarative deployments</span></div>
+      </div>
+      <div class="pc-mile">◆ Build CI/CD pipeline: code → build → test → deploy to K8s</div>
+    </div>
+    <div class="pc" data-c="pk">
+      <div style="display:flex;align-items:center;gap:10px;margin-bottom:10px"><span class="pc-num">5</span><div><div class="pc-title">Monitoring, Security & DevSecOps</div><div class="pc-time">Months 9–10</div></div></div>
+      <div class="pc-topics">
+        <div class="pc-t"><b>Observability:</b> <span>Prometheus + Grafana + Loki with Alloy, metrics, alerting</span></div>
+        <div class="pc-t"><b>SRE Practices:</b> <span>SLIs/SLOs/SLAs, error budgets, incident response</span></div>
+        <div class="pc-t"><b>DevSecOps:</b> <span>SAST, DAST, Trivy, OWASP Top 10</span></div>
+        <div class="pc-t"><b>Secrets & IaC Security:</b> <span>Vault, Checkov, Gitleaks</span></div>
+      </div>
+      <div class="pc-mile">◆ Monitor K8s with Prometheus/Grafana + security scanning in CI</div>
+    </div>
+    <div class="pc" data-c="am">
+      <div style="display:flex;align-items:center;gap:10px;margin-bottom:10px"><span class="pc-num">6</span><div><div class="pc-title">Real-World Projects & Portfolio</div><div class="pc-time">Months 11–12</div></div></div>
+      <div class="pc-topics">
+        <div class="pc-t"><b>Capstone 1:</b> <span>Full CI/CD: GitHub → Jenkins → Docker → K8s + monitoring</span></div>
+        <div class="pc-t"><b>Capstone 2:</b> <span>GitOps: ArgoCD + Terraform + security pipeline</span></div>
+        <div class="pc-t"><b>Interview Prep:</b> <span>Technical + scenario-based questions</span></div>
+        <div class="pc-t"><b>Portfolio & Soft Skills:</b> <span>GitHub portfolio, resume, LinkedIn</span></div>
+      </div>
+      <div class="pc-mile">◆ Job-ready portfolio with 2–3 comprehensive projects on GitHub</div>
+    </div>
+  </div>
+  <div class="info warn" style="margin-top:14px"><strong>Pacing and cost, honestly:</strong> Phase 3 is the heaviest. Docker, Kubernetes and a first look at AWS in two months at 8–12 hours a week is tight. If month 6 takes you six to eight weeks, take them and move the later months along. Almost everything in this roadmap runs on your own machine at no cost; the AWS parts are the exception. Before you open any cloud account, read <a href="#cost">How not to get billed</a>.</div>
+</div>
+
+<!-- ===================== SECTION 6: MONTHLY PLAN ===================== -->
+<div class="section" id="monthly">
+  <h2 class="sh"><span class="ico">📅</span> Detailed Monthly Plan</h2>
+  <p class="sh-sub">Week-by-week breakdown: what to learn and build each month</p>
+  <div class="month-grid">
+    <div class="mc" data-c="g">
+      <div class="mc-h"><span class="mc-num">M1</span><div><div class="mc-label">Linux & Shell Scripting</div><div class="mc-phase">Phase 1 · Foundation</div></div></div>
+      <ul><li>Week 1–2: Install Ubuntu, learn filesystem navigation, permissions, users</li><li>Week 3: Process management, systemd services, package management</li><li>Week 4: Bash scripting (variables, loops, conditionals, cron jobs)</li></ul>
+      <div class="mc-goal">Goal: Comfortable navigating Linux entirely via terminal</div>
+    </div>
+    <div class="mc" data-c="g">
+      <div class="mc-h"><span class="mc-num">M2</span><div><div class="mc-label">Python, Git & GitHub</div><div class="mc-phase">Phase 1 · Foundation</div></div></div>
+      <ul><li>Week 1–2: Python scripting (file I/O, JSON/YAML parsing, API calls)</li><li>Week 3: Git fundamentals (init, add, commit, branch, merge, rebase)</li><li>Week 4: GitHub workflows (PRs, code reviews, conflict resolution)</li></ul>
+      <div class="mc-goal">Goal: Automate a server setup task with Bash + Python, push to GitHub</div>
+    </div>
+    <div class="mc" data-c="cy">
+      <div class="mc-h"><span class="mc-num">M3</span><div><div class="mc-label">Networking Fundamentals</div><div class="mc-phase">Phase 2 · Core Skills</div></div></div>
+      <ul><li>Week 1: OSI model, TCP/IP, DNS resolution, how the internet works (the <a href="../network-concepts/">Network Concepts guide</a> covers the layers)</li><li>Week 2: IPv4/IPv6, CIDR, subnetting, NAT, firewalls (iptables/ufw)</li><li>Week 3: Load balancing concepts, proxy vs reverse proxy</li><li>Week 4: Practise with Wireshark, ping, traceroute, nslookup, dig</li></ul>
+      <div class="mc-goal">Goal: Trace DNS resolution and explain the OSI model confidently</div>
+    </div>
+    <div class="mc" data-c="cy">
+      <div class="mc-h"><span class="mc-num">M4</span><div><div class="mc-label">Web Servers & Advanced Scripting</div><div class="mc-phase">Phase 2 · Core Skills</div></div></div>
+      <ul><li>Week 1–2: Nginx & Apache (install, configure virtual hosts, reverse proxy, SSL/TLS)</li><li>Week 3: Advanced Bash (functions, arrays, trap, heredoc, process substitution)</li><li>Week 4: YAML & JSON mastery, jq command-line tool</li></ul>
+      <div class="mc-goal">Goal: Deploy a static site on Nginx with SSL behind a reverse proxy</div>
+    </div>
+    <div class="mc" data-c="pr">
+      <div class="mc-h"><span class="mc-num">M5</span><div><div class="mc-label">Docker & Containerisation</div><div class="mc-phase">Phase 3 · Containers & Cloud</div></div></div>
+      <ul><li>Week 1: Docker concepts (images, containers, Dockerfile syntax)</li><li>Week 2: Volumes, networks, Docker Compose, multi-stage builds</li><li>Week 3: Container registries (Docker Hub, ECR, GHCR, Artifact Registry)</li><li>Week 4: Containerise a real application (Python Flask + database)</li></ul>
+      <div class="mc-goal">Goal: Build & push a multi-stage Docker image to Docker Hub</div>
+    </div>
+    <div class="mc" data-c="pr">
+      <div class="mc-h"><span class="mc-num">M6</span><div><div class="mc-label">Kubernetes & AWS Cloud</div><div class="mc-phase">Phase 3 · Containers & Cloud</div></div></div>
+      <ul><li>Week 1: K8s concepts (Pods, Deployments, Services, Gateway API and Ingress)</li><li>Week 2: ConfigMaps, Secrets, RBAC, Helm charts, labs on kind or minikube</li><li>Week 3: AWS fundamentals (EC2, S3, VPC, IAM, Route 53) on the free plan, with a budget alert set first</li><li>Week 4: Deploy the containerised app to your local cluster with Helm. Amazon EKS is optional and paid: see <a href="#cost">How not to get billed</a></li></ul>
+      <div class="mc-goal">Goal: Deploy a multi-container app on K8s with Helm</div>
+    </div>
+    <div class="mc" data-c="or">
+      <div class="mc-h"><span class="mc-num">M7</span><div><div class="mc-label">CI/CD Pipelines</div><div class="mc-phase">Phase 4 · CI/CD & IaC</div></div></div>
+      <ul><li>Week 1–2: Jenkins (install, create pipelines, Jenkinsfile syntax)</li><li>Week 3: GitHub Actions (workflows, triggers, secrets, artifacts)</li><li>Week 4: Build complete pipeline: code → build → test → deploy to K8s</li></ul>
+      <div class="mc-goal">Goal: Working CI/CD pipeline that deploys to Kubernetes on every push</div>
+    </div>
+    <div class="mc" data-c="or">
+      <div class="mc-h"><span class="mc-num">M8</span><div><div class="mc-label">Terraform, Ansible & GitOps</div><div class="mc-phase">Phase 4 · CI/CD & IaC</div></div></div>
+      <ul><li>Week 1–2: Terraform (HCL, providers, state, modules, plan/apply)</li><li>Week 3: Ansible (playbooks, roles, inventory, idempotency)</li><li>Week 4: GitOps with ArgoCD or Flux (declarative K8s deployments)</li></ul>
+      <div class="mc-goal">Goal: Provision AWS infra with Terraform + configure with Ansible, then run terraform destroy the same day</div>
+    </div>
+    <div class="mc" data-c="pk">
+      <div class="mc-h"><span class="mc-num">M9</span><div><div class="mc-label">Monitoring & Observability</div><div class="mc-phase">Phase 5 · Security</div></div></div>
+      <ul><li>Week 1–2: Prometheus (metrics, PromQL, alerting rules)</li><li>Week 3: Grafana dashboards + Loki for log aggregation, with Grafana Alloy as the collector</li><li>Week 4: SRE practices (SLIs/SLOs/SLAs, error budgets, incident response)</li></ul>
+      <div class="mc-goal">Goal: Full monitoring stack for a K8s cluster with dashboards and alerts</div>
+    </div>
+    <div class="mc" data-c="pk">
+      <div class="mc-h"><span class="mc-num">M10</span><div><div class="mc-label">DevSecOps & Security</div><div class="mc-phase">Phase 5 · Security</div></div></div>
+      <ul><li>Week 1: OWASP Top 10, SAST with Semgrep/SonarQube</li><li>Week 2: DAST with ZAP, container scanning with Trivy</li><li>Week 3: Secrets management (HashiCorp Vault, Gitleaks, Checkov for IaC)</li><li>Week 4: Integrate all security tools into your CI/CD pipeline</li></ul>
+      <div class="mc-goal">Goal: Security-integrated CI/CD pipeline with SAST + DAST + scanning</div>
+    </div>
+    <div class="mc" data-c="am">
+      <div class="mc-h"><span class="mc-num">M11</span><div><div class="mc-label">Capstone Projects</div><div class="mc-phase">Phase 6 · Portfolio</div></div></div>
+      <ul><li>Week 1–2: Capstone 1 (Full DevOps pipeline: GitHub → Jenkins → Docker → K8s + monitoring + rollback)</li><li>Week 3–4: Capstone 2 (GitOps deployment: ArgoCD + Terraform IaC + security pipeline integration)</li></ul>
+      <div class="mc-goal">Goal: Two production-grade projects demonstrating end-to-end skills</div>
+    </div>
+    <div class="mc" data-c="am">
+      <div class="mc-h"><span class="mc-num">M12</span><div><div class="mc-label">Interview Prep & Career</div><div class="mc-phase">Phase 6 · Portfolio</div></div></div>
+      <ul><li>Week 1: Polish GitHub portfolio, write detailed README files for all projects</li><li>Week 2: Resume building, LinkedIn optimisation, portfolio website</li><li>Week 3–4: Technical interview practice (Linux, Docker, K8s, CI/CD, Cloud, Terraform, Security scenarios)</li></ul>
+      <div class="mc-goal">Goal: Job-ready portfolio + confident interview performance</div>
+    </div>
+  </div>
+</div>
+
+<!-- ===================== SECTION 7: PROJECTS LAB ===================== -->
+<div class="section" id="projects">
+  <h2 class="sh"><span class="ico">🔨</span> Projects Lab</h2>
+  <p class="sh-sub">20 hands-on projects from basic to expert: build your portfolio progressively</p>
+  <div class="info"><strong>How to use this:</strong> Start with Basic projects during Phases 1–2. Move to Intermediate during Phases 3–4. Tackle Advanced during Phases 4–5. Expert projects are capstone-level for Phase 6 and beyond. Each project builds on skills from the previous tier. Push every project to GitHub with a detailed README, architecture diagram, and setup instructions.</div>
+
+  <div class="info warn" id="cost">
+    <strong>How not to get billed. Read this before you open a cloud account.</strong> Projects 1 to 7, 9, 11 to 15, 18 and 20 can be done on your own machine and cost nothing. Projects 8, 10, 16, 17 and 19 use AWS services that are billed; each is marked below with a free or local way to practise the same skill. AWS terms below were read on <a href="https://aws.amazon.com/free/" target="_blank" rel="noopener">aws.amazon.com/free</a> and its <a href="https://aws.amazon.com/free/free-tier-faqs/" target="_blank" rel="noopener">FAQ</a> on 18 November 2026; they change, so read them again on the day you sign up.
+    <ul>
+      <li><strong>Know which plan you are on.</strong> A new AWS customer gets USD 100 in credits at sign-up and can earn up to USD 100 more by completing set activities. You choose a <em>free plan</em> or a <em>paid plan</em>. On the free plan you are not charged. It ends after six months or when the credits are used up, whichever comes first; AWS then closes the account unless you upgrade (its FAQ gives 90 days before the content is erased). The free plan does not include every service. On the paid plan, or once you upgrade, anything beyond your credits is charged at normal rates. The older offer of 12 months of limited free use applies only to accounts created before 15 July 2025.</li>
+      <li><strong>Set a budget alert on day one.</strong> Create a monthly cost budget in <a href="https://docs.aws.amazon.com/cost-management/latest/userguide/budgets-create.html" target="_blank" rel="noopener">AWS Budgets</a> with an email alert at a small amount. An alert does not stop spending by itself, and AWS says budget figures are updated up to three times a day, so a warning can arrive hours after the charge.</li>
+      <li><strong>Delete, do not just stop.</strong> Finish a cloud lab in one sitting, then delete what you created: run <code>terraform destroy</code>, and check in the console that EKS clusters, NAT gateways, load balancers, RDS databases, snapshots and public IPv4 addresses are gone. Most of these are billed for every hour they exist, whether or not you use them. Look at the Billing page again the next day.</li>
+      <li><strong>Never commit keys.</strong> Do not create access keys for the root user, turn on MFA, and prefer temporary credentials (<a href="https://docs.aws.amazon.com/IAM/latest/UserGuide/root-user-best-practices.html" target="_blank" rel="noopener">AWS root user best practices</a>). Keep <code>.env</code>, <code>*.tfvars</code> and <code>*.tfstate</code> files out of Git with <code>.gitignore</code>, and run Gitleaks as a pre-commit hook. Anyone who finds a leaked key can create resources that are billed to you. If a key ever reaches a repository, delete the key in IAM straight away; deleting the commit is not enough.</li>
+      <li><strong>Stay local when you can.</strong> <a href="https://kind.sigs.k8s.io/" target="_blank" rel="noopener">kind</a> and <a href="https://minikube.sigs.k8s.io/docs/start/" target="_blank" rel="noopener">minikube</a> run Kubernetes on your laptop for free. <a href="https://docs.getmoto.org/en/latest/docs/server_mode.html" target="_blank" rel="noopener">Moto</a> (open source) can stand in for many AWS APIs in its server mode. LocalStack has needed an account and an auth token since 23 March 2026; its Hobby plan is free for non-commercial use (<a href="https://blog.localstack.cloud/localstack-single-image-next-steps/" target="_blank" rel="noopener">LocalStack notice</a>).</li>
+      <li><strong>Other clouds:</strong> the same rules apply on Azure, Google Cloud or any other provider. Free offers change, so read the provider's own page before you enter a card number.</li>
+    </ul>
+  </div>
+
+  <!-- BASIC TIER -->
+  <div class="proj-tier">
+    <div class="tier-label" style="color:var(--g);background:var(--gl)">🟢 Basic <span class="tier-phase">Phases 1–2</span></div>
+    <div class="proj-grid">
+      <div class="pj" style="--tc:var(--g)">
+        <div class="pj-title"><span class="pj-num">1</span> Automated Server Provisioning</div>
+        <p>Write a Bash script that provisions a fresh Ubuntu server from scratch: installs packages (Nginx, Python, Git, Docker), creates users with appropriate permissions, configures UFW firewall rules, sets up SSH key authentication, and logs every action with timestamps.</p>
+        <div class="pj-tools"><span class="pj-tool">Bash</span><span class="pj-tool">Linux</span><span class="pj-tool">SSH</span><span class="pj-tool">UFW</span><span class="pj-tool">Cron</span></div>
+        <div class="pj-cost free"><b>Cost: free.</b> Use a virtual machine on your own computer (VirtualBox), not a cloud server.</div>
+        <div class="pj-outcome">🎯 Demonstrates: Linux administration, shell scripting, automation fundamentals</div>
+      </div>
+      <div class="pj" style="--tc:var(--g)">
+        <div class="pj-title"><span class="pj-num">2</span> System Health Monitor</div>
+        <p>Build a Python script that monitors CPU, memory, disk usage, and running processes. Outputs an HTML report, sends email alerts when thresholds are exceeded. Runs automatically via cron. Push reports to a GitHub repo daily.</p>
+        <div class="pj-tools"><span class="pj-tool">Python</span><span class="pj-tool">Linux</span><span class="pj-tool">Cron</span><span class="pj-tool">SMTP</span><span class="pj-tool">Git</span></div>
+        <div class="pj-cost free"><b>Cost: free.</b> Keep the SMTP password out of the script and out of Git.</div>
+        <div class="pj-outcome">🎯 Demonstrates: Python scripting, system monitoring, automation, version control</div>
+      </div>
+      <div class="pj" style="--tc:var(--g)">
+        <div class="pj-title"><span class="pj-num">3</span> Static Website with Nginx & SSL</div>
+        <p>Deploy a personal portfolio site on Nginx with custom virtual hosts, a reverse proxy to a simple API backend, HTTPS via Let's Encrypt (or self-signed), custom error pages, and automated daily backups via cron.</p>
+        <div class="pj-tools"><span class="pj-tool">Nginx</span><span class="pj-tool">SSL/TLS</span><span class="pj-tool">Bash</span><span class="pj-tool">DNS</span><span class="pj-tool">Linux</span></div>
+        <div class="pj-cost free"><b>Cost: free.</b> Use a self-signed certificate on your own machine. Let's Encrypt certificates are also free, but they need a domain name you own (domain names are usually paid) and a server reachable from the internet.</div>
+        <div class="pj-outcome">🎯 Demonstrates: Web server config, networking, SSL termination, reverse proxy</div>
+      </div>
+      <div class="pj" style="--tc:var(--g)">
+        <div class="pj-title"><span class="pj-num">4</span> Log Analyser & Reporting Tool</div>
+        <p>Parse Nginx/Apache access logs using Bash (grep, awk, sed) and Python. Extract top IPs, most visited pages, error rates, traffic patterns. Generate a formatted report. Detect anomalies like brute force attempts.</p>
+        <div class="pj-tools"><span class="pj-tool">Bash</span><span class="pj-tool">Python</span><span class="pj-tool">grep/awk/sed</span><span class="pj-tool">jq</span><span class="pj-tool">Git</span></div>
+        <div class="pj-cost free"><b>Cost: free.</b> Runs anywhere Bash and Python run.</div>
+        <div class="pj-outcome">🎯 Demonstrates: Text processing, log analysis, scripting proficiency, Git workflow</div>
+      </div>
+      <div class="pj" style="--tc:var(--g)">
+        <div class="pj-title"><span class="pj-num">5</span> Git Workflow Simulator</div>
+        <p>Create a multi-branch Git repository simulating a team development workflow. Implement GitFlow branching (main, develop, feature, release, hotfix). Practise merge conflicts, rebasing, cherry-picking, tagging releases, and writing PR descriptions.</p>
+        <div class="pj-tools"><span class="pj-tool">Git</span><span class="pj-tool">GitHub</span><span class="pj-tool">Markdown</span></div>
+        <div class="pj-cost free"><b>Cost: free.</b> A free GitHub account is enough.</div>
+        <div class="pj-outcome">🎯 Demonstrates: Git mastery, branching strategies, collaboration workflows</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- INTERMEDIATE TIER -->
+  <div class="proj-tier">
+    <div class="tier-label" style="color:var(--cy);background:rgba(34,211,238,.1)">🔵 Intermediate <span class="tier-phase">Phases 3–4</span></div>
+    <div class="proj-grid">
+      <div class="pj" style="--tc:var(--cy)">
+        <div class="pj-title"><span class="pj-num">6</span> Containerised Microservices App</div>
+        <p>Containerise a multi-service application (Python Flask + PostgreSQL + Redis) using Docker. Write optimised multi-stage Dockerfiles, orchestrate with Docker Compose, configure networking, volumes for persistence, health checks, and push images to Docker Hub.</p>
+        <div class="pj-tools"><span class="pj-tool">Docker</span><span class="pj-tool">Docker Compose</span><span class="pj-tool">Python Flask</span><span class="pj-tool">PostgreSQL</span><span class="pj-tool">Redis</span></div>
+        <div class="pj-cost free"><b>Cost: free.</b> Runs on your own machine. Docker's Personal plan, which includes Docker Hub, is listed at USD 0 on its pricing page (18 November 2026).</div>
+        <div class="pj-outcome">🎯 Demonstrates: Containerisation, multi-stage builds, service orchestration, networking</div>
+      </div>
+      <div class="pj" style="--tc:var(--cy)">
+        <div class="pj-title"><span class="pj-num">7</span> Kubernetes Deployment with Helm</div>
+        <p>Deploy the containerised app from Project 6 to a Kubernetes cluster on your own machine (kind or minikube). Create Deployments, Services, Gateway API routes (Gateway and HTTPRoute), ConfigMaps, Secrets, RBAC policies. Package everything as a Helm chart with configurable values. Gateway API needs a controller: pick one from the <a href="https://gateway-api.sigs.k8s.io/implementations/" target="_blank" rel="noopener">implementations list</a>.</p>
+        <div class="pj-tools"><span class="pj-tool">Kubernetes</span><span class="pj-tool">Helm</span><span class="pj-tool">Gateway API</span><span class="pj-tool">RBAC</span><span class="pj-tool">kind / minikube</span></div>
+        <div class="pj-cost free"><b>Cost: free.</b> Runs on kind or minikube. Amazon EKS is paid: USD 0.10 per cluster per hour, about USD 72 for a 30-day month, before any worker nodes (EKS pricing page, 18 November 2026).</div>
+        <div class="pj-outcome">🎯 Demonstrates: K8s orchestration, Helm packaging, RBAC, production-like deployment</div>
+      </div>
+      <div class="pj" style="--tc:var(--cy)">
+        <div class="pj-title"><span class="pj-num">8</span> AWS Cloud Infrastructure</div>
+        <p>Design and build a production-grade AWS setup: custom VPC with public/private subnets, NAT gateway, security groups, Application Load Balancer, EC2 Auto Scaling group, RDS database, S3 for static assets, Route 53 for DNS, CloudWatch for basic monitoring.</p>
+        <div class="pj-tools"><span class="pj-tool">AWS</span><span class="pj-tool">VPC</span><span class="pj-tool">EC2</span><span class="pj-tool">RDS</span><span class="pj-tool">ALB</span><span class="pj-tool">S3</span><span class="pj-tool">Route 53</span></div>
+        <div class="pj-cost paid"><b>Cost: paid cloud services.</b> NAT gateways, load balancers, RDS databases and public IPv4 addresses are billed by the hour, and a Route 53 hosted zone by the month, from the moment they exist. On the free plan they come out of your credits (where the service is offered on that plan at all); on a paid plan you pay. Build it, take screenshots, delete it the same day. Free practice: draw the design, write it as Terraform and run <code>terraform plan</code>, which creates nothing.</div>
+        <div class="pj-outcome">🎯 Demonstrates: Cloud architecture, networking, high availability, AWS services</div>
+      </div>
+      <div class="pj" style="--tc:var(--cy)">
+        <div class="pj-title"><span class="pj-num">9</span> CI/CD Pipeline (Jenkins + GitHub Actions)</div>
+        <p>Build a complete CI/CD pipeline for the containerised app: GitHub webhook triggers Jenkins → run unit tests → build Docker image → push to registry → deploy to Kubernetes. Create a parallel GitHub Actions workflow for comparison.</p>
+        <div class="pj-tools"><span class="pj-tool">Jenkins</span><span class="pj-tool">GitHub Actions</span><span class="pj-tool">Docker</span><span class="pj-tool">Kubernetes</span><span class="pj-tool">Webhooks</span></div>
+        <div class="pj-cost free"><b>Cost: free.</b> Jenkins runs on your own machine, and GitHub Actions is free for public repositories on standard runners. Deploy to a kind cluster instead of a cloud one.</div>
+        <div class="pj-outcome">🎯 Demonstrates: CI/CD design, pipeline automation, testing, deployment automation</div>
+      </div>
+      <div class="pj" style="--tc:var(--cy)">
+        <div class="pj-title"><span class="pj-num">10</span> Infrastructure as Code with Terraform</div>
+        <p>Recreate the AWS infrastructure from Project 8 entirely in Terraform. Use modules for VPC, compute, database, and load balancer. Implement remote state with the S3 backend and its own lock file (<code>use_lockfile = true</code>). The DynamoDB lock table that older tutorials use is deprecated. Create separate workspaces for dev and staging environments.</p>
+        <div class="pj-tools"><span class="pj-tool">Terraform</span><span class="pj-tool">AWS</span><span class="pj-tool">HCL</span><span class="pj-tool">S3 Backend</span><span class="pj-tool">Modules</span></div>
+        <div class="pj-cost paid"><b>Cost: paid cloud services.</b> Running <code>terraform apply</code> creates the same billed resources as Project 8, plus S3 storage for the state. <code>terraform plan</code> creates nothing and is enough to practise modules and workspaces. If you do apply, run <code>terraform destroy</code> the same day.</div>
+        <div class="pj-outcome">🎯 Demonstrates: IaC principles, Terraform modules, state management, multi-environment</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ADVANCED TIER -->
+  <div class="proj-tier">
+    <div class="tier-label" style="color:var(--or);background:rgba(251,146,60,.1)">🟠 Advanced <span class="tier-phase">Phases 4–5</span></div>
+    <div class="proj-grid">
+      <div class="pj" style="--tc:var(--or)">
+        <div class="pj-title"><span class="pj-num">11</span> GitOps Deployment with ArgoCD</div>
+        <p>Set up ArgoCD on a Kubernetes cluster. Create a GitOps workflow where all K8s manifests live in a Git repo. Configure ArgoCD to auto-sync on every commit. Implement application sets for multi-service deployment, health checks, and automated rollback on failure.</p>
+        <div class="pj-tools"><span class="pj-tool">ArgoCD</span><span class="pj-tool">Kubernetes</span><span class="pj-tool">GitOps</span><span class="pj-tool">Helm</span><span class="pj-tool">Git</span></div>
+        <div class="pj-cost free"><b>Cost: free.</b> Runs on kind or minikube.</div>
+        <div class="pj-outcome">🎯 Demonstrates: GitOps principles, declarative deployments, auto-sync, rollback</div>
+      </div>
+      <div class="pj" style="--tc:var(--or)">
+        <div class="pj-title"><span class="pj-num">12</span> Full Observability Stack</div>
+        <p>Deploy Prometheus, Grafana, and Loki on your K8s cluster. Create custom dashboards for application and infrastructure metrics. Configure alerting rules (Alertmanager) for CPU, memory, pod restarts, and error rates. Set up log aggregation with Loki, using Grafana Alloy as the collector (Promtail, which older tutorials use, reached end of life on 2 March 2026).</p>
+        <div class="pj-tools"><span class="pj-tool">Prometheus</span><span class="pj-tool">Grafana</span><span class="pj-tool">Loki</span><span class="pj-tool">Alloy</span><span class="pj-tool">Alertmanager</span><span class="pj-tool">PromQL</span></div>
+        <div class="pj-cost free"><b>Cost: free.</b> Runs on kind or minikube. On an 8 GB machine, close everything else first.</div>
+        <div class="pj-outcome">🎯 Demonstrates: Observability, metrics, dashboards, alerting, log aggregation</div>
+      </div>
+      <div class="pj" style="--tc:var(--or)">
+        <div class="pj-title"><span class="pj-num">13</span> DevSecOps Pipeline</div>
+        <p>Integrate security scanning into your CI/CD pipeline: Semgrep for SAST on code, Trivy for container image and IaC scanning, ZAP for DAST on the running application, Gitleaks for secret detection, and Checkov for Terraform validation. Fail the pipeline on critical findings. Pin every third-party GitHub Action to a full commit SHA, not a version tag: tags can be moved, as the Trivy actions showed in March 2026.</p>
+        <div class="pj-tools"><span class="pj-tool">Semgrep</span><span class="pj-tool">Trivy</span><span class="pj-tool">ZAP</span><span class="pj-tool">Gitleaks</span><span class="pj-tool">Checkov</span><span class="pj-tool">Jenkins</span></div>
+        <div class="pj-cost free"><b>Cost: free.</b> Every scanner named here is free to use, and the pipeline runs on your own Jenkins or on GitHub Actions.</div>
+        <div class="pj-outcome">🎯 Demonstrates: Shift-left security, SAST/DAST/SCA integration, security-gate enforcement</div>
+      </div>
+      <div class="pj" style="--tc:var(--or)">
+        <div class="pj-title"><span class="pj-num">14</span> Configuration Management with Ansible</div>
+        <p>Write Ansible playbooks to configure servers: virtual machines on your own computer, or the ones provisioned by Terraform. Install and configure Docker, Nginx, monitoring agents, firewall rules, and application deployment. Use roles for reusable components, inventory for multi-environment targeting, and Ansible Vault for secrets.</p>
+        <div class="pj-tools"><span class="pj-tool">Ansible</span><span class="pj-tool">Terraform</span><span class="pj-tool">YAML</span><span class="pj-tool">Ansible Vault</span><span class="pj-tool">Roles</span></div>
+        <div class="pj-cost free"><b>Cost: free.</b> Use virtual machines on your own computer as the servers. If you use the EC2 instances from Project 10 instead, they are billed: destroy them when you finish.</div>
+        <div class="pj-outcome">🎯 Demonstrates: Configuration management, idempotency, secrets handling, IaC + CM combo</div>
+      </div>
+      <div class="pj" style="--tc:var(--or)">
+        <div class="pj-title"><span class="pj-num">15</span> Blue/Green Deployment Strategy</div>
+        <p>Implement a blue/green deployment for your application on Kubernetes. Two identical environments run side by side. New version deploys to green, traffic switches via a Service or Gateway API route (HTTPRoute) update, old blue environment stays available for instant rollback. Automate the cutover in your CI/CD pipeline.</p>
+        <div class="pj-tools"><span class="pj-tool">Kubernetes</span><span class="pj-tool">Gateway API</span><span class="pj-tool">CI/CD</span><span class="pj-tool">Docker</span><span class="pj-tool">Helm</span></div>
+        <div class="pj-cost free"><b>Cost: free.</b> Runs on kind or minikube.</div>
+        <div class="pj-outcome">🎯 Demonstrates: Zero-downtime deployments, rollback strategies, production readiness</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- EXPERT TIER -->
+  <div class="proj-tier">
+    <div class="tier-label" style="color:var(--pk);background:rgba(244,114,182,.1)">🔴 Expert <span class="tier-phase">Phase 6 &amp; Beyond</span></div>
+    <div class="proj-grid">
+      <div class="pj" style="--tc:var(--pk)">
+        <div class="pj-title"><span class="pj-num">16</span> End-to-End DevOps Platform</div>
+        <p>The capstone: combine Projects 6–15 into a single production-grade platform. Terraform provisions AWS infrastructure → Ansible configures servers → Jenkins/GH Actions CI/CD pipeline builds, tests, and scans Docker images → ArgoCD deploys to K8s → Prometheus/Grafana monitors everything → Security scanning gates every release.</p>
+        <div class="pj-tools"><span class="pj-tool">Terraform</span><span class="pj-tool">Ansible</span><span class="pj-tool">Jenkins</span><span class="pj-tool">Docker</span><span class="pj-tool">K8s</span><span class="pj-tool">ArgoCD</span><span class="pj-tool">Prometheus</span><span class="pj-tool">Trivy</span></div>
+        <div class="pj-cost paid"><b>Cost: paid cloud services.</b> Only the AWS infrastructure is billed (see Projects 8 and 10). Everything from the CI/CD pipeline onward runs free on a local cluster. Provision the cloud part for the final demonstration only, record it, then destroy it.</div>
+        <div class="pj-outcome">🎯 Demonstrates: Full-stack DevOps engineering, end-to-end ownership, production readiness</div>
+      </div>
+      <div class="pj" style="--tc:var(--pk)">
+        <div class="pj-title"><span class="pj-num">17</span> Multi-Environment Infrastructure</div>
+        <p>Extend your Terraform codebase to manage 3 environments (dev, staging, production) with different instance sizes, database tiers, and security policies. Use Terraform workspaces or separate state files. Implement promotion pipelines: code must pass through dev → staging → production with approval gates.</p>
+        <div class="pj-tools"><span class="pj-tool">Terraform</span><span class="pj-tool">AWS</span><span class="pj-tool">Workspaces</span><span class="pj-tool">CI/CD Gates</span><span class="pj-tool">IAM Policies</span></div>
+        <div class="pj-cost paid"><b>Cost: paid cloud services.</b> Three environments mean three sets of billed resources. Practise with <code>terraform plan</code> and separate state files. If you apply, use the smallest sizes and destroy each environment the same day.</div>
+        <div class="pj-outcome">🎯 Demonstrates: Enterprise IaC, environment management, promotion workflows, governance</div>
+      </div>
+      <div class="pj" style="--tc:var(--pk)">
+        <div class="pj-title"><span class="pj-num">18</span> Secrets Management Platform</div>
+        <p>Deploy HashiCorp Vault on Kubernetes. Configure dynamic secrets for databases (Vault generates temporary credentials), PKI secrets engine for TLS certificates, AWS secrets engine for IAM credentials. Integrate Vault with your CI/CD pipeline and K8s pods using the Vault Agent injector.</p>
+        <div class="pj-tools"><span class="pj-tool">HashiCorp Vault</span><span class="pj-tool">Kubernetes</span><span class="pj-tool">PKI</span><span class="pj-tool">Dynamic Secrets</span><span class="pj-tool">Vault Agent</span></div>
+        <div class="pj-cost free"><b>Cost: free.</b> Runs on a local cluster. Vault is free to download but is under the Business Source License, not an open-source licence; <a href="https://openbao.org/" target="_blank" rel="noopener">OpenBao</a> is the open-source fork. The AWS secrets engine needs an AWS account.</div>
+        <div class="pj-outcome">🎯 Demonstrates: Enterprise secrets management, zero-trust security, Vault + K8s integration</div>
+      </div>
+      <div class="pj" style="--tc:var(--pk)">
+        <div class="pj-title"><span class="pj-num">19</span> Disaster Recovery & Backup System</div>
+        <p>Design and implement a DR strategy: automated database backups to S3 with lifecycle policies, infrastructure recovery using Terraform state, K8s cluster backup with Velero, application state replication across availability zones, and a documented runbook with RTO/RPO targets. Test recovery by simulating failures.</p>
+        <div class="pj-tools"><span class="pj-tool">Velero</span><span class="pj-tool">AWS S3</span><span class="pj-tool">Terraform</span><span class="pj-tool">Kubernetes</span><span class="pj-tool">RDS Snapshots</span></div>
+        <div class="pj-cost paid"><b>Cost: paid cloud services.</b> S3 storage, RDS snapshots and resources in more than one availability zone are billed. Free practice: back up and restore a local cluster with Velero and an S3-compatible object store running beside it, and write the runbook.</div>
+        <div class="pj-outcome">🎯 Demonstrates: DR planning, backup automation, resilience testing, SRE practices</div>
+      </div>
+      <div class="pj" style="--tc:var(--pk)">
+        <div class="pj-title"><span class="pj-num">20</span> Compliance-as-Code Dashboard</div>
+        <p>Build an automated compliance checking system: Checkov scans IaC for CIS/PCI-DSS violations, Prowler audits live AWS accounts, OPA (Open Policy Agent) enforces K8s admission policies. Aggregate results into a Grafana dashboard showing compliance posture across all environments with pass/fail trends over time.</p>
+        <div class="pj-tools"><span class="pj-tool">Checkov</span><span class="pj-tool">Prowler</span><span class="pj-tool">OPA</span><span class="pj-tool">Grafana</span><span class="pj-tool">Policy-as-Code</span></div>
+        <div class="pj-cost free"><b>Cost: free.</b> Checkov, OPA and Prowler are open source. Prowler needs an AWS account to audit: give it read-only audit permissions and nothing more.</div>
+        <div class="pj-outcome">🎯 Demonstrates: Enterprise compliance, policy enforcement, audit automation, governance</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="info"><strong>Portfolio tip:</strong> You don't need to complete all 20 projects. For a strong job-ready portfolio, aim for 3–4 Basic + 3 Intermediate + 2 Advanced projects. Each one should be on GitHub with a professional README that includes: project description, architecture diagram, tools used, setup instructions, screenshots, and what you learned.</div>
+</div>
+
+<!-- ===================== SECTION 8: LEARNING RESOURCES ===================== -->
+<div class="section" id="resources">
+  <h2 class="sh"><span class="ico">📚</span> Learning Resources</h2>
+  <p class="sh-sub">Curated free and freemium resources: documentation, courses, platforms, books</p>
+
+  <h3 style="font-family:'Outfit',sans-serif;font-size:.95rem;font-weight:700;color:var(--g);margin:8px 0">Official Documentation</h3>
+  <div class="res-grid">
+    <div class="rc"><div class="rc-title"><a href="https://roadmap.sh/devops" target="_blank" rel="noopener">roadmap.sh/devops</a></div><div class="rc-desc">Interactive DevOps roadmap with learning links for every topic</div><span class="rc-tag tag-free">FREE</span> <span class="rc-tag tag-doc">DOCS</span></div>
+    <div class="rc"><div class="rc-title"><a href="https://docs.docker.com" target="_blank" rel="noopener">Docker Documentation</a></div><div class="rc-desc">Official Docker guides, reference, and tutorials</div><span class="rc-tag tag-doc">DOCS</span></div>
+    <div class="rc"><div class="rc-title"><a href="https://kubernetes.io/docs" target="_blank" rel="noopener">Kubernetes Documentation</a></div><div class="rc-desc">Official K8s docs: concepts, tasks, tutorials, API reference</div><span class="rc-tag tag-doc">DOCS</span></div>
+    <div class="rc"><div class="rc-title"><a href="https://docs.aws.amazon.com" target="_blank" rel="noopener">AWS Documentation</a></div><div class="rc-desc">Official AWS documentation for every service</div><span class="rc-tag tag-doc">DOCS</span></div>
+    <div class="rc"><div class="rc-title"><a href="https://developer.hashicorp.com/terraform/docs" target="_blank" rel="noopener">Terraform Documentation</a></div><div class="rc-desc">HashiCorp Terraform official docs: language, providers, state</div><span class="rc-tag tag-doc">DOCS</span></div>
+    <div class="rc"><div class="rc-title"><a href="https://docs.ansible.com" target="_blank" rel="noopener">Ansible Documentation</a></div><div class="rc-desc">Official Ansible docs: playbooks, modules, collections, guides</div><span class="rc-tag tag-doc">DOCS</span></div>
+  </div>
+
+  <h3 style="font-family:'Outfit',sans-serif;font-size:.95rem;font-weight:700;color:var(--g);margin:16px 0 8px">Courses & Lab Platforms</h3>
+  <div class="res-grid">
+    <div class="rc"><div class="rc-title"><a href="https://killercoda.com" target="_blank" rel="noopener">Killercoda</a></div><div class="rc-desc">Browser-based interactive labs for Kubernetes, Docker and Linux. Free with registration; each scenario runs for up to one hour</div><span class="rc-tag tag-free">FREE</span> <span class="rc-tag tag-practice">HANDS-ON</span></div>
+    <div class="rc"><div class="rc-title"><a href="https://kodekloud.com" target="_blank" rel="noopener">KodeKloud</a></div><div class="rc-desc">Paid subscription for DevOps courses and hands-on labs. Some content is free, such as its 100 Days of DevOps track</div><span class="rc-tag tag-course">COURSE · PAID</span></div>
+    <div class="rc"><div class="rc-title"><a href="https://skillbuilder.aws/" target="_blank" rel="noopener">AWS Skill Builder</a></div><div class="rc-desc">AWS's own training site. Many self-paced digital courses are free; a paid subscription adds more</div><span class="rc-tag tag-free">FREE</span> <span class="rc-tag tag-course">COURSE</span></div>
+    <div class="rc"><div class="rc-title"><a href="https://training.linuxfoundation.org/resources/" target="_blank" rel="noopener">Linux Foundation Training</a></div><div class="rc-desc">Free introductory courses on Linux, Kubernetes, and open source (a free account is needed to enrol)</div><span class="rc-tag tag-free">FREE</span> <span class="rc-tag tag-course">COURSE</span></div>
+    <div class="rc"><div class="rc-title"><a href="https://labs.iximiuz.com/" target="_blank" rel="noopener">iximiuz Labs</a></div><div class="rc-desc">Browser playgrounds and tutorials for Linux, Docker, Kubernetes and networking. Free Basic plan: one playground at a time, one hour a day, no card needed</div><span class="rc-tag tag-free">FREE</span> <span class="rc-tag tag-practice">HANDS-ON</span></div>
+    <div class="rc"><div class="rc-title"><a href="https://kind.sigs.k8s.io/" target="_blank" rel="noopener">kind</a> and <a href="https://minikube.sigs.k8s.io/docs/start/" target="_blank" rel="noopener">minikube</a></div><div class="rc-desc">Kubernetes clusters on your own machine, free and with no time limit. Hosted playgrounds come and go; these stay</div><span class="rc-tag tag-free">FREE</span> <span class="rc-tag tag-practice">HANDS-ON</span></div>
+  </div>
+
+  <h3 style="font-family:'Outfit',sans-serif;font-size:.95rem;font-weight:700;color:var(--g);margin:16px 0 8px">YouTube Channels</h3>
+  <div class="res-grid">
+    <div class="rc"><div class="rc-title"><a href="https://www.youtube.com/@TechWorldwithNana" target="_blank" rel="noopener">TechWorld with Nana</a></div><div class="rc-desc">Excellent DevOps tutorials: Docker, Kubernetes, CI/CD, Terraform</div><span class="rc-tag tag-free">FREE</span> <span class="rc-tag tag-yt">YOUTUBE</span></div>
+    <div class="rc"><div class="rc-title"><a href="https://www.youtube.com/@AbhishekVeeramalla" target="_blank" rel="noopener">Abhishek Veeramalla</a></div><div class="rc-desc">Practical DevOps projects and zero-to-hero series</div><span class="rc-tag tag-free">FREE</span> <span class="rc-tag tag-yt">YOUTUBE</span></div>
+    <div class="rc"><div class="rc-title"><a href="https://www.youtube.com/@NetworkChuck" target="_blank" rel="noopener">NetworkChuck</a></div><div class="rc-desc">Engaging networking and Linux content for beginners</div><span class="rc-tag tag-free">FREE</span> <span class="rc-tag tag-yt">YOUTUBE</span></div>
+    <div class="rc"><div class="rc-title"><a href="https://www.youtube.com/@TrainWithShubham" target="_blank" rel="noopener">TrainWithShubham</a></div><div class="rc-desc">DevOps tutorials, live projects, and community-driven learning</div><span class="rc-tag tag-free">FREE</span> <span class="rc-tag tag-yt">YOUTUBE</span></div>
+    <div class="rc"><div class="rc-title"><a href="https://www.youtube.com/@freecodecamp" target="_blank" rel="noopener">freeCodeCamp</a></div><div class="rc-desc">Full-length free courses on Docker, Kubernetes, AWS, Linux, Python</div><span class="rc-tag tag-free">FREE</span> <span class="rc-tag tag-yt">YOUTUBE</span></div>
+  </div>
+
+  <h3 style="font-family:'Outfit',sans-serif;font-size:.95rem;font-weight:700;color:var(--g);margin:16px 0 8px">Essential Books</h3>
+  <div class="res-grid">
+    <div class="rc"><div class="rc-title">📕 The Phoenix Project</div><div class="rc-desc">by Gene Kim, Kevin Behr and George Spafford. Essential reading to understand DevOps culture and the business case for DevOps</div><span class="rc-tag tag-book">BOOK</span></div>
+    <div class="rc"><div class="rc-title">📗 The DevOps Handbook</div><div class="rc-desc">by Gene Kim et al. Comprehensive guide to DevOps practices, principles, and case studies</div><span class="rc-tag tag-book">BOOK</span></div>
+    <div class="rc"><div class="rc-title">📘 Automate the Boring Stuff with Python</div><div class="rc-desc">by Al Sweigart. <a href="https://automatetheboringstuff.com" target="_blank" rel="noopener" style="color:var(--g)">Free online</a>. Excellent for Python scripting & automation</div><span class="rc-tag tag-free">FREE</span> <span class="rc-tag tag-book">BOOK</span></div>
+  </div>
+</div>
+
+<!-- ===================== SECTION 9: GITHUB REPOS ===================== -->
+<div class="section" id="github">
+  <h2 class="sh"><span class="ico">🐙</span> Essential GitHub Repositories</h2>
+  <p class="sh-sub">Open repositories for DevOps, DevSecOps and learning, sorted by category</p>
+
+  <h3 style="font-family:'Outfit',sans-serif;font-size:.95rem;font-weight:700;color:var(--g);margin:8px 0">Roadmaps & Learning Paths</h3>
+  <div class="res-grid">
+    <div class="rc"><div class="rc-title"><a href="https://github.com/nilbuild/developer-roadmap" target="_blank" rel="noopener">nilbuild/developer-roadmap</a></div><div class="rc-desc">The repository behind roadmap.sh (it moved from kamranahmedse/developer-roadmap): DevOps, backend and frontend roadmaps</div><span class="rc-tag tag-github">GITHUB</span></div>
+    <div class="rc"><div class="rc-title"><a href="https://github.com/MichaelCade/90DaysOfDevOps" target="_blank" rel="noopener">MichaelCade/90DaysOfDevOps</a></div><div class="rc-desc">A structured day-by-day learning plan: DevOps principles, tools, use cases</div><span class="rc-tag tag-github">GITHUB</span></div>
+    <div class="rc"><div class="rc-title"><a href="https://github.com/bregman-arie/devops-resources" target="_blank" rel="noopener">bregman-arie/devops-resources</a></div><div class="rc-desc">Linux, Jenkins, AWS, SRE, Prometheus, Docker, Ansible, Git, K8s, Terraform</div><span class="rc-tag tag-github">GITHUB</span></div>
+  </div>
+
+  <h3 style="font-family:'Outfit',sans-serif;font-size:.95rem;font-weight:700;color:var(--g);margin:16px 0 8px">Hands-On Practice & Exercises</h3>
+  <div class="res-grid">
+    <div class="rc"><div class="rc-title"><a href="https://github.com/bregman-arie/devops-exercises" target="_blank" rel="noopener">bregman-arie/devops-exercises</a></div><div class="rc-desc">Exercises and interview questions: Linux, AWS, Docker, K8s, CI/CD, Terraform</div><span class="rc-tag tag-github">GITHUB</span></div>
+    <div class="rc"><div class="rc-title"><a href="https://github.com/kelseyhightower/kubernetes-the-hard-way" target="_blank" rel="noopener">kelseyhightower/kubernetes-the-hard-way</a></div><div class="rc-desc">A step-by-step guide to setting up a Kubernetes cluster by hand, with no scripts</div><span class="rc-tag tag-github">GITHUB</span></div>
+    <div class="rc"><div class="rc-title"><a href="https://github.com/codecrafters-io/build-your-own-x" target="_blank" rel="noopener">codecrafters-io/build-your-own-x</a></div><div class="rc-desc">Build Docker, Git, databases, HTTP servers from scratch to understand core concepts</div><span class="rc-tag tag-github">GITHUB</span></div>
+    <div class="rc"><div class="rc-title"><a href="https://github.com/practical-tutorials/project-based-learning" target="_blank" rel="noopener">practical-tutorials/project-based-learning</a></div><div class="rc-desc">Project-based approach to automation, deployment, monitoring, and infrastructure</div><span class="rc-tag tag-github">GITHUB</span></div>
+  </div>
+
+  <h3 style="font-family:'Outfit',sans-serif;font-size:.95rem;font-weight:700;color:var(--g);margin:16px 0 8px">Awesome Lists & Free Books</h3>
+  <div class="res-grid">
+    <div class="rc"><div class="rc-title"><a href="https://github.com/EbookFoundation/free-programming-books" target="_blank" rel="noopener">EbookFoundation/free-programming-books</a></div><div class="rc-desc">Massive collection of free books on Docker, K8s, AWS, Linux, Terraform, Python, Go</div><span class="rc-tag tag-github">GITHUB</span></div>
+    <div class="rc"><div class="rc-title"><a href="https://github.com/donnemartin/system-design-primer" target="_blank" rel="noopener">donnemartin/system-design-primer</a></div><div class="rc-desc">Large-scale system design: load balancing, caching, databases, security. Essential for interviews</div><span class="rc-tag tag-github">GITHUB</span></div>
+    <div class="rc"><div class="rc-title"><a href="https://github.com/trimstray/the-book-of-secret-knowledge" target="_blank" rel="noopener">trimstray/the-book-of-secret-knowledge</a></div><div class="rc-desc">Lists, manuals, cheatsheets, blogs, hacks, CLI tools for sysadmins and DevOps</div><span class="rc-tag tag-github">GITHUB</span></div>
+  </div>
+</div>
+
+<!-- ===================== SECTION 10: DEVSECOPS TOOLS ===================== -->
+<div class="section" id="tools">
+  <h2 class="sh"><span class="ico">🔧</span> DevSecOps Tools</h2>
+  <p class="sh-sub">Tools you will use in real DevSecOps pipelines. Most are open source; the licence is noted where it is not</p>
+  <div class="res-grid">
+    <div class="rc"><div class="rc-title"><a href="https://github.com/aquasecurity/trivy" target="_blank" rel="noopener">aquasecurity/trivy</a></div><div class="rc-desc">Scanner for containers, K8s, IaC and code: finds CVEs, misconfigurations and secrets. tfsec is now part of Trivy. Its GitHub Actions and one release were compromised in March 2026 (<a href="https://github.com/aquasecurity/trivy/security/advisories/GHSA-69fq-xp46-6x23" target="_blank" rel="noopener">advisory</a>): pin the action to a full commit SHA.</div><span class="rc-tag tag-github">GITHUB</span></div>
+    <div class="rc"><div class="rc-title"><a href="https://github.com/semgrep/semgrep" target="_blank" rel="noopener">semgrep/semgrep</a></div><div class="rc-desc">Lightweight SAST for many languages: find bugs with patterns that look like source code</div><span class="rc-tag tag-github">GITHUB</span></div>
+    <div class="rc"><div class="rc-title"><a href="https://github.com/SonarSource/sonarqube" target="_blank" rel="noopener">SonarSource/sonarqube</a></div><div class="rc-desc">Continuous code quality and security inspection, widely used for quality gates. The free edition is called SonarQube Community Build</div><span class="rc-tag tag-github">GITHUB</span></div>
+    <div class="rc"><div class="rc-title"><a href="https://github.com/zaproxy/zaproxy" target="_blank" rel="noopener">zaproxy/zaproxy (ZAP by Checkmarx)</a></div><div class="rc-desc">Web application security scanner for DAST: XSS, SQL injection and other runtime vulnerabilities. Formerly OWASP ZAP; still open source under Apache v2</div><span class="rc-tag tag-github">GITHUB</span></div>
+    <div class="rc"><div class="rc-title"><a href="https://github.com/gitleaks/gitleaks" target="_blank" rel="noopener">gitleaks/gitleaks</a></div><div class="rc-desc">Detect and prevent hardcoded secrets in Git repos. Run it as a pre-commit hook first, then again in CI</div><span class="rc-tag tag-github">GITHUB</span></div>
+    <div class="rc"><div class="rc-title"><a href="https://github.com/bridgecrewio/checkov" target="_blank" rel="noopener">bridgecrewio/checkov</a></div><div class="rc-desc">Static analysis for IaC: Terraform, CloudFormation, K8s, Helm misconfigurations</div><span class="rc-tag tag-github">GITHUB</span></div>
+    <div class="rc"><div class="rc-title"><a href="https://github.com/hashicorp/vault" target="_blank" rel="noopener">hashicorp/vault</a></div><div class="rc-desc">Secrets management, encryption as a service, privileged access management. Source-available under the Business Source License 1.1, not open source; <a href="https://openbao.org/" target="_blank" rel="noopener">OpenBao</a> is the open-source fork, managed by the Linux Foundation's OpenSSF</div><span class="rc-tag tag-github">GITHUB</span></div>
+    <div class="rc"><div class="rc-title"><a href="https://github.com/projectdiscovery/nuclei" target="_blank" rel="noopener">projectdiscovery/nuclei</a></div><div class="rc-desc">Template-based vulnerability scanner with community-maintained YAML templates</div><span class="rc-tag tag-github">GITHUB</span></div>
+  </div>
+</div>
+
+<!-- ===================== SECTION 11: CERTIFICATIONS ===================== -->
+<div class="section" id="certs">
+  <h2 class="sh"><span class="ico">🎓</span> Recommended Certifications</h2>
+  <p class="sh-sub">Take each one after the relevant roadmap phase. A certificate supports your skills in front of employers; it does not replace projects</p>
+  <div class="tbl-wrap"><table class="cert-tbl">
+    <thead><tr><th>#</th><th>Certification</th><th>Provider</th><th>When</th></tr></thead>
+    <tbody>
+      <tr><td style="color:var(--g);font-weight:700">1</td><td>AWS Certified Cloud Practitioner</td><td>Amazon Web Services</td><td style="color:var(--pr)">After Phase 3</td></tr>
+      <tr><td style="color:var(--g);font-weight:700">2</td><td>AWS Certified Solutions Architect - Associate</td><td>Amazon Web Services</td><td style="color:var(--or)">After Phase 4</td></tr>
+      <tr><td style="color:var(--g);font-weight:700">3</td><td>Docker Certified Associate (DCA)</td><td>Mirantis</td><td style="color:var(--pr)">After Phase 3</td></tr>
+      <tr><td style="color:var(--g);font-weight:700">4</td><td>Certified Kubernetes Administrator (CKA)</td><td>CNCF / Linux Foundation</td><td style="color:var(--or)">After Phase 4</td></tr>
+      <tr><td style="color:var(--g);font-weight:700">5</td><td>Terraform Associate</td><td>HashiCorp (an IBM company)</td><td style="color:var(--or)">After Phase 4</td></tr>
+      <tr><td style="color:var(--g);font-weight:700">6</td><td>AWS Certified DevOps Engineer - Professional</td><td>Amazon Web Services</td><td style="color:var(--am)">After Phase 6</td></tr>
+    </tbody>
+  </table></div>
+  <div class="info" style="margin-top:12px"><strong>Note:</strong> Certifications are valuable but not a substitute for hands-on experience. Always prioritise building projects and practical skills. Exam fees are a real cost for a student and they change: on 18 November 2026 the Linux Foundation listed the <a href="https://training.linuxfoundation.org/certification/certified-kubernetes-administrator-cka/" target="_blank" rel="noopener">CKA</a> at USD 445 with one retake included, and Mirantis listed the <a href="https://training.mirantis.com/certification/dca-certification-exam/" target="_blank" rel="noopener">DCA</a> at USD 199. Check the provider's own page for the current fee before you pay (<a href="https://aws.amazon.com/certification/" target="_blank" rel="noopener">AWS</a>, <a href="https://developer.hashicorp.com/certifications/infrastructure-automation" target="_blank" rel="noopener">HashiCorp</a>). The CKA is a hands-on exam, so plan extra Kubernetes practice beyond Phase 4 before you book it. The DCA is now run by Mirantis and is a Docker exam, not a Kubernetes one; if you can afford only one, this roadmap leans towards CKA or Terraform Associate.</div>
+</div>
+
+<!-- ===================== SECTION 12: CAREERS ===================== -->
+<div class="section" id="careers">
+  <h2 class="sh"><span class="ico">💼</span> Career Paths</h2>
+  <p class="sh-sub">Where DevOps skills take you: roles, focus and key skills</p>
+  <div class="tbl-wrap"><table class="career-tbl">
+    <thead><tr><th>Role</th><th>Focus</th><th>Key Skills</th></tr></thead>
+    <tbody>
+      <tr><td style="color:var(--w);font-weight:700">Junior DevOps Engineer</td><td>General DevOps, CI/CD, automation</td><td>Linux, Git, Docker, CI/CD, scripting</td></tr>
+      <tr><td style="color:var(--w);font-weight:700">Cloud Engineer</td><td>Cloud infrastructure design & management</td><td>AWS/Azure/GCP, Terraform, networking</td></tr>
+      <tr><td style="color:var(--w);font-weight:700">Site Reliability Engineer</td><td>System reliability, performance, incidents</td><td>Monitoring, SLOs, Python/Go, K8s</td></tr>
+      <tr><td style="color:var(--w);font-weight:700">DevSecOps Engineer</td><td>Security integration into pipelines</td><td>SAST/DAST, Vault, container security</td></tr>
+      <tr><td style="color:var(--w);font-weight:700">Platform Engineer</td><td>Internal developer platforms</td><td>Kubernetes, IaC, CI/CD, developer tools</td></tr>
+      <tr><td style="color:var(--w);font-weight:700">Release Manager</td><td>Software release processes</td><td>CI/CD, Git workflows, coordination</td></tr>
+    </tbody>
+  </table></div>
+  <div class="info" style="margin-top:12px"><strong>Starting point:</strong> Target Junior DevOps Engineer or Cloud Engineer for your first role. With 1–2 years of experience, specialise into SRE, DevSecOps, or Platform Engineering. If the security roles interest you most, the <a href="../cybersecurity-roadmap/">Cybersecurity Roadmap</a> on this site covers that path.</div>
+</div>
+
+<!-- ===================== SECTION 13: COMMUNITIES ===================== -->
+<div class="section" id="communities">
+  <h2 class="sh"><span class="ico">🌍</span> DevOps Communities</h2>
+  <p class="sh-sub">Connect, learn, and grow: online and offline communities worldwide</p>
+
+  <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:10px">
+    <div class="card">
+      <div class="card-h" style="color:var(--g)">💬 Online Communities</div>
+      <ul>
+        <li><a href="https://www.reddit.com/r/devops/" target="_blank" rel="noopener" style="color:var(--g)">r/devops</a>: the DevOps community on Reddit</li>
+        <li><a href="https://www.reddit.com/r/kubernetes/" target="_blank" rel="noopener" style="color:var(--g)">r/kubernetes</a>: Kubernetes-focused discussions and Q&A</li>
+        <li><a href="https://slack.cncf.io/" target="_blank" rel="noopener" style="color:var(--g)">CNCF Slack</a>: Official Cloud Native Computing Foundation Slack</li>
+        <li><a href="https://roadmap.sh/discord" target="_blank" rel="noopener" style="color:var(--g)">roadmap.sh Discord</a>: the community around the roadmap.sh roadmaps</li>
+      </ul>
+    </div>
+    <div class="card">
+      <div class="card-h" style="color:var(--cy)">🎤 Global Conferences</div>
+      <ul>
+        <li><strong style="color:var(--w)">KubeCon + CloudNativeCon</strong>: The flagship CNCF conference series, which includes an India edition</li>
+        <li><strong style="color:var(--w)">DevOpsDays</strong>: A <a href="https://devopsdays.org/events/" target="_blank" rel="noopener">worldwide series</a> of community-run conferences</li>
+        <li><strong style="color:var(--w)">HashiConf</strong>: Terraform, Vault, and the HashiCorp ecosystem (held as part of IBM TechXchange in 2026)</li>
+        <li><strong style="color:var(--w)">AWS re:Invent / Summit</strong>: AWS cloud conference series</li>
+        <li><strong style="color:var(--w)">FOSDEM</strong>: Open-source developer conference in Brussels (next: 30 and 31 January 2027)</li>
+      </ul>
+    </div>
+    <div class="card">
+      <div class="card-h" style="color:var(--am)">🇮🇳 Indian Communities</div>
+      <ul>
+        <li>Local DevOps and cloud meetup groups on <a href="https://meetup.com" target="_blank" rel="noopener" style="color:var(--g)">meetup.com</a></li>
+        <li>YouTube: Abhishek Veeramalla, TrainWithShubham</li>
+        <li>Conferences: KubeCon + CloudNativeCon in India (in 2027 part of <a href="https://events.linuxfoundation.org/open-nexus-india/" target="_blank" rel="noopener">Open Nexus India</a>, Bengaluru, 9 and 10 September) and the AWS Community Days that local user groups run in Indian cities</li>
+      </ul>
+    </div>
+    <div class="card">
+      <div class="card-h" style="color:var(--pk)">📰 Stay Current</div>
+      <ul>
+        <li><a href="https://www.devopsweekly.com/" target="_blank" rel="noopener">DevOps Weekly</a>: a weekly email of DevOps news</li>
+        <li><a href="https://tldr.tech/devops" target="_blank" rel="noopener">TLDR DevOps</a>: a free, short DevOps newsletter</li>
+        <li><a href="https://www.cncf.io/kubeweekly/" target="_blank" rel="noopener">KubeWeekly</a>: weekly Kubernetes news from CNCF</li>
+        <li>Follow DevOps professionals on <strong style="color:var(--w)">LinkedIn</strong> and <strong style="color:var(--w)">X (Twitter)</strong></li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<!-- ===================== SECTION 14: BEGINNER MISTAKES ===================== -->
+<div class="section" id="mistakes">
+  <h2 class="sh"><span class="ico">⚠️</span> Common Beginner Mistakes</h2>
+  <p class="sh-sub">Pitfalls that delay progress, and what to do instead</p>
+  <div class="mistake-grid">
+    <div class="mk">
+      <div class="mk-h">❌ Skipping Linux Fundamentals</div>
+      <p>Jumping straight to Docker or Kubernetes without understanding Linux commands, file permissions, and processes. Every DevOps tool runs on Linux.</p>
+      <div class="mk-fix">✅ Spend the full 2 months on Phase 1. Do everything in the terminal.</div>
+    </div>
+    <div class="mk">
+      <div class="mk-h">❌ Learning Tools Before Concepts</div>
+      <p>Memorising Jenkins pipeline syntax without understanding what CI/CD is, or learning Terraform commands without understanding infrastructure.</p>
+      <div class="mk-fix">✅ Always understand the "why" before the "how". Read the concept, then use the tool.</div>
+    </div>
+    <div class="mk">
+      <div class="mk-h">❌ Tutorial Hell: Watching, Not Building</div>
+      <p>Watching 50 hours of YouTube tutorials without building a single project. Passive learning creates an illusion of competence.</p>
+      <div class="mk-fix">✅ For every hour of watching, spend 2 hours building. Every phase has a milestone: build it.</div>
+    </div>
+    <div class="mk">
+      <div class="mk-h">❌ Chasing Every New Tool</div>
+      <p>Trying to learn Docker, Kubernetes, Terraform, Ansible, Jenkins, ArgoCD, Prometheus, and 10 more tools simultaneously.</p>
+      <div class="mk-fix">✅ Follow the phased roadmap. Master one tool per category before exploring alternatives.</div>
+    </div>
+    <div class="mk">
+      <div class="mk-h">❌ Ignoring Documentation Skills</div>
+      <p>Building projects but not writing README files, architecture diagrams, or documenting decisions. Employers check your GitHub profile.</p>
+      <div class="mk-fix">✅ Document every project with a clear README, architecture diagram, and setup instructions.</div>
+    </div>
+    <div class="mk">
+      <div class="mk-h">❌ Not Using Git for Everything</div>
+      <p>Writing scripts, configs, and notes locally without version control. Losing work. Not building a GitHub history.</p>
+      <div class="mk-fix">✅ From Day 1, push every script, config file, and exercise to a GitHub repo.</div>
+    </div>
+    <div class="mk">
+      <div class="mk-h">❌ Prioritising Certs Over Projects</div>
+      <p>Spending months preparing for certifications without building hands-on projects. Certs validate skills; they don't create them.</p>
+      <div class="mk-fix">✅ Build projects first. Pursue certifications after completing the relevant phase.</div>
+    </div>
+    <div class="mk">
+      <div class="mk-h">❌ Studying in Isolation</div>
+      <p>Not joining communities, not asking questions, not sharing progress. The DevOps field is highly collaborative.</p>
+      <div class="mk-fix">✅ Join communities from Day 1. Ask questions. Share what you learn. Help others.</div>
+    </div>
+    <div class="mk">
+      <div class="mk-h">❌ Leaving Cloud Resources Running</div>
+      <p>Creating a Kubernetes cluster, a NAT gateway or a database for a tutorial and forgetting it. Most cloud resources are billed for every hour they exist, used or not.</p>
+      <div class="mk-fix">✅ Set a budget alert first, delete everything the same day, and read <a href="#cost" style="color:var(--g)">How not to get billed</a>.</div>
+    </div>
+  </div>
+</div>
+
+<!-- ===================== SECTION 15: INTERVIEW PREP ===================== -->
+<div class="section" id="interview">
+  <h2 class="sh"><span class="ico">🎯</span> Interview Preparation</h2>
+  <p class="sh-sub">10 topic areas commonly tested in DevOps interviews</p>
+  <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:10px">
+    <div class="card"><div class="card-h" style="color:var(--g)">🐧 Linux & OS</div><p>File permissions, process management, systemd, cron, disk management, shell scripting problems</p></div>
+    <div class="card"><div class="card-h" style="color:var(--cy)">🌐 Networking</div><p>TCP vs UDP, DNS resolution, HTTP status codes, SSL/TLS handshake, subnetting</p></div>
+    <div class="card"><div class="card-h" style="color:var(--pr)">📦 Git</div><p>Merge vs rebase, conflict resolution, branching strategies (GitFlow, trunk-based), reverting</p></div>
+    <div class="card"><div class="card-h" style="color:var(--or)">🐳 Docker</div><p>Images vs containers, multi-stage builds, networking modes, Compose, Dockerfile optimisation</p></div>
+    <div class="card"><div class="card-h" style="color:var(--pk)">☸️ Kubernetes</div><p>Pod lifecycle, Deployment vs StatefulSet, Services, Ingress and Gateway API, ConfigMaps, resource limits, probes</p></div>
+    <div class="card"><div class="card-h" style="color:var(--am)">🔄 CI/CD</div><p>Pipeline design, delivery vs deployment, secrets handling, rollback strategies, artifacts</p></div>
+    <div class="card"><div class="card-h" style="color:var(--g)">☁️ Cloud (AWS)</div><p>VPC design, security groups vs NACLs, S3 classes, EC2 types, IAM best practices</p></div>
+    <div class="card"><div class="card-h" style="color:var(--cy)">📝 Terraform & IaC</div><p>State management and locking, modules, Terraform vs Ansible, drift handling, remote backends</p></div>
+    <div class="card"><div class="card-h" style="color:var(--pr)">📊 Monitoring</div><p>Metrics selection, monitoring vs observability, alerting, SLIs/SLOs/SLAs, incident response</p></div>
+    <div class="card"><div class="card-h" style="color:var(--pk)">🛡️ Security & DevSecOps</div><p>OWASP Top 10, container security, SAST vs DAST, secret management, least privilege</p></div>
+  </div>
+  <div class="info" style="margin-top:12px"><strong>Pro tip:</strong> Practise scenario-based questions: "How would you design a CI/CD pipeline from scratch?", "A production server is down. Walk me through your troubleshooting process", "How would you migrate a monolith to microservices?"</div>
+</div>
+
+<!-- ===================== SECTION 16: GLOSSARY ===================== -->
+<div class="section" id="glossary">
+  <h2 class="sh"><span class="ico">📖</span> Glossary of Terms</h2>
+  <p class="sh-sub">91 DevOps & DevSecOps terms defined, organised by category for quick reference</p>
+
+  <!-- Core DevOps -->
+  <div class="gloss-cat">
+    <div class="gloss-cat-h" style="color:var(--g);background:var(--gl)">Core DevOps Concepts</div>
+    <div class="gloss-grid">
+      <div class="gl"><span class="gl-term">DevOps</span><span class="gl-def">Culture and practices combining Development and Operations for faster, reliable software delivery</span></div>
+      <div class="gl"><span class="gl-term">DevSecOps</span><span class="gl-def">DevOps with security integrated into every phase of the development lifecycle ("shift-left security")</span></div>
+      <div class="gl"><span class="gl-term">Shift Left</span><span class="gl-def">Moving testing and security earlier in the development process to catch issues sooner and cheaper</span></div>
+      <div class="gl"><span class="gl-term">Automation</span><span class="gl-def">Using scripts and tools to perform tasks without manual intervention, the core principle of DevOps</span></div>
+      <div class="gl"><span class="gl-term">Idempotency</span><span class="gl-def">Running an operation multiple times produces the same result, critical for Ansible, Terraform, and reliable automation</span></div>
+      <div class="gl"><span class="gl-term">Immutable Infrastructure</span><span class="gl-def">Servers are never modified after deployment; changes require replacing with a new version entirely</span></div>
+      <div class="gl"><span class="gl-term">Configuration Drift</span><span class="gl-def">When a server's actual state diverges from its defined configuration. IaC tools prevent this</span></div>
+      <div class="gl"><span class="gl-term">Toil</span><span class="gl-def">Manual, repetitive operational work that can and should be automated (SRE term)</span></div>
+    </div>
+  </div>
+
+  <!-- CI/CD -->
+  <div class="gloss-cat">
+    <div class="gloss-cat-h" style="color:var(--cy);background:rgba(34,211,238,.1)">CI/CD & Pipeline</div>
+    <div class="gloss-grid">
+      <div class="gl"><span class="gl-term">CI</span><span class="gl-def">Continuous Integration: automatically building and testing code every time a developer pushes changes</span></div>
+      <div class="gl"><span class="gl-term">CD (Delivery)</span><span class="gl-def">Continuous Delivery: code is automatically prepared for release but requires manual approval to deploy</span></div>
+      <div class="gl"><span class="gl-term">CD (Deployment)</span><span class="gl-def">Continuous Deployment: code is automatically deployed to production without manual approval</span></div>
+      <div class="gl"><span class="gl-term">Pipeline</span><span class="gl-def">Automated sequence of stages (build → test → deploy) that code passes through from commit to production</span></div>
+      <div class="gl"><span class="gl-term">Artifact</span><span class="gl-def">A built output (Docker image, JAR, binary) produced by a CI pipeline and stored in a registry</span></div>
+      <div class="gl"><span class="gl-term">GitOps</span><span class="gl-def">Using Git as the single source of truth for infrastructure and deployments: changes via PRs, not manual commands</span></div>
+      <div class="gl"><span class="gl-term">Blue/Green</span><span class="gl-def">Deployment strategy running two identical environments; traffic switches from old (blue) to new (green) for zero downtime</span></div>
+      <div class="gl"><span class="gl-term">Canary Deploy</span><span class="gl-def">Gradually routing a small percentage of traffic to a new version before full rollout</span></div>
+      <div class="gl"><span class="gl-term">Rollback</span><span class="gl-def">Reverting to a previous known-good version when a deployment fails or causes issues</span></div>
+    </div>
+  </div>
+
+  <!-- Containers -->
+  <div class="gloss-cat">
+    <div class="gloss-cat-h" style="color:var(--pr);background:rgba(167,139,250,.1)">Containerisation & Orchestration</div>
+    <div class="gloss-grid">
+      <div class="gl"><span class="gl-term">Container</span><span class="gl-def">Lightweight, isolated package containing an application and all its dependencies, so it runs identically everywhere</span></div>
+      <div class="gl"><span class="gl-term">Docker Image</span><span class="gl-def">Read-only template used to create containers, built from a Dockerfile as a stack of filesystem layers</span></div>
+      <div class="gl"><span class="gl-term">Dockerfile</span><span class="gl-def">Text file with instructions to build a Docker image; it defines the base image, dependencies, and startup command</span></div>
+      <div class="gl"><span class="gl-term">Docker Compose</span><span class="gl-def">Tool for defining and running multi-container applications using a YAML configuration file</span></div>
+      <div class="gl"><span class="gl-term">Container Registry</span><span class="gl-def">Storage for Docker images (Docker Hub, AWS ECR, GHCR), like GitHub but for container images</span></div>
+      <div class="gl"><span class="gl-term">Kubernetes (K8s)</span><span class="gl-def">Open-source container orchestration platform that automates deployment, scaling, and management of containers</span></div>
+      <div class="gl"><span class="gl-term">Pod</span><span class="gl-def">Smallest deployable unit in Kubernetes: one or more containers that share networking and storage</span></div>
+      <div class="gl"><span class="gl-term">Deployment</span><span class="gl-def">K8s object that manages a set of identical Pods and handles scaling, updates, and rollbacks</span></div>
+      <div class="gl"><span class="gl-term">Service</span><span class="gl-def">K8s object that exposes Pods to network traffic and gives a group of Pods a stable IP and DNS name</span></div>
+      <div class="gl"><span class="gl-term">Ingress</span><span class="gl-def">K8s object that manages external HTTP/HTTPS access to Services (routing, TLS, load balancing). The API is frozen: it still works and will not be removed, but new features go into Gateway API</span></div>
+      <div class="gl"><span class="gl-term">Gateway API</span><span class="gl-def">The Kubernetes project's recommended replacement for Ingress when routing traffic into a cluster, built from GatewayClass, Gateway and HTTPRoute resources</span></div>
+      <div class="gl"><span class="gl-term">Helm</span><span class="gl-def">Package manager for Kubernetes that bundles K8s manifests into reusable, versioned charts with configurable values</span></div>
+      <div class="gl"><span class="gl-term">RBAC</span><span class="gl-def">Role-Based Access Control: restricts who can do what in Kubernetes (or any system) based on assigned roles</span></div>
+    </div>
+  </div>
+
+  <!-- Cloud & Infra -->
+  <div class="gloss-cat">
+    <div class="gloss-cat-h" style="color:var(--am);background:rgba(251,191,36,.1)">Cloud & Infrastructure</div>
+    <div class="gloss-grid">
+      <div class="gl"><span class="gl-term">VPC</span><span class="gl-def">Virtual Private Cloud: isolated network within a cloud provider where you launch resources (AWS, GCP, Azure)</span></div>
+      <div class="gl"><span class="gl-term">EC2</span><span class="gl-def">Elastic Compute Cloud: AWS virtual servers (instances) that you can start, stop, and scale on demand</span></div>
+      <div class="gl"><span class="gl-term">S3</span><span class="gl-def">Simple Storage Service: AWS object storage for files, backups, static assets, and Terraform state</span></div>
+      <div class="gl"><span class="gl-term">IAM</span><span class="gl-def">Identity and Access Management: controls who can access what in AWS (users, roles, policies, permissions)</span></div>
+      <div class="gl"><span class="gl-term">RDS</span><span class="gl-def">Relational Database Service: managed database (PostgreSQL, MySQL) on AWS with automated backups and scaling</span></div>
+      <div class="gl"><span class="gl-term">Auto Scaling</span><span class="gl-def">Automatically adjusting the number of running servers based on demand, scaling up under load and down when idle</span></div>
+      <div class="gl"><span class="gl-term">Load Balancer</span><span class="gl-def">Distributes incoming traffic across multiple servers to ensure availability and prevent overload (ALB, NLB)</span></div>
+      <div class="gl"><span class="gl-term">Free Tier</span><span class="gl-def">AWS's offer for new customers. For accounts created from 15 July 2025: up to USD 200 in credits and a free plan that ends after six months or when the credits run out. It is not 12 months of free use: see <a href="#cost">How not to get billed</a></span></div>
+    </div>
+  </div>
+
+  <!-- IaC -->
+  <div class="gloss-cat">
+    <div class="gloss-cat-h" style="color:var(--or);background:rgba(251,146,60,.1)">Infrastructure as Code (IaC)</div>
+    <div class="gloss-grid">
+      <div class="gl"><span class="gl-term">IaC</span><span class="gl-def">Infrastructure as Code: defining and provisioning infrastructure through code files instead of manual setup</span></div>
+      <div class="gl"><span class="gl-term">Terraform</span><span class="gl-def">IaC tool from HashiCorp (now part of IBM). It uses the HCL language to provision cloud infrastructure across AWS, GCP, Azure, and more</span></div>
+      <div class="gl"><span class="gl-term">HCL</span><span class="gl-def">HashiCorp Configuration Language: the declarative language used to write Terraform configurations</span></div>
+      <div class="gl"><span class="gl-term">State File</span><span class="gl-def">Terraform's record of what infrastructure it has created. It maps your code to real cloud resources</span></div>
+      <div class="gl"><span class="gl-term">State Locking</span><span class="gl-def">Stops two runs changing the same state at once. With the S3 backend, use its own lock file (use_lockfile); the DynamoDB lock table is deprecated</span></div>
+      <div class="gl"><span class="gl-term">Terraform Module</span><span class="gl-def">Reusable, self-contained package of Terraform configurations, like a function for infrastructure</span></div>
+      <div class="gl"><span class="gl-term">OpenTofu</span><span class="gl-def">Open-source fork of Terraform (Linux Foundation), created after HashiCorp changed Terraform's licence to the Business Source License (BSL) in 2023</span></div>
+      <div class="gl"><span class="gl-term">Ansible</span><span class="gl-def">Agentless configuration management tool that uses YAML playbooks to configure servers via SSH</span></div>
+      <div class="gl"><span class="gl-term">Playbook</span><span class="gl-def">Ansible YAML file defining tasks to execute on remote servers, the main unit of Ansible automation</span></div>
+    </div>
+  </div>
+
+  <!-- Monitoring -->
+  <div class="gloss-cat">
+    <div class="gloss-cat-h" style="color:var(--pk);background:rgba(244,114,182,.1)">Monitoring & Observability</div>
+    <div class="gloss-grid">
+      <div class="gl"><span class="gl-term">Observability</span><span class="gl-def">Ability to understand a system's internal state from its external outputs: metrics, logs, and traces</span></div>
+      <div class="gl"><span class="gl-term">Prometheus</span><span class="gl-def">Open-source metrics collection and alerting system that pulls metrics from targets at defined intervals</span></div>
+      <div class="gl"><span class="gl-term">Grafana</span><span class="gl-def">Visualisation platform that creates dashboards from Prometheus, Loki, and other data sources</span></div>
+      <div class="gl"><span class="gl-term">Loki</span><span class="gl-def">Log aggregation system by Grafana Labs that indexes log labels, not content. Logs are sent to it by Grafana Alloy, which replaced Promtail (end of life 2 March 2026)</span></div>
+      <div class="gl"><span class="gl-term">Grafana Alloy</span><span class="gl-def">Grafana's telemetry collector, a distribution of the OpenTelemetry Collector. It is what ships logs to Loki now</span></div>
+      <div class="gl"><span class="gl-term">PromQL</span><span class="gl-def">Prometheus Query Language: used to query metrics and create alerting rules and dashboard panels</span></div>
+      <div class="gl"><span class="gl-term">SLI</span><span class="gl-def">Service Level Indicator: a quantitative measure of service performance (e.g., request latency, error rate)</span></div>
+      <div class="gl"><span class="gl-term">SLO</span><span class="gl-def">Service Level Objective: target value for an SLI (e.g., "99.9% of requests under 200ms")</span></div>
+      <div class="gl"><span class="gl-term">SLA</span><span class="gl-def">Service Level Agreement: contractual commitment between provider and customer with consequences if not met</span></div>
+      <div class="gl"><span class="gl-term">Error Budget</span><span class="gl-def">Amount of allowed unreliability (100% − SLO). When exhausted, new feature releases are frozen until reliability improves</span></div>
+      <div class="gl"><span class="gl-term">Alertmanager</span><span class="gl-def">Prometheus component that handles alert routing, grouping, silencing, and notification (Slack, email, PagerDuty)</span></div>
+    </div>
+  </div>
+
+  <!-- Security -->
+  <div class="gloss-cat">
+    <div class="gloss-cat-h" style="color:var(--rd);background:rgba(248,113,113,.1)">Security & DevSecOps</div>
+    <div class="gloss-grid">
+      <div class="gl"><span class="gl-term">SAST</span><span class="gl-def">Static Application Security Testing: scans source code for vulnerabilities without running it (Semgrep, SonarQube)</span></div>
+      <div class="gl"><span class="gl-term">DAST</span><span class="gl-def">Dynamic Application Security Testing: tests running applications for vulnerabilities at runtime (ZAP, Nuclei)</span></div>
+      <div class="gl"><span class="gl-term">SCA</span><span class="gl-def">Software Composition Analysis: scans dependencies and container images for known CVEs (Trivy, Grype)</span></div>
+      <div class="gl"><span class="gl-term">CVE</span><span class="gl-def">Common Vulnerabilities and Exposures: standardised identifier for publicly known security vulnerabilities (e.g., CVE-2021-44228)</span></div>
+      <div class="gl"><span class="gl-term">OWASP Top 10</span><span class="gl-def">OWASP's awareness document listing the 10 most critical web application security risks, the baseline every developer should know. The current edition is 2025</span></div>
+      <div class="gl"><span class="gl-term">Secrets Management</span><span class="gl-def">Securely storing and accessing credentials, API keys, and tokens. Never hardcode secrets: use a secrets manager such as Vault or OpenBao. Kubernetes Secrets are stored unencrypted in etcd by default (base64 is encoding, not encryption), so turn on encryption at rest and restrict access with RBAC</span></div>
+      <div class="gl"><span class="gl-term">Least Privilege</span><span class="gl-def">Granting only the minimum permissions needed to perform a task, a foundational security principle</span></div>
+      <div class="gl"><span class="gl-term">Zero Trust</span><span class="gl-def">Security model that trusts nothing by default: every request is verified regardless of origin or network location</span></div>
+      <div class="gl"><span class="gl-term">OPA</span><span class="gl-def">Open Policy Agent: policy engine for enforcing rules across K8s, APIs, and infrastructure as code</span></div>
+      <div class="gl"><span class="gl-term">CIS Benchmarks</span><span class="gl-def">Center for Internet Security best-practice configuration standards for operating systems, cloud, and applications</span></div>
+      <div class="gl"><span class="gl-term">PCI-DSS</span><span class="gl-def">Payment Card Industry Data Security Standard: compliance framework for organisations handling credit card data</span></div>
+    </div>
+  </div>
+
+  <!-- Networking -->
+  <div class="gloss-cat">
+    <div class="gloss-cat-h" style="color:var(--cy2);background:rgba(6,182,212,.1)">Networking</div>
+    <div class="gloss-grid">
+      <div class="gl"><span class="gl-term">OSI Model</span><span class="gl-def">7-layer conceptual model for network communication: Physical, Data Link, Network, Transport, Session, Presentation, Application</span></div>
+      <div class="gl"><span class="gl-term">TCP/IP</span><span class="gl-def">Transmission Control Protocol / Internet Protocol: the fundamental communication protocols of the internet</span></div>
+      <div class="gl"><span class="gl-term">DNS</span><span class="gl-def">Domain Name System: translates human-readable domain names (www.example.com) into IP addresses (such as 192.0.2.10)</span></div>
+      <div class="gl"><span class="gl-term">CIDR</span><span class="gl-def">Classless Inter-Domain Routing: notation for IP address ranges (e.g., 10.0.0.0/16 = 65,536 addresses)</span></div>
+      <div class="gl"><span class="gl-term">NAT</span><span class="gl-def">Network Address Translation: maps private IPs to public IPs, allowing internal servers to access the internet</span></div>
+      <div class="gl"><span class="gl-term">Reverse Proxy</span><span class="gl-def">Server that sits in front of backend servers and forwards client requests to them. Used for load balancing, TLS, and caching (Nginx)</span></div>
+      <div class="gl"><span class="gl-term">SSL/TLS</span><span class="gl-def">Secure Sockets Layer / Transport Layer Security: encrypts data in transit between client and server (HTTPS)</span></div>
+      <div class="gl"><span class="gl-term">Subnet</span><span class="gl-def">A segmented portion of a larger network, used in VPCs to isolate public-facing and private resources</span></div>
+    </div>
+    <p class="sh-sub" style="margin:8px 0 0">For the layers and protocols in more depth, see the <a href="../network-concepts/">Network Concepts guide</a>.</p>
+  </div>
+
+  <!-- Version Control -->
+  <div class="gloss-cat">
+    <div class="gloss-cat-h" style="color:var(--g2);background:rgba(52,211,153,.1)">Version Control & Collaboration</div>
+    <div class="gloss-grid">
+      <div class="gl"><span class="gl-term">Git</span><span class="gl-def">Distributed version control system that tracks changes to files, enabling collaboration and history management</span></div>
+      <div class="gl"><span class="gl-term">Branch</span><span class="gl-def">Independent line of development in Git that allows working on features without affecting the main codebase</span></div>
+      <div class="gl"><span class="gl-term">Pull Request (PR)</span><span class="gl-def">Request to merge changes from one branch into another; it includes code review, discussion, and approval</span></div>
+      <div class="gl"><span class="gl-term">Merge vs Rebase</span><span class="gl-def">Merge creates a commit joining two branches; Rebase rewrites history to place commits on top of another branch</span></div>
+      <div class="gl"><span class="gl-term">GitFlow</span><span class="gl-def">Branching strategy with dedicated branches for features, releases, and hotfixes: structured but heavyweight</span></div>
+      <div class="gl"><span class="gl-term">Trunk-Based</span><span class="gl-def">Branching strategy where all developers commit to a single main branch with short-lived feature branches</span></div>
+    </div>
+  </div>
+
+  <!-- Formats & General -->
+  <div class="gloss-cat">
+    <div class="gloss-cat-h" style="color:var(--am2);background:rgba(245,158,11,.1)">Formats, Protocols & General</div>
+    <div class="gloss-grid">
+      <div class="gl"><span class="gl-term">YAML</span><span class="gl-def">Human-readable data format used for configuration files. Kubernetes, Docker Compose, Ansible, and CI/CD all use YAML</span></div>
+      <div class="gl"><span class="gl-term">JSON</span><span class="gl-def">JavaScript Object Notation: lightweight data format for APIs and configuration (parsed with jq on command line)</span></div>
+      <div class="gl"><span class="gl-term">API</span><span class="gl-def">Application Programming Interface: defined way for software components to communicate (REST APIs use HTTP)</span></div>
+      <div class="gl"><span class="gl-term">REST</span><span class="gl-def">Representational State Transfer: architectural style for APIs using HTTP methods (GET, POST, PUT, DELETE)</span></div>
+      <div class="gl"><span class="gl-term">SSH</span><span class="gl-def">Secure Shell: encrypted protocol for remote server access and command execution (port 22)</span></div>
+      <div class="gl"><span class="gl-term">HTTP/HTTPS</span><span class="gl-def">Hypertext Transfer Protocol (Secure): the protocol browsers use to communicate with web servers (port 80/443)</span></div>
+      <div class="gl"><span class="gl-term">SRE</span><span class="gl-def">Site Reliability Engineering: discipline applying software engineering to operations problems (coined by Google)</span></div>
+      <div class="gl"><span class="gl-term">Post-Mortem</span><span class="gl-def">Blameless analysis conducted after an incident that documents what happened, why, and how to prevent recurrence</span></div>
+    </div>
+  </div>
+</div>
+
+</main>
+</div><!-- /layout -->
+
+<script>
+function toggleSidebar(){
+  var open=document.getElementById('sidebar').classList.toggle('open');
+  document.getElementById('overlay').classList.toggle('open',open);
+  document.getElementById('ham').setAttribute('aria-expanded',open?'true':'false');
+}
+function closeSB(){
+  if(window.innerWidth<=860){
+    document.getElementById('sidebar').classList.remove('open');
+    document.getElementById('overlay').classList.remove('open');
+    document.getElementById('ham').setAttribute('aria-expanded','false');
+  }
+}
+document.addEventListener('keydown',function(e){if(e.key==='Escape')closeSB()});
+// Highlight active sidebar link on scroll
+const sections=document.querySelectorAll('.section,.hero');
+const links=document.querySelectorAll('.sb-link');
+window.addEventListener('scroll',()=>{
+  let current='';
+  sections.forEach(s=>{if(window.scrollY>=s.offsetTop-100)current=s.id});
+  links.forEach(l=>{l.classList.remove('active');if(l.getAttribute('href')==='#'+current)l.classList.add('active')});
+});
+</script>
+
+<!-- auc:foot -->
+<footer class="auc-foot">
+  <p><strong>DevOps and DevSecOps Roadmap</strong>, version 3.0, last reviewed November 2026. Written by <a href="../">Krishna Mohan Parsha</a> as part of Architect U'r Career, a personal initiative. The views are my own and not those of my employer.</p>
+  <p>Free to use, share and adapt for non-commercial teaching and learning, with credit, under <a rel="license noopener" target="_blank" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a>. <a target="_blank" rel="noopener" href="https://github.com/mohanparsha/architecturcareer/issues/new?title=Correction%3A%20devops-devsecops-roadmap">Found an error? Tell me.</a> <a href="../about/#changelog">What changed</a>. <a href="../about/">How this site is maintained</a>.</p>
+</footer>
+<!-- /auc:foot -->
+<script src="../assets/auc-guide.js" defer></script>
+<script data-goatcounter="https://km-auc.goatcounter.com/count" async src="https://gc.zgo.at/count.js"></script>
+</body>
+</html>
