@@ -1,4 +1,10 @@
-Operating Systems Unit 1, version 3.3 (November 2026)
+Operating Systems Unit 1, version 3.4 (November 2026)
+
+## November 2026, version 3.4
+
+- A link to a topic in the Concept Explorer, or to anything inside one, now opens that topic. The topics are hidden until chosen, so such a link used to land on nothing visible. The context-switch worked example has its own address, ending `#quantum-cost`.
+
+## November 2026, version 3.3
 
 - Corrected the context-switch example. A 10 ms quantum gives about 100 switches a second on one CPU, not 5,000. The example now states its assumptions, shows the working for four quantum sizes, and adds how long each of 50 processes waits for its turn.
 - Corrected the textbook chapter references against the table of contents of Operating System Concepts, 10th Edition (2018). Scheduling criteria and algorithms, the convoy effect and aging are in Chapter 5 (Sections 5.1 to 5.3), not Chapter 3, and the page now says so.

@@ -172,7 +172,7 @@ GUIDES = [
         ],
     },
     {
-        "slug": "os-unit-1", "name": "Operating Systems Unit 1", "path": 3, "step": 4, "version": "3.3",
+        "slug": "os-unit-1", "name": "Operating Systems Unit 1", "path": 3, "step": 4, "version": "3.4",
         "seo_title": "Operating Systems Unit 1: Processes, System Calls and CPU Scheduling",
         "description": "Interactive revision reference for a first operating systems unit: OS structure, system calls, processes and CPU scheduling, with worked calculations.",
         "type": "Revision reference", "level": "Undergraduate", "audience": "student",

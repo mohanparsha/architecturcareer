@@ -137,7 +137,7 @@
     .quiz-feedback { margin-top:10px; font-size:14px; color:var(--muted); }
     .section a:not(.nav-chip) { color:var(--blue); font-weight:700; }
     /* Jumping to a section from the chip bar must not leave its heading under the sticky bar. */
-    .section { scroll-margin-top:136px; }
+    .section, .topic-panel [id], .tab-panel [id], .topic-panel, .tab-panel { scroll-margin-top:136px; }
     .hero-note { margin-top:12px !important; font-size:14px !important; }
     mark.search-hit { background:#fff1a8; color:inherit; padding:0 2px; }
     .hidden-by-search { display:none !important; }
@@ -177,7 +177,7 @@
       .metric-strip { grid-template-columns:repeat(2,1fr); }
       /* On a phone the chip bar is several rows tall: let it scroll away instead of covering the page. */
       .sticky-nav { position:static; }
-      .section { scroll-margin-top:12px; }
+      .section, .topic-panel [id], .tab-panel [id], .topic-panel, .tab-panel { scroll-margin-top:12px; }
       .wrap, .sticky-nav .inner { width:calc(100vw - 20px); }
       .hero { padding:22px 18px; border-radius:22px; }
       .section { padding:18px 14px; border-radius:20px; }
@@ -211,7 +211,7 @@
   ],
   "isAccessibleForFree": true,
   "license": "https://creativecommons.org/licenses/by-nc-sa/4.0/",
-  "version": "3.3",
+  "version": "3.4",
   "dateModified": "2026-11-18",
   "author": {
     "@type": "Person",
@@ -246,7 +246,7 @@
     <section class="hero">
       <div class="eyebrow">📘 Operating Systems &nbsp;|&nbsp; Unit 1 &nbsp;|&nbsp; Silberschatz, Galvin &amp; Gagne, 10th Ed.</div>
       <h1>Operating Systems: Unit 1<br />Interactive Reference</h1>
-      <p style="margin:4px 0 14px; font-size:13px; color:rgba(255,255,255,.8);">Version 3.3 &nbsp;|&nbsp; Last reviewed November 2026</p>
+      <p style="margin:4px 0 14px; font-size:13px; color:rgba(255,255,255,.8);">Version 3.4 &nbsp;|&nbsp; Last reviewed November 2026</p>
       <p>
         Covers the topics of a typical first unit of an undergraduate operating systems course: what an operating system does, how it is structured, system calls, processes, and a first look at CPU scheduling. It follows <em>Operating System Concepts</em>, 10th Edition, by Silberschatz, Galvin and Gagne (Wiley, 2018): Chapter 1 (Introduction), Chapter 2 (Operating-System Structures) and Chapter 3 (Processes), plus the scheduling criteria and algorithms of Chapter 5 (CPU Scheduling, Sections 5.1 to 5.3). Use the concept explorer for understanding, the system flows for narrative answers, the worked scheduling examples for calculation practice, and the glossary and self-test quiz for exam preparation.
       </p>
@@ -685,7 +685,7 @@ Return to user mode</div>
               </div>
               <div>
                 <div class="card"><h3>Context-switch overhead factors</h3><ul class="muted-list"><li>Register save/restore</li><li>TLB flush or partial invalidation</li><li>CPU cache eviction and cold-cache restart</li><li>Page-table or memory-map switch</li></ul>
-                <div class="master-note" style="margin-top:12px;"><strong>Worked example: what does the quantum cost?</strong><br /><br />
+                <div class="master-note" id="quantum-cost" style="margin-top:12px;"><strong>Worked example: what does the quantum cost?</strong><br /><br />
                   <strong>Assumptions.</strong> One CPU core. The ready queue holds n = 50 processes, all CPU-bound, so each one runs for its whole quantum q and there is exactly one switch per quantum. Each switch costs s = 10 microseconds = 0.01 ms of CPU time: the textbook's Chapter 5 slides give a quantum as usually 10 ms to 100 ms and a context switch as under 10 microseconds.<br /><br />
                   <strong>Working.</strong> One cycle is a quantum of useful work plus one switch, so it lasts q + s.
                   <div class="formula">Switches per second = 1000 ms ÷ (q + s)</div>
@@ -1220,6 +1220,29 @@ Average Turnaround = 9.25 ms</div>
       });
     });
 
+    // A link such as #topic-schedule, #tab-io or #quantum-cost points into a panel that is hidden until
+    // its button is pressed. Press that button, then scroll to the target. The hash is only ever passed to
+    // getElementById; the selectors below are built from ids already in the page.
+    function openFromHash() {
+      let id = '';
+      try { id = decodeURIComponent(location.hash.slice(1)); } catch (e) { return; }  // a malformed link must not stop the page's other scripts
+      const target = id && document.getElementById(id);
+      if (!target) return;
+      const topic = target.closest('.topic-panel');
+      const tab = target.closest('.tab-panel');
+      if (topic) {
+        const btn = document.querySelector('.topic-btn[data-topic="' + topic.id.replace(/^topic-/, '') + '"]');
+        if (btn) btn.click();
+      }
+      if (tab) {
+        const btn = document.querySelector('.tab-btn[data-tab="' + tab.id + '"]');
+        if (btn) btn.click();
+      }
+      if (topic || tab) target.scrollIntoView();
+    }
+    openFromHash();
+    window.addEventListener('hashchange', openFromHash);
+
     const searchInput = document.getElementById('searchInput');
     const searchable = Array.from(document.querySelectorAll('.searchable, .card, details, .topic-btn, .quiz-question'));
     function removeMarks(node) {
@@ -1289,7 +1312,7 @@ Average Turnaround = 9.25 ms</div>
   </script>
 <!-- auc:foot -->
 <footer class="auc-foot">
-  <p><strong>Operating Systems Unit 1</strong>, version 3.3, last reviewed November 2026. Written by <a href="../">Krishna Mohan Parsha</a> as part of Architect U'r Career, a personal initiative. The views are my own and not those of my employer.</p>
+  <p><strong>Operating Systems Unit 1</strong>, version 3.4, last reviewed November 2026. Written by <a href="../">Krishna Mohan Parsha</a> as part of Architect U'r Career, a personal initiative. The views are my own and not those of my employer.</p>
   <p>Free to use, share and adapt for non-commercial teaching and learning, with credit, under <a rel="license noopener" target="_blank" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a>. <a target="_blank" rel="noopener" href="https://github.com/mohanparsha/architecturcareer/issues/new?title=Correction%3A%20os-unit-1">Found an error? Tell me.</a> <a href="../about/#changelog">What changed</a>. <a href="../about/">How this site is maintained</a>.</p>
 </footer>
 <!-- /auc:foot -->
